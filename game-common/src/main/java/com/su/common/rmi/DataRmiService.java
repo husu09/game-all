@@ -6,6 +6,9 @@ import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projection;
 
+/**
+ * 数据库操作远程调用接口
+ * */
 public interface DataRmiService {
 	
 	public <T> int save(T t);

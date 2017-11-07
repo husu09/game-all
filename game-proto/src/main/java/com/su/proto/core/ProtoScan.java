@@ -1,18 +1,14 @@
-package com.su.core.proto;
+package com.su.proto.core;
 
 import java.io.File;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
-import com.su.core.config.AppConfig;
-import com.su.core.util.CoreUtils;
+import com.su.common.util.CoreUtils;
 
 /**
  * 扫描指定包下的所有proto协议
@@ -22,6 +18,8 @@ public class ProtoScan {
 
 	@Autowired
 	private ProtoContext protoContext;
+	
+	private String protoPackName;
 
 	public void scan(String packName) throws Exception {
 		String packPath = packName.replace(".", "/");
@@ -49,6 +47,6 @@ public class ProtoScan {
 	
 	@PostConstruct
 	public void init() throws Exception {
-		scan(appConfig.getPackName());
+		scan(protoPackName);
 	}
 }

@@ -4,6 +4,9 @@ import java.lang.reflect.Field;
 
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CacheUtil {
 	/**
 	 * 生成 key

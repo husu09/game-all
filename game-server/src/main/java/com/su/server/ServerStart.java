@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.su.core.config.AppConfig;
 import com.su.core.netty.NettyServer;
 
-public class AppStart {
+public class ServerStart {
 
 	public static void main(String[] args) throws Exception {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);

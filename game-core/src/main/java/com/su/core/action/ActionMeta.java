@@ -2,6 +2,9 @@ package com.su.core.action;
 
 import java.lang.reflect.Method;
 
+/**
+ * 封装请求执行者
+ * */
 public class ActionMeta {
 	/**
 	 * 是否需要登录

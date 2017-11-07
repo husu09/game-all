@@ -4,23 +4,17 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
-import com.su.core.config.AppConfig;
-import com.su.core.proto.ProtoContext;
-import com.su.core.proto.ProtoScan;
+import com.su.proto.core.ProtoContext;
 
+/**
+ * 加载所有的协议处理者
+ * */
 @Component
 public class ActionScan implements ApplicationListener<ContextRefreshedEvent> {
 

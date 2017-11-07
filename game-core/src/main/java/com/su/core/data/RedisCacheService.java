@@ -1,55 +1,60 @@
 package com.su.core.data;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 
-import redis.clients.jedis.Jedis;
-
+/**
+ * redis 缓存管理对象
+ * */
+@Service
 public class RedisCacheService {
-	
+	@Autowired
 	private RedisClient client;
-	
+	@Autowired
 	private CacheUtil cacheUtil;
-	
+
 	public void saveOrUpdate(Object o) {
 		if (!cacheUtil.isPersistent(o)) {
 			return;
-		} 
-		client.setForMap(cacheUtil.getParentKey(o), cacheUtil.getKey(o) , JSON.toJSONString(o));
+		}
+		client.setForMap(cacheUtil.getParentKey(o), cacheUtil.getKey(o), JSON.toJSONString(o));
 	}
-	
+
 	public void saveOrUpdate(Collection<Object> os) {
 		for (Object o : os) {
 			saveOrUpdate(o);
 		}
-		
+
 	}
-	
+
 	public void saveOrUpdate(Object[] os) {
 		for (Object o : os) {
 			saveOrUpdate(o);
 		}
-		
+
 	}
 
 	public void delete(Class<?> c) {
 		client.delete(cacheUtil.getParentKey(c));
 	}
-	
+
 	public void delete(Object o) {
 		client.deleteForMap(cacheUtil.getParentKey(o), cacheUtil.getKey(o));
 	}
-	
+
 	public void delete(Collection<Object> os) {
 		for (Object o : os) {
 			delete(o);
 		}
 	}
-	
+
 	public void delete(Object[] os) {
 		for (Object o : os) {
 			delete(o);
@@ -80,7 +85,7 @@ public class RedisCacheService {
 					resultList = new ArrayList<>(max);
 				resultList.add(t);
 			}
-			if (i+1 == max)
+			if (i + 1 == max)
 				break;
 			i++;
 		}
@@ -88,4 +93,3 @@ public class RedisCacheService {
 	}
 
 }
-

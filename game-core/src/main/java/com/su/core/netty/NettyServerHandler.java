@@ -21,8 +21,6 @@ import org.springframework.stereotype.Component;
 import com.google.protobuf.MessageLite;
 import com.su.core.akka.AkkaContext;
 import com.su.core.akka.ProcessorActor;
-import com.su.proto.LoginProto.LoginResp;
-import com.su.proto.LoginProto.RegisterResp;
 
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;

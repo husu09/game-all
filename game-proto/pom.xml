@@ -9,9 +9,9 @@
 	<artifactId>game-proto</artifactId>
 	<dependencies>
 		<dependency>
-			<groupId>com.google.protobuf</groupId>
-			<artifactId>protobuf-java</artifactId>
-			<version>3.4.0</version>
+			<groupId>com.su</groupId>
+			<artifactId>game-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

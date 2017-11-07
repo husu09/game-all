@@ -1,44 +1,31 @@
-package com.su.core.proto;
+package com.su.proto.core;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.google.protobuf.MessageLite;
-
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.handler.codec.CorruptedFrameException;
-import io.netty.handler.codec.MessageToMessageDecoder;
-import io.netty.util.CharsetUtil;
 
-@Sharable
-@Component
-public class ProtoDecoder extends MessageToMessageDecoder<ByteBuf> {
-	
-	@Autowired
-	private ProtoContext protoContext;
-	
-	
+public class ProtoLengthPrepender extends ByteToMessageDecoder {
+
 	@Override
 	protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
-	
-		int nameLen = readRawVarint32(in);
-		byte[] nameData = new byte[nameLen];
-		in.readBytes(nameData);
-		String messageName = new String(nameData, CharsetUtil.UTF_8);
-		if (!protoContext.contains(messageName)) {
-			throw new Exception("没有这个协议：" + messageName);
+		in.markReaderIndex();
+		int preIndex = in.readerIndex();
+		int totalLen = readRawVarint32(in);
+		if (preIndex == in.readerIndex()) {
+			return;
 		}
-		int dataLen = readRawVarint32(in);
-		byte[] data = new byte[dataLen];
-		in.readBytes(data);
-		MessageLite messageLite = protoContext.get(messageName).getDefaultInstanceForType().getParserForType()
-				.parseFrom(data);
-		out.add(messageLite);
+		if (totalLen < 0) {
+			throw new CorruptedFrameException("negative length: " + totalLen);
+		}
+
+		if (in.readableBytes() < totalLen) {
+			in.resetReaderIndex();
+		} else {
+			out.add(in.readRetainedSlice(totalLen));
+		}
 	}
 
 	/**

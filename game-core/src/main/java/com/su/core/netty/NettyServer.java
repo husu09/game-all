@@ -16,12 +16,12 @@
 package com.su.core.netty;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.su.core.config.AppConfig;
-import com.su.core.proto.ProtoLengthPrepender;
-import com.su.core.proto.ProtoDecoder;
-import com.su.core.proto.ProtoEncoder;
+import com.su.proto.core.ProtoDecoder;
+import com.su.proto.core.ProtoEncoder;
+import com.su.proto.core.ProtoLengthPrepender;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -48,6 +48,9 @@ public final class NettyServer {
 	private NettyServerHandler nettyServerHandler;
 	@Autowired
 	private HeartbeatHandler heartbeatHandler;
+	
+	@Value("${server.port}")
+	private int port;
 	
 	
 	private EventLoopGroup bossGroup = null;
@@ -76,7 +79,7 @@ public final class NettyServer {
                 }
              });
             // Bind and start to accept incoming connections.
-            b.bind(appConfig.getPort()).sync().channel().closeFuture().sync();
+            b.bind(port).sync().channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

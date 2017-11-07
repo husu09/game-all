@@ -1,19 +1,21 @@
-package com.su.common.mq;
-
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.concurrent.TimeoutException;
+package com.su.data.mq;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.Consumer;
 
+@Component
 public class MQClient {
 
-	private String queueName = "";
+	@Value("${mq.queueName}")
+	private String queueName;
 	private Channel channel = null;
 	private Connection connection = null;
 
@@ -31,18 +33,12 @@ public class MQClient {
 		// 创建一个通道
 		channel = connection.createChannel();
 		// 声明一个队列
-		channel.queueDeclare(queueName, false, false, false, null);
+		channel.queueDeclare(queueName, true, false, false, null);
+		// 告诉服务器我们需要那个频道的消息，如果频道中有消息，就会执行回调函数handleDelivery
+		Consumer consumer = new MQCustomer(channel);
+		// 自动回复队列应答 -- RabbitMQ中的消息确认机制
+		channel.basicConsume(queueName, true, consumer);
 
-	}
-
-	public void send(String s) {
-		// 发送消息到队列中
-		try {
-			channel.basicPublish("", queueName, null, s.getBytes("UTF-8"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("发送消息到时 mq 失败 " + s);
-		}
 	}
 
 	@PreDestroy

@@ -1,4 +1,4 @@
-package com.su.core.proto;
+package com.su.proto.core;
 
 import org.springframework.stereotype.Component;
 

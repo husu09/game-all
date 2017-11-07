@@ -1,4 +1,4 @@
-package com.su.core.util;
+package com.su.common.util;
 
 import java.util.regex.Pattern;
 

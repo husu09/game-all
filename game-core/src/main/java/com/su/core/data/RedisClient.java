@@ -1,24 +1,28 @@
 package com.su.core.data;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.su.core.config.AppConfig;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+/**
+ * redis 客户端
+ * */
+@Component
 public class RedisClient {
 	
-	
+	@Value("${redis.host}")
 	private String host;
+	@Value("${redis.port}")
 	private int port;
 	private String password;
+	@Value("${redis.password}")
 	
 	private JedisPoolConfig config;
 	private JedisPool pool;

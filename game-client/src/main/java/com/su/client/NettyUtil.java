@@ -2,13 +2,13 @@ package com.su.client;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.su.core.util.SpringContextUtil;
+import com.su.common.util.SpringUtil;
 
 public class NettyUtil {
 	public static void start(String host, int port) {
 		ClientContext ctx = ClientContext.getInstance();
-		AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) SpringContextUtil
-				.getSpringContext();
+		AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) SpringUtil
+				.getContext();
 
 		// 启动服务
 		NettyClient client = context.getBean(NettyClient.class);

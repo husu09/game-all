@@ -1,15 +1,15 @@
 package com.su.core.data;
 
-import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.persistence.Id;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+/**
+ * 内存缓存管理对象
+ * */
+@Service
 public class MemoryCacheService {
 	@Autowired
 	private MemoryCache cache;

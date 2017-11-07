@@ -2,7 +2,7 @@ package com.su.client;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.su.core.config.AppConfig;
+import com.su.client.config.AppConfig;
 
 public class ClientStart {
 	

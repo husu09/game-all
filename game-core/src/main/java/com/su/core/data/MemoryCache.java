@@ -6,7 +6,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+/**
+ * 内存缓存存储结构
+ * */
+@Component
 public class MemoryCache {
 	@Autowired
 	private CacheUtil cacheUtil;

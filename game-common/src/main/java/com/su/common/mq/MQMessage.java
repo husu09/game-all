@@ -1,14 +1,24 @@
 package com.su.common.mq;
 
 public class MQMessage {
-	private int operator;
+	/**
+	 * 数据库操作
+	 * */
+	private MQOperator mqOperator;
+	/**
+	 * 对象类名
+	 * */
 	private String className;
+	/**
+	 * 对象数据
+	 * */
 	private String data;
-	public int getOperator() {
-		return operator;
+	
+	public MQOperator getMqOperator() {
+		return mqOperator;
 	}
-	public void setOperator(int operator) {
-		this.operator = operator;
+	public void setMqOperator(MQOperator mqOperator) {
+		this.mqOperator = mqOperator;
 	}
 	public String getClassName() {
 		return className;
@@ -22,5 +32,7 @@ public class MQMessage {
 	public void setData(String data) {
 		this.data = data;
 	}
+	
+	
 	
 }

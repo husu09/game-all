@@ -1,4 +1,4 @@
-package com.su.core.proto;
+package com.su.proto.core;
 
 import java.util.HashMap;
 import java.util.Map;

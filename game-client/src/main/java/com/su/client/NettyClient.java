@@ -18,9 +18,9 @@ package com.su.client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.su.core.proto.ProtoDecoder;
-import com.su.core.proto.ProtoEncoder;
-import com.su.core.proto.ProtoLengthPrepender;
+import com.su.proto.core.ProtoDecoder;
+import com.su.proto.core.ProtoEncoder;
+import com.su.proto.core.ProtoLengthPrepender;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
