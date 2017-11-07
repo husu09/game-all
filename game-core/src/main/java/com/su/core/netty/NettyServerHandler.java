@@ -15,6 +15,16 @@
  */
 package com.su.core.netty;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.google.protobuf.MessageLite;
+import com.su.core.akka.AkkaContext;
+import com.su.core.akka.ProcessorActor;
+import com.su.proto.LoginProto.LoginResp;
+import com.su.proto.LoginProto.RegisterResp;
+
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -22,11 +32,24 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * Handles both client-side and server-side handler depending on which
  * constructor was called.
  */
+@Sharable
+@Component
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
-
+	
+	@Autowired
+	private AkkaContext akkaContext;
+	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		System.out.println(msg);
+		
+		String channelId = ctx.channel().id().asLongText();
+		if (akkaContext.contain(channelId)) {
+			akkaContext.getActor(channelId).process(ctx, (MessageLite) msg);
+		} else {
+			ProcessorActor processorActor = akkaContext.createActor();
+			akkaContext.addActor(channelId, processorActor);
+			processorActor.process(ctx, (MessageLite) msg);
+		}
 	}
 
 	@Override
@@ -39,4 +62,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 		cause.printStackTrace();
 		ctx.close();
 	}
+	
+	
 }

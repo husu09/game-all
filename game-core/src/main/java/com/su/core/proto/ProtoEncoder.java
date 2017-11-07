@@ -7,9 +7,11 @@ import com.google.protobuf.MessageLiteOrBuilder;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.handler.codec.MessageToByteEncoder;
 import io.netty.util.CharsetUtil;
 
+@Sharable
 @Component
 public class ProtoEncoder  extends MessageToByteEncoder<MessageLiteOrBuilder>  {
 
@@ -18,6 +20,10 @@ public class ProtoEncoder  extends MessageToByteEncoder<MessageLiteOrBuilder>  {
      * @param out to be written to
      * @param value to be written
      */
+	public ProtoEncoder(){
+		super();
+	}
+	
     static void writeRawVarint32(ByteBuf out, int value) {
         while (true) {
         	// 不大于正的127的数字直接写入bytebuf

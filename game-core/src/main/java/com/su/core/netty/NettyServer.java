@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.su.core.config.AppConfig;
+import com.su.core.proto.ProtoLengthPrepender;
 import com.su.core.proto.ProtoDecoder;
 import com.su.core.proto.ProtoEncoder;
 
@@ -31,6 +32,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleStateHandler;
 
 /**
  * Modification of {@link EchoServer} which utilizes Java object serialization.
@@ -40,6 +42,15 @@ public final class NettyServer {
 
 	@Autowired
 	private AppConfig appConfig;
+	@Autowired
+	private ProtoDecoder protoDecoder;
+	@Autowired
+	private ProtoEncoder protoEncoder;
+	@Autowired
+	private NettyServerHandler nettyServerHandler;
+	@Autowired
+	private HeartbeatHandler heartbeatHandler;
+	
 	
 	private EventLoopGroup bossGroup = null;
     private EventLoopGroup workerGroup = null;
@@ -58,9 +69,13 @@ public final class NettyServer {
                 public void initChannel(SocketChannel ch) throws Exception {
                     ChannelPipeline p = ch.pipeline();
                     p.addLast(
-                    		new ProtoEncoder(),
-                    		new ProtoDecoder(),
-                            new NettyServerHandler());
+                    		new IdleStateHandler(0, 0, 120),
+                    		heartbeatHandler,
+                    		protoEncoder,
+                    		new ProtoLengthPrepender(),
+                    		protoDecoder,
+                    		nettyServerHandler);
+                    System.out.println("initChannel");
                 }
              });
             // Bind and start to accept incoming connections.

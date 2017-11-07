@@ -9,8 +9,10 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan(basePackages = {"com.su"})
 @PropertySource("config.properties")
 public class AppConfig {
+	
 	@Value("${server.port}")
 	private int port;
+	
 	@Value("${proto.packName}")
 	private String packName;
 

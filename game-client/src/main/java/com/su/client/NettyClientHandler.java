@@ -39,7 +39,8 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         // Echo back the received object to the server.
-        ctx.write(msg);
+        //ctx.write(msg);
+    	System.out.println("client recevice " + msg);
     }
 
     @Override

@@ -27,7 +27,7 @@ import com.su.client.handler.CreateButtonHandler;
 import com.su.client.handler.LoginButtonHandler;
 import com.su.client.handler.ProtoButtonHandler;
 import com.su.core.proto.ProtoContext;
-import com.su.core.util.ApplicationContextUtil;
+import com.su.core.util.SpringContextUtil;
 
 @Component
 public class ClientUI {
@@ -46,8 +46,8 @@ public class ClientUI {
 		frame.setLayout(new BorderLayout());
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
-				AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) ApplicationContextUtil
-						.getApplicationContext();
+				AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) SpringContextUtil
+						.getSpringContext();
 				client.stop();
 				context.close();
 				System.exit(0);

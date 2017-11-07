@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
  * */
 @Component
 public class ActionContext {
+	
 	private Map<String, ActionMeta> map = new HashMap<>();
 	
 	public void add(String name, ActionMeta actionMeta) {

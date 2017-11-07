@@ -18,9 +18,9 @@ package com.su.client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.su.core.config.AppConfig;
 import com.su.core.proto.ProtoDecoder;
 import com.su.core.proto.ProtoEncoder;
+import com.su.core.proto.ProtoLengthPrepender;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -39,7 +39,7 @@ public final class NettyClient {
 	private ProtoEncoder protoEncoder;
 	@Autowired
 	private ProtoDecoder protoDecoder;
-	
+
 	private EventLoopGroup group;
 
 	public void start(String host, int port) throws Exception {
@@ -51,7 +51,7 @@ public final class NettyClient {
 				@Override
 				public void initChannel(SocketChannel ch) throws Exception {
 					ChannelPipeline p = ch.pipeline();
-					p.addLast(protoEncoder, protoDecoder, new NettyClientHandler());
+					p.addLast(protoEncoder, new ProtoLengthPrepender(), protoDecoder, new NettyClientHandler());
 				}
 			});
 
@@ -63,6 +63,8 @@ public final class NettyClient {
 	}
 
 	public void stop() {
-		group.shutdownGracefully();
+		if (group != null) {
+			group.shutdownGracefully();
+		}
 	}
 }

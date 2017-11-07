@@ -13,7 +13,7 @@ import com.google.protobuf.MessageLite;
 import com.su.client.ClientConst;
 import com.su.client.ClientContext;
 import com.su.core.proto.ProtoContext;
-import com.su.core.util.ApplicationContextUtil;
+import com.su.core.util.SpringContextUtil;
 
 /**
  * 生成 proto 参数输入框
@@ -28,7 +28,7 @@ public class ProtoButtonHandler implements ActionListener {
 		p.setVisible(false);
 		p.removeAll();
 		JButton but = (JButton) e.getSource();
-		ProtoContext protoContext = ApplicationContextUtil.getApplicationContext().getBean(ProtoContext.class);
+		ProtoContext protoContext = SpringContextUtil.getSpringContext().getBean(ProtoContext.class);
 		MessageLite messageLite = protoContext.get(but.getText());
 		ClientContext.getInstance().setSelectMessageLite(messageLite);
 		Class<?> c = messageLite.getClass();

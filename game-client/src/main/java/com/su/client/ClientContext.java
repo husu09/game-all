@@ -1,5 +1,7 @@
 package com.su.client;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -156,17 +158,12 @@ public class ClientContext {
 	public void saveData(String host, String name) {
 		try {
 			Properties prop = new Properties();
-			System.out.println(LoginButtonHandler.class.getClassLoader().getResource(""));
-			System.out.println(LoginButtonHandler.class.getClassLoader().getResource("/"));
-			System.out.println(LoginButtonHandler.class.getClassLoader().getSystemResource(""));
-			System.out.println(LoginButtonHandler.class.getClassLoader().getSystemResource("/"));
 			String path = LoginButtonHandler.class.getClassLoader().getResource(ClientConst.SAVE_FILE).getPath();
-			InputStream in = LoginButtonHandler.class.getClassLoader().getResourceAsStream(ClientConst.SAVE_FILE);
-			prop.load(in);
 			prop.setProperty("host", host);
 			prop.setProperty("name", name);
-			prop.store(new FileOutputStream(path), "client data");
-			in.close();
+			FileOutputStream out = new FileOutputStream(path);
+			prop.store(out, "client data");
+			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -179,7 +176,12 @@ public class ClientContext {
 		Map<String, String> map = new HashMap<>();
 		try {
 			Properties prop = new Properties();
-			InputStream in = LoginButtonHandler.class.getClassLoader().getResourceAsStream(ClientConst.SAVE_FILE);
+			String path = LoginButtonHandler.class.getClassLoader().getResource("").getPath() + ClientConst.SAVE_FILE;
+			File file = new File(path);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			InputStream in = new FileInputStream(file);
 			prop.load(in);
 			map.put("host", prop.getProperty("host"));
 			map.put("name", prop.getProperty("name"));
