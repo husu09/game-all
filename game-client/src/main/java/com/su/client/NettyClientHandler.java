@@ -15,8 +15,6 @@
  */
 package com.su.client;
 
-import com.su.proto.LoginProto.LoginReq;
-
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -33,8 +31,9 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        LoginReq msg = LoginReq.newBuilder().setName("xiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHeixiaoHei").build();
-        ctx.writeAndFlush(msg);
+    	ClientContext cc = ClientContext.getInstance();
+    	cc.setCtx(ctx);
+    	cc.getCdl().countDown();
     }
 
     @Override

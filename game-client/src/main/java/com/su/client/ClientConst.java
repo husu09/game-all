@@ -17,5 +17,11 @@ public class ClientConst {
 	 * com.google.protobuf.LazyStringList String集合
 	 */
 	public static final int STRINGS_TYPE = 4;
+	/**
+	 * 保存client数据的文件
+	 * */
+	public static final String SAVE_FILE = "data.properties";
+	
+	
 
 }

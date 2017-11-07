@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
@@ -27,13 +28,17 @@ import com.su.client.handler.LoginButtonHandler;
 import com.su.client.handler.ProtoButtonHandler;
 import com.su.client.handler.SendButtonHandler;
 import com.su.core.proto.ProtoContext;
+import com.su.core.util.ApplicationContextUtil;
 
 @Component
 public class ClientUI {
 	@Autowired
 	private ProtoContext protoContext;
+	@Autowired
+	private NettyClient client;
 
 	public void show() throws Exception {
+		ClientContext ctx = ClientContext.getInstance();
 		// 窗口
 		JFrame frame = new JFrame();
 		frame.setSize(1000, 700);
@@ -42,6 +47,10 @@ public class ClientUI {
 		frame.setLayout(new BorderLayout());
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
+				AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) ApplicationContextUtil
+						.getApplicationContext();
+				client.stop();
+				context.close();
 				System.exit(0);
 			}
 		});
@@ -66,6 +75,7 @@ public class ClientUI {
 		r1p.add(ipT);
 		r1p.add(createB);
 		leftLeft.add(r1p);
+		ctx.setHostTF(ipT);
 
 		// 第二行
 		JPanel r2p = new JPanel();
@@ -77,8 +87,10 @@ public class ClientUI {
 		r2p.add(nameT);
 		r2p.add(loginB);
 		leftLeft.add(r2p);
+		ctx.setUserNameTF(nameT);
 
 		// 第三行
+		/*
 		JPanel r3p = new JPanel();
 		JLabel passwordL = new JLabel("密码");
 		JTextField passwordT = new JTextField(20);
@@ -88,6 +100,7 @@ public class ClientUI {
 		r3p.add(passwordT);
 		r3p.add(sendB);
 		leftLeft.add(r3p);
+		*/
 
 		// 左下
 		JPanel leftBelow = new JPanel();

@@ -19,51 +19,14 @@ public final class LoginProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int32 id = 1;</code>
-     */
-    int getId();
-
-    /**
-     * <code>string name = 2;</code>
+     * <code>string name = 1;</code>
      */
     java.lang.String getName();
     /**
-     * <code>string name = 2;</code>
+     * <code>string name = 1;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
-
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    java.util.List<java.lang.Integer> getIdsList();
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    int getIdsCount();
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    int getIds(int index);
-
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    java.util.List<java.lang.String>
-        getResultsList();
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    int getResultsCount();
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    java.lang.String getResults(int index);
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getResultsBytes(int index);
   }
   /**
    * <pre>
@@ -81,10 +44,7 @@ public final class LoginProto {
       super(builder);
     }
     private RegisterReq() {
-      id_ = 0;
       name_ = "";
-      ids_ = java.util.Collections.emptyList();
-      results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -112,45 +72,10 @@ public final class LoginProto {
               }
               break;
             }
-            case 8: {
-
-              id_ = input.readInt32();
-              break;
-            }
-            case 18: {
+            case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
               name_ = s;
-              break;
-            }
-            case 24: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                ids_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              ids_.add(input.readInt32());
-              break;
-            }
-            case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                ids_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                ids_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                results_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              results_.add(s);
               break;
             }
           }
@@ -161,12 +86,6 @@ public final class LoginProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          ids_ = java.util.Collections.unmodifiableList(ids_);
-        }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          results_ = results_.getUnmodifiableView();
-        }
         makeExtensionsImmutable();
       }
     }
@@ -182,20 +101,10 @@ public final class LoginProto {
               com.su.proto.LoginProto.RegisterReq.class, com.su.proto.LoginProto.RegisterReq.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    /**
-     * <code>int32 id = 1;</code>
-     */
-    public int getId() {
-      return id_;
-    }
-
-    public static final int NAME_FIELD_NUMBER = 2;
+    public static final int NAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object name_;
     /**
-     * <code>string name = 2;</code>
+     * <code>string name = 1;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -210,7 +119,7 @@ public final class LoginProto {
       }
     }
     /**
-     * <code>string name = 2;</code>
+     * <code>string name = 1;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -226,58 +135,6 @@ public final class LoginProto {
       }
     }
 
-    public static final int IDS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Integer> ids_;
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    public java.util.List<java.lang.Integer>
-        getIdsList() {
-      return ids_;
-    }
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    public int getIdsCount() {
-      return ids_.size();
-    }
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    public int getIds(int index) {
-      return ids_.get(index);
-    }
-    private int idsMemoizedSerializedSize = -1;
-
-    public static final int RESULTS_FIELD_NUMBER = 4;
-    private com.google.protobuf.LazyStringList results_;
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getResultsList() {
-      return results_;
-    }
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    public int getResultsCount() {
-      return results_.size();
-    }
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    public java.lang.String getResults(int index) {
-      return results_.get(index);
-    }
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getResultsBytes(int index) {
-      return results_.getByteString(index);
-    }
-
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -290,22 +147,8 @@ public final class LoginProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
-      if (id_ != 0) {
-        output.writeInt32(1, id_);
-      }
       if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
-      }
-      if (getIdsList().size() > 0) {
-        output.writeUInt32NoTag(26);
-        output.writeUInt32NoTag(idsMemoizedSerializedSize);
-      }
-      for (int i = 0; i < ids_.size(); i++) {
-        output.writeInt32NoTag(ids_.get(i));
-      }
-      for (int i = 0; i < results_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, results_.getRaw(i));
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
       }
     }
 
@@ -314,34 +157,8 @@ public final class LoginProto {
       if (size != -1) return size;
 
       size = 0;
-      if (id_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
-      }
       if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < ids_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(ids_.get(i));
-        }
-        size += dataSize;
-        if (!getIdsList().isEmpty()) {
-          size += 1;
-          size += com.google.protobuf.CodedOutputStream
-              .computeInt32SizeNoTag(dataSize);
-        }
-        idsMemoizedSerializedSize = dataSize;
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < results_.size(); i++) {
-          dataSize += computeStringSizeNoTag(results_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getResultsList().size();
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
       }
       memoizedSize = size;
       return size;
@@ -359,14 +176,8 @@ public final class LoginProto {
       com.su.proto.LoginProto.RegisterReq other = (com.su.proto.LoginProto.RegisterReq) obj;
 
       boolean result = true;
-      result = result && (getId()
-          == other.getId());
       result = result && getName()
           .equals(other.getName());
-      result = result && getIdsList()
-          .equals(other.getIdsList());
-      result = result && getResultsList()
-          .equals(other.getResultsList());
       return result;
     }
 
@@ -377,18 +188,8 @@ public final class LoginProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId();
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
-      if (getIdsCount() > 0) {
-        hash = (37 * hash) + IDS_FIELD_NUMBER;
-        hash = (53 * hash) + getIdsList().hashCode();
-      }
-      if (getResultsCount() > 0) {
-        hash = (37 * hash) + RESULTS_FIELD_NUMBER;
-        hash = (53 * hash) + getResultsList().hashCode();
-      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -511,14 +312,8 @@ public final class LoginProto {
       }
       public Builder clear() {
         super.clear();
-        id_ = 0;
-
         name_ = "";
 
-        ids_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
-        results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -541,21 +336,7 @@ public final class LoginProto {
 
       public com.su.proto.LoginProto.RegisterReq buildPartial() {
         com.su.proto.LoginProto.RegisterReq result = new com.su.proto.LoginProto.RegisterReq(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        result.id_ = id_;
         result.name_ = name_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          ids_ = java.util.Collections.unmodifiableList(ids_);
-          bitField0_ = (bitField0_ & ~0x00000004);
-        }
-        result.ids_ = ids_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          results_ = results_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        }
-        result.results_ = results_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -597,31 +378,8 @@ public final class LoginProto {
 
       public Builder mergeFrom(com.su.proto.LoginProto.RegisterReq other) {
         if (other == com.su.proto.LoginProto.RegisterReq.getDefaultInstance()) return this;
-        if (other.getId() != 0) {
-          setId(other.getId());
-        }
         if (!other.getName().isEmpty()) {
           name_ = other.name_;
-          onChanged();
-        }
-        if (!other.ids_.isEmpty()) {
-          if (ids_.isEmpty()) {
-            ids_ = other.ids_;
-            bitField0_ = (bitField0_ & ~0x00000004);
-          } else {
-            ensureIdsIsMutable();
-            ids_.addAll(other.ids_);
-          }
-          onChanged();
-        }
-        if (!other.results_.isEmpty()) {
-          if (results_.isEmpty()) {
-            results_ = other.results_;
-            bitField0_ = (bitField0_ & ~0x00000008);
-          } else {
-            ensureResultsIsMutable();
-            results_.addAll(other.results_);
-          }
           onChanged();
         }
         onChanged();
@@ -649,37 +407,10 @@ public final class LoginProto {
         }
         return this;
       }
-      private int bitField0_;
-
-      private int id_ ;
-      /**
-       * <code>int32 id = 1;</code>
-       */
-      public int getId() {
-        return id_;
-      }
-      /**
-       * <code>int32 id = 1;</code>
-       */
-      public Builder setId(int value) {
-        
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 id = 1;</code>
-       */
-      public Builder clearId() {
-        
-        id_ = 0;
-        onChanged();
-        return this;
-      }
 
       private java.lang.Object name_ = "";
       /**
-       * <code>string name = 2;</code>
+       * <code>string name = 1;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -694,7 +425,7 @@ public final class LoginProto {
         }
       }
       /**
-       * <code>string name = 2;</code>
+       * <code>string name = 1;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -710,7 +441,7 @@ public final class LoginProto {
         }
       }
       /**
-       * <code>string name = 2;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setName(
           java.lang.String value) {
@@ -723,7 +454,7 @@ public final class LoginProto {
         return this;
       }
       /**
-       * <code>string name = 2;</code>
+       * <code>string name = 1;</code>
        */
       public Builder clearName() {
         
@@ -732,7 +463,7 @@ public final class LoginProto {
         return this;
       }
       /**
-       * <code>string name = 2;</code>
+       * <code>string name = 1;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -742,166 +473,6 @@ public final class LoginProto {
   checkByteStringIsUtf8(value);
         
         name_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<java.lang.Integer> ids_ = java.util.Collections.emptyList();
-      private void ensureIdsIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          ids_ = new java.util.ArrayList<java.lang.Integer>(ids_);
-          bitField0_ |= 0x00000004;
-         }
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public java.util.List<java.lang.Integer>
-          getIdsList() {
-        return java.util.Collections.unmodifiableList(ids_);
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public int getIdsCount() {
-        return ids_.size();
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public int getIds(int index) {
-        return ids_.get(index);
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public Builder setIds(
-          int index, int value) {
-        ensureIdsIsMutable();
-        ids_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public Builder addIds(int value) {
-        ensureIdsIsMutable();
-        ids_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public Builder addAllIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureIdsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, ids_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public Builder clearIds() {
-        ids_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureResultsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          results_ = new com.google.protobuf.LazyStringArrayList(results_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getResultsList() {
-        return results_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public int getResultsCount() {
-        return results_.size();
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public java.lang.String getResults(int index) {
-        return results_.get(index);
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getResultsBytes(int index) {
-        return results_.getByteString(index);
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder setResults(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultsIsMutable();
-        results_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder addResults(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultsIsMutable();
-        results_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder addAllResults(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureResultsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, results_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder clearResults() {
-        results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder addResultsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureResultsIsMutable();
-        results_.add(value);
         onChanged();
         return this;
       }
@@ -957,53 +528,6 @@ public final class LoginProto {
   public interface RegisterRespOrBuilder extends
       // @@protoc_insertion_point(interface_extends:RegisterResp)
       com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>int32 id = 1;</code>
-     */
-    int getId();
-
-    /**
-     * <code>string name = 2;</code>
-     */
-    java.lang.String getName();
-    /**
-     * <code>string name = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    java.util.List<java.lang.Integer> getIdsList();
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    int getIdsCount();
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    int getIds(int index);
-
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    java.util.List<java.lang.String>
-        getResultsList();
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    int getResultsCount();
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    java.lang.String getResults(int index);
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getResultsBytes(int index);
   }
   /**
    * Protobuf type {@code RegisterResp}
@@ -1017,10 +541,6 @@ public final class LoginProto {
       super(builder);
     }
     private RegisterResp() {
-      id_ = 0;
-      name_ = "";
-      ids_ = java.util.Collections.emptyList();
-      results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -1033,7 +553,6 @@ public final class LoginProto {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
       try {
         boolean done = false;
         while (!done) {
@@ -1048,47 +567,6 @@ public final class LoginProto {
               }
               break;
             }
-            case 8: {
-
-              id_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              name_ = s;
-              break;
-            }
-            case 24: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                ids_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              ids_.add(input.readInt32());
-              break;
-            }
-            case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
-                ids_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                ids_.add(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                results_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              results_.add(s);
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1097,12 +575,6 @@ public final class LoginProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          ids_ = java.util.Collections.unmodifiableList(ids_);
-        }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          results_ = results_.getUnmodifiableView();
-        }
         makeExtensionsImmutable();
       }
     }
@@ -1118,102 +590,6 @@ public final class LoginProto {
               com.su.proto.LoginProto.RegisterResp.class, com.su.proto.LoginProto.RegisterResp.Builder.class);
     }
 
-    private int bitField0_;
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    /**
-     * <code>int32 id = 1;</code>
-     */
-    public int getId() {
-      return id_;
-    }
-
-    public static final int NAME_FIELD_NUMBER = 2;
-    private volatile java.lang.Object name_;
-    /**
-     * <code>string name = 2;</code>
-     */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        name_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string name = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int IDS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Integer> ids_;
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    public java.util.List<java.lang.Integer>
-        getIdsList() {
-      return ids_;
-    }
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    public int getIdsCount() {
-      return ids_.size();
-    }
-    /**
-     * <code>repeated int32 ids = 3;</code>
-     */
-    public int getIds(int index) {
-      return ids_.get(index);
-    }
-    private int idsMemoizedSerializedSize = -1;
-
-    public static final int RESULTS_FIELD_NUMBER = 4;
-    private com.google.protobuf.LazyStringList results_;
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getResultsList() {
-      return results_;
-    }
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    public int getResultsCount() {
-      return results_.size();
-    }
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    public java.lang.String getResults(int index) {
-      return results_.get(index);
-    }
-    /**
-     * <code>repeated string results = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getResultsBytes(int index) {
-      return results_.getByteString(index);
-    }
-
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1226,23 +602,6 @@ public final class LoginProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
-      if (id_ != 0) {
-        output.writeInt32(1, id_);
-      }
-      if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
-      }
-      if (getIdsList().size() > 0) {
-        output.writeUInt32NoTag(26);
-        output.writeUInt32NoTag(idsMemoizedSerializedSize);
-      }
-      for (int i = 0; i < ids_.size(); i++) {
-        output.writeInt32NoTag(ids_.get(i));
-      }
-      for (int i = 0; i < results_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, results_.getRaw(i));
-      }
     }
 
     public int getSerializedSize() {
@@ -1250,35 +609,6 @@ public final class LoginProto {
       if (size != -1) return size;
 
       size = 0;
-      if (id_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
-      }
-      if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < ids_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(ids_.get(i));
-        }
-        size += dataSize;
-        if (!getIdsList().isEmpty()) {
-          size += 1;
-          size += com.google.protobuf.CodedOutputStream
-              .computeInt32SizeNoTag(dataSize);
-        }
-        idsMemoizedSerializedSize = dataSize;
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < results_.size(); i++) {
-          dataSize += computeStringSizeNoTag(results_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getResultsList().size();
-      }
       memoizedSize = size;
       return size;
     }
@@ -1295,14 +625,6 @@ public final class LoginProto {
       com.su.proto.LoginProto.RegisterResp other = (com.su.proto.LoginProto.RegisterResp) obj;
 
       boolean result = true;
-      result = result && (getId()
-          == other.getId());
-      result = result && getName()
-          .equals(other.getName());
-      result = result && getIdsList()
-          .equals(other.getIdsList());
-      result = result && getResultsList()
-          .equals(other.getResultsList());
       return result;
     }
 
@@ -1313,18 +635,6 @@ public final class LoginProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId();
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
-      if (getIdsCount() > 0) {
-        hash = (37 * hash) + IDS_FIELD_NUMBER;
-        hash = (53 * hash) + getIdsList().hashCode();
-      }
-      if (getResultsCount() > 0) {
-        hash = (37 * hash) + RESULTS_FIELD_NUMBER;
-        hash = (53 * hash) + getResultsList().hashCode();
-      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1443,14 +753,6 @@ public final class LoginProto {
       }
       public Builder clear() {
         super.clear();
-        id_ = 0;
-
-        name_ = "";
-
-        ids_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
-        results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -1473,21 +775,6 @@ public final class LoginProto {
 
       public com.su.proto.LoginProto.RegisterResp buildPartial() {
         com.su.proto.LoginProto.RegisterResp result = new com.su.proto.LoginProto.RegisterResp(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        result.id_ = id_;
-        result.name_ = name_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          ids_ = java.util.Collections.unmodifiableList(ids_);
-          bitField0_ = (bitField0_ & ~0x00000004);
-        }
-        result.ids_ = ids_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          results_ = results_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        }
-        result.results_ = results_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -1529,33 +816,6 @@ public final class LoginProto {
 
       public Builder mergeFrom(com.su.proto.LoginProto.RegisterResp other) {
         if (other == com.su.proto.LoginProto.RegisterResp.getDefaultInstance()) return this;
-        if (other.getId() != 0) {
-          setId(other.getId());
-        }
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
-          onChanged();
-        }
-        if (!other.ids_.isEmpty()) {
-          if (ids_.isEmpty()) {
-            ids_ = other.ids_;
-            bitField0_ = (bitField0_ & ~0x00000004);
-          } else {
-            ensureIdsIsMutable();
-            ids_.addAll(other.ids_);
-          }
-          onChanged();
-        }
-        if (!other.results_.isEmpty()) {
-          if (results_.isEmpty()) {
-            results_ = other.results_;
-            bitField0_ = (bitField0_ & ~0x00000008);
-          } else {
-            ensureResultsIsMutable();
-            results_.addAll(other.results_);
-          }
-          onChanged();
-        }
         onChanged();
         return this;
       }
@@ -1579,262 +839,6 @@ public final class LoginProto {
             mergeFrom(parsedMessage);
           }
         }
-        return this;
-      }
-      private int bitField0_;
-
-      private int id_ ;
-      /**
-       * <code>int32 id = 1;</code>
-       */
-      public int getId() {
-        return id_;
-      }
-      /**
-       * <code>int32 id = 1;</code>
-       */
-      public Builder setId(int value) {
-        
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 id = 1;</code>
-       */
-      public Builder clearId() {
-        
-        id_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object name_ = "";
-      /**
-       * <code>string name = 2;</code>
-       */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          name_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string name = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string name = 2;</code>
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 2;</code>
-       */
-      public Builder clearName() {
-        
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 2;</code>
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        name_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<java.lang.Integer> ids_ = java.util.Collections.emptyList();
-      private void ensureIdsIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          ids_ = new java.util.ArrayList<java.lang.Integer>(ids_);
-          bitField0_ |= 0x00000004;
-         }
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public java.util.List<java.lang.Integer>
-          getIdsList() {
-        return java.util.Collections.unmodifiableList(ids_);
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public int getIdsCount() {
-        return ids_.size();
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public int getIds(int index) {
-        return ids_.get(index);
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public Builder setIds(
-          int index, int value) {
-        ensureIdsIsMutable();
-        ids_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public Builder addIds(int value) {
-        ensureIdsIsMutable();
-        ids_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public Builder addAllIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureIdsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, ids_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated int32 ids = 3;</code>
-       */
-      public Builder clearIds() {
-        ids_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureResultsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          results_ = new com.google.protobuf.LazyStringArrayList(results_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getResultsList() {
-        return results_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public int getResultsCount() {
-        return results_.size();
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public java.lang.String getResults(int index) {
-        return results_.get(index);
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getResultsBytes(int index) {
-        return results_.getByteString(index);
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder setResults(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultsIsMutable();
-        results_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder addResults(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureResultsIsMutable();
-        results_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder addAllResults(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureResultsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, results_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder clearResults() {
-        results_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string results = 4;</code>
-       */
-      public Builder addResultsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureResultsIsMutable();
-        results_.add(value);
-        onChanged();
         return this;
       }
       public final Builder setUnknownFields(
@@ -2791,12 +1795,10 @@ public final class LoginProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\021proto/login.proto\"E\n\013RegisterReq\022\n\n\002id" +
-      "\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\013\n\003ids\030\003 \003(\005\022\017\n\007res" +
-      "ults\030\004 \003(\t\"F\n\014RegisterResp\022\n\n\002id\030\001 \001(\005\022\014" +
-      "\n\004name\030\002 \001(\t\022\013\n\003ids\030\003 \003(\005\022\017\n\007results\030\004 \003" +
-      "(\t\"\030\n\010LoginReq\022\014\n\004name\030\001 \001(\t\"\013\n\tLoginRes" +
-      "pB\032\n\014com.su.protoB\nLoginProtob\006proto3"
+      "\n\021proto/login.proto\"\033\n\013RegisterReq\022\014\n\004na" +
+      "me\030\001 \001(\t\"\016\n\014RegisterResp\"\030\n\010LoginReq\022\014\n\004" +
+      "name\030\001 \001(\t\"\013\n\tLoginRespB\032\n\014com.su.protoB" +
+      "\nLoginProtob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2815,13 +1817,13 @@ public final class LoginProto {
     internal_static_RegisterReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RegisterReq_descriptor,
-        new java.lang.String[] { "Id", "Name", "Ids", "Results", });
+        new java.lang.String[] { "Name", });
     internal_static_RegisterResp_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_RegisterResp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RegisterResp_descriptor,
-        new java.lang.String[] { "Id", "Name", "Ids", "Results", });
+        new java.lang.String[] { });
     internal_static_LoginReq_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_LoginReq_fieldAccessorTable = new

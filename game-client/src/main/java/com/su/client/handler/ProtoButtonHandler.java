@@ -23,6 +23,7 @@ public class ProtoButtonHandler implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		ClientContext.getInstance().getTextFields().clear();
 		JPanel p = ClientContext.getInstance().getPanel();
 		p.setVisible(false);
 		p.removeAll();
@@ -38,10 +39,11 @@ public class ProtoButtonHandler implements ActionListener {
 				String propertyName = f.getName().substring(0, f.getName().length() - 1);
 				JLabel r1l = new JLabel(propertyName);
 				JTextField r1t = new JTextField(20);
+				r1t.setName(propertyName);
+				ClientContext.getInstance().getTextFields().add(r1t);
 				int propertyType = 0;
 				if (f.getType().getName().equals("int")) {
 					propertyType = ClientConst.INT_TYPE;
-					r1t.setText(",,,");
 				} else if (f.getType().getName().equals("java.lang.Object")) {
 					propertyType = ClientConst.STRING_TYPE;
 				} else if (f.getType().getName().equals("java.util.List")) {
@@ -49,6 +51,7 @@ public class ProtoButtonHandler implements ActionListener {
 					r1t.setText(",,,");
 				} else if (f.getType().getName().equals("com.google.protobuf.LazyStringList")) {
 					propertyType = ClientConst.STRINGS_TYPE;
+					r1t.setText(",,,");
 				} else {
 					System.out.println("未知的字段类型：" + propertyName);
 					continue;

@@ -2,7 +2,6 @@ package com.su.server;
 
 import java.util.Scanner;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.su.core.config.AppConfig;
@@ -11,9 +10,7 @@ import com.su.core.netty.NettyServer;
 public class AppStart {
 
 	public static void main(String[] args) throws Exception {
-		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		// 配置
-		AppConfig appConfig = context.getBean(AppConfig.class);
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		// 启动服务
 		NettyServer server = context.getBean(NettyServer.class);
 		new Thread(new Runnable() {
@@ -37,6 +34,7 @@ public class AppStart {
 			if (command.equals("stop")) {
 				// 关闭服务器
 				server.stop();
+				context.stop();
 				break;
 			}
 		}
