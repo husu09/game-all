@@ -11,5 +11,6 @@
   	<module>game-core</module>
   	<module>game-data</module>
   	<module>game-server</module>
+  	<module>game-excel</module>
   </modules>
 </project>
