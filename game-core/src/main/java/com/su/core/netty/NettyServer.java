@@ -75,7 +75,6 @@ public final class NettyServer {
                     		new ProtoLengthPrepender(),
                     		protoDecoder,
                     		nettyServerHandler);
-                    System.out.println("initChannel");
                 }
              });
             // Bind and start to accept incoming connections.

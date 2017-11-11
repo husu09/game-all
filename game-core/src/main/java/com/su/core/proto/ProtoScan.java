@@ -2,9 +2,12 @@ package com.su.core.proto;
 
 import java.io.File;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
@@ -15,7 +18,7 @@ import com.su.core.util.CoreUtils;
  * 扫描指定包下的所有proto协议
  */
 @Component
-public class ProtoScan implements ApplicationListener<ContextRefreshedEvent>  {
+public class ProtoScan {
 
 	@Autowired
 	private ProtoContext protoContext;
@@ -45,13 +48,9 @@ public class ProtoScan implements ApplicationListener<ContextRefreshedEvent>  {
 			}
 		}
 	}
-
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		try {
-			scan(appConfig.getPackName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	
+	@PostConstruct
+	public void init() throws Exception {
+		scan(appConfig.getPackName());
 	}
 }

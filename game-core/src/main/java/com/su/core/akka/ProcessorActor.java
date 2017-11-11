@@ -5,7 +5,8 @@ import com.google.protobuf.MessageLite;
 import io.netty.channel.ChannelHandlerContext;
 
 public interface ProcessorActor {
-	public void process(ChannelHandlerContext ctx, MessageLite messageLite);
+	
+	public void process(ChannelHandlerContext ctx, MessageLite messageLite)  throws Exception ;
 	
 	/**
 	 * 完成调用后关闭 Actor

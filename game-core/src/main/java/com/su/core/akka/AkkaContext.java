@@ -50,7 +50,7 @@ public class AkkaContext {
 	/**
 	 * 判断 Actor 是否存在
 	 * */
-	public boolean contain(String channelId) {
+	public boolean containsActor(String channelId) {
 		return actorMap.containsKey(channelId);
 	}
 	

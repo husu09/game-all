@@ -40,10 +40,10 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	private AkkaContext akkaContext;
 	
 	@Override
-	public void channelRead(ChannelHandlerContext ctx, Object msg) {
+	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		
 		String channelId = ctx.channel().id().asLongText();
-		if (akkaContext.contain(channelId)) {
+		if (akkaContext.containsActor(channelId)) {
 			akkaContext.getActor(channelId).process(ctx, (MessageLite) msg);
 		} else {
 			ProcessorActor processorActor = akkaContext.createActor();
