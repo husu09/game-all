@@ -1,4 +1,4 @@
-package com.su.common.rmi;
+package com.su.core.data;
 
 import java.util.Collection;
 import java.util.List;
@@ -6,13 +6,19 @@ import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projection;
 
-public interface DataRmiService {
+public interface DataService {
 	
-	public <T> int save(T t);
+	public <T> void save(T t);
 
-	public <T> int[] save(Collection<T> ts);
+	public <T> void save(Collection<T> ts);
 
-	public <T> int[] save(T[] ts);
+	public <T> void save(T[] ts);
+	
+	public <T> int saveNow(T t);
+
+	public <T> int[] saveNow(Collection<T> ts);
+
+	public <T> int[] saveNow(T[] ts);
 
 	public <T> void update(T t);
 

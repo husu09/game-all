@@ -19,7 +19,6 @@ public class AccountControl {
 	@Action(mustLogin = false)
 	public void login(PlayerContext playerContext, LoginReq req) {
 		System.out.println("loginReq");
-		dataRmiService.save();
 		playerContext.write(LoginResp.newBuilder());
 		
 	}
