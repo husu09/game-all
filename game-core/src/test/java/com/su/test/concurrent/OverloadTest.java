@@ -7,22 +7,29 @@ import java.util.List;
 public class OverloadTest {
 	
 	public void save(Object o) {
-		System.out.println("save(Object o)");
+		save(o);
 	}
 	
-	public void save(Collection<Object> o) {
+	private void saveT2(Collection<Object> o) {
 		System.out.println("save(Collection<Object> o)");
 	}
 	
-	public void save(Object[] o) {
+	private void saveT2(Object[] o) {
 		System.out.println("save(Object[] o)");
 	}
 	
 	public static void main(String[] args) {
-		OverloadTest t = new OverloadTest();
+		/*OverloadTest t = new OverloadTest();
 		Object o = new Object();
 		List list = new ArrayList<>();
 		Integer[] arr = new Integer[]{1};
-		t.save(list);
+		t.saveT2(list);*/
+		/*System.out.println(OverloadTest.class.getName());
+		System.out.println(OverloadTest.class.getSimpleName());
+		System.out.println(OverloadTest.class.getCanonicalName());
+		System.out.println(OverloadTest.class.getTypeName());*/
+		Object o = 1;
+		System.out.println(o);
+		
 	}
 }

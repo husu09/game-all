@@ -5,48 +5,347 @@ import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-public interface DataService {
+import com.su.common.rmi.DataRmiService;
+import com.su.core.action.Action;
+
+@Repository
+public class DataService {
+
+	@Autowired
+	private DataRmiService dataRmiService;
+	@Autowired
+	private MQService mqService;
+	@Autowired
+	private RedisCacheService redisService;
+	@Autowired
+	private MemoryCacheService memoryService;	
 	
-	public <T> void save(T t);
-
-	public <T> void save(Collection<T> ts);
-
-	public <T> void save(T[] ts);
+	private boolean isRedisCache(Class<?> c) {
+		Cache ac = c.getAnnotation(Cache.class);
+		if (ac != null) {
+			return ac.redisCache();
+		}
+		return false;
+	}
 	
-	public <T> int saveNow(T t);
+	private boolean isRedisCache(Object o) {
+		Cache ac = o.getClass().getAnnotation(Cache.class);
+		if (ac != null) {
+			return ac.redisCache();
+		}
+		return false;
+	}
 
-	public <T> int[] saveNow(Collection<T> ts);
+	private boolean isRedisCache(Collection<Object> os) {
+		if (os.size() == 0)
+			return false;
+		Object t = os.iterator().next();
+		Cache ac = t.getClass().getAnnotation(Cache.class);
+		if (ac != null) {
+			return ac.redisCache();
+		}
+		return false;
+	}
 
-	public <T> int[] saveNow(T[] ts);
+	private boolean isRedisCache(Object[] os) {
+		if (os.length == 0)
+			return false;
+		Object t = os[0];
+		Cache ac = t.getClass().getAnnotation(Cache.class);
+		if (ac != null) {
+			return ac.redisCache();
+		}
+		return false;
+	}
+	
+	private boolean isMemoryCache(Class<?> c) {
+		Cache ac = c.getAnnotation(Cache.class);
+		if (ac != null) {
+			return ac.memoryCache();
+		}
+		return false;
+	}
+	
+	private boolean isMemoryCache(Object o) {
+		Cache ac = o.getClass().getAnnotation(Cache.class);
+		if (ac != null) {
+			return ac.memoryCache();
+		}
+		return false;
+	}
 
-	public <T> void update(T t);
+	private boolean isMemoryCache(Collection<Object> os) {
+		if (os.size() == 0)
+			return false;
+		Object t = os.iterator().next();
+		Cache ac = t.getClass().getAnnotation(Cache.class);
+		if (ac != null) {
+			return ac.memoryCache();
+		}
+		return false;
+	}
 
-	public <T> void update(Collection<T> ts);
+	private <T> boolean isMemoryCache(Object[] os) {
+		if (os.length == 0)
+			return false;
+		Object t = os[0];
+		Cache ac = t.getClass().getAnnotation(Cache.class);
+		if (ac != null) {
+			return ac.memoryCache();
+		}
+		return false;
+	}
 
-	public <T> void update(T[] ts);
+	@Action
+	public void save(Object o) {
+		if (isMemoryCache(o))
+			memoryService.saveOrUpdate(o);
+		if (isRedisCache(o))
+			redisService.saveOrUpdate(o);
+		mqService.sendSave(o);
+	}
 
-	public int update(String sql);
+	@Action
+	public void save(Collection<Object> os) {
+		if (isMemoryCache(os))
+			memoryService.saveOrUpdate(os);
+		if (isRedisCache(os))
+			redisService.saveOrUpdate(os);
+		mqService.sendSave(os);
+	}
 
-	public <T> void delete(T t);
+	@Action
+	public void save(Object[] os) {
+		if (isMemoryCache(os))
+			memoryService.saveOrUpdate(os);
+		if (isRedisCache(os))
+			redisService.saveOrUpdate(os);
+		mqService.sendSave(os);
+	}
 
-	public <T> void delete(Collection<T> ts);
+	@Action
+	public int saveNow(Object o) {
+		int i = dataRmiService.save(o);
+		if (isMemoryCache(o))
+			memoryService.saveOrUpdate(o);
+		if (isRedisCache(o))
+			redisService.saveOrUpdate(o);
+		return i;
+	}
 
-	public <T> void delete(T[] ts);
+	@Action
+	public int[] saveNow(Collection<Object> os) {
+		int[] arr = dataRmiService.save(os);
+		if (isMemoryCache(os))
+			memoryService.saveOrUpdate(os);
+		if (isRedisCache(os))
+			redisService.saveOrUpdate(os);
+		return arr;
+	}
 
-	public int delete(String sql);
+	@Action
+	public int[] saveNow(Object[] os) {
+		int[] arr = dataRmiService.save(os);
+		if (isMemoryCache(os))
+			memoryService.saveOrUpdate(os);
+		if (isRedisCache(os))
+			redisService.saveOrUpdate(os);
+		return arr;
+	}
 
-	public <T> T get(Class<T> c, Integer id);
+	@Action
+	public void update(Object o) {
+		if (isMemoryCache(o))
+			memoryService.saveOrUpdate(o);
+		if (isRedisCache(o))
+			redisService.saveOrUpdate(o);
+		mqService.sendUpdate(o);
 
-	public <T> T get(DetachedCriteria detachedCriteria);
+	}
 
-	public <T> List<T> list(Class<T> c);
+	@Action
+	public void update(Collection<Object> os) {
+		if (isMemoryCache(os))
+			memoryService.saveOrUpdate(os);
+		if (isRedisCache(os))
+			redisService.saveOrUpdate(os);
+		mqService.sendUpdate(os);
+	}
 
-	public <T> List<T> list(DetachedCriteria detachedCriteria);
+	@Action
+	public void update(Object[] os) {
+		if (isMemoryCache(os))
+			memoryService.saveOrUpdate(os);
+		if (isRedisCache(os))
+			redisService.saveOrUpdate(os);
+		mqService.sendUpdate(os);
+	}
 
-	public <T> List<T> list(Class<T> c, int first, int max);
+	@Action
+	@Deprecated
+	public int update(Class<?> c, String sql) {
+		int i = dataRmiService.update(sql);
+		// 缓存失效
+		if (isMemoryCache(c))
+			memoryService.delete(c);
+		if (isRedisCache(c))
+			redisService.delete(c);
+		return i;
+	}
 
-	public <T> List<T> list(DetachedCriteria detachedCriteria, int first, int max);
+	@Action
+	public void delete(Object o) {
+		if (isMemoryCache(o))
+			memoryService.delete(o);
+		if (isRedisCache(o))
+			redisService.delete(o);
+		mqService.delete(o);
+	}
 
-	public long get(Class<?> c, Projection projection);
+	@Action
+	public void delete(Collection<Object> os) {
+		if (isMemoryCache(os))
+			memoryService.delete(os);
+		if (isRedisCache(os))
+			redisService.delete(os);
+		mqService.delete(os);
+	}
+
+	@Action
+	public void delete(Object[] os) {
+		if (isMemoryCache(os))
+			memoryService.delete(os);
+		if (isRedisCache(os))
+			redisService.delete(os);
+		mqService.delete(os);
+	}
+
+	@Action
+	@Deprecated
+	public int delete(Class<?> c, String sql) {
+		int i = dataRmiService.delete(sql);
+		// 缓存失效
+		if (isMemoryCache(c))
+			memoryService.delete(c);
+		if (isRedisCache(c))
+			redisService.delete(c);
+		return i;
+	}
+
+	@Action
+	public <T> T get(Class<T> c, int id) {
+		T t = null;
+		boolean ismc = false;
+		boolean isrc = false;
+		if (ismc = isMemoryCache(c))
+			t = memoryService.get(c, id);
+		if (t == null && (isrc = isRedisCache(t)))
+			t = redisService.get(c, id);
+		if (t == null) {
+			t = dataRmiService.get(c, id);
+			if (ismc)
+				memoryService.saveOrUpdate(t);
+			if (isrc)
+				redisService.saveOrUpdate(t);
+		}
+		return t;
+	}
+
+	@Action
+	public <T> T get(DetachedCriteria detachedCriteria) {
+		T t = dataRmiService.get(detachedCriteria);
+		if (isMemoryCache(t))
+			memoryService.saveOrUpdate(t);
+		if (isRedisCache(t))
+			redisService.saveOrUpdate(t);
+		return t;
+	}
+
+	@Action
+	public <T> List<T> listByCache(Class<T> c) {
+		List<T> ts = null;
+		boolean ismc = false;
+		boolean isrc = false;
+		if (ismc = isMemoryCache(c))
+			ts = memoryService.list(c);
+		if (ts == null && (isrc = isRedisCache(ts)))
+			ts = redisService.list(c);
+		if (ts == null) {
+			ts = dataRmiService.list(c);
+			if (ismc)
+				memoryService.saveOrUpdate(ts);
+			if (isrc)
+				redisService.saveOrUpdate(ts);
+		}
+		return ts;
+	}
+	
+	@Action
+	public <T> List<T> list(Class<T> c) {
+		List<T> ts = dataRmiService.list(c);
+		if (isMemoryCache(ts))
+			memoryService.saveOrUpdate(ts);
+		if (isRedisCache(ts))
+			redisService.saveOrUpdate(ts);
+		return ts;
+	}
+
+	@Action
+	public <T> List<T> list(DetachedCriteria detachedCriteria) {
+		List<T> ts = dataRmiService.list(detachedCriteria);
+		if (isMemoryCache(ts))
+			memoryService.saveOrUpdate(ts);
+		if (isRedisCache(ts))
+			redisService.saveOrUpdate(ts);
+		return ts;
+	}
+
+	@Action
+	public <T> List<T> listByCache(Class<T> c, int first, int max) {
+		List<T> ts = null;
+		boolean ismc = false;
+		boolean isrc = false;
+		if (ismc = isMemoryCache(c))
+			ts = memoryService.list(c, first, max);
+		if (ts == null && (isrc = isRedisCache(ts)))
+			ts = redisService.list(c, first, max);
+		if (ts == null) {
+			ts = dataRmiService.list(c, first, max);
+			if (ismc)
+				memoryService.saveOrUpdate(ts);
+			if (isrc)
+				redisService.saveOrUpdate(ts);
+		}
+		return ts;
+	}
+	
+	@Action
+	public <T> List<T> list(Class<T> c, int first, int max) {
+		List<T> ts = dataRmiService.list(c, first, max);
+		if (isMemoryCache(ts))
+			memoryService.saveOrUpdate(ts);
+		if (isRedisCache(ts))
+			redisService.saveOrUpdate(ts);
+		return ts;
+	}
+
+	@Action
+	public <T> List<T> list(DetachedCriteria detachedCriteria, int first, int max) {
+		List<T> ts = dataRmiService.get(detachedCriteria);
+		if (isMemoryCache(ts))
+			memoryService.saveOrUpdate(ts);
+		if (isRedisCache(ts))
+			redisService.saveOrUpdate(ts);
+		return ts;
+	}
+
+	@Action
+	public long get(Class<?> c, Projection projection) {
+		long l = dataRmiService.get(c, projection);
+		return l;
+	}
+
 }

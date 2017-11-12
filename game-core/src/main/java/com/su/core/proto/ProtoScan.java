@@ -22,8 +22,6 @@ public class ProtoScan {
 
 	@Autowired
 	private ProtoContext protoContext;
-	@Autowired
-	private AppConfig appConfig;
 
 	public void scan(String packName) throws Exception {
 		String packPath = packName.replace(".", "/");

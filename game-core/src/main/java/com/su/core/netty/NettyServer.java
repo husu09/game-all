@@ -41,8 +41,6 @@ import io.netty.handler.timeout.IdleStateHandler;
 public final class NettyServer {
 
 	@Autowired
-	private AppConfig appConfig;
-	@Autowired
 	private ProtoDecoder protoDecoder;
 	@Autowired
 	private ProtoEncoder protoEncoder;

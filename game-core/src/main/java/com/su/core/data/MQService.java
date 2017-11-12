@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MQService {
+	
+	
 
 	public <T> void sendSave(T t) {
 		// TODO Auto-generated method stub

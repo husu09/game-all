@@ -1,0 +1,78 @@
+package com.su.core.data;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class MemoryCache {
+	@Autowired
+	private CacheUtil cacheUtil;
+	
+	/**
+	 * 内存中的缓存结构
+	 * */
+	private Map<Class<?>, Map<String, Object>> classValueMap = new ConcurrentHashMap<>();
+	
+	public void add(Object o) {
+		Map<String, Object> map = classValueMap.get(o.getClass());
+		if (map == null) {
+			map = new ConcurrentHashMap<>();
+			classValueMap.put(o.getClass(), map);
+		}
+		map.put(cacheUtil.getKey(o), o);
+	}
+
+	public void remove(Object o) {
+		Map<String, Object> map = classValueMap.get(o.getClass());
+		if (map == null)
+			return;
+		map.remove(cacheUtil.getKey(o));
+	}
+	
+	public void remove(Class<?> c) {
+		classValueMap.remove(c);
+	}
+
+	public boolean contains(Object o) {
+		Map<String, Object> map = classValueMap.get(o.getClass());
+		if (map == null)
+			return false;
+		return map.containsKey(cacheUtil.getKey(o));
+	}
+
+	public <T> T get(Class<T> c, int id) {
+		Map<String, Object> map = classValueMap.get(c);
+		if (map == null)
+			return null;
+		return (T) map.get(cacheUtil.getKey(c, id));
+	}
+
+	public <T> List<T> list(Class<T> c) {
+		Map<String, Object> map = classValueMap.get(c);
+		if (map == null)
+			return null;
+		return  (List<T>) map.values();
+	}
+
+	public <T> List<T> list(Class<T> c, int first, int max) {
+		Map<String, Object> map = classValueMap.get(c);
+		if (map == null)
+			return null;
+		List<Object> resultList = null;
+		int i = 0;
+		for (Object o : map.values()) {
+			if (i >= first) {
+				if (resultList == null)
+					resultList = new ArrayList<>(max);
+				resultList.add(o);
+			}
+			if (i+1 == max)
+				break;
+			i++;
+		}
+		return (List<T>) resultList;
+	}
+}

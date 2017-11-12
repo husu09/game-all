@@ -16,36 +16,6 @@ import redis.clients.jedis.Jedis;
 @ComponentScan(basePackages = { "com.su" })
 @PropertySource("config.properties")
 public class AppConfig {
-
-	@Value("${server.port}")
-	private int port;
-
-	@Value("${proto.packName}")
-	private String packName;
-
-	@Value("${redis.host}")
-	private String reids_host;
-
-	@Value("${redis.port}")
-	private int reids_port;
-
-	@Value("${redis.password}")
-	private String reids_password;
-
-	public int getPort() {
-		return port;
-	}
-
-	public String getPackName() {
-		return packName;
-	}
-
-	@Bean
-	public Jedis jedis() {
-		Jedis jedis = new Jedis(reids_host, reids_port);
-		jedis.auth(reids_password);
-		return jedis;
-	}
 	
 	@Bean
 	public RmiProxyFactoryBean dataRmiService() {
