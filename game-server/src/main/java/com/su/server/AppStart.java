@@ -5,8 +5,8 @@ import java.util.Scanner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.su.core.config.AppConfig;
 import com.su.core.netty.NettyServer;
-import com.su.core.proto.ProtoScan;
 
 public class AppStart {
 
@@ -14,9 +14,6 @@ public class AppStart {
 		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		// 配置
 		AppConfig appConfig = context.getBean(AppConfig.class);
-		// 扫描proto协议
-		ProtoScan protoScan = context.getBean(ProtoScan.class);
-		protoScan.scan(appConfig.getPackName());
 		// 启动服务
 		NettyServer server = context.getBean(NettyServer.class);
 		new Thread(new Runnable() {

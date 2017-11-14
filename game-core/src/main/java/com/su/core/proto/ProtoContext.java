@@ -2,6 +2,8 @@ package com.su.core.proto;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
@@ -25,5 +27,9 @@ public class ProtoContext {
 
 	public boolean contains(String messageName) {
 		return map.containsKey(messageName);
+	}
+	
+	public Set<Entry<String, MessageLite>> all() {
+		return map.entrySet();
 	}
 }

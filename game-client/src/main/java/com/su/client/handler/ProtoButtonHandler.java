@@ -9,15 +9,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.su.client.ClientStart;
+import com.google.protobuf.MessageLite;
+import com.su.client.ClientConst;
+import com.su.client.ClientContext;
+import com.su.core.proto.ProtoContext;
+import com.su.core.util.ApplicationContextUtil;
 
 /**
  * 生成 proto 参数输入框
- * */
+ */
 public class ProtoButtonHandler implements ActionListener {
-	
+
 	private JPanel p;
-	
+
 	public ProtoButtonHandler(JPanel p) {
 		this.p = p;
 	}
@@ -27,15 +31,31 @@ public class ProtoButtonHandler implements ActionListener {
 		p.setVisible(false);
 		p.removeAll();
 		JButton but = (JButton) e.getSource();
-		Class<?> c = ClientStart.getClass(but.getText());
+		ProtoContext protoContext = ApplicationContextUtil.getApplicationContext().getBean(ProtoContext.class);
+		MessageLite messageLite = protoContext.get(but.getText());
+		ClientContext.getInstance().setSelectMessageLite(messageLite);
+		Class<?> c = messageLite.getClass();
 		Field[] fields = c.getDeclaredFields();
 		for (Field f : fields) {
 			if (f.getName().endsWith("_") && !f.getName().equals("bitField0_")) {
 				JPanel r1p = new JPanel();
-				JLabel r1l = new JLabel(f.getName().substring(0, f.getName().length() - 1));
+				String propertyName = f.getName().substring(0, f.getName().length() - 1);
+				JLabel r1l = new JLabel(propertyName);
 				JTextField r1t = new JTextField(20);
-				System.out.println(f.getType());
-				System.out.println(f.getGenericType());
+				int propertyType = 0;
+				if (f.getType().getName().equals("int")) {
+					propertyType = ClientConst.INT_TYPE;
+				} else if (f.getType().getName().equals("java.lang.Object")) {
+					propertyType = ClientConst.STRING_TYPE;
+				} else if (f.getType().getName().equals("java.util.List")) {
+					propertyType = ClientConst.INTS_TYPE;
+				} else if (f.getType().getName().equals("com.google.protobuf.LazyStringList")) {
+					propertyType = ClientConst.STRINGS_TYPE;
+				} else {
+					System.out.println("未知的字段类型：" + propertyName);
+					continue;
+				}
+				ClientContext.getInstance().addProperty(but.getText(), propertyName, propertyType);
 				r1p.add(r1l);
 				r1p.add(r1t);
 				p.add(r1p);

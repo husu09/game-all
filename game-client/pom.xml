@@ -8,11 +8,20 @@
 	</parent>
 	<artifactId>game-client</artifactId>
 	<dependencies>
-		<!-- netty -->
 		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>4.1.16.Final</version>
+			<groupId>com.su</groupId>
+			<artifactId>game-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.su</groupId>
+			<artifactId>game-proto</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.su</groupId>
+			<artifactId>game-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

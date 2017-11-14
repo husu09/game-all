@@ -1,4 +1,4 @@
-package com.su.core;
+package com.su.core.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;

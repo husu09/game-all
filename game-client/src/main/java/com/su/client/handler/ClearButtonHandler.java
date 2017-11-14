@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * 创建账号
+ * 清空文本框
  * */
 public class ClearButtonHandler implements ActionListener {
 

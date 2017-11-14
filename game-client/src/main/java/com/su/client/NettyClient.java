@@ -15,8 +15,8 @@
  */
 package com.su.client;
 
-import com.su.core.ProtoDecoder;
-import com.su.core.ProtoEncoder;
+import com.su.core.proto.ProtoDecoder;
+import com.su.core.proto.ProtoEncoder;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;

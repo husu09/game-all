@@ -18,7 +18,7 @@ package com.su.core.netty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.su.core.AppConfig;
+import com.su.core.config.AppConfig;
 import com.su.core.proto.ProtoDecoder;
 import com.su.core.proto.ProtoEncoder;
 

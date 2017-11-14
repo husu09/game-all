@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import com.su.core.proto.ProtoContext;
 
-@Component
+
 public class ActionScan implements BeanPostProcessor {
 
 	@Autowired

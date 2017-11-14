@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 
 /**
- *	proto 按钮，生成参数输入框
+ *	登录
  * */
 public class LoginButtonHandler implements ActionListener {
 	
