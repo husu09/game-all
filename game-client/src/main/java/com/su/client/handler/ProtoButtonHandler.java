@@ -20,14 +20,10 @@ import com.su.core.util.ApplicationContextUtil;
  */
 public class ProtoButtonHandler implements ActionListener {
 
-	private JPanel p;
-
-	public ProtoButtonHandler(JPanel p) {
-		this.p = p;
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		JPanel p = ClientContext.getInstance().getPanel();
 		p.setVisible(false);
 		p.removeAll();
 		JButton but = (JButton) e.getSource();
@@ -45,10 +41,12 @@ public class ProtoButtonHandler implements ActionListener {
 				int propertyType = 0;
 				if (f.getType().getName().equals("int")) {
 					propertyType = ClientConst.INT_TYPE;
+					r1t.setText(",,,");
 				} else if (f.getType().getName().equals("java.lang.Object")) {
 					propertyType = ClientConst.STRING_TYPE;
 				} else if (f.getType().getName().equals("java.util.List")) {
 					propertyType = ClientConst.INTS_TYPE;
+					r1t.setText(",,,");
 				} else if (f.getType().getName().equals("com.google.protobuf.LazyStringList")) {
 					propertyType = ClientConst.STRINGS_TYPE;
 				} else {

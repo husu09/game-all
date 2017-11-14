@@ -104,7 +104,8 @@ public class ClientUI {
 		lrp.setLayout(new GridLayout(0, 1));
 		JScrollPane lrsp = new JScrollPane(lrp);
 		leftRight.add(lrsp);
-		loadProto(lrp, leftBelow);
+		loadProto(lrp);
+		ClientContext.getInstance().setPanel(leftBelow);
 
 		leftP.add(leftRight);
 
@@ -121,6 +122,7 @@ public class ClientUI {
 		JScrollPane scroll = new JScrollPane(textA);
 		rightTop.add(scroll);
 		rightP.add("Center", rightTop);
+		ClientContext.getInstance().setTextArea(textA);
 
 		// 右下
 		JPanel rightBelow = new JPanel();
@@ -143,8 +145,8 @@ public class ClientUI {
 	 * @param leftBelow
 	 *            显示协议参数的面板
 	 */
-	private void loadProto(JComponent leftRight, JPanel leftBelow) {
-		ProtoButtonHandler pbh = new ProtoButtonHandler(leftBelow);
+	private void loadProto(JComponent leftRight) {
+		ProtoButtonHandler pbh = new ProtoButtonHandler();
 		for (Entry<String, MessageLite> e : protoContext.all()) {
 			if (e.getKey().contains("Resp"))
 				continue;

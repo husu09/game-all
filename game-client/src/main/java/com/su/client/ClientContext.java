@@ -3,6 +3,9 @@ package com.su.client;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
 import com.google.protobuf.MessageLite;
 
 public class ClientContext {
@@ -45,5 +48,32 @@ public class ClientContext {
 	public int getProperty(String messageName, String propertyName) {
 		return map.get(messageName).get(propertyName);
 	}
+	
+	/**
+	 * 参数面板
+	 * */
+	private JPanel panel;
 
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+	
+	/**
+	 * 文本域
+	 * */
+	private JTextArea textArea;
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+	public void setTextArea(JTextArea textArea) {
+		this.textArea = textArea;
+	}
+	
+	
 }

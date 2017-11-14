@@ -10,7 +10,7 @@ public class ClientConst {
 	 */
 	public static final int STRING_TYPE = 2;
 	/**
-	 * java.util.List<java.lang.Integer> int集合
+	 * java.util.List int集合
 	 */
 	public static final int INTS_TYPE = 3;
 	/**

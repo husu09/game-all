@@ -18,6 +18,7 @@ public class SendButtonHandler implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// 组装协议信息
 		MessageLite messageLite = ClientContext.getInstance().getSelectMessageLite();
+		
 		/*messageLite.getClass().getSimpleName();
 		RegisterReq.newBuilder().setId(value);
 		RegisterReq.newBuilder().addIds(value);
