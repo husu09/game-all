@@ -2,8 +2,6 @@ package com.su.client.handler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.InputStream;
-import java.util.Properties;
 
 import javax.swing.JTextField;
 
@@ -34,16 +32,10 @@ public class LoginButtonHandler implements ActionListener {
 			return;
 		}
 		// 保存数据
-		Properties prop = new Properties();
-		InputStream in = LoginButtonHandler.class.getClassLoader().getResourceAsStream("data.properties");
+		ctx.saveData(arr[0], arr[1]);
+		AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) ApplicationContextUtil
+				.getApplicationContext();
 		try {
-			prop.load(in);
-			prop.setProperty("host", hostTF.getText());
-			prop.setProperty("name", userNameTF.getText());
-			in.close();
-
-			AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) ApplicationContextUtil
-					.getApplicationContext();
 			// 启动服务
 			NettyClient client = context.getBean(NettyClient.class);
 			new Thread(new Runnable() {

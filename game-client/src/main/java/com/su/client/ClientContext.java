@@ -1,5 +1,6 @@
 package com.su.client;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -155,10 +156,16 @@ public class ClientContext {
 	public void saveData(String host, String name) {
 		try {
 			Properties prop = new Properties();
+			System.out.println(LoginButtonHandler.class.getClassLoader().getResource(""));
+			System.out.println(LoginButtonHandler.class.getClassLoader().getResource("/"));
+			System.out.println(LoginButtonHandler.class.getClassLoader().getSystemResource(""));
+			System.out.println(LoginButtonHandler.class.getClassLoader().getSystemResource("/"));
+			String path = LoginButtonHandler.class.getClassLoader().getResource(ClientConst.SAVE_FILE).getPath();
 			InputStream in = LoginButtonHandler.class.getClassLoader().getResourceAsStream(ClientConst.SAVE_FILE);
 			prop.load(in);
 			prop.setProperty("host", host);
 			prop.setProperty("name", name);
+			prop.store(new FileOutputStream(path), "client data");
 			in.close();
 		} catch (IOException e) {
 			e.printStackTrace();

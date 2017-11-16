@@ -26,7 +26,6 @@ import com.google.protobuf.MessageLite;
 import com.su.client.handler.CreateButtonHandler;
 import com.su.client.handler.LoginButtonHandler;
 import com.su.client.handler.ProtoButtonHandler;
-import com.su.client.handler.SendButtonHandler;
 import com.su.core.proto.ProtoContext;
 import com.su.core.util.ApplicationContextUtil;
 
@@ -64,13 +63,14 @@ public class ClientUI {
 		// 左左
 		JPanel leftLeft = new JPanel();
 		leftLeft.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
+		
 		// 第一行
 		JPanel r1p = new JPanel();
 		JLabel ipL = new JLabel("地址");
 		JButton createB = new JButton("创号");
 		createB.addActionListener(new CreateButtonHandler());
 		JTextField ipT = new JTextField(20);
+		ipT.setText(ctx.getData().get("host"));
 		r1p.add(ipL);
 		r1p.add(ipT);
 		r1p.add(createB);
@@ -81,6 +81,7 @@ public class ClientUI {
 		JPanel r2p = new JPanel();
 		JLabel nameL = new JLabel("用户");
 		JTextField nameT = new JTextField(20);
+		nameT.setText(ctx.getData().get("name"));
 		JButton loginB = new JButton("登录");
 		loginB.addActionListener(new LoginButtonHandler());
 		r2p.add(nameL);
