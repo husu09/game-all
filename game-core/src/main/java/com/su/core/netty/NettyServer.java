@@ -17,6 +17,10 @@ package com.su.core.netty;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ApplicationContextEvent;
+import org.springframework.context.event.ContextClosedEvent;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.su.proto.core.ProtoDecoder;
@@ -38,7 +42,7 @@ import io.netty.handler.timeout.IdleStateHandler;
  * Modification of {@link EchoServer} which utilizes Java object serialization.
  */
 @Component
-public final class NettyServer {
+public final class NettyServer implements ApplicationListener<ApplicationContextEvent> {
 
 	@Autowired
 	private ProtoDecoder protoDecoder;
@@ -48,46 +52,60 @@ public final class NettyServer {
 	private NettyServerHandler nettyServerHandler;
 	@Autowired
 	private HeartbeatHandler heartbeatHandler;
-	
+
 	@Value("${server.port}")
 	private int port;
-	
-	
+
 	private EventLoopGroup bossGroup = null;
-    private EventLoopGroup workerGroup = null;
-	
-	
-    public void start() throws Exception {
-    	bossGroup = new NioEventLoopGroup(1);
-    	workerGroup = new NioEventLoopGroup();
-        try {
-            ServerBootstrap b = new ServerBootstrap();
-            b.group(bossGroup, workerGroup)
-             .channel(NioServerSocketChannel.class)
-             .handler(new LoggingHandler(LogLevel.INFO))
-             .childHandler(new ChannelInitializer<SocketChannel>() {
-                @Override
-                public void initChannel(SocketChannel ch) throws Exception {
-                    ChannelPipeline p = ch.pipeline();
-                    p.addLast(
-                    		new IdleStateHandler(0, 0, 120),
-                    		heartbeatHandler,
-                    		protoEncoder,
-                    		new ProtoLengthPrepender(),
-                    		protoDecoder,
-                    		nettyServerHandler);
-                }
-             });
-            // Bind and start to accept incoming connections.
-            b.bind(port).sync().channel().closeFuture().sync();
-        } finally {
-            bossGroup.shutdownGracefully();
-            workerGroup.shutdownGracefully();
-        }
-    }
-    
-    public void stop() {
-    	bossGroup.shutdownGracefully();
-        workerGroup.shutdownGracefully();
-    }
+	private EventLoopGroup workerGroup = null;
+
+	public void start() {
+		bossGroup = new NioEventLoopGroup(1);
+		workerGroup = new NioEventLoopGroup();
+		try {
+			ServerBootstrap b = new ServerBootstrap();
+			b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+					.handler(new LoggingHandler(LogLevel.INFO)).childHandler(new ChannelInitializer<SocketChannel>() {
+						@Override
+						public void initChannel(SocketChannel ch) throws Exception {
+							ChannelPipeline p = ch.pipeline();
+							p.addLast(protoEncoder, new ProtoLengthPrepender(), protoDecoder, nettyServerHandler);
+							/*
+							 * p.addLast(new IdleStateHandler(0, 0, 120),
+							 * heartbeatHandler, protoEncoder, new
+							 * ProtoLengthPrepender(), protoDecoder,
+							 * nettyServerHandler);
+							 */
+						}
+					});
+			// Bind and start to accept incoming connections.
+			b.bind(port).sync().channel().closeFuture().sync();
+		} catch (Exception e) {
+			e.printStackTrace();
+			;
+		} finally {
+			bossGroup.shutdownGracefully();
+			workerGroup.shutdownGracefully();
+		}
+	}
+
+	public void stop() {
+		bossGroup.shutdownGracefully();
+		workerGroup.shutdownGracefully();
+	}
+
+	@Override
+	public void onApplicationEvent(ApplicationContextEvent event) {
+		if (event instanceof ContextRefreshedEvent) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					start();
+				}
+			}, "netty-server").start();
+		} else if (event instanceof ContextClosedEvent) {
+			stop();
+		}
+
+	}
 }

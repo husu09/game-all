@@ -21,8 +21,8 @@ public class RedisClient {
 	private String host;
 	@Value("${redis.port}")
 	private int port;
-	private String password;
 	@Value("${redis.password}")
+	private String password;
 	
 	private JedisPoolConfig config;
 	private JedisPool pool;

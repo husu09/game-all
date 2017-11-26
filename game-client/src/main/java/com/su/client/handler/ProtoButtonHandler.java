@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.google.protobuf.MessageLite;
-import com.su.client.ClientConst;
-import com.su.client.ClientContext;
+import com.su.client.core.ClientConst;
+import com.su.client.core.ClientContext;
 import com.su.common.util.SpringUtil;
 import com.su.proto.core.ProtoContext;
 

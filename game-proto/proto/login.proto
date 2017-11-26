@@ -1,7 +1,6 @@
 syntax = "proto3";
 option java_package = "com.su.proto"; 
 option java_outer_classname = "LoginProto";
-
 // 注册
 message RegisterReq {
  	string name = 1;

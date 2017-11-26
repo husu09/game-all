@@ -1,4 +1,4 @@
-package com.su.client;
+package com.su.client.core;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,17 +10,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.google.protobuf.Message;
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
+import com.googlecode.protobuf.format.JsonFormat;
 import com.su.client.handler.LoginButtonHandler;
 
 import io.netty.channel.ChannelHandlerContext;
@@ -190,6 +190,18 @@ public class ClientContext {
 			e.printStackTrace();
 		}
 		return map;
+	}
+
+	public void showMessage(String string) {
+		textArea.append(string);
+	}
+	
+	private JsonFormat jsonFormat = new JsonFormat();
+	
+	public void showMessage(MessageLite messageLite) {
+		String jsonStr = FormatUtil.formatJson(jsonFormat.printToString((Message) messageLite));
+		jsonStr = messageLite.getClass().getSimpleName() + jsonStr + "\n";
+		showMessage(jsonStr);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.su.client;
+package com.su.client.core;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -23,9 +23,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
+import com.su.client.handler.ClearButtonHandler;
 import com.su.client.handler.CreateButtonHandler;
 import com.su.client.handler.LoginButtonHandler;
 import com.su.client.handler.ProtoButtonHandler;
+import com.su.client.handler.SendButtonHandler;
 import com.su.common.util.SpringUtil;
 import com.su.proto.core.ProtoContext;
 
@@ -91,7 +93,7 @@ public class ClientUI {
 		ctx.setUserNameTF(nameT);
 
 		// 第三行
-		/*
+		
 		JPanel r3p = new JPanel();
 		JLabel passwordL = new JLabel("密码");
 		JTextField passwordT = new JTextField(20);
@@ -101,7 +103,7 @@ public class ClientUI {
 		r3p.add(passwordT);
 		r3p.add(sendB);
 		leftLeft.add(r3p);
-		*/
+		
 
 		// 左下
 		JPanel leftBelow = new JPanel();
@@ -141,6 +143,7 @@ public class ClientUI {
 		// 右下
 		JPanel rightBelow = new JPanel();
 		JButton clearB = new JButton("清空");
+		clearB.addActionListener(new ClearButtonHandler());
 		rightBelow.setLayout(new FlowLayout());
 		rightBelow.add(clearB);
 		rightP.add("South", rightBelow);

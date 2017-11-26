@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.su.common.po.Person;
+import com.su.common.po.Player;
 import com.su.data.config.DataConfig;
 import com.su.data.dao.BaseDao;
 
@@ -19,7 +19,7 @@ public class HibernateTest {
 	
 	@Test
 	public void testDao() {
-		Person p1 = new Person();
+		Player p1 = new Player();
 		p1.setId(10002);
 		p1.setName("person2");
 		baseDao.save(p1);

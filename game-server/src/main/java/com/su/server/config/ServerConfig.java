@@ -1,4 +1,4 @@
-package com.su.core.config;
+package com.su.server.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +12,7 @@ import com.su.common.rmi.DataRmiService;
 @Configuration
 @ComponentScan(basePackages = { "com.su" })
 @PropertySource("config.properties")
-public class AppConfig {
+public class ServerConfig {
 
 	@Value("${rmi.url}")
 	private String rmiUrl;

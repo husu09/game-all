@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.su.client;
+package com.su.client.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,6 +39,8 @@ public final class NettyClient {
 	private ProtoEncoder protoEncoder;
 	@Autowired
 	private ProtoDecoder protoDecoder;
+	@Autowired
+	private NettyClientHandler nettyClientHandler;
 
 	private EventLoopGroup group;
 
@@ -51,7 +53,7 @@ public final class NettyClient {
 				@Override
 				public void initChannel(SocketChannel ch) throws Exception {
 					ChannelPipeline p = ch.pipeline();
-					p.addLast(protoEncoder, new ProtoLengthPrepender(), protoDecoder, new NettyClientHandler());
+					p.addLast(protoEncoder, new ProtoLengthPrepender(), protoDecoder, nettyClientHandler);
 				}
 			});
 

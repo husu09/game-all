@@ -7,15 +7,16 @@ import java.util.List;
 import javax.swing.JTextField;
 
 import com.google.protobuf.MessageLite;
-import com.su.client.ClientConst;
-import com.su.client.ClientContext;
-import com.su.client.ClientUtil;
+import com.su.client.core.ClientConst;
+import com.su.client.core.ClientContext;
+import com.su.client.core.ClientUtil;
 
 /**
  * 发送消息
  */
 public class SendButtonHandler implements ActionListener {
-
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// 组装协议信息
@@ -54,11 +55,13 @@ public class SendButtonHandler implements ActionListener {
 					}
 				}
 			}
+			MessageLite ml = (MessageLite) builder.getClass().getMethod("build").invoke(builder);
+			// 发送消息
+			ClientContext.getInstance().write(ml);
+			ClientContext.getInstance().showMessage(ml);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		// 发送消息
-		
 		
 	}
 

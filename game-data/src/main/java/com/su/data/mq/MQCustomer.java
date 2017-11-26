@@ -2,15 +2,15 @@ package com.su.data.mq;
 
 import java.io.IOException;
 
+import com.alibaba.fastjson.JSON;
 import com.rabbitmq.client.AMQP.BasicProperties;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.DefaultConsumer;
+import com.rabbitmq.client.Envelope;
 import com.su.common.mq.MQMessage;
 import com.su.common.mq.MQOperator;
 import com.su.common.util.SpringUtil;
 import com.su.data.dao.BaseDao;
-import com.alibaba.fastjson.JSON;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
 
 /**
  * mq消费者

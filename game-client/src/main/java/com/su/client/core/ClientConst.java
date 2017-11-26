@@ -1,4 +1,4 @@
-package com.su.client;
+package com.su.client.core;
 
 public class ClientConst {
 	/**

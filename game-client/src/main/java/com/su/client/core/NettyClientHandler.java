@@ -13,7 +13,13 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.su.client;
+package com.su.client.core;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.google.protobuf.MessageLite;
+import com.su.client.handler.ReceiveMessageHandler;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -25,9 +31,11 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * ping-pong traffic between the object echo client and server by sending the
  * first message to the server.
  */
+@Component
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
-
+	@Autowired
+	private ReceiveMessageHandler receiveMessageHandler;
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
@@ -40,7 +48,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         // Echo back the received object to the server.
         //ctx.write(msg);
-    	System.out.println("client recevice " + msg);
+    	receiveMessageHandler.process((MessageLite) msg);
     }
 
     @Override

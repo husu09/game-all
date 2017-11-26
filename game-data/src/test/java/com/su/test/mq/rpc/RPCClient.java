@@ -1,14 +1,5 @@
 package com.su.test.mq.rpc;
 
-import java.io.IOException;
-import java.util.UUID;
-import java.util.concurrent.TimeoutException;
-
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-
 public class RPCClient {/*
     private Connection connection;
     private Channel channel;

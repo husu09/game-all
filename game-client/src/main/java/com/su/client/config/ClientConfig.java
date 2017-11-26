@@ -7,6 +7,6 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @ComponentScan(basePackages = { "com.su" })
 @PropertySource("config.properties")
-public class AppConfig {
+public class ClientConfig {
 
 }

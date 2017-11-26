@@ -5,6 +5,7 @@ import java.io.File;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
@@ -19,6 +20,7 @@ public class ProtoScan {
 	@Autowired
 	private ProtoContext protoContext;
 	
+	@Value("${proto.packName}")
 	private String protoPackName;
 
 	public void scan(String packName) throws Exception {

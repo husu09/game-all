@@ -46,7 +46,6 @@ public class MQClient {
 		}
 	}
 
-
 	@PreDestroy
 	public void destroy() throws Exception {
 		// 关闭通道和连接

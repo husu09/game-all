@@ -50,7 +50,7 @@ public class DataConfig {
 	private String auto;
 
 	@Bean
-	public DataSource dataSource() {
+	public DruidDataSource dataSource() {
 		DruidDataSource dataSource = new DruidDataSource();
 		dataSource.setDriverClassName(driverClassName);
 		dataSource.setUrl(url);
@@ -73,19 +73,32 @@ public class DataConfig {
 	}
 
 	@Bean
-	public HibernateTransactionManager platformTransactionManager(SessionFactory sessionFactory) {
+	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		return new HibernateTransactionManager(sessionFactory);
 	}
-	
-	
+
 	@Bean
 	public RmiServiceExporter rmiServiceExporter(DataRmiService dataRmiService) {
 		RmiServiceExporter exporter = new RmiServiceExporter();
 		exporter.setService(dataRmiService);
 		exporter.setServiceName("DataRmiService");
 		exporter.setServiceInterface(DataRmiService.class);
-		//exporter.setRegistryHost();
-		//exporter.setRegistryPort();
+		// exporter.setRegistryHost();
+		// exporter.setRegistryPort();
 		return exporter;
 	}
+	
+	/*@PostConstruct
+	public void init() {
+		try {
+			dataSource().init();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PreDestroy
+	public void destroy() {
+		dataSource().close();
+	}*/
 }

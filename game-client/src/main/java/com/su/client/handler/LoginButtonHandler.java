@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 
-import com.su.client.ClientContext;
-import com.su.client.NettyUtil;
+import com.su.client.core.ClientContext;
+import com.su.client.core.NettyUtil;
 import com.su.proto.LoginProto.LoginReq;
 
 /**

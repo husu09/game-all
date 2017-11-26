@@ -1,9 +1,8 @@
-package com.su.client;
+package com.su.client.core;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.su.client.config.ClientConfig;
-import com.su.client.core.ClientUI;
 
 public class ClientStart {
 	
