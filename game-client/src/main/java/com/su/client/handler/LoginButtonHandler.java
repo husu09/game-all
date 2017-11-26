@@ -30,7 +30,9 @@ public class LoginButtonHandler implements ActionListener {
 		}
 		// 保存数据
 		ctx.saveData(hostTF.getText(), userNameTF.getText());
-		NettyUtil.start(arr[0], Integer.parseInt(arr[1]));
+		if (ClientContext.getInstance().getCtx() == null) {
+			NettyUtil.start(arr[0], Integer.parseInt(arr[1]));
+		}
 		ctx.write(LoginReq.newBuilder().setName(userNameTF.getText()).build());
 
 	}

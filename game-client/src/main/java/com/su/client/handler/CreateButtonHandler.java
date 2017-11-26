@@ -17,22 +17,24 @@ public class CreateButtonHandler implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		ClientContext ctx = ClientContext.getInstance();
-		JTextField hostTF = ctx.getHostTF();
+		ClientContext clientCtx = ClientContext.getInstance();
+		JTextField hostTF = clientCtx.getHostTF();
 		String[] arr = hostTF.getText().split(":");
 		if (arr.length < 2) {
 			System.out.println("服务器地址错误！");
 			return;
 		}
-		JTextField userNameTF = ctx.getUserNameTF();
+		JTextField userNameTF = clientCtx.getUserNameTF();
 		if (userNameTF.getText().trim().equals("")) {
 			System.out.println("用户名不能为空");
 			return;
 		}
 		// 保存数据
-		ctx.saveData(hostTF.getText(), userNameTF.getText());
-		NettyUtil.start(arr[0], Integer.parseInt(arr[1]));
-		ctx.write(RegisterReq.newBuilder().setName(userNameTF.getText()).build());
+		clientCtx.saveData(hostTF.getText(), userNameTF.getText());
+		if (ClientContext.getInstance().getCtx() == null) {
+			NettyUtil.start(arr[0], Integer.parseInt(arr[1]));
+		}
+		clientCtx.write(RegisterReq.newBuilder().setName(userNameTF.getText()).build());
 
 	}
 

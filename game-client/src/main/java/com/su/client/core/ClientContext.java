@@ -138,6 +138,10 @@ public class ClientContext {
 	public void setCtx(ChannelHandlerContext ctx) {
 		this.ctx = ctx;
 	}
+	
+	public ChannelHandlerContext getCtx() {
+		return ctx;
+	}
 
 	public void write(MessageLiteOrBuilder msg) {
 		ctx.writeAndFlush(msg);

@@ -33,7 +33,5 @@ public class NettyUtil {
 
 	}
 
-	public static void stop() {
 
-	}
 }
