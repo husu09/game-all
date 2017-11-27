@@ -1,0 +1,25 @@
+syntax = "proto3";
+option java_package = "com.su.proto"; 
+option java_outer_classname = "LoginProto";
+
+// 注册
+message RegisterReq {
+	int32 id = 1;
+ 	string name = 2;
+ 	repeated int32 ids = 3;
+	repeated string results = 4;
+ 	
+}
+message RegisterResp{
+	int32 id = 1;
+ 	string name = 2;
+	repeated int32 ids = 3;
+	repeated string results = 4;
+}
+// 登录
+message LoginReq {
+	string name = 1;
+}
+message LoginResp {
+}
+
