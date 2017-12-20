@@ -1,12 +1,14 @@
 package com.su.excel.core;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import com.alibaba.fastjson.JSON;
 
 public abstract class ExcelMappingAdapter<T> implements ExcelMapping<T> {
 
@@ -34,5 +36,25 @@ public abstract class ExcelMappingAdapter<T> implements ExcelMapping<T> {
 	public void init() {
 		excelManager.put(name(), this);
 	}
+
+	@Override
+	public Class<T> getTypeClass() {
+		Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
+				.getActualTypeArguments()[0];
+		return entityClass;
+	}
+
+	@Override
+	public void add(String value) {
+		T t = JSON.parseObject(value, getTypeClass());
+		if (t instanceof Identity) {
+			Identity identity = (Identity) t;
+			storageMap.put(identity.getId(), t);
+		} else {
+			throw new RuntimeException(t.getClass() + " 没有实现 Identity 接口");
+		}
+	}
+	
+	
 
 }

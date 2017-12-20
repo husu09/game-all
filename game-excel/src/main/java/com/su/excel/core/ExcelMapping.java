@@ -11,4 +11,8 @@ public interface ExcelMapping<T> {
 	public void completeAll();
 	
 	public T get(int id);
+	
+	public Class<?> getTypeClass();
+	
+	public void add(String value);
 }

@@ -1,11 +1,23 @@
 package com.su.excel.core;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.stereotype.Component;
+
+import com.alibaba.fastjson.JSON;
 
 
 @Component
@@ -50,5 +62,29 @@ public class ExcelManager {
 			preData.put(mappingName, new ArrayList<>());
 		preData.get(mappingName).add(value);
 	}
-
+	
+	/**
+	 * 保存预处理数据
+	 * */
+	public void savePreData() {
+		String basePath = getClass().getResource("/").getFile() + "preData/";
+		File dir = new File(basePath);
+		if (!dir.exists()) 
+			dir.mkdirs();
+		for(Entry<String, List<Object>> e : preData.entrySet()) {
+			try {
+				PrintWriter out = new PrintWriter(new FileWriter(basePath + e.getKey()));
+				for (Object o : e.getValue()) {
+					String jsonString = JSON.toJSONString(o);
+					out.println(jsonString);
+				}
+				out.flush();
+				out.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+		}
+	}
+	
 }

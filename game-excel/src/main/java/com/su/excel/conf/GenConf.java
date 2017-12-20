@@ -1,6 +1,8 @@
-package com.su.excel.po;
+package com.su.excel.conf;
 
-public class GenPo  {
+import com.su.excel.core.Identity;
+
+public class GenConf implements Identity  {
 
 	private int id;
 	private String name;
