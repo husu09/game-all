@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -21,15 +20,18 @@ import org.springframework.stereotype.Component;
  * 预处理excel数据，验证数据完整性后保存
  */
 @Component
-public class PreDataProcess {
+public class ExcelProcessor {
 
 	@Autowired
 	private ExcelManager excelManager;
 
 	@Value("${excel.dir}")
 	private String dir;
-
-	public void process() {
+	
+	/**
+	 * 预处理数据
+	 * */
+	public void preProcesss() {
 		File file = new File(dir);
 		if (!file.exists()) {
 			System.out.println("目录不存在");

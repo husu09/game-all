@@ -7,24 +7,22 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.su.excel.config.ExcelConfig;
-import com.su.excel.core.ExcelManager;
-import com.su.excel.core.PreDataProcess;
-
+import com.su.excel.core.ExcelProcessor;
 
 @Component
 public class ExcelStart implements ApplicationListener<ContextRefreshedEvent> {
-	
+
 	@Autowired
-	private PreDataProcess preDataProcess;
-	
+	private ExcelProcessor preDataProcess;
+
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ExcelConfig.class);
 		context.close();
 	}
 
-	@Override 
+	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		//preDataProcess.process();
+		// 预处理配置
 		preDataProcess.refresh();
 	}
 }

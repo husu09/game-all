@@ -10,11 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
 
+/**
+ * 配置文件映射基类
+ */
 public abstract class ExcelMappingAdapter<T> implements ExcelMapping<T> {
 
 	@Autowired
 	private ExcelManager excelManager;
-
+	
+	/**
+	 * 存储解析后的数据
+	 * */
 	private Map<Integer, T> storageMap = new HashMap<>();
 
 	@Override
@@ -54,7 +60,5 @@ public abstract class ExcelMappingAdapter<T> implements ExcelMapping<T> {
 			throw new RuntimeException(t.getClass() + " 没有实现 Identity 接口");
 		}
 	}
-	
-	
 
 }
