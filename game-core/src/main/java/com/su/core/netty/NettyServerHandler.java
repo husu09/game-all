@@ -39,7 +39,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		
 		String channelId = ctx.channel().id().asLongText();
 		if (akkaContext.containsActor(channelId)) {
 			akkaContext.getActor(channelId).process(ctx, (MessageLite) msg);

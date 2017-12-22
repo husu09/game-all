@@ -6,6 +6,9 @@ import com.su.proto.CommonProto.ErrorResp;
 
 import io.netty.channel.ChannelHandlerContext;
 
+/**
+ * 玩家上下文
+ * */
 public class PlayerContext {
 	
 	private ChannelHandlerContext ctx;

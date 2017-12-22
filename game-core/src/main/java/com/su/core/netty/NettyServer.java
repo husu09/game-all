@@ -60,7 +60,7 @@ public final class NettyServer implements ApplicationListener<ApplicationContext
 	private EventLoopGroup workerGroup = null;
 
 	public void start() {
-		bossGroup = new NioEventLoopGroup(1);
+		bossGroup = new NioEventLoopGroup();
 		workerGroup = new NioEventLoopGroup();
 		try {
 			ServerBootstrap b = new ServerBootstrap();

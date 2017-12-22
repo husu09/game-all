@@ -1,8 +1,13 @@
 package com.su.core.data;
 
-/**
- * TODO 处理缓存中的数据安全
- * */
-public class Transaction {
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+@Retention(RUNTIME)
+@Target(TYPE)
+public @interface Transaction {
 
 }

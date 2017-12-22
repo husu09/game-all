@@ -99,7 +99,6 @@ public class DataService {
 		return false;
 	}
 
-	@Action
 	public void save(Object o) {
 		if (isMemoryCache(o))
 			memoryService.saveOrUpdate(o);
@@ -108,7 +107,6 @@ public class DataService {
 		mqService.sendSave(o);
 	}
 
-	@Action
 	public void save(Collection<Object> os) {
 		if (isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
@@ -117,7 +115,6 @@ public class DataService {
 		mqService.sendSave(os);
 	}
 
-	@Action
 	public void save(Object[] os) {
 		if (isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
@@ -126,7 +123,6 @@ public class DataService {
 		mqService.sendSave(os);
 	}
 
-	@Action
 	public int saveNow(Object o) {
 		int i = dataRmiService.save(o);
 		if (isMemoryCache(o))
@@ -136,7 +132,6 @@ public class DataService {
 		return i;
 	}
 
-	@Action
 	public int[] saveNow(Collection<Object> os) {
 		int[] arr = dataRmiService.save(os);
 		if (isMemoryCache(os))
@@ -146,7 +141,6 @@ public class DataService {
 		return arr;
 	}
 
-	@Action
 	public int[] saveNow(Object[] os) {
 		int[] arr = dataRmiService.save(os);
 		if (isMemoryCache(os))
@@ -156,7 +150,6 @@ public class DataService {
 		return arr;
 	}
 
-	@Action
 	public void update(Object o) {
 		if (isMemoryCache(o))
 			memoryService.saveOrUpdate(o);
@@ -166,7 +159,6 @@ public class DataService {
 
 	}
 
-	@Action
 	public void update(Collection<Object> os) {
 		if (isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
@@ -175,7 +167,6 @@ public class DataService {
 		mqService.sendUpdate(os);
 	}
 
-	@Action
 	public void update(Object[] os) {
 		if (isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
@@ -184,7 +175,6 @@ public class DataService {
 		mqService.sendUpdate(os);
 	}
 
-	@Action
 	@Deprecated
 	public int update(Class<?> c, String sql) {
 		int i = dataRmiService.update(sql);
@@ -196,7 +186,6 @@ public class DataService {
 		return i;
 	}
 
-	@Action
 	public void delete(Object o) {
 		if (isMemoryCache(o))
 			memoryService.delete(o);
@@ -205,7 +194,6 @@ public class DataService {
 		mqService.delete(o);
 	}
 
-	@Action
 	public void delete(Collection<Object> os) {
 		if (isMemoryCache(os))
 			memoryService.delete(os);
@@ -214,7 +202,6 @@ public class DataService {
 		mqService.delete(os);
 	}
 
-	@Action
 	public void delete(Object[] os) {
 		if (isMemoryCache(os))
 			memoryService.delete(os);
@@ -223,7 +210,6 @@ public class DataService {
 		mqService.delete(os);
 	}
 
-	@Action
 	@Deprecated
 	public int delete(Class<?> c, String sql) {
 		int i = dataRmiService.delete(sql);
@@ -235,7 +221,6 @@ public class DataService {
 		return i;
 	}
 
-	@Action
 	public <T> T get(Class<T> c, int id) {
 		T t = null;
 		boolean ismc = false;
@@ -254,7 +239,6 @@ public class DataService {
 		return t;
 	}
 
-	@Action
 	public <T> T get(DetachedCriteria detachedCriteria) {
 		T t = dataRmiService.get(detachedCriteria);
 		if (isMemoryCache(t))
@@ -264,7 +248,6 @@ public class DataService {
 		return t;
 	}
 
-	@Action
 	public <T> List<T> listByCache(Class<T> c) {
 		List<T> ts = null;
 		boolean ismc = false;
@@ -283,7 +266,6 @@ public class DataService {
 		return ts;
 	}
 	
-	@Action
 	public <T> List<T> list(Class<T> c) {
 		List<T> ts = dataRmiService.list(c);
 		if (isMemoryCache(ts))
@@ -293,7 +275,6 @@ public class DataService {
 		return ts;
 	}
 
-	@Action
 	public <T> List<T> list(DetachedCriteria detachedCriteria) {
 		List<T> ts = dataRmiService.list(detachedCriteria);
 		if (isMemoryCache(ts))
@@ -303,7 +284,6 @@ public class DataService {
 		return ts;
 	}
 
-	@Action
 	public <T> List<T> listByCache(Class<T> c, int first, int max) {
 		List<T> ts = null;
 		boolean ismc = false;
@@ -322,7 +302,6 @@ public class DataService {
 		return ts;
 	}
 	
-	@Action
 	public <T> List<T> list(Class<T> c, int first, int max) {
 		List<T> ts = dataRmiService.list(c, first, max);
 		if (isMemoryCache(ts))
@@ -332,7 +311,6 @@ public class DataService {
 		return ts;
 	}
 
-	@Action
 	public <T> List<T> list(DetachedCriteria detachedCriteria, int first, int max) {
 		List<T> ts = dataRmiService.get(detachedCriteria);
 		if (isMemoryCache(ts))
@@ -342,7 +320,6 @@ public class DataService {
 		return ts;
 	}
 
-	@Action
 	public long get(Class<?> c, Projection projection) {
 		long l = dataRmiService.get(c, projection);
 		return l;

@@ -17,6 +17,8 @@ public class MQService {
 
 	@Autowired
 	private MQClient mqClient;
+	@Autowired
+	private TransactionManager transactionManager;
 
 	public <T> void sendSave(T t) {
 		MQMessage mqMessage = new MQMessage();
