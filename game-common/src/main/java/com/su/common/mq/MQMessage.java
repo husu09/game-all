@@ -4,7 +4,7 @@ public class MQMessage {
 	/**
 	 * 数据库操作
 	 * */
-	private MQOperator mqOperator;
+	private DataOperator mqOperator;
 	/**
 	 * 对象类名
 	 * */
@@ -14,10 +14,10 @@ public class MQMessage {
 	 * */
 	private String data;
 	
-	public MQOperator getMqOperator() {
+	public DataOperator getMqOperator() {
 		return mqOperator;
 	}
-	public void setMqOperator(MQOperator mqOperator) {
+	public void setMqOperator(DataOperator mqOperator) {
 		this.mqOperator = mqOperator;
 	}
 	public String getClassName() {

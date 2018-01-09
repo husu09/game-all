@@ -8,7 +8,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 import com.su.common.mq.MQMessage;
-import com.su.common.mq.MQOperator;
+import com.su.common.mq.DataOperator;
 import com.su.common.util.SpringUtil;
 import com.su.data.dao.BaseDao;
 
@@ -29,14 +29,12 @@ public class MQCustomer extends DefaultConsumer {
 		String message = new String(body, "UTF-8");
 		MQMessage mqMessage = JSON.parseObject(message, MQMessage.class);
 		try {
-			if (mqMessage.getMqOperator() == MQOperator.ADD) {
+			if (mqMessage.getMqOperator() == DataOperator.SAVE) {
 				dao.save(JSON.parseObject(mqMessage.getData(), Class.forName(mqMessage.getClassName())));
-			} else if (mqMessage.getMqOperator() == MQOperator.UPDATE) {
+			} else if (mqMessage.getMqOperator() == DataOperator.UPDATE) {
 				dao.update(JSON.parseObject(mqMessage.getData(), Class.forName(mqMessage.getClassName())));
-
-			} else if (mqMessage.getMqOperator() == MQOperator.DELETE) {
+			} else if (mqMessage.getMqOperator() == DataOperator.DELETE) {
 				dao.delete(JSON.parseObject(mqMessage.getData(), Class.forName(mqMessage.getClassName())));
-
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

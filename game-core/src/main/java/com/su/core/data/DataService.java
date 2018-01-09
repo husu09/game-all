@@ -8,215 +8,137 @@ import org.hibernate.criterion.Projection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.su.common.mq.DataOperator;
 import com.su.common.rmi.DataRmiService;
-import com.su.core.action.Action;
 
 @Repository
 public class DataService {
-
 	@Autowired
 	private DataRmiService dataRmiService;
-	@Autowired
-	private MQService mqService;
 	@Autowired
 	private RedisCacheService redisService;
 	@Autowired
 	private MemoryCacheService memoryService;	
-	
-	private boolean isRedisCache(Class<?> c) {
-		Cache ac = c.getAnnotation(Cache.class);
-		if (ac != null) {
-			return ac.redisCache();
-		}
-		return false;
-	}
-	
-	private boolean isRedisCache(Object o) {
-		Cache ac = o.getClass().getAnnotation(Cache.class);
-		if (ac != null) {
-			return ac.redisCache();
-		}
-		return false;
-	}
+	@Autowired
+	private IDGenerator idGenerator;
+	@Autowired
+	private TransactionManager transactionManager;
 
-	private boolean isRedisCache(Collection<Object> os) {
-		if (os.size() == 0)
-			return false;
-		Object t = os.iterator().next();
-		Cache ac = t.getClass().getAnnotation(Cache.class);
-		if (ac != null) {
-			return ac.redisCache();
-		}
-		return false;
-	}
-
-	private boolean isRedisCache(Object[] os) {
-		if (os.length == 0)
-			return false;
-		Object t = os[0];
-		Cache ac = t.getClass().getAnnotation(Cache.class);
-		if (ac != null) {
-			return ac.redisCache();
-		}
-		return false;
-	}
-	
-	private boolean isMemoryCache(Class<?> c) {
-		Cache ac = c.getAnnotation(Cache.class);
-		if (ac != null) {
-			return ac.memoryCache();
-		}
-		return false;
-	}
-	
-	private boolean isMemoryCache(Object o) {
-		Cache ac = o.getClass().getAnnotation(Cache.class);
-		if (ac != null) {
-			return ac.memoryCache();
-		}
-		return false;
-	}
-
-	private boolean isMemoryCache(Collection<Object> os) {
-		if (os.size() == 0)
-			return false;
-		Object t = os.iterator().next();
-		Cache ac = t.getClass().getAnnotation(Cache.class);
-		if (ac != null) {
-			return ac.memoryCache();
-		}
-		return false;
-	}
-
-	private <T> boolean isMemoryCache(Object[] os) {
-		if (os.length == 0)
-			return false;
-		Object t = os[0];
-		Cache ac = t.getClass().getAnnotation(Cache.class);
-		if (ac != null) {
-			return ac.memoryCache();
-		}
-		return false;
-	}
-
-	public void save(Object o) {
-		if (isMemoryCache(o))
+	public long save(Object o) {
+		long id = idGenerator.next(o);
+		if (CacheUtil.isMemoryCache(o))
 			memoryService.saveOrUpdate(o);
-		if (isRedisCache(o))
+		if (CacheUtil.isRedisCache(o))
 			redisService.saveOrUpdate(o);
-		mqService.sendSave(o);
+		transactionManager.addCache(o);
+		transactionManager.addDataOperator(DataOperator.SAVE, o);
+		return id;
 	}
 
-	public void save(Collection<Object> os) {
-		if (isMemoryCache(os))
+	public long[] save(Collection<Object> os) {
+		long[] arr = new long[os.size()];
+		int i = 0;
+		for (Object o : os) {
+			long id = idGenerator.next(o);
+			arr[i++] = id;
+		}
+		if (CacheUtil.isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
-		if (isRedisCache(os))
+		if (CacheUtil.isRedisCache(os))
 			redisService.saveOrUpdate(os);
-		mqService.sendSave(os);
-	}
-
-	public void save(Object[] os) {
-		if (isMemoryCache(os))
-			memoryService.saveOrUpdate(os);
-		if (isRedisCache(os))
-			redisService.saveOrUpdate(os);
-		mqService.sendSave(os);
-	}
-
-	public int saveNow(Object o) {
-		int i = dataRmiService.save(o);
-		if (isMemoryCache(o))
-			memoryService.saveOrUpdate(o);
-		if (isRedisCache(o))
-			redisService.saveOrUpdate(o);
-		return i;
-	}
-
-	public int[] saveNow(Collection<Object> os) {
-		int[] arr = dataRmiService.save(os);
-		if (isMemoryCache(os))
-			memoryService.saveOrUpdate(os);
-		if (isRedisCache(os))
-			redisService.saveOrUpdate(os);
+		transactionManager.addCache(os);
+		transactionManager.addDataOperator(DataOperator.SAVE, os);
 		return arr;
 	}
 
-	public int[] saveNow(Object[] os) {
-		int[] arr = dataRmiService.save(os);
-		if (isMemoryCache(os))
+	public long[] save(Object[] os) {
+		long[] arr = new long[os.length];
+		int i = 0;
+		for (Object o : os) {
+			long id = idGenerator.next(o);
+			arr[i++] = id;
+		}
+		if (CacheUtil.isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
-		if (isRedisCache(os))
+		if (CacheUtil.isRedisCache(os))
 			redisService.saveOrUpdate(os);
+		transactionManager.addCache(os);
+		transactionManager.addDataOperator(DataOperator.SAVE, os);
 		return arr;
 	}
 
 	public void update(Object o) {
-		if (isMemoryCache(o))
+		if (CacheUtil.isMemoryCache(o))
 			memoryService.saveOrUpdate(o);
-		if (isRedisCache(o))
+		if (CacheUtil.isRedisCache(o))
 			redisService.saveOrUpdate(o);
-		mqService.sendUpdate(o);
-
+		transactionManager.addCache(o);
+		transactionManager.addDataOperator(DataOperator.UPDATE, o);
 	}
 
 	public void update(Collection<Object> os) {
-		if (isMemoryCache(os))
+		if (CacheUtil.isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
-		if (isRedisCache(os))
+		if (CacheUtil.isRedisCache(os))
 			redisService.saveOrUpdate(os);
-		mqService.sendUpdate(os);
+		transactionManager.addCache(os);
+		transactionManager.addDataOperator(DataOperator.UPDATE, os);
 	}
 
 	public void update(Object[] os) {
-		if (isMemoryCache(os))
+		if (CacheUtil.isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
-		if (isRedisCache(os))
+		if (CacheUtil.isRedisCache(os))
 			redisService.saveOrUpdate(os);
-		mqService.sendUpdate(os);
+		transactionManager.addCache(os);
+		transactionManager.addDataOperator(DataOperator.UPDATE, os);
 	}
 
 	@Deprecated
 	public int update(Class<?> c, String sql) {
 		int i = dataRmiService.update(sql);
 		// 缓存失效
-		if (isMemoryCache(c))
+		if (CacheUtil.isMemoryCache(c))
 			memoryService.delete(c);
-		if (isRedisCache(c))
+		if (CacheUtil.isRedisCache(c))
 			redisService.delete(c);
 		return i;
 	}
 
 	public void delete(Object o) {
-		if (isMemoryCache(o))
+		if (CacheUtil.isMemoryCache(o))
 			memoryService.delete(o);
-		if (isRedisCache(o))
+		if (CacheUtil.isRedisCache(o))
 			redisService.delete(o);
-		mqService.delete(o);
+		transactionManager.addCache(o);
+		transactionManager.addDataOperator(DataOperator.DELETE, o);
 	}
 
 	public void delete(Collection<Object> os) {
-		if (isMemoryCache(os))
+		if (CacheUtil.isMemoryCache(os))
 			memoryService.delete(os);
-		if (isRedisCache(os))
+		if (CacheUtil.isRedisCache(os))
 			redisService.delete(os);
-		mqService.delete(os);
+		transactionManager.addCache(os);
+		transactionManager.addDataOperator(DataOperator.DELETE, os);
 	}
 
 	public void delete(Object[] os) {
-		if (isMemoryCache(os))
+		if (CacheUtil.isMemoryCache(os))
 			memoryService.delete(os);
-		if (isRedisCache(os))
+		if (CacheUtil.isRedisCache(os))
 			redisService.delete(os);
-		mqService.delete(os);
+		transactionManager.addCache(os);
+		transactionManager.addDataOperator(DataOperator.DELETE, os);
 	}
 
 	@Deprecated
 	public int delete(Class<?> c, String sql) {
 		int i = dataRmiService.delete(sql);
 		// 缓存失效
-		if (isMemoryCache(c))
+		if (CacheUtil.isMemoryCache(c))
 			memoryService.delete(c);
-		if (isRedisCache(c))
+		if (CacheUtil.isRedisCache(c))
 			redisService.delete(c);
 		return i;
 	}
@@ -225,9 +147,9 @@ public class DataService {
 		T t = null;
 		boolean ismc = false;
 		boolean isrc = false;
-		if (ismc = isMemoryCache(c))
+		if (ismc = CacheUtil.isMemoryCache(c))
 			t = memoryService.get(c, id);
-		if (t == null && (isrc = isRedisCache(t)))
+		if (t == null && (isrc = CacheUtil.isRedisCache(t)))
 			t = redisService.get(c, id);
 		if (t == null) {
 			t = dataRmiService.get(c, id);
@@ -236,15 +158,17 @@ public class DataService {
 			if (isrc)
 				redisService.saveOrUpdate(t);
 		}
+		transactionManager.addCache(t);
 		return t;
 	}
 
 	public <T> T get(DetachedCriteria detachedCriteria) {
 		T t = dataRmiService.get(detachedCriteria);
-		if (isMemoryCache(t))
+		if (CacheUtil.isMemoryCache(t))
 			memoryService.saveOrUpdate(t);
-		if (isRedisCache(t))
+		if (CacheUtil.isRedisCache(t))
 			redisService.saveOrUpdate(t);
+		transactionManager.addCache(t);
 		return t;
 	}
 
@@ -252,9 +176,9 @@ public class DataService {
 		List<T> ts = null;
 		boolean ismc = false;
 		boolean isrc = false;
-		if (ismc = isMemoryCache(c))
+		if (ismc = CacheUtil.isMemoryCache(c))
 			ts = memoryService.list(c);
-		if (ts == null && (isrc = isRedisCache(ts)))
+		if (ts == null && (isrc = CacheUtil.isRedisCache(ts)))
 			ts = redisService.list(c);
 		if (ts == null) {
 			ts = dataRmiService.list(c);
@@ -263,24 +187,27 @@ public class DataService {
 			if (isrc)
 				redisService.saveOrUpdate(ts);
 		}
+		transactionManager.addCache(ts);
 		return ts;
 	}
 	
 	public <T> List<T> list(Class<T> c) {
 		List<T> ts = dataRmiService.list(c);
-		if (isMemoryCache(ts))
+		if (CacheUtil.isMemoryCache(ts))
 			memoryService.saveOrUpdate(ts);
-		if (isRedisCache(ts))
+		if (CacheUtil.isRedisCache(ts))
 			redisService.saveOrUpdate(ts);
+		transactionManager.addCache(ts);
 		return ts;
 	}
 
 	public <T> List<T> list(DetachedCriteria detachedCriteria) {
 		List<T> ts = dataRmiService.list(detachedCriteria);
-		if (isMemoryCache(ts))
+		if (CacheUtil.isMemoryCache(ts))
 			memoryService.saveOrUpdate(ts);
-		if (isRedisCache(ts))
+		if (CacheUtil.isRedisCache(ts))
 			redisService.saveOrUpdate(ts);
+		transactionManager.addCache(ts);
 		return ts;
 	}
 
@@ -288,9 +215,9 @@ public class DataService {
 		List<T> ts = null;
 		boolean ismc = false;
 		boolean isrc = false;
-		if (ismc = isMemoryCache(c))
+		if (ismc = CacheUtil.isMemoryCache(c))
 			ts = memoryService.list(c, first, max);
-		if (ts == null && (isrc = isRedisCache(ts)))
+		if (ts == null && (isrc = CacheUtil.isRedisCache(ts)))
 			ts = redisService.list(c, first, max);
 		if (ts == null) {
 			ts = dataRmiService.list(c, first, max);
@@ -299,24 +226,27 @@ public class DataService {
 			if (isrc)
 				redisService.saveOrUpdate(ts);
 		}
+		transactionManager.addCache(ts);
 		return ts;
 	}
 	
 	public <T> List<T> list(Class<T> c, int first, int max) {
 		List<T> ts = dataRmiService.list(c, first, max);
-		if (isMemoryCache(ts))
+		if (CacheUtil.isMemoryCache(ts))
 			memoryService.saveOrUpdate(ts);
-		if (isRedisCache(ts))
+		if (CacheUtil.isRedisCache(ts))
 			redisService.saveOrUpdate(ts);
+		transactionManager.addCache(ts);
 		return ts;
 	}
 
 	public <T> List<T> list(DetachedCriteria detachedCriteria, int first, int max) {
 		List<T> ts = dataRmiService.get(detachedCriteria);
-		if (isMemoryCache(ts))
+		if (CacheUtil.isMemoryCache(ts))
 			memoryService.saveOrUpdate(ts);
-		if (isRedisCache(ts))
+		if (CacheUtil.isRedisCache(ts))
 			redisService.saveOrUpdate(ts);
+		transactionManager.addCache(ts);
 		return ts;
 	}
 

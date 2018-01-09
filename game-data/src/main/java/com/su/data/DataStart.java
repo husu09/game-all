@@ -8,7 +8,7 @@ import com.su.data.config.DataConfig;
 
 public class DataStart {
 	public static void main(String[] args) {
-		
+
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DataConfig.class);
 		System.out.println("输入stop关闭服务器：");
 		Scanner sc = new Scanner(System.in);
@@ -21,6 +21,5 @@ public class DataStart {
 			}
 		}
 		sc.close();
-		
 	}
 }

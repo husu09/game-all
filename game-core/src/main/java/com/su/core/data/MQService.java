@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.su.common.mq.MQMessage;
-import com.su.common.mq.MQOperator;
+import com.su.common.mq.DataOperator;
 
 /**
  * mq 服务对象
@@ -17,13 +17,11 @@ public class MQService {
 
 	@Autowired
 	private MQClient mqClient;
-	@Autowired
-	private TransactionManager transactionManager;
 
 	public <T> void sendSave(T t) {
 		MQMessage mqMessage = new MQMessage();
 		mqMessage.setClassName(t.getClass().getCanonicalName());
-		mqMessage.setMqOperator(MQOperator.ADD);
+		mqMessage.setMqOperator(DataOperator.SAVE);
 		mqMessage.setData(JSON.toJSONString(t));
 		mqClient.send(JSON.toJSONString(mqMessage));
 	}
@@ -44,7 +42,7 @@ public class MQService {
 	public <T> void sendUpdate(T t) {
 		MQMessage mqMessage = new MQMessage();
 		mqMessage.setClassName(t.getClass().getCanonicalName());
-		mqMessage.setMqOperator(MQOperator.UPDATE);
+		mqMessage.setMqOperator(DataOperator.UPDATE);
 		mqMessage.setData(JSON.toJSONString(t));
 		mqClient.send(JSON.toJSONString(mqMessage));
 	}
@@ -64,7 +62,7 @@ public class MQService {
 	public <T> void delete(T t) {
 		MQMessage mqMessage = new MQMessage();
 		mqMessage.setClassName(t.getClass().getCanonicalName());
-		mqMessage.setMqOperator(MQOperator.DELETE);
+		mqMessage.setMqOperator(DataOperator.DELETE);
 		mqMessage.setData(JSON.toJSONString(t));
 		mqClient.send(JSON.toJSONString(mqMessage));
 	}
@@ -80,6 +78,14 @@ public class MQService {
 		for (T t : ts) {
 			delete(t);
 		}
+	}
+	
+	public <T> void common(DataOperator dataOperator, T t) {
+		MQMessage mqMessage = new MQMessage();
+		mqMessage.setClassName(t.getClass().getCanonicalName());
+		mqMessage.setMqOperator(dataOperator);
+		mqMessage.setData(JSON.toJSONString(t));
+		mqClient.send(JSON.toJSONString(mqMessage));
 	}
 
 }

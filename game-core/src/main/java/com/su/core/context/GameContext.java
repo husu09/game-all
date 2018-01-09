@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GameContext {
-	private Map<Integer, PlayerContext> playerContextMap = new ConcurrentHashMap<>();
+	private Map<Long, PlayerContext> playerContextMap = new ConcurrentHashMap<>();
 
-	public void addPlayerContext(int id, PlayerContext playerContext) {
+	public void addPlayerContext(long id, PlayerContext playerContext) {
 		playerContextMap.put(id, playerContext);
 	}
 

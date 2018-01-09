@@ -28,7 +28,7 @@ public class AccountService {
 	public Player createPlayer(String name) {
 		Player player = new Player();
 		player.setName(name);
-		int id = dataService.saveNow(player);
+		long id = dataService.save(player);
 		player.setId(id);
 		return player;
 	}

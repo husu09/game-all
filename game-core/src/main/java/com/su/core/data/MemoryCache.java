@@ -13,8 +13,6 @@ import org.springframework.stereotype.Component;
  * */
 @Component
 public class MemoryCache {
-	@Autowired
-	private CacheUtil cacheUtil;
 	
 	/**
 	 * 内存中的缓存结构
@@ -24,17 +22,22 @@ public class MemoryCache {
 	public void add(Object o) {
 		Map<String, Object> map = classValueMap.get(o.getClass());
 		if (map == null) {
-			map = new ConcurrentHashMap<>();
-			classValueMap.put(o.getClass(), map);
+			synchronized (this) {
+				map = classValueMap.get(o.getClass());
+				if (map == null) {
+					map = new ConcurrentHashMap<>();
+					classValueMap.put(o.getClass(), map);
+				}
+			}
 		}
-		map.put(cacheUtil.getKey(o), o);
+		map.put(CacheUtil.getKey(o), o);
 	}
 
 	public void remove(Object o) {
 		Map<String, Object> map = classValueMap.get(o.getClass());
 		if (map == null)
 			return;
-		map.remove(cacheUtil.getKey(o));
+		map.remove(CacheUtil.getKey(o));
 	}
 	
 	public void remove(Class<?> c) {
@@ -45,14 +48,14 @@ public class MemoryCache {
 		Map<String, Object> map = classValueMap.get(o.getClass());
 		if (map == null)
 			return false;
-		return map.containsKey(cacheUtil.getKey(o));
+		return map.containsKey(CacheUtil.getKey(o));
 	}
 
 	public <T> T get(Class<T> c, int id) {
 		Map<String, Object> map = classValueMap.get(c);
 		if (map == null)
 			return null;
-		return (T) map.get(cacheUtil.getKey(c, id));
+		return (T) map.get(CacheUtil.getKey(c, id));
 	}
 
 	public <T> List<T> list(Class<T> c) {

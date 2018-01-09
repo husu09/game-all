@@ -17,14 +17,12 @@ import com.alibaba.fastjson.JSON;
 public class RedisCacheService {
 	@Autowired
 	private RedisClient client;
-	@Autowired
-	private CacheUtil cacheUtil;
 
 	public void saveOrUpdate(Object o) {
-		if (!cacheUtil.isPersistent(o)) {
+		if (!CacheUtil.isPersistent(o)) {
 			return;
 		}
-		client.setForMap(cacheUtil.getParentKey(o), cacheUtil.getKey(o), JSON.toJSONString(o));
+		client.setForMap(CacheUtil.getParentKey(o), CacheUtil.getKey(o), JSON.toJSONString(o));
 	}
 
 	public void saveOrUpdate(Collection<Object> os) {
@@ -42,11 +40,11 @@ public class RedisCacheService {
 	}
 
 	public void delete(Class<?> c) {
-		client.delete(cacheUtil.getParentKey(c));
+		client.delete(CacheUtil.getParentKey(c));
 	}
 
 	public void delete(Object o) {
-		client.deleteForMap(cacheUtil.getParentKey(o), cacheUtil.getKey(o));
+		client.deleteForMap(CacheUtil.getParentKey(o), CacheUtil.getKey(o));
 	}
 
 	public void delete(Collection<Object> os) {
@@ -62,12 +60,12 @@ public class RedisCacheService {
 	}
 
 	public <T> T get(Class<T> c, int id) {
-		String value = client.getForMap(cacheUtil.getParentKey(c), cacheUtil.getKey(c, id));
+		String value = client.getForMap(CacheUtil.getParentKey(c), CacheUtil.getKey(c, id));
 		return JSON.parseObject(value, c);
 	}
 
 	public <T> List<T> list(Class<T> c) {
-		List<String> list = client.getForMap(cacheUtil.getParentKey(c));
+		List<String> list = client.getForMap(CacheUtil.getParentKey(c));
 		List<T> ts = new ArrayList<>(list.size());
 		for (String s : list) {
 			T t = JSON.parseObject(s, c);
