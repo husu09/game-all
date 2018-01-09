@@ -13,7 +13,7 @@ import com.su.common.rmi.DataRmiService;
 @Configuration
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = { "com.su" })
-@PropertySource("config.properties")
+@PropertySource("serverConfig.properties")
 public class ServerConfig {
 
 	@Value("${rmi.url}")

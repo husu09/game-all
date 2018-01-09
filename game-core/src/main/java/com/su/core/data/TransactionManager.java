@@ -83,7 +83,7 @@ public class TransactionManager {
 	 */
 	public void rollblack() {
 		// 延时操作
-		TransactionData transactionData = threadLocal.get();
+		TransactionData transactionData = getTransactionData();
 		transactionData.getLazyDataOperator().clear();
 		// 缓存
 		for (Object o : transactionData.getCacheData()) {

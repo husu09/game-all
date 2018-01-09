@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Player implements Serializable {
 	@Id
 	private long id;
-	@Column(unique=true, columnDefinition="comment '用户名'")
+	@Column(unique=true)
 	private String name;
 	
 	public long getId() {

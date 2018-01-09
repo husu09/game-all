@@ -38,7 +38,7 @@ public class MQCustomer extends DefaultConsumer {
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			System.out.println("mq 消息消息失败 " + message);
+			System.out.println("mq 消费消息失败 " + message);
 		}
 	}
 

@@ -34,8 +34,8 @@ public class MQClient implements ApplicationListener<ContextRefreshedEvent> {
 			// 创建一个通道
 			channel = connection.createChannel();
 			// 声明一个队列
-			channel.queueDeclare(queueName, true, false, false, null);
 			// 告诉服务器我们需要那个频道的消息，如果频道中有消息，就会执行回调函数handleDelivery
+			channel.queueDeclare(queueName, true, false, false, null);
 			Consumer consumer = new MQCustomer(channel);
 			// 自动回复队列应答 -- RabbitMQ中的消息确认机制
 			channel.basicConsume(queueName, true, consumer);
