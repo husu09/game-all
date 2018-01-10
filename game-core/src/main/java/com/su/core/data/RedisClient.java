@@ -3,6 +3,7 @@ package com.su.core.data;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -24,13 +25,17 @@ public class RedisClient {
 	@Value("${redis.password}")
 	private String password;
 	
-	private JedisPoolConfig config;
 	private JedisPool pool;
 
 	@PostConstruct
 	private void init() {
-		config = new JedisPoolConfig();
+		JedisPoolConfig config = new JedisPoolConfig();
 		pool = new JedisPool(config, host, port, 60000, password);
+	}
+	
+	@PreDestroy
+	private void destroy() {
+		pool.close();
 	}
 
 	public Jedis getJedis() {

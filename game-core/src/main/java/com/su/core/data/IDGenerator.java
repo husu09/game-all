@@ -7,7 +7,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import javax.persistence.Id;
 
+
 import org.hibernate.criterion.Projections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +22,8 @@ import com.su.common.rmi.DataRmiService;
 @Component
 public class IDGenerator {
 
+	private final static Logger logger = LoggerFactory.getLogger(IDGenerator.class);
+	
 	@Autowired
 	private DataRmiService dataRmiService;
 
@@ -49,15 +54,17 @@ public class IDGenerator {
 	 * 设置 id
 	 */
 	public void setId(Object o, Object id) {
-		Field[] fields = o.getClass().getFields();
+		Field[] fields = o.getClass().getDeclaredFields();
 		boolean flag = false;
 		for (Field f : fields) {
 			if (f.isAnnotationPresent(Id.class)) {
 				try {
 					flag = true;
+					f.setAccessible(true);
 					f.set(o, id);
 					break;
 				} catch (Exception e) {
+					e.printStackTrace();
 					throw new RuntimeException("设置对象id失败 " + o + " " + id);
 				}
 			}

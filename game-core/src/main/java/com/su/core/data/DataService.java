@@ -26,11 +26,11 @@ public class DataService {
 
 	public long save(Object o) {
 		long id = idGenerator.next(o);
+		transactionManager.addCache(o);
 		if (CacheUtil.isMemoryCache(o))
 			memoryService.saveOrUpdate(o);
 		if (CacheUtil.isRedisCache(o))
 			redisService.saveOrUpdate(o);
-		transactionManager.addCache(o);
 		transactionManager.addDataOperator(DataOperator.SAVE, o);
 		return id;
 	}
@@ -42,11 +42,11 @@ public class DataService {
 			long id = idGenerator.next(o);
 			arr[i++] = id;
 		}
+		transactionManager.addCache(os);
 		if (CacheUtil.isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
 		if (CacheUtil.isRedisCache(os))
 			redisService.saveOrUpdate(os);
-		transactionManager.addCache(os);
 		transactionManager.addDataOperator(DataOperator.SAVE, os);
 		return arr;
 	}
@@ -58,39 +58,39 @@ public class DataService {
 			long id = idGenerator.next(o);
 			arr[i++] = id;
 		}
+		transactionManager.addCache(os);
 		if (CacheUtil.isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
 		if (CacheUtil.isRedisCache(os))
 			redisService.saveOrUpdate(os);
-		transactionManager.addCache(os);
 		transactionManager.addDataOperator(DataOperator.SAVE, os);
 		return arr;
 	}
 
 	public void update(Object o) {
+		transactionManager.addCache(o);
 		if (CacheUtil.isMemoryCache(o))
 			memoryService.saveOrUpdate(o);
 		if (CacheUtil.isRedisCache(o))
 			redisService.saveOrUpdate(o);
-		transactionManager.addCache(o);
 		transactionManager.addDataOperator(DataOperator.UPDATE, o);
 	}
 
 	public void update(Collection<Object> os) {
+		transactionManager.addCache(os);
 		if (CacheUtil.isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
 		if (CacheUtil.isRedisCache(os))
 			redisService.saveOrUpdate(os);
-		transactionManager.addCache(os);
 		transactionManager.addDataOperator(DataOperator.UPDATE, os);
 	}
 
 	public void update(Object[] os) {
+		transactionManager.addCache(os);
 		if (CacheUtil.isMemoryCache(os))
 			memoryService.saveOrUpdate(os);
 		if (CacheUtil.isRedisCache(os))
 			redisService.saveOrUpdate(os);
-		transactionManager.addCache(os);
 		transactionManager.addDataOperator(DataOperator.UPDATE, os);
 	}
 
@@ -106,29 +106,29 @@ public class DataService {
 	}
 
 	public void delete(Object o) {
+		transactionManager.addCache(o);
 		if (CacheUtil.isMemoryCache(o))
 			memoryService.delete(o);
 		if (CacheUtil.isRedisCache(o))
 			redisService.delete(o);
-		transactionManager.addCache(o);
 		transactionManager.addDataOperator(DataOperator.DELETE, o);
 	}
 
 	public void delete(Collection<Object> os) {
+		transactionManager.addCache(os);
 		if (CacheUtil.isMemoryCache(os))
 			memoryService.delete(os);
 		if (CacheUtil.isRedisCache(os))
 			redisService.delete(os);
-		transactionManager.addCache(os);
 		transactionManager.addDataOperator(DataOperator.DELETE, os);
 	}
 
 	public void delete(Object[] os) {
+		transactionManager.addCache(os);
 		if (CacheUtil.isMemoryCache(os))
 			memoryService.delete(os);
 		if (CacheUtil.isRedisCache(os))
 			redisService.delete(os);
-		transactionManager.addCache(os);
 		transactionManager.addDataOperator(DataOperator.DELETE, os);
 	}
 
@@ -147,28 +147,32 @@ public class DataService {
 		T t = null;
 		boolean ismc = false;
 		boolean isrc = false;
+		boolean flag = false;
 		if (ismc = CacheUtil.isMemoryCache(c))
 			t = memoryService.get(c, id);
 		if (t == null && (isrc = CacheUtil.isRedisCache(t)))
 			t = redisService.get(c, id);
 		if (t == null) {
 			t = dataRmiService.get(c, id);
+			flag = true;
+			transactionManager.addCache(t);
 			if (ismc)
 				memoryService.saveOrUpdate(t);
 			if (isrc)
 				redisService.saveOrUpdate(t);
 		}
-		transactionManager.addCache(t);
+		if (!flag)
+			transactionManager.addCache(t);
 		return t;
 	}
 
 	public <T> T get(DetachedCriteria detachedCriteria) {
 		T t = dataRmiService.get(detachedCriteria);
+		transactionManager.addCache(t);
 		if (CacheUtil.isMemoryCache(t))
 			memoryService.saveOrUpdate(t);
 		if (CacheUtil.isRedisCache(t))
 			redisService.saveOrUpdate(t);
-		transactionManager.addCache(t);
 		return t;
 	}
 
@@ -176,38 +180,42 @@ public class DataService {
 		List<T> ts = null;
 		boolean ismc = false;
 		boolean isrc = false;
+		boolean flag = false;
 		if (ismc = CacheUtil.isMemoryCache(c))
 			ts = memoryService.list(c);
 		if (ts == null && (isrc = CacheUtil.isRedisCache(ts)))
 			ts = redisService.list(c);
 		if (ts == null) {
 			ts = dataRmiService.list(c);
+			flag = true;
+			transactionManager.addCache(ts);
 			if (ismc)
 				memoryService.saveOrUpdate(ts);
 			if (isrc)
 				redisService.saveOrUpdate(ts);
 		}
-		transactionManager.addCache(ts);
+		if (!flag)
+			transactionManager.addCache(ts);
 		return ts;
 	}
 	
 	public <T> List<T> list(Class<T> c) {
 		List<T> ts = dataRmiService.list(c);
+		transactionManager.addCache(ts);
 		if (CacheUtil.isMemoryCache(ts))
 			memoryService.saveOrUpdate(ts);
 		if (CacheUtil.isRedisCache(ts))
 			redisService.saveOrUpdate(ts);
-		transactionManager.addCache(ts);
 		return ts;
 	}
 
 	public <T> List<T> list(DetachedCriteria detachedCriteria) {
 		List<T> ts = dataRmiService.list(detachedCriteria);
+		transactionManager.addCache(ts);
 		if (CacheUtil.isMemoryCache(ts))
 			memoryService.saveOrUpdate(ts);
 		if (CacheUtil.isRedisCache(ts))
 			redisService.saveOrUpdate(ts);
-		transactionManager.addCache(ts);
 		return ts;
 	}
 
@@ -215,38 +223,42 @@ public class DataService {
 		List<T> ts = null;
 		boolean ismc = false;
 		boolean isrc = false;
+		boolean flag = false;
 		if (ismc = CacheUtil.isMemoryCache(c))
 			ts = memoryService.list(c, first, max);
 		if (ts == null && (isrc = CacheUtil.isRedisCache(ts)))
 			ts = redisService.list(c, first, max);
 		if (ts == null) {
 			ts = dataRmiService.list(c, first, max);
+			flag = true;
+			transactionManager.addCache(ts);
 			if (ismc)
 				memoryService.saveOrUpdate(ts);
 			if (isrc)
 				redisService.saveOrUpdate(ts);
 		}
-		transactionManager.addCache(ts);
+		if (!flag)
+			transactionManager.addCache(ts);
 		return ts;
 	}
 	
 	public <T> List<T> list(Class<T> c, int first, int max) {
 		List<T> ts = dataRmiService.list(c, first, max);
+		transactionManager.addCache(ts);
 		if (CacheUtil.isMemoryCache(ts))
 			memoryService.saveOrUpdate(ts);
 		if (CacheUtil.isRedisCache(ts))
 			redisService.saveOrUpdate(ts);
-		transactionManager.addCache(ts);
 		return ts;
 	}
 
 	public <T> List<T> list(DetachedCriteria detachedCriteria, int first, int max) {
 		List<T> ts = dataRmiService.get(detachedCriteria);
+		transactionManager.addCache(ts);
 		if (CacheUtil.isMemoryCache(ts))
 			memoryService.saveOrUpdate(ts);
 		if (CacheUtil.isRedisCache(ts))
 			redisService.saveOrUpdate(ts);
-		transactionManager.addCache(ts);
 		return ts;
 	}
 

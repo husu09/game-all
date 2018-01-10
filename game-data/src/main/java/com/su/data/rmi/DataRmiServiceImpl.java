@@ -18,17 +18,17 @@ public class DataRmiServiceImpl implements DataRmiService {
 	private BaseDao dao;
 	
 	@Override
-	public <T> int save(T t) {
+	public <T> long save(T t) {
 		return dao.save(t);
 	}
 
 	@Override
-	public <T> int[] save(Collection<T> ts) {
+	public <T> long[] save(Collection<T> ts) {
 		return dao.save(ts);
 	}
 
 	@Override
-	public <T> int[] save(T[] ts) {
+	public <T> long[] save(T[] ts) {
 		return dao.save(ts);
 	}
 

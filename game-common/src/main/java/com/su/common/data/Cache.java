@@ -1,4 +1,4 @@
-package com.su.core.data;
+package com.su.common.data;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

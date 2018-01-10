@@ -13,11 +13,9 @@ import org.springframework.stereotype.Service;
 public class MemoryCacheService {
 	@Autowired
 	private MemoryCache cache;
-	@Autowired
-	private CacheUtil cacheUtil;
 
 	public void saveOrUpdate(Object o) {
-		if (!cacheUtil.isPersistent(o)) {
+		if (!CacheUtil.isPersistent(o)) {
 			return;
 		}
 		if (!cache.contains(o)) {

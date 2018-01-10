@@ -10,13 +10,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.junit.validator.ValidateWith;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 
 @Component
 public class ExcelManager {
-
+	
+	@Value("${excel.preData.dir}")
+	private String preDataDir;
+	
 	/**
 	 * 配置映射类
 	 */
@@ -61,13 +66,12 @@ public class ExcelManager {
 	 * 保存预处理数据
 	 */
 	public void savePreData() {
-		String basePath = getClass().getResource("/").getFile() + "preData/";
-		File dir = new File(basePath);
+		File dir = new File(preDataDir);
 		if (!dir.exists())
 			dir.mkdirs();
 		for (Entry<String, List<Object>> e : preData.entrySet()) {
 			try {
-				PrintWriter out = new PrintWriter(new FileWriter(basePath + e.getKey()));
+				PrintWriter out = new PrintWriter(new FileWriter(preDataDir + e.getKey()));
 				for (Object o : e.getValue()) {
 					String jsonString = JSON.toJSONString(o);
 					out.println(jsonString);

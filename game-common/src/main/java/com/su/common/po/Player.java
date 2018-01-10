@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.su.common.data.Cache;
+
+@Cache
 @Entity
 public class Player implements Serializable {
 	@Id

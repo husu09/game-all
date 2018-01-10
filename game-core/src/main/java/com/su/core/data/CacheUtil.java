@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
 
+import com.su.common.data.Cache;
+
 @Component
 public class CacheUtil {
 	/**
@@ -15,10 +17,11 @@ public class CacheUtil {
 	public static String getKey(Object o) {
 		String name = o.getClass().getSimpleName();
 		Object id = null;
-		Field[] fields = o.getClass().getFields();
+		Field[] fields = o.getClass().getDeclaredFields();
 		for (Field f : fields) {
 			if (f.isAnnotationPresent(Id.class)) {
 				try {
+					f.setAccessible(true);
 					id = f.get(o);
 					break;
 				} catch (Exception e) {
@@ -55,10 +58,12 @@ public class CacheUtil {
 	 * 检测对象是否是持久化状态
 	 */
 	public static boolean isPersistent(Object o) {
-		Field[] fields = o.getClass().getFields();
+		if (o == null) return false;
+		Field[] fields = o.getClass().getDeclaredFields();
 		for (Field f : fields) {
 			if (f.isAnnotationPresent(Id.class)) {
 				try {
+					f.setAccessible(true);
 					Object id = f.get(o);
 					if (id != null)
 						return true;
@@ -79,6 +84,7 @@ public class CacheUtil {
 	}
 
 	public static boolean isRedisCache(Object o) {
+		if (o == null) return false;
 		Cache ac = o.getClass().getAnnotation(Cache.class);
 		if (ac != null) {
 			return ac.redisCache();
@@ -87,6 +93,7 @@ public class CacheUtil {
 	}
 
 	public static boolean isRedisCache(Collection<Object> os) {
+		if (os == null) return false;
 		if (os.size() == 0)
 			return false;
 		Object t = os.iterator().next();
@@ -98,6 +105,7 @@ public class CacheUtil {
 	}
 
 	public static boolean isRedisCache(Object[] os) {
+		if (os == null) return false;
 		if (os.length == 0)
 			return false;
 		Object t = os[0];
@@ -117,6 +125,7 @@ public class CacheUtil {
 	}
 
 	public static boolean isMemoryCache(Object o) {
+		if (o == null) return false;
 		Cache ac = o.getClass().getAnnotation(Cache.class);
 		if (ac != null) {
 			return ac.memoryCache();
@@ -125,6 +134,7 @@ public class CacheUtil {
 	}
 
 	public static boolean isMemoryCache(Collection<Object> os) {
+		if (os == null) return false;
 		if (os.size() == 0)
 			return false;
 		Object t = os.iterator().next();
@@ -136,6 +146,7 @@ public class CacheUtil {
 	}
 
 	public static <T> boolean isMemoryCache(Object[] os) {
+		if (os == null) return false;
 		if (os.length == 0)
 			return false;
 		Object t = os[0];

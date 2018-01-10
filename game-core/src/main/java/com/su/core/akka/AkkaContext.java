@@ -3,6 +3,8 @@ package com.su.core.akka;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.PreDestroy;
+
 import org.springframework.stereotype.Component;
 
 import akka.actor.ActorSystem;
@@ -60,5 +62,10 @@ public class AkkaContext {
 	public ActorSystem getActorSystem() {
 		return system;
 	}
+	
+    @PreDestroy
+    private void destroy() {
+    	system.terminate();
+    }
 	
 }

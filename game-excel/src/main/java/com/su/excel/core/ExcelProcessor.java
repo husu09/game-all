@@ -28,6 +28,9 @@ public class ExcelProcessor {
 	@Value("${excel.dir}")
 	private String dir;
 	
+	@Value("${excel.preData.dir}")
+	private String preDataDir;
+	
 	/**
 	 * 预处理数据
 	 * */
@@ -118,8 +121,7 @@ public class ExcelProcessor {
 	 * 刷新配置
 	 * */
 	public void refresh() {
-		String basePath = getClass().getResource("/").getFile() + "preData/";
-		File dir = new File(basePath);
+		File dir = new File(preDataDir);
 		if (!dir.exists()) {
 			System.out.println("preData 目录不存在");
 			return;

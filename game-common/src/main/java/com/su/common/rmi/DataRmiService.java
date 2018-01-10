@@ -11,11 +11,11 @@ import org.hibernate.criterion.Projection;
  * */
 public interface DataRmiService {
 	
-	public <T> int save(T t);
+	public <T> long save(T t);
 
-	public <T> int[] save(Collection<T> ts);
+	public <T> long[] save(Collection<T> ts);
 
-	public <T> int[] save(T[] ts);
+	public <T> long[] save(T[] ts);
 
 	public <T> void update(T t);
 

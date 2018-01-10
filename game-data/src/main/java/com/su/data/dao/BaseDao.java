@@ -20,14 +20,14 @@ public class BaseDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public <T> int save(T t) {
+	public <T> long save(T t) {
 		Session session = sessionFactory.getCurrentSession();
-		return (int) session.save(t);
+		return (long) session.save(t);
 	}
 
-	public <T> int[] save(Collection<T> ts) {
+	public <T> long[] save(Collection<T> ts) {
 		Session session = sessionFactory.getCurrentSession();
-		int[] ids = new int[ts.size()];
+		long[] ids = new long[ts.size()];
 		int i = 0;
 		for (T t : ts) {
 			int id = (int) session.save(t);
@@ -37,9 +37,9 @@ public class BaseDao {
 		return ids;
 	}
 
-	public <T> int[] save(T[] ts) {
+	public <T> long[] save(T[] ts) {
 		Session session = sessionFactory.getCurrentSession();
-		int[] ids = new int[ts.length];
+		long[] ids = new long[ts.length];
 		int i = 0;
 		for (T t : ts) {
 			int id = (int) session.save(t);
@@ -142,7 +142,9 @@ public class BaseDao {
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(c);
 		criteria.setProjection(projection);
-		return (Long)criteria.uniqueResult();
+		Object result = criteria.uniqueResult();
+		if (result == null) return 0;
+		return (Long)result;
 	}
 	
 

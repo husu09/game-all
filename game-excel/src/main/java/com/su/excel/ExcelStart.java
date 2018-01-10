@@ -23,6 +23,6 @@ public class ExcelStart implements ApplicationListener<ContextRefreshedEvent> {
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		// 预处理配置
-		preDataProcess.refresh();
+		preDataProcess.preProcesss();
 	}
 }
