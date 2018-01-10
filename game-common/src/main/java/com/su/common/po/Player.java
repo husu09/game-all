@@ -18,8 +18,12 @@ public class Player implements Serializable {
 	 * */
 	@Column(unique=true)
 	private String name;
-	
+	/**
+	 * 等级
+	 * */
 	private int level;
+	
+	
 	
 	public long getId() {
 		return id;
