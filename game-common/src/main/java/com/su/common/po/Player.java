@@ -13,8 +13,13 @@ import com.su.common.data.Cache;
 public class Player implements Serializable {
 	@Id
 	private long id;
+	/**
+	 * 用户名
+	 * */
 	@Column(unique=true)
 	private String name;
+	
+	private int level;
 	
 	public long getId() {
 		return id;
@@ -28,6 +33,11 @@ public class Player implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	
 }
