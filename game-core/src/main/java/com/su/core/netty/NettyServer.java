@@ -15,6 +15,9 @@
  */
 package com.su.core.netty;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
@@ -42,7 +45,7 @@ import io.netty.handler.timeout.IdleStateHandler;
  * Modification of {@link EchoServer} which utilizes Java object serialization.
  */
 @Component
-public final class NettyServer implements ApplicationListener<ApplicationContextEvent> {
+public final class NettyServer {
 
 	@Autowired
 	private ProtoDecoder protoDecoder;
@@ -93,19 +96,20 @@ public final class NettyServer implements ApplicationListener<ApplicationContext
 		bossGroup.shutdownGracefully();
 		workerGroup.shutdownGracefully();
 	}
-
-	@Override
-	public void onApplicationEvent(ApplicationContextEvent event) {
-		if (event instanceof ContextRefreshedEvent) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					start();
-				}
-			}, "netty-server").start();
-		} else if (event instanceof ContextClosedEvent) {
-			stop();
-		}
-
+	
+	
+	@PostConstruct
+	private void init() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				start();
+			}
+		}, "netty-server").start();
+	}
+	
+	@PreDestroy
+	private void destroy() {
+		stop();
 	}
 }

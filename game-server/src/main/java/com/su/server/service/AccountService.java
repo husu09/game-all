@@ -25,11 +25,9 @@ public class AccountService {
 	/**
 	 * 创建用户
 	 * */
-	public Player createPlayer(String name) {
+	public void createPlayer(String name) {
 		Player player = new Player();
 		player.setName(name);
-		long id = dataService.save(player);
-		player.setId(id);
-		return player;
+		dataService.save(player);
 	}
 }

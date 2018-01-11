@@ -30,7 +30,9 @@ public class PlayerContext {
         }
 		
 	}
-	
+	/**
+	 * 发送错误提示
+	 * */
 	public void sendError(String errorCode, String message, Object... parameters) {
 		
 		ErrorResp.Builder builder = ErrorResp.newBuilder()

@@ -48,14 +48,29 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			processorActor.process(ctx, (MessageLite) msg);
 		}
 	}
+	
+	
+	
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+	}
+
+
 
 	@Override
-	public void channelReadComplete(ChannelHandlerContext ctx) {
-		ctx.flush();
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		String channelId = ctx.channel().id().asLongText();
+		if (akkaContext.containsActor(channelId)) {
+			akkaContext.getActor(channelId).stop();
+		}
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		String channelId = ctx.channel().id().asLongText();
+		if (akkaContext.containsActor(channelId)) {
+			akkaContext.getActor(channelId).stop();
+		}
 		cause.printStackTrace();
 		ctx.close();
 	}

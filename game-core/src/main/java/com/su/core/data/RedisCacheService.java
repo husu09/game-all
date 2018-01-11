@@ -22,7 +22,7 @@ public class RedisCacheService {
 		if (!CacheUtil.isPersistent(o)) {
 			return;
 		}
-		client.setForMap(CacheUtil.getParentKey(o), CacheUtil.getKey(o), JSON.toJSONString(o));
+		client.setMap(CacheUtil.getParentKey(o), CacheUtil.getKey(o), JSON.toJSONString(o));
 	}
 
 	public void saveOrUpdate(Collection<Object> os) {
@@ -44,7 +44,7 @@ public class RedisCacheService {
 	}
 
 	public void delete(Object o) {
-		client.deleteForMap(CacheUtil.getParentKey(o), CacheUtil.getKey(o));
+		client.deleteMap(CacheUtil.getParentKey(o), CacheUtil.getKey(o));
 	}
 
 	public void delete(Collection<Object> os) {
@@ -60,12 +60,12 @@ public class RedisCacheService {
 	}
 
 	public <T> T get(Class<T> c, int id) {
-		String value = client.getForMap(CacheUtil.getParentKey(c), CacheUtil.getKey(c, id));
+		String value = client.getMap(CacheUtil.getParentKey(c), CacheUtil.getKey(c, id));
 		return JSON.parseObject(value, c);
 	}
 
 	public <T> List<T> list(Class<T> c) {
-		List<String> list = client.getForMap(CacheUtil.getParentKey(c));
+		List<String> list = client.getMap(CacheUtil.getParentKey(c));
 		List<T> ts = new ArrayList<>(list.size());
 		for (String s : list) {
 			T t = JSON.parseObject(s, c);

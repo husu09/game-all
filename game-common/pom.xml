@@ -32,6 +32,11 @@
 			<artifactId>guava</artifactId>
 			<version>23.4-jre</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.7</version>
+		</dependency>
 		<!-- netty -->
 		<dependency>
 			<groupId>io.netty</groupId>

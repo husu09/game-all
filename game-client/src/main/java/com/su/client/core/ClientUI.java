@@ -165,7 +165,7 @@ public class ClientUI {
 	private void loadProto(JComponent leftRight) {
 		ProtoButtonHandler pbh = new ProtoButtonHandler();
 		for (Entry<String, MessageLite> e : protoContext.all()) {
-			if (e.getKey().contains("Resp"))
+			if (!e.getKey().contains("Req"))
 				continue;
 			JButton tB = new JButton(e.getKey());
 			tB.setPreferredSize(new Dimension(180, 25));

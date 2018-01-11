@@ -10,6 +10,7 @@ import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
 import com.su.proto.LoginProto.LoginReq;
 import com.su.proto.LoginProto.LoginResp;
+import com.su.proto.LoginProto.PlayerMsg;
 import com.su.proto.LoginProto.RegisterReq;
 import com.su.proto.LoginProto.RegisterResp;
 import com.su.server.service.AccountService;
@@ -41,7 +42,12 @@ public class AccountControl {
 			playerContext.sendError("", "参数错误");
 			return;
 		}
-		Player player = accountService.createPlayer(req.getName());
+		Player player = accountService.queryPlayerByName(req.getName());
+		if (player != null) {
+			playerContext.sendError("", "用户名重复");
+			return;
+		}
+		accountService.createPlayer(req.getName());
 		playerContext.write(RegisterResp.newBuilder());
 	}
 }

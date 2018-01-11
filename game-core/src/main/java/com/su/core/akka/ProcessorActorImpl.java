@@ -25,7 +25,7 @@ public class ProcessorActorImpl implements ProcessorActor {
 		if (actionMeta.isMustLogin()) {
 			PlayerContext playerContext = ctx.channel().attr(PLAYER_CONTEXT_KEY).get();
 			if (playerContext == null) {
-				throw new RuntimeException("没有找到对应的PlayerConte");
+				throw new RuntimeException("没有找到对应的PlayerContext");
 			}
 		}
 		PlayerContext playerContext = new PlayerContext();

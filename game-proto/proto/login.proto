@@ -13,4 +13,9 @@ message LoginReq {
 }
 message LoginResp {
 }
+// 用户
+message PlayerMsg {
+	string name = 1;	// 名字
+	int32 level = 2;	// 等级
+}
 
