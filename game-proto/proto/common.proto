@@ -1,10 +1,10 @@
-syntax = "proto3";
+syntax = proto2
 option java_package = "com.su.proto"; 
 option java_outer_classname = "CommonProto";
 
 // 错误提示
 message ErrorResp{
- 	string errorCode = 1;
- 	string errorMsg = 2;
+ 	optional string errorCode = 1;
+ 	optional string errorMsg = 2;
  	repeated string parameters  = 3;
 }

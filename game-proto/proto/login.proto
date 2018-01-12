@@ -1,21 +1,30 @@
-syntax = "proto3";
+syntax = proto2
 option java_package = "com.su.proto"; 
 option java_outer_classname = "LoginProto";
 // 注册
 message RegisterReq {
- 	string name = 1;
+ 	optional string name = 1;
 }
 message RegisterResp{
 }
 // 登录
 message LoginReq {
-	string name = 1;
+	optional string name = 1;
 }
 message LoginResp {
+	optional PlayerData player = 1;	// 玩家
 }
-// 用户
-message PlayerMsg {
-	string name = 1;	// 名字
-	int32 level = 2;	// 等级
+
+// 玩家数据
+message PlayerData {
+	optional int64 id = 1;
+	optional string name = 2;	// 名字
+	optional string picture = 3;	// 头像
+	optional int32 level = 3 [default = -1];	// 等级
+	optional int32 vip = 4 [default = -1];	// vip等级
+	
+	
+	
 }
+
 

@@ -10,13 +10,12 @@ import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
 import com.su.proto.LoginProto.LoginReq;
 import com.su.proto.LoginProto.LoginResp;
-import com.su.proto.LoginProto.PlayerMsg;
 import com.su.proto.LoginProto.RegisterReq;
 import com.su.proto.LoginProto.RegisterResp;
 import com.su.server.service.AccountService;
 
 @Controller
-public class AccountControl {
+public class LoginControl {
 	
 	@Autowired
 	private GameContext gameContext;
@@ -24,6 +23,9 @@ public class AccountControl {
 	@Autowired
 	private AccountService accountService;
 	
+	/**
+	 * 登录
+	 * */
 	@Action(mustLogin = false)
 	public void login(PlayerContext playerContext, LoginReq req) {
 		Player player = accountService.queryPlayerByName(req.getName());
@@ -36,6 +38,9 @@ public class AccountControl {
 		
 	}
 	
+	/**
+	 * 注册
+	 * */
 	@Action(mustLogin = false)
 	public void register(PlayerContext playerContext, RegisterReq req) {
 		if (StringUtils.isEmpty(req.getName())) {

@@ -19,21 +19,29 @@ public final class CommonProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string errorCode = 1;</code>
+     * <code>optional string errorCode = 1;</code>
+     */
+    boolean hasErrorCode();
+    /**
+     * <code>optional string errorCode = 1;</code>
      */
     java.lang.String getErrorCode();
     /**
-     * <code>string errorCode = 1;</code>
+     * <code>optional string errorCode = 1;</code>
      */
     com.google.protobuf.ByteString
         getErrorCodeBytes();
 
     /**
-     * <code>string errorMsg = 2;</code>
+     * <code>optional string errorMsg = 2;</code>
+     */
+    boolean hasErrorMsg();
+    /**
+     * <code>optional string errorMsg = 2;</code>
      */
     java.lang.String getErrorMsg();
     /**
-     * <code>string errorMsg = 2;</code>
+     * <code>optional string errorMsg = 2;</code>
      */
     com.google.protobuf.ByteString
         getErrorMsgBytes();
@@ -81,7 +89,7 @@ public final class CommonProto {
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      return this.unknownFields;
     }
     private ErrorResp(
         com.google.protobuf.CodedInputStream input,
@@ -89,6 +97,8 @@ public final class CommonProto {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
         boolean done = false;
         while (!done) {
@@ -98,30 +108,31 @@ public final class CommonProto {
               done = true;
               break;
             default: {
-              if (!input.skipField(tag)) {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
                 done = true;
               }
               break;
             }
             case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              errorCode_ = s;
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              errorCode_ = bs;
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              errorMsg_ = s;
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              errorMsg_ = bs;
               break;
             }
             case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
+              com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 parameters_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000004;
               }
-              parameters_.add(s);
+              parameters_.add(bs);
               break;
             }
           }
@@ -135,6 +146,7 @@ public final class CommonProto {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           parameters_ = parameters_.getUnmodifiableView();
         }
+        this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
@@ -154,7 +166,13 @@ public final class CommonProto {
     public static final int ERRORCODE_FIELD_NUMBER = 1;
     private volatile java.lang.Object errorCode_;
     /**
-     * <code>string errorCode = 1;</code>
+     * <code>optional string errorCode = 1;</code>
+     */
+    public boolean hasErrorCode() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string errorCode = 1;</code>
      */
     public java.lang.String getErrorCode() {
       java.lang.Object ref = errorCode_;
@@ -164,12 +182,14 @@ public final class CommonProto {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        errorCode_ = s;
+        if (bs.isValidUtf8()) {
+          errorCode_ = s;
+        }
         return s;
       }
     }
     /**
-     * <code>string errorCode = 1;</code>
+     * <code>optional string errorCode = 1;</code>
      */
     public com.google.protobuf.ByteString
         getErrorCodeBytes() {
@@ -188,7 +208,13 @@ public final class CommonProto {
     public static final int ERRORMSG_FIELD_NUMBER = 2;
     private volatile java.lang.Object errorMsg_;
     /**
-     * <code>string errorMsg = 2;</code>
+     * <code>optional string errorMsg = 2;</code>
+     */
+    public boolean hasErrorMsg() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string errorMsg = 2;</code>
      */
     public java.lang.String getErrorMsg() {
       java.lang.Object ref = errorMsg_;
@@ -198,12 +224,14 @@ public final class CommonProto {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        errorMsg_ = s;
+        if (bs.isValidUtf8()) {
+          errorMsg_ = s;
+        }
         return s;
       }
     }
     /**
-     * <code>string errorMsg = 2;</code>
+     * <code>optional string errorMsg = 2;</code>
      */
     public com.google.protobuf.ByteString
         getErrorMsgBytes() {
@@ -260,15 +288,16 @@ public final class CommonProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getErrorCodeBytes().isEmpty()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, errorCode_);
       }
-      if (!getErrorMsgBytes().isEmpty()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, errorMsg_);
       }
       for (int i = 0; i < parameters_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, parameters_.getRaw(i));
       }
+      unknownFields.writeTo(output);
     }
 
     public int getSerializedSize() {
@@ -276,10 +305,10 @@ public final class CommonProto {
       if (size != -1) return size;
 
       size = 0;
-      if (!getErrorCodeBytes().isEmpty()) {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, errorCode_);
       }
-      if (!getErrorMsgBytes().isEmpty()) {
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, errorMsg_);
       }
       {
@@ -290,6 +319,7 @@ public final class CommonProto {
         size += dataSize;
         size += 1 * getParametersList().size();
       }
+      size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
@@ -306,12 +336,19 @@ public final class CommonProto {
       com.su.proto.CommonProto.ErrorResp other = (com.su.proto.CommonProto.ErrorResp) obj;
 
       boolean result = true;
-      result = result && getErrorCode()
-          .equals(other.getErrorCode());
-      result = result && getErrorMsg()
-          .equals(other.getErrorMsg());
+      result = result && (hasErrorCode() == other.hasErrorCode());
+      if (hasErrorCode()) {
+        result = result && getErrorCode()
+            .equals(other.getErrorCode());
+      }
+      result = result && (hasErrorMsg() == other.hasErrorMsg());
+      if (hasErrorMsg()) {
+        result = result && getErrorMsg()
+            .equals(other.getErrorMsg());
+      }
       result = result && getParametersList()
           .equals(other.getParametersList());
+      result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
 
@@ -322,10 +359,14 @@ public final class CommonProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ERRORCODE_FIELD_NUMBER;
-      hash = (53 * hash) + getErrorCode().hashCode();
-      hash = (37 * hash) + ERRORMSG_FIELD_NUMBER;
-      hash = (53 * hash) + getErrorMsg().hashCode();
+      if (hasErrorCode()) {
+        hash = (37 * hash) + ERRORCODE_FIELD_NUMBER;
+        hash = (53 * hash) + getErrorCode().hashCode();
+      }
+      if (hasErrorMsg()) {
+        hash = (37 * hash) + ERRORMSG_FIELD_NUMBER;
+        hash = (53 * hash) + getErrorMsg().hashCode();
+      }
       if (getParametersCount() > 0) {
         hash = (37 * hash) + PARAMETERS_FIELD_NUMBER;
         hash = (53 * hash) + getParametersList().hashCode();
@@ -453,9 +494,9 @@ public final class CommonProto {
       public Builder clear() {
         super.clear();
         errorCode_ = "";
-
+        bitField0_ = (bitField0_ & ~0x00000001);
         errorMsg_ = "";
-
+        bitField0_ = (bitField0_ & ~0x00000002);
         parameters_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
@@ -482,7 +523,13 @@ public final class CommonProto {
         com.su.proto.CommonProto.ErrorResp result = new com.su.proto.CommonProto.ErrorResp(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
         result.errorCode_ = errorCode_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
         result.errorMsg_ = errorMsg_;
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           parameters_ = parameters_.getUnmodifiableView();
@@ -531,11 +578,13 @@ public final class CommonProto {
 
       public Builder mergeFrom(com.su.proto.CommonProto.ErrorResp other) {
         if (other == com.su.proto.CommonProto.ErrorResp.getDefaultInstance()) return this;
-        if (!other.getErrorCode().isEmpty()) {
+        if (other.hasErrorCode()) {
+          bitField0_ |= 0x00000001;
           errorCode_ = other.errorCode_;
           onChanged();
         }
-        if (!other.getErrorMsg().isEmpty()) {
+        if (other.hasErrorMsg()) {
+          bitField0_ |= 0x00000002;
           errorMsg_ = other.errorMsg_;
           onChanged();
         }
@@ -549,6 +598,7 @@ public final class CommonProto {
           }
           onChanged();
         }
+        this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
@@ -578,7 +628,13 @@ public final class CommonProto {
 
       private java.lang.Object errorCode_ = "";
       /**
-       * <code>string errorCode = 1;</code>
+       * <code>optional string errorCode = 1;</code>
+       */
+      public boolean hasErrorCode() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string errorCode = 1;</code>
        */
       public java.lang.String getErrorCode() {
         java.lang.Object ref = errorCode_;
@@ -586,14 +642,16 @@ public final class CommonProto {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          errorCode_ = s;
+          if (bs.isValidUtf8()) {
+            errorCode_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string errorCode = 1;</code>
+       * <code>optional string errorCode = 1;</code>
        */
       public com.google.protobuf.ByteString
           getErrorCodeBytes() {
@@ -609,37 +667,36 @@ public final class CommonProto {
         }
       }
       /**
-       * <code>string errorCode = 1;</code>
+       * <code>optional string errorCode = 1;</code>
        */
       public Builder setErrorCode(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+  bitField0_ |= 0x00000001;
         errorCode_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string errorCode = 1;</code>
+       * <code>optional string errorCode = 1;</code>
        */
       public Builder clearErrorCode() {
-        
+        bitField0_ = (bitField0_ & ~0x00000001);
         errorCode_ = getDefaultInstance().getErrorCode();
         onChanged();
         return this;
       }
       /**
-       * <code>string errorCode = 1;</code>
+       * <code>optional string errorCode = 1;</code>
        */
       public Builder setErrorCodeBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
-        
+  bitField0_ |= 0x00000001;
         errorCode_ = value;
         onChanged();
         return this;
@@ -647,7 +704,13 @@ public final class CommonProto {
 
       private java.lang.Object errorMsg_ = "";
       /**
-       * <code>string errorMsg = 2;</code>
+       * <code>optional string errorMsg = 2;</code>
+       */
+      public boolean hasErrorMsg() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string errorMsg = 2;</code>
        */
       public java.lang.String getErrorMsg() {
         java.lang.Object ref = errorMsg_;
@@ -655,14 +718,16 @@ public final class CommonProto {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          errorMsg_ = s;
+          if (bs.isValidUtf8()) {
+            errorMsg_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string errorMsg = 2;</code>
+       * <code>optional string errorMsg = 2;</code>
        */
       public com.google.protobuf.ByteString
           getErrorMsgBytes() {
@@ -678,37 +743,36 @@ public final class CommonProto {
         }
       }
       /**
-       * <code>string errorMsg = 2;</code>
+       * <code>optional string errorMsg = 2;</code>
        */
       public Builder setErrorMsg(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+  bitField0_ |= 0x00000002;
         errorMsg_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string errorMsg = 2;</code>
+       * <code>optional string errorMsg = 2;</code>
        */
       public Builder clearErrorMsg() {
-        
+        bitField0_ = (bitField0_ & ~0x00000002);
         errorMsg_ = getDefaultInstance().getErrorMsg();
         onChanged();
         return this;
       }
       /**
-       * <code>string errorMsg = 2;</code>
+       * <code>optional string errorMsg = 2;</code>
        */
       public Builder setErrorMsgBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
-        
+  bitField0_ |= 0x00000002;
         errorMsg_ = value;
         onChanged();
         return this;
@@ -801,20 +865,19 @@ public final class CommonProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
-        ensureParametersIsMutable();
+  ensureParametersIsMutable();
         parameters_.add(value);
         onChanged();
         return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.setUnknownFields(unknownFields);
       }
 
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
+        return super.mergeUnknownFields(unknownFields);
       }
 
 
@@ -831,7 +894,7 @@ public final class CommonProto {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ErrorResp>
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<ErrorResp>
         PARSER = new com.google.protobuf.AbstractParser<ErrorResp>() {
       public ErrorResp parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
@@ -872,8 +935,7 @@ public final class CommonProto {
     java.lang.String[] descriptorData = {
       "\n\022proto/common.proto\"D\n\tErrorResp\022\021\n\terr" +
       "orCode\030\001 \001(\t\022\020\n\010errorMsg\030\002 \001(\t\022\022\n\nparame" +
-      "ters\030\003 \003(\tB\033\n\014com.su.protoB\013CommonProtob" +
-      "\006proto3"
+      "ters\030\003 \003(\tB\033\n\014com.su.protoB\013CommonProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
