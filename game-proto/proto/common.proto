@@ -1,4 +1,4 @@
-syntax = proto2
+syntax = "proto2";
 option java_package = "com.su.proto"; 
 option java_outer_classname = "CommonProto";
 

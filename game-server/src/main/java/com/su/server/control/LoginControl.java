@@ -10,6 +10,8 @@ import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
 import com.su.proto.LoginProto.LoginReq;
 import com.su.proto.LoginProto.LoginResp;
+import com.su.proto.LoginProto.PlayerData;
+import com.su.proto.LoginProto.LoginResp.Builder;
 import com.su.proto.LoginProto.RegisterReq;
 import com.su.proto.LoginProto.RegisterResp;
 import com.su.server.service.AccountService;
@@ -34,6 +36,13 @@ public class LoginControl {
 			return;
 		}
 		gameContext.addPlayerContext(player.getId(), playerContext);
+		
+		PlayerData.Builder playerData = PlayerData.newBuilder();
+		playerData.setId(player.getId());
+		playerData.setName(player.getName());
+		
+		Builder resp = LoginResp.newBuilder();
+		resp.setPlayerData(playerData);
 		playerContext.write(LoginResp.newBuilder());
 		
 	}

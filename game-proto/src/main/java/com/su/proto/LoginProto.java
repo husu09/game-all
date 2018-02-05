@@ -19,14 +19,26 @@ public final class LoginProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     boolean hasName();
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     java.lang.String getName();
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     com.google.protobuf.ByteString
@@ -113,12 +125,20 @@ public final class LoginProto {
     public static final int NAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object name_;
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     public boolean hasName() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     public java.lang.String getName() {
@@ -136,6 +156,10 @@ public final class LoginProto {
       }
     }
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -444,12 +468,20 @@ public final class LoginProto {
 
       private java.lang.Object name_ = "";
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public boolean hasName() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public java.lang.String getName() {
@@ -467,6 +499,10 @@ public final class LoginProto {
         }
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -483,6 +519,10 @@ public final class LoginProto {
         }
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public Builder setName(
@@ -496,6 +536,10 @@ public final class LoginProto {
         return this;
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public Builder clearName() {
@@ -505,6 +549,10 @@ public final class LoginProto {
         return this;
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public Builder setNameBytes(
@@ -944,14 +992,26 @@ public final class LoginProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     boolean hasName();
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     java.lang.String getName();
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     com.google.protobuf.ByteString
@@ -1038,12 +1098,20 @@ public final class LoginProto {
     public static final int NAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object name_;
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     public boolean hasName() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     public java.lang.String getName() {
@@ -1061,6 +1129,10 @@ public final class LoginProto {
       }
     }
     /**
+     * <pre>
+     * 用户名
+     * </pre>
+     *
      * <code>optional string name = 1;</code>
      */
     public com.google.protobuf.ByteString
@@ -1369,12 +1441,20 @@ public final class LoginProto {
 
       private java.lang.Object name_ = "";
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public boolean hasName() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public java.lang.String getName() {
@@ -1392,6 +1472,10 @@ public final class LoginProto {
         }
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public com.google.protobuf.ByteString
@@ -1408,6 +1492,10 @@ public final class LoginProto {
         }
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public Builder setName(
@@ -1421,6 +1509,10 @@ public final class LoginProto {
         return this;
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public Builder clearName() {
@@ -1430,6 +1522,10 @@ public final class LoginProto {
         return this;
       }
       /**
+       * <pre>
+       * 用户名
+       * </pre>
+       *
        * <code>optional string name = 1;</code>
        */
       public Builder setNameBytes(
@@ -1500,25 +1596,25 @@ public final class LoginProto {
      * 玩家
      * </pre>
      *
-     * <code>optional .PlayerData player = 1;</code>
+     * <code>optional .PlayerData playerData = 1;</code>
      */
-    boolean hasPlayer();
+    boolean hasPlayerData();
     /**
      * <pre>
      * 玩家
      * </pre>
      *
-     * <code>optional .PlayerData player = 1;</code>
+     * <code>optional .PlayerData playerData = 1;</code>
      */
-    com.su.proto.LoginProto.PlayerData getPlayer();
+    com.su.proto.LoginProto.PlayerData getPlayerData();
     /**
      * <pre>
      * 玩家
      * </pre>
      *
-     * <code>optional .PlayerData player = 1;</code>
+     * <code>optional .PlayerData playerData = 1;</code>
      */
-    com.su.proto.LoginProto.PlayerDataOrBuilder getPlayerOrBuilder();
+    com.su.proto.LoginProto.PlayerDataOrBuilder getPlayerDataOrBuilder();
   }
   /**
    * Protobuf type {@code LoginResp}
@@ -1565,12 +1661,12 @@ public final class LoginProto {
             case 10: {
               com.su.proto.LoginProto.PlayerData.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = player_.toBuilder();
+                subBuilder = playerData_.toBuilder();
               }
-              player_ = input.readMessage(com.su.proto.LoginProto.PlayerData.PARSER, extensionRegistry);
+              playerData_ = input.readMessage(com.su.proto.LoginProto.PlayerData.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(player_);
-                player_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(playerData_);
+                playerData_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000001;
               break;
@@ -1600,16 +1696,16 @@ public final class LoginProto {
     }
 
     private int bitField0_;
-    public static final int PLAYER_FIELD_NUMBER = 1;
-    private com.su.proto.LoginProto.PlayerData player_;
+    public static final int PLAYERDATA_FIELD_NUMBER = 1;
+    private com.su.proto.LoginProto.PlayerData playerData_;
     /**
      * <pre>
      * 玩家
      * </pre>
      *
-     * <code>optional .PlayerData player = 1;</code>
+     * <code>optional .PlayerData playerData = 1;</code>
      */
-    public boolean hasPlayer() {
+    public boolean hasPlayerData() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
@@ -1617,20 +1713,20 @@ public final class LoginProto {
      * 玩家
      * </pre>
      *
-     * <code>optional .PlayerData player = 1;</code>
+     * <code>optional .PlayerData playerData = 1;</code>
      */
-    public com.su.proto.LoginProto.PlayerData getPlayer() {
-      return player_ == null ? com.su.proto.LoginProto.PlayerData.getDefaultInstance() : player_;
+    public com.su.proto.LoginProto.PlayerData getPlayerData() {
+      return playerData_ == null ? com.su.proto.LoginProto.PlayerData.getDefaultInstance() : playerData_;
     }
     /**
      * <pre>
      * 玩家
      * </pre>
      *
-     * <code>optional .PlayerData player = 1;</code>
+     * <code>optional .PlayerData playerData = 1;</code>
      */
-    public com.su.proto.LoginProto.PlayerDataOrBuilder getPlayerOrBuilder() {
-      return player_ == null ? com.su.proto.LoginProto.PlayerData.getDefaultInstance() : player_;
+    public com.su.proto.LoginProto.PlayerDataOrBuilder getPlayerDataOrBuilder() {
+      return playerData_ == null ? com.su.proto.LoginProto.PlayerData.getDefaultInstance() : playerData_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1646,7 +1742,7 @@ public final class LoginProto {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, getPlayer());
+        output.writeMessage(1, getPlayerData());
       }
       unknownFields.writeTo(output);
     }
@@ -1658,7 +1754,7 @@ public final class LoginProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getPlayer());
+          .computeMessageSize(1, getPlayerData());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1677,10 +1773,10 @@ public final class LoginProto {
       com.su.proto.LoginProto.LoginResp other = (com.su.proto.LoginProto.LoginResp) obj;
 
       boolean result = true;
-      result = result && (hasPlayer() == other.hasPlayer());
-      if (hasPlayer()) {
-        result = result && getPlayer()
-            .equals(other.getPlayer());
+      result = result && (hasPlayerData() == other.hasPlayerData());
+      if (hasPlayerData()) {
+        result = result && getPlayerData()
+            .equals(other.getPlayerData());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -1693,9 +1789,9 @@ public final class LoginProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasPlayer()) {
-        hash = (37 * hash) + PLAYER_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayer().hashCode();
+      if (hasPlayerData()) {
+        hash = (37 * hash) + PLAYERDATA_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerData().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1811,15 +1907,15 @@ public final class LoginProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getPlayerFieldBuilder();
+          getPlayerDataFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
-        if (playerBuilder_ == null) {
-          player_ = null;
+        if (playerDataBuilder_ == null) {
+          playerData_ = null;
         } else {
-          playerBuilder_.clear();
+          playerDataBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
@@ -1849,10 +1945,10 @@ public final class LoginProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        if (playerBuilder_ == null) {
-          result.player_ = player_;
+        if (playerDataBuilder_ == null) {
+          result.playerData_ = playerData_;
         } else {
-          result.player_ = playerBuilder_.build();
+          result.playerData_ = playerDataBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1896,8 +1992,8 @@ public final class LoginProto {
 
       public Builder mergeFrom(com.su.proto.LoginProto.LoginResp other) {
         if (other == com.su.proto.LoginProto.LoginResp.getDefaultInstance()) return this;
-        if (other.hasPlayer()) {
-          mergePlayer(other.getPlayer());
+        if (other.hasPlayerData()) {
+          mergePlayerData(other.getPlayerData());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1927,17 +2023,17 @@ public final class LoginProto {
       }
       private int bitField0_;
 
-      private com.su.proto.LoginProto.PlayerData player_ = null;
+      private com.su.proto.LoginProto.PlayerData playerData_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.LoginProto.PlayerData, com.su.proto.LoginProto.PlayerData.Builder, com.su.proto.LoginProto.PlayerDataOrBuilder> playerBuilder_;
+          com.su.proto.LoginProto.PlayerData, com.su.proto.LoginProto.PlayerData.Builder, com.su.proto.LoginProto.PlayerDataOrBuilder> playerDataBuilder_;
       /**
        * <pre>
        * 玩家
        * </pre>
        *
-       * <code>optional .PlayerData player = 1;</code>
+       * <code>optional .PlayerData playerData = 1;</code>
        */
-      public boolean hasPlayer() {
+      public boolean hasPlayerData() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
@@ -1945,13 +2041,13 @@ public final class LoginProto {
        * 玩家
        * </pre>
        *
-       * <code>optional .PlayerData player = 1;</code>
+       * <code>optional .PlayerData playerData = 1;</code>
        */
-      public com.su.proto.LoginProto.PlayerData getPlayer() {
-        if (playerBuilder_ == null) {
-          return player_ == null ? com.su.proto.LoginProto.PlayerData.getDefaultInstance() : player_;
+      public com.su.proto.LoginProto.PlayerData getPlayerData() {
+        if (playerDataBuilder_ == null) {
+          return playerData_ == null ? com.su.proto.LoginProto.PlayerData.getDefaultInstance() : playerData_;
         } else {
-          return playerBuilder_.getMessage();
+          return playerDataBuilder_.getMessage();
         }
       }
       /**
@@ -1959,17 +2055,17 @@ public final class LoginProto {
        * 玩家
        * </pre>
        *
-       * <code>optional .PlayerData player = 1;</code>
+       * <code>optional .PlayerData playerData = 1;</code>
        */
-      public Builder setPlayer(com.su.proto.LoginProto.PlayerData value) {
-        if (playerBuilder_ == null) {
+      public Builder setPlayerData(com.su.proto.LoginProto.PlayerData value) {
+        if (playerDataBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          player_ = value;
+          playerData_ = value;
           onChanged();
         } else {
-          playerBuilder_.setMessage(value);
+          playerDataBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000001;
         return this;
@@ -1979,15 +2075,15 @@ public final class LoginProto {
        * 玩家
        * </pre>
        *
-       * <code>optional .PlayerData player = 1;</code>
+       * <code>optional .PlayerData playerData = 1;</code>
        */
-      public Builder setPlayer(
+      public Builder setPlayerData(
           com.su.proto.LoginProto.PlayerData.Builder builderForValue) {
-        if (playerBuilder_ == null) {
-          player_ = builderForValue.build();
+        if (playerDataBuilder_ == null) {
+          playerData_ = builderForValue.build();
           onChanged();
         } else {
-          playerBuilder_.setMessage(builderForValue.build());
+          playerDataBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000001;
         return this;
@@ -1997,21 +2093,21 @@ public final class LoginProto {
        * 玩家
        * </pre>
        *
-       * <code>optional .PlayerData player = 1;</code>
+       * <code>optional .PlayerData playerData = 1;</code>
        */
-      public Builder mergePlayer(com.su.proto.LoginProto.PlayerData value) {
-        if (playerBuilder_ == null) {
+      public Builder mergePlayerData(com.su.proto.LoginProto.PlayerData value) {
+        if (playerDataBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              player_ != null &&
-              player_ != com.su.proto.LoginProto.PlayerData.getDefaultInstance()) {
-            player_ =
-              com.su.proto.LoginProto.PlayerData.newBuilder(player_).mergeFrom(value).buildPartial();
+              playerData_ != null &&
+              playerData_ != com.su.proto.LoginProto.PlayerData.getDefaultInstance()) {
+            playerData_ =
+              com.su.proto.LoginProto.PlayerData.newBuilder(playerData_).mergeFrom(value).buildPartial();
           } else {
-            player_ = value;
+            playerData_ = value;
           }
           onChanged();
         } else {
-          playerBuilder_.mergeFrom(value);
+          playerDataBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000001;
         return this;
@@ -2021,14 +2117,14 @@ public final class LoginProto {
        * 玩家
        * </pre>
        *
-       * <code>optional .PlayerData player = 1;</code>
+       * <code>optional .PlayerData playerData = 1;</code>
        */
-      public Builder clearPlayer() {
-        if (playerBuilder_ == null) {
-          player_ = null;
+      public Builder clearPlayerData() {
+        if (playerDataBuilder_ == null) {
+          playerData_ = null;
           onChanged();
         } else {
-          playerBuilder_.clear();
+          playerDataBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
@@ -2038,26 +2134,26 @@ public final class LoginProto {
        * 玩家
        * </pre>
        *
-       * <code>optional .PlayerData player = 1;</code>
+       * <code>optional .PlayerData playerData = 1;</code>
        */
-      public com.su.proto.LoginProto.PlayerData.Builder getPlayerBuilder() {
+      public com.su.proto.LoginProto.PlayerData.Builder getPlayerDataBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
-        return getPlayerFieldBuilder().getBuilder();
+        return getPlayerDataFieldBuilder().getBuilder();
       }
       /**
        * <pre>
        * 玩家
        * </pre>
        *
-       * <code>optional .PlayerData player = 1;</code>
+       * <code>optional .PlayerData playerData = 1;</code>
        */
-      public com.su.proto.LoginProto.PlayerDataOrBuilder getPlayerOrBuilder() {
-        if (playerBuilder_ != null) {
-          return playerBuilder_.getMessageOrBuilder();
+      public com.su.proto.LoginProto.PlayerDataOrBuilder getPlayerDataOrBuilder() {
+        if (playerDataBuilder_ != null) {
+          return playerDataBuilder_.getMessageOrBuilder();
         } else {
-          return player_ == null ?
-              com.su.proto.LoginProto.PlayerData.getDefaultInstance() : player_;
+          return playerData_ == null ?
+              com.su.proto.LoginProto.PlayerData.getDefaultInstance() : playerData_;
         }
       }
       /**
@@ -2065,20 +2161,20 @@ public final class LoginProto {
        * 玩家
        * </pre>
        *
-       * <code>optional .PlayerData player = 1;</code>
+       * <code>optional .PlayerData playerData = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.su.proto.LoginProto.PlayerData, com.su.proto.LoginProto.PlayerData.Builder, com.su.proto.LoginProto.PlayerDataOrBuilder> 
-          getPlayerFieldBuilder() {
-        if (playerBuilder_ == null) {
-          playerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getPlayerDataFieldBuilder() {
+        if (playerDataBuilder_ == null) {
+          playerDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.su.proto.LoginProto.PlayerData, com.su.proto.LoginProto.PlayerData.Builder, com.su.proto.LoginProto.PlayerDataOrBuilder>(
-                  getPlayer(),
+                  getPlayerData(),
                   getParentForChildren(),
                   isClean());
-          player_ = null;
+          playerData_ = null;
         }
-        return playerBuilder_;
+        return playerDataBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2135,10 +2231,27 @@ public final class LoginProto {
 
     /**
      * <pre>
+     * id
+     * </pre>
+     *
+     * <code>optional int64 id = 1 [default = -1];</code>
+     */
+    boolean hasId();
+    /**
+     * <pre>
+     * id
+     * </pre>
+     *
+     * <code>optional int64 id = 1 [default = -1];</code>
+     */
+    long getId();
+
+    /**
+     * <pre>
      * 名字
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>optional string name = 2;</code>
      */
     boolean hasName();
     /**
@@ -2146,7 +2259,7 @@ public final class LoginProto {
      * 名字
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>optional string name = 2;</code>
      */
     java.lang.String getName();
     /**
@@ -2154,17 +2267,43 @@ public final class LoginProto {
      * 名字
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>optional string name = 2;</code>
      */
     com.google.protobuf.ByteString
         getNameBytes();
 
     /**
      * <pre>
+     * 头像
+     * </pre>
+     *
+     * <code>optional string picture = 3;</code>
+     */
+    boolean hasPicture();
+    /**
+     * <pre>
+     * 头像
+     * </pre>
+     *
+     * <code>optional string picture = 3;</code>
+     */
+    java.lang.String getPicture();
+    /**
+     * <pre>
+     * 头像
+     * </pre>
+     *
+     * <code>optional string picture = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getPictureBytes();
+
+    /**
+     * <pre>
      * 等级
      * </pre>
      *
-     * <code>optional int32 level = 2 [default = -1];</code>
+     * <code>optional int32 level = 4 [default = -1];</code>
      */
     boolean hasLevel();
     /**
@@ -2172,9 +2311,26 @@ public final class LoginProto {
      * 等级
      * </pre>
      *
-     * <code>optional int32 level = 2 [default = -1];</code>
+     * <code>optional int32 level = 4 [default = -1];</code>
      */
     int getLevel();
+
+    /**
+     * <pre>
+     * vip等级
+     * </pre>
+     *
+     * <code>optional int32 vipLevel = 5 [default = -1];</code>
+     */
+    boolean hasVipLevel();
+    /**
+     * <pre>
+     * vip等级
+     * </pre>
+     *
+     * <code>optional int32 vipLevel = 5 [default = -1];</code>
+     */
+    int getVipLevel();
   }
   /**
    * <pre>
@@ -2192,8 +2348,11 @@ public final class LoginProto {
       super(builder);
     }
     private PlayerData() {
+      id_ = -1L;
       name_ = "";
+      picture_ = "";
       level_ = -1;
+      vipLevel_ = -1;
     }
 
     @java.lang.Override
@@ -2224,15 +2383,31 @@ public final class LoginProto {
               }
               break;
             }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 8: {
               bitField0_ |= 0x00000001;
+              id_ = input.readInt64();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
               name_ = bs;
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              picture_ = bs;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
               level_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              vipLevel_ = input.readInt32();
               break;
             }
           }
@@ -2260,24 +2435,47 @@ public final class LoginProto {
     }
 
     private int bitField0_;
-    public static final int NAME_FIELD_NUMBER = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private long id_;
+    /**
+     * <pre>
+     * id
+     * </pre>
+     *
+     * <code>optional int64 id = 1 [default = -1];</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     * id
+     * </pre>
+     *
+     * <code>optional int64 id = 1 [default = -1];</code>
+     */
+    public long getId() {
+      return id_;
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
     private volatile java.lang.Object name_;
     /**
      * <pre>
      * 名字
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>optional string name = 2;</code>
      */
     public boolean hasName() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <pre>
      * 名字
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>optional string name = 2;</code>
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -2298,7 +2496,7 @@ public final class LoginProto {
      * 名字
      * </pre>
      *
-     * <code>optional string name = 1;</code>
+     * <code>optional string name = 2;</code>
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -2314,27 +2512,104 @@ public final class LoginProto {
       }
     }
 
-    public static final int LEVEL_FIELD_NUMBER = 2;
+    public static final int PICTURE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object picture_;
+    /**
+     * <pre>
+     * 头像
+     * </pre>
+     *
+     * <code>optional string picture = 3;</code>
+     */
+    public boolean hasPicture() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     * 头像
+     * </pre>
+     *
+     * <code>optional string picture = 3;</code>
+     */
+    public java.lang.String getPicture() {
+      java.lang.Object ref = picture_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          picture_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * 头像
+     * </pre>
+     *
+     * <code>optional string picture = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getPictureBytes() {
+      java.lang.Object ref = picture_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        picture_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int LEVEL_FIELD_NUMBER = 4;
     private int level_;
     /**
      * <pre>
      * 等级
      * </pre>
      *
-     * <code>optional int32 level = 2 [default = -1];</code>
+     * <code>optional int32 level = 4 [default = -1];</code>
      */
     public boolean hasLevel() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <pre>
      * 等级
      * </pre>
      *
-     * <code>optional int32 level = 2 [default = -1];</code>
+     * <code>optional int32 level = 4 [default = -1];</code>
      */
     public int getLevel() {
       return level_;
+    }
+
+    public static final int VIPLEVEL_FIELD_NUMBER = 5;
+    private int vipLevel_;
+    /**
+     * <pre>
+     * vip等级
+     * </pre>
+     *
+     * <code>optional int32 vipLevel = 5 [default = -1];</code>
+     */
+    public boolean hasVipLevel() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <pre>
+     * vip等级
+     * </pre>
+     *
+     * <code>optional int32 vipLevel = 5 [default = -1];</code>
+     */
+    public int getVipLevel() {
+      return vipLevel_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2350,10 +2625,19 @@ public final class LoginProto {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+        output.writeInt64(1, id_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, level_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, picture_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, level_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, vipLevel_);
       }
       unknownFields.writeTo(output);
     }
@@ -2364,11 +2648,22 @@ public final class LoginProto {
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, id_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, picture_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, level_);
+          .computeInt32Size(4, level_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, vipLevel_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2387,15 +2682,30 @@ public final class LoginProto {
       com.su.proto.LoginProto.PlayerData other = (com.su.proto.LoginProto.PlayerData) obj;
 
       boolean result = true;
+      result = result && (hasId() == other.hasId());
+      if (hasId()) {
+        result = result && (getId()
+            == other.getId());
+      }
       result = result && (hasName() == other.hasName());
       if (hasName()) {
         result = result && getName()
             .equals(other.getName());
       }
+      result = result && (hasPicture() == other.hasPicture());
+      if (hasPicture()) {
+        result = result && getPicture()
+            .equals(other.getPicture());
+      }
       result = result && (hasLevel() == other.hasLevel());
       if (hasLevel()) {
         result = result && (getLevel()
             == other.getLevel());
+      }
+      result = result && (hasVipLevel() == other.hasVipLevel());
+      if (hasVipLevel()) {
+        result = result && (getVipLevel()
+            == other.getVipLevel());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -2408,13 +2718,26 @@ public final class LoginProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasId()) {
+        hash = (37 * hash) + ID_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getId());
+      }
       if (hasName()) {
         hash = (37 * hash) + NAME_FIELD_NUMBER;
         hash = (53 * hash) + getName().hashCode();
       }
+      if (hasPicture()) {
+        hash = (37 * hash) + PICTURE_FIELD_NUMBER;
+        hash = (53 * hash) + getPicture().hashCode();
+      }
       if (hasLevel()) {
         hash = (37 * hash) + LEVEL_FIELD_NUMBER;
         hash = (53 * hash) + getLevel();
+      }
+      if (hasVipLevel()) {
+        hash = (37 * hash) + VIPLEVEL_FIELD_NUMBER;
+        hash = (53 * hash) + getVipLevel();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2538,10 +2861,16 @@ public final class LoginProto {
       }
       public Builder clear() {
         super.clear();
-        name_ = "";
+        id_ = -1L;
         bitField0_ = (bitField0_ & ~0x00000001);
-        level_ = -1;
+        name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        picture_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        level_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        vipLevel_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -2569,11 +2898,23 @@ public final class LoginProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.name_ = name_;
+        result.id_ = id_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.picture_ = picture_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
         result.level_ = level_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.vipLevel_ = vipLevel_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2616,13 +2957,24 @@ public final class LoginProto {
 
       public Builder mergeFrom(com.su.proto.LoginProto.PlayerData other) {
         if (other == com.su.proto.LoginProto.PlayerData.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          setId(other.getId());
+        }
         if (other.hasName()) {
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
           name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasPicture()) {
+          bitField0_ |= 0x00000004;
+          picture_ = other.picture_;
           onChanged();
         }
         if (other.hasLevel()) {
           setLevel(other.getLevel());
+        }
+        if (other.hasVipLevel()) {
+          setVipLevel(other.getVipLevel());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2652,23 +3004,71 @@ public final class LoginProto {
       }
       private int bitField0_;
 
+      private long id_ = -1L;
+      /**
+       * <pre>
+       * id
+       * </pre>
+       *
+       * <code>optional int64 id = 1 [default = -1];</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       * id
+       * </pre>
+       *
+       * <code>optional int64 id = 1 [default = -1];</code>
+       */
+      public long getId() {
+        return id_;
+      }
+      /**
+       * <pre>
+       * id
+       * </pre>
+       *
+       * <code>optional int64 id = 1 [default = -1];</code>
+       */
+      public Builder setId(long value) {
+        bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * id
+       * </pre>
+       *
+       * <code>optional int64 id = 1 [default = -1];</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = -1L;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object name_ = "";
       /**
        * <pre>
        * 名字
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>optional string name = 2;</code>
        */
       public boolean hasName() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <pre>
        * 名字
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>optional string name = 2;</code>
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -2689,7 +3089,7 @@ public final class LoginProto {
        * 名字
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>optional string name = 2;</code>
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -2709,14 +3109,14 @@ public final class LoginProto {
        * 名字
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>optional string name = 2;</code>
        */
       public Builder setName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000002;
         name_ = value;
         onChanged();
         return this;
@@ -2726,10 +3126,10 @@ public final class LoginProto {
        * 名字
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>optional string name = 2;</code>
        */
       public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
@@ -2739,15 +3139,115 @@ public final class LoginProto {
        * 名字
        * </pre>
        *
-       * <code>optional string name = 1;</code>
+       * <code>optional string name = 2;</code>
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000002;
         name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object picture_ = "";
+      /**
+       * <pre>
+       * 头像
+       * </pre>
+       *
+       * <code>optional string picture = 3;</code>
+       */
+      public boolean hasPicture() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       * 头像
+       * </pre>
+       *
+       * <code>optional string picture = 3;</code>
+       */
+      public java.lang.String getPicture() {
+        java.lang.Object ref = picture_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            picture_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * 头像
+       * </pre>
+       *
+       * <code>optional string picture = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPictureBytes() {
+        java.lang.Object ref = picture_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          picture_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * 头像
+       * </pre>
+       *
+       * <code>optional string picture = 3;</code>
+       */
+      public Builder setPicture(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        picture_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 头像
+       * </pre>
+       *
+       * <code>optional string picture = 3;</code>
+       */
+      public Builder clearPicture() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        picture_ = getDefaultInstance().getPicture();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 头像
+       * </pre>
+       *
+       * <code>optional string picture = 3;</code>
+       */
+      public Builder setPictureBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        picture_ = value;
         onChanged();
         return this;
       }
@@ -2758,17 +3258,17 @@ public final class LoginProto {
        * 等级
        * </pre>
        *
-       * <code>optional int32 level = 2 [default = -1];</code>
+       * <code>optional int32 level = 4 [default = -1];</code>
        */
       public boolean hasLevel() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <pre>
        * 等级
        * </pre>
        *
-       * <code>optional int32 level = 2 [default = -1];</code>
+       * <code>optional int32 level = 4 [default = -1];</code>
        */
       public int getLevel() {
         return level_;
@@ -2778,10 +3278,10 @@ public final class LoginProto {
        * 等级
        * </pre>
        *
-       * <code>optional int32 level = 2 [default = -1];</code>
+       * <code>optional int32 level = 4 [default = -1];</code>
        */
       public Builder setLevel(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000008;
         level_ = value;
         onChanged();
         return this;
@@ -2791,11 +3291,59 @@ public final class LoginProto {
        * 等级
        * </pre>
        *
-       * <code>optional int32 level = 2 [default = -1];</code>
+       * <code>optional int32 level = 4 [default = -1];</code>
        */
       public Builder clearLevel() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000008);
         level_ = -1;
+        onChanged();
+        return this;
+      }
+
+      private int vipLevel_ = -1;
+      /**
+       * <pre>
+       * vip等级
+       * </pre>
+       *
+       * <code>optional int32 vipLevel = 5 [default = -1];</code>
+       */
+      public boolean hasVipLevel() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <pre>
+       * vip等级
+       * </pre>
+       *
+       * <code>optional int32 vipLevel = 5 [default = -1];</code>
+       */
+      public int getVipLevel() {
+        return vipLevel_;
+      }
+      /**
+       * <pre>
+       * vip等级
+       * </pre>
+       *
+       * <code>optional int32 vipLevel = 5 [default = -1];</code>
+       */
+      public Builder setVipLevel(int value) {
+        bitField0_ |= 0x00000010;
+        vipLevel_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * vip等级
+       * </pre>
+       *
+       * <code>optional int32 vipLevel = 5 [default = -1];</code>
+       */
+      public Builder clearVipLevel() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        vipLevel_ = -1;
         onChanged();
         return this;
       }
@@ -2884,10 +3432,11 @@ public final class LoginProto {
     java.lang.String[] descriptorData = {
       "\n\021proto/login.proto\"\033\n\013RegisterReq\022\014\n\004na" +
       "me\030\001 \001(\t\"\016\n\014RegisterResp\"\030\n\010LoginReq\022\014\n\004" +
-      "name\030\001 \001(\t\"(\n\tLoginResp\022\033\n\006player\030\001 \001(\0132" +
-      "\013.PlayerData\"-\n\nPlayerData\022\014\n\004name\030\001 \001(\t" +
-      "\022\021\n\005level\030\002 \001(\005:\002-1B\032\n\014com.su.protoB\nLog" +
-      "inProto"
+      "name\030\001 \001(\t\",\n\tLoginResp\022\037\n\nplayerData\030\001 " +
+      "\001(\0132\013.PlayerData\"d\n\nPlayerData\022\016\n\002id\030\001 \001" +
+      "(\003:\002-1\022\014\n\004name\030\002 \001(\t\022\017\n\007picture\030\003 \001(\t\022\021\n" +
+      "\005level\030\004 \001(\005:\002-1\022\024\n\010vipLevel\030\005 \001(\005:\002-1B\032" +
+      "\n\014com.su.protoB\nLoginProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2924,13 +3473,13 @@ public final class LoginProto {
     internal_static_LoginResp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_LoginResp_descriptor,
-        new java.lang.String[] { "Player", });
+        new java.lang.String[] { "PlayerData", });
     internal_static_PlayerData_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_PlayerData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PlayerData_descriptor,
-        new java.lang.String[] { "Name", "Level", });
+        new java.lang.String[] { "Id", "Name", "Picture", "Level", "VipLevel", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

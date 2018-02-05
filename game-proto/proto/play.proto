@@ -24,8 +24,6 @@ message PlayerData {
 	optional int32 vipLevel = 5 [default = -1];		// vip等级
 }
 
-
 // 出牌
 
-// 发牌
-message 
+
