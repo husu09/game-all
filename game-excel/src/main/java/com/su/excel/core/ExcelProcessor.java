@@ -32,6 +32,11 @@ public class ExcelProcessor {
 	private String preDataDir;
 	
 	/**
+	 * 列名的行数
+	 * */
+	private int cellNameRowNum = 2;
+	
+	/**
 	 * 预处理数据
 	 * */
 	public void preProcesss() {
@@ -58,7 +63,7 @@ public class ExcelProcessor {
 					int rowNum = 0; // 行数
 					while (rowIt.hasNext()) {
 						Row row = rowIt.next();
-						if (++rowNum < 3)
+						if (++rowNum < cellNameRowNum)
 							continue; // 跳过行头
 						Iterator<Cell> cellIt = row.cellIterator();
 						int columnNum = 0; // 列数
@@ -91,7 +96,7 @@ public class ExcelProcessor {
 								System.out.println("未知的 cell type : " + cell.getCellTypeEnum());
 								break;
 							}
-							if (rowNum == 3) // 保存列名
+							if (rowNum == cellNameRowNum) // 保存列名
 								title.put(columnNum, value);
 							else {
 								if (rowData == null)
