@@ -9,11 +9,6 @@ public interface ProcessorActor {
 	public void process(ChannelHandlerContext ctx, MessageLite messageLite)  throws Exception ;
 	
 	/**
-	 * 完成调用后关闭 Actor
-	 * */
-	public void poisonPill();
-	
-	/**
 	 * 关闭 Actor
 	 * */
 	public void stop();

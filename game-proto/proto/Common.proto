@@ -1,5 +1,5 @@
 syntax = "proto2";
-option java_package = "com.su.proto"; 
+package com.su.proto;
 option java_outer_classname = "CommonProto";
 
 // 错误提示

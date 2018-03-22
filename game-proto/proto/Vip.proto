@@ -1,0 +1,11 @@
+syntax = "proto2";
+package com.su.proto;
+option java_outer_classname = "VipProto";
+
+// 购买Vip
+message buyVipReq {
+
+}
+message buyVipResp {
+
+}

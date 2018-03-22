@@ -34,11 +34,6 @@ public class ProcessorActorImpl implements ProcessorActor {
 
 	}
 
-	@Override
-	public void poisonPill() {
-		TypedActor.get(akkaContext.getActorSystem()).poisonPill(this);
-
-	}
 
 	@Override
 	public void stop() {

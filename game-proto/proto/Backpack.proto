@@ -1,0 +1,10 @@
+syntax = "proto2";
+package com.su.proto;
+option java_outer_classname = "BackpackProto";
+
+// 物品
+messasge GoodsPro {
+	optional int32 index = 1;		// 索引
+	optional int32 type = 2;		// 类型
+	optional int32 
+}

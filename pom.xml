@@ -13,5 +13,6 @@
   	<module>game-server</module>
   	<module>game-excel</module>
   	<module>game-play</module>
+  	<module>game-console</module>
   </modules>
 </project>
