@@ -11,3 +11,11 @@ message PlayerDataPro {
 	optional int32 vipLevel = 5 [default = -1];		// vip等级
 	optional int32 vipExp = 6[default = -1];		// vip经验
 }
+
+// 获取玩家数据
+message GetPlayerDataReq {
+	optional PlayerDataPro playerData = 1;
+}
+message GetPlayerDataResp {
+
+}

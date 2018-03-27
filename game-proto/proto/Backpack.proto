@@ -6,5 +6,8 @@ option java_outer_classname = "BackpackProto";
 messasge GoodsPro {
 	optional int32 index = 1;		// 索引
 	optional int32 type = 2;		// 类型
-	optional int32 
+	optional int32 cid = 3;			//	id
+	optional int32 number = 4;		// 数量
+	optional int64 eTime = 5;		// 过期时间
 }
+
