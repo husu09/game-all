@@ -7,7 +7,6 @@ import javax.swing.JTextField;
 
 import com.su.client.core.ClientContext;
 import com.su.client.core.NettyUtil;
-import com.su.proto.LoginProto.RegisterReq;
 
 /**
  * 创建账号
@@ -34,7 +33,7 @@ public class CreateButtonHandler implements ActionListener {
 		if (ClientContext.getInstance().getCtx() == null) {
 			NettyUtil.start(arr[0], Integer.parseInt(arr[1]));
 		}
-		clientCtx.write(RegisterReq.newBuilder().setName(userNameTF.getText()).build());
+		//clientCtx.write(RegisterReq.newBuilder().setName(userNameTF.getText()).build());
 
 	}
 

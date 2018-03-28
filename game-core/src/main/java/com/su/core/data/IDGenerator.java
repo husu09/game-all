@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
 
@@ -12,6 +13,8 @@ import org.hibernate.criterion.Projections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.su.common.rmi.DataRmiService;
@@ -20,7 +23,7 @@ import com.su.common.rmi.DataRmiService;
  * id 生成器
  */
 @Component
-public class IDGenerator {
+public class IDGenerator  implements ApplicationListener<ContextRefreshedEvent> {
 
 	private final static Logger logger = LoggerFactory.getLogger(IDGenerator.class);
 	
@@ -32,18 +35,7 @@ public class IDGenerator {
 	public long next(Object o) {
 		String parentKey = CacheUtil.getParentKey(o);
 		AtomicLong atomicLong = idMap.get(parentKey);
-		if (atomicLong == null) {
-			synchronized (this) {
-				atomicLong = idMap.get(parentKey);
-				if (atomicLong == null) {
-					atomicLong = new AtomicLong(getMaxId(o));
-					idMap.put(parentKey, atomicLong);
-				}
-			}
-		}
-		long id = atomicLong.incrementAndGet();
-		setId(o, id);
-		return id;
+		return atomicLong.incrementAndGet();
 	}
 
 	private long getMaxId(Object o) {
@@ -52,7 +44,7 @@ public class IDGenerator {
 
 	/**
 	 * 设置 id
-	 */
+	
 	public void setId(Object o, Object id) {
 		Field[] fields = o.getClass().getDeclaredFields();
 		boolean flag = false;
@@ -72,5 +64,24 @@ public class IDGenerator {
 		if (!flag)
 			throw new RuntimeException("对象没有id属性 " + o);
 	}
+	 */
 
+	@Override
+	public void onApplicationEvent(ContextRefreshedEvent event) {
+		Map<String, Object> beans = event.getApplicationContext().getBeansWithAnnotation(Entity.class);
+		for (Object o : beans.values()) {
+			String parentKey = CacheUtil.getParentKey(o);
+			AtomicLong atomicLong = idMap.get(parentKey);
+			if (atomicLong == null) {
+				synchronized (o) {
+					atomicLong = idMap.get(parentKey);
+					if (atomicLong == null) {
+						atomicLong = new AtomicLong(getMaxId(o));
+						idMap.put(parentKey, atomicLong);
+					}
+				}
+			}
+		}
+	}
+	
 }

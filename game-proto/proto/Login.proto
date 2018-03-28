@@ -3,13 +3,6 @@ package com.su.proto;
 option java_outer_classname = "LoginProto";
 import "proto/Player.proto";
 
-// 注册
-message RegisterReq {
- 	optional string name = 1;	// 用户名
- 	optional int32 channel = 2;	// 渠道（1：微信、2：QQ）
-}
-message RegisterResp {
-}
 // 登录
 message LoginReq {
 	optional string name = 1;	// 用户名

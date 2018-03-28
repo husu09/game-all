@@ -53,8 +53,8 @@ public final class NettyServer {
 	private ProtoEncoder protoEncoder;
 	@Autowired
 	private NettyServerHandler nettyServerHandler;
-	@Autowired
-	private HeartbeatHandler heartbeatHandler;
+	//@Autowired
+	//private HeartbeatHandler heartbeatHandler;
 
 	@Value("${server.port}")
 	private int port;
@@ -85,7 +85,6 @@ public final class NettyServer {
 			b.bind(port).sync().channel().closeFuture().sync();
 		} catch (Exception e) {
 			e.printStackTrace();
-			;
 		} finally {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();

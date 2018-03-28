@@ -2,7 +2,7 @@ package com.su.common.util;
 
 import java.util.regex.Pattern;
 
-public class CoreUtils {
+public class CommonUtils {
 	/**
 	 * 判断是否为整数
 	 */

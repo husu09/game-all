@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
-import com.su.common.util.CoreUtils;
+import com.su.common.util.CommonUtils;
 
 /**
  * 扫描指定包下的所有proto协议
@@ -35,7 +35,7 @@ public class ProtoScan {
 					int lastIndex = chiled.getName().indexOf(".");
 					String name = chiled.getName().substring(0, lastIndex);
 					String[] arr = name.split("\\$");
-					if (arr.length == 2 && !arr[1].endsWith("OrBuilder") && !CoreUtils.isInteger(arr[1])) {
+					if (arr.length == 2 && !arr[1].endsWith("OrBuilder") && !CommonUtils.isInteger(arr[1])) {
 						Class<?> c = Class.forName(packName + "." + arr[0] + "$" + arr[1]);
 						MessageLite messageLite = (MessageLite) c.getMethod("getDefaultInstance").invoke(null);
 						protoContext.add(c.getSimpleName(), messageLite);

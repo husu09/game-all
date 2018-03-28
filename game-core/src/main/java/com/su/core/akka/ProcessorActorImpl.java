@@ -27,9 +27,11 @@ public class ProcessorActorImpl implements ProcessorActor {
 			if (playerContext == null) {
 				throw new RuntimeException("没有找到对应的PlayerContext");
 			}
-		}
+			actionMeta.getMethod().invoke(actionMeta.getExecutor(), playerContext, messageLite);
+		} 
 		PlayerContext playerContext = new PlayerContext();
 		playerContext.setCtx(ctx);
+		playerContext.setActor(this);
 		actionMeta.getMethod().invoke(actionMeta.getExecutor(), playerContext, messageLite);
 
 	}

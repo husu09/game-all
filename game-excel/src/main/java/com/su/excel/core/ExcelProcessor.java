@@ -34,7 +34,7 @@ public class ExcelProcessor {
 	/**
 	 * 列名的行数
 	 * */
-	private int cellNameRowNum = 2;
+	private int cellNameRowNum = 3;
 	
 	/**
 	 * 预处理数据

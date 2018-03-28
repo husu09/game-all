@@ -10,21 +10,22 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GameContext {
+	
 	private Map<Long, PlayerContext> playerContextMap = new ConcurrentHashMap<>();
 
 	public void addPlayerContext(long id, PlayerContext playerContext) {
 		playerContextMap.put(id, playerContext);
 	}
 
-	public void removePlayerContext(int id) {
+	public void removePlayerContext(long id) {
 		playerContextMap.remove(id);
 	}
 
-	public PlayerContext getPlayerContext(int id) {
+	public PlayerContext getPlayerContext(long id) {
 		return playerContextMap.get(id);
 	}
 
-	public boolean containsPlayerContext(int id) {
+	public boolean containsPlayerContext(long id) {
 		return playerContextMap.containsKey(id);
 	}
 }

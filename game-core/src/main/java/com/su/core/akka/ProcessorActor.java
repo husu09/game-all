@@ -6,6 +6,9 @@ import io.netty.channel.ChannelHandlerContext;
 
 public interface ProcessorActor {
 	
+	/**
+	 * 处理消息
+	 * */
 	public void process(ChannelHandlerContext ctx, MessageLite messageLite)  throws Exception ;
 	
 	/**

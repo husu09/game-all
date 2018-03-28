@@ -14,8 +14,8 @@ message PlayerDataPro {
 
 // 获取玩家数据
 message GetPlayerDataReq {
-	optional PlayerDataPro playerData = 1;
+	
 }
 message GetPlayerDataResp {
-
+	optional PlayerDataPro playerData = 1;
 }

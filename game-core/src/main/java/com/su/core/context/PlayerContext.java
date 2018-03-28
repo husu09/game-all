@@ -2,6 +2,8 @@ package com.su.core.context;
 
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
+import com.su.common.po.Player;
+import com.su.core.akka.ProcessorActor;
 import com.su.proto.CommonProto.ErrorResp;
 
 import io.netty.channel.ChannelHandlerContext;
@@ -12,6 +14,12 @@ import io.netty.channel.ChannelHandlerContext;
 public class PlayerContext {
 	
 	private ChannelHandlerContext ctx;
+	
+	private ProcessorActor actor;
+	
+	private Player player;
+	
+	
 
 	public ChannelHandlerContext getCtx() {
 		return ctx;
@@ -21,6 +29,23 @@ public class PlayerContext {
 		this.ctx = ctx;
 	}
 	
+	public ProcessorActor getActor() {
+		return actor;
+	}
+
+	public void setActor(ProcessorActor actor) {
+		this.actor = actor;
+	}
+	
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	public void write(MessageLiteOrBuilder msg) {
 		if (msg instanceof MessageLite) {
 			ctx.writeAndFlush(msg);

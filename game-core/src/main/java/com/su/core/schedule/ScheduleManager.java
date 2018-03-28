@@ -11,11 +11,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ScheduleManager {
-	private ScheduledExecutorService pool = Executors.newSingleThreadScheduledExecutor();	
+	private ScheduledExecutorService pool = Executors.newScheduledThreadPool(1);
 	
 	@PostConstruct
 	public void init() {
-		ScheduledExecutorService pool = Executors.newScheduledThreadPool(1);
 		pool.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {

@@ -11,17 +11,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class ActionContext {
 	
-	private Map<String, ActionMeta> map = new HashMap<>();
+	private Map<String, ActionMeta> actionMetaMap = new HashMap<>();
 	
 	public void add(String name, ActionMeta actionMeta) {
-		map.put(name, actionMeta);
+		actionMetaMap.put(name, actionMeta);
 	}
 	
 	public ActionMeta get(String name) {
-		return map.get(name);
+		return actionMetaMap.get(name);
 	}
 	
 	public boolean contains(String name) {
-		return map.containsKey(name);
+		return actionMetaMap.containsKey(name);
 	}
 }
