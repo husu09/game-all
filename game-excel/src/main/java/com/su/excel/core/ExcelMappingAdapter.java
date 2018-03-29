@@ -17,11 +17,16 @@ public abstract class ExcelMappingAdapter<T> implements ExcelMapping<T> {
 
 	@Autowired
 	private ExcelManager excelManager;
-	
+
 	/**
 	 * 存储解析后的数据
-	 * */
+	 */
 	private Map<Integer, T> storageMap = new HashMap<>();
+
+	@PostConstruct
+	public void init() {
+		excelManager.put(name(), this);
+	}
 
 	@Override
 	public void complete() {
@@ -36,11 +41,6 @@ public abstract class ExcelMappingAdapter<T> implements ExcelMapping<T> {
 	@Override
 	public T get(int id) {
 		return storageMap.get(id);
-	}
-
-	@PostConstruct
-	public void init() {
-		excelManager.put(name(), this);
 	}
 
 	@Override

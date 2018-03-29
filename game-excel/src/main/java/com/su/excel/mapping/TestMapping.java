@@ -19,6 +19,6 @@ public class TestMapping extends ExcelMappingAdapter<GenConf> {
 
 	@Override
 	public String name() {
-		return "C翅膀";
+		return "J将领表";
 	}
 }

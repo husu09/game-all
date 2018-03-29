@@ -3,15 +3,18 @@ package com.su.excel.core;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -27,75 +30,76 @@ public class ExcelProcessor {
 
 	@Value("${excel.dir}")
 	private String dir;
-	
+
 	@Value("${excel.preData.dir}")
 	private String preDataDir;
-	
+
+	private static final Logger logger = LoggerFactory.getLogger(ExcelProcessor.class);
+
 	/**
 	 * 列名的行数
-	 * */
+	 */
 	private int cellNameRowNum = 3;
-	
+
 	/**
 	 * 预处理数据
-	 * */
+	 */
 	public void preProcesss() {
 		File file = new File(dir);
 		if (!file.exists()) {
-			System.out.println("目录不存在");
+			logger.info("目录不存在");
 			return;
 		}
 		if (!file.isDirectory()) {
-			System.out.println("该路径不是目录");
+			logger.info("该路径不是目录");
+			return;
 		}
 		for (File f : file.listFiles()) {
 			if (f.getName().endsWith("xlsx")) {
 				String mappingName = f.getName().substring(0, f.getName().lastIndexOf("."));
-
 				if (!excelManager.contains(mappingName))
 					continue;
 				ExcelMapping<?> mapping = excelManager.get(mappingName);
 				try {
-					XSSFWorkbook workbook = new XSSFWorkbook(dir + f.getName());
+					OPCPackage pkg = OPCPackage.open(new File(dir + f.getName()));
+					XSSFWorkbook workbook = new XSSFWorkbook(pkg);
 					XSSFSheet sheet = workbook.getSheetAt(0);
-					Iterator<Row> rowIt = sheet.rowIterator();
 					Map<Integer, String> title = new HashMap<>();// <列数，列名>
 					int rowNum = 0; // 行数
-					while (rowIt.hasNext()) {
-						Row row = rowIt.next();
+					DataFormatter formatter = new DataFormatter();
+					for (Row row : sheet) {
+						System.out.println();
 						if (++rowNum < cellNameRowNum)
 							continue; // 跳过行头
-						Iterator<Cell> cellIt = row.cellIterator();
 						int columnNum = 0; // 列数
 						RowData rowData = null;
-						while (cellIt.hasNext()) {
-							++columnNum;
-							String value = null;
-							Cell cell = cellIt.next();
+						for (Cell cell : row) {
+							String value = formatter.formatCellValue(cell);
+
 							switch (cell.getCellTypeEnum()) {
-							case NUMERIC:
-								value = String.valueOf((int) cell.getNumericCellValue());
-								break;
+
 							case STRING:
-								value = cell.getStringCellValue();
+								value = cell.getRichStringCellValue().getString();
 								break;
-							case FORMULA:
-								switch (cell.getCachedFormulaResultTypeEnum()) {
-								case NUMERIC:
-									value = String.valueOf((int) cell.getNumericCellValue());
-									break;
-								case STRING:
-									value = cell.getStringCellValue();
-									break;
-								default:
-									System.out.println("未知的 formula result type : " + cell.getCellTypeEnum());
-									break;
+							case NUMERIC:
+								if (DateUtil.isCellDateFormatted(cell)) {
+									value = String.valueOf(cell.getDateCellValue());
+								} else {
+									value = String.valueOf(cell.getNumericCellValue());
 								}
 								break;
-							default:
-								System.out.println("未知的 cell type : " + cell.getCellTypeEnum());
+							case BOOLEAN:
+								value = String.valueOf(cell.getBooleanCellValue());
 								break;
+							case FORMULA:
+								value = String.valueOf(cell.getCellFormula());
+								break;
+							case BLANK:
+								break;
+							default:
 							}
+							++columnNum;
+							System.out.print(value + " ");
 							if (rowNum == cellNameRowNum) // 保存列名
 								title.put(columnNum, value);
 							else {
@@ -105,13 +109,14 @@ public class ExcelProcessor {
 							}
 						}
 						if (rowData != null) {
-							Object rowObject = mapping.mapping(rowData);
-							excelManager.addPreData(mappingName, rowObject);
+							// Object rowObject = mapping.mapping(rowData);
+							// excelManager.addPreData(mappingName, rowObject);
 						}
 					}
 					mapping.complete();// 加载完当前表
 					workbook.close();
-				} catch (IOException e) {
+					pkg.close();
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -120,15 +125,14 @@ public class ExcelProcessor {
 		excelManager.completeAll(); // 加载完所有表
 		excelManager.savePreData(); // 保存预处理数据
 	}
-	
-	
+
 	/**
 	 * 刷新配置
-	 * */
+	 */
 	public void refresh() {
 		File dir = new File(preDataDir);
 		if (!dir.exists()) {
-			System.out.println("preData 目录不存在");
+			logger.info("preData 目录不存在");
 			return;
 		}
 		File[] files = dir.listFiles();
@@ -137,7 +141,7 @@ public class ExcelProcessor {
 				continue;
 			ExcelMapping<?> mapping = excelManager.get(file.getName());
 			try {
-				BufferedReader reader = new BufferedReader( new FileReader(file));
+				BufferedReader reader = new BufferedReader(new FileReader(file));
 				String line = reader.readLine();
 				while (line != null) {
 					mapping.add(line);
