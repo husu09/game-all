@@ -97,8 +97,7 @@ public final class NettyServer {
 	}
 	
 	
-	@PostConstruct
-	private void init() {
+	public void init() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -107,8 +106,7 @@ public final class NettyServer {
 		}, "netty-server").start();
 	}
 	
-	@PreDestroy
-	private void destroy() {
+	public void destroy() {
 		stop();
 	}
 }

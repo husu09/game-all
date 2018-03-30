@@ -8,22 +8,20 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-
 import org.hibernate.criterion.Projections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.su.common.rmi.DataRmiService;
+import com.su.common.util.SpringUtil;
 
 /**
  * id 生成器
  */
 @Component
-public class IDGenerator  implements ApplicationListener<ContextRefreshedEvent> {
+public class IDGenerator {
 
 	private final static Logger logger = LoggerFactory.getLogger(IDGenerator.class);
 	
@@ -35,7 +33,9 @@ public class IDGenerator  implements ApplicationListener<ContextRefreshedEvent> 
 	public long next(Object o) {
 		String parentKey = CacheUtil.getParentKey(o);
 		AtomicLong atomicLong = idMap.get(parentKey);
-		return atomicLong.incrementAndGet();
+		long id = atomicLong.incrementAndGet();
+		setId(o, id);
+		return id;
 	}
 
 	private long getMaxId(Object o) {
@@ -44,7 +44,7 @@ public class IDGenerator  implements ApplicationListener<ContextRefreshedEvent> 
 
 	/**
 	 * 设置 id
-	
+	*/
 	public void setId(Object o, Object id) {
 		Field[] fields = o.getClass().getDeclaredFields();
 		boolean flag = false;
@@ -64,11 +64,10 @@ public class IDGenerator  implements ApplicationListener<ContextRefreshedEvent> 
 		if (!flag)
 			throw new RuntimeException("对象没有id属性 " + o);
 	}
-	 */
+	 
 
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		Map<String, Object> beans = event.getApplicationContext().getBeansWithAnnotation(Entity.class);
+	public void init() {
+		Map<String, Object> beans = SpringUtil.getContext().getBeansWithAnnotation(Entity.class);
 		for (Object o : beans.values()) {
 			String parentKey = CacheUtil.getParentKey(o);
 			AtomicLong atomicLong = idMap.get(parentKey);

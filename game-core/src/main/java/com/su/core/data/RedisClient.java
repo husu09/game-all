@@ -31,14 +31,13 @@ public class RedisClient {
 	
 	private static Logger logger = LoggerFactory.getLogger(RedisClient.class);  
 	
-	@PostConstruct
-	private void init() {
+
+	public void init() {
 		JedisPoolConfig config = new JedisPoolConfig();
 		pool = new JedisPool(config, host, port, 60000, password);
 	}
 	
-	@PreDestroy
-	private void destroy() {
+	public void destroy() {
 		pool.close();
 	}
 	

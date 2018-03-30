@@ -5,29 +5,27 @@ import java.lang.reflect.Parameter;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
+import com.su.common.util.SpringUtil;
 import com.su.proto.core.ProtoContext;
 
 /**
  * 加载所有的协议处理者
- * */
+ */
 @Component
-public class ActionScan implements ApplicationListener<ContextRefreshedEvent> {
+public class ActionScan {
 
 	@Autowired
 	private ActionContext actionContext;
 	@Autowired
 	private ProtoContext protoContext;
 
+	public void scan() {
 
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		Map<String, Object> beans = event.getApplicationContext().getBeansWithAnnotation(Controller.class);
-		
+		Map<String, Object> beans = SpringUtil.getContext().getBeansWithAnnotation(Controller.class);
+
 		for (Object bean : beans.values()) {
 			Method[] methods = bean.getClass().getMethods();
 			for (Method method : methods) {
@@ -50,9 +48,7 @@ public class ActionScan implements ApplicationListener<ContextRefreshedEvent> {
 				}
 			}
 		}
-		
-	}
-	
 
+	}
 
 }

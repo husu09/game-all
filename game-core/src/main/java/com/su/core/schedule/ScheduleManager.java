@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 public class ScheduleManager {
 	private ScheduledExecutorService pool = Executors.newScheduledThreadPool(1);
 	
-	@PostConstruct
 	public void init() {
 		pool.scheduleAtFixedRate(new Runnable() {
 			@Override

@@ -1,8 +1,8 @@
-package com.su.excel.conf;
+package com.su.excel.co;
 
 import com.su.excel.core.Identity;
 
-public class GenConf implements Identity  {
+public class GenCo implements Identity  {
 
 	private int id;
 	private String name;

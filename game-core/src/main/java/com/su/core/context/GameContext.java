@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GameContext {
+	/**
+	 * 是否正在关服
+	 * */
+	private volatile boolean stopping;
 	
 	private Map<Long, PlayerContext> playerContextMap = new ConcurrentHashMap<>();
 
@@ -28,4 +32,13 @@ public class GameContext {
 	public boolean containsPlayerContext(long id) {
 		return playerContextMap.containsKey(id);
 	}
+
+	public boolean isStopping() {
+		return stopping;
+	}
+
+	public void setStopping(boolean stopping) {
+		this.stopping = stopping;
+	}
+		
 }

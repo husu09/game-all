@@ -2,16 +2,19 @@ package com.su.excel.core;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +29,7 @@ import org.springframework.stereotype.Component;
 public class ExcelProcessor {
 
 	@Autowired
-	private ExcelManager excelManager;
+	private ExcelContext excelContext;
 
 	@Value("${excel.dir}")
 	private String dir;
@@ -56,28 +59,30 @@ public class ExcelProcessor {
 		}
 		for (File f : file.listFiles()) {
 			if (f.getName().endsWith("xlsx")) {
-				String mappingName = f.getName().substring(0, f.getName().lastIndexOf("."));
-				if (!excelManager.contains(mappingName))
+				String mapName = f.getName().substring(0, f.getName().lastIndexOf("."));
+				if (!excelContext.containsMap(mapName))
 					continue;
-				ExcelMapping<?> mapping = excelManager.get(mappingName);
+				ExcelMap<?> map = excelContext.getMap(mapName);
 				try {
-					OPCPackage pkg = OPCPackage.open(new File(dir + f.getName()));
-					XSSFWorkbook workbook = new XSSFWorkbook(pkg);
-					XSSFSheet sheet = workbook.getSheetAt(0);
+					FileInputStream fis = new FileInputStream(dir + f.getName());
+					Workbook workbook = null;
+					if (f.getName().toLowerCase().endsWith("xlsx")) {
+						workbook = new XSSFWorkbook(fis);
+					} else if (f.getName().toLowerCase().endsWith("xls")) {
+						workbook = new HSSFWorkbook(fis);
+					}
+					Sheet sheet = workbook.getSheetAt(0);
 					Map<Integer, String> title = new HashMap<>();// <列数，列名>
 					int rowNum = 0; // 行数
 					DataFormatter formatter = new DataFormatter();
 					for (Row row : sheet) {
-						System.out.println();
 						if (++rowNum < cellNameRowNum)
 							continue; // 跳过行头
 						int columnNum = 0; // 列数
 						RowData rowData = null;
 						for (Cell cell : row) {
 							String value = formatter.formatCellValue(cell);
-
 							switch (cell.getCellTypeEnum()) {
-
 							case STRING:
 								value = cell.getRichStringCellValue().getString();
 								break;
@@ -92,14 +97,19 @@ public class ExcelProcessor {
 								value = String.valueOf(cell.getBooleanCellValue());
 								break;
 							case FORMULA:
-								value = String.valueOf(cell.getCellFormula());
+								if (cell.getCachedFormulaResultTypeEnum() == CellType.NUMERIC) {
+									if (DateUtil.isCellDateFormatted(cell)) {
+										value = String.valueOf(cell.getDateCellValue());
+									} else {
+										value = String.valueOf(cell.getNumericCellValue());
+									}
+								}
 								break;
 							case BLANK:
 								break;
 							default:
 							}
 							++columnNum;
-							System.out.print(value + " ");
 							if (rowNum == cellNameRowNum) // 保存列名
 								title.put(columnNum, value);
 							else {
@@ -109,27 +119,26 @@ public class ExcelProcessor {
 							}
 						}
 						if (rowData != null) {
-							// Object rowObject = mapping.mapping(rowData);
-							// excelManager.addPreData(mappingName, rowObject);
+							Object rowObject = map.map(rowData);
+							excelContext.addPreData(mapName, rowObject);
 						}
 					}
-					mapping.complete();// 加载完当前表
-					workbook.close();
-					pkg.close();
+					map.finishLoad();// 加载完当前表
+					fis.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 
 		}
-		excelManager.completeAll(); // 加载完所有表
-		excelManager.savePreData(); // 保存预处理数据
+		excelContext.callFinishLoadAll(); // 加载完所有表
+		excelContext.savePreData(); // 保存预处理数据
 	}
 
 	/**
-	 * 刷新配置
+	 * 加载数据
 	 */
-	public void refresh() {
+	public void reload() {
 		File dir = new File(preDataDir);
 		if (!dir.exists()) {
 			logger.info("preData 目录不存在");
@@ -137,14 +146,14 @@ public class ExcelProcessor {
 		}
 		File[] files = dir.listFiles();
 		for (File file : files) {
-			if (!file.isFile() || !excelManager.contains(file.getName()))
+			if (!file.isFile() || !excelContext.containsMap(file.getName()))
 				continue;
-			ExcelMapping<?> mapping = excelManager.get(file.getName());
+			ExcelMap<?> map = excelContext.getMap(file.getName());
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				String line = reader.readLine();
 				while (line != null) {
-					mapping.add(line);
+					map.add(line);
 					line = reader.readLine();
 				}
 				reader.close();

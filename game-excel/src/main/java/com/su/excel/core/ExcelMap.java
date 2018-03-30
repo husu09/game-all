@@ -3,27 +3,27 @@ package com.su.excel.core;
 /**
  * 配置文件映射接口
  * */
-public interface ExcelMapping<T> {
+public interface ExcelMap<T> {
 	
 	/**
 	 * 返回文件名
 	 * */
-	public String name();
+	public String getName();
 	
 	/**
 	 * 映射
 	 * */
-	public T mapping(RowData rowData);
+	public T map(RowData rowData);
 	
 	/**
 	 * 加载完当前配置表时调用
 	 * */
-	public void complete();
+	public void finishLoad();
 	
 	/**
 	 * 加载完所有配置时调用
 	 * */
-	public void completeAll();
+	public void finishLoadAll();
 	
 	/**
 	 * 通过 id 获取配置

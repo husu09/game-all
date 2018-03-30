@@ -13,10 +13,10 @@ import com.alibaba.fastjson.JSON;
 /**
  * 配置文件映射基类
  */
-public abstract class ExcelMappingAdapter<T> implements ExcelMapping<T> {
+public abstract class ExcelMapAdapter<T> implements ExcelMap<T> {
 
 	@Autowired
-	private ExcelManager excelManager;
+	private ExcelContext excelManager;
 
 	/**
 	 * 存储解析后的数据
@@ -25,16 +25,16 @@ public abstract class ExcelMappingAdapter<T> implements ExcelMapping<T> {
 
 	@PostConstruct
 	public void init() {
-		excelManager.put(name(), this);
+		excelManager.addMap(getName(), this);
 	}
 
 	@Override
-	public void complete() {
+	public void finishLoad() {
 
 	}
 
 	@Override
-	public void completeAll() {
+	public void finishLoadAll() {
 
 	}
 

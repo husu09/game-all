@@ -10,56 +10,55 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.junit.validator.ValidateWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 
 @Component
-public class ExcelManager {
-	
+public class ExcelContext {
+
 	@Value("${excel.preData.dir}")
 	private String preDataDir;
-	
+
 	/**
 	 * 配置映射类
 	 */
-	private Map<String, ExcelMapping<?>> mappings = new HashMap<>();
+	private Map<String, ExcelMap<?>> maps = new HashMap<>();
 
 	/**
 	 * 预处理数据
 	 */
 	private Map<String, List<Object>> preData = new HashMap<>();
 
-	public void put(String name, ExcelMapping<?> mapping) {
-		mappings.put(name, mapping);
+	public void addMap(String name, ExcelMap<?> map) {
+		maps.put(name, map);
 	}
 
-	public boolean contains(String mappingName) {
-		return mappings.containsKey(mappingName);
+	public boolean containsMap(String mapName) {
+		return maps.containsKey(mapName);
 	}
 
-	public ExcelMapping<?> get(String mappingName) {
-		return mappings.get(mappingName);
+	public ExcelMap<?> getMap(String mapName) {
+		return maps.get(mapName);
 	}
 
 	/**
 	 * 所有配置加载完成时调用
 	 */
-	public void completeAll() {
-		for (ExcelMapping<?> mapping : mappings.values()) {
-			mapping.completeAll();
+	public void callFinishLoadAll() {
+		for (ExcelMap<?> map : maps.values()) {
+			map.finishLoadAll();
 		}
 	}
 
 	/**
 	 * 添加预处理数据
 	 */
-	public void addPreData(String mappingName, Object value) {
-		if (!preData.containsKey(mappingName))
-			preData.put(mappingName, new ArrayList<>());
-		preData.get(mappingName).add(value);
+	public void addPreData(String mapName, Object value) {
+		if (!preData.containsKey(mapName))
+			preData.put(mapName, new ArrayList<>());
+		preData.get(mapName).add(value);
 	}
 
 	/**

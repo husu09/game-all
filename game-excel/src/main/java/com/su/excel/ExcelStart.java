@@ -10,19 +10,15 @@ import com.su.excel.config.ExcelConfig;
 import com.su.excel.core.ExcelProcessor;
 
 @Component
-public class ExcelStart implements ApplicationListener<ContextRefreshedEvent> {
+public class ExcelStart {
 
 	@Autowired
 	private ExcelProcessor preDataProcess;
 
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ExcelConfig.class);
-		context.close();
-	}
-
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
 		// 预处理配置
-		preDataProcess.preProcesss();
+		context.getBean(ExcelProcessor.class).preProcesss();
+		context.close();
 	}
 }
