@@ -16,13 +16,13 @@ import com.su.common.rmi.DataRmiService;
 @PropertySource("serverConfig.properties")
 public class ServerConfig {
 
-	@Value("${rmi.url}")
-	private String rmiUrl;
+	@Value("${dataRmi.url}")
+	private String dataRmiUrl;
 
 	@Bean
 	public RmiProxyFactoryBean dataRmiService() {
 		RmiProxyFactoryBean rmiProxy = new RmiProxyFactoryBean();
-		rmiProxy.setServiceUrl(rmiUrl);
+		rmiProxy.setServiceUrl(dataRmiUrl);
 		rmiProxy.setServiceInterface(DataRmiService.class);
 		return rmiProxy;
 	}

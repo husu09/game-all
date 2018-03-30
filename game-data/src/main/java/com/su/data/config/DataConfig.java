@@ -83,22 +83,8 @@ public class DataConfig {
 		exporter.setService(dataRmiService);
 		exporter.setServiceName("DataRmiService");
 		exporter.setServiceInterface(DataRmiService.class);
-		// exporter.setRegistryHost();
-		// exporter.setRegistryPort();
+		exporter.setRegistryPort(10001);
 		return exporter;
 	}
 	
-	/*@PostConstruct
-	public void init() {
-		try {
-			dataSource().init();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@PreDestroy
-	public void destroy() {
-		dataSource().close();
-	}*/
 }

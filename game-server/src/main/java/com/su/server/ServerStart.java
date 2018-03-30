@@ -23,14 +23,14 @@ public class ServerStart {
 		context.getBean(ExcelProcessor.class).reload();
 		context.getBean(IDGenerator.class).init();
 		context.getBean(ActionScan.class).scan();
-		MQProducer mqProducer = context.getBean(MQProducer.class);
-		mqProducer.start();
 		RedisClient redisClient = context.getBean(RedisClient.class);
 		redisClient.init();
-		NettyServer nettyServer = context.getBean(NettyServer.class);
-		nettyServer.start();
+		MQProducer mqProducer = context.getBean(MQProducer.class);
+		mqProducer.start();
 		ScheduleManager scheduleManager = context.getBean(ScheduleManager.class);
 		scheduleManager.start();
+		NettyServer nettyServer = context.getBean(NettyServer.class);
+		nettyServer.start();
 		GameContext gameContext = context.getBean(GameContext.class);
 
 		System.out.println("输入stop关闭服务器：");
@@ -40,9 +40,9 @@ public class ServerStart {
 			if (command.equals("stop")) {
 				gameContext.setStopping(true);
 				nettyServer.stop();
+				scheduleManager.stop();
 				mqProducer.stop();
 				redisClient.destroy();
-				scheduleManager.stop();
 				context.close();
 				break;
 			}
