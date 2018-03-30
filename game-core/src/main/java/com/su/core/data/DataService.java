@@ -16,7 +16,7 @@ public class DataService {
 	@Autowired
 	private DataRmiService dataRmiService;
 	@Autowired
-	private RedisCacheService redisService;
+	private RedisService redisService;
 	@Autowired
 	private MemoryCacheService memoryService;	
 	@Autowired

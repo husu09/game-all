@@ -3,7 +3,6 @@ package com.su.core.event;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.su.core.context.PlayerContext;

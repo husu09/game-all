@@ -12,9 +12,9 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * redis 缓存管理对象
- * */
+ */
 @Service
-public class RedisCacheService {
+public class RedisService {
 	@Autowired
 	private RedisClient client;
 
@@ -22,7 +22,7 @@ public class RedisCacheService {
 		if (!CacheUtil.isPersistent(o)) {
 			return;
 		}
-		client.setMap(CacheUtil.getParentKey(o), CacheUtil.getKey(o), JSON.toJSONString(o));
+		client.hset(CacheUtil.getParentKey(o), CacheUtil.getKey(o), JSON.toJSONString(o));
 	}
 
 	public void saveOrUpdate(Collection<Object> os) {
@@ -40,11 +40,11 @@ public class RedisCacheService {
 	}
 
 	public void delete(Class<?> c) {
-		client.delete(CacheUtil.getParentKey(c));
+		client.del(CacheUtil.getParentKey(c));
 	}
 
 	public void delete(Object o) {
-		client.deleteMap(CacheUtil.getParentKey(o), CacheUtil.getKey(o));
+		client.hdel(CacheUtil.getParentKey(o), CacheUtil.getKey(o));
 	}
 
 	public void delete(Collection<Object> os) {
@@ -60,12 +60,12 @@ public class RedisCacheService {
 	}
 
 	public <T> T get(Class<T> c, int id) {
-		String value = client.getMap(CacheUtil.getParentKey(c), CacheUtil.getKey(c, id));
+		String value = client.hget(CacheUtil.getParentKey(c), CacheUtil.getKey(c, id));
 		return JSON.parseObject(value, c);
 	}
 
 	public <T> List<T> list(Class<T> c) {
-		List<String> list = client.getMap(CacheUtil.getParentKey(c));
+		List<String> list = client.hvals(CacheUtil.getParentKey(c));
 		List<T> ts = new ArrayList<>(list.size());
 		for (String s : list) {
 			T t = JSON.parseObject(s, c);

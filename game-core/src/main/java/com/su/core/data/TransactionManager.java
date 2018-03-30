@@ -21,13 +21,18 @@ public class TransactionManager {
 	@Autowired
 	private MemoryCacheService memoryService;
 	@Autowired
-	private RedisCacheService redisService;
+	private RedisService redisService;
 
 	private TransactionData getTransactionData() {
 		TransactionData transactionData = threadLocal.get();
 		if (transactionData == null) {
-			transactionData = new TransactionData();
-			threadLocal.set(transactionData);
+			synchronized (this) {
+				if (transactionData == null) {
+					transactionData = new TransactionData();
+					threadLocal.set(transactionData);
+				}
+				return transactionData;
+			}
 		}
 		return transactionData;
 

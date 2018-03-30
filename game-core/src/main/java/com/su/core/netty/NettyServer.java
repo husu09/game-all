@@ -15,15 +15,8 @@
  */
 package com.su.core.netty;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ApplicationContextEvent;
-import org.springframework.context.event.ContextClosedEvent;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.su.proto.core.ProtoDecoder;
@@ -39,7 +32,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import io.netty.handler.timeout.IdleStateHandler;
 
 /**
  * Modification of {@link EchoServer} which utilizes Java object serialization.
@@ -82,7 +74,7 @@ public final class NettyServer {
 						}
 					});
 			// Bind and start to accept incoming connections.
-			b.bind(port).sync().channel().closeFuture().sync();
+			b.bind(port);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -96,17 +88,4 @@ public final class NettyServer {
 		workerGroup.shutdownGracefully();
 	}
 	
-	
-	public void init() {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				start();
-			}
-		}, "netty-server").start();
-	}
-	
-	public void destroy() {
-		stop();
-	}
 }

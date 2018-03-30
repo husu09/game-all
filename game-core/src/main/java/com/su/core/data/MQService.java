@@ -16,46 +16,46 @@ import com.su.common.mq.DataOperator;
 public class MQService {
 
 	@Autowired
-	private MQClient mqClient;
+	private MQProducer mqClient;
 
-	public <T> void sendSave(T t) {
+	public <T> void save(T t) {
 		MQMessage mqMessage = new MQMessage();
 		mqMessage.setClassName(t.getClass().getCanonicalName());
 		mqMessage.setMqOperator(DataOperator.SAVE);
 		mqMessage.setData(JSON.toJSONString(t));
-		mqClient.send(JSON.toJSONString(mqMessage));
+		mqClient.produce(JSON.toJSONString(mqMessage));
 	}
 
-	public <T> void sendSave(Collection<T> ts) {
+	public <T> void save(Collection<T> ts) {
 		for (T t : ts) {
-			sendSave(t);
+			save(t);
 		}
 
 	}
 
-	public <T> void sendSave(T[] ts) {
+	public <T> void save(T[] ts) {
 		for (T t : ts) {
-			sendSave(t);
+			save(t);
 		}
 	}
 
-	public <T> void sendUpdate(T t) {
+	public <T> void update(T t) {
 		MQMessage mqMessage = new MQMessage();
 		mqMessage.setClassName(t.getClass().getCanonicalName());
 		mqMessage.setMqOperator(DataOperator.UPDATE);
 		mqMessage.setData(JSON.toJSONString(t));
-		mqClient.send(JSON.toJSONString(mqMessage));
+		mqClient.produce(JSON.toJSONString(mqMessage));
 	}
 
-	public <T> void sendUpdate(Collection<T> ts) {
+	public <T> void update(Collection<T> ts) {
 		for (T t : ts) {
-			sendUpdate(t);
+			update(t);
 		}
 	}
 
-	public <T> void sendUpdate(T[] ts) {
+	public <T> void update(T[] ts) {
 		for (T t : ts) {
-			sendUpdate(t);
+			update(t);
 		}
 	}
 
@@ -64,7 +64,7 @@ public class MQService {
 		mqMessage.setClassName(t.getClass().getCanonicalName());
 		mqMessage.setMqOperator(DataOperator.DELETE);
 		mqMessage.setData(JSON.toJSONString(t));
-		mqClient.send(JSON.toJSONString(mqMessage));
+		mqClient.produce(JSON.toJSONString(mqMessage));
 	}
 
 	public <T> void delete(Collection<T> ts) {
@@ -85,7 +85,7 @@ public class MQService {
 		mqMessage.setClassName(t.getClass().getCanonicalName());
 		mqMessage.setMqOperator(dataOperator);
 		mqMessage.setData(JSON.toJSONString(t));
-		mqClient.send(JSON.toJSONString(mqMessage));
+		mqClient.produce(JSON.toJSONString(mqMessage));
 	}
 
 }

@@ -24,7 +24,7 @@ import com.su.common.util.SpringUtil;
 public class IDGenerator {
 
 	private final static Logger logger = LoggerFactory.getLogger(IDGenerator.class);
-	
+
 	@Autowired
 	private DataRmiService dataRmiService;
 
@@ -44,7 +44,7 @@ public class IDGenerator {
 
 	/**
 	 * 设置 id
-	*/
+	 */
 	public void setId(Object o, Object id) {
 		Field[] fields = o.getClass().getDeclaredFields();
 		boolean flag = false;
@@ -57,14 +57,13 @@ public class IDGenerator {
 					break;
 				} catch (Exception e) {
 					e.printStackTrace();
-					throw new RuntimeException("设置对象id失败 " + o + " " + id);
+					logger.info("设置对象id失败{} {}", o, id);
 				}
 			}
 		}
 		if (!flag)
-			throw new RuntimeException("对象没有id属性 " + o);
+			logger.info("对象没有id属性{}", o);
 	}
-	 
 
 	public void init() {
 		Map<String, Object> beans = SpringUtil.getContext().getBeansWithAnnotation(Entity.class);
@@ -82,5 +81,5 @@ public class IDGenerator {
 			}
 		}
 	}
-	
+
 }
