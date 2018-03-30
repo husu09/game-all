@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import com.su.proto.core.ProtoContext;
  */
 @Component
 public class ActionScan {
+	private Logger logger = LoggerFactory.getLogger(ActionScan.class);
 
 	@Autowired
 	private ActionContext actionContext;
@@ -23,7 +26,8 @@ public class ActionScan {
 	private ProtoContext protoContext;
 
 	public void scan() {
-
+		
+		
 		Map<String, Object> beans = SpringUtil.getContext().getBeansWithAnnotation(Controller.class);
 
 		for (Object bean : beans.values()) {
@@ -35,20 +39,20 @@ public class ActionScan {
 					Parameter parameter = method.getParameters()[1];
 					String messageName = parameter.getType().getSimpleName();
 					if (!protoContext.contains(messageName)) {
-						System.out.println("协议不存在：" + messageName);
+						logger.info("协议不存在：{}", messageName);
 					}
 					if (!messageName.endsWith("Req")) {
-						System.out.println("不是请求协议：" + messageName);
+						logger.info("不是请求协议：{}", messageName);
 					}
 					if (actionContext.contains(messageName)) {
-						System.out.println("重复的消息处理对象：" + messageName);
+						logger.info("重复的消息处理对象：{}", messageName);
 					}
 
 					actionContext.add(messageName, new ActionMeta(mustLogin, bean, method));
 				}
 			}
 		}
-
+		logger.info("加载所有Action成功");
 	}
 
 }

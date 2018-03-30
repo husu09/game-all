@@ -1,5 +1,7 @@
 package com.su.core.data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +12,12 @@ import com.rabbitmq.client.MessageProperties;
 
 @Component
 public class MQProducer {
-
+	
+	private Logger logger = LoggerFactory.getLogger(MQProducer.class);
+	
 	@Value("${mq.queueName}")
 	private String queueName;
-	@Value("R{mq.host}")
+	@Value("${mq.host}")
 	private String host;
 	private Channel channel;
 	private Connection connection;
@@ -21,10 +25,11 @@ public class MQProducer {
 	public void start() {
 		try {
 			ConnectionFactory factory = new ConnectionFactory();
-			factory.setHost("localhost");
+			factory.setHost(host);
 			connection = factory.newConnection();
 			channel = connection.createChannel();
 			channel.queueDeclare(queueName, true, false, false, null);
+			logger.info("初始化RabbitMQ成功{}:{}", host, factory.getPort());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -54,5 +59,6 @@ public class MQProducer {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		logger.info("关闭RabbitMQ");
 	}
 }

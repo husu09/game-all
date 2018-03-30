@@ -1,5 +1,7 @@
 package com.su.server.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +17,9 @@ import com.su.common.rmi.DataRmiService;
 @ComponentScan(basePackages = { "com.su" })
 @PropertySource("serverConfig.properties")
 public class ServerConfig {
-
+	
+	private Logger logger = LoggerFactory.getLogger(ServerConfig.class);
+	
 	@Value("${dataRmi.url}")
 	private String dataRmiUrl;
 

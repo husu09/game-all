@@ -2,6 +2,8 @@ package com.su.data.mq;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -16,7 +18,9 @@ import com.rabbitmq.client.Envelope;
 
 @Component
 public class MQCustomer {
-
+	
+	private Logger logger = LoggerFactory.getLogger(MQCustomer.class);
+	
 	@Value("${mq.queueName}")
 	private String queueName;
 	@Value("${mq.host}")
@@ -51,6 +55,7 @@ public class MQCustomer {
 			for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
 				channel.basicConsume(queueName, autoAck, consumer);
 			}
+			logger.info("启动RabbitMQ服务成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,5 +77,6 @@ public class MQCustomer {
 				e.printStackTrace();
 			}
 		}
+		logger.info("关务RabbitMQ服务");
 	}
 }

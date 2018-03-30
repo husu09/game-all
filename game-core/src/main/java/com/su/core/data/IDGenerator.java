@@ -80,6 +80,7 @@ public class IDGenerator {
 				}
 			}
 		}
+		logger.info("id生成器初始化成功");
 	}
 
 }

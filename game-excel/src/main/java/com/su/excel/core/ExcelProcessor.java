@@ -34,8 +34,7 @@ public class ExcelProcessor {
 	@Value("${excel.dir}")
 	private String dir;
 
-	@Value("${excel.preData.dir}")
-	private String preDataDir;
+	public final static String preDataDir = System.getProperty("user.dir") + "/../preData/";
 
 	private static final Logger logger = LoggerFactory.getLogger(ExcelProcessor.class);
 
@@ -161,5 +160,7 @@ public class ExcelProcessor {
 				e.printStackTrace();
 			}
 		}
+		logger.info("加载Excel配置成功");
 	}
+	
 }

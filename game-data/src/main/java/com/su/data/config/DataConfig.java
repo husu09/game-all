@@ -86,5 +86,5 @@ public class DataConfig {
 		exporter.setRegistryPort(10001);
 		return exporter;
 	}
-	
+
 }

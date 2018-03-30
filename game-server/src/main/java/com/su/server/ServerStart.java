@@ -19,6 +19,7 @@ public class ServerStart {
 	public static void main(String[] args) throws Exception {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ServerConfig.class);
+		System.out.println("==============================启动服务==============================");
 		// 加载配置
 		context.getBean(ExcelProcessor.class).reload();
 		context.getBean(IDGenerator.class).init();
@@ -32,7 +33,6 @@ public class ServerStart {
 		NettyServer nettyServer = context.getBean(NettyServer.class);
 		nettyServer.start();
 		GameContext gameContext = context.getBean(GameContext.class);
-
 		System.out.println("输入stop关闭服务器：");
 		Scanner sc = new Scanner(System.in);
 		while (true) {
@@ -48,6 +48,7 @@ public class ServerStart {
 			}
 		}
 		sc.close();
+		System.out.println("==============================关闭服务==============================");
 	}
 
 }

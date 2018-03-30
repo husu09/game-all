@@ -15,6 +15,8 @@
  */
 package com.su.core.netty;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -38,6 +40,8 @@ import io.netty.handler.logging.LoggingHandler;
  */
 @Component
 public final class NettyServer {
+	
+	private Logger logger = LoggerFactory.getLogger(NettyServer.class);
 
 	@Autowired
 	private ProtoDecoder protoDecoder;
@@ -81,11 +85,13 @@ public final class NettyServer {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
+		logger.info("启动Netty服务");
 	}
 
 	public void stop() {
 		bossGroup.shutdownGracefully();
 		workerGroup.shutdownGracefully();
+		logger.info("关闭Netty服务");
 	}
 	
 }

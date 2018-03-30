@@ -32,10 +32,12 @@ public class RedisClient {
 		JedisPoolConfig config = new JedisPoolConfig();
 		config.setMaxTotal(Runtime.getRuntime().availableProcessors());
 		pool = new JedisPool(config, host, port, 60000, password);
+		logger.info("初始redis成功{}:{}", host, port);
 	}
 
 	public void destroy() {
 		pool.close();
+		logger.info("关闭redis");
 	}
 
 	/**

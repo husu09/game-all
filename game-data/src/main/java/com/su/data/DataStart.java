@@ -9,8 +9,8 @@ import com.su.data.mq.MQCustomer;
 
 public class DataStart {
 	public static void main(String[] args) {
-
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DataConfig.class);
+		System.out.println("==============================启动服务==============================");
 		MQCustomer mqCustomer = context.getBean(MQCustomer.class);
 		mqCustomer.start();
 		System.out.println("输入stop关闭服务器：");
@@ -25,5 +25,6 @@ public class DataStart {
 			}
 		}
 		sc.close();
+		System.out.println("==============================关闭服务==============================");
 	}
 }
