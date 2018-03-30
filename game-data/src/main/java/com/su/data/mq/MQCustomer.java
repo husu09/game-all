@@ -2,29 +2,38 @@ package com.su.data.mq;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 
-public class Customer {
+@Component
+public class MQCustomer {
 
+	@Value("${mq.queueName}")
 	private String queueName;
-	private CustomerWorker worker;
+	@Value("${mq.host}")
+	private String host;
+	private Connection connection;
 	private Channel channel;
-
-	public Customer(Channel channel, String queueName, CustomerWorker worker) {
-		this.channel = channel;
-		this.queueName = queueName;
-		this.worker = worker;
-	}
+	@Autowired
+	private CustomerWorker customerWorker;
 
 	public void start() {
 		try {
+			ConnectionFactory factory = new ConnectionFactory();
+			factory.setHost(host);
+			connection = factory.newConnection();
+			channel = connection.createChannel();
 			channel.queueDeclare(queueName, true, false, false, null);
 			channel.basicQos(1);
-
 			Consumer consumer = new DefaultConsumer(channel) {
 
 				@Override
@@ -32,14 +41,16 @@ public class Customer {
 						byte[] body) throws IOException {
 					String message = new String(body, "UTF-8");
 					try {
-						worker.doWork(message);
+						customerWorker.doWork(message);
 					} finally {
 						channel.basicAck(envelope.getDeliveryTag(), false);
 					}
 				}
 			};
 			boolean autoAck = false;
-			channel.basicConsume(queueName, autoAck, consumer);
+			for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
+				channel.basicConsume(queueName, autoAck, consumer);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,13 +58,19 @@ public class Customer {
 	}
 
 	public void stop() {
-		// 关闭通道和连接
-		if (channel != null)
+		if (channel != null) {
 			try {
 				channel.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
-
 }
