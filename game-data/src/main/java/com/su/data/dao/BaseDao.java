@@ -99,7 +99,7 @@ public class BaseDao {
 		return query.executeUpdate();
 	}
 
-	public <T> T get(Class<T> c, Integer id) {
+	public <T> T get(Class<T> c, long id) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(c, id);
 	}

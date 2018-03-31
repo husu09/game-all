@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
 import com.su.client.handler.ClearButtonHandler;
-import com.su.client.handler.CreateButtonHandler;
 import com.su.client.handler.LoginButtonHandler;
 import com.su.client.handler.ProtoButtonHandler;
 import com.su.client.handler.SendButtonHandler;
@@ -37,9 +36,19 @@ public class ClientUI {
 	private ProtoContext protoContext;
 	@Autowired
 	private NettyClient client;
+	@Autowired
+	private ClientContext clientContext;
+	@Autowired
+	private ClearButtonHandler clearButtonHandler;
+	@Autowired
+	private LoginButtonHandler loginButtonHandler;
+	@Autowired
+	private ProtoButtonHandler protoButtonHandler;
+	@Autowired
+	private SendButtonHandler sendButtonHandler;
+	
 
 	public void show() throws Exception {
-		ClientContext ctx = ClientContext.getInstance();
 		// 窗口
 		JFrame frame = new JFrame();
 		frame.setSize(1000, 700);
@@ -69,28 +78,25 @@ public class ClientUI {
 		// 第一行
 		JPanel r1p = new JPanel();
 		JLabel ipL = new JLabel("地址");
-		JButton createB = new JButton("创号");
-		createB.addActionListener(new CreateButtonHandler());
 		JTextField ipT = new JTextField(20);
-		ipT.setText(ctx.getData().get("host"));
+		ipT.setText(clientContext.getData().get("host"));
 		r1p.add(ipL);
 		r1p.add(ipT);
-		r1p.add(createB);
 		leftLeft.add(r1p);
-		ctx.setHostTF(ipT);
+		clientContext.setHostTF(ipT);
 
 		// 第二行
 		JPanel r2p = new JPanel();
 		JLabel nameL = new JLabel("用户");
 		JTextField nameT = new JTextField(20);
-		nameT.setText(ctx.getData().get("name"));
+		nameT.setText(clientContext.getData().get("name"));
 		JButton loginB = new JButton("登录");
-		loginB.addActionListener(new LoginButtonHandler());
+		loginB.addActionListener(loginButtonHandler);
 		r2p.add(nameL);
 		r2p.add(nameT);
 		r2p.add(loginB);
 		leftLeft.add(r2p);
-		ctx.setUserNameTF(nameT);
+		clientContext.setUserNameTF(nameT);
 
 		// 第三行
 		
@@ -98,7 +104,7 @@ public class ClientUI {
 		JLabel passwordL = new JLabel("密码");
 		JTextField passwordT = new JTextField(20);
 		JButton sendB = new JButton("发送");
-		sendB.addActionListener(new SendButtonHandler());
+		sendB.addActionListener(sendButtonHandler);
 		r3p.add(passwordL);
 		r3p.add(passwordT);
 		r3p.add(sendB);
@@ -121,7 +127,7 @@ public class ClientUI {
 		JScrollPane lrsp = new JScrollPane(lrp);
 		leftRight.add(lrsp);
 		loadProto(lrp);
-		ClientContext.getInstance().setPanel(leftBelow);
+		clientContext.setPanel(leftBelow);
 
 		leftP.add(leftRight);
 
@@ -138,12 +144,12 @@ public class ClientUI {
 		JScrollPane scroll = new JScrollPane(textA);
 		rightTop.add(scroll);
 		rightP.add("Center", rightTop);
-		ClientContext.getInstance().setTextArea(textA);
+		clientContext.setTextArea(textA);
 
 		// 右下
 		JPanel rightBelow = new JPanel();
 		JButton clearB = new JButton("清空");
-		clearB.addActionListener(new ClearButtonHandler());
+		clearB.addActionListener(clearButtonHandler);
 		rightBelow.setLayout(new FlowLayout());
 		rightBelow.add(clearB);
 		rightP.add("South", rightBelow);
@@ -163,13 +169,12 @@ public class ClientUI {
 	 *            显示协议参数的面板
 	 */
 	private void loadProto(JComponent leftRight) {
-		ProtoButtonHandler pbh = new ProtoButtonHandler();
 		for (Entry<String, MessageLite> e : protoContext.all()) {
-			if (!e.getKey().contains("Req"))
+			if (!e.getKey().contains("Req") || e.getKey().equals("LoginReq"))
 				continue;
 			JButton tB = new JButton(e.getKey());
 			tB.setPreferredSize(new Dimension(180, 25));
-			tB.addActionListener(pbh);
+			tB.addActionListener(protoButtonHandler);
 			leftRight.add(tB);
 		}
 	}

@@ -41,27 +41,28 @@ public final class NettyClient {
 	private ProtoDecoder protoDecoder;
 	@Autowired
 	private NettyClientHandler nettyClientHandler;
-
+	
 	private EventLoopGroup group;
 
-	public void start(String host, int port) throws Exception {
-
+	public void start(String host, int port) {
 		group = new NioEventLoopGroup();
-		try {
-			Bootstrap b = new Bootstrap();
-			b.group(group).channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
-				@Override
-				public void initChannel(SocketChannel ch) throws Exception {
-					ChannelPipeline p = ch.pipeline();
-					p.addLast(protoEncoder, new ProtoLengthPrepender(), protoDecoder, nettyClientHandler);
-				}
-			});
+		Bootstrap b = new Bootstrap();
+		b.group(group).channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
+			@Override
+			public void initChannel(SocketChannel ch) throws Exception {
+				ChannelPipeline p = ch.pipeline();
+				p.addLast(protoEncoder, new ProtoLengthPrepender(), protoDecoder, nettyClientHandler);
+			}
+		});
 
-			// Start the connection attempt.
-			b.connect(host, port).sync().channel().closeFuture().sync();
-		} finally {
-			group.shutdownGracefully();
+		// Start the connection attempt.
+		
+		try {
+			b.connect(host, port).sync();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		
 	}
 
 	public void stop() {

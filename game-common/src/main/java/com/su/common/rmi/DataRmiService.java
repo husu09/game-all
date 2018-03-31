@@ -33,7 +33,7 @@ public interface DataRmiService {
 
 	public int delete(String sql);
 
-	public <T> T get(Class<T> c, Integer id);
+	public <T> T get(Class<T> c, long id);
 
 	public <T> T get(DetachedCriteria detachedCriteria);
 

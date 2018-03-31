@@ -5,6 +5,7 @@ import java.util.Scanner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.su.core.action.ActionScan;
+import com.su.core.akka.AkkaContext;
 import com.su.core.context.GameContext;
 import com.su.core.data.IDGenerator;
 import com.su.core.data.MQProducer;
@@ -12,6 +13,7 @@ import com.su.core.data.RedisClient;
 import com.su.core.netty.NettyServer;
 import com.su.core.schedule.ScheduleManager;
 import com.su.excel.core.ExcelProcessor;
+import com.su.proto.core.ProtoScan;
 import com.su.server.config.ServerConfig;
 
 public class ServerStart {
@@ -33,6 +35,9 @@ public class ServerStart {
 		NettyServer nettyServer = context.getBean(NettyServer.class);
 		nettyServer.start();
 		GameContext gameContext = context.getBean(GameContext.class);
+		AkkaContext akkaContext = context.getBean(AkkaContext.class);
+		ProtoScan protoScan = context.getBean(ProtoScan.class);
+		protoScan.init();
 		System.out.println("输入stop关闭服务器：");
 		Scanner sc = new Scanner(System.in);
 		while (true) {
@@ -44,6 +49,7 @@ public class ServerStart {
 				mqProducer.stop();
 				redisClient.destroy();
 				context.close();
+				akkaContext.close();
 				break;
 			}
 		}

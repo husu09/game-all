@@ -143,7 +143,7 @@ public class DataService {
 		return i;
 	}
 
-	public <T> T get(Class<T> c, int id) {
+	public <T> T get(Class<T> c, long id) {
 		T t = null;
 		boolean ismc = false;
 		boolean isrc = false;

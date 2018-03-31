@@ -19,3 +19,4 @@ message GetPlayerDataReq {
 message GetPlayerDataResp {
 	optional PlayerDataPro playerData = 1;
 }
+

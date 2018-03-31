@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.swing.JTextField;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.google.protobuf.MessageLite;
 import com.su.client.core.ClientConst;
 import com.su.client.core.ClientContext;
@@ -14,22 +17,25 @@ import com.su.client.core.ClientUtil;
 /**
  * 发送消息
  */
+@Component
 public class SendButtonHandler implements ActionListener {
 	
+	@Autowired
+	private ClientContext clientContext;
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (ClientContext.getInstance().getCtx() == null) {
-			ClientContext.getInstance().showMessage("请先登录！\n");
+		if (clientContext.getCtx() == null) {
+			clientContext.showMessage("请先登录！\n");
 			return;
 		}
 		// 组装协议信息
-		MessageLite messageLite = ClientContext.getInstance().getSelectMessageLite();
-		List<JTextField> textFields = ClientContext.getInstance().getTextFields();
+		MessageLite messageLite = clientContext.getSelectMessageLite();
+		List<JTextField> textFields = clientContext.getTextFields();
 		try {
 			Object builder = messageLite.getClass().getMethod("newBuilder").invoke(null);
 			for (JTextField tf : textFields) {
-				int type = ClientContext.getInstance().getProperty(messageLite.getClass().getSimpleName(),
+				int type = clientContext.getProperty(messageLite.getClass().getSimpleName(),
 						tf.getName());
 				if (type == ClientConst.INT_TYPE) {
 					int value = 0;
@@ -61,8 +67,8 @@ public class SendButtonHandler implements ActionListener {
 			}
 			MessageLite ml = (MessageLite) builder.getClass().getMethod("build").invoke(builder);
 			// 发送消息
-			ClientContext.getInstance().write(ml);
-			ClientContext.getInstance().showMessage(ml);
+			clientContext.write(ml);
+			clientContext.showMessage(ml);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

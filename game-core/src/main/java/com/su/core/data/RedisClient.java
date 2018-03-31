@@ -30,8 +30,9 @@ public class RedisClient {
 
 	public void init() {
 		JedisPoolConfig config = new JedisPoolConfig();
-		config.setMaxTotal(Runtime.getRuntime().availableProcessors());
 		pool = new JedisPool(config, host, port, 60000, password);
+		Jedis jedis = getResource();
+		returnResource(jedis);
 		logger.info("初始redis成功{}:{}", host, port);
 	}
 
@@ -64,8 +65,6 @@ public class RedisClient {
 		try {
 			jedis = getResource();
 			value = jedis.get(key);
-		} catch (Exception e) {
-			logger.warn("get {} = {}", key, value, e);
 		} finally {
 			returnResource(jedis);
 		}
@@ -81,8 +80,6 @@ public class RedisClient {
 		try {
 			jedis = getResource();
 			result = jedis.del(key);
-		} catch (Exception e) {
-			logger.warn("del {}", key, e);
 		} finally {
 			returnResource(jedis);
 		}
@@ -95,8 +92,6 @@ public class RedisClient {
 		try {
 			jedis = getResource();
 			result = jedis.set(key, value);
-		} catch (Exception e) {
-			logger.warn("set {} = {}", key, value, e);
 		} finally {
 			returnResource(jedis);
 		}
@@ -109,8 +104,6 @@ public class RedisClient {
 		try {
 			jedis = getResource();
 			result = jedis.setex(key, seconds, value);
-		} catch (Exception e) {
-			logger.warn("set {} = {}", key, value, e);
 		} finally {
 			returnResource(jedis);
 		}
@@ -126,8 +119,6 @@ public class RedisClient {
 		try {
 			jedis = getResource();
 			value = jedis.hget(key, field);
-		} catch (Exception e) {
-			logger.warn("get {} = {}", key, value, e);
 		} finally {
 			returnResource(jedis);
 		}
@@ -143,8 +134,6 @@ public class RedisClient {
 		try {
 			jedis = getResource();
 			value = jedis.hvals(key);
-		} catch (Exception e) {
-			logger.warn("getList {} = {}", key, value, e);
 		} finally {
 			returnResource(jedis);
 		}
@@ -160,8 +149,6 @@ public class RedisClient {
 		try {
 			jedis = getResource();
 			result = jedis.hset(key, field, value);
-		} catch (Exception e) {
-			logger.warn("setMap {} = {}", key, value, e);
 		} finally {
 			returnResource(jedis);
 		}
@@ -177,8 +164,67 @@ public class RedisClient {
 		try {
 			jedis = getResource();
 			result = jedis.hdel(key, field);
-		} catch (Exception e) {
-			logger.warn("del {}", key, e);
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+
+	/**
+	 * hash表中是否包含指定的key
+	 */
+	public boolean hexists(String key, String field) {
+		boolean result = false;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result = jedis.hexists(key, field);
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+
+	/**
+	 * 向set中添加值
+	 */
+
+	public long sadd(String key, String member) {
+		long result = 0;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result = jedis.sadd(key, member);
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+
+	/**
+	 * 删除set中的值
+	 */
+	public long srem(String key, String member) {
+		long result = 0;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result = jedis.srem(key, member);
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+
+	/**
+	 * 判断set 中是否包含在成员
+	 */
+	public boolean sismember(String key, String member) {
+		boolean result = false;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result = jedis.sismember(key, member);
 		} finally {
 			returnResource(jedis);
 		}

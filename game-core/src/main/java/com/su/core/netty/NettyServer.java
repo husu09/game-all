@@ -78,14 +78,11 @@ public final class NettyServer {
 						}
 					});
 			// Bind and start to accept incoming connections.
-			b.bind(port);
+			b.bind(port).sync();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			bossGroup.shutdownGracefully();
-			workerGroup.shutdownGracefully();
 		}
-		logger.info("启动Netty服务");
+		logger.info("启动Netty服务 {}", port);
 	}
 
 	public void stop() {

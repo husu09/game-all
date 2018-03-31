@@ -59,7 +59,7 @@ public class RedisService {
 		}
 	}
 
-	public <T> T get(Class<T> c, int id) {
+	public <T> T get(Class<T> c, long id) {
 		String value = client.hget(CacheUtil.getParentKey(c), CacheUtil.getKey(c, id));
 		return JSON.parseObject(value, c);
 	}

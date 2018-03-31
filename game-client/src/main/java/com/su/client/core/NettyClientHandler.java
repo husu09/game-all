@@ -21,44 +21,39 @@ import org.springframework.stereotype.Component;
 import com.google.protobuf.MessageLite;
 import com.su.client.handler.ReceiveMessageHandler;
 
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-
-
 /**
- * Handler implementation for the object echo client.  It initiates the
- * ping-pong traffic between the object echo client and server by sending the
- * first message to the server.
+ * Handler implementation for the object echo client. It initiates the ping-pong
+ * traffic between the object echo client and server by sending the first
+ * message to the server.
  */
 @Component
+@Sharable
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
 	@Autowired
 	private ReceiveMessageHandler receiveMessageHandler;
+	@Autowired
+	private ClientContext clientContext;
 
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) {
-    	ClientContext cc = ClientContext.getInstance();
-    	cc.setCtx(ctx);
-    	cc.getCdl().countDown();
-    }
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) {
+		clientContext.setCtx(ctx);
+	}
 
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        // Echo back the received object to the server.
-        //ctx.write(msg);
-    	receiveMessageHandler.process((MessageLite) msg);
-    }
+	@Override
+	public void channelRead(ChannelHandlerContext ctx, Object msg) {
+		// Echo back the received object to the server.
+		// ctx.write(msg);
+		receiveMessageHandler.process((MessageLite) msg);
+	}
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.flush();
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();
-        ctx.close();
-    }
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+		cause.printStackTrace();
+		ctx.close();
+	}
 }

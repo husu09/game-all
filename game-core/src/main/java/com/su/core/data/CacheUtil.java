@@ -36,7 +36,7 @@ public class CacheUtil {
 	}
 	
 
-	public static String getKey(Class<?> c, int id) {
+	public static String getKey(Class<?> c, long id) {
 		return c.getSimpleName() + id;
 	}
 	

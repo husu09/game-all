@@ -50,7 +50,7 @@ public class MemoryCache {
 		return map.containsKey(CacheUtil.getKey(o));
 	}
 
-	public <T> T get(Class<T> c, int id) {
+	public <T> T get(Class<T> c, long id) {
 		Map<String, Object> map = classValueMap.get(c);
 		if (map == null)
 			return null;

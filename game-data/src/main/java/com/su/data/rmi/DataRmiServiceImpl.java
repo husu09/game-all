@@ -73,7 +73,7 @@ public class DataRmiServiceImpl implements DataRmiService {
 	}
 
 	@Override
-	public <T> T get(Class<T> c, Integer id) {
+	public <T> T get(Class<T> c, long id) {
 		return dao.get(c, id);
 	}
 

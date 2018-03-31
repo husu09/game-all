@@ -1,21 +1,21 @@
 package com.su.core.data;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.hibernate.criterion.Projections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.su.common.rmi.DataRmiService;
-import com.su.common.util.SpringUtil;
 
 /**
  * id 生成器
@@ -27,6 +27,8 @@ public class IDGenerator {
 
 	@Autowired
 	private DataRmiService dataRmiService;
+	@Value("${entity.packName}")
+	private String packName;
 
 	private Map<String, AtomicLong> idMap = new HashMap<>();
 
@@ -38,8 +40,8 @@ public class IDGenerator {
 		return id;
 	}
 
-	private long getMaxId(Object o) {
-		return dataRmiService.get(o.getClass(), Projections.max("id"));
+	private long getMaxId(Class<?> classes) {
+		return dataRmiService.get(classes, Projections.max("id"));
 	}
 
 	/**
@@ -66,21 +68,36 @@ public class IDGenerator {
 	}
 
 	public void init() {
-		Map<String, Object> beans = SpringUtil.getContext().getBeansWithAnnotation(Entity.class);
-		for (Object o : beans.values()) {
-			String parentKey = CacheUtil.getParentKey(o);
-			AtomicLong atomicLong = idMap.get(parentKey);
-			if (atomicLong == null) {
-				synchronized (o) {
-					atomicLong = idMap.get(parentKey);
+		scan(packName);
+		logger.info("id生成器初始化成功 {}", packName);
+	}
+	
+	public void scan(String packName) {
+		String packPath = packName.replace(".", "/");
+		String realPath = IDGenerator.class.getClassLoader().getResource(packPath).getPath();
+		File dir = new File(realPath);
+		for (File chiled : dir.listFiles()) {
+			if (chiled.isDirectory()) {
+				scan(packName + "." + chiled.getName());
+			} else {
+				try {
+					int lastIndex = chiled.getName().indexOf(".");
+					String name = chiled.getName().substring(0, lastIndex);
+					Class<?> c = Class.forName(packName + "." + name);
+					String parentKey = CacheUtil.getParentKey(c);
+					AtomicLong atomicLong = idMap.get(parentKey);
 					if (atomicLong == null) {
-						atomicLong = new AtomicLong(getMaxId(o));
-						idMap.put(parentKey, atomicLong);
+						atomicLong = idMap.get(parentKey);
+						if (atomicLong == null) {
+							atomicLong = new AtomicLong(getMaxId(c));
+							idMap.put(parentKey, atomicLong);
+						}
 					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
-		logger.info("id生成器初始化成功");
 	}
 
 }

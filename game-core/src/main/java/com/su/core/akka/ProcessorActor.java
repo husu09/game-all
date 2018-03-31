@@ -9,7 +9,7 @@ public interface ProcessorActor {
 	/**
 	 * 处理消息
 	 * */
-	public void process(ChannelHandlerContext ctx, MessageLite messageLite)  throws Exception ;
+	public void process(ChannelHandlerContext ctx, MessageLite messageLite);
 	
 	/**
 	 * 关闭 Actor

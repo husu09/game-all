@@ -2,7 +2,6 @@ package com.su.common.po;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -15,43 +14,35 @@ public class Player implements Serializable {
 	private long id;
 	/**
 	 * 名字
-	 * */
-	@Column(unique = true)
+	 */
 	private String name;
 	/**
 	 * 等级
-	 * */
-	@Column(nullable = false)
+	 */
 	private int level;
 	/**
 	 * 头像
-	 * */
-	@Column(nullable = false)
+	 */
 	private String picture;
 	/**
 	 * 金币
-	 * */
-	@Column(nullable = false)
+	 */
 	private int gold;
 	/**
 	 * 钻石
-	 * */
-	@Column(nullable = false)
+	 */
 	private int diamond;
 	/**
 	 * 创建时间
-	 * */
-	@Column(nullable = false)
+	 */
 	private long createTime;
 	/**
 	 * 最后登录时间
-	 * */
-	@Column(nullable = false)
+	 */
 	private long lastLoginTime;
 	/**
 	 * 最后登出时间
-	 * */
-	@Column(nullable = false)
+	 */
 	private long lastLogoutTime;
 	
 	public long getId() {
@@ -109,4 +100,6 @@ public class Player implements Serializable {
 		this.lastLogoutTime = lastLogoutTime;
 	}
 	
+	
+
 }

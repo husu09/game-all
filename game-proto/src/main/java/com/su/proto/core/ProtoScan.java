@@ -2,8 +2,8 @@ package com.su.proto.core;
 
 import java.io.File;
 
-import javax.annotation.PostConstruct;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -17,15 +17,17 @@ import com.su.common.util.CommonUtils;
 @Component
 public class ProtoScan {
 
+	private Logger logger = LoggerFactory.getLogger(ProtoScan.class);
+
 	@Autowired
 	private ProtoContext protoContext;
-	
+
 	@Value("${proto.packName}")
 	private String protoPackName;
 
-	public void scan(String packName) throws Exception {
+	public void scan(String packName) {
 		String packPath = packName.replace(".", "/");
-		String realPath = Thread.currentThread().getContextClassLoader().getResource(packPath).getPath();
+		String realPath = ProtoScan.class.getClassLoader().getResource(packPath).getPath();
 		File dir = new File(realPath);
 		for (File chiled : dir.listFiles()) {
 			if (chiled.isDirectory()) {
@@ -40,15 +42,15 @@ public class ProtoScan {
 						MessageLite messageLite = (MessageLite) c.getMethod("getDefaultInstance").invoke(null);
 						protoContext.add(c.getSimpleName(), messageLite);
 					}
-				} catch (ClassNotFoundException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
 	}
-	
-	@PostConstruct
-	public void init() throws Exception {
+
+	public void init() {
 		scan(protoPackName);
+		logger.info("扫描 {} 包下的proto协议成功", protoPackName);
 	}
 }
