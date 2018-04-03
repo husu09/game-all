@@ -58,18 +58,18 @@ public class PlayerContext {
 	/**
 	 * 发送错误提示
 	 */
-	public void sendError(int errCode, String message, Object... parameters) {
+	public void sendError(int errCode, Object... parameters) {
 
-		ErrorResp.Builder builder = ErrorResp.newBuilder().setErrorCode(errCode).setErrorMsg(message);
+		ErrorResp.Builder builder = ErrorResp.newBuilder().setErrorCode(errCode);
 		for (Object o : parameters) {
 			builder.addParameters(o.toString());
 		}
 		ctx.writeAndFlush(builder.build());
 	}
 
-	public static void sendError(ChannelHandlerContext ctx, int errCode, String message, Object... parameters) {
+	public static void sendError(ChannelHandlerContext ctx, int errCode, Object... parameters) {
 
-		ErrorResp.Builder builder = ErrorResp.newBuilder().setErrorCode(errCode).setErrorMsg(message);
+		ErrorResp.Builder builder = ErrorResp.newBuilder().setErrorCode(errCode);
 		for (Object o : parameters) {
 			builder.addParameters(o.toString());
 		}
