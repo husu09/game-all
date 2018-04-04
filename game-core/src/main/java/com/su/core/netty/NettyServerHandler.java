@@ -23,7 +23,6 @@ import com.su.core.akka.AkkaContext;
 import com.su.core.akka.ProcessorActor;
 import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
-import com.su.core.event.GameEventDispatcher;
 
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
@@ -43,8 +42,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	private AkkaContext akkaContext;
 	@Autowired
 	private GameContext gameContext;
-	@Autowired
-	private GameEventDispatcher gameEventDispatcher;
 
 	public static final AttributeKey<PlayerContext> PLAYER_CONTEXT_KEY = AttributeKey.valueOf("PLAYER_CONTEXT_KEY");
 	public static final AttributeKey<ProcessorActor> PROCESSOR_ACTOR_KEY = AttributeKey.valueOf("PROCESSOR_ACTOR_KEY");
@@ -76,10 +73,10 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 		ProcessorActor processorActor = ctx.channel().attr(PROCESSOR_ACTOR_KEY).get();
 		if (playerContext != null) {
 			if (playerContext.getPlayer() != null) {
+				// 退出事件
+				playerContext.getActor().logout(playerContext);
 				// 从所有玩家上下文移除
 				gameContext.removePlayerContext(playerContext.getPlayer().getId());
-				// 退出事件
-				gameEventDispatcher.logout(playerContext);
 			}
 		}
 		if (processorActor != null) {

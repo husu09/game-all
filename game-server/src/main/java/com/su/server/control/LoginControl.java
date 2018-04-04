@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.su.common.constant.ErrCode;
 import com.su.common.po.Player;
 import com.su.core.action.Action;
 import com.su.core.context.GameContext;
@@ -11,7 +12,6 @@ import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventDispatcher;
 import com.su.proto.LoginProto.LoginReq;
 import com.su.proto.LoginProto.LoginResp;
-import com.su.proto.LoginProto.LoginResp.Builder;
 import com.su.server.service.LoginService;
 import com.su.server.service.PlayerService;
 
@@ -37,7 +37,7 @@ public class LoginControl {
 	public void login(PlayerContext playerContext, LoginReq req) {
 		String name = req.getName();
 		if (StringUtils.isBlank(name)) {
-			playerContext.sendError(-1, "参数错误");
+			playerContext.sendError(ErrCode.PLAYER_NAME_IS_EMPTY);
 			return;
 		}
 		long playerId = 0;
@@ -51,7 +51,7 @@ public class LoginControl {
 		}
 		Player player = playerService.getPlayerById(playerId);
 		if (player == null) {
-			playerContext.sendError(-1, "系统错误");
+			playerContext.sendError(ErrCode.PLAYER_IS_NULL);
 			return;
 		}
 		playerContext.handleLogin(player);
