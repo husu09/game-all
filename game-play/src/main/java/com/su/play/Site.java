@@ -1,26 +1,17 @@
 package com.su.play;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * 场地
- * */
-public interface Site {
-	
-	
-	
+public class Site {
 	/**
-	 * 进入
+	 * 在线人数
 	 * */
-	public void enter();
 	/**
-	 * 退出
+	 * 等待队列
 	 * */
-	public void quit();
 	/**
-	 * 开始
+	 * 入场限制
 	 * */
-	public void start();
+	/**
+	 * 底分
+	 * */
 	
 }

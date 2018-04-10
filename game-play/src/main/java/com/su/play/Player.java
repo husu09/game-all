@@ -1,20 +1,19 @@
 package com.su.play;
 
-public interface Player {
+public class Player {
+	/**
+	 * 手牌
+	 * */
+	private int[] headCards = new int[27];
 	
 	/**
-	 * 使用道具
+	 * 出牌
 	 * */
-	public void useItem();
+	private void draw(){
+		
+	}
 	
-	/**
-	 * 添加buff
-	 * */
-	public void addBuff();
-	
-	/**
-	 * 删除buff
-	 * */
-	public void deleteBuff();
-	
+	public static void main(String[] args) {
+		System.out.println(System.currentTimeMillis());
+	}
 }
