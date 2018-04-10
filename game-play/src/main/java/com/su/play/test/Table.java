@@ -33,7 +33,7 @@ public class Table {
 	/**
 	 * 名次
 	 * */
-	{
+/*	{
 		int point = 3;
 		for (int i = 0; i < MAX_NUM_OF_CARD; i++) {
 			cards[i] = point;
@@ -49,12 +49,12 @@ public class Table {
 			}
 		}
 		System.out.println(Arrays.toString(cards));
-	}
+	}*/
 
 	/**
 	 * 洗牌
 	 */
-	public void Shuffle() {
+/*	public void Shuffle() {
 		for (int i = 0; i < cards.length; i++) {
 			int tmp = cards[1];
 			int r = CommonUtils.range(i, cards.length);
@@ -62,28 +62,28 @@ public class Table {
 			cards[r] = tmp;
 		}
 		System.out.println(Arrays.toString(cards));
-	}
+	}*/
 
 	/**
 	 * 发牌
 	 */
-	public void deal() {
-		int startIndex = winnerIndex;
-		Map<Integer, Integer> map = new HashMap<>();
-		for (int i = 0; i < players.length; i++) {
-			map.put(i, 0);
-		}
-		for (int i = 0; i < cards.length; i++) {
-
-			players[startIndex].getHandCards()[map.get(startIndex)] = cards[i];
-			map.put(startIndex, map.get(startIndex) + 1);
-			if ((i + 1) % players.length == 0) {
-				startIndex = winnerIndex;
-			}
-			startIndex++;
-		}
-
-	}
+//	public void deal() {
+//		int startIndex = winnerIndex;
+//		Map<Integer, Integer> map = new HashMap<>();
+//		for (int i = 0; i < players.length; i++) {
+//			map.put(i, 0);
+//		}
+//		for (int i = 0; i < cards.length; i++) {
+//
+//			players[startIndex].getHandCards()[map.get(startIndex)] = cards[i];
+//			map.put(startIndex, map.get(startIndex) + 1);
+//			if ((i + 1) % players.length == 0) {
+//				startIndex = winnerIndex;
+//			}
+//			startIndex++;
+//		}
+//
+//	}
 	
 	/**
 	 * 坐下
@@ -113,8 +113,8 @@ public class Table {
 	
 	
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		Table table = new Table();
 		table.Shuffle();
-	}
+	}*/
 }
