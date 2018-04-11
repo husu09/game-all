@@ -1,4 +1,4 @@
-package com.su.server.mo;
+package com.su.server.obj;
 
 public class Item {
 	

@@ -7,10 +7,10 @@ import com.alibaba.fastjson.JSON;
 import com.su.common.po.Player;
 import com.su.core.data.RedisClient;
 import com.su.server.constant.RedisKey;
-import com.su.server.mo.PlayerCoreData;
+import com.su.server.obj.PlayerCoreData;
 
 @Service
-public class LoginService {
+public class LoginService{
 	@Autowired
 	private RedisClient redisClient;
 

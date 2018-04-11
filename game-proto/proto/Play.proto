@@ -1,0 +1,22 @@
+syntax = "proto2";
+package com.su.proto;
+option java_outer_classname = "PlayProto";
+
+message TableDataPo
+{
+
+}
+
+// 开始匹配
+message startMatchingReq {
+	optional int32 siteType = 1;
+}
+message startMatchingResp {
+	
+}
+// 通知玩家游戏开始
+message startPlayNotice {
+
+}
+
+
