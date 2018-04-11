@@ -1,5 +1,7 @@
 package com.su.excel.core;
 
+import java.util.Collection;
+
 /**
  * 配置文件映射接口
  * */
@@ -29,6 +31,8 @@ public interface ExcelMap<T> {
 	 * 通过 id 获取配置
 	 * */
 	public T get(int id);
+	
+	public Collection<T> all();
 	
 	/**
 	 * 获取当前配置的类型

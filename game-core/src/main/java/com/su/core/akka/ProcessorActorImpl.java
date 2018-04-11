@@ -1,13 +1,10 @@
 package com.su.core.akka;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.protobuf.MessageLite;
-import com.su.common.constant.ErrCode;
 import com.su.common.util.SpringUtil;
 import com.su.core.action.ActionContext;
 import com.su.core.action.ActionMeta;
+import com.su.core.cons.ErrCode;
 import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventDispatcher;
 import com.su.core.netty.NettyServerHandler;
@@ -37,7 +34,7 @@ public class ProcessorActorImpl implements ProcessorActor {
 				PlayerContext playerContext = attr.get();
 				if (playerContext == null) {
 					//没有找到对应的PlayerContext
-					PlayerContext.sendError(ctx, ErrCode.NOT_FIND_PLAYERCONTEXT);
+					PlayerContext.sendError(ctx, ErrCode.NOT_FIND_PLAYER_CONTEXT);
 					return;
 				}
 				actionMeta.getMethod().invoke(actionMeta.getExecutor(), playerContext, messageLite);

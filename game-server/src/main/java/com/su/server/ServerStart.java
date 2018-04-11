@@ -10,6 +10,7 @@ import com.su.core.context.GameContext;
 import com.su.core.data.IDGenerator;
 import com.su.core.data.MQProducer;
 import com.su.core.data.RedisClient;
+import com.su.core.event.GameEventDispatcher;
 import com.su.core.netty.NettyServer;
 import com.su.core.schedule.ScheduleManager;
 import com.su.excel.core.ExcelProcessor;
@@ -38,6 +39,8 @@ public class ServerStart {
 		AkkaContext akkaContext = context.getBean(AkkaContext.class);
 		ProtoScan protoScan = context.getBean(ProtoScan.class);
 		protoScan.init();
+		GameEventDispatcher gameEventDispatcher = context.getBean(GameEventDispatcher.class);
+		gameEventDispatcher.serverStart();
 		System.out.println("输入stop关闭服务器：");
 		Scanner sc = new Scanner(System.in);
 		while (true) {
@@ -48,8 +51,9 @@ public class ServerStart {
 				scheduleManager.stop();
 				mqProducer.stop();
 				redisClient.destroy();
-				context.close();
 				akkaContext.close();
+				gameEventDispatcher.serverStop();
+				context.close();
 				break;
 			}
 		}

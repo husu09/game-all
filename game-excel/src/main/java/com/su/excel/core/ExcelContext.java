@@ -18,9 +18,6 @@ import com.alibaba.fastjson.JSON;
 @Component
 public class ExcelContext {
 
-	@Value("${excel.preData.dir}")
-	private String preDataDir;
-
 	/**
 	 * 配置映射类
 	 */
@@ -64,7 +61,7 @@ public class ExcelContext {
 	/**
 	 * 保存预处理数据
 	 */
-	public void savePreData() {
+	public void savePreData(String preDataDir) {
 		File dir = new File(preDataDir);
 		if (!dir.exists())
 			dir.mkdirs();

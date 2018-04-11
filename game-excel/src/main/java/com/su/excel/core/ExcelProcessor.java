@@ -41,7 +41,7 @@ public class ExcelProcessor {
 	/**
 	 * 列名的行数
 	 */
-	private int cellNameRowNum = 3;
+	private int cellNameRowNum = 2;
 
 	/**
 	 * 预处理数据
@@ -131,7 +131,7 @@ public class ExcelProcessor {
 
 		}
 		excelContext.callFinishLoadAll(); // 加载完所有表
-		excelContext.savePreData(); // 保存预处理数据
+		excelContext.savePreData(preDataDir); // 保存预处理数据
 	}
 
 	/**

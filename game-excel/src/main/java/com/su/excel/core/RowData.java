@@ -21,4 +21,11 @@ public class RowData {
 	public String getString(String key) {
 		return data.get(key);
 	}
+	
+	public boolean getBoolean(String key) {
+		if (getInt(key) > 0) 
+			return true;
+		return false;
+		
+	}
 }

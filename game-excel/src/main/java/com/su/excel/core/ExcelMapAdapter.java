@@ -1,6 +1,8 @@
 package com.su.excel.core;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +46,11 @@ public abstract class ExcelMapAdapter<T> implements ExcelMap<T> {
 	}
 
 	@Override
+	public Collection<T> all() {
+		return storageMap.values();
+	}
+
+	@Override
 	public Class<T> getTypeClass() {
 		Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
@@ -53,11 +60,12 @@ public abstract class ExcelMapAdapter<T> implements ExcelMap<T> {
 	@Override
 	public void add(String value) {
 		T t = JSON.parseObject(value, getTypeClass());
-		if (t instanceof Identity) {
-			Identity identity = (Identity) t;
-			storageMap.put(identity.getId(), t);
-		} else {
-			throw new RuntimeException(t.getClass() + " 没有实现 Identity 接口");
+		try {
+			Field field = t.getClass().getDeclaredField("id");
+			field.setAccessible(true);
+			storageMap.put(field.getInt(t), t);
+		} catch (Exception e) {
+			throw new RuntimeException(t.getClass() + " 没有id字段");
 		}
 	}
 
