@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.su.common.po.Player;
 import com.su.core.data.RedisClient;
-import com.su.server.cons.RedisKey;
-import com.su.server.obj.PlayerCoreData;
+import com.su.server.constant.RedisKey;
+import com.su.server.obj.server.PlayerCoreData;
 
 @Service
 public class LoginService{

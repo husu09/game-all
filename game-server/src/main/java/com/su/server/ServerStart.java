@@ -5,17 +5,17 @@ import java.util.Scanner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.su.core.action.ActionScan;
-import com.su.core.akka.AkkaContext;
-import com.su.core.context.GameContext;
 import com.su.core.data.IDGenerator;
 import com.su.core.data.MQProducer;
 import com.su.core.data.RedisClient;
-import com.su.core.event.GameEventDispatcher;
-import com.su.core.netty.NettyServer;
 import com.su.core.schedule.ScheduleManager;
 import com.su.excel.core.ExcelProcessor;
 import com.su.proto.core.ProtoScan;
+import com.su.server.akka.AkkaContext;
 import com.su.server.config.ServerConfig;
+import com.su.server.context.GameContext;
+import com.su.server.event.GameEventDispatcher;
+import com.su.server.netty.NettyServer;
 
 public class ServerStart {
 
