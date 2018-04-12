@@ -28,9 +28,6 @@ public class Site {
 	 * */
 	private SiteCo siteCo;
 	
-	
-	
-	
 	public Site(SiteCo siteCo) {
 		this.siteCo  = siteCo;
 	}

@@ -17,8 +17,6 @@ public class Matcher {
 	 * 场所
 	 * */
 	private Site site;
-
-
 	
 	public Matcher(Site site) {
 		this.site = site;
@@ -28,7 +26,7 @@ public class Matcher {
 	 * 处理玩家加入
 	 * */
 	public void doPlayerJoin(PlayerContext playerContext) {
-		playerDeque.offerLast(new GamePlayer());
+		playerDeque.offerLast(new GamePlayer(playerContext));
 		// 尝试从队列中获取4个玩家
 		GamePlayer[] gamePlayers = new GamePlayer[4];
 		for (int i = 0 ; i < 4; i++) {
@@ -48,7 +46,7 @@ public class Matcher {
 		if (table == null) {
 			table = new Table();
 		}
-		table.start();
+		table.start(gamePlayers);
 		
 	}
 	

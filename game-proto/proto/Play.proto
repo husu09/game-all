@@ -2,20 +2,34 @@ syntax = "proto2";
 package com.su.proto;
 option java_outer_classname = "PlayProto";
 
-message TableDataPo
-{
+message CardPro{
+	optional int32 value = 1;	// 牌面
+	optional int32 suit = 2;	// 花色
+}
 
+message TablePro
+{
+	repeated GamePlayerPro gamePlayers = 1;	// 玩家
+}
+
+message GamePlayerPro{
+	repeated CardPro handCards = 1;	// 玩家手牌
+	optional int32 isAuto = 2;	// 是否托管
+	optional int32 team = 3;	// 玩家队伍（0：无，1：红方，2：蓝方）
+	optional int32 score = 4;	// 玩家得分
+	
+	
 }
 
 // 开始匹配
 message startMatchingReq {
-	optional int32 siteType = 1;
+	optional int32 siteId = 1;	// 场所id
 }
 message startMatchingResp {
 	
 }
-// 通知玩家游戏开始
-message startPlayNotice {
+// 游戏开始通知
+message gameStartNotice {
 
 }
 
