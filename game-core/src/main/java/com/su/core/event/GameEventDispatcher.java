@@ -1,11 +1,11 @@
-package com.su.server.event;
+package com.su.core.event;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.su.server.context.PlayerContext;
+import com.su.core.context.PlayerContext;
 
 @Component
 public class GameEventDispatcher implements GameEvent {

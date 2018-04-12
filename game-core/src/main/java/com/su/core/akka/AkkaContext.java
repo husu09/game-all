@@ -1,4 +1,4 @@
-package com.su.server.akka;
+package com.su.core.akka;
 
 import org.springframework.stereotype.Component;
 

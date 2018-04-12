@@ -13,10 +13,11 @@ public class CommonUtils {
 		return pattern.matcher(s).matches();
 	}
 
-	/**
-	 * 随机数
-	 */
+	
 	private static final Random random = new Random();
+	/**
+	 * 按范围随机，不包含max
+	 */
 	public static int range(int min, int max) {
 		return random.nextInt(max - min) + min;
 	}

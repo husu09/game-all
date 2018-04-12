@@ -16,5 +16,6 @@ public enum Suit {
 	/**
 	 * 黑桃
 	 * */
-	HEI_TAO
+	HEI_TAO,
+	NONE
 }

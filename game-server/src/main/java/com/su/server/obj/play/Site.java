@@ -14,11 +14,11 @@ public class Site {
 	/**
 	 * 玩家数
 	 * */
-	private AtomicInteger playerNum;
+	private AtomicInteger playerNum = new AtomicInteger();
 	/**
 	 * 匹配器
 	 * */
-	private Matcher matcher;
+	private Matcher matcher = new Matcher(this);
 	/**
 	 * 牌桌队列
 	 * */
@@ -30,33 +30,37 @@ public class Site {
 	
 	public Site(SiteCo siteCo) {
 		this.siteCo  = siteCo;
+		init();
 	}
+	
 	/**
 	 * 初始化
 	 * */
 	public void init() {
 		for (int i = 0; i < siteCo.getInitTableNum(); i ++) {
-			
+			Table table = new Table();
+			tableQueue.offer(table);
 		}
 	}
+
 	public AtomicInteger getPlayerNum() {
 		return playerNum;
 	}
-	public void setPlayerNum(AtomicInteger playerNum) {
-		this.playerNum = playerNum;
-	}
+
 	public Matcher getMatcher() {
 		return matcher;
 	}
-	public void setMatcher(Matcher matcher) {
-		this.matcher = matcher;
-	}
+
 	public ConcurrentLinkedQueue<Table> getTableQueue() {
 		return tableQueue;
 	}
-	public void setTableQueue(ConcurrentLinkedQueue<Table> tableQueue) {
-		this.tableQueue = tableQueue;
+
+	public SiteCo getSiteCo() {
+		return siteCo;
 	}
+	
+	
+	
 	
 	
 	

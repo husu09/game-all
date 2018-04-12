@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.su.server.netty;
+package com.su.core.netty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

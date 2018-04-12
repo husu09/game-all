@@ -1,11 +1,15 @@
 package com.su.server.obj.play;
 
-import com.su.server.context.PlayerContext;
+import com.su.core.context.PlayerContext;
 
 /**
  * 游戏中的玩家对象
  * */
 public class GamePlayer {
+	/**
+	 * 坐位
+	 * */
+	private int index;
 	/**
 	 * 是否托管
 	 * */
@@ -66,6 +70,15 @@ public class GamePlayer {
 	public PlayerContext getPlayerContext() {
 		return playerContext;
 	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+	
 	
 	
 	

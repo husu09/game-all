@@ -28,20 +28,20 @@ public final class CommonProto {
     int getErrorCode();
 
     /**
-     * <code>repeated string parameters = 3;</code>
+     * <code>repeated string parameters = 2;</code>
      */
     java.util.List<java.lang.String>
         getParametersList();
     /**
-     * <code>repeated string parameters = 3;</code>
+     * <code>repeated string parameters = 2;</code>
      */
     int getParametersCount();
     /**
-     * <code>repeated string parameters = 3;</code>
+     * <code>repeated string parameters = 2;</code>
      */
     java.lang.String getParameters(int index);
     /**
-     * <code>repeated string parameters = 3;</code>
+     * <code>repeated string parameters = 2;</code>
      */
     com.google.protobuf.ByteString
         getParametersBytes(int index);
@@ -99,7 +99,7 @@ public final class CommonProto {
               errorCode_ = input.readInt32();
               break;
             }
-            case 26: {
+            case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 parameters_ = new com.google.protobuf.LazyStringArrayList();
@@ -151,29 +151,29 @@ public final class CommonProto {
       return errorCode_;
     }
 
-    public static final int PARAMETERS_FIELD_NUMBER = 3;
+    public static final int PARAMETERS_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList parameters_;
     /**
-     * <code>repeated string parameters = 3;</code>
+     * <code>repeated string parameters = 2;</code>
      */
     public com.google.protobuf.ProtocolStringList
         getParametersList() {
       return parameters_;
     }
     /**
-     * <code>repeated string parameters = 3;</code>
+     * <code>repeated string parameters = 2;</code>
      */
     public int getParametersCount() {
       return parameters_.size();
     }
     /**
-     * <code>repeated string parameters = 3;</code>
+     * <code>repeated string parameters = 2;</code>
      */
     public java.lang.String getParameters(int index) {
       return parameters_.get(index);
     }
     /**
-     * <code>repeated string parameters = 3;</code>
+     * <code>repeated string parameters = 2;</code>
      */
     public com.google.protobuf.ByteString
         getParametersBytes(int index) {
@@ -196,7 +196,7 @@ public final class CommonProto {
         output.writeInt32(1, errorCode_);
       }
       for (int i = 0; i < parameters_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, parameters_.getRaw(i));
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, parameters_.getRaw(i));
       }
       unknownFields.writeTo(output);
     }
@@ -543,33 +543,33 @@ public final class CommonProto {
          }
       }
       /**
-       * <code>repeated string parameters = 3;</code>
+       * <code>repeated string parameters = 2;</code>
        */
       public com.google.protobuf.ProtocolStringList
           getParametersList() {
         return parameters_.getUnmodifiableView();
       }
       /**
-       * <code>repeated string parameters = 3;</code>
+       * <code>repeated string parameters = 2;</code>
        */
       public int getParametersCount() {
         return parameters_.size();
       }
       /**
-       * <code>repeated string parameters = 3;</code>
+       * <code>repeated string parameters = 2;</code>
        */
       public java.lang.String getParameters(int index) {
         return parameters_.get(index);
       }
       /**
-       * <code>repeated string parameters = 3;</code>
+       * <code>repeated string parameters = 2;</code>
        */
       public com.google.protobuf.ByteString
           getParametersBytes(int index) {
         return parameters_.getByteString(index);
       }
       /**
-       * <code>repeated string parameters = 3;</code>
+       * <code>repeated string parameters = 2;</code>
        */
       public Builder setParameters(
           int index, java.lang.String value) {
@@ -582,7 +582,7 @@ public final class CommonProto {
         return this;
       }
       /**
-       * <code>repeated string parameters = 3;</code>
+       * <code>repeated string parameters = 2;</code>
        */
       public Builder addParameters(
           java.lang.String value) {
@@ -595,7 +595,7 @@ public final class CommonProto {
         return this;
       }
       /**
-       * <code>repeated string parameters = 3;</code>
+       * <code>repeated string parameters = 2;</code>
        */
       public Builder addAllParameters(
           java.lang.Iterable<java.lang.String> values) {
@@ -606,7 +606,7 @@ public final class CommonProto {
         return this;
       }
       /**
-       * <code>repeated string parameters = 3;</code>
+       * <code>repeated string parameters = 2;</code>
        */
       public Builder clearParameters() {
         parameters_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -615,7 +615,7 @@ public final class CommonProto {
         return this;
       }
       /**
-       * <code>repeated string parameters = 3;</code>
+       * <code>repeated string parameters = 2;</code>
        */
       public Builder addParametersBytes(
           com.google.protobuf.ByteString value) {
@@ -692,7 +692,7 @@ public final class CommonProto {
     java.lang.String[] descriptorData = {
       "\n\022proto/Common.proto\022\014com.su.proto\"2\n\tEr" +
       "rorResp\022\021\n\terrorCode\030\001 \001(\005\022\022\n\nparameters" +
-      "\030\003 \003(\tB\rB\013CommonProto"
+      "\030\002 \003(\tB\rB\013CommonProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

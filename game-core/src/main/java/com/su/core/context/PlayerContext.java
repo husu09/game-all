@@ -1,11 +1,11 @@
-package com.su.server.context;
+package com.su.core.context;
 
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.common.po.Player;
+import com.su.core.akka.ProcessorActor;
+import com.su.core.netty.NettyServerHandler;
 import com.su.proto.CommonProto.ErrorResp;
-import com.su.server.akka.ProcessorActor;
-import com.su.server.netty.NettyServerHandler;
 
 import io.netty.channel.ChannelHandlerContext;
 

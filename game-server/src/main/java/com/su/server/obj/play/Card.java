@@ -23,4 +23,10 @@ public class Card {
 		return suit;
 	}
 
+	@Override
+	public String toString() {
+		return "Card [value=" + value + ", suit=" + suit + "]";
+	}
+	
+
 }

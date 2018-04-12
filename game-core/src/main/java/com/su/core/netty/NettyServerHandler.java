@@ -13,16 +13,16 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.su.server.netty;
+package com.su.core.netty;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
-import com.su.server.akka.AkkaContext;
-import com.su.server.akka.ProcessorActor;
-import com.su.server.context.GameContext;
-import com.su.server.context.PlayerContext;
+import com.su.core.akka.AkkaContext;
+import com.su.core.akka.ProcessorActor;
+import com.su.core.context.GameContext;
+import com.su.core.context.PlayerContext;
 
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;

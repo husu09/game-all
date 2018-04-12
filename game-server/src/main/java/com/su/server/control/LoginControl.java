@@ -6,12 +6,12 @@ import org.springframework.stereotype.Controller;
 
 import com.su.common.po.Player;
 import com.su.core.action.Action;
+import com.su.core.context.GameContext;
+import com.su.core.context.PlayerContext;
+import com.su.core.event.GameEventDispatcher;
 import com.su.proto.LoginProto.LoginReq;
 import com.su.proto.LoginProto.LoginResp;
 import com.su.server.constant.ErrCode;
-import com.su.server.context.GameContext;
-import com.su.server.context.PlayerContext;
-import com.su.server.event.GameEventDispatcher;
 import com.su.server.service.LoginService;
 import com.su.server.service.PlayerService;
 

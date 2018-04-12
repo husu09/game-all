@@ -1,13 +1,13 @@
-package com.su.server.akka;
+package com.su.core.akka;
 
 import com.google.protobuf.MessageLite;
 import com.su.common.util.SpringUtil;
 import com.su.core.action.ActionContext;
 import com.su.core.action.ActionMeta;
-import com.su.server.constant.ErrCode;
-import com.su.server.context.PlayerContext;
-import com.su.server.event.GameEventDispatcher;
-import com.su.server.netty.NettyServerHandler;
+import com.su.core.constant.ErrCode;
+import com.su.core.context.PlayerContext;
+import com.su.core.event.GameEventDispatcher;
+import com.su.core.netty.NettyServerHandler;
 
 import akka.actor.TypedActor;
 import io.netty.channel.ChannelHandlerContext;
