@@ -1,15 +1,14 @@
 package com.su.server.obj.play;
 
+import java.util.concurrent.Delayed;
+import java.util.concurrent.TimeUnit;
+
 import com.su.core.context.PlayerContext;
 
 /**
  * 游戏中的玩家对象
  * */
-public class GamePlayer {
-	/**
-	 * 坐位
-	 * */
-	private int index;
+public class GamePlayer  {
 	/**
 	 * 是否托管
 	 * */
@@ -30,6 +29,10 @@ public class GamePlayer {
 	 * 玩家上下文
 	 * */
 	private PlayerContext playerContext;
+	/**
+	 * 操作时间
+	 * */
+	private long opTime;
 	
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
@@ -71,15 +74,6 @@ public class GamePlayer {
 		return playerContext;
 	}
 
-	public int getIndex() {
-		return index;
-	}
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
-	
-	
-	
 	
 }

@@ -27,7 +27,7 @@ public class Table {
 	/**
 	 * 牌权玩家
 	 * */
-	private int holdIndex;
+	private int holdIndex = 0;
 	
 
 	public Table() {
@@ -60,12 +60,12 @@ public class Table {
 	 */
 	public void start(GamePlayer[] players) {
 		this.players = players;
-		for (int i = 0; i < players.length; i++) {
-			players[i].setIndex(i);
-		}
+		this.state = TableState.START;
 		shuffle();
 		deal();
 	}
+	
+	
 
 	/**
 	 * 洗牌
@@ -99,6 +99,13 @@ public class Table {
 	/**
 	 * 过牌
 	 */
+	
+	/**
+	 * 叫牌
+	 * */
+	public void call() {
+		
+	}
 
 	public static void main(String[] args) {
 		new Table();

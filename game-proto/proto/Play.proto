@@ -2,7 +2,7 @@ syntax = "proto2";
 package com.su.proto;
 option java_outer_classname = "PlayProto";
 
-message CardPro{
+message CardPro {
 	optional int32 value = 1;	// 牌面
 	optional int32 suit = 2;	// 花色
 }
@@ -16,17 +16,15 @@ message TablePro {
 	repeated GamePlayerPro gamePlayers = 1;	// 玩家
 	repeated MultipleTypePro multiples = 2;	// 倍数
 	optional int32 state = 3;		// 牌桌状态
-	optional int32 holdIndex = 4;	// 出牌玩家
+	optional int32 holdIndex = 4;	// 牌权玩家
 	optional int32 myselfIndex = 5;	// 我的位置
-	
 }
 
-message GamePlayerPro{
-	optional int32 index = 1;		// 玩家坐位
-	repeated CardPro handCards = 2;	// 玩家手牌
-	optional int32 isAuto = 3;	// 是否托管
-	optional int32 team = 4;	// 玩家队伍（0：无，1：红方，2：蓝方）
-	optional int32 score = 5;	// 玩家得分
+message GamePlayerPro {
+	repeated CardPro handCards = 1;	// 玩家手牌
+	optional int32 isAuto = 2;	// 是否托管
+	optional int32 team = 3;	// 玩家队伍（0：无，1：红方，2：蓝方）
+	optional int32 score = 4;	// 玩家得分
 }
 
 // 开始匹配
@@ -73,10 +71,12 @@ message readyResp {
 message gameStartNotice {
 	optional TablePro table = 1;	// 牌桌数据
 }
+
 // 玩家数据更新通知
 message updateGamePlayerNotice{
 	optional GamePlayerPro gamePlayer = 1;	
 }
+
 // 牌桌数据更新通知
 message updateTableNotice{
 	optional TablePro table = 1;
