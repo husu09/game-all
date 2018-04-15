@@ -1,6 +1,7 @@
 package com.su.server.obj.play;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import com.su.common.util.CommonUtils;
 
@@ -9,25 +10,39 @@ import com.su.common.util.CommonUtils;
  */
 public class Table {
 	/**
-	 * 玩家
-	 */
-	private GamePlayer[] players;
-	/**
 	 * 牌
 	 */
 	private Card[] cards = new Card[108];
+	/**
+	 * 玩家
+	 */
+	private GamePlayer[] players;
 	/**
 	 * 状态
 	 */
 	private TableState state = TableState.IDLE;
 	/**
-	 * 庄家
+	 * 牌权
 	 */
-	private int dealerIndex = 0;
+	private int hold = 0;
 	/**
-	 * 牌权玩家
+	 * 轮分
 	 * */
-	private int holdIndex = 0;
+	private int roundScore;
+	/**
+	 * 被叫的牌
+	 * */
+	private Card calledCard;
+	/**
+	 * 叫牌状态
+	 * */
+	private CallState callState;
+	/**
+	 * 倍数
+	 * */
+	private Map<MultipleType,Integer> multiples;
+	
+	
 	
 
 	public Table() {
@@ -90,24 +105,5 @@ public class Table {
 			}
 			cycle++;
 		}
-	}
-
-	/**
-	 * 出牌
-	 */
-
-	/**
-	 * 过牌
-	 */
-	
-	/**
-	 * 叫牌
-	 * */
-	public void call() {
-		
-	}
-
-	public static void main(String[] args) {
-		new Table();
 	}
 }

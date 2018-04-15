@@ -1,9 +1,11 @@
 package com.su.server.obj.play;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.su.core.context.PlayerContext;
 import com.su.excel.co.SiteCo;
 import com.su.excel.map.SiteConf;
 
@@ -16,13 +18,13 @@ public class Site {
 	 * */
 	private AtomicInteger playerNum = new AtomicInteger();
 	/**
-	 * 匹配器
-	 * */
-	private Matcher matcher = new Matcher(this);
-	/**
 	 * 牌桌队列
 	 * */
 	private ConcurrentLinkedQueue<Table> tableQueue = new ConcurrentLinkedQueue<>();
+	/**
+	 * 玩家队列
+	 * */
+	private  ConcurrentLinkedDeque<GamePlayer> playerDeque = new ConcurrentLinkedDeque<>();
 	/**
 	 * 配置
 	 * */
@@ -31,6 +33,33 @@ public class Site {
 	public Site(SiteCo siteCo) {
 		this.siteCo  = siteCo;
 		init();
+	}
+	/**
+	 * 处理玩家加入
+	 * */
+	public void startMatch(PlayerContext playerContext) {
+		playerDeque.offerLast(new GamePlayer(playerContext));
+		// 尝试从队列中获取4个玩家
+		GamePlayer[] gamePlayers = new GamePlayer[4];
+		for (int i = 0 ; i < 4; i++) {
+			gamePlayers[i] = playerDeque.poll();
+			if (gamePlayers[i] == null) {
+				// 不足4人时重新排队
+				for (GamePlayer gamePlayer : gamePlayers) {
+					if (gamePlayer == null)
+						break;
+					playerDeque.offerFirst(gamePlayer);
+				}
+				return;
+			}
+		}
+		// 人数足够时开始游戏
+		Table table = tableQueue.poll();
+		if (table == null) {
+			table = new Table();
+		}
+		table.start(gamePlayers);
+		
 	}
 	
 	/**
@@ -43,22 +72,11 @@ public class Site {
 		}
 	}
 
-	public AtomicInteger getPlayerNum() {
-		return playerNum;
-	}
 
-	public Matcher getMatcher() {
-		return matcher;
-	}
 
-	public ConcurrentLinkedQueue<Table> getTableQueue() {
-		return tableQueue;
-	}
 
-	public SiteCo getSiteCo() {
-		return siteCo;
-	}
-	
+
+
 	
 	
 	
