@@ -97,13 +97,13 @@ public class Table {
 	 * 发牌
 	 */
 	private void deal() {
-		int cycle = 0;
+		/*int cycle = 0;
 		for (int i = 0; i < cards.length; i++) {
 			for (int j = dealerIndex; j < players.length; j++) {
 				players[j].getHandCards()[cycle] = cards[i];
 				i++;
 			}
 			cycle++;
-		}
+		}*/
 	}
 }
