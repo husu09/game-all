@@ -1,9 +1,12 @@
 package com.su.server.obj.play;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.su.common.util.CommonUtils;
+import com.su.proto.PlayProto.GamePlayerPro;
 import com.su.proto.PlayProto.GameStartNotice;
+import com.su.proto.PlayProto.MultiplePro;
 import com.su.proto.PlayProto.TablePro;
 
 /**
@@ -41,11 +44,31 @@ public class Table {
 	/**
 	 * 倍数
 	 */
-	private Map<MultipleType, Integer> multiples;
+	private Map<Integer, Integer> multiples;
 	/**
 	 * actor
 	 */
 	private TableActor actor;
+
+	public TablePro toProto() {
+		TablePro.Builder builder = TablePro.newBuilder();
+		GamePlayerPro.Builder gamePlayerProBuilder = GamePlayerPro.newBuilder();
+		for (int i = 0; i < players.length; i++) {
+			builder.addPlayers(players[i].toProto(gamePlayerProBuilder));
+			gamePlayerProBuilder.clear();
+		}
+		MultiplePro.Builder multipleProBuilder = MultiplePro.newBuilder();
+		for (Entry<Integer, Integer> entry : multiples.entrySet()) {
+			builder.addMultiples(multipleProBuilder.setType(entry.getKey()).setValue(entry.getValue()));
+			multipleProBuilder.clear();
+		}
+		builder.setState(state.ordinal());
+		builder.setHold(hold);
+		builder.setRoundScore(roundScore);
+		builder.setFlagCard(calledCard.toProto());
+		builder.setCallState(callState.ordinal());
+		return builder.build();
+	}
 
 	public Table(TableActor actor) {
 		this.actor = actor;
@@ -80,15 +103,18 @@ public class Table {
 		this.players = players;
 		this.state = TableState.START;
 		// 初始倍数
-		multiples.put(MultipleType.CHU_SHI, MultipleType.CHU_SHI.getValue());
+		multiples.put(MultipleType.CHU_SHI.ordinal(), MultipleType.CHU_SHI.getValue());
 		shuffle();
 		deal();
 		players[hold].setState(PlayerState.OPERATING);
-		for (int i = 1; i < players.length; i ++)
+		for (int i = 1; i < players.length; i++)
 			players[i].setState(PlayerState.WATCH);
 		// 通知
 		GameStartNotice.Builder builder = GameStartNotice.newBuilder();
-		builder.setTable(value)
+		builder.setTable(toProto());
+		for (int i = 0; i < players.length; i++) {
+			players[i].getPlayerContext().write(builder);
+		}
 	}
 
 	/**
@@ -96,8 +122,9 @@ public class Table {
 	 */
 	private void shuffle() {
 		for (int i = 0; i < cards.length; i++) {
-			Card tmp = cards[1];
+			Card tmp = cards[i];
 			int r = CommonUtils.range(i, cards.length);
+			cards[i] = cards[r];
 			cards[r] = tmp;
 		}
 	}
@@ -116,13 +143,6 @@ public class Table {
 
 	public TableActor getActor() {
 		return actor;
-	}
-	
-	
-	private TablePro toProto() {
-		TablePro.Builder builder = TablePro.newBuilder();
-		builder.
-		return builder.build();
 	}
 
 }

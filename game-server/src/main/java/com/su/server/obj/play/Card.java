@@ -19,9 +19,7 @@ public class Card {
 
 	public CardPro toProto() {
 		CardPro.Builder builder = CardPro.newBuilder();
-		builder.setValue(value);
-		builder.setSuit(suit.ordinal());
-		return builder.build();
+		return toProto(builder);
 	}
 
 	public CardPro toProto(CardPro.Builder builder) {

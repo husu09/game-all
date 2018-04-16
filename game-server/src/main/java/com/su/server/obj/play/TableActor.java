@@ -35,6 +35,10 @@ public interface TableActor {
 	 * 重连
 	 * */
 	public void reconnect(PlayerContext playerContext);
+	/**
+	 * 检测牌权变更
+	 * */
+	public void check();
 	
 	
 }

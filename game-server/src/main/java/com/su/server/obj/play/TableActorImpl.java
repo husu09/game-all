@@ -13,8 +13,7 @@ public class TableActorImpl implements TableActor {
 	
 	@Override
 	public void start(GamePlayer[] players) {
-		// TODO Auto-generated method stub
-		
+		table.start(players);
 	}
 
 	@Override
@@ -50,6 +49,11 @@ public class TableActorImpl implements TableActor {
 	@Override
 	public void reconnect(PlayerContext playerContext) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void check() {
 		
 	}
 

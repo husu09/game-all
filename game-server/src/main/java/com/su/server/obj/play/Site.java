@@ -63,6 +63,7 @@ public class Site {
 		if (table == null) {
 			TableActor tableActor = akkaContext.createActor(TableActor.class, TableActorImpl.class);
 			table = new Table(tableActor);
+			tableActor.init(table);
 		}
 		table.getActor().start(gamePlayers);
 

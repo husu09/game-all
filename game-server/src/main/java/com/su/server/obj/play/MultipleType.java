@@ -1,7 +1,5 @@
 package com.su.server.obj.play;
 
-import com.su.proto.PlayProto.MultiplePro;
-
 public enum MultipleType {
 	/**
 	 * 基础倍数 0
@@ -69,20 +67,4 @@ public enum MultipleType {
 	public int getValue() {
 		return value;
 	}
-
-	public MultiplePro toProto() {
-		MultiplePro.Builder builder = MultiplePro.newBuilder();
-		builder.setType(ordinal());
-		builder.setValue(value);
-		return builder.build();
-	}
-
-	public MultiplePro toProto(MultiplePro.Builder builder) {
-		if (builder == null)
-			builder = MultiplePro.newBuilder();
-		builder.setType(ordinal());
-		builder.setValue(value);
-		return builder.build();
-	}
-
 }

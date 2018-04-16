@@ -20,7 +20,6 @@ message TablePro {
 	optional int32 roundScore = 5[default = -1]; // 轮分
 	optional CardPro flagCard = 6;	// 被叫的牌
 	optional int32	callState = 7[default = -1];	// 叫牌状态
-	optional int32 myself = 8[default = -1];	// 我的位置
 }
 
 message GamePlayerPro {

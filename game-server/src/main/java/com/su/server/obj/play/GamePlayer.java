@@ -10,6 +10,10 @@ import com.su.server.context.PlayerContext;
  */
 public class GamePlayer {
 	/**
+	 * 坐位
+	 * */
+	private int index;
+	/**
 	 * 手牌
 	 */
 	private Card[] handCards = new Card[27];
@@ -20,7 +24,7 @@ public class GamePlayer {
 	/**
 	 * 我的倍数
 	 */
-	private MultipleType multipleType;
+	private int multipleType;
 	private int multiple;
 	/**
 	 * 分数
@@ -37,7 +41,7 @@ public class GamePlayer {
 	/**
 	 * 是否托管
 	 */
-	private boolean isAuto;
+	private int isAuto;
 	/**
 	 * 玩家上下文
 	 */
@@ -46,9 +50,15 @@ public class GamePlayer {
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 	}
-	
+
 	public GamePlayerPro toProto() {
 		GamePlayerPro.Builder builder = GamePlayerPro.newBuilder();
+		return toProto(builder);
+	}
+
+	public GamePlayerPro toProto(GamePlayerPro.Builder builder) {
+		if (builder == null)
+			builder = GamePlayerPro.newBuilder();
 		CardPro.Builder cardProBuilder = CardPro.newBuilder();
 		for (Card card : handCards) {
 			builder.addHandCards(card.toProto(cardProBuilder));
@@ -56,7 +66,12 @@ public class GamePlayer {
 		}
 		builder.setTeam(team.ordinal());
 		MultiplePro.Builder multipleProBuilder = MultiplePro.newBuilder();
-		
+		multipleProBuilder.setType(multipleType).setValue(multiple);
+		builder.setMyMultiple(multipleProBuilder.build());
+		builder.setMyScore(myScore);
+		builder.setState(state.ordinal());
+		builder.setDeadline(deadLine);
+		builder.setIsAuto(isAuto);
 		return builder.build();
 	}
 
@@ -84,11 +99,11 @@ public class GamePlayer {
 		this.team = team;
 	}
 
-	public MultipleType getMultipleType() {
+	public int getMultipleType() {
 		return multipleType;
 	}
 
-	public void setMultipleType(MultipleType multipleType) {
+	public void setMultipleType(int multipleType) {
 		this.multipleType = multipleType;
 	}
 
@@ -116,22 +131,23 @@ public class GamePlayer {
 		this.deadLine = deadLine;
 	}
 
-	public boolean isAuto() {
+	public int isAuto() {
 		return isAuto;
 	}
 
-	public void setAuto(boolean isAuto) {
+	public void setAuto(int isAuto) {
 		this.isAuto = isAuto;
 	}
 
 	public PlayerContext getPlayerContext() {
 		return playerContext;
 	}
-	
-	
-	
-	
-	
-	
 
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
 }

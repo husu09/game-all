@@ -1432,23 +1432,6 @@ public final class PlayProto {
      * <code>optional int32 callState = 7 [default = -1];</code>
      */
     int getCallState();
-
-    /**
-     * <pre>
-     * 我的位置
-     * </pre>
-     *
-     * <code>optional int32 myself = 8 [default = -1];</code>
-     */
-    boolean hasMyself();
-    /**
-     * <pre>
-     * 我的位置
-     * </pre>
-     *
-     * <code>optional int32 myself = 8 [default = -1];</code>
-     */
-    int getMyself();
   }
   /**
    * Protobuf type {@code com.su.proto.TablePro}
@@ -1468,7 +1451,6 @@ public final class PlayProto {
       hold_ = -1;
       roundScore_ = -1;
       callState_ = -1;
-      myself_ = -1;
     }
 
     @java.lang.Override
@@ -1548,11 +1530,6 @@ public final class PlayProto {
             case 56: {
               bitField0_ |= 0x00000010;
               callState_ = input.readInt32();
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000020;
-              myself_ = input.readInt32();
               break;
             }
           }
@@ -1821,29 +1798,6 @@ public final class PlayProto {
       return callState_;
     }
 
-    public static final int MYSELF_FIELD_NUMBER = 8;
-    private int myself_;
-    /**
-     * <pre>
-     * 我的位置
-     * </pre>
-     *
-     * <code>optional int32 myself = 8 [default = -1];</code>
-     */
-    public boolean hasMyself() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <pre>
-     * 我的位置
-     * </pre>
-     *
-     * <code>optional int32 myself = 8 [default = -1];</code>
-     */
-    public int getMyself() {
-      return myself_;
-    }
-
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1876,9 +1830,6 @@ public final class PlayProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(7, callState_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(8, myself_);
       }
       unknownFields.writeTo(output);
     }
@@ -1915,10 +1866,6 @@ public final class PlayProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, callState_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, myself_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1966,11 +1913,6 @@ public final class PlayProto {
         result = result && (getCallState()
             == other.getCallState());
       }
-      result = result && (hasMyself() == other.hasMyself());
-      if (hasMyself()) {
-        result = result && (getMyself()
-            == other.getMyself());
-      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2009,10 +1951,6 @@ public final class PlayProto {
       if (hasCallState()) {
         hash = (37 * hash) + CALLSTATE_FIELD_NUMBER;
         hash = (53 * hash) + getCallState();
-      }
-      if (hasMyself()) {
-        hash = (37 * hash) + MYSELF_FIELD_NUMBER;
-        hash = (53 * hash) + getMyself();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2161,8 +2099,6 @@ public final class PlayProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         callState_ = -1;
         bitField0_ = (bitField0_ & ~0x00000040);
-        myself_ = -1;
-        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -2229,10 +2165,6 @@ public final class PlayProto {
           to_bitField0_ |= 0x00000010;
         }
         result.callState_ = callState_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.myself_ = myself_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2341,9 +2273,6 @@ public final class PlayProto {
         }
         if (other.hasCallState()) {
           setCallState(other.getCallState());
-        }
-        if (other.hasMyself()) {
-          setMyself(other.getMyself());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3339,54 +3268,6 @@ public final class PlayProto {
       public Builder clearCallState() {
         bitField0_ = (bitField0_ & ~0x00000040);
         callState_ = -1;
-        onChanged();
-        return this;
-      }
-
-      private int myself_ = -1;
-      /**
-       * <pre>
-       * 我的位置
-       * </pre>
-       *
-       * <code>optional int32 myself = 8 [default = -1];</code>
-       */
-      public boolean hasMyself() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      /**
-       * <pre>
-       * 我的位置
-       * </pre>
-       *
-       * <code>optional int32 myself = 8 [default = -1];</code>
-       */
-      public int getMyself() {
-        return myself_;
-      }
-      /**
-       * <pre>
-       * 我的位置
-       * </pre>
-       *
-       * <code>optional int32 myself = 8 [default = -1];</code>
-       */
-      public Builder setMyself(int value) {
-        bitField0_ |= 0x00000080;
-        myself_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * 我的位置
-       * </pre>
-       *
-       * <code>optional int32 myself = 8 [default = -1];</code>
-       */
-      public Builder clearMyself() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        myself_ = -1;
         onChanged();
         return this;
       }
@@ -13716,31 +13597,31 @@ public final class PlayProto {
     java.lang.String[] descriptorData = {
       "\n\020proto/Play.proto\022\014com.su.proto\"&\n\007Card" +
       "Pro\022\r\n\005value\030\001 \001(\005\022\014\n\004suit\030\002 \001(\005\"*\n\013Mult" +
-      "iplePro\022\014\n\004type\030\001 \001(\005\022\r\n\005value\030\002 \001(\005\"\367\001\n" +
+      "iplePro\022\014\n\004type\030\001 \001(\005\022\r\n\005value\030\002 \001(\005\"\343\001\n" +
       "\010TablePro\022,\n\007players\030\001 \003(\0132\033.com.su.prot" +
       "o.GamePlayerPro\022,\n\tmultiples\030\002 \003(\0132\031.com" +
       ".su.proto.MultiplePro\022\021\n\005state\030\003 \001(\005:\002-1" +
       "\022\020\n\004hold\030\004 \001(\005:\002-1\022\026\n\nroundScore\030\005 \001(\005:\002" +
       "-1\022\'\n\010flagCard\030\006 \001(\0132\025.com.su.proto.Card" +
-      "Pro\022\025\n\tcallState\030\007 \001(\005:\002-1\022\022\n\006myself\030\010 \001" +
-      "(\005:\002-1\"\314\001\n\rGamePlayerPro\022(\n\thandCards\030\001 ",
-      "\003(\0132\025.com.su.proto.CardPro\022\020\n\004team\030\002 \001(\005" +
-      ":\002-1\022-\n\nmyMultiple\030\003 \001(\0132\031.com.su.proto." +
-      "MultiplePro\022\023\n\007myScore\030\004 \001(\005:\002-1\022\021\n\005stat" +
-      "e\030\005 \001(\005:\002-1\022\024\n\010deadline\030\006 \001(\003:\002-1\022\022\n\006isA" +
-      "uto\030\007 \001(\005:\002-1\"\037\n\rStartMatchReq\022\016\n\006siteId" +
-      "\030\001 \001(\005\"\020\n\016StartMatchResp\"\034\n\007CallReq\022\021\n\tc" +
-      "ardIndex\030\001 \001(\005\"\n\n\010CallResp\"/\n\007DrawReq\022\020\n" +
-      "\010cardType\030\001 \001(\005\022\022\n\ncardIndexs\030\002 \003(\005\"\n\n\010D" +
-      "rawResp\"\n\n\010CheckReq\"\013\n\tCheckResp\"\n\n\010Read" +
-      "yReq\"\013\n\tReadyResp\"\t\n\007ExitReq\"\n\n\010ExitResp",
-      "\"\013\n\tDoubleReq\"\014\n\nDoubleResp\"\014\n\nUseItemRe" +
-      "q\"\r\n\013UseItemResp\"8\n\017GameStartNotice\022%\n\005t" +
-      "able\030\001 \001(\0132\026.com.su.proto.TablePro\"I\n\026Up" +
-      "dateGamePlayerNotice\022/\n\ngamePlayer\030\001 \001(\013" +
-      "2\033.com.su.proto.GamePlayerPro\":\n\021UpdateT" +
-      "ableNotice\022%\n\005table\030\001 \001(\0132\026.com.su.proto" +
-      ".TableProB\013B\tPlayProto"
+      "Pro\022\025\n\tcallState\030\007 \001(\005:\002-1\"\314\001\n\rGamePlaye" +
+      "rPro\022(\n\thandCards\030\001 \003(\0132\025.com.su.proto.C",
+      "ardPro\022\020\n\004team\030\002 \001(\005:\002-1\022-\n\nmyMultiple\030\003" +
+      " \001(\0132\031.com.su.proto.MultiplePro\022\023\n\007mySco" +
+      "re\030\004 \001(\005:\002-1\022\021\n\005state\030\005 \001(\005:\002-1\022\024\n\010deadl" +
+      "ine\030\006 \001(\003:\002-1\022\022\n\006isAuto\030\007 \001(\005:\002-1\"\037\n\rSta" +
+      "rtMatchReq\022\016\n\006siteId\030\001 \001(\005\"\020\n\016StartMatch" +
+      "Resp\"\034\n\007CallReq\022\021\n\tcardIndex\030\001 \001(\005\"\n\n\010Ca" +
+      "llResp\"/\n\007DrawReq\022\020\n\010cardType\030\001 \001(\005\022\022\n\nc" +
+      "ardIndexs\030\002 \003(\005\"\n\n\010DrawResp\"\n\n\010CheckReq\"" +
+      "\013\n\tCheckResp\"\n\n\010ReadyReq\"\013\n\tReadyResp\"\t\n" +
+      "\007ExitReq\"\n\n\010ExitResp\"\013\n\tDoubleReq\"\014\n\nDou",
+      "bleResp\"\014\n\nUseItemReq\"\r\n\013UseItemResp\"8\n\017" +
+      "GameStartNotice\022%\n\005table\030\001 \001(\0132\026.com.su." +
+      "proto.TablePro\"I\n\026UpdateGamePlayerNotice" +
+      "\022/\n\ngamePlayer\030\001 \001(\0132\033.com.su.proto.Game" +
+      "PlayerPro\":\n\021UpdateTableNotice\022%\n\005table\030" +
+      "\001 \001(\0132\026.com.su.proto.TableProB\013B\tPlayPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -13771,7 +13652,7 @@ public final class PlayProto {
     internal_static_com_su_proto_TablePro_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_su_proto_TablePro_descriptor,
-        new java.lang.String[] { "Players", "Multiples", "State", "Hold", "RoundScore", "FlagCard", "CallState", "Myself", });
+        new java.lang.String[] { "Players", "Multiples", "State", "Hold", "RoundScore", "FlagCard", "CallState", });
     internal_static_com_su_proto_GamePlayerPro_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_su_proto_GamePlayerPro_fieldAccessorTable = new
