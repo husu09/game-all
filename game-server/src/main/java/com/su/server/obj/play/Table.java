@@ -1,12 +1,15 @@
 package com.su.server.obj.play;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.DelayQueue;
 
+import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.common.util.CommonUtils;
 import com.su.common.util.SpringUtil;
 import com.su.core.akka.AkkaContext;
+import com.su.proto.PlayProto.CardPro;
 import com.su.proto.PlayProto.GamePlayerPro;
 import com.su.proto.PlayProto.GameStartNotice;
 import com.su.proto.PlayProto.MultiplePro;
@@ -51,10 +54,11 @@ public class Table {
 	/**
 	 * 倍数
 	 */
-	private Map<Integer, Integer> multiples;
+	private int[] multipleTypes = new int[MultipleType.values().length];
+	private int[] multipleValues = new int[MultipleType.values().length];
 	/**
 	 * 最后出牌
-	 * */
+	 */
 	private Card[] lastCards;
 	/**
 	 * 操作接口
@@ -67,7 +71,7 @@ public class Table {
 
 	private AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
 
-	public TablePro toProto() {
+	/*public TablePro toProto() {
 		TablePro.Builder builder = TablePro.newBuilder();
 		GamePlayerPro.Builder gamePlayerProBuilder = GamePlayerPro.newBuilder();
 		for (int i = 0; i < players.length; i++) {
@@ -82,10 +86,18 @@ public class Table {
 		builder.setState(state.ordinal());
 		builder.setHold(hold);
 		builder.setRoundScore(roundScore);
-		builder.setCalledCard(calledCard.toProto());
+		if (calledCard != null)
+			builder.setCalledCard(calledCard.toProto());
 		builder.setCallState(callState.ordinal());
+		if (lastCards != null) {
+			CardPro.Builder cardProBuilder = CardPro.newBuilder();
+			for (Card card : lastCards) {
+				builder.addLastCards(card.toProto());
+				cardProBuilder.clear();
+			}
+		}
 		return builder.build();
-	}
+	}*/
 
 	public Table(Site site) {
 		this.site = site;
@@ -114,13 +126,14 @@ public class Table {
 		}
 
 	}
+
 	/**
 	 * 初始化
-	 * */
+	 */
 	public void init(GamePlayer[] players) {
 		this.players = players;
 		// 初始倍数
-		multiples.put(MultipleType.CHU_SHI.ordinal(), MultipleType.CHU_SHI.getValue());
+		/*multiples.put(MultipleType.CHU_SHI.ordinal(), MultipleType.CHU_SHI.getValue());*/
 		for (int i = 0; i < players.length; i++) {
 			players[i].setIndex(i);
 		}
@@ -133,20 +146,20 @@ public class Table {
 	 */
 	public void start() {
 		this.state = TableState.START;
-		shuffle();
-		deal();
-		players[hold].setState(PlayerState.OPERATING);
-		players[hold].setDeadLine(15);
 		for (int i = 0; i < players.length; i++) {
 			if (i == hold)
 				continue;
 			players[i].setState(PlayerState.WATCH);
 		}
+		shuffle();
+		deal();
+		players[hold].setState(PlayerState.OPERATING);
+		players[hold].setDeadLine(15);
 		deadLineQueue.offer(players[hold]);
 		site.getPlayingTableQueue().offer(this);
 		// 通知
 		GameStartNotice.Builder builder = GameStartNotice.newBuilder();
-		builder.setTable(toProto());
+		/*builder.setTable(toProto());*/
 		for (int i = 0; i < players.length; i++) {
 			players[i].getPlayerContext().write(builder);
 		}
@@ -175,7 +188,10 @@ public class Table {
 				index++;
 		}
 	}
-
+	
+	/**
+	 * 处理超时
+	 * */
 	public void checkDeadLine() {
 		GamePlayer player = deadLineQueue.poll();
 		if (player != null) {
@@ -183,18 +199,26 @@ public class Table {
 				player.check();
 		}
 	}
-
-
+	
+	/**
+	 * 处理过牌
+	 * */
 	public void doCheck(GamePlayer gamePlayer) {
 		GamePlayer nextPlayer = players[(gamePlayer.getIndex() + 1 + 1) % 4 - 1];
 		nextPlayer.setState(PlayerState.OPERATING);
-		
 	}
-
+	
+	/**
+	 * 通知所有玩家数据更新
+	 * */
+	private void noticePlayers(MessageLiteOrBuilder msg) {
+		for(GamePlayer player : players) {
+			player.getPlayerContext().write(msg);
+		}
+	}
+	
 	public TableActor getActor() {
 		return actor;
 	}
-	
-	
 
 }

@@ -28,8 +28,7 @@ public class GamePlayer implements Delayed {
 	/**
 	 * 我的倍数
 	 */
-	private int multipleType;
-	private int multiple;
+	private int multipleValue;
 	/**
 	 * 分数
 	 */
@@ -50,61 +49,65 @@ public class GamePlayer implements Delayed {
 	 * 玩家上下文
 	 */
 	private PlayerContext playerContext;
-	
+
 	private Table table;
 
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 		this.id = playerContext.getPlayer().getId();
 	}
-	
-	public GamePlayerPro toProto() {
+
+	/*public GamePlayerPro toProto() {
 		GamePlayerPro.Builder builder = GamePlayerPro.newBuilder();
 		return toProto(builder);
-	}
+	}*/
 
-	public GamePlayerPro toProto(GamePlayerPro.Builder builder) {
+	/*public GamePlayerPro toProto(GamePlayerPro.Builder builder) {
 		if (builder == null)
 			builder = GamePlayerPro.newBuilder();
 		builder.setId(id);
 		CardPro.Builder cardProBuilder = CardPro.newBuilder();
 		for (Card card : handCards) {
+			if (card == null)
+				continue;
 			builder.addHandCards(card.toProto(cardProBuilder));
 			cardProBuilder.clear();
 		}
 		builder.setTeam(team.ordinal());
-		MultiplePro.Builder multipleProBuilder = MultiplePro.newBuilder();
-		multipleProBuilder.setType(multipleType).setValue(multiple);
-		builder.setMyMultiple(multipleProBuilder.build());
+		if (multipleType != 0) {
+			MultiplePro.Builder multipleProBuilder = MultiplePro.newBuilder();
+			multipleProBuilder.setType(multipleType).setValue(multiple);
+			builder.setMyMultiple(multipleProBuilder.build());
+		}
 		builder.setMyScore(myScore);
 		builder.setState(state.ordinal());
 		builder.setDeadline(deadLine);
 		builder.setIsAuto(isAuto);
 		return builder.build();
-	}
-	
-	
-	
+	}*/
+
 	/**
 	 * 叫牌
-	 * */
+	 */
 	public void call() {
-		
+
 	}
+
 	/**
 	 * 出牌
-	 * */
+	 */
 	public void draw() {
-		
+
 	}
+
 	/**
 	 * 过牌
-	 * */
+	 */
 	public void check() {
 		state = PlayerState.WATCH;
 		table.doCheck(this);
 	}
-	
+
 	@Override
 	public int compareTo(Delayed o) {
 		if (this.getDelay(TimeUnit.SECONDS) > o.getDelay(TimeUnit.SECONDS))
@@ -141,22 +144,6 @@ public class GamePlayer implements Delayed {
 
 	public void setTeam(Team team) {
 		this.team = team;
-	}
-
-	public int getMultipleType() {
-		return multipleType;
-	}
-
-	public void setMultipleType(int multipleType) {
-		this.multipleType = multipleType;
-	}
-
-	public int getMultiple() {
-		return multiple;
-	}
-
-	public void setMultiple(int multiple) {
-		this.multiple = multiple;
 	}
 
 	public int getMyScore() {
@@ -207,5 +194,4 @@ public class GamePlayer implements Delayed {
 		return playerContext;
 	}
 
-	
 }

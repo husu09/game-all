@@ -28,7 +28,7 @@ message GamePlayerPro {
 	repeated CardPro handCards = 2;	// 玩家手牌
 	optional int32 cardNum = 3[default = -1];	// 手牌数量
 	optional int32 team = 4[default = -1];	// 玩家队伍（0：无，1：红方，2：蓝方）
-	optional MultiplePro myMultiple = 5;	// 倍数
+	optional int32 myMultipleValue = 5;	// 倍数
 	optional int32 myScore = 6[default = -1];	// 得分
 	optional int32 state = 7[default = -1];	// 状态
 	optional int64 deadline = 8[default = -1];	// 截止时间
