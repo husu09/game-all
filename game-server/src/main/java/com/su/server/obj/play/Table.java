@@ -266,7 +266,6 @@ public class Table implements Delayed {
 		site.getDeadLineQueue().remove(player);
 		player.setState(PlayerState.WATCH);
 		player.setDeadLine(0);
-
 		GamePlayer nextPlayer = players[(player.getIndex() + 1 + 1) % 4 - 1];
 		nextPlayer.setState(PlayerState.OPERATING);
 		nextPlayer.setDeadLine(30);
@@ -292,6 +291,14 @@ public class Table implements Delayed {
 	 */
 	public void call(GamePlayer player, int index) {
 		site.getDeadLineQueue().remove(player);
+		// 玩家状态处理
+		player.setState(PlayerState.WATCH);
+		player.setDeadLine(0);
+		GamePlayer nextPlayer = players[(player.getIndex() + 1 + 1) % 4 - 1];
+		nextPlayer.setState(PlayerState.OPERATING);
+		nextPlayer.setDeadLine(30);
+		site.getDeadLineQueue().offer(nextPlayer);
+		
 		if (player.getState() != PlayerState.OPERATING) {
 			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
 			return;
@@ -322,12 +329,6 @@ public class Table implements Delayed {
 			callState = CallState.CALL;
 			multiples[MultipleType.JIAO_PAI.ordinal()] += MultipleType.MING_JIAO.getValue();
 		}
-		// 玩家状态处理
-		player.setState(PlayerState.WATCH);
-		player.setDeadLine(0);
-		GamePlayer nextPlayer = players[(player.getIndex() + 1 + 1) % 4 - 1];
-		nextPlayer.setState(PlayerState.OPERATING);
-		nextPlayer.setDeadLine(30);
 		
 		// 通知
 		gamePlayerPro.setState(player.getState().ordinal());
