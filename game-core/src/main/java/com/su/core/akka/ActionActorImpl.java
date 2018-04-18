@@ -13,7 +13,7 @@ import akka.actor.TypedActor;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.Attribute;
 
-public class ProcessorActorImpl implements ProcessorActor {
+public class ActionActorImpl implements ActionActor {
 
 	private AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
 	private ActionContext actionContext = SpringUtil.getContext().getBean(ActionContext.class);

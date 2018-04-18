@@ -19,8 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
+import com.su.core.akka.ActionActor;
+import com.su.core.akka.ActionActorImpl;
 import com.su.core.akka.AkkaContext;
-import com.su.core.akka.ProcessorActor;
 import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
 
@@ -44,18 +45,18 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	private GameContext gameContext;
 
 	public static final AttributeKey<PlayerContext> PLAYER_CONTEXT_KEY = AttributeKey.valueOf("PLAYER_CONTEXT_KEY");
-	public static final AttributeKey<ProcessorActor> PROCESSOR_ACTOR_KEY = AttributeKey.valueOf("PROCESSOR_ACTOR_KEY");
+	public static final AttributeKey<ActionActor> PROCESSOR_ACTOR_KEY = AttributeKey.valueOf("PROCESSOR_ACTOR_KEY");
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		Attribute<ProcessorActor> attr = ctx.channel().attr(PROCESSOR_ACTOR_KEY);
-		ProcessorActor processorActor = attr.get();
-		if (processorActor != null) {
-			processorActor.process(ctx, (MessageLite) msg);
+		Attribute<ActionActor> attr = ctx.channel().attr(PROCESSOR_ACTOR_KEY);
+		ActionActor actionActor = attr.get();
+		if (actionActor != null) {
+			actionActor.process(ctx, (MessageLite) msg);
 		} else {
-			processorActor = akkaContext.createActor();
-			attr.set(processorActor);
-			processorActor.process(ctx, (MessageLite) msg);
+			actionActor = akkaContext.createActor(ActionActor.class, ActionActorImpl.class);
+			attr.set(actionActor);
+			actionActor.process(ctx, (MessageLite) msg);
 		}
 	}
 
@@ -70,7 +71,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		PlayerContext playerContext = ctx.channel().attr(PLAYER_CONTEXT_KEY).get();
-		ProcessorActor processorActor = ctx.channel().attr(PROCESSOR_ACTOR_KEY).get();
+		ActionActor processorActor = ctx.channel().attr(PROCESSOR_ACTOR_KEY).get();
 		if (playerContext != null) {
 			if (playerContext.getPlayer() != null) {
 				// 退出事件

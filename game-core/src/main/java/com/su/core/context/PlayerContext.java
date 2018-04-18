@@ -3,7 +3,7 @@ package com.su.core.context;
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.common.po.Player;
-import com.su.core.akka.ProcessorActor;
+import com.su.core.akka.ActionActor;
 import com.su.core.netty.NettyServerHandler;
 import com.su.proto.CommonProto.ErrorResp;
 
@@ -16,7 +16,7 @@ public class PlayerContext {
 
 	private ChannelHandlerContext ctx;
 
-	private ProcessorActor actor;
+	private ActionActor actor;
 
 	private Player player;
 	
@@ -29,11 +29,11 @@ public class PlayerContext {
 		this.ctx = ctx;
 	}
 
-	public ProcessorActor getActor() {
+	public ActionActor getActor() {
 		return actor;
 	}
 
-	public void setActor(ProcessorActor actor) {
+	public void setActor(ActionActor actor) {
 		this.actor = actor;
 	}
 

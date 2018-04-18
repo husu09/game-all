@@ -5,7 +5,7 @@ import com.su.core.context.PlayerContext;
 
 import io.netty.channel.ChannelHandlerContext;
 
-public interface ProcessorActor {
+public interface ActionActor {
 	
 	/**
 	 * 处理消息
