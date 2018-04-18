@@ -44,8 +44,13 @@ public interface TableActor {
 	public void reconnect(PlayerContext playerContext);
 
 	/**
-	 * 检测截止时间
+	 * 玩家超时
 	 */
-	public void checkDeadline();
+	public void checkDeadline(GamePlayer player);
+	
+	/**
+	 * 等待超时
+	 * */
+	public void checkWaiting();
 
 }

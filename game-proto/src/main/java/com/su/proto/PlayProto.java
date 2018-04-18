@@ -12969,17 +12969,28 @@ public final class PlayProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
      */
-    boolean hasGamePlayer();
+    java.util.List<com.su.proto.PlayProto.GamePlayerPro> 
+        getGamePlayerList();
     /**
-     * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
      */
-    com.su.proto.PlayProto.GamePlayerPro getGamePlayer();
+    com.su.proto.PlayProto.GamePlayerPro getGamePlayer(int index);
     /**
-     * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
      */
-    com.su.proto.PlayProto.GamePlayerProOrBuilder getGamePlayerOrBuilder();
+    int getGamePlayerCount();
+    /**
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     */
+    java.util.List<? extends com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+        getGamePlayerOrBuilderList();
+    /**
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     */
+    com.su.proto.PlayProto.GamePlayerProOrBuilder getGamePlayerOrBuilder(
+        int index);
   }
   /**
    * <pre>
@@ -12997,6 +13008,7 @@ public final class PlayProto {
       super(builder);
     }
     private UpdateGamePlayerNotice() {
+      gamePlayer_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -13028,16 +13040,12 @@ public final class PlayProto {
               break;
             }
             case 10: {
-              com.su.proto.PlayProto.GamePlayerPro.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = gamePlayer_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                gamePlayer_ = new java.util.ArrayList<com.su.proto.PlayProto.GamePlayerPro>();
+                mutable_bitField0_ |= 0x00000001;
               }
-              gamePlayer_ = input.readMessage(com.su.proto.PlayProto.GamePlayerPro.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(gamePlayer_);
-                gamePlayer_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
+              gamePlayer_.add(
+                  input.readMessage(com.su.proto.PlayProto.GamePlayerPro.PARSER, extensionRegistry));
               break;
             }
           }
@@ -13048,6 +13056,9 @@ public final class PlayProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          gamePlayer_ = java.util.Collections.unmodifiableList(gamePlayer_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -13064,26 +13075,39 @@ public final class PlayProto {
               com.su.proto.PlayProto.UpdateGamePlayerNotice.class, com.su.proto.PlayProto.UpdateGamePlayerNotice.Builder.class);
     }
 
-    private int bitField0_;
     public static final int GAMEPLAYER_FIELD_NUMBER = 1;
-    private com.su.proto.PlayProto.GamePlayerPro gamePlayer_;
+    private java.util.List<com.su.proto.PlayProto.GamePlayerPro> gamePlayer_;
     /**
-     * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
      */
-    public boolean hasGamePlayer() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+    public java.util.List<com.su.proto.PlayProto.GamePlayerPro> getGamePlayerList() {
+      return gamePlayer_;
     }
     /**
-     * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
      */
-    public com.su.proto.PlayProto.GamePlayerPro getGamePlayer() {
-      return gamePlayer_ == null ? com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance() : gamePlayer_;
+    public java.util.List<? extends com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+        getGamePlayerOrBuilderList() {
+      return gamePlayer_;
     }
     /**
-     * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
      */
-    public com.su.proto.PlayProto.GamePlayerProOrBuilder getGamePlayerOrBuilder() {
-      return gamePlayer_ == null ? com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance() : gamePlayer_;
+    public int getGamePlayerCount() {
+      return gamePlayer_.size();
+    }
+    /**
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     */
+    public com.su.proto.PlayProto.GamePlayerPro getGamePlayer(int index) {
+      return gamePlayer_.get(index);
+    }
+    /**
+     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     */
+    public com.su.proto.PlayProto.GamePlayerProOrBuilder getGamePlayerOrBuilder(
+        int index) {
+      return gamePlayer_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -13098,8 +13122,8 @@ public final class PlayProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, getGamePlayer());
+      for (int i = 0; i < gamePlayer_.size(); i++) {
+        output.writeMessage(1, gamePlayer_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -13109,9 +13133,9 @@ public final class PlayProto {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      for (int i = 0; i < gamePlayer_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getGamePlayer());
+          .computeMessageSize(1, gamePlayer_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -13130,11 +13154,8 @@ public final class PlayProto {
       com.su.proto.PlayProto.UpdateGamePlayerNotice other = (com.su.proto.PlayProto.UpdateGamePlayerNotice) obj;
 
       boolean result = true;
-      result = result && (hasGamePlayer() == other.hasGamePlayer());
-      if (hasGamePlayer()) {
-        result = result && getGamePlayer()
-            .equals(other.getGamePlayer());
-      }
+      result = result && getGamePlayerList()
+          .equals(other.getGamePlayerList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -13146,9 +13167,9 @@ public final class PlayProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasGamePlayer()) {
+      if (getGamePlayerCount() > 0) {
         hash = (37 * hash) + GAMEPLAYER_FIELD_NUMBER;
-        hash = (53 * hash) + getGamePlayer().hashCode();
+        hash = (53 * hash) + getGamePlayerList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -13274,11 +13295,11 @@ public final class PlayProto {
       public Builder clear() {
         super.clear();
         if (gamePlayerBuilder_ == null) {
-          gamePlayer_ = null;
+          gamePlayer_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           gamePlayerBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -13302,16 +13323,15 @@ public final class PlayProto {
       public com.su.proto.PlayProto.UpdateGamePlayerNotice buildPartial() {
         com.su.proto.PlayProto.UpdateGamePlayerNotice result = new com.su.proto.PlayProto.UpdateGamePlayerNotice(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
         if (gamePlayerBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            gamePlayer_ = java.util.Collections.unmodifiableList(gamePlayer_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
           result.gamePlayer_ = gamePlayer_;
         } else {
           result.gamePlayer_ = gamePlayerBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -13353,8 +13373,31 @@ public final class PlayProto {
 
       public Builder mergeFrom(com.su.proto.PlayProto.UpdateGamePlayerNotice other) {
         if (other == com.su.proto.PlayProto.UpdateGamePlayerNotice.getDefaultInstance()) return this;
-        if (other.hasGamePlayer()) {
-          mergeGamePlayer(other.getGamePlayer());
+        if (gamePlayerBuilder_ == null) {
+          if (!other.gamePlayer_.isEmpty()) {
+            if (gamePlayer_.isEmpty()) {
+              gamePlayer_ = other.gamePlayer_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureGamePlayerIsMutable();
+              gamePlayer_.addAll(other.gamePlayer_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.gamePlayer_.isEmpty()) {
+            if (gamePlayerBuilder_.isEmpty()) {
+              gamePlayerBuilder_.dispose();
+              gamePlayerBuilder_ = null;
+              gamePlayer_ = other.gamePlayer_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              gamePlayerBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getGamePlayerFieldBuilder() : null;
+            } else {
+              gamePlayerBuilder_.addAllMessages(other.gamePlayer_);
+            }
+          }
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -13384,117 +13427,239 @@ public final class PlayProto {
       }
       private int bitField0_;
 
-      private com.su.proto.PlayProto.GamePlayerPro gamePlayer_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder> gamePlayerBuilder_;
-      /**
-       * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
-       */
-      public boolean hasGamePlayer() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+      private java.util.List<com.su.proto.PlayProto.GamePlayerPro> gamePlayer_ =
+        java.util.Collections.emptyList();
+      private void ensureGamePlayerIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          gamePlayer_ = new java.util.ArrayList<com.su.proto.PlayProto.GamePlayerPro>(gamePlayer_);
+          bitField0_ |= 0x00000001;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder> gamePlayerBuilder_;
+
       /**
-       * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro getGamePlayer() {
+      public java.util.List<com.su.proto.PlayProto.GamePlayerPro> getGamePlayerList() {
         if (gamePlayerBuilder_ == null) {
-          return gamePlayer_ == null ? com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance() : gamePlayer_;
+          return java.util.Collections.unmodifiableList(gamePlayer_);
         } else {
-          return gamePlayerBuilder_.getMessage();
+          return gamePlayerBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
        */
-      public Builder setGamePlayer(com.su.proto.PlayProto.GamePlayerPro value) {
+      public int getGamePlayerCount() {
+        if (gamePlayerBuilder_ == null) {
+          return gamePlayer_.size();
+        } else {
+          return gamePlayerBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public com.su.proto.PlayProto.GamePlayerPro getGamePlayer(int index) {
+        if (gamePlayerBuilder_ == null) {
+          return gamePlayer_.get(index);
+        } else {
+          return gamePlayerBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public Builder setGamePlayer(
+          int index, com.su.proto.PlayProto.GamePlayerPro value) {
         if (gamePlayerBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          gamePlayer_ = value;
+          ensureGamePlayerIsMutable();
+          gamePlayer_.set(index, value);
           onChanged();
         } else {
-          gamePlayerBuilder_.setMessage(value);
+          gamePlayerBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
        */
       public Builder setGamePlayer(
+          int index, com.su.proto.PlayProto.GamePlayerPro.Builder builderForValue) {
+        if (gamePlayerBuilder_ == null) {
+          ensureGamePlayerIsMutable();
+          gamePlayer_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          gamePlayerBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public Builder addGamePlayer(com.su.proto.PlayProto.GamePlayerPro value) {
+        if (gamePlayerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGamePlayerIsMutable();
+          gamePlayer_.add(value);
+          onChanged();
+        } else {
+          gamePlayerBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public Builder addGamePlayer(
+          int index, com.su.proto.PlayProto.GamePlayerPro value) {
+        if (gamePlayerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGamePlayerIsMutable();
+          gamePlayer_.add(index, value);
+          onChanged();
+        } else {
+          gamePlayerBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public Builder addGamePlayer(
           com.su.proto.PlayProto.GamePlayerPro.Builder builderForValue) {
         if (gamePlayerBuilder_ == null) {
-          gamePlayer_ = builderForValue.build();
+          ensureGamePlayerIsMutable();
+          gamePlayer_.add(builderForValue.build());
           onChanged();
         } else {
-          gamePlayerBuilder_.setMessage(builderForValue.build());
+          gamePlayerBuilder_.addMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
        */
-      public Builder mergeGamePlayer(com.su.proto.PlayProto.GamePlayerPro value) {
+      public Builder addGamePlayer(
+          int index, com.su.proto.PlayProto.GamePlayerPro.Builder builderForValue) {
         if (gamePlayerBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              gamePlayer_ != null &&
-              gamePlayer_ != com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance()) {
-            gamePlayer_ =
-              com.su.proto.PlayProto.GamePlayerPro.newBuilder(gamePlayer_).mergeFrom(value).buildPartial();
-          } else {
-            gamePlayer_ = value;
-          }
+          ensureGamePlayerIsMutable();
+          gamePlayer_.add(index, builderForValue.build());
           onChanged();
         } else {
-          gamePlayerBuilder_.mergeFrom(value);
+          gamePlayerBuilder_.addMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public Builder addAllGamePlayer(
+          java.lang.Iterable<? extends com.su.proto.PlayProto.GamePlayerPro> values) {
+        if (gamePlayerBuilder_ == null) {
+          ensureGamePlayerIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, gamePlayer_);
+          onChanged();
+        } else {
+          gamePlayerBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
        */
       public Builder clearGamePlayer() {
         if (gamePlayerBuilder_ == null) {
-          gamePlayer_ = null;
+          gamePlayer_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           gamePlayerBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
       /**
-       * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro.Builder getGamePlayerBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getGamePlayerFieldBuilder().getBuilder();
+      public Builder removeGamePlayer(int index) {
+        if (gamePlayerBuilder_ == null) {
+          ensureGamePlayerIsMutable();
+          gamePlayer_.remove(index);
+          onChanged();
+        } else {
+          gamePlayerBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerProOrBuilder getGamePlayerOrBuilder() {
-        if (gamePlayerBuilder_ != null) {
-          return gamePlayerBuilder_.getMessageOrBuilder();
-        } else {
-          return gamePlayer_ == null ?
-              com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance() : gamePlayer_;
+      public com.su.proto.PlayProto.GamePlayerPro.Builder getGamePlayerBuilder(
+          int index) {
+        return getGamePlayerFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public com.su.proto.PlayProto.GamePlayerProOrBuilder getGamePlayerOrBuilder(
+          int index) {
+        if (gamePlayerBuilder_ == null) {
+          return gamePlayer_.get(index);  } else {
+          return gamePlayerBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
+      public java.util.List<? extends com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+           getGamePlayerOrBuilderList() {
+        if (gamePlayerBuilder_ != null) {
+          return gamePlayerBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(gamePlayer_);
+        }
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public com.su.proto.PlayProto.GamePlayerPro.Builder addGamePlayerBuilder() {
+        return getGamePlayerFieldBuilder().addBuilder(
+            com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public com.su.proto.PlayProto.GamePlayerPro.Builder addGamePlayerBuilder(
+          int index) {
+        return getGamePlayerFieldBuilder().addBuilder(
+            index, com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       */
+      public java.util.List<com.su.proto.PlayProto.GamePlayerPro.Builder> 
+           getGamePlayerBuilderList() {
+        return getGamePlayerFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
           com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder> 
           getGamePlayerFieldBuilder() {
         if (gamePlayerBuilder_ == null) {
-          gamePlayerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          gamePlayerBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder>(
-                  getGamePlayer(),
+                  gamePlayer_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
           gamePlayer_ = null;
@@ -14285,7 +14450,7 @@ public final class PlayProto {
       "sp\"\014\n\nUseItemReq\"\r\n\013UseItemResp\"8\n\017GameS" +
       "tartNotice\022%\n\005table\030\001 \001(\0132\026.com.su.proto" +
       ".TablePro\"I\n\026UpdateGamePlayerNotice\022/\n\ng" +
-      "amePlayer\030\001 \001(\0132\033.com.su.proto.GamePlaye" +
+      "amePlayer\030\001 \003(\0132\033.com.su.proto.GamePlaye" +
       "rPro\":\n\021UpdateTableNotice\022%\n\005table\030\001 \001(\013" +
       "2\026.com.su.proto.TableProB\013B\tPlayProto"
     };

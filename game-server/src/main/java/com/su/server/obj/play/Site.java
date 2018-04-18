@@ -2,6 +2,7 @@ package com.su.server.obj.play;
 
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.su.excel.co.SiteCo;
@@ -17,21 +18,21 @@ public class Site {
 	 */
 	private AtomicInteger playerNum = new AtomicInteger();
 	/**
+	 * 玩家队列
+	 */
+	private ConcurrentLinkedDeque<GamePlayer> playerDeque = new ConcurrentLinkedDeque<>();
+	/**
 	 * 空闲牌桌队列
 	 */
 	private ConcurrentLinkedQueue<Table> tableQueue = new ConcurrentLinkedQueue<>();
 	/**
-	 * 游戏中的牌桌队列
-	 */
-	private ConcurrentLinkedQueue<Table> playingTableQueue = new ConcurrentLinkedQueue<>();
-	/**
 	 * 等待中的牌桌队列
 	 */
-	private ConcurrentLinkedQueue<Table> waitingTableQueue = new ConcurrentLinkedQueue<>();
+	private DelayQueue<Table> waitingTableQueue = new DelayQueue<>();
 	/**
-	 * 玩家队列
+	 * 操作时间队列
 	 */
-	private ConcurrentLinkedDeque<GamePlayer> playerDeque = new ConcurrentLinkedDeque<>();
+	private DelayQueue<GamePlayer> deadLineQueue = new DelayQueue<>();
 	/**
 	 * 配置
 	 */
@@ -89,16 +90,16 @@ public class Site {
 		return tableQueue;
 	}
 
-	public ConcurrentLinkedQueue<Table> getPlayingTableQueue() {
-		return playingTableQueue;
+	public ConcurrentLinkedDeque<GamePlayer> getPlayerDeque() {
+		return playerDeque;
 	}
 
-	public ConcurrentLinkedQueue<Table> getWaitingTableQueue() {
+	public DelayQueue<Table> getWaitingTableQueue() {
 		return waitingTableQueue;
 	}
 
-	public ConcurrentLinkedDeque<GamePlayer> getPlayerDeque() {
-		return playerDeque;
+	public DelayQueue<GamePlayer> getDeadLineQueue() {
+		return deadLineQueue;
 	}
 	
 }

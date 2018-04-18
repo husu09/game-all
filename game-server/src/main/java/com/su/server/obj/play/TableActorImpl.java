@@ -55,7 +55,13 @@ public class TableActorImpl implements TableActor {
 	}
 
 	@Override
-	public void checkDeadline() {
+	public void checkDeadline(GamePlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void checkWaiting() {
 		// TODO Auto-generated method stub
 		
 	}

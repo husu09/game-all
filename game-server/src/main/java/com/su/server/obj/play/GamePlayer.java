@@ -3,9 +3,6 @@ package com.su.server.obj.play;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
-import com.su.proto.PlayProto.CardPro;
-import com.su.proto.PlayProto.GamePlayerPro;
-import com.su.proto.PlayProto.MultiplePro;
 import com.su.server.context.PlayerContext;
 
 /**
@@ -49,37 +46,14 @@ public class GamePlayer implements Delayed {
 	 * 玩家上下文
 	 */
 	private PlayerContext playerContext;
-	
-	private GamePlayerPro.Builder gamePlayerPro = GamePlayerPro.newBuilder();
-
+	/**
+	 * 牌桌
+	 */
 	private Table table;
 
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 		this.id = playerContext.getPlayer().getId();
-	}
-
-
-	/**
-	 * 叫牌
-	 */
-	public void call() {
-
-	}
-
-	/**
-	 * 出牌
-	 */
-	public void draw() {
-
-	}
-
-	/**
-	 * 过牌
-	 */
-	public void check() {
-		state = PlayerState.WATCH;
-		table.doCheck(this);
 	}
 
 	@Override
@@ -176,8 +150,4 @@ public class GamePlayer implements Delayed {
 		return playerContext;
 	}
 
-	public GamePlayerPro.Builder getGamePlayerPro() {
-		return gamePlayerPro;
-	}
-	
 }

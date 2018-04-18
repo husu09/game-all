@@ -102,7 +102,7 @@ message GameStartNotice {
 
 // 玩家数据更新通知
 message UpdateGamePlayerNotice{
-	optional GamePlayerPro gamePlayer = 1;	
+	repeated GamePlayerPro gamePlayer = 1;	
 }
 
 // 牌桌数据更新通知
