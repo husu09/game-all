@@ -18,7 +18,7 @@ message TablePro {
 	optional int32 state = 3[default = -1];		// 状态
 	optional int32 hold = 4[default = -1];	// 牌权
 	optional int32 roundScore = 5[default = -1]; // 轮分
-	optional CardPro calledCard = 6;	// 被叫的牌
+	optional CardPro callCard = 6;	// 被叫的牌
 	optional int32	callState = 7[default = -1];	// 叫牌状态
 	repeated CardPro lastCards = 8;	// 最后出牌
 	optional int32 dealer = 9;	// 庄家
@@ -29,8 +29,8 @@ message GamePlayerPro {
 	repeated CardPro handCards = 2;	// 玩家手牌
 	optional int32 cardNum = 3[default = -1];	// 手牌数量
 	optional int32 team = 4[default = -1];	// 玩家队伍（0：无，1：红方，2：蓝方）
-	optional int32 myMultipleValue = 5;	// 倍数
-	optional int32 myScore = 6[default = -1];	// 得分
+	optional int32 multipleValue = 5;	// 倍数
+	optional int32 score = 6[default = -1];	// 得分
 	optional int32 state = 7[default = -1];	// 状态
 	optional int64 deadline = 8[default = -1];	// 截止时间
 	optional int32 isAuto = 9[default = -1];	// 是否托管
@@ -95,9 +95,10 @@ message UseItemReq {
 message UseItemResp {
 }
 
-// 游戏开始通知
-message GameStartNotice {
-	optional TablePro table = 1;	// 牌桌数据
+// 托管
+message autoReq{
+}
+message autoResp{
 }
 
 // 玩家数据更新通知

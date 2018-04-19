@@ -7,12 +7,6 @@ public class TableActorImpl implements TableActor {
 	private Table table;
 
 	@Override
-	public void initActor(Table table) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void initTable(GamePlayer[] players) {
 		// TODO Auto-generated method stub
 		

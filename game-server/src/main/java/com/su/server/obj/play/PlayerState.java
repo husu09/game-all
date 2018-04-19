@@ -14,7 +14,7 @@ public enum PlayerState {
 	 */
 	OPERATING,
 	/**
-	 * 等待中 3
+	 * 退出 3
 	 * */
-	WAITING
+	QUIT
 }

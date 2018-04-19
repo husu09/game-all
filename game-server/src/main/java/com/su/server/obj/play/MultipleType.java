@@ -1,7 +1,6 @@
 package com.su.server.obj.play;
 
 public enum MultipleType {
-	/************************ 公共倍数 *******************************/
 	/**
 	 * 基础倍数 0
 	 */
@@ -49,16 +48,7 @@ public enum MultipleType {
 	/**
 	 * 天炸 11
 	 */
-	TIAN_ZHA(4),
-	/************************ 玩家倍数 *******************************/
-	/**
-	 * 加倍 12
-	 */
-	JIA_BEI(2),
-	/**
-	 * 超级加倍 13
-	 */
-	CHAO_JI_JIA_BEI(4);
+	TIAN_ZHA(4);
 
 	private int value;
 

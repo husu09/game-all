@@ -17,23 +17,23 @@ public class GamePlayer implements Delayed {
 	/**
 	 * 手牌
 	 */
-	private Card[] handCards = new Card[27];
+	private Card[] handCards;
 	/**
 	 * 队伍
 	 */
-	private Team team = Team.NONE;
+	private Team team;
 	/**
-	 * 我的倍数
+	 * 倍数
 	 */
 	private int multipleValue;
 	/**
 	 * 分数
 	 */
-	private int myScore;
+	private int score;
 	/**
 	 * 状态
 	 */
-	private PlayerState state = PlayerState.READY;
+	private PlayerState state;
 	/**
 	 * 截止时间
 	 */
@@ -50,10 +50,15 @@ public class GamePlayer implements Delayed {
 	 * 牌桌
 	 */
 	private Table table;
-
+	/**
+	 * 手牌数量
+	 * */
+	private final static int HAND_CARDS_NUM = 27;
+	
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 		this.id = playerContext.getPlayer().getId();
+		handCards = new Card[HAND_CARDS_NUM];
 	}
 
 	@Override
@@ -103,11 +108,11 @@ public class GamePlayer implements Delayed {
 	}
 
 	public int getMyScore() {
-		return myScore;
+		return score;
 	}
 
 	public void setMyScore(int myScore) {
-		this.myScore = myScore;
+		this.score = myScore;
 	}
 
 	public PlayerState getState() {

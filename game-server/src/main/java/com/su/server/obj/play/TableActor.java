@@ -3,15 +3,11 @@ package com.su.server.obj.play;
 import com.su.server.context.PlayerContext;
 
 public interface TableActor {
-	/**
-	 * 初始化
-	 */
-	public void initActor(Table table);
 
 	/**
-	 * 初始化牌桌
+	 * 开始游戏
 	 */
-	public void initTable(GamePlayer[] players);
+	public void start(GamePlayer[] players);
 
 	/**
 	 * 叫牌

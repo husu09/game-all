@@ -1,7 +1,5 @@
 package com.su.server.obj.play;
 
-import com.su.proto.PlayProto.CardPro;
-
 public class Card implements Comparable<Card> {
 	/**
 	 * 牌面
@@ -41,6 +39,58 @@ public class Card implements Comparable<Card> {
 	@Override
 	public String toString() {
 		return "Card [value=" + value + ", suit=" + suit + "]";
+	}
+
+	/**
+	 * 一幅牌的张数
+	 */
+	public static final int CARDS_NUM = 54;
+
+	/**
+	 * 卡牌对应的值
+	 */
+	public static final int CARD_3 = 3;
+	public static final int CARD_4 = 4;
+	public static final int CARD_5 = 5;
+	public static final int CARD_6 = 6;
+	public static final int CARD_7 = 7;
+	public static final int CARD_8 = 8;
+	public static final int CARD_9 = 9;
+	public static final int CARD_10 = 10;
+	public static final int CARD_J = 11;
+	public static final int CARD_Q = 12;
+	public static final int CARD_K = 13;
+	public static final int CARD_A = 14;
+	public static final int CARD_2 = 15;
+	public static final int CARD_XIAO_WANG = 16;
+	public static final int CARD_DA_WANG = 17;
+
+	/**
+	 * 获取一幅牌
+	 */
+	public static Card[] getADeckOfCards() {
+		Card[] cards = new Card[CARDS_NUM];
+		int value = CARD_3;
+		int suit = Suit.FANG_KUAI.ordinal();
+		for (int i = 0; i < CARDS_NUM; i++) {
+			if (value + i == CARD_XIAO_WANG) {
+				cards[i] = new Card(CARD_XIAO_WANG, Suit.NONE);
+				continue;
+			}
+			if (value + i == CARD_DA_WANG) {
+				cards[i] = new Card(CARD_DA_WANG, Suit.NONE);
+				continue;
+			}
+
+			cards[i] = new Card(value + i, Suit.values()[suit]);
+			if ((i + 1) % 4 == 0) {
+				value++;
+				suit = 1;
+			} else {
+				suit++;
+			}
+		}
+		return cards;
 	}
 
 }
