@@ -3,6 +3,8 @@ package com.su.server.obj.play;
 import java.util.Map;
 
 import com.su.common.util.CommonUtils;
+import com.su.proto.PlayProto.GameStartNotice;
+import com.su.proto.PlayProto.TablePro;
 
 /**
  * 牌桌对象
@@ -85,7 +87,8 @@ public class Table {
 		for (int i = 1; i < players.length; i ++)
 			players[i].setState(PlayerState.WATCH);
 		// 通知
-		
+		GameStartNotice.Builder builder = GameStartNotice.newBuilder();
+		builder.setTable(value)
 	}
 
 	/**
@@ -113,6 +116,13 @@ public class Table {
 
 	public TableActor getActor() {
 		return actor;
+	}
+	
+	
+	private TablePro toProto() {
+		TablePro.Builder builder = TablePro.newBuilder();
+		builder.
+		return builder.build();
 	}
 
 }
