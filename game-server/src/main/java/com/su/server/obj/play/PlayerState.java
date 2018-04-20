@@ -10,7 +10,11 @@ public enum PlayerState {
 	 */
 	WATCH,
 	/**
-	 * 等待 2
+	 * 操作 2
 	 */
+	OPERATING,
+	/**
+	 * 等待中 3
+	 * */
 	WAITING
 }

@@ -1,6 +1,12 @@
 package com.su.server.obj.play;
 
+import com.su.server.context.PlayerContext;
+
 public interface TableActor {
+	/**
+	 * 初始化
+	 * */
+	public void init(Table table);
 	/**
 	 * 开始
 	 * */
@@ -28,7 +34,7 @@ public interface TableActor {
 	/**
 	 * 重连
 	 * */
-	public void reconnect();
+	public void reconnect(PlayerContext playerContext);
 	
 	
 }

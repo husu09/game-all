@@ -7,103 +7,103 @@ message CardPro {
 	optional int32 suit = 2;	// 花色（0：无，1：方块，2：梅花，3：红桃，4：黑桃）
 }
 
-message MultipleTypePro {
+message MultiplePro {
 	optional int32 type = 1;	// 类型
 	optional int32 value = 2;	// 倍数
 }
 
 message TablePro {
 	repeated GamePlayerPro players = 1;	// 玩家
-	repeated MultipleTypePro multiples = 2;	// 倍数
-	optional int32 state = 3;		// 状态
-	optional int32 hold = 4;	// 牌权
-	optional int32 roundScore = 5; // 轮分
+	repeated MultiplePro multiples = 2;	// 倍数
+	optional int32 state = 3[default = -1];		// 状态
+	optional int32 hold = 4[default = -1];	// 牌权
+	optional int32 roundScore = 5[default = -1]; // 轮分
 	optional CardPro flagCard = 6;	// 被叫的牌
-	optional int32	callState = 7;	// 叫牌状态
-	optional int32 myself = 8;	// 我的位置
+	optional int32	callState = 7[default = -1];	// 叫牌状态
+	optional int32 myself = 8[default = -1];	// 我的位置
 }
 
 message GamePlayerPro {
 	repeated CardPro handCards = 1;	// 玩家手牌
-	optional int32 team = 2;	// 玩家队伍（0：无，1：红方，2：蓝方）
-	optional MultipleTypePro myMultiple = 3;	// 倍数
-	optional int32 myScore = 4;	// 得分
-	optional int32 state = 5;	// 状态
-	optional int64 deadline = 6;	// 截止时间
-	optional int32 isAuto = 7;	// 是否托管
+	optional int32 team = 2[default = -1];	// 玩家队伍（0：无，1：红方，2：蓝方）
+	optional MultiplePro myMultiple = 3;	// 倍数
+	optional int32 myScore = 4[default = -1];	// 得分
+	optional int32 state = 5[default = -1];	// 状态
+	optional int64 deadline = 6[default = -1];	// 截止时间
+	optional int32 isAuto = 7[default = -1];	// 是否托管
 }
 
 // 开始匹配
-message startMatchReq {
+message StartMatchReq {
 	optional int32 siteId = 1;	// 场所id
 }
-message startMatchResp {
+message StartMatchResp {
 	
 }
 
 // 叫牌
-message callReq {
+message CallReq {
 	optional int32 cardIndex = 1;	// 出牌索引
 }
-message callResp {
+message CallResp {
 	
 }
 
 // 出牌
-message drawReq {
+message DrawReq {
 	optional int32 cardType = 1;	// 牌型
 	repeated int32 cardIndexs = 2;	// 出牌索引
 }
-message drawResp {
+message DrawResp {
 	
 }
 // 过牌
-message checkReq {
+message CheckReq {
 
 }
-message checkResp {
+message CheckResp {
 	
 }
 
 // 准备
-message readyReq {
+message ReadyReq {
 
 }
-message readyResp {
+message ReadyResp {
 
 }
 // 退出
-message exitReq {
+message ExitReq {
 
 }
-message exitResp {
+message ExitResp {
 
 }
 // 加倍
-message doubleReq{
+message DoubleReq{
 
 }
-message doubleResp{
+message DoubleResp{
 }
 
 // 使用道具
-message useItemReq {
+message UseItemReq {
 }
-message useItemResp {
+message UseItemResp {
 }
 
 // 游戏开始通知
-message gameStartNotice {
+message GameStartNotice {
 	optional TablePro table = 1;	// 牌桌数据
 }
 
 // 玩家数据更新通知
-message updateGamePlayerNotice{
+message UpdateGamePlayerNotice{
 	optional GamePlayerPro gamePlayer = 1;	
 }
 
 // 牌桌数据更新通知
-message updateTableNotice{
+message UpdateTableNotice{
 	optional TablePro table = 1;
 }
 

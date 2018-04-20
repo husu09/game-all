@@ -1,11 +1,12 @@
-package com.su.core.context;
+package com.su.server.context;
 
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.common.po.Player;
-import com.su.core.akka.ActionActor;
-import com.su.core.netty.NettyServerHandler;
 import com.su.proto.CommonProto.ErrorResp;
+import com.su.server.akka.ActionActor;
+import com.su.server.netty.NettyServerHandler;
+import com.su.server.obj.play.GamePlayer;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -17,29 +18,14 @@ public class PlayerContext {
 	private ChannelHandlerContext ctx;
 
 	private ActionActor actor;
-
+	
 	private Player player;
 	
-
-	public ChannelHandlerContext getCtx() {
-		return ctx;
-	}
-
-	public void setCtx(ChannelHandlerContext ctx) {
-		this.ctx = ctx;
-	}
-
-	public ActionActor getActor() {
-		return actor;
-	}
-
-	public void setActor(ActionActor actor) {
-		this.actor = actor;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
+	/**
+	 * 对局中
+	 * */
+	private GamePlayer gamePlayer;
+	
 
 	public void handleLogin(Player player) {
 		this.player = player;
@@ -76,5 +62,41 @@ public class PlayerContext {
 		}
 		ctx.writeAndFlush(builder.build());
 	}
+
+	public ChannelHandlerContext getCtx() {
+		return ctx;
+	}
+
+	public void setCtx(ChannelHandlerContext ctx) {
+		this.ctx = ctx;
+	}
+
+	public ActionActor getActor() {
+		return actor;
+	}
+
+	public void setActor(ActionActor actor) {
+		this.actor = actor;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public GamePlayer getGamePlayer() {
+		return gamePlayer;
+	}
+
+	public void setGamePlayer(GamePlayer gamePlayer) {
+		this.gamePlayer = gamePlayer;
+	}
+
+
+	
+	
 
 }

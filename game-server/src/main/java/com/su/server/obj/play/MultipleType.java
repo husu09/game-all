@@ -1,60 +1,88 @@
 package com.su.server.obj.play;
 
+import com.su.proto.PlayProto.MultiplePro;
+
 public enum MultipleType {
 	/**
 	 * 基础倍数 0
 	 */
-	CHU_SHI,
+	CHU_SHI(15),
 	/**
 	 * 叫牌 1
 	 */
-	JIAO_PAI,
+	JIAO_PAI(2),
 	/**
 	 * 暗叫 2
 	 */
-	AN_JIAO,
+	AN_JIAO(4),
 	/**
 	 * 明叫 3
 	 */
-	MING_JIAO,
+	MING_JIAO(6),
 	/**
 	 * 全胜 4
 	 */
-	QUAN_SHENG,
+	QUAN_SHENG(2),
 	/**
 	 * 满分 5
 	 */
-	MAN_FEN,
+	MAN_FEN(4),
 	/**
 	 * 510K 6
 	 */
-	F_510K,
+	F_510K(2),
 	/**
 	 * 六炸 7
 	 */
-	LIU_ZHA,
+	LIU_ZHA(2),
 	/**
 	 * 七炸 8
 	 */
-	QI_ZHA,
+	QI_ZHA(3),
 	/**
 	 * 王炸 9
 	 */
-	WANG_ZHA,
+	WANG_ZHA(2),
 	/**
 	 * 同花510k 10
 	 */
-	TONG_HUA_510K,
+	TONG_HUA_510K(3),
 	/**
 	 * 天炸 11
 	 */
-	TIAN_ZHA,
+	TIAN_ZHA(4),
 	/**
 	 * 加倍 12
 	 */
-	JIA_BEI,
+	JIA_BEI(2),
 	/**
 	 * 超级加倍 13
 	 */
-	CHAO_JI_JIA_BEI
+	CHAO_JI_JIA_BEI(4);
+
+	private int value;
+
+	private MultipleType(int value) {
+		this.value = value;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public MultiplePro toProto() {
+		MultiplePro.Builder builder = MultiplePro.newBuilder();
+		builder.setType(ordinal());
+		builder.setValue(value);
+		return builder.build();
+	}
+
+	public MultiplePro toProto(MultiplePro.Builder builder) {
+		if (builder == null)
+			builder = MultiplePro.newBuilder();
+		builder.setType(ordinal());
+		builder.setValue(value);
+		return builder.build();
+	}
+
 }

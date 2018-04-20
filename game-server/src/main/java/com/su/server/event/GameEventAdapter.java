@@ -1,10 +1,10 @@
-package com.su.core.event;
+package com.su.server.event;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.su.core.context.PlayerContext;
+import com.su.server.context.PlayerContext;
 
 public class GameEventAdapter implements GameEvent {
 	

@@ -1,7 +1,7 @@
-package com.su.core.akka;
+package com.su.server.akka;
 
 import com.google.protobuf.MessageLite;
-import com.su.core.context.PlayerContext;
+import com.su.server.context.PlayerContext;
 
 import io.netty.channel.ChannelHandlerContext;
 

@@ -1,6 +1,5 @@
 package com.su.server.obj.play;
 
-import java.util.Arrays;
 import java.util.Map;
 
 import com.su.common.util.CommonUtils;
@@ -27,45 +26,47 @@ public class Table {
 	private int hold = 0;
 	/**
 	 * 轮分
-	 * */
+	 */
 	private int roundScore;
 	/**
 	 * 被叫的牌
-	 * */
+	 */
 	private Card calledCard;
 	/**
 	 * 叫牌状态
-	 * */
+	 */
 	private CallState callState;
 	/**
 	 * 倍数
-	 * */
-	private Map<MultipleType,Integer> multiples;
-	
-	
-	
+	 */
+	private Map<MultipleType, Integer> multiples;
+	/**
+	 * actor
+	 */
+	private TableActor actor;
 
-	public Table() {
+	public Table(TableActor actor) {
+		this.actor = actor;
 		// 生成牌
 		for (int j = 0; j < 2; j++) {
 			int index = 0;
 			int value = 3;
-			int suit = 0;
+			int suit = 1;
 			for (int i = 1; i <= 52; i++) {
 				cards[index] = new Card(value, Suit.values()[suit]);
 				System.out.println(cards[index]);
 				if (i % 4 == 0) {
 					value++;
-					suit = 0;
+					suit = 1;
 				} else {
 					suit++;
 				}
 				index++;
 			}
-			cards[index] = new Card(value, Suit.values()[Suit.values().length - 1]);
+			cards[index] = new Card(value, Suit.values()[0]);
 			index++;
 			value++;
-			cards[index] = new Card(value, Suit.values()[Suit.values().length - 1]);
+			cards[index] = new Card(value, Suit.values()[0]);
 		}
 
 	}
@@ -76,11 +77,16 @@ public class Table {
 	public void start(GamePlayer[] players) {
 		this.players = players;
 		this.state = TableState.START;
+		// 初始倍数
+		multiples.put(MultipleType.CHU_SHI, MultipleType.CHU_SHI.getValue());
 		shuffle();
 		deal();
+		players[hold].setState(PlayerState.OPERATING);
+		for (int i = 1; i < players.length; i ++)
+			players[i].setState(PlayerState.WATCH);
+		// 通知
+		
 	}
-	
-	
 
 	/**
 	 * 洗牌
@@ -97,15 +103,16 @@ public class Table {
 	 * 发牌
 	 */
 	private void deal() {
-		/*int cycle = 0;
-		for (int i = 0; i < cards.length; i++) {
-			for (int j = dealerIndex; j < players.length; j++) {
-				players[j].getHandCards()[cycle] = cards[i];
-				i++;
-			}
-			cycle++;
-		}*/
-		
-		
+		int index = 0;
+		for (int i = 1; i <= cards.length; i++) {
+			players[i % 4 - 1].getHandCards()[index] = cards[i];
+			if (i % 4 == 0)
+				index++;
+		}
 	}
+
+	public TableActor getActor() {
+		return actor;
+	}
+
 }

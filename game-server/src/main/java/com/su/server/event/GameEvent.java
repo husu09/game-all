@@ -1,6 +1,6 @@
-package com.su.core.event;
+package com.su.server.event;
 
-import com.su.core.context.PlayerContext;
+import com.su.server.context.PlayerContext;
 
 public interface GameEvent {
 	/**
