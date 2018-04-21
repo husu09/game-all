@@ -1396,25 +1396,25 @@ public final class PlayProto {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+     * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
      */
-    boolean hasFlagCard();
+    boolean hasCalledCard();
     /**
      * <pre>
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+     * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
      */
-    com.su.proto.PlayProto.CardPro getFlagCard();
+    com.su.proto.PlayProto.CardPro getCalledCard();
     /**
      * <pre>
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+     * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
      */
-    com.su.proto.PlayProto.CardProOrBuilder getFlagCardOrBuilder();
+    com.su.proto.PlayProto.CardProOrBuilder getCalledCardOrBuilder();
 
     /**
      * <pre>
@@ -1432,6 +1432,50 @@ public final class PlayProto {
      * <code>optional int32 callState = 7 [default = -1];</code>
      */
     int getCallState();
+
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    java.util.List<com.su.proto.PlayProto.CardPro> 
+        getLastCardsList();
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    com.su.proto.PlayProto.CardPro getLastCards(int index);
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    int getLastCardsCount();
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
+        getLastCardsOrBuilderList();
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    com.su.proto.PlayProto.CardProOrBuilder getLastCardsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.su.proto.TablePro}
@@ -1451,6 +1495,7 @@ public final class PlayProto {
       hold_ = -1;
       roundScore_ = -1;
       callState_ = -1;
+      lastCards_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -1517,12 +1562,12 @@ public final class PlayProto {
             case 50: {
               com.su.proto.PlayProto.CardPro.Builder subBuilder = null;
               if (((bitField0_ & 0x00000008) == 0x00000008)) {
-                subBuilder = flagCard_.toBuilder();
+                subBuilder = calledCard_.toBuilder();
               }
-              flagCard_ = input.readMessage(com.su.proto.PlayProto.CardPro.PARSER, extensionRegistry);
+              calledCard_ = input.readMessage(com.su.proto.PlayProto.CardPro.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(flagCard_);
-                flagCard_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(calledCard_);
+                calledCard_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000008;
               break;
@@ -1530,6 +1575,15 @@ public final class PlayProto {
             case 56: {
               bitField0_ |= 0x00000010;
               callState_ = input.readInt32();
+              break;
+            }
+            case 66: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                lastCards_ = new java.util.ArrayList<com.su.proto.PlayProto.CardPro>();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              lastCards_.add(
+                  input.readMessage(com.su.proto.PlayProto.CardPro.PARSER, extensionRegistry));
               break;
             }
           }
@@ -1545,6 +1599,9 @@ public final class PlayProto {
         }
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           multiples_ = java.util.Collections.unmodifiableList(multiples_);
+        }
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+          lastCards_ = java.util.Collections.unmodifiableList(lastCards_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1742,16 +1799,16 @@ public final class PlayProto {
       return roundScore_;
     }
 
-    public static final int FLAGCARD_FIELD_NUMBER = 6;
-    private com.su.proto.PlayProto.CardPro flagCard_;
+    public static final int CALLEDCARD_FIELD_NUMBER = 6;
+    private com.su.proto.PlayProto.CardPro calledCard_;
     /**
      * <pre>
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+     * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
      */
-    public boolean hasFlagCard() {
+    public boolean hasCalledCard() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
@@ -1759,20 +1816,20 @@ public final class PlayProto {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+     * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
      */
-    public com.su.proto.PlayProto.CardPro getFlagCard() {
-      return flagCard_ == null ? com.su.proto.PlayProto.CardPro.getDefaultInstance() : flagCard_;
+    public com.su.proto.PlayProto.CardPro getCalledCard() {
+      return calledCard_ == null ? com.su.proto.PlayProto.CardPro.getDefaultInstance() : calledCard_;
     }
     /**
      * <pre>
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+     * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
      */
-    public com.su.proto.PlayProto.CardProOrBuilder getFlagCardOrBuilder() {
-      return flagCard_ == null ? com.su.proto.PlayProto.CardPro.getDefaultInstance() : flagCard_;
+    public com.su.proto.PlayProto.CardProOrBuilder getCalledCardOrBuilder() {
+      return calledCard_ == null ? com.su.proto.PlayProto.CardPro.getDefaultInstance() : calledCard_;
     }
 
     public static final int CALLSTATE_FIELD_NUMBER = 7;
@@ -1796,6 +1853,61 @@ public final class PlayProto {
      */
     public int getCallState() {
       return callState_;
+    }
+
+    public static final int LASTCARDS_FIELD_NUMBER = 8;
+    private java.util.List<com.su.proto.PlayProto.CardPro> lastCards_;
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    public java.util.List<com.su.proto.PlayProto.CardPro> getLastCardsList() {
+      return lastCards_;
+    }
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    public java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
+        getLastCardsOrBuilderList() {
+      return lastCards_;
+    }
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    public int getLastCardsCount() {
+      return lastCards_.size();
+    }
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    public com.su.proto.PlayProto.CardPro getLastCards(int index) {
+      return lastCards_.get(index);
+    }
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     */
+    public com.su.proto.PlayProto.CardProOrBuilder getLastCardsOrBuilder(
+        int index) {
+      return lastCards_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1826,10 +1938,13 @@ public final class PlayProto {
         output.writeInt32(5, roundScore_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(6, getFlagCard());
+        output.writeMessage(6, getCalledCard());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(7, callState_);
+      }
+      for (int i = 0; i < lastCards_.size(); i++) {
+        output.writeMessage(8, lastCards_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -1861,11 +1976,15 @@ public final class PlayProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getFlagCard());
+          .computeMessageSize(6, getCalledCard());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, callState_);
+      }
+      for (int i = 0; i < lastCards_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, lastCards_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1903,16 +2022,18 @@ public final class PlayProto {
         result = result && (getRoundScore()
             == other.getRoundScore());
       }
-      result = result && (hasFlagCard() == other.hasFlagCard());
-      if (hasFlagCard()) {
-        result = result && getFlagCard()
-            .equals(other.getFlagCard());
+      result = result && (hasCalledCard() == other.hasCalledCard());
+      if (hasCalledCard()) {
+        result = result && getCalledCard()
+            .equals(other.getCalledCard());
       }
       result = result && (hasCallState() == other.hasCallState());
       if (hasCallState()) {
         result = result && (getCallState()
             == other.getCallState());
       }
+      result = result && getLastCardsList()
+          .equals(other.getLastCardsList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1944,13 +2065,17 @@ public final class PlayProto {
         hash = (37 * hash) + ROUNDSCORE_FIELD_NUMBER;
         hash = (53 * hash) + getRoundScore();
       }
-      if (hasFlagCard()) {
-        hash = (37 * hash) + FLAGCARD_FIELD_NUMBER;
-        hash = (53 * hash) + getFlagCard().hashCode();
+      if (hasCalledCard()) {
+        hash = (37 * hash) + CALLEDCARD_FIELD_NUMBER;
+        hash = (53 * hash) + getCalledCard().hashCode();
       }
       if (hasCallState()) {
         hash = (37 * hash) + CALLSTATE_FIELD_NUMBER;
         hash = (53 * hash) + getCallState();
+      }
+      if (getLastCardsCount() > 0) {
+        hash = (37 * hash) + LASTCARDS_FIELD_NUMBER;
+        hash = (53 * hash) + getLastCardsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2068,7 +2193,8 @@ public final class PlayProto {
                 .alwaysUseFieldBuilders) {
           getPlayersFieldBuilder();
           getMultiplesFieldBuilder();
-          getFlagCardFieldBuilder();
+          getCalledCardFieldBuilder();
+          getLastCardsFieldBuilder();
         }
       }
       public Builder clear() {
@@ -2091,14 +2217,20 @@ public final class PlayProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         roundScore_ = -1;
         bitField0_ = (bitField0_ & ~0x00000010);
-        if (flagCardBuilder_ == null) {
-          flagCard_ = null;
+        if (calledCardBuilder_ == null) {
+          calledCard_ = null;
         } else {
-          flagCardBuilder_.clear();
+          calledCardBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
         callState_ = -1;
         bitField0_ = (bitField0_ & ~0x00000040);
+        if (lastCardsBuilder_ == null) {
+          lastCards_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+        } else {
+          lastCardsBuilder_.clear();
+        }
         return this;
       }
 
@@ -2156,15 +2288,24 @@ public final class PlayProto {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000008;
         }
-        if (flagCardBuilder_ == null) {
-          result.flagCard_ = flagCard_;
+        if (calledCardBuilder_ == null) {
+          result.calledCard_ = calledCard_;
         } else {
-          result.flagCard_ = flagCardBuilder_.build();
+          result.calledCard_ = calledCardBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000010;
         }
         result.callState_ = callState_;
+        if (lastCardsBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+            lastCards_ = java.util.Collections.unmodifiableList(lastCards_);
+            bitField0_ = (bitField0_ & ~0x00000080);
+          }
+          result.lastCards_ = lastCards_;
+        } else {
+          result.lastCards_ = lastCardsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2268,11 +2409,37 @@ public final class PlayProto {
         if (other.hasRoundScore()) {
           setRoundScore(other.getRoundScore());
         }
-        if (other.hasFlagCard()) {
-          mergeFlagCard(other.getFlagCard());
+        if (other.hasCalledCard()) {
+          mergeCalledCard(other.getCalledCard());
         }
         if (other.hasCallState()) {
           setCallState(other.getCallState());
+        }
+        if (lastCardsBuilder_ == null) {
+          if (!other.lastCards_.isEmpty()) {
+            if (lastCards_.isEmpty()) {
+              lastCards_ = other.lastCards_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+            } else {
+              ensureLastCardsIsMutable();
+              lastCards_.addAll(other.lastCards_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.lastCards_.isEmpty()) {
+            if (lastCardsBuilder_.isEmpty()) {
+              lastCardsBuilder_.dispose();
+              lastCardsBuilder_ = null;
+              lastCards_ = other.lastCards_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+              lastCardsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getLastCardsFieldBuilder() : null;
+            } else {
+              lastCardsBuilder_.addAllMessages(other.lastCards_);
+            }
+          }
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3070,17 +3237,17 @@ public final class PlayProto {
         return this;
       }
 
-      private com.su.proto.PlayProto.CardPro flagCard_ = null;
+      private com.su.proto.PlayProto.CardPro calledCard_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> flagCardBuilder_;
+          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> calledCardBuilder_;
       /**
        * <pre>
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+       * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
        */
-      public boolean hasFlagCard() {
+      public boolean hasCalledCard() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
@@ -3088,13 +3255,13 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+       * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
        */
-      public com.su.proto.PlayProto.CardPro getFlagCard() {
-        if (flagCardBuilder_ == null) {
-          return flagCard_ == null ? com.su.proto.PlayProto.CardPro.getDefaultInstance() : flagCard_;
+      public com.su.proto.PlayProto.CardPro getCalledCard() {
+        if (calledCardBuilder_ == null) {
+          return calledCard_ == null ? com.su.proto.PlayProto.CardPro.getDefaultInstance() : calledCard_;
         } else {
-          return flagCardBuilder_.getMessage();
+          return calledCardBuilder_.getMessage();
         }
       }
       /**
@@ -3102,17 +3269,17 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+       * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
        */
-      public Builder setFlagCard(com.su.proto.PlayProto.CardPro value) {
-        if (flagCardBuilder_ == null) {
+      public Builder setCalledCard(com.su.proto.PlayProto.CardPro value) {
+        if (calledCardBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          flagCard_ = value;
+          calledCard_ = value;
           onChanged();
         } else {
-          flagCardBuilder_.setMessage(value);
+          calledCardBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000020;
         return this;
@@ -3122,15 +3289,15 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+       * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
        */
-      public Builder setFlagCard(
+      public Builder setCalledCard(
           com.su.proto.PlayProto.CardPro.Builder builderForValue) {
-        if (flagCardBuilder_ == null) {
-          flagCard_ = builderForValue.build();
+        if (calledCardBuilder_ == null) {
+          calledCard_ = builderForValue.build();
           onChanged();
         } else {
-          flagCardBuilder_.setMessage(builderForValue.build());
+          calledCardBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000020;
         return this;
@@ -3140,21 +3307,21 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+       * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
        */
-      public Builder mergeFlagCard(com.su.proto.PlayProto.CardPro value) {
-        if (flagCardBuilder_ == null) {
+      public Builder mergeCalledCard(com.su.proto.PlayProto.CardPro value) {
+        if (calledCardBuilder_ == null) {
           if (((bitField0_ & 0x00000020) == 0x00000020) &&
-              flagCard_ != null &&
-              flagCard_ != com.su.proto.PlayProto.CardPro.getDefaultInstance()) {
-            flagCard_ =
-              com.su.proto.PlayProto.CardPro.newBuilder(flagCard_).mergeFrom(value).buildPartial();
+              calledCard_ != null &&
+              calledCard_ != com.su.proto.PlayProto.CardPro.getDefaultInstance()) {
+            calledCard_ =
+              com.su.proto.PlayProto.CardPro.newBuilder(calledCard_).mergeFrom(value).buildPartial();
           } else {
-            flagCard_ = value;
+            calledCard_ = value;
           }
           onChanged();
         } else {
-          flagCardBuilder_.mergeFrom(value);
+          calledCardBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000020;
         return this;
@@ -3164,14 +3331,14 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+       * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
        */
-      public Builder clearFlagCard() {
-        if (flagCardBuilder_ == null) {
-          flagCard_ = null;
+      public Builder clearCalledCard() {
+        if (calledCardBuilder_ == null) {
+          calledCard_ = null;
           onChanged();
         } else {
-          flagCardBuilder_.clear();
+          calledCardBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
         return this;
@@ -3181,26 +3348,26 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+       * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
        */
-      public com.su.proto.PlayProto.CardPro.Builder getFlagCardBuilder() {
+      public com.su.proto.PlayProto.CardPro.Builder getCalledCardBuilder() {
         bitField0_ |= 0x00000020;
         onChanged();
-        return getFlagCardFieldBuilder().getBuilder();
+        return getCalledCardFieldBuilder().getBuilder();
       }
       /**
        * <pre>
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+       * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
        */
-      public com.su.proto.PlayProto.CardProOrBuilder getFlagCardOrBuilder() {
-        if (flagCardBuilder_ != null) {
-          return flagCardBuilder_.getMessageOrBuilder();
+      public com.su.proto.PlayProto.CardProOrBuilder getCalledCardOrBuilder() {
+        if (calledCardBuilder_ != null) {
+          return calledCardBuilder_.getMessageOrBuilder();
         } else {
-          return flagCard_ == null ?
-              com.su.proto.PlayProto.CardPro.getDefaultInstance() : flagCard_;
+          return calledCard_ == null ?
+              com.su.proto.PlayProto.CardPro.getDefaultInstance() : calledCard_;
         }
       }
       /**
@@ -3208,20 +3375,20 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro flagCard = 6;</code>
+       * <code>optional .com.su.proto.CardPro calledCard = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> 
-          getFlagCardFieldBuilder() {
-        if (flagCardBuilder_ == null) {
-          flagCardBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getCalledCardFieldBuilder() {
+        if (calledCardBuilder_ == null) {
+          calledCardBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder>(
-                  getFlagCard(),
+                  getCalledCard(),
                   getParentForChildren(),
                   isClean());
-          flagCard_ = null;
+          calledCard_ = null;
         }
-        return flagCardBuilder_;
+        return calledCardBuilder_;
       }
 
       private int callState_ = -1;
@@ -3270,6 +3437,318 @@ public final class PlayProto {
         callState_ = -1;
         onChanged();
         return this;
+      }
+
+      private java.util.List<com.su.proto.PlayProto.CardPro> lastCards_ =
+        java.util.Collections.emptyList();
+      private void ensureLastCardsIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          lastCards_ = new java.util.ArrayList<com.su.proto.PlayProto.CardPro>(lastCards_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> lastCardsBuilder_;
+
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public java.util.List<com.su.proto.PlayProto.CardPro> getLastCardsList() {
+        if (lastCardsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(lastCards_);
+        } else {
+          return lastCardsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public int getLastCardsCount() {
+        if (lastCardsBuilder_ == null) {
+          return lastCards_.size();
+        } else {
+          return lastCardsBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public com.su.proto.PlayProto.CardPro getLastCards(int index) {
+        if (lastCardsBuilder_ == null) {
+          return lastCards_.get(index);
+        } else {
+          return lastCardsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public Builder setLastCards(
+          int index, com.su.proto.PlayProto.CardPro value) {
+        if (lastCardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLastCardsIsMutable();
+          lastCards_.set(index, value);
+          onChanged();
+        } else {
+          lastCardsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public Builder setLastCards(
+          int index, com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+        if (lastCardsBuilder_ == null) {
+          ensureLastCardsIsMutable();
+          lastCards_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          lastCardsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public Builder addLastCards(com.su.proto.PlayProto.CardPro value) {
+        if (lastCardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLastCardsIsMutable();
+          lastCards_.add(value);
+          onChanged();
+        } else {
+          lastCardsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public Builder addLastCards(
+          int index, com.su.proto.PlayProto.CardPro value) {
+        if (lastCardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLastCardsIsMutable();
+          lastCards_.add(index, value);
+          onChanged();
+        } else {
+          lastCardsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public Builder addLastCards(
+          com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+        if (lastCardsBuilder_ == null) {
+          ensureLastCardsIsMutable();
+          lastCards_.add(builderForValue.build());
+          onChanged();
+        } else {
+          lastCardsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public Builder addLastCards(
+          int index, com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+        if (lastCardsBuilder_ == null) {
+          ensureLastCardsIsMutable();
+          lastCards_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          lastCardsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public Builder addAllLastCards(
+          java.lang.Iterable<? extends com.su.proto.PlayProto.CardPro> values) {
+        if (lastCardsBuilder_ == null) {
+          ensureLastCardsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, lastCards_);
+          onChanged();
+        } else {
+          lastCardsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public Builder clearLastCards() {
+        if (lastCardsBuilder_ == null) {
+          lastCards_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+          onChanged();
+        } else {
+          lastCardsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public Builder removeLastCards(int index) {
+        if (lastCardsBuilder_ == null) {
+          ensureLastCardsIsMutable();
+          lastCards_.remove(index);
+          onChanged();
+        } else {
+          lastCardsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public com.su.proto.PlayProto.CardPro.Builder getLastCardsBuilder(
+          int index) {
+        return getLastCardsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public com.su.proto.PlayProto.CardProOrBuilder getLastCardsOrBuilder(
+          int index) {
+        if (lastCardsBuilder_ == null) {
+          return lastCards_.get(index);  } else {
+          return lastCardsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
+           getLastCardsOrBuilderList() {
+        if (lastCardsBuilder_ != null) {
+          return lastCardsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(lastCards_);
+        }
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public com.su.proto.PlayProto.CardPro.Builder addLastCardsBuilder() {
+        return getLastCardsFieldBuilder().addBuilder(
+            com.su.proto.PlayProto.CardPro.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public com.su.proto.PlayProto.CardPro.Builder addLastCardsBuilder(
+          int index) {
+        return getLastCardsFieldBuilder().addBuilder(
+            index, com.su.proto.PlayProto.CardPro.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       */
+      public java.util.List<com.su.proto.PlayProto.CardPro.Builder> 
+           getLastCardsBuilderList() {
+        return getLastCardsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> 
+          getLastCardsFieldBuilder() {
+        if (lastCardsBuilder_ == null) {
+          lastCardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder>(
+                  lastCards_,
+                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  getParentForChildren(),
+                  isClean());
+          lastCards_ = null;
+        }
+        return lastCardsBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3325,11 +3804,20 @@ public final class PlayProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <code>optional int64 id = 1 [default = -1];</code>
+     */
+    boolean hasId();
+    /**
+     * <code>optional int64 id = 1 [default = -1];</code>
+     */
+    long getId();
+
+    /**
      * <pre>
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     java.util.List<com.su.proto.PlayProto.CardPro> 
         getHandCardsList();
@@ -3338,7 +3826,7 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     com.su.proto.PlayProto.CardPro getHandCards(int index);
     /**
@@ -3346,7 +3834,7 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     int getHandCardsCount();
     /**
@@ -3354,7 +3842,7 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
         getHandCardsOrBuilderList();
@@ -3363,7 +3851,7 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     com.su.proto.PlayProto.CardProOrBuilder getHandCardsOrBuilder(
         int index);
@@ -3373,7 +3861,7 @@ public final class PlayProto {
      * 玩家队伍（0：无，1：红方，2：蓝方）
      * </pre>
      *
-     * <code>optional int32 team = 2 [default = -1];</code>
+     * <code>optional int32 team = 3 [default = -1];</code>
      */
     boolean hasTeam();
     /**
@@ -3381,7 +3869,7 @@ public final class PlayProto {
      * 玩家队伍（0：无，1：红方，2：蓝方）
      * </pre>
      *
-     * <code>optional int32 team = 2 [default = -1];</code>
+     * <code>optional int32 team = 3 [default = -1];</code>
      */
     int getTeam();
 
@@ -3390,7 +3878,7 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+     * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
      */
     boolean hasMyMultiple();
     /**
@@ -3398,7 +3886,7 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+     * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
      */
     com.su.proto.PlayProto.MultiplePro getMyMultiple();
     /**
@@ -3406,7 +3894,7 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+     * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
      */
     com.su.proto.PlayProto.MultipleProOrBuilder getMyMultipleOrBuilder();
 
@@ -3415,7 +3903,7 @@ public final class PlayProto {
      * 得分
      * </pre>
      *
-     * <code>optional int32 myScore = 4 [default = -1];</code>
+     * <code>optional int32 myScore = 5 [default = -1];</code>
      */
     boolean hasMyScore();
     /**
@@ -3423,7 +3911,7 @@ public final class PlayProto {
      * 得分
      * </pre>
      *
-     * <code>optional int32 myScore = 4 [default = -1];</code>
+     * <code>optional int32 myScore = 5 [default = -1];</code>
      */
     int getMyScore();
 
@@ -3432,7 +3920,7 @@ public final class PlayProto {
      * 状态
      * </pre>
      *
-     * <code>optional int32 state = 5 [default = -1];</code>
+     * <code>optional int32 state = 6 [default = -1];</code>
      */
     boolean hasState();
     /**
@@ -3440,7 +3928,7 @@ public final class PlayProto {
      * 状态
      * </pre>
      *
-     * <code>optional int32 state = 5 [default = -1];</code>
+     * <code>optional int32 state = 6 [default = -1];</code>
      */
     int getState();
 
@@ -3449,7 +3937,7 @@ public final class PlayProto {
      * 截止时间
      * </pre>
      *
-     * <code>optional int64 deadline = 6 [default = -1];</code>
+     * <code>optional int64 deadline = 7 [default = -1];</code>
      */
     boolean hasDeadline();
     /**
@@ -3457,7 +3945,7 @@ public final class PlayProto {
      * 截止时间
      * </pre>
      *
-     * <code>optional int64 deadline = 6 [default = -1];</code>
+     * <code>optional int64 deadline = 7 [default = -1];</code>
      */
     long getDeadline();
 
@@ -3466,7 +3954,7 @@ public final class PlayProto {
      * 是否托管
      * </pre>
      *
-     * <code>optional int32 isAuto = 7 [default = -1];</code>
+     * <code>optional int32 isAuto = 8 [default = -1];</code>
      */
     boolean hasIsAuto();
     /**
@@ -3474,7 +3962,7 @@ public final class PlayProto {
      * 是否托管
      * </pre>
      *
-     * <code>optional int32 isAuto = 7 [default = -1];</code>
+     * <code>optional int32 isAuto = 8 [default = -1];</code>
      */
     int getIsAuto();
   }
@@ -3490,6 +3978,7 @@ public final class PlayProto {
       super(builder);
     }
     private GamePlayerPro() {
+      id_ = -1L;
       handCards_ = java.util.Collections.emptyList();
       team_ = -1;
       myScore_ = -1;
@@ -3526,23 +4015,28 @@ public final class PlayProto {
               }
               break;
             }
-            case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+            case 8: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readInt64();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 handCards_ = new java.util.ArrayList<com.su.proto.PlayProto.CardPro>();
-                mutable_bitField0_ |= 0x00000001;
+                mutable_bitField0_ |= 0x00000002;
               }
               handCards_.add(
                   input.readMessage(com.su.proto.PlayProto.CardPro.PARSER, extensionRegistry));
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000001;
+            case 24: {
+              bitField0_ |= 0x00000002;
               team_ = input.readInt32();
               break;
             }
-            case 26: {
+            case 34: {
               com.su.proto.PlayProto.MultiplePro.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
                 subBuilder = myMultiple_.toBuilder();
               }
               myMultiple_ = input.readMessage(com.su.proto.PlayProto.MultiplePro.PARSER, extensionRegistry);
@@ -3550,26 +4044,26 @@ public final class PlayProto {
                 subBuilder.mergeFrom(myMultiple_);
                 myMultiple_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000002;
-              break;
-            }
-            case 32: {
               bitField0_ |= 0x00000004;
-              myScore_ = input.readInt32();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000008;
-              state_ = input.readInt32();
+              myScore_ = input.readInt32();
               break;
             }
             case 48: {
               bitField0_ |= 0x00000010;
-              deadline_ = input.readInt64();
+              state_ = input.readInt32();
               break;
             }
             case 56: {
               bitField0_ |= 0x00000020;
+              deadline_ = input.readInt64();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000040;
               isAuto_ = input.readInt32();
               break;
             }
@@ -3581,7 +4075,7 @@ public final class PlayProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           handCards_ = java.util.Collections.unmodifiableList(handCards_);
         }
         this.unknownFields = unknownFields.build();
@@ -3601,14 +4095,29 @@ public final class PlayProto {
     }
 
     private int bitField0_;
-    public static final int HANDCARDS_FIELD_NUMBER = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private long id_;
+    /**
+     * <code>optional int64 id = 1 [default = -1];</code>
+     */
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int64 id = 1 [default = -1];</code>
+     */
+    public long getId() {
+      return id_;
+    }
+
+    public static final int HANDCARDS_FIELD_NUMBER = 2;
     private java.util.List<com.su.proto.PlayProto.CardPro> handCards_;
     /**
      * <pre>
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     public java.util.List<com.su.proto.PlayProto.CardPro> getHandCardsList() {
       return handCards_;
@@ -3618,7 +4127,7 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     public java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
         getHandCardsOrBuilderList() {
@@ -3629,7 +4138,7 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     public int getHandCardsCount() {
       return handCards_.size();
@@ -3639,7 +4148,7 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     public com.su.proto.PlayProto.CardPro getHandCards(int index) {
       return handCards_.get(index);
@@ -3649,54 +4158,54 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
      */
     public com.su.proto.PlayProto.CardProOrBuilder getHandCardsOrBuilder(
         int index) {
       return handCards_.get(index);
     }
 
-    public static final int TEAM_FIELD_NUMBER = 2;
+    public static final int TEAM_FIELD_NUMBER = 3;
     private int team_;
     /**
      * <pre>
      * 玩家队伍（0：无，1：红方，2：蓝方）
      * </pre>
      *
-     * <code>optional int32 team = 2 [default = -1];</code>
+     * <code>optional int32 team = 3 [default = -1];</code>
      */
     public boolean hasTeam() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <pre>
      * 玩家队伍（0：无，1：红方，2：蓝方）
      * </pre>
      *
-     * <code>optional int32 team = 2 [default = -1];</code>
+     * <code>optional int32 team = 3 [default = -1];</code>
      */
     public int getTeam() {
       return team_;
     }
 
-    public static final int MYMULTIPLE_FIELD_NUMBER = 3;
+    public static final int MYMULTIPLE_FIELD_NUMBER = 4;
     private com.su.proto.PlayProto.MultiplePro myMultiple_;
     /**
      * <pre>
      * 倍数
      * </pre>
      *
-     * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+     * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
      */
     public boolean hasMyMultiple() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <pre>
      * 倍数
      * </pre>
      *
-     * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+     * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
      */
     public com.su.proto.PlayProto.MultiplePro getMyMultiple() {
       return myMultiple_ == null ? com.su.proto.PlayProto.MultiplePro.getDefaultInstance() : myMultiple_;
@@ -3706,99 +4215,99 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+     * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
      */
     public com.su.proto.PlayProto.MultipleProOrBuilder getMyMultipleOrBuilder() {
       return myMultiple_ == null ? com.su.proto.PlayProto.MultiplePro.getDefaultInstance() : myMultiple_;
     }
 
-    public static final int MYSCORE_FIELD_NUMBER = 4;
+    public static final int MYSCORE_FIELD_NUMBER = 5;
     private int myScore_;
     /**
      * <pre>
      * 得分
      * </pre>
      *
-     * <code>optional int32 myScore = 4 [default = -1];</code>
+     * <code>optional int32 myScore = 5 [default = -1];</code>
      */
     public boolean hasMyScore() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <pre>
      * 得分
      * </pre>
      *
-     * <code>optional int32 myScore = 4 [default = -1];</code>
+     * <code>optional int32 myScore = 5 [default = -1];</code>
      */
     public int getMyScore() {
       return myScore_;
     }
 
-    public static final int STATE_FIELD_NUMBER = 5;
+    public static final int STATE_FIELD_NUMBER = 6;
     private int state_;
     /**
      * <pre>
      * 状态
      * </pre>
      *
-     * <code>optional int32 state = 5 [default = -1];</code>
+     * <code>optional int32 state = 6 [default = -1];</code>
      */
     public boolean hasState() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <pre>
      * 状态
      * </pre>
      *
-     * <code>optional int32 state = 5 [default = -1];</code>
+     * <code>optional int32 state = 6 [default = -1];</code>
      */
     public int getState() {
       return state_;
     }
 
-    public static final int DEADLINE_FIELD_NUMBER = 6;
+    public static final int DEADLINE_FIELD_NUMBER = 7;
     private long deadline_;
     /**
      * <pre>
      * 截止时间
      * </pre>
      *
-     * <code>optional int64 deadline = 6 [default = -1];</code>
+     * <code>optional int64 deadline = 7 [default = -1];</code>
      */
     public boolean hasDeadline() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <pre>
      * 截止时间
      * </pre>
      *
-     * <code>optional int64 deadline = 6 [default = -1];</code>
+     * <code>optional int64 deadline = 7 [default = -1];</code>
      */
     public long getDeadline() {
       return deadline_;
     }
 
-    public static final int ISAUTO_FIELD_NUMBER = 7;
+    public static final int ISAUTO_FIELD_NUMBER = 8;
     private int isAuto_;
     /**
      * <pre>
      * 是否托管
      * </pre>
      *
-     * <code>optional int32 isAuto = 7 [default = -1];</code>
+     * <code>optional int32 isAuto = 8 [default = -1];</code>
      */
     public boolean hasIsAuto() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <pre>
      * 是否托管
      * </pre>
      *
-     * <code>optional int32 isAuto = 7 [default = -1];</code>
+     * <code>optional int32 isAuto = 8 [default = -1];</code>
      */
     public int getIsAuto() {
       return isAuto_;
@@ -3816,26 +4325,29 @@ public final class PlayProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < handCards_.size(); i++) {
-        output.writeMessage(1, handCards_.get(i));
-      }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(2, team_);
+        output.writeInt64(1, id_);
+      }
+      for (int i = 0; i < handCards_.size(); i++) {
+        output.writeMessage(2, handCards_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(3, getMyMultiple());
+        output.writeInt32(3, team_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(4, myScore_);
+        output.writeMessage(4, getMyMultiple());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(5, state_);
+        output.writeInt32(5, myScore_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(6, deadline_);
+        output.writeInt32(6, state_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(7, isAuto_);
+        output.writeInt64(7, deadline_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(8, isAuto_);
       }
       unknownFields.writeTo(output);
     }
@@ -3845,33 +4357,37 @@ public final class PlayProto {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < handCards_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, handCards_.get(i));
-      }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, team_);
+          .computeInt64Size(1, id_);
+      }
+      for (int i = 0; i < handCards_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, handCards_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getMyMultiple());
+          .computeInt32Size(3, team_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, myScore_);
+          .computeMessageSize(4, getMyMultiple());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, state_);
+          .computeInt32Size(5, myScore_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, deadline_);
+          .computeInt32Size(6, state_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, isAuto_);
+          .computeInt64Size(7, deadline_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, isAuto_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3890,6 +4406,11 @@ public final class PlayProto {
       com.su.proto.PlayProto.GamePlayerPro other = (com.su.proto.PlayProto.GamePlayerPro) obj;
 
       boolean result = true;
+      result = result && (hasId() == other.hasId());
+      if (hasId()) {
+        result = result && (getId()
+            == other.getId());
+      }
       result = result && getHandCardsList()
           .equals(other.getHandCardsList());
       result = result && (hasTeam() == other.hasTeam());
@@ -3933,6 +4454,11 @@ public final class PlayProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasId()) {
+        hash = (37 * hash) + ID_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getId());
+      }
       if (getHandCardsCount() > 0) {
         hash = (37 * hash) + HANDCARDS_FIELD_NUMBER;
         hash = (53 * hash) + getHandCardsList().hashCode();
@@ -4082,28 +4608,30 @@ public final class PlayProto {
       }
       public Builder clear() {
         super.clear();
+        id_ = -1L;
+        bitField0_ = (bitField0_ & ~0x00000001);
         if (handCardsBuilder_ == null) {
           handCards_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           handCardsBuilder_.clear();
         }
         team_ = -1;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         if (myMultipleBuilder_ == null) {
           myMultiple_ = null;
         } else {
           myMultipleBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
-        myScore_ = -1;
         bitField0_ = (bitField0_ & ~0x00000008);
-        state_ = -1;
+        myScore_ = -1;
         bitField0_ = (bitField0_ & ~0x00000010);
-        deadline_ = -1L;
+        state_ = -1;
         bitField0_ = (bitField0_ & ~0x00000020);
-        isAuto_ = -1;
+        deadline_ = -1L;
         bitField0_ = (bitField0_ & ~0x00000040);
+        isAuto_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -4128,41 +4656,45 @@ public final class PlayProto {
         com.su.proto.PlayProto.GamePlayerPro result = new com.su.proto.PlayProto.GamePlayerPro(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
         if (handCardsBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             handCards_ = java.util.Collections.unmodifiableList(handCards_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.handCards_ = handCards_;
         } else {
           result.handCards_ = handCardsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.team_ = team_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
+        }
+        result.team_ = team_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
         }
         if (myMultipleBuilder_ == null) {
           result.myMultiple_ = myMultiple_;
         } else {
           result.myMultiple_ = myMultipleBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.myScore_ = myScore_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.state_ = state_;
+        result.myScore_ = myScore_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.deadline_ = deadline_;
+        result.state_ = state_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
+        }
+        result.deadline_ = deadline_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
         }
         result.isAuto_ = isAuto_;
         result.bitField0_ = to_bitField0_;
@@ -4207,11 +4739,14 @@ public final class PlayProto {
 
       public Builder mergeFrom(com.su.proto.PlayProto.GamePlayerPro other) {
         if (other == com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          setId(other.getId());
+        }
         if (handCardsBuilder_ == null) {
           if (!other.handCards_.isEmpty()) {
             if (handCards_.isEmpty()) {
               handCards_ = other.handCards_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureHandCardsIsMutable();
               handCards_.addAll(other.handCards_);
@@ -4224,7 +4759,7 @@ public final class PlayProto {
               handCardsBuilder_.dispose();
               handCardsBuilder_ = null;
               handCards_ = other.handCards_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
               handCardsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getHandCardsFieldBuilder() : null;
@@ -4279,12 +4814,44 @@ public final class PlayProto {
       }
       private int bitField0_;
 
+      private long id_ = -1L;
+      /**
+       * <code>optional int64 id = 1 [default = -1];</code>
+       */
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int64 id = 1 [default = -1];</code>
+       */
+      public long getId() {
+        return id_;
+      }
+      /**
+       * <code>optional int64 id = 1 [default = -1];</code>
+       */
+      public Builder setId(long value) {
+        bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 id = 1 [default = -1];</code>
+       */
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = -1L;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.su.proto.PlayProto.CardPro> handCards_ =
         java.util.Collections.emptyList();
       private void ensureHandCardsIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           handCards_ = new java.util.ArrayList<com.su.proto.PlayProto.CardPro>(handCards_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -4296,7 +4863,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public java.util.List<com.su.proto.PlayProto.CardPro> getHandCardsList() {
         if (handCardsBuilder_ == null) {
@@ -4310,7 +4877,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public int getHandCardsCount() {
         if (handCardsBuilder_ == null) {
@@ -4324,7 +4891,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public com.su.proto.PlayProto.CardPro getHandCards(int index) {
         if (handCardsBuilder_ == null) {
@@ -4338,7 +4905,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public Builder setHandCards(
           int index, com.su.proto.PlayProto.CardPro value) {
@@ -4359,7 +4926,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public Builder setHandCards(
           int index, com.su.proto.PlayProto.CardPro.Builder builderForValue) {
@@ -4377,7 +4944,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public Builder addHandCards(com.su.proto.PlayProto.CardPro value) {
         if (handCardsBuilder_ == null) {
@@ -4397,7 +4964,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public Builder addHandCards(
           int index, com.su.proto.PlayProto.CardPro value) {
@@ -4418,7 +4985,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public Builder addHandCards(
           com.su.proto.PlayProto.CardPro.Builder builderForValue) {
@@ -4436,7 +5003,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public Builder addHandCards(
           int index, com.su.proto.PlayProto.CardPro.Builder builderForValue) {
@@ -4454,7 +5021,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public Builder addAllHandCards(
           java.lang.Iterable<? extends com.su.proto.PlayProto.CardPro> values) {
@@ -4473,12 +5040,12 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public Builder clearHandCards() {
         if (handCardsBuilder_ == null) {
           handCards_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           handCardsBuilder_.clear();
@@ -4490,7 +5057,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public Builder removeHandCards(int index) {
         if (handCardsBuilder_ == null) {
@@ -4507,7 +5074,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public com.su.proto.PlayProto.CardPro.Builder getHandCardsBuilder(
           int index) {
@@ -4518,7 +5085,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public com.su.proto.PlayProto.CardProOrBuilder getHandCardsOrBuilder(
           int index) {
@@ -4532,7 +5099,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
            getHandCardsOrBuilderList() {
@@ -4547,7 +5114,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public com.su.proto.PlayProto.CardPro.Builder addHandCardsBuilder() {
         return getHandCardsFieldBuilder().addBuilder(
@@ -4558,7 +5125,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public com.su.proto.PlayProto.CardPro.Builder addHandCardsBuilder(
           int index) {
@@ -4570,7 +5137,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 1;</code>
+       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
        */
       public java.util.List<com.su.proto.PlayProto.CardPro.Builder> 
            getHandCardsBuilderList() {
@@ -4583,7 +5150,7 @@ public final class PlayProto {
           handCardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder>(
                   handCards_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           handCards_ = null;
@@ -4597,17 +5164,17 @@ public final class PlayProto {
        * 玩家队伍（0：无，1：红方，2：蓝方）
        * </pre>
        *
-       * <code>optional int32 team = 2 [default = -1];</code>
+       * <code>optional int32 team = 3 [default = -1];</code>
        */
       public boolean hasTeam() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <pre>
        * 玩家队伍（0：无，1：红方，2：蓝方）
        * </pre>
        *
-       * <code>optional int32 team = 2 [default = -1];</code>
+       * <code>optional int32 team = 3 [default = -1];</code>
        */
       public int getTeam() {
         return team_;
@@ -4617,10 +5184,10 @@ public final class PlayProto {
        * 玩家队伍（0：无，1：红方，2：蓝方）
        * </pre>
        *
-       * <code>optional int32 team = 2 [default = -1];</code>
+       * <code>optional int32 team = 3 [default = -1];</code>
        */
       public Builder setTeam(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         team_ = value;
         onChanged();
         return this;
@@ -4630,10 +5197,10 @@ public final class PlayProto {
        * 玩家队伍（0：无，1：红方，2：蓝方）
        * </pre>
        *
-       * <code>optional int32 team = 2 [default = -1];</code>
+       * <code>optional int32 team = 3 [default = -1];</code>
        */
       public Builder clearTeam() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         team_ = -1;
         onChanged();
         return this;
@@ -4647,17 +5214,17 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+       * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
        */
       public boolean hasMyMultiple() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <pre>
        * 倍数
        * </pre>
        *
-       * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+       * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
        */
       public com.su.proto.PlayProto.MultiplePro getMyMultiple() {
         if (myMultipleBuilder_ == null) {
@@ -4671,7 +5238,7 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+       * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
        */
       public Builder setMyMultiple(com.su.proto.PlayProto.MultiplePro value) {
         if (myMultipleBuilder_ == null) {
@@ -4683,7 +5250,7 @@ public final class PlayProto {
         } else {
           myMultipleBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         return this;
       }
       /**
@@ -4691,7 +5258,7 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+       * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
        */
       public Builder setMyMultiple(
           com.su.proto.PlayProto.MultiplePro.Builder builderForValue) {
@@ -4701,7 +5268,7 @@ public final class PlayProto {
         } else {
           myMultipleBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         return this;
       }
       /**
@@ -4709,11 +5276,11 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+       * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
        */
       public Builder mergeMyMultiple(com.su.proto.PlayProto.MultiplePro value) {
         if (myMultipleBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
               myMultiple_ != null &&
               myMultiple_ != com.su.proto.PlayProto.MultiplePro.getDefaultInstance()) {
             myMultiple_ =
@@ -4725,7 +5292,7 @@ public final class PlayProto {
         } else {
           myMultipleBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         return this;
       }
       /**
@@ -4733,7 +5300,7 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+       * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
        */
       public Builder clearMyMultiple() {
         if (myMultipleBuilder_ == null) {
@@ -4742,7 +5309,7 @@ public final class PlayProto {
         } else {
           myMultipleBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       /**
@@ -4750,10 +5317,10 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+       * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
        */
       public com.su.proto.PlayProto.MultiplePro.Builder getMyMultipleBuilder() {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         onChanged();
         return getMyMultipleFieldBuilder().getBuilder();
       }
@@ -4762,7 +5329,7 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+       * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
        */
       public com.su.proto.PlayProto.MultipleProOrBuilder getMyMultipleOrBuilder() {
         if (myMultipleBuilder_ != null) {
@@ -4777,7 +5344,7 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>optional .com.su.proto.MultiplePro myMultiple = 3;</code>
+       * <code>optional .com.su.proto.MultiplePro myMultiple = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.su.proto.PlayProto.MultiplePro, com.su.proto.PlayProto.MultiplePro.Builder, com.su.proto.PlayProto.MultipleProOrBuilder> 
@@ -4799,17 +5366,17 @@ public final class PlayProto {
        * 得分
        * </pre>
        *
-       * <code>optional int32 myScore = 4 [default = -1];</code>
+       * <code>optional int32 myScore = 5 [default = -1];</code>
        */
       public boolean hasMyScore() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <pre>
        * 得分
        * </pre>
        *
-       * <code>optional int32 myScore = 4 [default = -1];</code>
+       * <code>optional int32 myScore = 5 [default = -1];</code>
        */
       public int getMyScore() {
         return myScore_;
@@ -4819,10 +5386,10 @@ public final class PlayProto {
        * 得分
        * </pre>
        *
-       * <code>optional int32 myScore = 4 [default = -1];</code>
+       * <code>optional int32 myScore = 5 [default = -1];</code>
        */
       public Builder setMyScore(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         myScore_ = value;
         onChanged();
         return this;
@@ -4832,10 +5399,10 @@ public final class PlayProto {
        * 得分
        * </pre>
        *
-       * <code>optional int32 myScore = 4 [default = -1];</code>
+       * <code>optional int32 myScore = 5 [default = -1];</code>
        */
       public Builder clearMyScore() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         myScore_ = -1;
         onChanged();
         return this;
@@ -4847,17 +5414,17 @@ public final class PlayProto {
        * 状态
        * </pre>
        *
-       * <code>optional int32 state = 5 [default = -1];</code>
+       * <code>optional int32 state = 6 [default = -1];</code>
        */
       public boolean hasState() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <pre>
        * 状态
        * </pre>
        *
-       * <code>optional int32 state = 5 [default = -1];</code>
+       * <code>optional int32 state = 6 [default = -1];</code>
        */
       public int getState() {
         return state_;
@@ -4867,10 +5434,10 @@ public final class PlayProto {
        * 状态
        * </pre>
        *
-       * <code>optional int32 state = 5 [default = -1];</code>
+       * <code>optional int32 state = 6 [default = -1];</code>
        */
       public Builder setState(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         state_ = value;
         onChanged();
         return this;
@@ -4880,10 +5447,10 @@ public final class PlayProto {
        * 状态
        * </pre>
        *
-       * <code>optional int32 state = 5 [default = -1];</code>
+       * <code>optional int32 state = 6 [default = -1];</code>
        */
       public Builder clearState() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         state_ = -1;
         onChanged();
         return this;
@@ -4895,17 +5462,17 @@ public final class PlayProto {
        * 截止时间
        * </pre>
        *
-       * <code>optional int64 deadline = 6 [default = -1];</code>
+       * <code>optional int64 deadline = 7 [default = -1];</code>
        */
       public boolean hasDeadline() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <pre>
        * 截止时间
        * </pre>
        *
-       * <code>optional int64 deadline = 6 [default = -1];</code>
+       * <code>optional int64 deadline = 7 [default = -1];</code>
        */
       public long getDeadline() {
         return deadline_;
@@ -4915,10 +5482,10 @@ public final class PlayProto {
        * 截止时间
        * </pre>
        *
-       * <code>optional int64 deadline = 6 [default = -1];</code>
+       * <code>optional int64 deadline = 7 [default = -1];</code>
        */
       public Builder setDeadline(long value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         deadline_ = value;
         onChanged();
         return this;
@@ -4928,10 +5495,10 @@ public final class PlayProto {
        * 截止时间
        * </pre>
        *
-       * <code>optional int64 deadline = 6 [default = -1];</code>
+       * <code>optional int64 deadline = 7 [default = -1];</code>
        */
       public Builder clearDeadline() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         deadline_ = -1L;
         onChanged();
         return this;
@@ -4943,17 +5510,17 @@ public final class PlayProto {
        * 是否托管
        * </pre>
        *
-       * <code>optional int32 isAuto = 7 [default = -1];</code>
+       * <code>optional int32 isAuto = 8 [default = -1];</code>
        */
       public boolean hasIsAuto() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <pre>
        * 是否托管
        * </pre>
        *
-       * <code>optional int32 isAuto = 7 [default = -1];</code>
+       * <code>optional int32 isAuto = 8 [default = -1];</code>
        */
       public int getIsAuto() {
         return isAuto_;
@@ -4963,10 +5530,10 @@ public final class PlayProto {
        * 是否托管
        * </pre>
        *
-       * <code>optional int32 isAuto = 7 [default = -1];</code>
+       * <code>optional int32 isAuto = 8 [default = -1];</code>
        */
       public Builder setIsAuto(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         isAuto_ = value;
         onChanged();
         return this;
@@ -4976,10 +5543,10 @@ public final class PlayProto {
        * 是否托管
        * </pre>
        *
-       * <code>optional int32 isAuto = 7 [default = -1];</code>
+       * <code>optional int32 isAuto = 8 [default = -1];</code>
        */
       public Builder clearIsAuto() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         isAuto_ = -1;
         onChanged();
         return this;
@@ -13597,31 +14164,32 @@ public final class PlayProto {
     java.lang.String[] descriptorData = {
       "\n\020proto/Play.proto\022\014com.su.proto\"&\n\007Card" +
       "Pro\022\r\n\005value\030\001 \001(\005\022\014\n\004suit\030\002 \001(\005\"*\n\013Mult" +
-      "iplePro\022\014\n\004type\030\001 \001(\005\022\r\n\005value\030\002 \001(\005\"\343\001\n" +
+      "iplePro\022\014\n\004type\030\001 \001(\005\022\r\n\005value\030\002 \001(\005\"\217\002\n" +
       "\010TablePro\022,\n\007players\030\001 \003(\0132\033.com.su.prot" +
       "o.GamePlayerPro\022,\n\tmultiples\030\002 \003(\0132\031.com" +
       ".su.proto.MultiplePro\022\021\n\005state\030\003 \001(\005:\002-1" +
       "\022\020\n\004hold\030\004 \001(\005:\002-1\022\026\n\nroundScore\030\005 \001(\005:\002" +
-      "-1\022\'\n\010flagCard\030\006 \001(\0132\025.com.su.proto.Card" +
-      "Pro\022\025\n\tcallState\030\007 \001(\005:\002-1\"\314\001\n\rGamePlaye" +
-      "rPro\022(\n\thandCards\030\001 \003(\0132\025.com.su.proto.C",
-      "ardPro\022\020\n\004team\030\002 \001(\005:\002-1\022-\n\nmyMultiple\030\003" +
-      " \001(\0132\031.com.su.proto.MultiplePro\022\023\n\007mySco" +
-      "re\030\004 \001(\005:\002-1\022\021\n\005state\030\005 \001(\005:\002-1\022\024\n\010deadl" +
-      "ine\030\006 \001(\003:\002-1\022\022\n\006isAuto\030\007 \001(\005:\002-1\"\037\n\rSta" +
-      "rtMatchReq\022\016\n\006siteId\030\001 \001(\005\"\020\n\016StartMatch" +
-      "Resp\"\034\n\007CallReq\022\021\n\tcardIndex\030\001 \001(\005\"\n\n\010Ca" +
-      "llResp\"/\n\007DrawReq\022\020\n\010cardType\030\001 \001(\005\022\022\n\nc" +
-      "ardIndexs\030\002 \003(\005\"\n\n\010DrawResp\"\n\n\010CheckReq\"" +
-      "\013\n\tCheckResp\"\n\n\010ReadyReq\"\013\n\tReadyResp\"\t\n" +
-      "\007ExitReq\"\n\n\010ExitResp\"\013\n\tDoubleReq\"\014\n\nDou",
-      "bleResp\"\014\n\nUseItemReq\"\r\n\013UseItemResp\"8\n\017" +
-      "GameStartNotice\022%\n\005table\030\001 \001(\0132\026.com.su." +
-      "proto.TablePro\"I\n\026UpdateGamePlayerNotice" +
-      "\022/\n\ngamePlayer\030\001 \001(\0132\033.com.su.proto.Game" +
-      "PlayerPro\":\n\021UpdateTableNotice\022%\n\005table\030" +
-      "\001 \001(\0132\026.com.su.proto.TableProB\013B\tPlayPro" +
-      "to"
+      "-1\022)\n\ncalledCard\030\006 \001(\0132\025.com.su.proto.Ca" +
+      "rdPro\022\025\n\tcallState\030\007 \001(\005:\002-1\022(\n\tlastCard" +
+      "s\030\010 \003(\0132\025.com.su.proto.CardPro\"\334\001\n\rGameP",
+      "layerPro\022\016\n\002id\030\001 \001(\003:\002-1\022(\n\thandCards\030\002 " +
+      "\003(\0132\025.com.su.proto.CardPro\022\020\n\004team\030\003 \001(\005" +
+      ":\002-1\022-\n\nmyMultiple\030\004 \001(\0132\031.com.su.proto." +
+      "MultiplePro\022\023\n\007myScore\030\005 \001(\005:\002-1\022\021\n\005stat" +
+      "e\030\006 \001(\005:\002-1\022\024\n\010deadline\030\007 \001(\003:\002-1\022\022\n\006isA" +
+      "uto\030\010 \001(\005:\002-1\"\037\n\rStartMatchReq\022\016\n\006siteId" +
+      "\030\001 \001(\005\"\020\n\016StartMatchResp\"\034\n\007CallReq\022\021\n\tc" +
+      "ardIndex\030\001 \001(\005\"\n\n\010CallResp\"/\n\007DrawReq\022\020\n" +
+      "\010cardType\030\001 \001(\005\022\022\n\ncardIndexs\030\002 \003(\005\"\n\n\010D" +
+      "rawResp\"\n\n\010CheckReq\"\013\n\tCheckResp\"\n\n\010Read",
+      "yReq\"\013\n\tReadyResp\"\t\n\007ExitReq\"\n\n\010ExitResp" +
+      "\"\013\n\tDoubleReq\"\014\n\nDoubleResp\"\014\n\nUseItemRe" +
+      "q\"\r\n\013UseItemResp\"8\n\017GameStartNotice\022%\n\005t" +
+      "able\030\001 \001(\0132\026.com.su.proto.TablePro\"I\n\026Up" +
+      "dateGamePlayerNotice\022/\n\ngamePlayer\030\001 \001(\013" +
+      "2\033.com.su.proto.GamePlayerPro\":\n\021UpdateT" +
+      "ableNotice\022%\n\005table\030\001 \001(\0132\026.com.su.proto" +
+      ".TableProB\013B\tPlayProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -13652,13 +14220,13 @@ public final class PlayProto {
     internal_static_com_su_proto_TablePro_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_su_proto_TablePro_descriptor,
-        new java.lang.String[] { "Players", "Multiples", "State", "Hold", "RoundScore", "FlagCard", "CallState", });
+        new java.lang.String[] { "Players", "Multiples", "State", "Hold", "RoundScore", "CalledCard", "CallState", "LastCards", });
     internal_static_com_su_proto_GamePlayerPro_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_su_proto_GamePlayerPro_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_su_proto_GamePlayerPro_descriptor,
-        new java.lang.String[] { "HandCards", "Team", "MyMultiple", "MyScore", "State", "Deadline", "IsAuto", });
+        new java.lang.String[] { "Id", "HandCards", "Team", "MyMultiple", "MyScore", "State", "Deadline", "IsAuto", });
     internal_static_com_su_proto_StartMatchReq_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_com_su_proto_StartMatchReq_fieldAccessorTable = new

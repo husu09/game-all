@@ -4,8 +4,6 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.su.common.util.SpringUtil;
-import com.su.core.akka.AkkaContext;
 import com.su.excel.co.SiteCo;
 import com.su.server.context.PlayerContext;
 
@@ -19,9 +17,17 @@ public class Site {
 	 */
 	private AtomicInteger playerNum = new AtomicInteger();
 	/**
-	 * 牌桌队列
+	 * 空闲牌桌队列
 	 */
 	private ConcurrentLinkedQueue<Table> tableQueue = new ConcurrentLinkedQueue<>();
+	/**
+	 * 游戏中的牌桌队列
+	 */
+	private ConcurrentLinkedQueue<Table> playingTableQueue = new ConcurrentLinkedQueue<>();
+	/**
+	 * 等待中的牌桌队列
+	 */
+	private ConcurrentLinkedQueue<Table> waitingTableQueue = new ConcurrentLinkedQueue<>();
 	/**
 	 * 玩家队列
 	 */
@@ -30,8 +36,6 @@ public class Site {
 	 * 配置
 	 */
 	private SiteCo siteCo;
-
-	private AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
 
 	public Site(SiteCo siteCo) {
 		this.siteCo = siteCo;
@@ -61,11 +65,9 @@ public class Site {
 		// 人数足够时开始游戏
 		Table table = tableQueue.poll();
 		if (table == null) {
-			TableActor tableActor = akkaContext.createActor(TableActor.class, TableActorImpl.class);
-			table = new Table(tableActor);
-			tableActor.init(table);
+			table = new Table(this);
 		}
-		table.getActor().start(gamePlayers);
+		table.getActor().initTable(gamePlayers);
 
 	}
 
@@ -74,10 +76,29 @@ public class Site {
 	 */
 	public void init() {
 		for (int i = 0; i < siteCo.getInitTableNum(); i++) {
-			TableActor tableActor = akkaContext.createActor(TableActor.class, TableActorImpl.class);
-			Table table = new Table(tableActor);
+			Table table = new Table(this);
 			tableQueue.offer(table);
 		}
 	}
 
+	public AtomicInteger getPlayerNum() {
+		return playerNum;
+	}
+
+	public ConcurrentLinkedQueue<Table> getTableQueue() {
+		return tableQueue;
+	}
+
+	public ConcurrentLinkedQueue<Table> getPlayingTableQueue() {
+		return playingTableQueue;
+	}
+
+	public ConcurrentLinkedQueue<Table> getWaitingTableQueue() {
+		return waitingTableQueue;
+	}
+
+	public ConcurrentLinkedDeque<GamePlayer> getPlayerDeque() {
+		return playerDeque;
+	}
+	
 }

@@ -2,8 +2,11 @@ package com.su.server.obj.play;
 
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.DelayQueue;
 
 import com.su.common.util.CommonUtils;
+import com.su.common.util.SpringUtil;
+import com.su.core.akka.AkkaContext;
 import com.su.proto.PlayProto.GamePlayerPro;
 import com.su.proto.PlayProto.GameStartNotice;
 import com.su.proto.PlayProto.MultiplePro;
@@ -13,6 +16,10 @@ import com.su.proto.PlayProto.TablePro;
  * 牌桌对象
  */
 public class Table {
+	/**
+	 * 场所
+	 */
+	private Site site;
 	/**
 	 * 牌
 	 */
@@ -46,9 +53,19 @@ public class Table {
 	 */
 	private Map<Integer, Integer> multiples;
 	/**
-	 * actor
+	 * 最后出牌
+	 * */
+	private Card[] lastCards;
+	/**
+	 * 操作接口
 	 */
 	private TableActor actor;
+	/**
+	 * 操作时间队列
+	 */
+	private DelayQueue<GamePlayer> deadLineQueue = new DelayQueue<>();
+
+	private AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
 
 	public TablePro toProto() {
 		TablePro.Builder builder = TablePro.newBuilder();
@@ -65,13 +82,15 @@ public class Table {
 		builder.setState(state.ordinal());
 		builder.setHold(hold);
 		builder.setRoundScore(roundScore);
-		builder.setFlagCard(calledCard.toProto());
+		builder.setCalledCard(calledCard.toProto());
 		builder.setCallState(callState.ordinal());
 		return builder.build();
 	}
 
-	public Table(TableActor actor) {
-		this.actor = actor;
+	public Table(Site site) {
+		this.site = site;
+		this.actor = akkaContext.createActor(TableActor.class, TableActorImpl.class);
+		this.actor.initActor(this);
 		// 生成牌
 		for (int j = 0; j < 2; j++) {
 			int index = 0;
@@ -95,20 +114,36 @@ public class Table {
 		}
 
 	}
+	/**
+	 * 初始化
+	 * */
+	public void init(GamePlayer[] players) {
+		this.players = players;
+		// 初始倍数
+		multiples.put(MultipleType.CHU_SHI.ordinal(), MultipleType.CHU_SHI.getValue());
+		for (int i = 0; i < players.length; i++) {
+			players[i].setIndex(i);
+		}
+		shuffle();
+		start();
+	}
 
 	/**
 	 * 开始游戏
 	 */
-	public void start(GamePlayer[] players) {
-		this.players = players;
+	public void start() {
 		this.state = TableState.START;
-		// 初始倍数
-		multiples.put(MultipleType.CHU_SHI.ordinal(), MultipleType.CHU_SHI.getValue());
 		shuffle();
 		deal();
 		players[hold].setState(PlayerState.OPERATING);
-		for (int i = 1; i < players.length; i++)
+		players[hold].setDeadLine(15);
+		for (int i = 0; i < players.length; i++) {
+			if (i == hold)
+				continue;
 			players[i].setState(PlayerState.WATCH);
+		}
+		deadLineQueue.offer(players[hold]);
+		site.getPlayingTableQueue().offer(this);
 		// 通知
 		GameStartNotice.Builder builder = GameStartNotice.newBuilder();
 		builder.setTable(toProto());
@@ -135,14 +170,31 @@ public class Table {
 	private void deal() {
 		int index = 0;
 		for (int i = 1; i <= cards.length; i++) {
-			players[i % 4 - 1].getHandCards()[index] = cards[i];
+			players[(hold + i) % 4 - 1].getHandCards()[index] = cards[i];
 			if (i % 4 == 0)
 				index++;
 		}
 	}
 
+	public void checkDeadLine() {
+		GamePlayer player = deadLineQueue.poll();
+		if (player != null) {
+			if (player.getState() == PlayerState.OPERATING)
+				player.check();
+		}
+	}
+
+
+	public void doCheck(GamePlayer gamePlayer) {
+		GamePlayer nextPlayer = players[(gamePlayer.getIndex() + 1 + 1) % 4 - 1];
+		nextPlayer.setState(PlayerState.OPERATING);
+		
+	}
+
 	public TableActor getActor() {
 		return actor;
 	}
+	
+	
 
 }

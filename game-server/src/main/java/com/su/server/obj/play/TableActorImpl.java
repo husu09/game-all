@@ -5,15 +5,17 @@ import com.su.server.context.PlayerContext;
 public class TableActorImpl implements TableActor {
 	
 	private Table table;
-	
+
 	@Override
-	public void init(Table table) {
-		this.table = table;
+	public void initActor(Table table) {
+		// TODO Auto-generated method stub
+		
 	}
-	
+
 	@Override
-	public void start(GamePlayer[] players) {
-		table.start(players);
+	public void initTable(GamePlayer[] players) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -53,9 +55,13 @@ public class TableActorImpl implements TableActor {
 	}
 
 	@Override
-	public void check() {
+	public void checkDeadline() {
+		// TODO Auto-generated method stub
 		
 	}
+
+	
+
 
 
 }
