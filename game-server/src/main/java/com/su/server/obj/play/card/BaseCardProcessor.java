@@ -4,8 +4,6 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import com.su.server.constant.ErrCode;
-import com.su.server.obj.play.Card;
 import com.su.server.obj.play.CardType;
 
 @Component

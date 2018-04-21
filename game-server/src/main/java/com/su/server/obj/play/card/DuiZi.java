@@ -1,25 +1,29 @@
 package com.su.server.obj.play.card;
 
+import org.springframework.stereotype.Component;
+
+import com.su.server.obj.play.Card;
 import com.su.server.obj.play.CardType;
 
+@Component
 public class DuiZi extends BaseCardProcessor  {
 
-	@Override
-	public boolean verify() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean compare() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public CardType getCardType() {
-		// TODO Auto-generated method stub
-		return null;
+		return CardType.DUI_ZI;
+	}
+
+	@Override
+	public boolean verify(Card[] cards) {
+		if (cards.length != 2)
+			return false;
+		return false;
+	}
+
+	@Override
+	public boolean compare(Card[] cards, CardType lastCardType, Card[] lastCards) {
+		return false;
 	}
 
 }

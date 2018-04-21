@@ -1,7 +1,10 @@
 package com.su.server.obj.play.card;
 
+import org.springframework.stereotype.Component;
+
 import com.su.server.obj.play.CardType;
 
+@Component
 public class ZhaDan  extends BaseCardProcessor {
 
 	@Override
