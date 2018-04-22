@@ -1,5 +1,6 @@
 package com.su.server.obj.play;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -54,12 +55,15 @@ public class Table {
 	/**
 	 * 倍数
 	 */
-	private int[] multipleTypes = new int[MultipleType.values().length];
-	private int[] multipleValues = new int[MultipleType.values().length];
+	private int[] multiples = new int[MultipleType.values().length - 2];
 	/**
 	 * 最后出牌
 	 */
 	private Card[] lastCards;
+	/**
+	 * 庄家
+	 */
+	private int dealer;
 	/**
 	 * 操作接口
 	 */
@@ -68,36 +72,10 @@ public class Table {
 	 * 操作时间队列
 	 */
 	private DelayQueue<GamePlayer> deadLineQueue = new DelayQueue<>();
+	
+	private TablePro.Builder tablePro = TablePro.newBuilder();
 
 	private AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
-
-	/*public TablePro toProto() {
-		TablePro.Builder builder = TablePro.newBuilder();
-		GamePlayerPro.Builder gamePlayerProBuilder = GamePlayerPro.newBuilder();
-		for (int i = 0; i < players.length; i++) {
-			builder.addPlayers(players[i].toProto(gamePlayerProBuilder));
-			gamePlayerProBuilder.clear();
-		}
-		MultiplePro.Builder multipleProBuilder = MultiplePro.newBuilder();
-		for (Entry<Integer, Integer> entry : multiples.entrySet()) {
-			builder.addMultiples(multipleProBuilder.setType(entry.getKey()).setValue(entry.getValue()));
-			multipleProBuilder.clear();
-		}
-		builder.setState(state.ordinal());
-		builder.setHold(hold);
-		builder.setRoundScore(roundScore);
-		if (calledCard != null)
-			builder.setCalledCard(calledCard.toProto());
-		builder.setCallState(callState.ordinal());
-		if (lastCards != null) {
-			CardPro.Builder cardProBuilder = CardPro.newBuilder();
-			for (Card card : lastCards) {
-				builder.addLastCards(card.toProto());
-				cardProBuilder.clear();
-			}
-		}
-		return builder.build();
-	}*/
 
 	public Table(Site site) {
 		this.site = site;
@@ -133,11 +111,10 @@ public class Table {
 	public void init(GamePlayer[] players) {
 		this.players = players;
 		// 初始倍数
-		/*multiples.put(MultipleType.CHU_SHI.ordinal(), MultipleType.CHU_SHI.getValue());*/
+		multiples[MultipleType.CHU_SHI.ordinal()] = MultipleType.CHU_SHI.getValue();
 		for (int i = 0; i < players.length; i++) {
 			players[i].setIndex(i);
 		}
-		shuffle();
 		start();
 	}
 
@@ -145,7 +122,9 @@ public class Table {
 	 * 开始游戏
 	 */
 	public void start() {
+		//
 		this.state = TableState.START;
+		dealer = hold;
 		for (int i = 0; i < players.length; i++) {
 			if (i == hold)
 				continue;
@@ -158,11 +137,71 @@ public class Table {
 		deadLineQueue.offer(players[hold]);
 		site.getPlayingTableQueue().offer(this);
 		// 通知
-		GameStartNotice.Builder builder = GameStartNotice.newBuilder();
-		/*builder.setTable(toProto());*/
-		for (int i = 0; i < players.length; i++) {
-			players[i].getPlayerContext().write(builder);
+		GameStartNotice.Builder gameStartNotice = GameStartNotice.newBuilder();
+		// 倍数
+		MultiplePro.Builder multiplePro = MultiplePro.newBuilder();
+		for (MultipleType multipleType : MultipleType.values()) {
+			if (multiples[multipleType.ordinal()] != 0 && multipleType.ordinal() < multiples.length) {
+				multiplePro.setType(multipleType.ordinal());
+				multiplePro.setValue(multiples[multipleType.ordinal()]);
+				tablePro.addMultiples(multiplePro);
+				multiplePro.clear();
+			}
+
 		}
+		tablePro.setState(state.ordinal());
+		tablePro.setHold(hold);
+		tablePro.setRoundScore(roundScore);
+		CardPro.Builder cardPro = CardPro.newBuilder();
+		if (calledCard != null) {
+			cardPro.setValue(calledCard.getValue());
+			cardPro.setSuit(calledCard.getSuit().ordinal());
+			tablePro.setCalledCard(cardPro);
+			cardPro.clear();
+		}
+		if (lastCards != null) {
+			for (Card card : lastCards) {
+				cardPro.setValue(card.getValue());
+				cardPro.setSuit(card.getSuit().ordinal());
+				tablePro.addLastCards(cardPro);
+				cardPro.clear();
+			}
+		}
+		tablePro.setDealer(dealer);
+		// 玩家数据
+		for (int i = 0; i < players.length; i++) {
+			for (int j = 0; j < players.length; j++) {
+				gamePlayerPro.setId(players[j].getId());
+				if (players[i] == players[j]) {
+					for (Card card : players[j].getHandCards()) {
+						if (card == null)
+							continue;
+						cardPro.setValue(card.getValue());
+						cardPro.setSuit(card.getSuit().ordinal());
+						gamePlayerPro.addHandCards(cardPro);
+						cardPro.clear();
+					}
+				}
+				int cardNum = 0;
+				for (Card card : players[j].getHandCards()) {
+					if (card == null)
+						break;
+					cardNum++;
+				}
+				gamePlayerPro.setCardNum(cardNum);
+				gamePlayerPro.setTeam(players[j].getTeam().ordinal());
+				gamePlayerPro.setMyMultipleValue(players[j].getMyScore());
+				gamePlayerPro.setMyScore(players[j].getState().ordinal());
+				gamePlayerPro.setDeadline(players[j].getDeadLine());
+				gamePlayerPro.setIsAuto(players[j].getIsAuto());
+				tablePro.addPlayers(gamePlayerPro);
+				gamePlayerPro.clear();
+
+			}
+			players[i].getPlayerContext().write(gameStartNotice);
+			tablePro.clearPlayers();
+		}
+
 	}
 
 	/**
@@ -186,12 +225,16 @@ public class Table {
 			players[(hold + i) % 4 - 1].getHandCards()[index] = cards[i];
 			if (i % 4 == 0)
 				index++;
+			
+		}
+		for (int i = 0; i < players.length; i++) {
+			Arrays.sort(players[i].getHandCards());
 		}
 	}
-	
+
 	/**
 	 * 处理超时
-	 * */
+	 */
 	public void checkDeadLine() {
 		GamePlayer player = deadLineQueue.poll();
 		if (player != null) {
@@ -199,24 +242,24 @@ public class Table {
 				player.check();
 		}
 	}
-	
+
 	/**
 	 * 处理过牌
-	 * */
+	 */
 	public void doCheck(GamePlayer gamePlayer) {
 		GamePlayer nextPlayer = players[(gamePlayer.getIndex() + 1 + 1) % 4 - 1];
 		nextPlayer.setState(PlayerState.OPERATING);
 	}
-	
+
 	/**
 	 * 通知所有玩家数据更新
-	 * */
+	 */
 	private void noticePlayers(MessageLiteOrBuilder msg) {
-		for(GamePlayer player : players) {
+		for (GamePlayer player : players) {
 			player.getPlayerContext().write(msg);
 		}
 	}
-	
+
 	public TableActor getActor() {
 		return actor;
 	}

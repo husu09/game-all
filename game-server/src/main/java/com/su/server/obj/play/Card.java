@@ -2,7 +2,7 @@ package com.su.server.obj.play;
 
 import com.su.proto.PlayProto.CardPro;
 
-public class Card {
+public class Card implements Comparable<Card> {
 	/**
 	 * 牌面
 	 */
@@ -17,17 +17,17 @@ public class Card {
 		this.suit = suit;
 	}
 
-	public CardPro toProto() {
-		CardPro.Builder builder = CardPro.newBuilder();
-		return toProto(builder);
-	}
-
-	public CardPro toProto(CardPro.Builder builder) {
-		if (builder == null)
-			builder = CardPro.newBuilder();
-		builder.setValue(value);
-		builder.setSuit(suit.ordinal());
-		return builder.build();
+	@Override
+	public int compareTo(Card o) {
+		if (value > o.getValue())
+			return 1;
+		else if (value < o.getValue())
+			return -1;
+		if (suit.ordinal() > o.getSuit().ordinal())
+			return 1;
+		else if (suit.ordinal() < o.getSuit().ordinal())
+			return -1;
+		return 0;
 	}
 
 	public int getValue() {

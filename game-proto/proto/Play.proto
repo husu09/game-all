@@ -21,6 +21,7 @@ message TablePro {
 	optional CardPro calledCard = 6;	// 被叫的牌
 	optional int32	callState = 7[default = -1];	// 叫牌状态
 	repeated CardPro lastCards = 8;	// 最后出牌
+	optional int32 dealer = 9;	// 庄家
 }
 
 message GamePlayerPro {

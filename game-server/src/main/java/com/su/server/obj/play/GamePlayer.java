@@ -49,6 +49,8 @@ public class GamePlayer implements Delayed {
 	 * 玩家上下文
 	 */
 	private PlayerContext playerContext;
+	
+	private GamePlayerPro.Builder gamePlayerPro = GamePlayerPro.newBuilder();
 
 	private Table table;
 
@@ -57,34 +59,6 @@ public class GamePlayer implements Delayed {
 		this.id = playerContext.getPlayer().getId();
 	}
 
-	/*public GamePlayerPro toProto() {
-		GamePlayerPro.Builder builder = GamePlayerPro.newBuilder();
-		return toProto(builder);
-	}*/
-
-	/*public GamePlayerPro toProto(GamePlayerPro.Builder builder) {
-		if (builder == null)
-			builder = GamePlayerPro.newBuilder();
-		builder.setId(id);
-		CardPro.Builder cardProBuilder = CardPro.newBuilder();
-		for (Card card : handCards) {
-			if (card == null)
-				continue;
-			builder.addHandCards(card.toProto(cardProBuilder));
-			cardProBuilder.clear();
-		}
-		builder.setTeam(team.ordinal());
-		if (multipleType != 0) {
-			MultiplePro.Builder multipleProBuilder = MultiplePro.newBuilder();
-			multipleProBuilder.setType(multipleType).setValue(multiple);
-			builder.setMyMultiple(multipleProBuilder.build());
-		}
-		builder.setMyScore(myScore);
-		builder.setState(state.ordinal());
-		builder.setDeadline(deadLine);
-		builder.setIsAuto(isAuto);
-		return builder.build();
-	}*/
 
 	/**
 	 * 叫牌
@@ -146,6 +120,14 @@ public class GamePlayer implements Delayed {
 		this.team = team;
 	}
 
+	public int getMultipleValue() {
+		return multipleValue;
+	}
+
+	public void setMultipleValue(int multipleValue) {
+		this.multipleValue = multipleValue;
+	}
+
 	public int getMyScore() {
 		return myScore;
 	}
@@ -194,4 +176,8 @@ public class GamePlayer implements Delayed {
 		return playerContext;
 	}
 
+	public GamePlayerPro.Builder getGamePlayerPro() {
+		return gamePlayerPro;
+	}
+	
 }
