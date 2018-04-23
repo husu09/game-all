@@ -66,6 +66,7 @@ public class Table implements Delayed {
 	 * 最后出牌
 	 */
 	private Card[] lastCards;
+	private CardType lastCardType;
 	/**
 	 * 庄家
 	 */
@@ -299,6 +300,12 @@ public class Table implements Delayed {
 		nextPlayer.setDeadLine(30);
 		site.getDeadLineQueue().offer(nextPlayer);
 		
+		// 分数
+		if (nextPlayer.getIndex() == hold) {
+			nextPlayer.setMyScore(roundScore);
+			roundScore = 0;
+		}
+		
 		if (player.getState() != PlayerState.OPERATING) {
 			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
 			return;
@@ -338,6 +345,7 @@ public class Table implements Delayed {
 
 		gamePlayerPro.setState(nextPlayer.getState().ordinal());
 		gamePlayerPro.setDeadline(nextPlayer.getDeadLine());
+		gamePlayerPro.setMyScore(nextPlayer.getMyScore());
 		updateGamePlayerNotice.addGamePlayer(gamePlayerPro);
 		gamePlayerPro.clear();
 
@@ -353,7 +361,91 @@ public class Table implements Delayed {
 	/**
 	 * 出牌
 	 */
-	public void draw(GamePlayer player, CardType cardType, int[] index) {
+	public void draw(GamePlayer player, CardType cardType, int[] indexs) {
+		site.getDeadLineQueue().remove(player);
+		// 玩家状态处理
+		player.setState(PlayerState.WATCH);
+		player.setDeadLine(0);
+		GamePlayer nextPlayer = players[(player.getIndex() + 1 + 1) % 4 - 1];
+		nextPlayer.setState(PlayerState.OPERATING);
+		nextPlayer.setDeadLine(30);
+		site.getDeadLineQueue().offer(nextPlayer);
+		
+		if (player.getState() != PlayerState.OPERATING) {
+			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
+			return;
+		}
+		Card[] cards = new Card[indexs.length];
+		// 索引验证
+		for (int i = 0; i < indexs.length; i ++) {
+			if (indexs[i] < 0 || indexs[i] >= player.getHandCards().length) {
+				player.getPlayerContext().sendError(ErrCode.PARAMETER_ERROR);
+				return;
+			}
+			Card card = player.getHandCards()[indexs[i]];
+			if (card == null) {
+				player.getPlayerContext().sendError(ErrCode.SYSTEM_ERROR);
+				return;
+			}
+			cards[i] = card;
+		}
+		// 牌型验证
+		if (!CardTypeUnit.verify(cardType, cards)) {
+			player.getPlayerContext().sendError(ErrCode.CARD_TYPE_ERROR);
+			return;
+		}
+		// 比较大小
+		if (!CardTypeUnit.compare(cardType, cards, lastCardType, lastCards)) {
+			player.getPlayerContext().sendError(ErrCode.CARD_SIZE_ERROR);
+			return;
+		}
+		lastCardType = cardType;
+		lastCards = cards;
+		
+		// 处理玩家手牌
+		for (int index : indexs) {
+			player.getHandCards()[index] = null;
+		}
+		// 倍数
+		MultipleType multiple = MultipleTypeUnit.getMultiple(cardType, cards);
+		if (multiple != null) {
+			multiples[multiple.ordinal()] += multiple.getValue();
+			multiplePro.setType(multiple.ordinal()).setValue(multiples[multiple.ordinal()]);
+			tablePro.addMultiples(multiplePro);
+			multiplePro.clear();
+		}
+		// 变更牌权
+		hold = player.getIndex();
+		tablePro.setHold(hold);
+		// 叫牌状态
+		for (Card card : cards) {
+			if (card.equals(calledCard)) {
+				if (dealer == player.getId()) {
+					// 暗叫
+					if (callState != CallState.LIGHT) {
+						callState = CallState.DARK;
+					}
+				} 
+				// 分组
+				player.setTeam(players[dealer].getTeam());
+			}
+		}
+		// 检测输赢
+		boolean isWin = true;
+		for (Card card : player.getHandCards()) {
+			if (card != null){
+				isWin = false;
+				break;
+			}
+		}
+		if (isWin) {
+			
+		}
+		// 接风
+		GamePlayer teammate =null;
+		
+		
+		
 		
 	}
 
@@ -361,21 +453,28 @@ public class Table implements Delayed {
 	 * 退出
 	 */
 	public void exit(GamePlayer player) {
-
+		// 对局中
+		if (state == TableState.WAITING) {
+			// 解散牌局
+		} 
+		if (player.getState() == PlayerState.OPERATING) {
+			player.setIsAuto(1);
+			check(player);
+		}
 	}
 
 	/**
 	 * 准备
 	 */
 	public void ready(GamePlayer player) {
-
+		player.setState(PlayerState.READY);
 	}
 
 	/**
 	 * 重连
 	 */
 	public void reconnect(PlayerContext playerContext) {
-
+		
 	}
 
 	/**
@@ -390,7 +489,7 @@ public class Table implements Delayed {
 	 * 等待超时
 	 */
 	public void checkWaiting() {
-
+		
 	}
 
 	/**

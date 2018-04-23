@@ -19,4 +19,8 @@ public class ErrCode {
 	public static final int OTHER_PLAYER_CALLED = 2002;
 	// 参数错误
 	public static final int PARAMETER_ERROR = 2003;
+	// 牌型错误
+	public static final int CARD_TYPE_ERROR = 2004;
+	// 牌型大小错误
+	public static final int CARD_SIZE_ERROR = 2005;
 }
