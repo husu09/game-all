@@ -2,7 +2,7 @@ package com.su.server.obj.play;
 
 public enum MultipleType {
 	/**
-	 * 基础倍数 0
+	 * 初始倍数 0
 	 */
 	CHU_SHI(15),
 	/**

@@ -2,19 +2,15 @@ package com.su.server.obj.play;
 
 public enum TableState {
 	/**
-	 * 空闲 0
-	 * */
-	IDLE,
-	/**
-	 * 开始 1
+	 * 开始 0
 	 * */
 	START,
 	/**
-	 * 游戏 2
+	 * 游戏 1
 	 * */
 	PLAYING,
 	/**
-	 * 等待 3
+	 * 等待 2
 	 * */
 	WAITING
 }

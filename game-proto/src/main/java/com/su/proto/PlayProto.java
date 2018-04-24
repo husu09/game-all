@@ -14,8 +14,8 @@ public final class PlayProto {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface CardProOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.CardPro)
+  public interface PCardOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.PCard)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -37,35 +37,35 @@ public final class PlayProto {
 
     /**
      * <pre>
-     * 花色（0：无，1：方块，2：梅花，3：红桃，4：黑桃）
+     * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
      * </pre>
      *
-     * <code>optional int32 suit = 2;</code>
+     * <code>optional int32 suit = 2 [default = -1];</code>
      */
     boolean hasSuit();
     /**
      * <pre>
-     * 花色（0：无，1：方块，2：梅花，3：红桃，4：黑桃）
+     * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
      * </pre>
      *
-     * <code>optional int32 suit = 2;</code>
+     * <code>optional int32 suit = 2 [default = -1];</code>
      */
     int getSuit();
   }
   /**
-   * Protobuf type {@code com.su.proto.CardPro}
+   * Protobuf type {@code com.su.proto.PCard}
    */
-  public  static final class CardPro extends
+  public  static final class PCard extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.CardPro)
-      CardProOrBuilder {
-    // Use CardPro.newBuilder() to construct.
-    private CardPro(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.PCard)
+      PCardOrBuilder {
+    // Use PCard.newBuilder() to construct.
+    private PCard(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private CardPro() {
+    private PCard() {
       value_ = 0;
-      suit_ = 0;
+      suit_ = -1;
     }
 
     @java.lang.Override
@@ -73,7 +73,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private CardPro(
+    private PCard(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -120,14 +120,14 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_CardPro_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_PCard_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_CardPro_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_PCard_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.CardPro.class, com.su.proto.PlayProto.CardPro.Builder.class);
+              com.su.proto.PlayProto.PCard.class, com.su.proto.PlayProto.PCard.Builder.class);
     }
 
     private int bitField0_;
@@ -158,20 +158,20 @@ public final class PlayProto {
     private int suit_;
     /**
      * <pre>
-     * 花色（0：无，1：方块，2：梅花，3：红桃，4：黑桃）
+     * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
      * </pre>
      *
-     * <code>optional int32 suit = 2;</code>
+     * <code>optional int32 suit = 2 [default = -1];</code>
      */
     public boolean hasSuit() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <pre>
-     * 花色（0：无，1：方块，2：梅花，3：红桃，4：黑桃）
+     * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
      * </pre>
      *
-     * <code>optional int32 suit = 2;</code>
+     * <code>optional int32 suit = 2 [default = -1];</code>
      */
     public int getSuit() {
       return suit_;
@@ -222,10 +222,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.CardPro)) {
+      if (!(obj instanceof com.su.proto.PlayProto.PCard)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.CardPro other = (com.su.proto.PlayProto.CardPro) obj;
+      com.su.proto.PlayProto.PCard other = (com.su.proto.PlayProto.PCard) obj;
 
       boolean result = true;
       result = result && (hasValue() == other.hasValue());
@@ -262,58 +262,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.CardPro parseFrom(
+    public static com.su.proto.PlayProto.PCard parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.CardPro parseFrom(
+    public static com.su.proto.PlayProto.PCard parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.CardPro parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.PCard parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.CardPro parseFrom(
+    public static com.su.proto.PlayProto.PCard parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.CardPro parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.PCard parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.CardPro parseFrom(
+    public static com.su.proto.PlayProto.PCard parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.CardPro parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.PCard parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.CardPro parseDelimitedFrom(
+    public static com.su.proto.PlayProto.PCard parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.CardPro parseFrom(
+    public static com.su.proto.PlayProto.PCard parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.CardPro parseFrom(
+    public static com.su.proto.PlayProto.PCard parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -325,7 +325,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.CardPro prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.PCard prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -340,25 +340,25 @@ public final class PlayProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.su.proto.CardPro}
+     * Protobuf type {@code com.su.proto.PCard}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.CardPro)
-        com.su.proto.PlayProto.CardProOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.PCard)
+        com.su.proto.PlayProto.PCardOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_CardPro_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PCard_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_CardPro_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PCard_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.CardPro.class, com.su.proto.PlayProto.CardPro.Builder.class);
+                com.su.proto.PlayProto.PCard.class, com.su.proto.PlayProto.PCard.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.CardPro.newBuilder()
+      // Construct using com.su.proto.PlayProto.PCard.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -377,30 +377,30 @@ public final class PlayProto {
         super.clear();
         value_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        suit_ = 0;
+        suit_ = -1;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_CardPro_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PCard_descriptor;
       }
 
-      public com.su.proto.PlayProto.CardPro getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.CardPro.getDefaultInstance();
+      public com.su.proto.PlayProto.PCard getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.PCard.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.CardPro build() {
-        com.su.proto.PlayProto.CardPro result = buildPartial();
+      public com.su.proto.PlayProto.PCard build() {
+        com.su.proto.PlayProto.PCard result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.CardPro buildPartial() {
-        com.su.proto.PlayProto.CardPro result = new com.su.proto.PlayProto.CardPro(this);
+      public com.su.proto.PlayProto.PCard buildPartial() {
+        com.su.proto.PlayProto.PCard result = new com.su.proto.PlayProto.PCard(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -443,16 +443,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.CardPro) {
-          return mergeFrom((com.su.proto.PlayProto.CardPro)other);
+        if (other instanceof com.su.proto.PlayProto.PCard) {
+          return mergeFrom((com.su.proto.PlayProto.PCard)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.CardPro other) {
-        if (other == com.su.proto.PlayProto.CardPro.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.PCard other) {
+        if (other == com.su.proto.PlayProto.PCard.getDefaultInstance()) return this;
         if (other.hasValue()) {
           setValue(other.getValue());
         }
@@ -472,11 +472,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.CardPro parsedMessage = null;
+        com.su.proto.PlayProto.PCard parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.CardPro) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.PCard) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -535,33 +535,33 @@ public final class PlayProto {
         return this;
       }
 
-      private int suit_ ;
+      private int suit_ = -1;
       /**
        * <pre>
-       * 花色（0：无，1：方块，2：梅花，3：红桃，4：黑桃）
+       * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
        * </pre>
        *
-       * <code>optional int32 suit = 2;</code>
+       * <code>optional int32 suit = 2 [default = -1];</code>
        */
       public boolean hasSuit() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <pre>
-       * 花色（0：无，1：方块，2：梅花，3：红桃，4：黑桃）
+       * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
        * </pre>
        *
-       * <code>optional int32 suit = 2;</code>
+       * <code>optional int32 suit = 2 [default = -1];</code>
        */
       public int getSuit() {
         return suit_;
       }
       /**
        * <pre>
-       * 花色（0：无，1：方块，2：梅花，3：红桃，4：黑桃）
+       * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
        * </pre>
        *
-       * <code>optional int32 suit = 2;</code>
+       * <code>optional int32 suit = 2 [default = -1];</code>
        */
       public Builder setSuit(int value) {
         bitField0_ |= 0x00000002;
@@ -571,14 +571,14 @@ public final class PlayProto {
       }
       /**
        * <pre>
-       * 花色（0：无，1：方块，2：梅花，3：红桃，4：黑桃）
+       * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
        * </pre>
        *
-       * <code>optional int32 suit = 2;</code>
+       * <code>optional int32 suit = 2 [default = -1];</code>
        */
       public Builder clearSuit() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        suit_ = 0;
+        suit_ = -1;
         onChanged();
         return this;
       }
@@ -593,46 +593,46 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.CardPro)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.PCard)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.CardPro)
-    private static final com.su.proto.PlayProto.CardPro DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.PCard)
+    private static final com.su.proto.PlayProto.PCard DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.CardPro();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.PCard();
     }
 
-    public static com.su.proto.PlayProto.CardPro getDefaultInstance() {
+    public static com.su.proto.PlayProto.PCard getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<CardPro>
-        PARSER = new com.google.protobuf.AbstractParser<CardPro>() {
-      public CardPro parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<PCard>
+        PARSER = new com.google.protobuf.AbstractParser<PCard>() {
+      public PCard parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CardPro(input, extensionRegistry);
+          return new PCard(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<CardPro> parser() {
+    public static com.google.protobuf.Parser<PCard> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<CardPro> getParserForType() {
+    public com.google.protobuf.Parser<PCard> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.CardPro getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.PCard getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface MultipleProOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.MultiplePro)
+  public interface PMultipleOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.PMultiple)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -670,17 +670,17 @@ public final class PlayProto {
     int getValue();
   }
   /**
-   * Protobuf type {@code com.su.proto.MultiplePro}
+   * Protobuf type {@code com.su.proto.PMultiple}
    */
-  public  static final class MultiplePro extends
+  public  static final class PMultiple extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.MultiplePro)
-      MultipleProOrBuilder {
-    // Use MultiplePro.newBuilder() to construct.
-    private MultiplePro(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.PMultiple)
+      PMultipleOrBuilder {
+    // Use PMultiple.newBuilder() to construct.
+    private PMultiple(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private MultiplePro() {
+    private PMultiple() {
       type_ = 0;
       value_ = 0;
     }
@@ -690,7 +690,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private MultiplePro(
+    private PMultiple(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -737,14 +737,14 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_MultiplePro_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_PMultiple_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_MultiplePro_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_PMultiple_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.MultiplePro.class, com.su.proto.PlayProto.MultiplePro.Builder.class);
+              com.su.proto.PlayProto.PMultiple.class, com.su.proto.PlayProto.PMultiple.Builder.class);
     }
 
     private int bitField0_;
@@ -839,10 +839,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.MultiplePro)) {
+      if (!(obj instanceof com.su.proto.PlayProto.PMultiple)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.MultiplePro other = (com.su.proto.PlayProto.MultiplePro) obj;
+      com.su.proto.PlayProto.PMultiple other = (com.su.proto.PlayProto.PMultiple) obj;
 
       boolean result = true;
       result = result && (hasType() == other.hasType());
@@ -879,58 +879,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.MultiplePro parseFrom(
+    public static com.su.proto.PlayProto.PMultiple parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.MultiplePro parseFrom(
+    public static com.su.proto.PlayProto.PMultiple parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.MultiplePro parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.PMultiple parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.MultiplePro parseFrom(
+    public static com.su.proto.PlayProto.PMultiple parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.MultiplePro parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.PMultiple parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.MultiplePro parseFrom(
+    public static com.su.proto.PlayProto.PMultiple parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.MultiplePro parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.PMultiple parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.MultiplePro parseDelimitedFrom(
+    public static com.su.proto.PlayProto.PMultiple parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.MultiplePro parseFrom(
+    public static com.su.proto.PlayProto.PMultiple parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.MultiplePro parseFrom(
+    public static com.su.proto.PlayProto.PMultiple parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -942,7 +942,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.MultiplePro prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.PMultiple prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -957,25 +957,25 @@ public final class PlayProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.su.proto.MultiplePro}
+     * Protobuf type {@code com.su.proto.PMultiple}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.MultiplePro)
-        com.su.proto.PlayProto.MultipleProOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.PMultiple)
+        com.su.proto.PlayProto.PMultipleOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_MultiplePro_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PMultiple_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_MultiplePro_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PMultiple_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.MultiplePro.class, com.su.proto.PlayProto.MultiplePro.Builder.class);
+                com.su.proto.PlayProto.PMultiple.class, com.su.proto.PlayProto.PMultiple.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.MultiplePro.newBuilder()
+      // Construct using com.su.proto.PlayProto.PMultiple.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1001,23 +1001,23 @@ public final class PlayProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_MultiplePro_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PMultiple_descriptor;
       }
 
-      public com.su.proto.PlayProto.MultiplePro getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.MultiplePro.getDefaultInstance();
+      public com.su.proto.PlayProto.PMultiple getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.PMultiple.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.MultiplePro build() {
-        com.su.proto.PlayProto.MultiplePro result = buildPartial();
+      public com.su.proto.PlayProto.PMultiple build() {
+        com.su.proto.PlayProto.PMultiple result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.MultiplePro buildPartial() {
-        com.su.proto.PlayProto.MultiplePro result = new com.su.proto.PlayProto.MultiplePro(this);
+      public com.su.proto.PlayProto.PMultiple buildPartial() {
+        com.su.proto.PlayProto.PMultiple result = new com.su.proto.PlayProto.PMultiple(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1060,16 +1060,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.MultiplePro) {
-          return mergeFrom((com.su.proto.PlayProto.MultiplePro)other);
+        if (other instanceof com.su.proto.PlayProto.PMultiple) {
+          return mergeFrom((com.su.proto.PlayProto.PMultiple)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.MultiplePro other) {
-        if (other == com.su.proto.PlayProto.MultiplePro.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.PMultiple other) {
+        if (other == com.su.proto.PlayProto.PMultiple.getDefaultInstance()) return this;
         if (other.hasType()) {
           setType(other.getType());
         }
@@ -1089,11 +1089,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.MultiplePro parsedMessage = null;
+        com.su.proto.PlayProto.PMultiple parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.MultiplePro) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.PMultiple) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1210,46 +1210,46 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.MultiplePro)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.PMultiple)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.MultiplePro)
-    private static final com.su.proto.PlayProto.MultiplePro DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.PMultiple)
+    private static final com.su.proto.PlayProto.PMultiple DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.MultiplePro();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.PMultiple();
     }
 
-    public static com.su.proto.PlayProto.MultiplePro getDefaultInstance() {
+    public static com.su.proto.PlayProto.PMultiple getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<MultiplePro>
-        PARSER = new com.google.protobuf.AbstractParser<MultiplePro>() {
-      public MultiplePro parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<PMultiple>
+        PARSER = new com.google.protobuf.AbstractParser<PMultiple>() {
+      public PMultiple parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new MultiplePro(input, extensionRegistry);
+          return new PMultiple(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<MultiplePro> parser() {
+    public static com.google.protobuf.Parser<PMultiple> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<MultiplePro> getParserForType() {
+    public com.google.protobuf.Parser<PMultiple> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.MultiplePro getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.PMultiple getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface TableProOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.TablePro)
+  public interface PTableOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.PTable)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1257,24 +1257,24 @@ public final class PlayProto {
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
-    java.util.List<com.su.proto.PlayProto.GamePlayerPro> 
+    java.util.List<com.su.proto.PlayProto.PGamePlayer> 
         getPlayersList();
     /**
      * <pre>
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
-    com.su.proto.PlayProto.GamePlayerPro getPlayers(int index);
+    com.su.proto.PlayProto.PGamePlayer getPlayers(int index);
     /**
      * <pre>
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
     int getPlayersCount();
     /**
@@ -1282,18 +1282,18 @@ public final class PlayProto {
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
-    java.util.List<? extends com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+    java.util.List<? extends com.su.proto.PlayProto.PGamePlayerOrBuilder> 
         getPlayersOrBuilderList();
     /**
      * <pre>
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
-    com.su.proto.PlayProto.GamePlayerProOrBuilder getPlayersOrBuilder(
+    com.su.proto.PlayProto.PGamePlayerOrBuilder getPlayersOrBuilder(
         int index);
 
     /**
@@ -1301,24 +1301,24 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
-    java.util.List<com.su.proto.PlayProto.MultiplePro> 
+    java.util.List<com.su.proto.PlayProto.PMultiple> 
         getMultiplesList();
     /**
      * <pre>
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
-    com.su.proto.PlayProto.MultiplePro getMultiples(int index);
+    com.su.proto.PlayProto.PMultiple getMultiples(int index);
     /**
      * <pre>
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
     int getMultiplesCount();
     /**
@@ -1326,18 +1326,18 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
-    java.util.List<? extends com.su.proto.PlayProto.MultipleProOrBuilder> 
+    java.util.List<? extends com.su.proto.PlayProto.PMultipleOrBuilder> 
         getMultiplesOrBuilderList();
     /**
      * <pre>
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
-    com.su.proto.PlayProto.MultipleProOrBuilder getMultiplesOrBuilder(
+    com.su.proto.PlayProto.PMultipleOrBuilder getMultiplesOrBuilder(
         int index);
 
     /**
@@ -1396,7 +1396,7 @@ public final class PlayProto {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+     * <code>optional .com.su.proto.PCard callCard = 6;</code>
      */
     boolean hasCallCard();
     /**
@@ -1404,17 +1404,17 @@ public final class PlayProto {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+     * <code>optional .com.su.proto.PCard callCard = 6;</code>
      */
-    com.su.proto.PlayProto.CardPro getCallCard();
+    com.su.proto.PlayProto.PCard getCallCard();
     /**
      * <pre>
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+     * <code>optional .com.su.proto.PCard callCard = 6;</code>
      */
-    com.su.proto.PlayProto.CardProOrBuilder getCallCardOrBuilder();
+    com.su.proto.PlayProto.PCardOrBuilder getCallCardOrBuilder();
 
     /**
      * <pre>
@@ -1438,24 +1438,24 @@ public final class PlayProto {
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
-    java.util.List<com.su.proto.PlayProto.CardPro> 
+    java.util.List<com.su.proto.PlayProto.PCard> 
         getLastCardsList();
     /**
      * <pre>
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
-    com.su.proto.PlayProto.CardPro getLastCards(int index);
+    com.su.proto.PlayProto.PCard getLastCards(int index);
     /**
      * <pre>
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
     int getLastCardsCount();
     /**
@@ -1463,18 +1463,18 @@ public final class PlayProto {
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
-    java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
+    java.util.List<? extends com.su.proto.PlayProto.PCardOrBuilder> 
         getLastCardsOrBuilderList();
     /**
      * <pre>
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
-    com.su.proto.PlayProto.CardProOrBuilder getLastCardsOrBuilder(
+    com.su.proto.PlayProto.PCardOrBuilder getLastCardsOrBuilder(
         int index);
 
     /**
@@ -1482,7 +1482,7 @@ public final class PlayProto {
      * 庄家
      * </pre>
      *
-     * <code>optional int32 dealer = 9;</code>
+     * <code>optional int32 dealer = 9 [default = -1];</code>
      */
     boolean hasDealer();
     /**
@@ -1490,22 +1490,22 @@ public final class PlayProto {
      * 庄家
      * </pre>
      *
-     * <code>optional int32 dealer = 9;</code>
+     * <code>optional int32 dealer = 9 [default = -1];</code>
      */
     int getDealer();
   }
   /**
-   * Protobuf type {@code com.su.proto.TablePro}
+   * Protobuf type {@code com.su.proto.PTable}
    */
-  public  static final class TablePro extends
+  public  static final class PTable extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.TablePro)
-      TableProOrBuilder {
-    // Use TablePro.newBuilder() to construct.
-    private TablePro(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.PTable)
+      PTableOrBuilder {
+    // Use PTable.newBuilder() to construct.
+    private PTable(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private TablePro() {
+    private PTable() {
       players_ = java.util.Collections.emptyList();
       multiples_ = java.util.Collections.emptyList();
       state_ = -1;
@@ -1513,7 +1513,7 @@ public final class PlayProto {
       roundScore_ = -1;
       callState_ = -1;
       lastCards_ = java.util.Collections.emptyList();
-      dealer_ = 0;
+      dealer_ = -1;
     }
 
     @java.lang.Override
@@ -1521,7 +1521,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private TablePro(
+    private PTable(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1546,20 +1546,20 @@ public final class PlayProto {
             }
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                players_ = new java.util.ArrayList<com.su.proto.PlayProto.GamePlayerPro>();
+                players_ = new java.util.ArrayList<com.su.proto.PlayProto.PGamePlayer>();
                 mutable_bitField0_ |= 0x00000001;
               }
               players_.add(
-                  input.readMessage(com.su.proto.PlayProto.GamePlayerPro.PARSER, extensionRegistry));
+                  input.readMessage(com.su.proto.PlayProto.PGamePlayer.PARSER, extensionRegistry));
               break;
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                multiples_ = new java.util.ArrayList<com.su.proto.PlayProto.MultiplePro>();
+                multiples_ = new java.util.ArrayList<com.su.proto.PlayProto.PMultiple>();
                 mutable_bitField0_ |= 0x00000002;
               }
               multiples_.add(
-                  input.readMessage(com.su.proto.PlayProto.MultiplePro.PARSER, extensionRegistry));
+                  input.readMessage(com.su.proto.PlayProto.PMultiple.PARSER, extensionRegistry));
               break;
             }
             case 24: {
@@ -1578,11 +1578,11 @@ public final class PlayProto {
               break;
             }
             case 50: {
-              com.su.proto.PlayProto.CardPro.Builder subBuilder = null;
+              com.su.proto.PlayProto.PCard.Builder subBuilder = null;
               if (((bitField0_ & 0x00000008) == 0x00000008)) {
                 subBuilder = callCard_.toBuilder();
               }
-              callCard_ = input.readMessage(com.su.proto.PlayProto.CardPro.PARSER, extensionRegistry);
+              callCard_ = input.readMessage(com.su.proto.PlayProto.PCard.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(callCard_);
                 callCard_ = subBuilder.buildPartial();
@@ -1597,11 +1597,11 @@ public final class PlayProto {
             }
             case 66: {
               if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-                lastCards_ = new java.util.ArrayList<com.su.proto.PlayProto.CardPro>();
+                lastCards_ = new java.util.ArrayList<com.su.proto.PlayProto.PCard>();
                 mutable_bitField0_ |= 0x00000080;
               }
               lastCards_.add(
-                  input.readMessage(com.su.proto.PlayProto.CardPro.PARSER, extensionRegistry));
+                  input.readMessage(com.su.proto.PlayProto.PCard.PARSER, extensionRegistry));
               break;
             }
             case 72: {
@@ -1632,27 +1632,27 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_TablePro_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_PTable_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_TablePro_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_PTable_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.TablePro.class, com.su.proto.PlayProto.TablePro.Builder.class);
+              com.su.proto.PlayProto.PTable.class, com.su.proto.PlayProto.PTable.Builder.class);
     }
 
     private int bitField0_;
     public static final int PLAYERS_FIELD_NUMBER = 1;
-    private java.util.List<com.su.proto.PlayProto.GamePlayerPro> players_;
+    private java.util.List<com.su.proto.PlayProto.PGamePlayer> players_;
     /**
      * <pre>
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
-    public java.util.List<com.su.proto.PlayProto.GamePlayerPro> getPlayersList() {
+    public java.util.List<com.su.proto.PlayProto.PGamePlayer> getPlayersList() {
       return players_;
     }
     /**
@@ -1660,9 +1660,9 @@ public final class PlayProto {
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
-    public java.util.List<? extends com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+    public java.util.List<? extends com.su.proto.PlayProto.PGamePlayerOrBuilder> 
         getPlayersOrBuilderList() {
       return players_;
     }
@@ -1671,7 +1671,7 @@ public final class PlayProto {
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
     public int getPlayersCount() {
       return players_.size();
@@ -1681,9 +1681,9 @@ public final class PlayProto {
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
-    public com.su.proto.PlayProto.GamePlayerPro getPlayers(int index) {
+    public com.su.proto.PlayProto.PGamePlayer getPlayers(int index) {
       return players_.get(index);
     }
     /**
@@ -1691,23 +1691,23 @@ public final class PlayProto {
      * 玩家
      * </pre>
      *
-     * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
      */
-    public com.su.proto.PlayProto.GamePlayerProOrBuilder getPlayersOrBuilder(
+    public com.su.proto.PlayProto.PGamePlayerOrBuilder getPlayersOrBuilder(
         int index) {
       return players_.get(index);
     }
 
     public static final int MULTIPLES_FIELD_NUMBER = 2;
-    private java.util.List<com.su.proto.PlayProto.MultiplePro> multiples_;
+    private java.util.List<com.su.proto.PlayProto.PMultiple> multiples_;
     /**
      * <pre>
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
-    public java.util.List<com.su.proto.PlayProto.MultiplePro> getMultiplesList() {
+    public java.util.List<com.su.proto.PlayProto.PMultiple> getMultiplesList() {
       return multiples_;
     }
     /**
@@ -1715,9 +1715,9 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
-    public java.util.List<? extends com.su.proto.PlayProto.MultipleProOrBuilder> 
+    public java.util.List<? extends com.su.proto.PlayProto.PMultipleOrBuilder> 
         getMultiplesOrBuilderList() {
       return multiples_;
     }
@@ -1726,7 +1726,7 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
     public int getMultiplesCount() {
       return multiples_.size();
@@ -1736,9 +1736,9 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
-    public com.su.proto.PlayProto.MultiplePro getMultiples(int index) {
+    public com.su.proto.PlayProto.PMultiple getMultiples(int index) {
       return multiples_.get(index);
     }
     /**
@@ -1746,9 +1746,9 @@ public final class PlayProto {
      * 倍数
      * </pre>
      *
-     * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+     * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
      */
-    public com.su.proto.PlayProto.MultipleProOrBuilder getMultiplesOrBuilder(
+    public com.su.proto.PlayProto.PMultipleOrBuilder getMultiplesOrBuilder(
         int index) {
       return multiples_.get(index);
     }
@@ -1823,13 +1823,13 @@ public final class PlayProto {
     }
 
     public static final int CALLCARD_FIELD_NUMBER = 6;
-    private com.su.proto.PlayProto.CardPro callCard_;
+    private com.su.proto.PlayProto.PCard callCard_;
     /**
      * <pre>
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+     * <code>optional .com.su.proto.PCard callCard = 6;</code>
      */
     public boolean hasCallCard() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
@@ -1839,20 +1839,20 @@ public final class PlayProto {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+     * <code>optional .com.su.proto.PCard callCard = 6;</code>
      */
-    public com.su.proto.PlayProto.CardPro getCallCard() {
-      return callCard_ == null ? com.su.proto.PlayProto.CardPro.getDefaultInstance() : callCard_;
+    public com.su.proto.PlayProto.PCard getCallCard() {
+      return callCard_ == null ? com.su.proto.PlayProto.PCard.getDefaultInstance() : callCard_;
     }
     /**
      * <pre>
      * 被叫的牌
      * </pre>
      *
-     * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+     * <code>optional .com.su.proto.PCard callCard = 6;</code>
      */
-    public com.su.proto.PlayProto.CardProOrBuilder getCallCardOrBuilder() {
-      return callCard_ == null ? com.su.proto.PlayProto.CardPro.getDefaultInstance() : callCard_;
+    public com.su.proto.PlayProto.PCardOrBuilder getCallCardOrBuilder() {
+      return callCard_ == null ? com.su.proto.PlayProto.PCard.getDefaultInstance() : callCard_;
     }
 
     public static final int CALLSTATE_FIELD_NUMBER = 7;
@@ -1879,15 +1879,15 @@ public final class PlayProto {
     }
 
     public static final int LASTCARDS_FIELD_NUMBER = 8;
-    private java.util.List<com.su.proto.PlayProto.CardPro> lastCards_;
+    private java.util.List<com.su.proto.PlayProto.PCard> lastCards_;
     /**
      * <pre>
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
-    public java.util.List<com.su.proto.PlayProto.CardPro> getLastCardsList() {
+    public java.util.List<com.su.proto.PlayProto.PCard> getLastCardsList() {
       return lastCards_;
     }
     /**
@@ -1895,9 +1895,9 @@ public final class PlayProto {
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
-    public java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
+    public java.util.List<? extends com.su.proto.PlayProto.PCardOrBuilder> 
         getLastCardsOrBuilderList() {
       return lastCards_;
     }
@@ -1906,7 +1906,7 @@ public final class PlayProto {
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
     public int getLastCardsCount() {
       return lastCards_.size();
@@ -1916,9 +1916,9 @@ public final class PlayProto {
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
-    public com.su.proto.PlayProto.CardPro getLastCards(int index) {
+    public com.su.proto.PlayProto.PCard getLastCards(int index) {
       return lastCards_.get(index);
     }
     /**
@@ -1926,9 +1926,9 @@ public final class PlayProto {
      * 最后出牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+     * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
      */
-    public com.su.proto.PlayProto.CardProOrBuilder getLastCardsOrBuilder(
+    public com.su.proto.PlayProto.PCardOrBuilder getLastCardsOrBuilder(
         int index) {
       return lastCards_.get(index);
     }
@@ -1940,7 +1940,7 @@ public final class PlayProto {
      * 庄家
      * </pre>
      *
-     * <code>optional int32 dealer = 9;</code>
+     * <code>optional int32 dealer = 9 [default = -1];</code>
      */
     public boolean hasDealer() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
@@ -1950,7 +1950,7 @@ public final class PlayProto {
      * 庄家
      * </pre>
      *
-     * <code>optional int32 dealer = 9;</code>
+     * <code>optional int32 dealer = 9 [default = -1];</code>
      */
     public int getDealer() {
       return dealer_;
@@ -2050,10 +2050,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.TablePro)) {
+      if (!(obj instanceof com.su.proto.PlayProto.PTable)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.TablePro other = (com.su.proto.PlayProto.TablePro) obj;
+      com.su.proto.PlayProto.PTable other = (com.su.proto.PlayProto.PTable) obj;
 
       boolean result = true;
       result = result && getPlayersList()
@@ -2144,58 +2144,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.TablePro parseFrom(
+    public static com.su.proto.PlayProto.PTable parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.TablePro parseFrom(
+    public static com.su.proto.PlayProto.PTable parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.TablePro parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.PTable parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.TablePro parseFrom(
+    public static com.su.proto.PlayProto.PTable parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.TablePro parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.PTable parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.TablePro parseFrom(
+    public static com.su.proto.PlayProto.PTable parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.TablePro parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.PTable parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.TablePro parseDelimitedFrom(
+    public static com.su.proto.PlayProto.PTable parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.TablePro parseFrom(
+    public static com.su.proto.PlayProto.PTable parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.TablePro parseFrom(
+    public static com.su.proto.PlayProto.PTable parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2207,7 +2207,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.TablePro prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.PTable prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -2222,25 +2222,25 @@ public final class PlayProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.su.proto.TablePro}
+     * Protobuf type {@code com.su.proto.PTable}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.TablePro)
-        com.su.proto.PlayProto.TableProOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.PTable)
+        com.su.proto.PlayProto.PTableOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_TablePro_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PTable_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_TablePro_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PTable_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.TablePro.class, com.su.proto.PlayProto.TablePro.Builder.class);
+                com.su.proto.PlayProto.PTable.class, com.su.proto.PlayProto.PTable.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.TablePro.newBuilder()
+      // Construct using com.su.proto.PlayProto.PTable.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2293,30 +2293,30 @@ public final class PlayProto {
         } else {
           lastCardsBuilder_.clear();
         }
-        dealer_ = 0;
+        dealer_ = -1;
         bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_TablePro_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PTable_descriptor;
       }
 
-      public com.su.proto.PlayProto.TablePro getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.TablePro.getDefaultInstance();
+      public com.su.proto.PlayProto.PTable getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.PTable.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.TablePro build() {
-        com.su.proto.PlayProto.TablePro result = buildPartial();
+      public com.su.proto.PlayProto.PTable build() {
+        com.su.proto.PlayProto.PTable result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.TablePro buildPartial() {
-        com.su.proto.PlayProto.TablePro result = new com.su.proto.PlayProto.TablePro(this);
+      public com.su.proto.PlayProto.PTable buildPartial() {
+        com.su.proto.PlayProto.PTable result = new com.su.proto.PlayProto.PTable(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (playersBuilder_ == null) {
@@ -2406,16 +2406,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.TablePro) {
-          return mergeFrom((com.su.proto.PlayProto.TablePro)other);
+        if (other instanceof com.su.proto.PlayProto.PTable) {
+          return mergeFrom((com.su.proto.PlayProto.PTable)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.TablePro other) {
-        if (other == com.su.proto.PlayProto.TablePro.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.PTable other) {
+        if (other == com.su.proto.PlayProto.PTable.getDefaultInstance()) return this;
         if (playersBuilder_ == null) {
           if (!other.players_.isEmpty()) {
             if (players_.isEmpty()) {
@@ -2525,11 +2525,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.TablePro parsedMessage = null;
+        com.su.proto.PlayProto.PTable parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.TablePro) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.PTable) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -2540,26 +2540,26 @@ public final class PlayProto {
       }
       private int bitField0_;
 
-      private java.util.List<com.su.proto.PlayProto.GamePlayerPro> players_ =
+      private java.util.List<com.su.proto.PlayProto.PGamePlayer> players_ =
         java.util.Collections.emptyList();
       private void ensurePlayersIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          players_ = new java.util.ArrayList<com.su.proto.PlayProto.GamePlayerPro>(players_);
+          players_ = new java.util.ArrayList<com.su.proto.PlayProto.PGamePlayer>(players_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder> playersBuilder_;
+          com.su.proto.PlayProto.PGamePlayer, com.su.proto.PlayProto.PGamePlayer.Builder, com.su.proto.PlayProto.PGamePlayerOrBuilder> playersBuilder_;
 
       /**
        * <pre>
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.GamePlayerPro> getPlayersList() {
+      public java.util.List<com.su.proto.PlayProto.PGamePlayer> getPlayersList() {
         if (playersBuilder_ == null) {
           return java.util.Collections.unmodifiableList(players_);
         } else {
@@ -2571,7 +2571,7 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
       public int getPlayersCount() {
         if (playersBuilder_ == null) {
@@ -2585,9 +2585,9 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro getPlayers(int index) {
+      public com.su.proto.PlayProto.PGamePlayer getPlayers(int index) {
         if (playersBuilder_ == null) {
           return players_.get(index);
         } else {
@@ -2599,10 +2599,10 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
       public Builder setPlayers(
-          int index, com.su.proto.PlayProto.GamePlayerPro value) {
+          int index, com.su.proto.PlayProto.PGamePlayer value) {
         if (playersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2620,10 +2620,10 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
       public Builder setPlayers(
-          int index, com.su.proto.PlayProto.GamePlayerPro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PGamePlayer.Builder builderForValue) {
         if (playersBuilder_ == null) {
           ensurePlayersIsMutable();
           players_.set(index, builderForValue.build());
@@ -2638,9 +2638,9 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
-      public Builder addPlayers(com.su.proto.PlayProto.GamePlayerPro value) {
+      public Builder addPlayers(com.su.proto.PlayProto.PGamePlayer value) {
         if (playersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2658,10 +2658,10 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
       public Builder addPlayers(
-          int index, com.su.proto.PlayProto.GamePlayerPro value) {
+          int index, com.su.proto.PlayProto.PGamePlayer value) {
         if (playersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2679,10 +2679,10 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
       public Builder addPlayers(
-          com.su.proto.PlayProto.GamePlayerPro.Builder builderForValue) {
+          com.su.proto.PlayProto.PGamePlayer.Builder builderForValue) {
         if (playersBuilder_ == null) {
           ensurePlayersIsMutable();
           players_.add(builderForValue.build());
@@ -2697,10 +2697,10 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
       public Builder addPlayers(
-          int index, com.su.proto.PlayProto.GamePlayerPro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PGamePlayer.Builder builderForValue) {
         if (playersBuilder_ == null) {
           ensurePlayersIsMutable();
           players_.add(index, builderForValue.build());
@@ -2715,10 +2715,10 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
       public Builder addAllPlayers(
-          java.lang.Iterable<? extends com.su.proto.PlayProto.GamePlayerPro> values) {
+          java.lang.Iterable<? extends com.su.proto.PlayProto.PGamePlayer> values) {
         if (playersBuilder_ == null) {
           ensurePlayersIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -2734,7 +2734,7 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
       public Builder clearPlayers() {
         if (playersBuilder_ == null) {
@@ -2751,7 +2751,7 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
       public Builder removePlayers(int index) {
         if (playersBuilder_ == null) {
@@ -2768,9 +2768,9 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro.Builder getPlayersBuilder(
+      public com.su.proto.PlayProto.PGamePlayer.Builder getPlayersBuilder(
           int index) {
         return getPlayersFieldBuilder().getBuilder(index);
       }
@@ -2779,9 +2779,9 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerProOrBuilder getPlayersOrBuilder(
+      public com.su.proto.PlayProto.PGamePlayerOrBuilder getPlayersOrBuilder(
           int index) {
         if (playersBuilder_ == null) {
           return players_.get(index);  } else {
@@ -2793,9 +2793,9 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
-      public java.util.List<? extends com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+      public java.util.List<? extends com.su.proto.PlayProto.PGamePlayerOrBuilder> 
            getPlayersOrBuilderList() {
         if (playersBuilder_ != null) {
           return playersBuilder_.getMessageOrBuilderList();
@@ -2808,41 +2808,41 @@ public final class PlayProto {
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro.Builder addPlayersBuilder() {
+      public com.su.proto.PlayProto.PGamePlayer.Builder addPlayersBuilder() {
         return getPlayersFieldBuilder().addBuilder(
-            com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance());
+            com.su.proto.PlayProto.PGamePlayer.getDefaultInstance());
       }
       /**
        * <pre>
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro.Builder addPlayersBuilder(
+      public com.su.proto.PlayProto.PGamePlayer.Builder addPlayersBuilder(
           int index) {
         return getPlayersFieldBuilder().addBuilder(
-            index, com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance());
+            index, com.su.proto.PlayProto.PGamePlayer.getDefaultInstance());
       }
       /**
        * <pre>
        * 玩家
        * </pre>
        *
-       * <code>repeated .com.su.proto.GamePlayerPro players = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer players = 1;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.GamePlayerPro.Builder> 
+      public java.util.List<com.su.proto.PlayProto.PGamePlayer.Builder> 
            getPlayersBuilderList() {
         return getPlayersFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+          com.su.proto.PlayProto.PGamePlayer, com.su.proto.PlayProto.PGamePlayer.Builder, com.su.proto.PlayProto.PGamePlayerOrBuilder> 
           getPlayersFieldBuilder() {
         if (playersBuilder_ == null) {
           playersBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder>(
+              com.su.proto.PlayProto.PGamePlayer, com.su.proto.PlayProto.PGamePlayer.Builder, com.su.proto.PlayProto.PGamePlayerOrBuilder>(
                   players_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
@@ -2852,26 +2852,26 @@ public final class PlayProto {
         return playersBuilder_;
       }
 
-      private java.util.List<com.su.proto.PlayProto.MultiplePro> multiples_ =
+      private java.util.List<com.su.proto.PlayProto.PMultiple> multiples_ =
         java.util.Collections.emptyList();
       private void ensureMultiplesIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          multiples_ = new java.util.ArrayList<com.su.proto.PlayProto.MultiplePro>(multiples_);
+          multiples_ = new java.util.ArrayList<com.su.proto.PlayProto.PMultiple>(multiples_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.MultiplePro, com.su.proto.PlayProto.MultiplePro.Builder, com.su.proto.PlayProto.MultipleProOrBuilder> multiplesBuilder_;
+          com.su.proto.PlayProto.PMultiple, com.su.proto.PlayProto.PMultiple.Builder, com.su.proto.PlayProto.PMultipleOrBuilder> multiplesBuilder_;
 
       /**
        * <pre>
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.MultiplePro> getMultiplesList() {
+      public java.util.List<com.su.proto.PlayProto.PMultiple> getMultiplesList() {
         if (multiplesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(multiples_);
         } else {
@@ -2883,7 +2883,7 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
       public int getMultiplesCount() {
         if (multiplesBuilder_ == null) {
@@ -2897,9 +2897,9 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
-      public com.su.proto.PlayProto.MultiplePro getMultiples(int index) {
+      public com.su.proto.PlayProto.PMultiple getMultiples(int index) {
         if (multiplesBuilder_ == null) {
           return multiples_.get(index);
         } else {
@@ -2911,10 +2911,10 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
       public Builder setMultiples(
-          int index, com.su.proto.PlayProto.MultiplePro value) {
+          int index, com.su.proto.PlayProto.PMultiple value) {
         if (multiplesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2932,10 +2932,10 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
       public Builder setMultiples(
-          int index, com.su.proto.PlayProto.MultiplePro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PMultiple.Builder builderForValue) {
         if (multiplesBuilder_ == null) {
           ensureMultiplesIsMutable();
           multiples_.set(index, builderForValue.build());
@@ -2950,9 +2950,9 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
-      public Builder addMultiples(com.su.proto.PlayProto.MultiplePro value) {
+      public Builder addMultiples(com.su.proto.PlayProto.PMultiple value) {
         if (multiplesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2970,10 +2970,10 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
       public Builder addMultiples(
-          int index, com.su.proto.PlayProto.MultiplePro value) {
+          int index, com.su.proto.PlayProto.PMultiple value) {
         if (multiplesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2991,10 +2991,10 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
       public Builder addMultiples(
-          com.su.proto.PlayProto.MultiplePro.Builder builderForValue) {
+          com.su.proto.PlayProto.PMultiple.Builder builderForValue) {
         if (multiplesBuilder_ == null) {
           ensureMultiplesIsMutable();
           multiples_.add(builderForValue.build());
@@ -3009,10 +3009,10 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
       public Builder addMultiples(
-          int index, com.su.proto.PlayProto.MultiplePro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PMultiple.Builder builderForValue) {
         if (multiplesBuilder_ == null) {
           ensureMultiplesIsMutable();
           multiples_.add(index, builderForValue.build());
@@ -3027,10 +3027,10 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
       public Builder addAllMultiples(
-          java.lang.Iterable<? extends com.su.proto.PlayProto.MultiplePro> values) {
+          java.lang.Iterable<? extends com.su.proto.PlayProto.PMultiple> values) {
         if (multiplesBuilder_ == null) {
           ensureMultiplesIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -3046,7 +3046,7 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
       public Builder clearMultiples() {
         if (multiplesBuilder_ == null) {
@@ -3063,7 +3063,7 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
       public Builder removeMultiples(int index) {
         if (multiplesBuilder_ == null) {
@@ -3080,9 +3080,9 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
-      public com.su.proto.PlayProto.MultiplePro.Builder getMultiplesBuilder(
+      public com.su.proto.PlayProto.PMultiple.Builder getMultiplesBuilder(
           int index) {
         return getMultiplesFieldBuilder().getBuilder(index);
       }
@@ -3091,9 +3091,9 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
-      public com.su.proto.PlayProto.MultipleProOrBuilder getMultiplesOrBuilder(
+      public com.su.proto.PlayProto.PMultipleOrBuilder getMultiplesOrBuilder(
           int index) {
         if (multiplesBuilder_ == null) {
           return multiples_.get(index);  } else {
@@ -3105,9 +3105,9 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
-      public java.util.List<? extends com.su.proto.PlayProto.MultipleProOrBuilder> 
+      public java.util.List<? extends com.su.proto.PlayProto.PMultipleOrBuilder> 
            getMultiplesOrBuilderList() {
         if (multiplesBuilder_ != null) {
           return multiplesBuilder_.getMessageOrBuilderList();
@@ -3120,41 +3120,41 @@ public final class PlayProto {
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
-      public com.su.proto.PlayProto.MultiplePro.Builder addMultiplesBuilder() {
+      public com.su.proto.PlayProto.PMultiple.Builder addMultiplesBuilder() {
         return getMultiplesFieldBuilder().addBuilder(
-            com.su.proto.PlayProto.MultiplePro.getDefaultInstance());
+            com.su.proto.PlayProto.PMultiple.getDefaultInstance());
       }
       /**
        * <pre>
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
-      public com.su.proto.PlayProto.MultiplePro.Builder addMultiplesBuilder(
+      public com.su.proto.PlayProto.PMultiple.Builder addMultiplesBuilder(
           int index) {
         return getMultiplesFieldBuilder().addBuilder(
-            index, com.su.proto.PlayProto.MultiplePro.getDefaultInstance());
+            index, com.su.proto.PlayProto.PMultiple.getDefaultInstance());
       }
       /**
        * <pre>
        * 倍数
        * </pre>
        *
-       * <code>repeated .com.su.proto.MultiplePro multiples = 2;</code>
+       * <code>repeated .com.su.proto.PMultiple multiples = 2;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.MultiplePro.Builder> 
+      public java.util.List<com.su.proto.PlayProto.PMultiple.Builder> 
            getMultiplesBuilderList() {
         return getMultiplesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.MultiplePro, com.su.proto.PlayProto.MultiplePro.Builder, com.su.proto.PlayProto.MultipleProOrBuilder> 
+          com.su.proto.PlayProto.PMultiple, com.su.proto.PlayProto.PMultiple.Builder, com.su.proto.PlayProto.PMultipleOrBuilder> 
           getMultiplesFieldBuilder() {
         if (multiplesBuilder_ == null) {
           multiplesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.su.proto.PlayProto.MultiplePro, com.su.proto.PlayProto.MultiplePro.Builder, com.su.proto.PlayProto.MultipleProOrBuilder>(
+              com.su.proto.PlayProto.PMultiple, com.su.proto.PlayProto.PMultiple.Builder, com.su.proto.PlayProto.PMultipleOrBuilder>(
                   multiples_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -3308,15 +3308,15 @@ public final class PlayProto {
         return this;
       }
 
-      private com.su.proto.PlayProto.CardPro callCard_ = null;
+      private com.su.proto.PlayProto.PCard callCard_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> callCardBuilder_;
+          com.su.proto.PlayProto.PCard, com.su.proto.PlayProto.PCard.Builder, com.su.proto.PlayProto.PCardOrBuilder> callCardBuilder_;
       /**
        * <pre>
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+       * <code>optional .com.su.proto.PCard callCard = 6;</code>
        */
       public boolean hasCallCard() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
@@ -3326,11 +3326,11 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+       * <code>optional .com.su.proto.PCard callCard = 6;</code>
        */
-      public com.su.proto.PlayProto.CardPro getCallCard() {
+      public com.su.proto.PlayProto.PCard getCallCard() {
         if (callCardBuilder_ == null) {
-          return callCard_ == null ? com.su.proto.PlayProto.CardPro.getDefaultInstance() : callCard_;
+          return callCard_ == null ? com.su.proto.PlayProto.PCard.getDefaultInstance() : callCard_;
         } else {
           return callCardBuilder_.getMessage();
         }
@@ -3340,9 +3340,9 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+       * <code>optional .com.su.proto.PCard callCard = 6;</code>
        */
-      public Builder setCallCard(com.su.proto.PlayProto.CardPro value) {
+      public Builder setCallCard(com.su.proto.PlayProto.PCard value) {
         if (callCardBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3360,10 +3360,10 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+       * <code>optional .com.su.proto.PCard callCard = 6;</code>
        */
       public Builder setCallCard(
-          com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+          com.su.proto.PlayProto.PCard.Builder builderForValue) {
         if (callCardBuilder_ == null) {
           callCard_ = builderForValue.build();
           onChanged();
@@ -3378,15 +3378,15 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+       * <code>optional .com.su.proto.PCard callCard = 6;</code>
        */
-      public Builder mergeCallCard(com.su.proto.PlayProto.CardPro value) {
+      public Builder mergeCallCard(com.su.proto.PlayProto.PCard value) {
         if (callCardBuilder_ == null) {
           if (((bitField0_ & 0x00000020) == 0x00000020) &&
               callCard_ != null &&
-              callCard_ != com.su.proto.PlayProto.CardPro.getDefaultInstance()) {
+              callCard_ != com.su.proto.PlayProto.PCard.getDefaultInstance()) {
             callCard_ =
-              com.su.proto.PlayProto.CardPro.newBuilder(callCard_).mergeFrom(value).buildPartial();
+              com.su.proto.PlayProto.PCard.newBuilder(callCard_).mergeFrom(value).buildPartial();
           } else {
             callCard_ = value;
           }
@@ -3402,7 +3402,7 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+       * <code>optional .com.su.proto.PCard callCard = 6;</code>
        */
       public Builder clearCallCard() {
         if (callCardBuilder_ == null) {
@@ -3419,9 +3419,9 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+       * <code>optional .com.su.proto.PCard callCard = 6;</code>
        */
-      public com.su.proto.PlayProto.CardPro.Builder getCallCardBuilder() {
+      public com.su.proto.PlayProto.PCard.Builder getCallCardBuilder() {
         bitField0_ |= 0x00000020;
         onChanged();
         return getCallCardFieldBuilder().getBuilder();
@@ -3431,14 +3431,14 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+       * <code>optional .com.su.proto.PCard callCard = 6;</code>
        */
-      public com.su.proto.PlayProto.CardProOrBuilder getCallCardOrBuilder() {
+      public com.su.proto.PlayProto.PCardOrBuilder getCallCardOrBuilder() {
         if (callCardBuilder_ != null) {
           return callCardBuilder_.getMessageOrBuilder();
         } else {
           return callCard_ == null ?
-              com.su.proto.PlayProto.CardPro.getDefaultInstance() : callCard_;
+              com.su.proto.PlayProto.PCard.getDefaultInstance() : callCard_;
         }
       }
       /**
@@ -3446,14 +3446,14 @@ public final class PlayProto {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional .com.su.proto.CardPro callCard = 6;</code>
+       * <code>optional .com.su.proto.PCard callCard = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> 
+          com.su.proto.PlayProto.PCard, com.su.proto.PlayProto.PCard.Builder, com.su.proto.PlayProto.PCardOrBuilder> 
           getCallCardFieldBuilder() {
         if (callCardBuilder_ == null) {
           callCardBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder>(
+              com.su.proto.PlayProto.PCard, com.su.proto.PlayProto.PCard.Builder, com.su.proto.PlayProto.PCardOrBuilder>(
                   getCallCard(),
                   getParentForChildren(),
                   isClean());
@@ -3510,26 +3510,26 @@ public final class PlayProto {
         return this;
       }
 
-      private java.util.List<com.su.proto.PlayProto.CardPro> lastCards_ =
+      private java.util.List<com.su.proto.PlayProto.PCard> lastCards_ =
         java.util.Collections.emptyList();
       private void ensureLastCardsIsMutable() {
         if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          lastCards_ = new java.util.ArrayList<com.su.proto.PlayProto.CardPro>(lastCards_);
+          lastCards_ = new java.util.ArrayList<com.su.proto.PlayProto.PCard>(lastCards_);
           bitField0_ |= 0x00000080;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> lastCardsBuilder_;
+          com.su.proto.PlayProto.PCard, com.su.proto.PlayProto.PCard.Builder, com.su.proto.PlayProto.PCardOrBuilder> lastCardsBuilder_;
 
       /**
        * <pre>
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.CardPro> getLastCardsList() {
+      public java.util.List<com.su.proto.PlayProto.PCard> getLastCardsList() {
         if (lastCardsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(lastCards_);
         } else {
@@ -3541,7 +3541,7 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
       public int getLastCardsCount() {
         if (lastCardsBuilder_ == null) {
@@ -3555,9 +3555,9 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
-      public com.su.proto.PlayProto.CardPro getLastCards(int index) {
+      public com.su.proto.PlayProto.PCard getLastCards(int index) {
         if (lastCardsBuilder_ == null) {
           return lastCards_.get(index);
         } else {
@@ -3569,10 +3569,10 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
       public Builder setLastCards(
-          int index, com.su.proto.PlayProto.CardPro value) {
+          int index, com.su.proto.PlayProto.PCard value) {
         if (lastCardsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3590,10 +3590,10 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
       public Builder setLastCards(
-          int index, com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PCard.Builder builderForValue) {
         if (lastCardsBuilder_ == null) {
           ensureLastCardsIsMutable();
           lastCards_.set(index, builderForValue.build());
@@ -3608,9 +3608,9 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
-      public Builder addLastCards(com.su.proto.PlayProto.CardPro value) {
+      public Builder addLastCards(com.su.proto.PlayProto.PCard value) {
         if (lastCardsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3628,10 +3628,10 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
       public Builder addLastCards(
-          int index, com.su.proto.PlayProto.CardPro value) {
+          int index, com.su.proto.PlayProto.PCard value) {
         if (lastCardsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3649,10 +3649,10 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
       public Builder addLastCards(
-          com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+          com.su.proto.PlayProto.PCard.Builder builderForValue) {
         if (lastCardsBuilder_ == null) {
           ensureLastCardsIsMutable();
           lastCards_.add(builderForValue.build());
@@ -3667,10 +3667,10 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
       public Builder addLastCards(
-          int index, com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PCard.Builder builderForValue) {
         if (lastCardsBuilder_ == null) {
           ensureLastCardsIsMutable();
           lastCards_.add(index, builderForValue.build());
@@ -3685,10 +3685,10 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
       public Builder addAllLastCards(
-          java.lang.Iterable<? extends com.su.proto.PlayProto.CardPro> values) {
+          java.lang.Iterable<? extends com.su.proto.PlayProto.PCard> values) {
         if (lastCardsBuilder_ == null) {
           ensureLastCardsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -3704,7 +3704,7 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
       public Builder clearLastCards() {
         if (lastCardsBuilder_ == null) {
@@ -3721,7 +3721,7 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
       public Builder removeLastCards(int index) {
         if (lastCardsBuilder_ == null) {
@@ -3738,9 +3738,9 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
-      public com.su.proto.PlayProto.CardPro.Builder getLastCardsBuilder(
+      public com.su.proto.PlayProto.PCard.Builder getLastCardsBuilder(
           int index) {
         return getLastCardsFieldBuilder().getBuilder(index);
       }
@@ -3749,9 +3749,9 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
-      public com.su.proto.PlayProto.CardProOrBuilder getLastCardsOrBuilder(
+      public com.su.proto.PlayProto.PCardOrBuilder getLastCardsOrBuilder(
           int index) {
         if (lastCardsBuilder_ == null) {
           return lastCards_.get(index);  } else {
@@ -3763,9 +3763,9 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
-      public java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
+      public java.util.List<? extends com.su.proto.PlayProto.PCardOrBuilder> 
            getLastCardsOrBuilderList() {
         if (lastCardsBuilder_ != null) {
           return lastCardsBuilder_.getMessageOrBuilderList();
@@ -3778,41 +3778,41 @@ public final class PlayProto {
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
-      public com.su.proto.PlayProto.CardPro.Builder addLastCardsBuilder() {
+      public com.su.proto.PlayProto.PCard.Builder addLastCardsBuilder() {
         return getLastCardsFieldBuilder().addBuilder(
-            com.su.proto.PlayProto.CardPro.getDefaultInstance());
+            com.su.proto.PlayProto.PCard.getDefaultInstance());
       }
       /**
        * <pre>
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
-      public com.su.proto.PlayProto.CardPro.Builder addLastCardsBuilder(
+      public com.su.proto.PlayProto.PCard.Builder addLastCardsBuilder(
           int index) {
         return getLastCardsFieldBuilder().addBuilder(
-            index, com.su.proto.PlayProto.CardPro.getDefaultInstance());
+            index, com.su.proto.PlayProto.PCard.getDefaultInstance());
       }
       /**
        * <pre>
        * 最后出牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro lastCards = 8;</code>
+       * <code>repeated .com.su.proto.PCard lastCards = 8;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.CardPro.Builder> 
+      public java.util.List<com.su.proto.PlayProto.PCard.Builder> 
            getLastCardsBuilderList() {
         return getLastCardsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> 
+          com.su.proto.PlayProto.PCard, com.su.proto.PlayProto.PCard.Builder, com.su.proto.PlayProto.PCardOrBuilder> 
           getLastCardsFieldBuilder() {
         if (lastCardsBuilder_ == null) {
           lastCardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder>(
+              com.su.proto.PlayProto.PCard, com.su.proto.PlayProto.PCard.Builder, com.su.proto.PlayProto.PCardOrBuilder>(
                   lastCards_,
                   ((bitField0_ & 0x00000080) == 0x00000080),
                   getParentForChildren(),
@@ -3822,13 +3822,13 @@ public final class PlayProto {
         return lastCardsBuilder_;
       }
 
-      private int dealer_ ;
+      private int dealer_ = -1;
       /**
        * <pre>
        * 庄家
        * </pre>
        *
-       * <code>optional int32 dealer = 9;</code>
+       * <code>optional int32 dealer = 9 [default = -1];</code>
        */
       public boolean hasDealer() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
@@ -3838,7 +3838,7 @@ public final class PlayProto {
        * 庄家
        * </pre>
        *
-       * <code>optional int32 dealer = 9;</code>
+       * <code>optional int32 dealer = 9 [default = -1];</code>
        */
       public int getDealer() {
         return dealer_;
@@ -3848,7 +3848,7 @@ public final class PlayProto {
        * 庄家
        * </pre>
        *
-       * <code>optional int32 dealer = 9;</code>
+       * <code>optional int32 dealer = 9 [default = -1];</code>
        */
       public Builder setDealer(int value) {
         bitField0_ |= 0x00000100;
@@ -3861,11 +3861,11 @@ public final class PlayProto {
        * 庄家
        * </pre>
        *
-       * <code>optional int32 dealer = 9;</code>
+       * <code>optional int32 dealer = 9 [default = -1];</code>
        */
       public Builder clearDealer() {
         bitField0_ = (bitField0_ & ~0x00000100);
-        dealer_ = 0;
+        dealer_ = -1;
         onChanged();
         return this;
       }
@@ -3880,46 +3880,46 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.TablePro)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.PTable)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.TablePro)
-    private static final com.su.proto.PlayProto.TablePro DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.PTable)
+    private static final com.su.proto.PlayProto.PTable DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.TablePro();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.PTable();
     }
 
-    public static com.su.proto.PlayProto.TablePro getDefaultInstance() {
+    public static com.su.proto.PlayProto.PTable getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<TablePro>
-        PARSER = new com.google.protobuf.AbstractParser<TablePro>() {
-      public TablePro parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<PTable>
+        PARSER = new com.google.protobuf.AbstractParser<PTable>() {
+      public PTable parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TablePro(input, extensionRegistry);
+          return new PTable(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<TablePro> parser() {
+    public static com.google.protobuf.Parser<PTable> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<TablePro> getParserForType() {
+    public com.google.protobuf.Parser<PTable> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.TablePro getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.PTable getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface GamePlayerProOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.GamePlayerPro)
+  public interface PGamePlayerOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.PGamePlayer)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -3936,24 +3936,24 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
-    java.util.List<com.su.proto.PlayProto.CardPro> 
+    java.util.List<com.su.proto.PlayProto.PCard> 
         getHandCardsList();
     /**
      * <pre>
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
-    com.su.proto.PlayProto.CardPro getHandCards(int index);
+    com.su.proto.PlayProto.PCard getHandCards(int index);
     /**
      * <pre>
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
     int getHandCardsCount();
     /**
@@ -3961,18 +3961,18 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
-    java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
+    java.util.List<? extends com.su.proto.PlayProto.PCardOrBuilder> 
         getHandCardsOrBuilderList();
     /**
      * <pre>
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
-    com.su.proto.PlayProto.CardProOrBuilder getHandCardsOrBuilder(
+    com.su.proto.PlayProto.PCardOrBuilder getHandCardsOrBuilder(
         int index);
 
     /**
@@ -3994,7 +3994,7 @@ public final class PlayProto {
 
     /**
      * <pre>
-     * 玩家队伍（0：无，1：红方，2：蓝方）
+     * 玩家队伍（0：红方，1：蓝方）
      * </pre>
      *
      * <code>optional int32 team = 4 [default = -1];</code>
@@ -4002,7 +4002,7 @@ public final class PlayProto {
     boolean hasTeam();
     /**
      * <pre>
-     * 玩家队伍（0：无，1：红方，2：蓝方）
+     * 玩家队伍（0：红方，1：蓝方）
      * </pre>
      *
      * <code>optional int32 team = 4 [default = -1];</code>
@@ -4095,17 +4095,17 @@ public final class PlayProto {
     int getIsAuto();
   }
   /**
-   * Protobuf type {@code com.su.proto.GamePlayerPro}
+   * Protobuf type {@code com.su.proto.PGamePlayer}
    */
-  public  static final class GamePlayerPro extends
+  public  static final class PGamePlayer extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.GamePlayerPro)
-      GamePlayerProOrBuilder {
-    // Use GamePlayerPro.newBuilder() to construct.
-    private GamePlayerPro(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.PGamePlayer)
+      PGamePlayerOrBuilder {
+    // Use PGamePlayer.newBuilder() to construct.
+    private PGamePlayer(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private GamePlayerPro() {
+    private PGamePlayer() {
       id_ = -1L;
       handCards_ = java.util.Collections.emptyList();
       cardNum_ = -1;
@@ -4122,7 +4122,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private GamePlayerPro(
+    private PGamePlayer(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4152,11 +4152,11 @@ public final class PlayProto {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                handCards_ = new java.util.ArrayList<com.su.proto.PlayProto.CardPro>();
+                handCards_ = new java.util.ArrayList<com.su.proto.PlayProto.PCard>();
                 mutable_bitField0_ |= 0x00000002;
               }
               handCards_.add(
-                  input.readMessage(com.su.proto.PlayProto.CardPro.PARSER, extensionRegistry));
+                  input.readMessage(com.su.proto.PlayProto.PCard.PARSER, extensionRegistry));
               break;
             }
             case 24: {
@@ -4211,14 +4211,14 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerPro_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_PGamePlayer_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerPro_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_PGamePlayer_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.GamePlayerPro.class, com.su.proto.PlayProto.GamePlayerPro.Builder.class);
+              com.su.proto.PlayProto.PGamePlayer.class, com.su.proto.PlayProto.PGamePlayer.Builder.class);
     }
 
     private int bitField0_;
@@ -4238,15 +4238,15 @@ public final class PlayProto {
     }
 
     public static final int HANDCARDS_FIELD_NUMBER = 2;
-    private java.util.List<com.su.proto.PlayProto.CardPro> handCards_;
+    private java.util.List<com.su.proto.PlayProto.PCard> handCards_;
     /**
      * <pre>
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
-    public java.util.List<com.su.proto.PlayProto.CardPro> getHandCardsList() {
+    public java.util.List<com.su.proto.PlayProto.PCard> getHandCardsList() {
       return handCards_;
     }
     /**
@@ -4254,9 +4254,9 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
-    public java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
+    public java.util.List<? extends com.su.proto.PlayProto.PCardOrBuilder> 
         getHandCardsOrBuilderList() {
       return handCards_;
     }
@@ -4265,7 +4265,7 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
     public int getHandCardsCount() {
       return handCards_.size();
@@ -4275,9 +4275,9 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
-    public com.su.proto.PlayProto.CardPro getHandCards(int index) {
+    public com.su.proto.PlayProto.PCard getHandCards(int index) {
       return handCards_.get(index);
     }
     /**
@@ -4285,9 +4285,9 @@ public final class PlayProto {
      * 玩家手牌
      * </pre>
      *
-     * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+     * <code>repeated .com.su.proto.PCard handCards = 2;</code>
      */
-    public com.su.proto.PlayProto.CardProOrBuilder getHandCardsOrBuilder(
+    public com.su.proto.PlayProto.PCardOrBuilder getHandCardsOrBuilder(
         int index) {
       return handCards_.get(index);
     }
@@ -4319,7 +4319,7 @@ public final class PlayProto {
     private int team_;
     /**
      * <pre>
-     * 玩家队伍（0：无，1：红方，2：蓝方）
+     * 玩家队伍（0：红方，1：蓝方）
      * </pre>
      *
      * <code>optional int32 team = 4 [default = -1];</code>
@@ -4329,7 +4329,7 @@ public final class PlayProto {
     }
     /**
      * <pre>
-     * 玩家队伍（0：无，1：红方，2：蓝方）
+     * 玩家队伍（0：红方，1：蓝方）
      * </pre>
      *
      * <code>optional int32 team = 4 [default = -1];</code>
@@ -4547,10 +4547,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.GamePlayerPro)) {
+      if (!(obj instanceof com.su.proto.PlayProto.PGamePlayer)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.GamePlayerPro other = (com.su.proto.PlayProto.GamePlayerPro) obj;
+      com.su.proto.PlayProto.PGamePlayer other = (com.su.proto.PlayProto.PGamePlayer) obj;
 
       boolean result = true;
       result = result && (hasId() == other.hasId());
@@ -4649,58 +4649,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.GamePlayerPro parseFrom(
+    public static com.su.proto.PlayProto.PGamePlayer parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.GamePlayerPro parseFrom(
+    public static com.su.proto.PlayProto.PGamePlayer parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.GamePlayerPro parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.PGamePlayer parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.GamePlayerPro parseFrom(
+    public static com.su.proto.PlayProto.PGamePlayer parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.GamePlayerPro parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.PGamePlayer parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.GamePlayerPro parseFrom(
+    public static com.su.proto.PlayProto.PGamePlayer parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.GamePlayerPro parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.PGamePlayer parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.GamePlayerPro parseDelimitedFrom(
+    public static com.su.proto.PlayProto.PGamePlayer parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.GamePlayerPro parseFrom(
+    public static com.su.proto.PlayProto.PGamePlayer parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.GamePlayerPro parseFrom(
+    public static com.su.proto.PlayProto.PGamePlayer parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4712,7 +4712,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.GamePlayerPro prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.PGamePlayer prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -4727,25 +4727,25 @@ public final class PlayProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.su.proto.GamePlayerPro}
+     * Protobuf type {@code com.su.proto.PGamePlayer}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.GamePlayerPro)
-        com.su.proto.PlayProto.GamePlayerProOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.PGamePlayer)
+        com.su.proto.PlayProto.PGamePlayerOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerPro_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PGamePlayer_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerPro_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PGamePlayer_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.GamePlayerPro.class, com.su.proto.PlayProto.GamePlayerPro.Builder.class);
+                com.su.proto.PlayProto.PGamePlayer.class, com.su.proto.PlayProto.PGamePlayer.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.GamePlayerPro.newBuilder()
+      // Construct using com.su.proto.PlayProto.PGamePlayer.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -4790,23 +4790,23 @@ public final class PlayProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerPro_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_PGamePlayer_descriptor;
       }
 
-      public com.su.proto.PlayProto.GamePlayerPro getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance();
+      public com.su.proto.PlayProto.PGamePlayer getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.PGamePlayer.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.GamePlayerPro build() {
-        com.su.proto.PlayProto.GamePlayerPro result = buildPartial();
+      public com.su.proto.PlayProto.PGamePlayer build() {
+        com.su.proto.PlayProto.PGamePlayer result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.GamePlayerPro buildPartial() {
-        com.su.proto.PlayProto.GamePlayerPro result = new com.su.proto.PlayProto.GamePlayerPro(this);
+      public com.su.proto.PlayProto.PGamePlayer buildPartial() {
+        com.su.proto.PlayProto.PGamePlayer result = new com.su.proto.PlayProto.PGamePlayer(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -4882,16 +4882,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.GamePlayerPro) {
-          return mergeFrom((com.su.proto.PlayProto.GamePlayerPro)other);
+        if (other instanceof com.su.proto.PlayProto.PGamePlayer) {
+          return mergeFrom((com.su.proto.PlayProto.PGamePlayer)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.GamePlayerPro other) {
-        if (other == com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.PGamePlayer other) {
+        if (other == com.su.proto.PlayProto.PGamePlayer.getDefaultInstance()) return this;
         if (other.hasId()) {
           setId(other.getId());
         }
@@ -4955,11 +4955,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.GamePlayerPro parsedMessage = null;
+        com.su.proto.PlayProto.PGamePlayer parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.GamePlayerPro) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.PGamePlayer) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -5002,26 +5002,26 @@ public final class PlayProto {
         return this;
       }
 
-      private java.util.List<com.su.proto.PlayProto.CardPro> handCards_ =
+      private java.util.List<com.su.proto.PlayProto.PCard> handCards_ =
         java.util.Collections.emptyList();
       private void ensureHandCardsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          handCards_ = new java.util.ArrayList<com.su.proto.PlayProto.CardPro>(handCards_);
+          handCards_ = new java.util.ArrayList<com.su.proto.PlayProto.PCard>(handCards_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> handCardsBuilder_;
+          com.su.proto.PlayProto.PCard, com.su.proto.PlayProto.PCard.Builder, com.su.proto.PlayProto.PCardOrBuilder> handCardsBuilder_;
 
       /**
        * <pre>
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.CardPro> getHandCardsList() {
+      public java.util.List<com.su.proto.PlayProto.PCard> getHandCardsList() {
         if (handCardsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(handCards_);
         } else {
@@ -5033,7 +5033,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
       public int getHandCardsCount() {
         if (handCardsBuilder_ == null) {
@@ -5047,9 +5047,9 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
-      public com.su.proto.PlayProto.CardPro getHandCards(int index) {
+      public com.su.proto.PlayProto.PCard getHandCards(int index) {
         if (handCardsBuilder_ == null) {
           return handCards_.get(index);
         } else {
@@ -5061,10 +5061,10 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
       public Builder setHandCards(
-          int index, com.su.proto.PlayProto.CardPro value) {
+          int index, com.su.proto.PlayProto.PCard value) {
         if (handCardsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5082,10 +5082,10 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
       public Builder setHandCards(
-          int index, com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PCard.Builder builderForValue) {
         if (handCardsBuilder_ == null) {
           ensureHandCardsIsMutable();
           handCards_.set(index, builderForValue.build());
@@ -5100,9 +5100,9 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
-      public Builder addHandCards(com.su.proto.PlayProto.CardPro value) {
+      public Builder addHandCards(com.su.proto.PlayProto.PCard value) {
         if (handCardsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5120,10 +5120,10 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
       public Builder addHandCards(
-          int index, com.su.proto.PlayProto.CardPro value) {
+          int index, com.su.proto.PlayProto.PCard value) {
         if (handCardsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -5141,10 +5141,10 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
       public Builder addHandCards(
-          com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+          com.su.proto.PlayProto.PCard.Builder builderForValue) {
         if (handCardsBuilder_ == null) {
           ensureHandCardsIsMutable();
           handCards_.add(builderForValue.build());
@@ -5159,10 +5159,10 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
       public Builder addHandCards(
-          int index, com.su.proto.PlayProto.CardPro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PCard.Builder builderForValue) {
         if (handCardsBuilder_ == null) {
           ensureHandCardsIsMutable();
           handCards_.add(index, builderForValue.build());
@@ -5177,10 +5177,10 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
       public Builder addAllHandCards(
-          java.lang.Iterable<? extends com.su.proto.PlayProto.CardPro> values) {
+          java.lang.Iterable<? extends com.su.proto.PlayProto.PCard> values) {
         if (handCardsBuilder_ == null) {
           ensureHandCardsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -5196,7 +5196,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
       public Builder clearHandCards() {
         if (handCardsBuilder_ == null) {
@@ -5213,7 +5213,7 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
       public Builder removeHandCards(int index) {
         if (handCardsBuilder_ == null) {
@@ -5230,9 +5230,9 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
-      public com.su.proto.PlayProto.CardPro.Builder getHandCardsBuilder(
+      public com.su.proto.PlayProto.PCard.Builder getHandCardsBuilder(
           int index) {
         return getHandCardsFieldBuilder().getBuilder(index);
       }
@@ -5241,9 +5241,9 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
-      public com.su.proto.PlayProto.CardProOrBuilder getHandCardsOrBuilder(
+      public com.su.proto.PlayProto.PCardOrBuilder getHandCardsOrBuilder(
           int index) {
         if (handCardsBuilder_ == null) {
           return handCards_.get(index);  } else {
@@ -5255,9 +5255,9 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
-      public java.util.List<? extends com.su.proto.PlayProto.CardProOrBuilder> 
+      public java.util.List<? extends com.su.proto.PlayProto.PCardOrBuilder> 
            getHandCardsOrBuilderList() {
         if (handCardsBuilder_ != null) {
           return handCardsBuilder_.getMessageOrBuilderList();
@@ -5270,41 +5270,41 @@ public final class PlayProto {
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
-      public com.su.proto.PlayProto.CardPro.Builder addHandCardsBuilder() {
+      public com.su.proto.PlayProto.PCard.Builder addHandCardsBuilder() {
         return getHandCardsFieldBuilder().addBuilder(
-            com.su.proto.PlayProto.CardPro.getDefaultInstance());
+            com.su.proto.PlayProto.PCard.getDefaultInstance());
       }
       /**
        * <pre>
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
-      public com.su.proto.PlayProto.CardPro.Builder addHandCardsBuilder(
+      public com.su.proto.PlayProto.PCard.Builder addHandCardsBuilder(
           int index) {
         return getHandCardsFieldBuilder().addBuilder(
-            index, com.su.proto.PlayProto.CardPro.getDefaultInstance());
+            index, com.su.proto.PlayProto.PCard.getDefaultInstance());
       }
       /**
        * <pre>
        * 玩家手牌
        * </pre>
        *
-       * <code>repeated .com.su.proto.CardPro handCards = 2;</code>
+       * <code>repeated .com.su.proto.PCard handCards = 2;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.CardPro.Builder> 
+      public java.util.List<com.su.proto.PlayProto.PCard.Builder> 
            getHandCardsBuilderList() {
         return getHandCardsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder> 
+          com.su.proto.PlayProto.PCard, com.su.proto.PlayProto.PCard.Builder, com.su.proto.PlayProto.PCardOrBuilder> 
           getHandCardsFieldBuilder() {
         if (handCardsBuilder_ == null) {
           handCardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.su.proto.PlayProto.CardPro, com.su.proto.PlayProto.CardPro.Builder, com.su.proto.PlayProto.CardProOrBuilder>(
+              com.su.proto.PlayProto.PCard, com.su.proto.PlayProto.PCard.Builder, com.su.proto.PlayProto.PCardOrBuilder>(
                   handCards_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -5365,7 +5365,7 @@ public final class PlayProto {
       private int team_ = -1;
       /**
        * <pre>
-       * 玩家队伍（0：无，1：红方，2：蓝方）
+       * 玩家队伍（0：红方，1：蓝方）
        * </pre>
        *
        * <code>optional int32 team = 4 [default = -1];</code>
@@ -5375,7 +5375,7 @@ public final class PlayProto {
       }
       /**
        * <pre>
-       * 玩家队伍（0：无，1：红方，2：蓝方）
+       * 玩家队伍（0：红方，1：蓝方）
        * </pre>
        *
        * <code>optional int32 team = 4 [default = -1];</code>
@@ -5385,7 +5385,7 @@ public final class PlayProto {
       }
       /**
        * <pre>
-       * 玩家队伍（0：无，1：红方，2：蓝方）
+       * 玩家队伍（0：红方，1：蓝方）
        * </pre>
        *
        * <code>optional int32 team = 4 [default = -1];</code>
@@ -5398,7 +5398,7 @@ public final class PlayProto {
       }
       /**
        * <pre>
-       * 玩家队伍（0：无，1：红方，2：蓝方）
+       * 玩家队伍（0：红方，1：蓝方）
        * </pre>
        *
        * <code>optional int32 team = 4 [default = -1];</code>
@@ -5660,39 +5660,39 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.GamePlayerPro)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.PGamePlayer)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.GamePlayerPro)
-    private static final com.su.proto.PlayProto.GamePlayerPro DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.PGamePlayer)
+    private static final com.su.proto.PlayProto.PGamePlayer DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.GamePlayerPro();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.PGamePlayer();
     }
 
-    public static com.su.proto.PlayProto.GamePlayerPro getDefaultInstance() {
+    public static com.su.proto.PlayProto.PGamePlayer getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<GamePlayerPro>
-        PARSER = new com.google.protobuf.AbstractParser<GamePlayerPro>() {
-      public GamePlayerPro parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<PGamePlayer>
+        PARSER = new com.google.protobuf.AbstractParser<PGamePlayer>() {
+      public PGamePlayer parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GamePlayerPro(input, extensionRegistry);
+          return new PGamePlayer(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<GamePlayerPro> parser() {
+    public static com.google.protobuf.Parser<PGamePlayer> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<GamePlayerPro> getParserForType() {
+    public com.google.protobuf.Parser<PGamePlayer> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.GamePlayerPro getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.PGamePlayer getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10056,8 +10056,8 @@ public final class PlayProto {
 
   }
 
-  public interface ExitReqOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.ExitReq)
+  public interface QuitReqOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.QuitReq)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
@@ -10065,17 +10065,17 @@ public final class PlayProto {
    * 退出
    * </pre>
    *
-   * Protobuf type {@code com.su.proto.ExitReq}
+   * Protobuf type {@code com.su.proto.QuitReq}
    */
-  public  static final class ExitReq extends
+  public  static final class QuitReq extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.ExitReq)
-      ExitReqOrBuilder {
-    // Use ExitReq.newBuilder() to construct.
-    private ExitReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.QuitReq)
+      QuitReqOrBuilder {
+    // Use QuitReq.newBuilder() to construct.
+    private QuitReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ExitReq() {
+    private QuitReq() {
     }
 
     @java.lang.Override
@@ -10083,7 +10083,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ExitReq(
+    private QuitReq(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -10119,14 +10119,14 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_ExitReq_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_QuitReq_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_ExitReq_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_QuitReq_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.ExitReq.class, com.su.proto.PlayProto.ExitReq.Builder.class);
+              com.su.proto.PlayProto.QuitReq.class, com.su.proto.PlayProto.QuitReq.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -10160,10 +10160,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.ExitReq)) {
+      if (!(obj instanceof com.su.proto.PlayProto.QuitReq)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.ExitReq other = (com.su.proto.PlayProto.ExitReq) obj;
+      com.su.proto.PlayProto.QuitReq other = (com.su.proto.PlayProto.QuitReq) obj;
 
       boolean result = true;
       result = result && unknownFields.equals(other.unknownFields);
@@ -10182,58 +10182,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.ExitReq parseFrom(
+    public static com.su.proto.PlayProto.QuitReq parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.ExitReq parseFrom(
+    public static com.su.proto.PlayProto.QuitReq parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.ExitReq parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.QuitReq parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.ExitReq parseFrom(
+    public static com.su.proto.PlayProto.QuitReq parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.ExitReq parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.QuitReq parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.ExitReq parseFrom(
+    public static com.su.proto.PlayProto.QuitReq parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.ExitReq parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.QuitReq parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.ExitReq parseDelimitedFrom(
+    public static com.su.proto.PlayProto.QuitReq parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.ExitReq parseFrom(
+    public static com.su.proto.PlayProto.QuitReq parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.ExitReq parseFrom(
+    public static com.su.proto.PlayProto.QuitReq parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10245,7 +10245,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.ExitReq prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.QuitReq prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -10264,25 +10264,25 @@ public final class PlayProto {
      * 退出
      * </pre>
      *
-     * Protobuf type {@code com.su.proto.ExitReq}
+     * Protobuf type {@code com.su.proto.QuitReq}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.ExitReq)
-        com.su.proto.PlayProto.ExitReqOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.QuitReq)
+        com.su.proto.PlayProto.QuitReqOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_ExitReq_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_QuitReq_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_ExitReq_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_QuitReq_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.ExitReq.class, com.su.proto.PlayProto.ExitReq.Builder.class);
+                com.su.proto.PlayProto.QuitReq.class, com.su.proto.PlayProto.QuitReq.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.ExitReq.newBuilder()
+      // Construct using com.su.proto.PlayProto.QuitReq.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -10304,23 +10304,23 @@ public final class PlayProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_ExitReq_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_QuitReq_descriptor;
       }
 
-      public com.su.proto.PlayProto.ExitReq getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.ExitReq.getDefaultInstance();
+      public com.su.proto.PlayProto.QuitReq getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.QuitReq.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.ExitReq build() {
-        com.su.proto.PlayProto.ExitReq result = buildPartial();
+      public com.su.proto.PlayProto.QuitReq build() {
+        com.su.proto.PlayProto.QuitReq result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.ExitReq buildPartial() {
-        com.su.proto.PlayProto.ExitReq result = new com.su.proto.PlayProto.ExitReq(this);
+      public com.su.proto.PlayProto.QuitReq buildPartial() {
+        com.su.proto.PlayProto.QuitReq result = new com.su.proto.PlayProto.QuitReq(this);
         onBuilt();
         return result;
       }
@@ -10352,16 +10352,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.ExitReq) {
-          return mergeFrom((com.su.proto.PlayProto.ExitReq)other);
+        if (other instanceof com.su.proto.PlayProto.QuitReq) {
+          return mergeFrom((com.su.proto.PlayProto.QuitReq)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.ExitReq other) {
-        if (other == com.su.proto.PlayProto.ExitReq.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.QuitReq other) {
+        if (other == com.su.proto.PlayProto.QuitReq.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -10375,11 +10375,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.ExitReq parsedMessage = null;
+        com.su.proto.PlayProto.QuitReq parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.ExitReq) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.QuitReq) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -10399,60 +10399,60 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.ExitReq)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.QuitReq)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.ExitReq)
-    private static final com.su.proto.PlayProto.ExitReq DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.QuitReq)
+    private static final com.su.proto.PlayProto.QuitReq DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.ExitReq();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.QuitReq();
     }
 
-    public static com.su.proto.PlayProto.ExitReq getDefaultInstance() {
+    public static com.su.proto.PlayProto.QuitReq getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<ExitReq>
-        PARSER = new com.google.protobuf.AbstractParser<ExitReq>() {
-      public ExitReq parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<QuitReq>
+        PARSER = new com.google.protobuf.AbstractParser<QuitReq>() {
+      public QuitReq parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ExitReq(input, extensionRegistry);
+          return new QuitReq(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ExitReq> parser() {
+    public static com.google.protobuf.Parser<QuitReq> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ExitReq> getParserForType() {
+    public com.google.protobuf.Parser<QuitReq> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.ExitReq getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.QuitReq getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface ExitRespOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.ExitResp)
+  public interface QuitRespOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.QuitResp)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code com.su.proto.ExitResp}
+   * Protobuf type {@code com.su.proto.QuitResp}
    */
-  public  static final class ExitResp extends
+  public  static final class QuitResp extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.ExitResp)
-      ExitRespOrBuilder {
-    // Use ExitResp.newBuilder() to construct.
-    private ExitResp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.QuitResp)
+      QuitRespOrBuilder {
+    // Use QuitResp.newBuilder() to construct.
+    private QuitResp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ExitResp() {
+    private QuitResp() {
     }
 
     @java.lang.Override
@@ -10460,7 +10460,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ExitResp(
+    private QuitResp(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -10496,14 +10496,14 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_ExitResp_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_QuitResp_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_ExitResp_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_QuitResp_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.ExitResp.class, com.su.proto.PlayProto.ExitResp.Builder.class);
+              com.su.proto.PlayProto.QuitResp.class, com.su.proto.PlayProto.QuitResp.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -10537,10 +10537,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.ExitResp)) {
+      if (!(obj instanceof com.su.proto.PlayProto.QuitResp)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.ExitResp other = (com.su.proto.PlayProto.ExitResp) obj;
+      com.su.proto.PlayProto.QuitResp other = (com.su.proto.PlayProto.QuitResp) obj;
 
       boolean result = true;
       result = result && unknownFields.equals(other.unknownFields);
@@ -10559,58 +10559,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.ExitResp parseFrom(
+    public static com.su.proto.PlayProto.QuitResp parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.ExitResp parseFrom(
+    public static com.su.proto.PlayProto.QuitResp parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.ExitResp parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.QuitResp parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.ExitResp parseFrom(
+    public static com.su.proto.PlayProto.QuitResp parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.ExitResp parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.QuitResp parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.ExitResp parseFrom(
+    public static com.su.proto.PlayProto.QuitResp parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.ExitResp parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.QuitResp parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.ExitResp parseDelimitedFrom(
+    public static com.su.proto.PlayProto.QuitResp parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.ExitResp parseFrom(
+    public static com.su.proto.PlayProto.QuitResp parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.ExitResp parseFrom(
+    public static com.su.proto.PlayProto.QuitResp parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10622,7 +10622,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.ExitResp prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.QuitResp prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -10637,25 +10637,25 @@ public final class PlayProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.su.proto.ExitResp}
+     * Protobuf type {@code com.su.proto.QuitResp}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.ExitResp)
-        com.su.proto.PlayProto.ExitRespOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.QuitResp)
+        com.su.proto.PlayProto.QuitRespOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_ExitResp_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_QuitResp_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_ExitResp_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_QuitResp_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.ExitResp.class, com.su.proto.PlayProto.ExitResp.Builder.class);
+                com.su.proto.PlayProto.QuitResp.class, com.su.proto.PlayProto.QuitResp.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.ExitResp.newBuilder()
+      // Construct using com.su.proto.PlayProto.QuitResp.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -10677,23 +10677,23 @@ public final class PlayProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_ExitResp_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_QuitResp_descriptor;
       }
 
-      public com.su.proto.PlayProto.ExitResp getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.ExitResp.getDefaultInstance();
+      public com.su.proto.PlayProto.QuitResp getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.QuitResp.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.ExitResp build() {
-        com.su.proto.PlayProto.ExitResp result = buildPartial();
+      public com.su.proto.PlayProto.QuitResp build() {
+        com.su.proto.PlayProto.QuitResp result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.ExitResp buildPartial() {
-        com.su.proto.PlayProto.ExitResp result = new com.su.proto.PlayProto.ExitResp(this);
+      public com.su.proto.PlayProto.QuitResp buildPartial() {
+        com.su.proto.PlayProto.QuitResp result = new com.su.proto.PlayProto.QuitResp(this);
         onBuilt();
         return result;
       }
@@ -10725,16 +10725,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.ExitResp) {
-          return mergeFrom((com.su.proto.PlayProto.ExitResp)other);
+        if (other instanceof com.su.proto.PlayProto.QuitResp) {
+          return mergeFrom((com.su.proto.PlayProto.QuitResp)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.ExitResp other) {
-        if (other == com.su.proto.PlayProto.ExitResp.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.QuitResp other) {
+        if (other == com.su.proto.PlayProto.QuitResp.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -10748,11 +10748,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.ExitResp parsedMessage = null;
+        com.su.proto.PlayProto.QuitResp parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.ExitResp) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.QuitResp) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -10772,39 +10772,39 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.ExitResp)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.QuitResp)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.ExitResp)
-    private static final com.su.proto.PlayProto.ExitResp DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.QuitResp)
+    private static final com.su.proto.PlayProto.QuitResp DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.ExitResp();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.QuitResp();
     }
 
-    public static com.su.proto.PlayProto.ExitResp getDefaultInstance() {
+    public static com.su.proto.PlayProto.QuitResp getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<ExitResp>
-        PARSER = new com.google.protobuf.AbstractParser<ExitResp>() {
-      public ExitResp parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<QuitResp>
+        PARSER = new com.google.protobuf.AbstractParser<QuitResp>() {
+      public QuitResp parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ExitResp(input, extensionRegistry);
+          return new QuitResp(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ExitResp> parser() {
+    public static com.google.protobuf.Parser<QuitResp> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ExitResp> getParserForType() {
+    public com.google.protobuf.Parser<QuitResp> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.ExitResp getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.QuitResp getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -12318,8 +12318,8 @@ public final class PlayProto {
 
   }
 
-  public interface autoReqOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.autoReq)
+  public interface AutoReqOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.AutoReq)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
@@ -12327,17 +12327,17 @@ public final class PlayProto {
    * 托管
    * </pre>
    *
-   * Protobuf type {@code com.su.proto.autoReq}
+   * Protobuf type {@code com.su.proto.AutoReq}
    */
-  public  static final class autoReq extends
+  public  static final class AutoReq extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.autoReq)
-      autoReqOrBuilder {
-    // Use autoReq.newBuilder() to construct.
-    private autoReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.AutoReq)
+      AutoReqOrBuilder {
+    // Use AutoReq.newBuilder() to construct.
+    private AutoReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private autoReq() {
+    private AutoReq() {
     }
 
     @java.lang.Override
@@ -12345,7 +12345,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private autoReq(
+    private AutoReq(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -12381,14 +12381,14 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_autoReq_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_AutoReq_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_autoReq_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_AutoReq_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.autoReq.class, com.su.proto.PlayProto.autoReq.Builder.class);
+              com.su.proto.PlayProto.AutoReq.class, com.su.proto.PlayProto.AutoReq.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -12422,10 +12422,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.autoReq)) {
+      if (!(obj instanceof com.su.proto.PlayProto.AutoReq)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.autoReq other = (com.su.proto.PlayProto.autoReq) obj;
+      com.su.proto.PlayProto.AutoReq other = (com.su.proto.PlayProto.AutoReq) obj;
 
       boolean result = true;
       result = result && unknownFields.equals(other.unknownFields);
@@ -12444,58 +12444,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.autoReq parseFrom(
+    public static com.su.proto.PlayProto.AutoReq parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.autoReq parseFrom(
+    public static com.su.proto.PlayProto.AutoReq parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.autoReq parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.AutoReq parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.autoReq parseFrom(
+    public static com.su.proto.PlayProto.AutoReq parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.autoReq parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.AutoReq parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.autoReq parseFrom(
+    public static com.su.proto.PlayProto.AutoReq parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.autoReq parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.AutoReq parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.autoReq parseDelimitedFrom(
+    public static com.su.proto.PlayProto.AutoReq parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.autoReq parseFrom(
+    public static com.su.proto.PlayProto.AutoReq parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.autoReq parseFrom(
+    public static com.su.proto.PlayProto.AutoReq parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -12507,7 +12507,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.autoReq prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.AutoReq prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -12526,25 +12526,25 @@ public final class PlayProto {
      * 托管
      * </pre>
      *
-     * Protobuf type {@code com.su.proto.autoReq}
+     * Protobuf type {@code com.su.proto.AutoReq}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.autoReq)
-        com.su.proto.PlayProto.autoReqOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.AutoReq)
+        com.su.proto.PlayProto.AutoReqOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_autoReq_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_AutoReq_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_autoReq_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_AutoReq_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.autoReq.class, com.su.proto.PlayProto.autoReq.Builder.class);
+                com.su.proto.PlayProto.AutoReq.class, com.su.proto.PlayProto.AutoReq.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.autoReq.newBuilder()
+      // Construct using com.su.proto.PlayProto.AutoReq.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -12566,23 +12566,23 @@ public final class PlayProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_autoReq_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_AutoReq_descriptor;
       }
 
-      public com.su.proto.PlayProto.autoReq getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.autoReq.getDefaultInstance();
+      public com.su.proto.PlayProto.AutoReq getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.AutoReq.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.autoReq build() {
-        com.su.proto.PlayProto.autoReq result = buildPartial();
+      public com.su.proto.PlayProto.AutoReq build() {
+        com.su.proto.PlayProto.AutoReq result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.autoReq buildPartial() {
-        com.su.proto.PlayProto.autoReq result = new com.su.proto.PlayProto.autoReq(this);
+      public com.su.proto.PlayProto.AutoReq buildPartial() {
+        com.su.proto.PlayProto.AutoReq result = new com.su.proto.PlayProto.AutoReq(this);
         onBuilt();
         return result;
       }
@@ -12614,16 +12614,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.autoReq) {
-          return mergeFrom((com.su.proto.PlayProto.autoReq)other);
+        if (other instanceof com.su.proto.PlayProto.AutoReq) {
+          return mergeFrom((com.su.proto.PlayProto.AutoReq)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.autoReq other) {
-        if (other == com.su.proto.PlayProto.autoReq.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.AutoReq other) {
+        if (other == com.su.proto.PlayProto.AutoReq.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -12637,11 +12637,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.autoReq parsedMessage = null;
+        com.su.proto.PlayProto.AutoReq parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.autoReq) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.AutoReq) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -12661,60 +12661,60 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.autoReq)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.AutoReq)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.autoReq)
-    private static final com.su.proto.PlayProto.autoReq DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.AutoReq)
+    private static final com.su.proto.PlayProto.AutoReq DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.autoReq();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.AutoReq();
     }
 
-    public static com.su.proto.PlayProto.autoReq getDefaultInstance() {
+    public static com.su.proto.PlayProto.AutoReq getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<autoReq>
-        PARSER = new com.google.protobuf.AbstractParser<autoReq>() {
-      public autoReq parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<AutoReq>
+        PARSER = new com.google.protobuf.AbstractParser<AutoReq>() {
+      public AutoReq parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new autoReq(input, extensionRegistry);
+          return new AutoReq(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<autoReq> parser() {
+    public static com.google.protobuf.Parser<AutoReq> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<autoReq> getParserForType() {
+    public com.google.protobuf.Parser<AutoReq> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.autoReq getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.AutoReq getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface autoRespOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.autoResp)
+  public interface AutoRespOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.AutoResp)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
-   * Protobuf type {@code com.su.proto.autoResp}
+   * Protobuf type {@code com.su.proto.AutoResp}
    */
-  public  static final class autoResp extends
+  public  static final class AutoResp extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.autoResp)
-      autoRespOrBuilder {
-    // Use autoResp.newBuilder() to construct.
-    private autoResp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.AutoResp)
+      AutoRespOrBuilder {
+    // Use AutoResp.newBuilder() to construct.
+    private AutoResp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private autoResp() {
+    private AutoResp() {
     }
 
     @java.lang.Override
@@ -12722,7 +12722,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private autoResp(
+    private AutoResp(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -12758,14 +12758,14 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_autoResp_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_AutoResp_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_autoResp_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_AutoResp_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.autoResp.class, com.su.proto.PlayProto.autoResp.Builder.class);
+              com.su.proto.PlayProto.AutoResp.class, com.su.proto.PlayProto.AutoResp.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -12799,10 +12799,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.autoResp)) {
+      if (!(obj instanceof com.su.proto.PlayProto.AutoResp)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.autoResp other = (com.su.proto.PlayProto.autoResp) obj;
+      com.su.proto.PlayProto.AutoResp other = (com.su.proto.PlayProto.AutoResp) obj;
 
       boolean result = true;
       result = result && unknownFields.equals(other.unknownFields);
@@ -12821,58 +12821,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.autoResp parseFrom(
+    public static com.su.proto.PlayProto.AutoResp parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.autoResp parseFrom(
+    public static com.su.proto.PlayProto.AutoResp parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.autoResp parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.AutoResp parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.autoResp parseFrom(
+    public static com.su.proto.PlayProto.AutoResp parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.autoResp parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.AutoResp parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.autoResp parseFrom(
+    public static com.su.proto.PlayProto.AutoResp parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.autoResp parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.AutoResp parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.autoResp parseDelimitedFrom(
+    public static com.su.proto.PlayProto.AutoResp parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.autoResp parseFrom(
+    public static com.su.proto.PlayProto.AutoResp parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.autoResp parseFrom(
+    public static com.su.proto.PlayProto.AutoResp parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -12884,7 +12884,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.autoResp prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.AutoResp prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -12899,25 +12899,25 @@ public final class PlayProto {
       return builder;
     }
     /**
-     * Protobuf type {@code com.su.proto.autoResp}
+     * Protobuf type {@code com.su.proto.AutoResp}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.autoResp)
-        com.su.proto.PlayProto.autoRespOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.AutoResp)
+        com.su.proto.PlayProto.AutoRespOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_autoResp_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_AutoResp_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_autoResp_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_AutoResp_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.autoResp.class, com.su.proto.PlayProto.autoResp.Builder.class);
+                com.su.proto.PlayProto.AutoResp.class, com.su.proto.PlayProto.AutoResp.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.autoResp.newBuilder()
+      // Construct using com.su.proto.PlayProto.AutoResp.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -12939,23 +12939,23 @@ public final class PlayProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_autoResp_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_AutoResp_descriptor;
       }
 
-      public com.su.proto.PlayProto.autoResp getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.autoResp.getDefaultInstance();
+      public com.su.proto.PlayProto.AutoResp getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.AutoResp.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.autoResp build() {
-        com.su.proto.PlayProto.autoResp result = buildPartial();
+      public com.su.proto.PlayProto.AutoResp build() {
+        com.su.proto.PlayProto.AutoResp result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.autoResp buildPartial() {
-        com.su.proto.PlayProto.autoResp result = new com.su.proto.PlayProto.autoResp(this);
+      public com.su.proto.PlayProto.AutoResp buildPartial() {
+        com.su.proto.PlayProto.AutoResp result = new com.su.proto.PlayProto.AutoResp(this);
         onBuilt();
         return result;
       }
@@ -12987,16 +12987,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.autoResp) {
-          return mergeFrom((com.su.proto.PlayProto.autoResp)other);
+        if (other instanceof com.su.proto.PlayProto.AutoResp) {
+          return mergeFrom((com.su.proto.PlayProto.AutoResp)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.autoResp other) {
-        if (other == com.su.proto.PlayProto.autoResp.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.AutoResp other) {
+        if (other == com.su.proto.PlayProto.AutoResp.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -13010,11 +13010,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.autoResp parsedMessage = null;
+        com.su.proto.PlayProto.AutoResp parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.autoResp) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.AutoResp) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -13034,70 +13034,70 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.autoResp)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.AutoResp)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.autoResp)
-    private static final com.su.proto.PlayProto.autoResp DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.AutoResp)
+    private static final com.su.proto.PlayProto.AutoResp DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.autoResp();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.AutoResp();
     }
 
-    public static com.su.proto.PlayProto.autoResp getDefaultInstance() {
+    public static com.su.proto.PlayProto.AutoResp getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<autoResp>
-        PARSER = new com.google.protobuf.AbstractParser<autoResp>() {
-      public autoResp parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<AutoResp>
+        PARSER = new com.google.protobuf.AbstractParser<AutoResp>() {
+      public AutoResp parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new autoResp(input, extensionRegistry);
+          return new AutoResp(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<autoResp> parser() {
+    public static com.google.protobuf.Parser<AutoResp> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<autoResp> getParserForType() {
+    public com.google.protobuf.Parser<AutoResp> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.autoResp getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.AutoResp getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface UpdateGamePlayerNoticeOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.UpdateGamePlayerNotice)
+  public interface GamePlayerNoticeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.GamePlayerNotice)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
-    java.util.List<com.su.proto.PlayProto.GamePlayerPro> 
+    java.util.List<com.su.proto.PlayProto.PGamePlayer> 
         getGamePlayerList();
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
-    com.su.proto.PlayProto.GamePlayerPro getGamePlayer(int index);
+    com.su.proto.PlayProto.PGamePlayer getGamePlayer(int index);
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
     int getGamePlayerCount();
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
-    java.util.List<? extends com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+    java.util.List<? extends com.su.proto.PlayProto.PGamePlayerOrBuilder> 
         getGamePlayerOrBuilderList();
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
-    com.su.proto.PlayProto.GamePlayerProOrBuilder getGamePlayerOrBuilder(
+    com.su.proto.PlayProto.PGamePlayerOrBuilder getGamePlayerOrBuilder(
         int index);
   }
   /**
@@ -13105,17 +13105,17 @@ public final class PlayProto {
    * 玩家数据更新通知
    * </pre>
    *
-   * Protobuf type {@code com.su.proto.UpdateGamePlayerNotice}
+   * Protobuf type {@code com.su.proto.GamePlayerNotice}
    */
-  public  static final class UpdateGamePlayerNotice extends
+  public  static final class GamePlayerNotice extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.UpdateGamePlayerNotice)
-      UpdateGamePlayerNoticeOrBuilder {
-    // Use UpdateGamePlayerNotice.newBuilder() to construct.
-    private UpdateGamePlayerNotice(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.GamePlayerNotice)
+      GamePlayerNoticeOrBuilder {
+    // Use GamePlayerNotice.newBuilder() to construct.
+    private GamePlayerNotice(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private UpdateGamePlayerNotice() {
+    private GamePlayerNotice() {
       gamePlayer_ = java.util.Collections.emptyList();
     }
 
@@ -13124,7 +13124,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private UpdateGamePlayerNotice(
+    private GamePlayerNotice(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -13149,11 +13149,11 @@ public final class PlayProto {
             }
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                gamePlayer_ = new java.util.ArrayList<com.su.proto.PlayProto.GamePlayerPro>();
+                gamePlayer_ = new java.util.ArrayList<com.su.proto.PlayProto.PGamePlayer>();
                 mutable_bitField0_ |= 0x00000001;
               }
               gamePlayer_.add(
-                  input.readMessage(com.su.proto.PlayProto.GamePlayerPro.PARSER, extensionRegistry));
+                  input.readMessage(com.su.proto.PlayProto.PGamePlayer.PARSER, extensionRegistry));
               break;
             }
           }
@@ -13173,47 +13173,47 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateGamePlayerNotice_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerNotice_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateGamePlayerNotice_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerNotice_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.UpdateGamePlayerNotice.class, com.su.proto.PlayProto.UpdateGamePlayerNotice.Builder.class);
+              com.su.proto.PlayProto.GamePlayerNotice.class, com.su.proto.PlayProto.GamePlayerNotice.Builder.class);
     }
 
     public static final int GAMEPLAYER_FIELD_NUMBER = 1;
-    private java.util.List<com.su.proto.PlayProto.GamePlayerPro> gamePlayer_;
+    private java.util.List<com.su.proto.PlayProto.PGamePlayer> gamePlayer_;
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
-    public java.util.List<com.su.proto.PlayProto.GamePlayerPro> getGamePlayerList() {
+    public java.util.List<com.su.proto.PlayProto.PGamePlayer> getGamePlayerList() {
       return gamePlayer_;
     }
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
-    public java.util.List<? extends com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+    public java.util.List<? extends com.su.proto.PlayProto.PGamePlayerOrBuilder> 
         getGamePlayerOrBuilderList() {
       return gamePlayer_;
     }
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
     public int getGamePlayerCount() {
       return gamePlayer_.size();
     }
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
-    public com.su.proto.PlayProto.GamePlayerPro getGamePlayer(int index) {
+    public com.su.proto.PlayProto.PGamePlayer getGamePlayer(int index) {
       return gamePlayer_.get(index);
     }
     /**
-     * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+     * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
      */
-    public com.su.proto.PlayProto.GamePlayerProOrBuilder getGamePlayerOrBuilder(
+    public com.su.proto.PlayProto.PGamePlayerOrBuilder getGamePlayerOrBuilder(
         int index) {
       return gamePlayer_.get(index);
     }
@@ -13256,10 +13256,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.UpdateGamePlayerNotice)) {
+      if (!(obj instanceof com.su.proto.PlayProto.GamePlayerNotice)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.UpdateGamePlayerNotice other = (com.su.proto.PlayProto.UpdateGamePlayerNotice) obj;
+      com.su.proto.PlayProto.GamePlayerNotice other = (com.su.proto.PlayProto.GamePlayerNotice) obj;
 
       boolean result = true;
       result = result && getGamePlayerList()
@@ -13284,58 +13284,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseFrom(
+    public static com.su.proto.PlayProto.GamePlayerNotice parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseFrom(
+    public static com.su.proto.PlayProto.GamePlayerNotice parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.GamePlayerNotice parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseFrom(
+    public static com.su.proto.PlayProto.GamePlayerNotice parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.GamePlayerNotice parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseFrom(
+    public static com.su.proto.PlayProto.GamePlayerNotice parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.GamePlayerNotice parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseDelimitedFrom(
+    public static com.su.proto.PlayProto.GamePlayerNotice parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseFrom(
+    public static com.su.proto.PlayProto.GamePlayerNotice parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice parseFrom(
+    public static com.su.proto.PlayProto.GamePlayerNotice parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -13347,7 +13347,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.UpdateGamePlayerNotice prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.GamePlayerNotice prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -13366,25 +13366,25 @@ public final class PlayProto {
      * 玩家数据更新通知
      * </pre>
      *
-     * Protobuf type {@code com.su.proto.UpdateGamePlayerNotice}
+     * Protobuf type {@code com.su.proto.GamePlayerNotice}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.UpdateGamePlayerNotice)
-        com.su.proto.PlayProto.UpdateGamePlayerNoticeOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.GamePlayerNotice)
+        com.su.proto.PlayProto.GamePlayerNoticeOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateGamePlayerNotice_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerNotice_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateGamePlayerNotice_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerNotice_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.UpdateGamePlayerNotice.class, com.su.proto.PlayProto.UpdateGamePlayerNotice.Builder.class);
+                com.su.proto.PlayProto.GamePlayerNotice.class, com.su.proto.PlayProto.GamePlayerNotice.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.UpdateGamePlayerNotice.newBuilder()
+      // Construct using com.su.proto.PlayProto.GamePlayerNotice.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -13413,23 +13413,23 @@ public final class PlayProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateGamePlayerNotice_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_GamePlayerNotice_descriptor;
       }
 
-      public com.su.proto.PlayProto.UpdateGamePlayerNotice getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.UpdateGamePlayerNotice.getDefaultInstance();
+      public com.su.proto.PlayProto.GamePlayerNotice getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.GamePlayerNotice.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.UpdateGamePlayerNotice build() {
-        com.su.proto.PlayProto.UpdateGamePlayerNotice result = buildPartial();
+      public com.su.proto.PlayProto.GamePlayerNotice build() {
+        com.su.proto.PlayProto.GamePlayerNotice result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.UpdateGamePlayerNotice buildPartial() {
-        com.su.proto.PlayProto.UpdateGamePlayerNotice result = new com.su.proto.PlayProto.UpdateGamePlayerNotice(this);
+      public com.su.proto.PlayProto.GamePlayerNotice buildPartial() {
+        com.su.proto.PlayProto.GamePlayerNotice result = new com.su.proto.PlayProto.GamePlayerNotice(this);
         int from_bitField0_ = bitField0_;
         if (gamePlayerBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -13471,16 +13471,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.UpdateGamePlayerNotice) {
-          return mergeFrom((com.su.proto.PlayProto.UpdateGamePlayerNotice)other);
+        if (other instanceof com.su.proto.PlayProto.GamePlayerNotice) {
+          return mergeFrom((com.su.proto.PlayProto.GamePlayerNotice)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.UpdateGamePlayerNotice other) {
-        if (other == com.su.proto.PlayProto.UpdateGamePlayerNotice.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.GamePlayerNotice other) {
+        if (other == com.su.proto.PlayProto.GamePlayerNotice.getDefaultInstance()) return this;
         if (gamePlayerBuilder_ == null) {
           if (!other.gamePlayer_.isEmpty()) {
             if (gamePlayer_.isEmpty()) {
@@ -13520,11 +13520,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.UpdateGamePlayerNotice parsedMessage = null;
+        com.su.proto.PlayProto.GamePlayerNotice parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.UpdateGamePlayerNotice) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.GamePlayerNotice) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -13535,22 +13535,22 @@ public final class PlayProto {
       }
       private int bitField0_;
 
-      private java.util.List<com.su.proto.PlayProto.GamePlayerPro> gamePlayer_ =
+      private java.util.List<com.su.proto.PlayProto.PGamePlayer> gamePlayer_ =
         java.util.Collections.emptyList();
       private void ensureGamePlayerIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          gamePlayer_ = new java.util.ArrayList<com.su.proto.PlayProto.GamePlayerPro>(gamePlayer_);
+          gamePlayer_ = new java.util.ArrayList<com.su.proto.PlayProto.PGamePlayer>(gamePlayer_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder> gamePlayerBuilder_;
+          com.su.proto.PlayProto.PGamePlayer, com.su.proto.PlayProto.PGamePlayer.Builder, com.su.proto.PlayProto.PGamePlayerOrBuilder> gamePlayerBuilder_;
 
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.GamePlayerPro> getGamePlayerList() {
+      public java.util.List<com.su.proto.PlayProto.PGamePlayer> getGamePlayerList() {
         if (gamePlayerBuilder_ == null) {
           return java.util.Collections.unmodifiableList(gamePlayer_);
         } else {
@@ -13558,7 +13558,7 @@ public final class PlayProto {
         }
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
       public int getGamePlayerCount() {
         if (gamePlayerBuilder_ == null) {
@@ -13568,9 +13568,9 @@ public final class PlayProto {
         }
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro getGamePlayer(int index) {
+      public com.su.proto.PlayProto.PGamePlayer getGamePlayer(int index) {
         if (gamePlayerBuilder_ == null) {
           return gamePlayer_.get(index);
         } else {
@@ -13578,10 +13578,10 @@ public final class PlayProto {
         }
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
       public Builder setGamePlayer(
-          int index, com.su.proto.PlayProto.GamePlayerPro value) {
+          int index, com.su.proto.PlayProto.PGamePlayer value) {
         if (gamePlayerBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13595,10 +13595,10 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
       public Builder setGamePlayer(
-          int index, com.su.proto.PlayProto.GamePlayerPro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PGamePlayer.Builder builderForValue) {
         if (gamePlayerBuilder_ == null) {
           ensureGamePlayerIsMutable();
           gamePlayer_.set(index, builderForValue.build());
@@ -13609,9 +13609,9 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
-      public Builder addGamePlayer(com.su.proto.PlayProto.GamePlayerPro value) {
+      public Builder addGamePlayer(com.su.proto.PlayProto.PGamePlayer value) {
         if (gamePlayerBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13625,10 +13625,10 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
       public Builder addGamePlayer(
-          int index, com.su.proto.PlayProto.GamePlayerPro value) {
+          int index, com.su.proto.PlayProto.PGamePlayer value) {
         if (gamePlayerBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -13642,10 +13642,10 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
       public Builder addGamePlayer(
-          com.su.proto.PlayProto.GamePlayerPro.Builder builderForValue) {
+          com.su.proto.PlayProto.PGamePlayer.Builder builderForValue) {
         if (gamePlayerBuilder_ == null) {
           ensureGamePlayerIsMutable();
           gamePlayer_.add(builderForValue.build());
@@ -13656,10 +13656,10 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
       public Builder addGamePlayer(
-          int index, com.su.proto.PlayProto.GamePlayerPro.Builder builderForValue) {
+          int index, com.su.proto.PlayProto.PGamePlayer.Builder builderForValue) {
         if (gamePlayerBuilder_ == null) {
           ensureGamePlayerIsMutable();
           gamePlayer_.add(index, builderForValue.build());
@@ -13670,10 +13670,10 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
       public Builder addAllGamePlayer(
-          java.lang.Iterable<? extends com.su.proto.PlayProto.GamePlayerPro> values) {
+          java.lang.Iterable<? extends com.su.proto.PlayProto.PGamePlayer> values) {
         if (gamePlayerBuilder_ == null) {
           ensureGamePlayerIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -13685,7 +13685,7 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
       public Builder clearGamePlayer() {
         if (gamePlayerBuilder_ == null) {
@@ -13698,7 +13698,7 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
       public Builder removeGamePlayer(int index) {
         if (gamePlayerBuilder_ == null) {
@@ -13711,16 +13711,16 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro.Builder getGamePlayerBuilder(
+      public com.su.proto.PlayProto.PGamePlayer.Builder getGamePlayerBuilder(
           int index) {
         return getGamePlayerFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerProOrBuilder getGamePlayerOrBuilder(
+      public com.su.proto.PlayProto.PGamePlayerOrBuilder getGamePlayerOrBuilder(
           int index) {
         if (gamePlayerBuilder_ == null) {
           return gamePlayer_.get(index);  } else {
@@ -13728,9 +13728,9 @@ public final class PlayProto {
         }
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
-      public java.util.List<? extends com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+      public java.util.List<? extends com.su.proto.PlayProto.PGamePlayerOrBuilder> 
            getGamePlayerOrBuilderList() {
         if (gamePlayerBuilder_ != null) {
           return gamePlayerBuilder_.getMessageOrBuilderList();
@@ -13739,33 +13739,33 @@ public final class PlayProto {
         }
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro.Builder addGamePlayerBuilder() {
+      public com.su.proto.PlayProto.PGamePlayer.Builder addGamePlayerBuilder() {
         return getGamePlayerFieldBuilder().addBuilder(
-            com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance());
+            com.su.proto.PlayProto.PGamePlayer.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
-      public com.su.proto.PlayProto.GamePlayerPro.Builder addGamePlayerBuilder(
+      public com.su.proto.PlayProto.PGamePlayer.Builder addGamePlayerBuilder(
           int index) {
         return getGamePlayerFieldBuilder().addBuilder(
-            index, com.su.proto.PlayProto.GamePlayerPro.getDefaultInstance());
+            index, com.su.proto.PlayProto.PGamePlayer.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.su.proto.GamePlayerPro gamePlayer = 1;</code>
+       * <code>repeated .com.su.proto.PGamePlayer gamePlayer = 1;</code>
        */
-      public java.util.List<com.su.proto.PlayProto.GamePlayerPro.Builder> 
+      public java.util.List<com.su.proto.PlayProto.PGamePlayer.Builder> 
            getGamePlayerBuilderList() {
         return getGamePlayerFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder> 
+          com.su.proto.PlayProto.PGamePlayer, com.su.proto.PlayProto.PGamePlayer.Builder, com.su.proto.PlayProto.PGamePlayerOrBuilder> 
           getGamePlayerFieldBuilder() {
         if (gamePlayerBuilder_ == null) {
           gamePlayerBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.su.proto.PlayProto.GamePlayerPro, com.su.proto.PlayProto.GamePlayerPro.Builder, com.su.proto.PlayProto.GamePlayerProOrBuilder>(
+              com.su.proto.PlayProto.PGamePlayer, com.su.proto.PlayProto.PGamePlayer.Builder, com.su.proto.PlayProto.PGamePlayerOrBuilder>(
                   gamePlayer_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
@@ -13785,77 +13785,77 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.UpdateGamePlayerNotice)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.GamePlayerNotice)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.UpdateGamePlayerNotice)
-    private static final com.su.proto.PlayProto.UpdateGamePlayerNotice DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.GamePlayerNotice)
+    private static final com.su.proto.PlayProto.GamePlayerNotice DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.UpdateGamePlayerNotice();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.GamePlayerNotice();
     }
 
-    public static com.su.proto.PlayProto.UpdateGamePlayerNotice getDefaultInstance() {
+    public static com.su.proto.PlayProto.GamePlayerNotice getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<UpdateGamePlayerNotice>
-        PARSER = new com.google.protobuf.AbstractParser<UpdateGamePlayerNotice>() {
-      public UpdateGamePlayerNotice parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GamePlayerNotice>
+        PARSER = new com.google.protobuf.AbstractParser<GamePlayerNotice>() {
+      public GamePlayerNotice parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new UpdateGamePlayerNotice(input, extensionRegistry);
+          return new GamePlayerNotice(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<UpdateGamePlayerNotice> parser() {
+    public static com.google.protobuf.Parser<GamePlayerNotice> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<UpdateGamePlayerNotice> getParserForType() {
+    public com.google.protobuf.Parser<GamePlayerNotice> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.UpdateGamePlayerNotice getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.GamePlayerNotice getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface UpdateTableNoticeOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.su.proto.UpdateTableNotice)
+  public interface TableNoticeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.su.proto.TableNotice)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .com.su.proto.TablePro table = 1;</code>
+     * <code>optional .com.su.proto.PTable table = 1;</code>
      */
     boolean hasTable();
     /**
-     * <code>optional .com.su.proto.TablePro table = 1;</code>
+     * <code>optional .com.su.proto.PTable table = 1;</code>
      */
-    com.su.proto.PlayProto.TablePro getTable();
+    com.su.proto.PlayProto.PTable getTable();
     /**
-     * <code>optional .com.su.proto.TablePro table = 1;</code>
+     * <code>optional .com.su.proto.PTable table = 1;</code>
      */
-    com.su.proto.PlayProto.TableProOrBuilder getTableOrBuilder();
+    com.su.proto.PlayProto.PTableOrBuilder getTableOrBuilder();
   }
   /**
    * <pre>
    * 牌桌数据更新通知
    * </pre>
    *
-   * Protobuf type {@code com.su.proto.UpdateTableNotice}
+   * Protobuf type {@code com.su.proto.TableNotice}
    */
-  public  static final class UpdateTableNotice extends
+  public  static final class TableNotice extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.su.proto.UpdateTableNotice)
-      UpdateTableNoticeOrBuilder {
-    // Use UpdateTableNotice.newBuilder() to construct.
-    private UpdateTableNotice(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:com.su.proto.TableNotice)
+      TableNoticeOrBuilder {
+    // Use TableNotice.newBuilder() to construct.
+    private TableNotice(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private UpdateTableNotice() {
+    private TableNotice() {
     }
 
     @java.lang.Override
@@ -13863,7 +13863,7 @@ public final class PlayProto {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private UpdateTableNotice(
+    private TableNotice(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -13887,11 +13887,11 @@ public final class PlayProto {
               break;
             }
             case 10: {
-              com.su.proto.PlayProto.TablePro.Builder subBuilder = null;
+              com.su.proto.PlayProto.PTable.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = table_.toBuilder();
               }
-              table_ = input.readMessage(com.su.proto.PlayProto.TablePro.PARSER, extensionRegistry);
+              table_ = input.readMessage(com.su.proto.PlayProto.PTable.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(table_);
                 table_ = subBuilder.buildPartial();
@@ -13913,36 +13913,36 @@ public final class PlayProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateTableNotice_descriptor;
+      return com.su.proto.PlayProto.internal_static_com_su_proto_TableNotice_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateTableNotice_fieldAccessorTable
+      return com.su.proto.PlayProto.internal_static_com_su_proto_TableNotice_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayProto.UpdateTableNotice.class, com.su.proto.PlayProto.UpdateTableNotice.Builder.class);
+              com.su.proto.PlayProto.TableNotice.class, com.su.proto.PlayProto.TableNotice.Builder.class);
     }
 
     private int bitField0_;
     public static final int TABLE_FIELD_NUMBER = 1;
-    private com.su.proto.PlayProto.TablePro table_;
+    private com.su.proto.PlayProto.PTable table_;
     /**
-     * <code>optional .com.su.proto.TablePro table = 1;</code>
+     * <code>optional .com.su.proto.PTable table = 1;</code>
      */
     public boolean hasTable() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .com.su.proto.TablePro table = 1;</code>
+     * <code>optional .com.su.proto.PTable table = 1;</code>
      */
-    public com.su.proto.PlayProto.TablePro getTable() {
-      return table_ == null ? com.su.proto.PlayProto.TablePro.getDefaultInstance() : table_;
+    public com.su.proto.PlayProto.PTable getTable() {
+      return table_ == null ? com.su.proto.PlayProto.PTable.getDefaultInstance() : table_;
     }
     /**
-     * <code>optional .com.su.proto.TablePro table = 1;</code>
+     * <code>optional .com.su.proto.PTable table = 1;</code>
      */
-    public com.su.proto.PlayProto.TableProOrBuilder getTableOrBuilder() {
-      return table_ == null ? com.su.proto.PlayProto.TablePro.getDefaultInstance() : table_;
+    public com.su.proto.PlayProto.PTableOrBuilder getTableOrBuilder() {
+      return table_ == null ? com.su.proto.PlayProto.PTable.getDefaultInstance() : table_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -13983,10 +13983,10 @@ public final class PlayProto {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayProto.UpdateTableNotice)) {
+      if (!(obj instanceof com.su.proto.PlayProto.TableNotice)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayProto.UpdateTableNotice other = (com.su.proto.PlayProto.UpdateTableNotice) obj;
+      com.su.proto.PlayProto.TableNotice other = (com.su.proto.PlayProto.TableNotice) obj;
 
       boolean result = true;
       result = result && (hasTable() == other.hasTable());
@@ -14014,58 +14014,58 @@ public final class PlayProto {
       return hash;
     }
 
-    public static com.su.proto.PlayProto.UpdateTableNotice parseFrom(
+    public static com.su.proto.PlayProto.TableNotice parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.UpdateTableNotice parseFrom(
+    public static com.su.proto.PlayProto.TableNotice parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.UpdateTableNotice parseFrom(byte[] data)
+    public static com.su.proto.PlayProto.TableNotice parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayProto.UpdateTableNotice parseFrom(
+    public static com.su.proto.PlayProto.TableNotice parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.UpdateTableNotice parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.TableNotice parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.UpdateTableNotice parseFrom(
+    public static com.su.proto.PlayProto.TableNotice parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.UpdateTableNotice parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayProto.TableNotice parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.UpdateTableNotice parseDelimitedFrom(
+    public static com.su.proto.PlayProto.TableNotice parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayProto.UpdateTableNotice parseFrom(
+    public static com.su.proto.PlayProto.TableNotice parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayProto.UpdateTableNotice parseFrom(
+    public static com.su.proto.PlayProto.TableNotice parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -14077,7 +14077,7 @@ public final class PlayProto {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayProto.UpdateTableNotice prototype) {
+    public static Builder newBuilder(com.su.proto.PlayProto.TableNotice prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -14096,25 +14096,25 @@ public final class PlayProto {
      * 牌桌数据更新通知
      * </pre>
      *
-     * Protobuf type {@code com.su.proto.UpdateTableNotice}
+     * Protobuf type {@code com.su.proto.TableNotice}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.su.proto.UpdateTableNotice)
-        com.su.proto.PlayProto.UpdateTableNoticeOrBuilder {
+        // @@protoc_insertion_point(builder_implements:com.su.proto.TableNotice)
+        com.su.proto.PlayProto.TableNoticeOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateTableNotice_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_TableNotice_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateTableNotice_fieldAccessorTable
+        return com.su.proto.PlayProto.internal_static_com_su_proto_TableNotice_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayProto.UpdateTableNotice.class, com.su.proto.PlayProto.UpdateTableNotice.Builder.class);
+                com.su.proto.PlayProto.TableNotice.class, com.su.proto.PlayProto.TableNotice.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayProto.UpdateTableNotice.newBuilder()
+      // Construct using com.su.proto.PlayProto.TableNotice.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -14143,23 +14143,23 @@ public final class PlayProto {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayProto.internal_static_com_su_proto_UpdateTableNotice_descriptor;
+        return com.su.proto.PlayProto.internal_static_com_su_proto_TableNotice_descriptor;
       }
 
-      public com.su.proto.PlayProto.UpdateTableNotice getDefaultInstanceForType() {
-        return com.su.proto.PlayProto.UpdateTableNotice.getDefaultInstance();
+      public com.su.proto.PlayProto.TableNotice getDefaultInstanceForType() {
+        return com.su.proto.PlayProto.TableNotice.getDefaultInstance();
       }
 
-      public com.su.proto.PlayProto.UpdateTableNotice build() {
-        com.su.proto.PlayProto.UpdateTableNotice result = buildPartial();
+      public com.su.proto.PlayProto.TableNotice build() {
+        com.su.proto.PlayProto.TableNotice result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayProto.UpdateTableNotice buildPartial() {
-        com.su.proto.PlayProto.UpdateTableNotice result = new com.su.proto.PlayProto.UpdateTableNotice(this);
+      public com.su.proto.PlayProto.TableNotice buildPartial() {
+        com.su.proto.PlayProto.TableNotice result = new com.su.proto.PlayProto.TableNotice(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -14202,16 +14202,16 @@ public final class PlayProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayProto.UpdateTableNotice) {
-          return mergeFrom((com.su.proto.PlayProto.UpdateTableNotice)other);
+        if (other instanceof com.su.proto.PlayProto.TableNotice) {
+          return mergeFrom((com.su.proto.PlayProto.TableNotice)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayProto.UpdateTableNotice other) {
-        if (other == com.su.proto.PlayProto.UpdateTableNotice.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayProto.TableNotice other) {
+        if (other == com.su.proto.PlayProto.TableNotice.getDefaultInstance()) return this;
         if (other.hasTable()) {
           mergeTable(other.getTable());
         }
@@ -14228,11 +14228,11 @@ public final class PlayProto {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayProto.UpdateTableNotice parsedMessage = null;
+        com.su.proto.PlayProto.TableNotice parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayProto.UpdateTableNotice) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayProto.TableNotice) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -14243,29 +14243,29 @@ public final class PlayProto {
       }
       private int bitField0_;
 
-      private com.su.proto.PlayProto.TablePro table_ = null;
+      private com.su.proto.PlayProto.PTable table_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayProto.TablePro, com.su.proto.PlayProto.TablePro.Builder, com.su.proto.PlayProto.TableProOrBuilder> tableBuilder_;
+          com.su.proto.PlayProto.PTable, com.su.proto.PlayProto.PTable.Builder, com.su.proto.PlayProto.PTableOrBuilder> tableBuilder_;
       /**
-       * <code>optional .com.su.proto.TablePro table = 1;</code>
+       * <code>optional .com.su.proto.PTable table = 1;</code>
        */
       public boolean hasTable() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .com.su.proto.TablePro table = 1;</code>
+       * <code>optional .com.su.proto.PTable table = 1;</code>
        */
-      public com.su.proto.PlayProto.TablePro getTable() {
+      public com.su.proto.PlayProto.PTable getTable() {
         if (tableBuilder_ == null) {
-          return table_ == null ? com.su.proto.PlayProto.TablePro.getDefaultInstance() : table_;
+          return table_ == null ? com.su.proto.PlayProto.PTable.getDefaultInstance() : table_;
         } else {
           return tableBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .com.su.proto.TablePro table = 1;</code>
+       * <code>optional .com.su.proto.PTable table = 1;</code>
        */
-      public Builder setTable(com.su.proto.PlayProto.TablePro value) {
+      public Builder setTable(com.su.proto.PlayProto.PTable value) {
         if (tableBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -14279,10 +14279,10 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>optional .com.su.proto.TablePro table = 1;</code>
+       * <code>optional .com.su.proto.PTable table = 1;</code>
        */
       public Builder setTable(
-          com.su.proto.PlayProto.TablePro.Builder builderForValue) {
+          com.su.proto.PlayProto.PTable.Builder builderForValue) {
         if (tableBuilder_ == null) {
           table_ = builderForValue.build();
           onChanged();
@@ -14293,15 +14293,15 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>optional .com.su.proto.TablePro table = 1;</code>
+       * <code>optional .com.su.proto.PTable table = 1;</code>
        */
-      public Builder mergeTable(com.su.proto.PlayProto.TablePro value) {
+      public Builder mergeTable(com.su.proto.PlayProto.PTable value) {
         if (tableBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
               table_ != null &&
-              table_ != com.su.proto.PlayProto.TablePro.getDefaultInstance()) {
+              table_ != com.su.proto.PlayProto.PTable.getDefaultInstance()) {
             table_ =
-              com.su.proto.PlayProto.TablePro.newBuilder(table_).mergeFrom(value).buildPartial();
+              com.su.proto.PlayProto.PTable.newBuilder(table_).mergeFrom(value).buildPartial();
           } else {
             table_ = value;
           }
@@ -14313,7 +14313,7 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>optional .com.su.proto.TablePro table = 1;</code>
+       * <code>optional .com.su.proto.PTable table = 1;</code>
        */
       public Builder clearTable() {
         if (tableBuilder_ == null) {
@@ -14326,33 +14326,33 @@ public final class PlayProto {
         return this;
       }
       /**
-       * <code>optional .com.su.proto.TablePro table = 1;</code>
+       * <code>optional .com.su.proto.PTable table = 1;</code>
        */
-      public com.su.proto.PlayProto.TablePro.Builder getTableBuilder() {
+      public com.su.proto.PlayProto.PTable.Builder getTableBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getTableFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .com.su.proto.TablePro table = 1;</code>
+       * <code>optional .com.su.proto.PTable table = 1;</code>
        */
-      public com.su.proto.PlayProto.TableProOrBuilder getTableOrBuilder() {
+      public com.su.proto.PlayProto.PTableOrBuilder getTableOrBuilder() {
         if (tableBuilder_ != null) {
           return tableBuilder_.getMessageOrBuilder();
         } else {
           return table_ == null ?
-              com.su.proto.PlayProto.TablePro.getDefaultInstance() : table_;
+              com.su.proto.PlayProto.PTable.getDefaultInstance() : table_;
         }
       }
       /**
-       * <code>optional .com.su.proto.TablePro table = 1;</code>
+       * <code>optional .com.su.proto.PTable table = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayProto.TablePro, com.su.proto.PlayProto.TablePro.Builder, com.su.proto.PlayProto.TableProOrBuilder> 
+          com.su.proto.PlayProto.PTable, com.su.proto.PlayProto.PTable.Builder, com.su.proto.PlayProto.PTableOrBuilder> 
           getTableFieldBuilder() {
         if (tableBuilder_ == null) {
           tableBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.su.proto.PlayProto.TablePro, com.su.proto.PlayProto.TablePro.Builder, com.su.proto.PlayProto.TableProOrBuilder>(
+              com.su.proto.PlayProto.PTable, com.su.proto.PlayProto.PTable.Builder, com.su.proto.PlayProto.PTableOrBuilder>(
                   getTable(),
                   getParentForChildren(),
                   isClean());
@@ -14371,64 +14371,64 @@ public final class PlayProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.su.proto.UpdateTableNotice)
+      // @@protoc_insertion_point(builder_scope:com.su.proto.TableNotice)
     }
 
-    // @@protoc_insertion_point(class_scope:com.su.proto.UpdateTableNotice)
-    private static final com.su.proto.PlayProto.UpdateTableNotice DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:com.su.proto.TableNotice)
+    private static final com.su.proto.PlayProto.TableNotice DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayProto.UpdateTableNotice();
+      DEFAULT_INSTANCE = new com.su.proto.PlayProto.TableNotice();
     }
 
-    public static com.su.proto.PlayProto.UpdateTableNotice getDefaultInstance() {
+    public static com.su.proto.PlayProto.TableNotice getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<UpdateTableNotice>
-        PARSER = new com.google.protobuf.AbstractParser<UpdateTableNotice>() {
-      public UpdateTableNotice parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<TableNotice>
+        PARSER = new com.google.protobuf.AbstractParser<TableNotice>() {
+      public TableNotice parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new UpdateTableNotice(input, extensionRegistry);
+          return new TableNotice(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<UpdateTableNotice> parser() {
+    public static com.google.protobuf.Parser<TableNotice> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<UpdateTableNotice> getParserForType() {
+    public com.google.protobuf.Parser<TableNotice> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayProto.UpdateTableNotice getDefaultInstanceForType() {
+    public com.su.proto.PlayProto.TableNotice getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_CardPro_descriptor;
+    internal_static_com_su_proto_PCard_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_CardPro_fieldAccessorTable;
+      internal_static_com_su_proto_PCard_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_MultiplePro_descriptor;
+    internal_static_com_su_proto_PMultiple_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_MultiplePro_fieldAccessorTable;
+      internal_static_com_su_proto_PMultiple_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_TablePro_descriptor;
+    internal_static_com_su_proto_PTable_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_TablePro_fieldAccessorTable;
+      internal_static_com_su_proto_PTable_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_GamePlayerPro_descriptor;
+    internal_static_com_su_proto_PGamePlayer_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_GamePlayerPro_fieldAccessorTable;
+      internal_static_com_su_proto_PGamePlayer_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_su_proto_StartMatchReq_descriptor;
   private static final 
@@ -14480,15 +14480,15 @@ public final class PlayProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_su_proto_ReadyResp_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_ExitReq_descriptor;
+    internal_static_com_su_proto_QuitReq_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_ExitReq_fieldAccessorTable;
+      internal_static_com_su_proto_QuitReq_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_ExitResp_descriptor;
+    internal_static_com_su_proto_QuitResp_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_ExitResp_fieldAccessorTable;
+      internal_static_com_su_proto_QuitResp_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_su_proto_DoubleReq_descriptor;
   private static final 
@@ -14510,25 +14510,25 @@ public final class PlayProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_su_proto_UseItemResp_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_autoReq_descriptor;
+    internal_static_com_su_proto_AutoReq_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_autoReq_fieldAccessorTable;
+      internal_static_com_su_proto_AutoReq_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_autoResp_descriptor;
+    internal_static_com_su_proto_AutoResp_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_autoResp_fieldAccessorTable;
+      internal_static_com_su_proto_AutoResp_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_UpdateGamePlayerNotice_descriptor;
+    internal_static_com_su_proto_GamePlayerNotice_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_UpdateGamePlayerNotice_fieldAccessorTable;
+      internal_static_com_su_proto_GamePlayerNotice_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_su_proto_UpdateTableNotice_descriptor;
+    internal_static_com_su_proto_TableNotice_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_com_su_proto_UpdateTableNotice_fieldAccessorTable;
+      internal_static_com_su_proto_TableNotice_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -14538,33 +14538,33 @@ public final class PlayProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020proto/Play.proto\022\014com.su.proto\"&\n\007Card" +
-      "Pro\022\r\n\005value\030\001 \001(\005\022\014\n\004suit\030\002 \001(\005\"*\n\013Mult" +
-      "iplePro\022\014\n\004type\030\001 \001(\005\022\r\n\005value\030\002 \001(\005\"\235\002\n" +
-      "\010TablePro\022,\n\007players\030\001 \003(\0132\033.com.su.prot" +
-      "o.GamePlayerPro\022,\n\tmultiples\030\002 \003(\0132\031.com" +
-      ".su.proto.MultiplePro\022\021\n\005state\030\003 \001(\005:\002-1" +
-      "\022\020\n\004hold\030\004 \001(\005:\002-1\022\026\n\nroundScore\030\005 \001(\005:\002" +
-      "-1\022\'\n\010callCard\030\006 \001(\0132\025.com.su.proto.Card" +
-      "Pro\022\025\n\tcallState\030\007 \001(\005:\002-1\022(\n\tlastCards\030" +
-      "\010 \003(\0132\025.com.su.proto.CardPro\022\016\n\006dealer\030\t",
-      " \001(\005\"\327\001\n\rGamePlayerPro\022\016\n\002id\030\001 \001(\003:\002-1\022(" +
-      "\n\thandCards\030\002 \003(\0132\025.com.su.proto.CardPro" +
-      "\022\023\n\007cardNum\030\003 \001(\005:\002-1\022\020\n\004team\030\004 \001(\005:\002-1\022" +
-      "\025\n\rmultipleValue\030\005 \001(\005\022\021\n\005score\030\006 \001(\005:\002-" +
-      "1\022\021\n\005state\030\007 \001(\005:\002-1\022\024\n\010deadline\030\010 \001(\003:\002" +
-      "-1\022\022\n\006isAuto\030\t \001(\005:\002-1\"\037\n\rStartMatchReq\022" +
-      "\016\n\006siteId\030\001 \001(\005\"\020\n\016StartMatchResp\"\034\n\007Cal" +
-      "lReq\022\021\n\tcardIndex\030\001 \001(\005\"\n\n\010CallResp\"/\n\007D" +
-      "rawReq\022\020\n\010cardType\030\001 \001(\005\022\022\n\ncardIndexs\030\002" +
-      " \003(\005\"\n\n\010DrawResp\"\n\n\010CheckReq\"\013\n\tCheckRes",
-      "p\"\n\n\010ReadyReq\"\013\n\tReadyResp\"\t\n\007ExitReq\"\n\n" +
-      "\010ExitResp\"\013\n\tDoubleReq\"\014\n\nDoubleResp\"\014\n\n" +
-      "UseItemReq\"\r\n\013UseItemResp\"\t\n\007autoReq\"\n\n\010" +
-      "autoResp\"I\n\026UpdateGamePlayerNotice\022/\n\nga" +
-      "mePlayer\030\001 \003(\0132\033.com.su.proto.GamePlayer" +
-      "Pro\":\n\021UpdateTableNotice\022%\n\005table\030\001 \001(\0132" +
-      "\026.com.su.proto.TableProB\013B\tPlayProto"
+      "\n\020proto/Play.proto\022\014com.su.proto\"(\n\005PCar" +
+      "d\022\r\n\005value\030\001 \001(\005\022\020\n\004suit\030\002 \001(\005:\002-1\"(\n\tPM" +
+      "ultiple\022\014\n\004type\030\001 \001(\005\022\r\n\005value\030\002 \001(\005\"\227\002\n" +
+      "\006PTable\022*\n\007players\030\001 \003(\0132\031.com.su.proto." +
+      "PGamePlayer\022*\n\tmultiples\030\002 \003(\0132\027.com.su." +
+      "proto.PMultiple\022\021\n\005state\030\003 \001(\005:\002-1\022\020\n\004ho" +
+      "ld\030\004 \001(\005:\002-1\022\026\n\nroundScore\030\005 \001(\005:\002-1\022%\n\010" +
+      "callCard\030\006 \001(\0132\023.com.su.proto.PCard\022\025\n\tc" +
+      "allState\030\007 \001(\005:\002-1\022&\n\tlastCards\030\010 \003(\0132\023." +
+      "com.su.proto.PCard\022\022\n\006dealer\030\t \001(\005:\002-1\"\323",
+      "\001\n\013PGamePlayer\022\016\n\002id\030\001 \001(\003:\002-1\022&\n\thandCa" +
+      "rds\030\002 \003(\0132\023.com.su.proto.PCard\022\023\n\007cardNu" +
+      "m\030\003 \001(\005:\002-1\022\020\n\004team\030\004 \001(\005:\002-1\022\025\n\rmultipl" +
+      "eValue\030\005 \001(\005\022\021\n\005score\030\006 \001(\005:\002-1\022\021\n\005state" +
+      "\030\007 \001(\005:\002-1\022\024\n\010deadline\030\010 \001(\003:\002-1\022\022\n\006isAu" +
+      "to\030\t \001(\005:\002-1\"\037\n\rStartMatchReq\022\016\n\006siteId\030" +
+      "\001 \001(\005\"\020\n\016StartMatchResp\"\034\n\007CallReq\022\021\n\tca" +
+      "rdIndex\030\001 \001(\005\"\n\n\010CallResp\"/\n\007DrawReq\022\020\n\010" +
+      "cardType\030\001 \001(\005\022\022\n\ncardIndexs\030\002 \003(\005\"\n\n\010Dr" +
+      "awResp\"\n\n\010CheckReq\"\013\n\tCheckResp\"\n\n\010Ready",
+      "Req\"\013\n\tReadyResp\"\t\n\007QuitReq\"\n\n\010QuitResp\"" +
+      "\013\n\tDoubleReq\"\014\n\nDoubleResp\"\014\n\nUseItemReq" +
+      "\"\r\n\013UseItemResp\"\t\n\007AutoReq\"\n\n\010AutoResp\"A" +
+      "\n\020GamePlayerNotice\022-\n\ngamePlayer\030\001 \003(\0132\031" +
+      ".com.su.proto.PGamePlayer\"2\n\013TableNotice" +
+      "\022#\n\005table\030\001 \001(\0132\024.com.su.proto.PTableB\013B" +
+      "\tPlayProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14578,29 +14578,29 @@ public final class PlayProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_com_su_proto_CardPro_descriptor =
+    internal_static_com_su_proto_PCard_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_com_su_proto_CardPro_fieldAccessorTable = new
+    internal_static_com_su_proto_PCard_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_CardPro_descriptor,
+        internal_static_com_su_proto_PCard_descriptor,
         new java.lang.String[] { "Value", "Suit", });
-    internal_static_com_su_proto_MultiplePro_descriptor =
+    internal_static_com_su_proto_PMultiple_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_com_su_proto_MultiplePro_fieldAccessorTable = new
+    internal_static_com_su_proto_PMultiple_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_MultiplePro_descriptor,
+        internal_static_com_su_proto_PMultiple_descriptor,
         new java.lang.String[] { "Type", "Value", });
-    internal_static_com_su_proto_TablePro_descriptor =
+    internal_static_com_su_proto_PTable_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_com_su_proto_TablePro_fieldAccessorTable = new
+    internal_static_com_su_proto_PTable_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_TablePro_descriptor,
+        internal_static_com_su_proto_PTable_descriptor,
         new java.lang.String[] { "Players", "Multiples", "State", "Hold", "RoundScore", "CallCard", "CallState", "LastCards", "Dealer", });
-    internal_static_com_su_proto_GamePlayerPro_descriptor =
+    internal_static_com_su_proto_PGamePlayer_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_com_su_proto_GamePlayerPro_fieldAccessorTable = new
+    internal_static_com_su_proto_PGamePlayer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_GamePlayerPro_descriptor,
+        internal_static_com_su_proto_PGamePlayer_descriptor,
         new java.lang.String[] { "Id", "HandCards", "CardNum", "Team", "MultipleValue", "Score", "State", "Deadline", "IsAuto", });
     internal_static_com_su_proto_StartMatchReq_descriptor =
       getDescriptor().getMessageTypes().get(4);
@@ -14662,17 +14662,17 @@ public final class PlayProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_su_proto_ReadyResp_descriptor,
         new java.lang.String[] { });
-    internal_static_com_su_proto_ExitReq_descriptor =
+    internal_static_com_su_proto_QuitReq_descriptor =
       getDescriptor().getMessageTypes().get(14);
-    internal_static_com_su_proto_ExitReq_fieldAccessorTable = new
+    internal_static_com_su_proto_QuitReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_ExitReq_descriptor,
+        internal_static_com_su_proto_QuitReq_descriptor,
         new java.lang.String[] { });
-    internal_static_com_su_proto_ExitResp_descriptor =
+    internal_static_com_su_proto_QuitResp_descriptor =
       getDescriptor().getMessageTypes().get(15);
-    internal_static_com_su_proto_ExitResp_fieldAccessorTable = new
+    internal_static_com_su_proto_QuitResp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_ExitResp_descriptor,
+        internal_static_com_su_proto_QuitResp_descriptor,
         new java.lang.String[] { });
     internal_static_com_su_proto_DoubleReq_descriptor =
       getDescriptor().getMessageTypes().get(16);
@@ -14698,29 +14698,29 @@ public final class PlayProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_su_proto_UseItemResp_descriptor,
         new java.lang.String[] { });
-    internal_static_com_su_proto_autoReq_descriptor =
+    internal_static_com_su_proto_AutoReq_descriptor =
       getDescriptor().getMessageTypes().get(20);
-    internal_static_com_su_proto_autoReq_fieldAccessorTable = new
+    internal_static_com_su_proto_AutoReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_autoReq_descriptor,
+        internal_static_com_su_proto_AutoReq_descriptor,
         new java.lang.String[] { });
-    internal_static_com_su_proto_autoResp_descriptor =
+    internal_static_com_su_proto_AutoResp_descriptor =
       getDescriptor().getMessageTypes().get(21);
-    internal_static_com_su_proto_autoResp_fieldAccessorTable = new
+    internal_static_com_su_proto_AutoResp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_autoResp_descriptor,
+        internal_static_com_su_proto_AutoResp_descriptor,
         new java.lang.String[] { });
-    internal_static_com_su_proto_UpdateGamePlayerNotice_descriptor =
+    internal_static_com_su_proto_GamePlayerNotice_descriptor =
       getDescriptor().getMessageTypes().get(22);
-    internal_static_com_su_proto_UpdateGamePlayerNotice_fieldAccessorTable = new
+    internal_static_com_su_proto_GamePlayerNotice_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_UpdateGamePlayerNotice_descriptor,
+        internal_static_com_su_proto_GamePlayerNotice_descriptor,
         new java.lang.String[] { "GamePlayer", });
-    internal_static_com_su_proto_UpdateTableNotice_descriptor =
+    internal_static_com_su_proto_TableNotice_descriptor =
       getDescriptor().getMessageTypes().get(23);
-    internal_static_com_su_proto_UpdateTableNotice_fieldAccessorTable = new
+    internal_static_com_su_proto_TableNotice_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_com_su_proto_UpdateTableNotice_descriptor,
+        internal_static_com_su_proto_TableNotice_descriptor,
         new java.lang.String[] { "Table", });
   }
 

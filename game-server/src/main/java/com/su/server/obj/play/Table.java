@@ -9,12 +9,19 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
 import com.google.protobuf.MessageLiteOrBuilder;
+import com.google.protobuf.MessageOrBuilder;
 import com.su.common.util.CommonUtils;
 import com.su.common.util.SpringUtil;
 import com.su.core.akka.AkkaContext;
 import com.su.proto.PlayProto.CardPro;
+import com.su.proto.PlayProto.GamePlayerNotice;
 import com.su.proto.PlayProto.GamePlayerPro;
 import com.su.proto.PlayProto.MultiplePro;
+import com.su.proto.PlayProto.PCard;
+import com.su.proto.PlayProto.PGamePlayer;
+import com.su.proto.PlayProto.PMultiple;
+import com.su.proto.PlayProto.PTable;
+import com.su.proto.PlayProto.TableNotice;
 import com.su.proto.PlayProto.TablePro;
 import com.su.proto.PlayProto.UpdateGamePlayerNotice;
 import com.su.proto.PlayProto.UpdateTableNotice;
@@ -60,7 +67,7 @@ public class Table implements Delayed {
 	/**
 	 * 倍数
 	 */
-	private int[] multiples;
+	private Multiple[] multiples;
 	/**
 	 * 最后出牌
 	 */
@@ -75,10 +82,6 @@ public class Table implements Delayed {
 	 */
 	private Integer[] rank;
 	/**
-	 * 队伍
-	 */
-	private Integer[][] item;
-	/**
 	 * 等待时间
 	 */
 	private int waitingTime;
@@ -89,12 +92,12 @@ public class Table implements Delayed {
 
 	private AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
 
-	private TablePro.Builder tablePro = TablePro.newBuilder();
-	private MultiplePro.Builder multiplePro = MultiplePro.newBuilder();
-	private CardPro.Builder cardPro = CardPro.newBuilder();
-	private GamePlayerPro.Builder gamePlayerPro = GamePlayerPro.newBuilder();
-	private UpdateGamePlayerNotice.Builder updateGamePlayerNotice = UpdateGamePlayerNotice.newBuilder();
-	private UpdateTableNotice.Builder updateTableNotice = UpdateTableNotice.newBuilder();
+	private PTable.Builder pTableBuiler = PTable.newBuilder();
+	private PGamePlayer.Builder pGamePlayerBuilder = PGamePlayer.newBuilder();
+	private PMultiple.Builder pMultipleBuilder = PMultiple.newBuilder();
+	private PCard.Builder pCardBuilder = PCard.newBuilder();
+	private TableNotice.Builder tableNoticeBuilder = TableNotice.newBuilder();
+	private GamePlayerNotice.Builder gamePlayerNoticeBuilder = GamePlayerNotice.newBuilder();
 
 	@Override
 	public int compareTo(Delayed o) {
@@ -110,6 +113,32 @@ public class Table implements Delayed {
 		return unit.convert(waitingTime, TimeUnit.SECONDS);
 	}
 
+	public PTable toProto() {
+		for (GamePlayer player : players) {
+			pTableBuiler.addPlayers(player.toProto(pGamePlayerBuilder, false));
+		}
+		for (Multiple multiple : multiples) {
+			pTableBuiler.addMultiples(multiple.toProto(pMultipleBuilder));
+		}
+		if (state != null)
+			pTableBuiler.setState(state.ordinal());
+		pTableBuiler.setHold(hold);
+		pTableBuiler.setRoundScore(roundScore);
+		if (callCard != null)
+			pTableBuiler.setCallCard(callCard.toProto(pCardBuilder));
+		if (callState != null)
+			pTableBuiler.setCallState(callState.ordinal());
+		if (lastCards != null) {
+			for (Card card : lastCards) {
+				pTableBuiler.addLastCards(card.toProto(pCardBuilder));
+			}
+		}
+		pTableBuiler.setDealer(dealer);
+		PTable pTable = pTableBuiler.build();
+		pTableBuiler.clear();
+		return pTable;
+	}
+
 	public Table(Site site) {
 		this.site = site;
 		this.actor = this.akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
@@ -119,8 +148,16 @@ public class Table implements Delayed {
 		System.arraycopy(oneCards, 0, cards, 0, Card.CARDS_NUM);
 		System.arraycopy(oneCards, 0, cards, Card.CARDS_NUM, Card.CARDS_NUM);
 		this.cards = cards;
-		// 牌桌状态
-		this.state = TableState.IDLE;
+	}
+
+	private Multiple addMultiple(MultipleType multipleType) {
+		Multiple multiple = multiples[multipleType.ordinal()];
+		if (multiple == null) {
+			multiples[multipleType.ordinal()] = new Multiple(multipleType.ordinal(), multipleType.getValue());
+		} else {
+			multiple.setValue(multiple.getValue() + multipleType.getValue());
+		}
+		return multiple;
 	}
 
 	public void start(GamePlayer[] players) {
@@ -132,9 +169,8 @@ public class Table implements Delayed {
 			players[i].setTable(this);
 		}
 		// 牌桌数据
-		this.multiples = new int[MultipleType.values().length];
+		this.multiples = new Multiple[MultipleType.values().length];
 		this.rank = new Integer[this.players.length];
-		this.item = new Integer[this.players.length][this.players.length];
 		this.dealer = players[0].getIndex();
 		start();
 	}
@@ -146,83 +182,31 @@ public class Table implements Delayed {
 		// 设置牌桌状态
 		this.state = TableState.START;
 		// 初始倍数
-		this.multiples[MultipleType.CHU_SHI.ordinal()] = MultipleType.CHU_SHI.getValue();
+		addMultiple(MultipleType.CHU_SHI);
 		shuffle();
 		deal();
 		// 牌权
 		this.hold = this.dealer;
-		this.players[hold].setState(PlayerState.OPERATING);
-		this.players[hold].setDeadLine(15);
+		this.players[this.hold].setState(PlayerState.OPERATING);
+		this.players[this.hold].setDeadLine(15);
 		// 加入到超时队列
-		this.site.getDeadLineQueue().offer(this.players[hold]);
+		this.site.getDeadLineQueue().offer(this.players[this.hold]);
 		// 通知
-		for (GamePlayer player : this.players) {
-			
-		}
-		// 倍数
-		for (MultipleType multipleType : MultipleType.values()) {
-			if (multiples[multipleType.ordinal()] != 0 && multipleType.ordinal() < multiples.length) {
-				multiplePro.setType(multipleType.ordinal());
-				multiplePro.setValue(multiples[multipleType.ordinal()]);
-				tablePro.addMultiples(multiplePro);
-				multiplePro.clear();
-			}
+		tableNoticeBuilder.setTable(toProto());
+		noticePlayers(tableNoticeBuilder);
+		tableNoticeBuilder.clear();
 
-		}
-		tablePro.setState(state.ordinal());
-		tablePro.setHold(hold);
-		tablePro.setRoundScore(roundScore);
-		if (callCard != null) {
-			cardPro.setValue(callCard.getValue());
-			cardPro.setSuit(callCard.getSuit().ordinal());
-			tablePro.setCalledCard(cardPro);
-			cardPro.clear();
-		}
-		if (lastCards != null) {
-			for (Card card : lastCards) {
-				cardPro.setValue(card.getValue());
-				cardPro.setSuit(card.getSuit().ordinal());
-				tablePro.addLastCards(cardPro);
-				cardPro.clear();
+		for (GamePlayer player : players) {
+			for (Card card : player.getHandCards()) {
+				if (card == null)
+					continue;
+				pGamePlayerBuilder.addHandCards(card.toProto(pCardBuilder));
 			}
+			gamePlayerNoticeBuilder.addGamePlayer(pGamePlayerBuilder);
+			pGamePlayerBuilder.clear();
+			player.getPlayerContext().write(gamePlayerNoticeBuilder);
+			gamePlayerNoticeBuilder.clear();
 		}
-		tablePro.setDealer(dealer);
-		// 玩家数据
-		for (int i = 0; i < players.length; i++) {
-			for (int j = 0; j < players.length; j++) {
-				gamePlayerPro.setId(players[j].getId());
-				if (players[i] == players[j]) {
-					for (Card card : players[j].getHandCards()) {
-						if (card == null)
-							continue;
-						cardPro.setValue(card.getValue());
-						cardPro.setSuit(card.getSuit().ordinal());
-						gamePlayerPro.addHandCards(cardPro);
-						cardPro.clear();
-					}
-				}
-				int cardNum = 0;
-				for (Card card : players[j].getHandCards()) {
-					if (card == null)
-						break;
-					cardNum++;
-				}
-				gamePlayerPro.setCardNum(cardNum);
-				gamePlayerPro.setTeam(players[j].getTeam().ordinal());
-				gamePlayerPro.setMyMultipleValue(players[j].getMyScore());
-				gamePlayerPro.setMyScore(players[j].getState().ordinal());
-				gamePlayerPro.setDeadline(players[j].getDeadLine());
-				gamePlayerPro.setIsAuto(players[j].getIsAuto());
-				tablePro.addPlayers(gamePlayerPro);
-				gamePlayerPro.clear();
-
-			}
-			players[i].getPlayerContext().write(gameStartNotice);
-			tablePro.clearPlayers();
-		}
-		tablePro.clear();
-		gameStartNotice.clear();
-
 	}
 
 	/**
@@ -256,6 +240,10 @@ public class Table implements Delayed {
 	 * 过牌
 	 */
 	public void check(GamePlayer player) {
+		if (player.getState() != PlayerState.OPERATING  || state != TableState.PLAYING) {
+			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
+			return;
+		}
 		site.getDeadLineQueue().remove(player);
 		player.setState(PlayerState.WATCH);
 		player.setDeadLine(0);
@@ -264,15 +252,15 @@ public class Table implements Delayed {
 		nextPlayer.setDeadLine(30);
 		site.getDeadLineQueue().offer(nextPlayer);
 		// 通知
-		gamePlayerPro.setState(player.getState().ordinal());
-		gamePlayerPro.setDeadline(player.getDeadLine());
-		updateGamePlayerNotice.addGamePlayer(gamePlayerPro);
-		gamePlayerPro.clear();
+		pGamePlayerBuilder.setState(player.getState().ordinal());
+		pGamePlayerBuilder.setDeadline(player.getDeadLine());
+		updateGamePlayerNotice.addGamePlayer(pGamePlayerBuilder);
+		pGamePlayerBuilder.clear();
 
-		gamePlayerPro.setState(nextPlayer.getState().ordinal());
-		gamePlayerPro.setDeadline(nextPlayer.getDeadLine());
-		updateGamePlayerNotice.addGamePlayer(gamePlayerPro);
-		gamePlayerPro.clear();
+		pGamePlayerBuilder.setState(nextPlayer.getState().ordinal());
+		pGamePlayerBuilder.setDeadline(nextPlayer.getDeadLine());
+		updateGamePlayerNotice.addGamePlayer(pGamePlayerBuilder);
+		pGamePlayerBuilder.clear();
 
 		noticePlayers(updateGamePlayerNotice);
 		updateGamePlayerNotice.clear();
@@ -283,37 +271,16 @@ public class Table implements Delayed {
 	 * 叫牌
 	 */
 	public void call(GamePlayer player, int index) {
-		site.getDeadLineQueue().remove(player);
-		// 玩家状态处理
-		player.setState(PlayerState.WATCH);
-		player.setDeadLine(0);
-		GamePlayer nextPlayer = players[(player.getIndex() + 1 + 1) % 4 - 1];
-		nextPlayer.setState(PlayerState.OPERATING);
-		nextPlayer.setDeadLine(30);
-		site.getDeadLineQueue().offer(nextPlayer);
-
-		// 分数
-		if (nextPlayer.getIndex() == hold) {
-			nextPlayer.setMyScore(roundScore);
-			roundScore = 0;
-		}
-
-		if (player.getState() != PlayerState.OPERATING) {
+		if (player.getState() != PlayerState.OPERATING || state != TableState.START) {
 			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
-			return;
-		}
-		if (callState != null) {
-			player.getPlayerContext().sendError(ErrCode.OTHER_PLAYER_CALLED);
 			return;
 		}
 		// 明叫
 		if (index == -1) {
 			callState = CallState.LIGHT;
-			multiples[MultipleType.MING_JIAO.ordinal()] += MultipleType.MING_JIAO.getValue();
-			multiplePro.setType(MultipleType.MING_JIAO.ordinal());
-			multiplePro.setValue(multiples[MultipleType.MING_JIAO.ordinal()]);
-			tablePro.addMultiples(multiplePro);
-			multiplePro.clear();
+			pTableBuiler.setCallState(callState.ordinal());
+			Multiple multiple = addMultiple(MultipleType.MING_JIAO);
+			pTableBuiler.addMultiples(multiple.toProto(pMultipleBuilder));
 		} else {
 			if (index < 0 || index >= player.getHandCards().length) {
 				player.getPlayerContext().sendError(ErrCode.PARAMETER_ERROR);
@@ -326,27 +293,42 @@ public class Table implements Delayed {
 			}
 			callCard = card;
 			callState = CallState.CALL;
-			multiples[MultipleType.JIAO_PAI.ordinal()] += MultipleType.MING_JIAO.getValue();
+			pTableBuiler.setCallState(callState.ordinal());
+			pTableBuiler.setCallCard(callCard.toProto(pCardBuilder));
+			Multiple multiple = addMultiple(MultipleType.JIAO_PAI);
+			pTableBuiler.addMultiples(multiple.toProto(pMultipleBuilder));
 		}
+		state = TableState.PLAYING;
+		pTableBuiler.setState(state.ordinal());
+		player.setTeam(Team.RED);
+		pGamePlayerBuilder.setTeam(player.getTeam().ordinal());
 
-		// 通知
-		gamePlayerPro.setState(player.getState().ordinal());
-		gamePlayerPro.setDeadline(player.getDeadLine());
-		updateGamePlayerNotice.addGamePlayer(gamePlayerPro);
-		gamePlayerPro.clear();
+		// 玩家状态处理
+		site.getDeadLineQueue().remove(player);
+		player.setState(PlayerState.WATCH);
+		pGamePlayerBuilder.setState(PlayerState.WATCH.ordinal());
+		player.setDeadLine(0);
+		pGamePlayerBuilder.setDeadline(player.getDeadLine());
+		gamePlayerNoticeBuilder.addGamePlayer(pGamePlayerBuilder);
+		pGamePlayerBuilder.clear();
 
-		gamePlayerPro.setState(nextPlayer.getState().ordinal());
-		gamePlayerPro.setDeadline(nextPlayer.getDeadLine());
-		gamePlayerPro.setMyScore(nextPlayer.getMyScore());
-		updateGamePlayerNotice.addGamePlayer(gamePlayerPro);
-		gamePlayerPro.clear();
-
-		noticePlayers(updateGamePlayerNotice);
-		updateGamePlayerNotice.clear();
-
-		updateTableNotice.setTable(tablePro);
-		noticePlayers(updateTableNotice);
-		updateTableNotice.clear();
+		GamePlayer nextPlayer = players[(player.getIndex() + 1 + 1) % 4 - 1];
+		nextPlayer.setState(PlayerState.OPERATING);
+		pGamePlayerBuilder.setState(nextPlayer.getState().ordinal());
+		nextPlayer.setDeadLine(30);
+		
+		pGamePlayerBuilder.setDeadline(nextPlayer.getDeadLine());
+		gamePlayerNoticeBuilder.addGamePlayer(pGamePlayerBuilder);
+		pGamePlayerBuilder.clear();
+		site.getDeadLineQueue().offer(nextPlayer);
+		
+		tableNoticeBuilder.setTable(pTableBuiler);
+		noticePlayers(tableNoticeBuilder);
+		tableNoticeBuilder.clear();
+		
+		noticePlayers(gamePlayerNoticeBuilder);
+		gamePlayerNoticeBuilder.clear();
+		
 
 	}
 
@@ -402,13 +384,13 @@ public class Table implements Delayed {
 		MultipleType multiple = MultipleTypeUnit.getMultiple(cardType, cards);
 		if (multiple != null) {
 			multiples[multiple.ordinal()] += multiple.getValue();
-			multiplePro.setType(multiple.ordinal()).setValue(multiples[multiple.ordinal()]);
-			tablePro.addMultiples(multiplePro);
-			multiplePro.clear();
+			pMultipleBuilder.setType(multiple.ordinal()).setValue(multiples[multiple.ordinal()]);
+			pTableBuiler.addMultiples(pMultipleBuilder);
+			pMultipleBuilder.clear();
 		}
 		// 变更牌权
 		hold = player.getIndex();
-		tablePro.setHold(hold);
+		pTableBuiler.setHold(hold);
 		// 叫牌状态
 		for (Card card : cards) {
 			if (card.equals(callCard)) {

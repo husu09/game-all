@@ -3,6 +3,8 @@ package com.su.server.obj.play;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
+import com.su.proto.PlayProto.PCard;
+import com.su.proto.PlayProto.PGamePlayer;
 import com.su.server.context.PlayerContext;
 
 /**
@@ -52,9 +54,9 @@ public class GamePlayer implements Delayed {
 	private Table table;
 	/**
 	 * 手牌数量
-	 * */
+	 */
 	private final static int HAND_CARDS_NUM = 27;
-	
+
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 		this.id = playerContext.getPlayer().getId();
@@ -73,6 +75,48 @@ public class GamePlayer implements Delayed {
 	@Override
 	public long getDelay(TimeUnit unit) {
 		return unit.convert(deadLine, TimeUnit.SECONDS);
+	}
+
+	/**
+	 * 获取手牌数量
+	 */
+	public int getHandCardsNum() {
+		int num = 0;
+		for (Card card : handCards) {
+			if (card != null)
+				num++;
+		}
+		return num;
+	}
+
+	public PGamePlayer toProto(boolean isContainHandCards) {
+		PGamePlayer.Builder builder = PGamePlayer.newBuilder();
+		return toProto(builder, isContainHandCards);
+	}
+
+	public PGamePlayer toProto(PGamePlayer.Builder builder, boolean isContainHandCards) {
+		PCard.Builder pCardProBuilder = PCard.newBuilder();
+		builder.setId(id);
+		if (isContainHandCards) {
+			for (Card card : handCards) {
+				if (card == null)
+					continue;
+				builder.addHandCards(card.toProto(pCardProBuilder));
+			}
+		}
+		builder.setCardNum(getHandCardsNum());
+		if (team != null)
+			builder.setTeam(team.ordinal());
+		builder.setMultipleValue(multipleValue);
+		builder.setScore(score);
+		if (state != null)
+			builder.setState(state.ordinal());
+		builder.setDeadline(deadLine);
+		builder.setIsAuto(isAuto);
+		PGamePlayer pGamePlayer = builder.build();
+		builder.clear();
+		return pGamePlayer;
+	
 	}
 
 	public int getIndex() {
@@ -107,11 +151,11 @@ public class GamePlayer implements Delayed {
 		this.multipleValue = multipleValue;
 	}
 
-	public int getMyScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public void setMyScore(int myScore) {
+	public void setScore(int myScore) {
 		this.score = myScore;
 	}
 

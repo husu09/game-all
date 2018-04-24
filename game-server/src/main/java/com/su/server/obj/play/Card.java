@@ -1,5 +1,7 @@
 package com.su.server.obj.play;
 
+import com.su.proto.PlayProto.PCard;
+
 public class Card implements Comparable<Card> {
 	/**
 	 * 牌面
@@ -28,17 +30,17 @@ public class Card implements Comparable<Card> {
 		return 0;
 	}
 
+	@Override
+	public String toString() {
+		return "Card [value=" + value + ", suit=" + suit + "]";
+	}
+
 	public int getValue() {
 		return value;
 	}
 
 	public Suit getSuit() {
 		return suit;
-	}
-
-	@Override
-	public String toString() {
-		return "Card [value=" + value + ", suit=" + suit + "]";
 	}
 
 	/**
@@ -74,23 +76,37 @@ public class Card implements Comparable<Card> {
 		int suit = Suit.FANG_KUAI.ordinal();
 		for (int i = 0; i < CARDS_NUM; i++) {
 			if (value + i == CARD_XIAO_WANG) {
-				cards[i] = new Card(CARD_XIAO_WANG, Suit.NONE);
+				cards[i] = new Card(CARD_XIAO_WANG, null);
 				continue;
 			}
 			if (value + i == CARD_DA_WANG) {
-				cards[i] = new Card(CARD_DA_WANG, Suit.NONE);
+				cards[i] = new Card(CARD_DA_WANG, null);
 				continue;
 			}
 
 			cards[i] = new Card(value + i, Suit.values()[suit]);
 			if ((i + 1) % 4 == 0) {
 				value++;
-				suit = 1;
+				suit = Suit.FANG_KUAI.ordinal();
 			} else {
 				suit++;
 			}
 		}
 		return cards;
+	}
+
+	public PCard toProto() {
+		PCard.Builder builder = PCard.newBuilder();
+		return toProto(builder);
+	}
+
+	public PCard toProto(PCard.Builder builder) {
+		builder.setValue(value);
+		if (suit != null)
+			builder.setSuit(suit.ordinal());
+		PCard pCard = builder.build();
+		builder.clear();
+		return pCard;
 	}
 
 }

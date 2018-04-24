@@ -68,7 +68,7 @@ public class Site {
 		if (table == null) {
 			table = new Table(this);
 		}
-		table.getActor().initTable(gamePlayers);
+		table.getActor().start(gamePlayers);
 
 	}
 

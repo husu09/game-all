@@ -2,23 +2,19 @@ package com.su.server.obj.play;
 
 public enum Suit {
 	/**
-	 * 无 0
-	 */
-	NONE,
-	/**
-	 * 方块 1
+	 * 方块 0
 	 */
 	FANG_KUAI,
 	/**
-	 * 梅花 2
+	 * 梅花 1
 	 */
 	MEI_HUA,
 	/**
-	 * 红桃 3
+	 * 红桃 2
 	 */
 	HONG_TAO,
 	/**
-	 * 黑桃 4
+	 * 黑桃 3
 	 */
 	HEI_TAO
 }
