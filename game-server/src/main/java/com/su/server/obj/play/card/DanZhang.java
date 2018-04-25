@@ -15,17 +15,15 @@ public class DanZhang extends BaseCardProcessor {
 
 	@Override
 	public boolean verify(Card[] cards) {
-		if (cards.length == 1)
-			return true;
-		return false;
+		if (cards.length != 1)
+			return false;
+		return true;
 	}
 
 	@Override
 	public boolean compare(Card[] cards, CardType lastCardType, Card[] lastCards) {
-		if (lastCardType == CardType.ZHA_DAN || lastCardType == CardType.T_510K || lastCardType == CardType.WANG_ZHA)
-			return true;
 		if (lastCardType == getCardType()) {
-			if (lastCards[0].getValue() > cards[0].getValue()) {
+			if (cards[0].getValue() > lastCards[0].getValue()) {
 				return true;
 			}
 		}

@@ -2,27 +2,41 @@ package com.su.server.obj.play.card;
 
 import org.springframework.stereotype.Component;
 
+import com.su.server.obj.play.Card;
 import com.su.server.obj.play.CardType;
 
 @Component
-public class WangZha extends BaseCardProcessor  {
-
-	@Override
-	public boolean verify() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean compare() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+public class WangZha extends BaseCardProcessor {
 
 	@Override
 	public CardType getCardType() {
-		// TODO Auto-generated method stub
-		return null;
+		return CardType.WANG_ZHA;
+	}
+
+	@Override
+	public boolean verify(Card[] cards) {
+		if (cards.length != 2)
+			return false;
+		if (cards[0].getValue() < Card.CARD_XIAO_WANG)
+			return false;
+		if (cards[1].getValue() < Card.CARD_XIAO_WANG)
+			return false;
+		return true;
+	}
+
+	@Override
+	public boolean compare(Card[] cards, CardType lastCardType, Card[] lastCards) {
+		if (getCardType() == lastCardType) {
+			if (cards[0].getValue() + cards[1].getValue() <= lastCards[0].getValue() + lastCards[1].getValue())
+				return false;
+		} else if (lastCardType.equals(CardType.ZHA_DAN)) {
+			if (lastCards.length >= 8)
+				return false;
+		} else if (lastCardType.equals(CardType.T_510K)) {
+			return true;
+		}
+
+		return true;
 	}
 
 }
