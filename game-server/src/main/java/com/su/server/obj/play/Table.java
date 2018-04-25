@@ -246,24 +246,23 @@ public class Table implements Delayed {
 		}
 		site.getDeadLineQueue().remove(player);
 		player.setState(PlayerState.WATCH);
+		pGamePlayerBuilder.setState(player.getState().ordinal());
 		player.setDeadLine(0);
+		pGamePlayerBuilder.setDeadline(player.getDeadLine());
+		gamePlayerNoticeBuilder.addGamePlayer(pGamePlayerBuilder);
+		pGamePlayerBuilder.clear();
+		
 		GamePlayer nextPlayer = players[(player.getIndex() + 1 + 1) % 4 - 1];
 		nextPlayer.setState(PlayerState.OPERATING);
-		nextPlayer.setDeadLine(30);
-		site.getDeadLineQueue().offer(nextPlayer);
-		// 通知
-		pGamePlayerBuilder.setState(player.getState().ordinal());
-		pGamePlayerBuilder.setDeadline(player.getDeadLine());
-		updateGamePlayerNotice.addGamePlayer(pGamePlayerBuilder);
-		pGamePlayerBuilder.clear();
-
 		pGamePlayerBuilder.setState(nextPlayer.getState().ordinal());
+		nextPlayer.setDeadLine(30);
 		pGamePlayerBuilder.setDeadline(nextPlayer.getDeadLine());
-		updateGamePlayerNotice.addGamePlayer(pGamePlayerBuilder);
+		site.getDeadLineQueue().offer(nextPlayer);
+		gamePlayerNoticeBuilder.addGamePlayer(pGamePlayerBuilder);
 		pGamePlayerBuilder.clear();
 
-		noticePlayers(updateGamePlayerNotice);
-		updateGamePlayerNotice.clear();
+		noticePlayers(gamePlayerNoticeBuilder);
+		gamePlayerNoticeBuilder.clear();
 
 	}
 
@@ -336,6 +335,10 @@ public class Table implements Delayed {
 	 * 出牌
 	 */
 	public void draw(GamePlayer player, CardType cardType, int[] indexs) {
+		if (player.getState() != PlayerState.OPERATING || state != TableState.PLAYING) {
+			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
+			return;
+		}
 		site.getDeadLineQueue().remove(player);
 		// 玩家状态处理
 		player.setState(PlayerState.WATCH);
@@ -345,10 +348,6 @@ public class Table implements Delayed {
 		nextPlayer.setDeadLine(30);
 		site.getDeadLineQueue().offer(nextPlayer);
 
-		if (player.getState() != PlayerState.OPERATING) {
-			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
-			return;
-		}
 		Card[] cards = new Card[indexs.length];
 		// 索引验证
 		for (int i = 0; i < indexs.length; i++) {
