@@ -1,13 +1,13 @@
-syntax = "proto2";
+syntax = "proto3";
 package com.su.proto;
 option java_outer_classname = "LoginProto";
 import "proto/Player.proto";
 
 // 登录
 message LoginReq {
-	optional string name = 1;	// 用户名
+	string name = 1;	// 用户名
 }
 message LoginResp {
-	optional PlayerDataPro playerData = 1;	// 玩家数据
+	PlayerDataPro playerData = 1;	// 玩家数据
 }
 
