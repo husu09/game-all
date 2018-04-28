@@ -1,9 +1,9 @@
-syntax = "proto2";
+syntax = "proto3";
 package com.su.proto;
 option java_outer_classname = "CommonProto";
 
 // 错误提示
 message ErrorResp{
- 	optional int32 errorCode = 1;
+ 	int32 errorCode = 1;
  	repeated string parameters  = 2;
 }
