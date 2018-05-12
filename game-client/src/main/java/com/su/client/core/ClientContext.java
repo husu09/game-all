@@ -18,10 +18,12 @@ import javax.swing.JTextField;
 
 import org.springframework.stereotype.Component;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
-import com.googlecode.protobuf.format.JsonFormat;
+import com.google.protobuf.MessageOrBuilder;
+import com.google.protobuf.util.JsonFormat;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -60,11 +62,7 @@ public class ClientContext {
 	 * 连接对象
 	 */
 	private ChannelHandlerContext ctx;
-	/**
-	 * 格式化 protobuf 工具
-	 */
-	private JsonFormat jsonFormat = new JsonFormat();
-	
+
 	private String dataPath = System.getProperty("user.dir") + "/" + ClientConst.SAVE_FILE;
 
 	public MessageLite getSelectMessageLite() {
@@ -184,9 +182,12 @@ public class ClientContext {
 	}
 
 	public void showMessage(MessageLite messageLite) {
-		String jsonStr = FormatUtil.formatJson(jsonFormat.printToString((Message) messageLite));
-		jsonStr = messageLite.getClass().getSimpleName() + jsonStr + "\n";
-		showMessage(jsonStr);
+		try {
+			String jsonStr = JsonFormat.printer().print((MessageOrBuilder) messageLite);
+			showMessage(jsonStr);
+		} catch (InvalidProtocolBufferException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
