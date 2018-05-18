@@ -5,10 +5,6 @@ package com.su.common.obj;
  * */
 public class Grid {
 	/**
-	 * 索引
-	 * */
-	private int index;
-	/**
 	 * 类型
 	 * */
 	private int type;
@@ -23,14 +19,8 @@ public class Grid {
 	/**
 	 * 有效时间
 	 * */
-	private long effTime;
+	private long endTime;
 	
-	public int getIndex() {
-		return index;
-	}
-	public void setIndex(int index) {
-		this.index = index;
-	}
 	public int getType() {
 		return type;
 	}
@@ -49,12 +39,10 @@ public class Grid {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public long getEffTime() {
-		return effTime;
+	public long getEndTime() {
+		return endTime;
 	}
-	public void setEffTime(long effTime) {
-		this.effTime = effTime;
-	}
-	
-	
+	public void setEndTime(long endTime) {
+		this.endTime = endTime;
+	}	
 }

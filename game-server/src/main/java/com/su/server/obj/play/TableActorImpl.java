@@ -1,4 +1,4 @@
-package com.su.common.obj.play;
+package com.su.server.obj.play;
 
 import com.su.server.context.PlayerContext;
 

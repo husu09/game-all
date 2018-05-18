@@ -5,7 +5,7 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
 import com.google.protobuf.MessageLiteOrBuilder;
-import com.su.common.util.CommonUtils;
+import com.su.common.util.CommonUtil;
 import com.su.common.util.SpringsUtil;
 import com.su.core.akka.AkkaContext;
 import com.su.proto.PlayMsg.GamePlayerNotice;
@@ -203,7 +203,7 @@ public class Table implements Delayed {
 	private void shuffle() {
 		for (int i = 0; i < cards.length; i++) {
 			Card tmp = cards[i];
-			int r = CommonUtils.range(i, cards.length);
+			int r = CommonUtil.range(i, cards.length);
 			cards[i] = cards[r];
 			cards[r] = tmp;
 		}

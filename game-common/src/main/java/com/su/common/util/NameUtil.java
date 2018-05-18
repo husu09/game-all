@@ -1,6 +1,6 @@
 package com.su.common.util;
 
-public class NameUtils {
+public class NameUtil {
 	
 	public static boolean is(String str,int length) {
 		

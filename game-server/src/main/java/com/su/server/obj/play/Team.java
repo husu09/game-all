@@ -1,4 +1,4 @@
-package com.su.common.obj.play;
+package com.su.server.obj.play;
 
 public enum Team {
 	/**

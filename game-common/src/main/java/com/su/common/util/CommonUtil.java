@@ -3,7 +3,7 @@ package com.su.common.util;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-public class CommonUtils {
+public class CommonUtil {
 	/**
 	 * 判断是否为整数
 	 */
