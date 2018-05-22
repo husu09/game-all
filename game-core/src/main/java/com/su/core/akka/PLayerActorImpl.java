@@ -30,7 +30,7 @@ public class PLayerActorImpl implements PlayerActor {
 			if (actionMeta == null) {
 				//没有找到对应的协议处理类
 				logger.error("not find action-meta {}", messageLite.getClass().getSimpleName());
-				PlayerContext.sendError(ctx, 00001);
+				PlayerContext.sendError(ctx, 10001);
 				return;
 			}
 			Attribute<PlayerContext> attr = ctx.channel().attr(NettyServerHandler.PLAYER_CONTEXT_KEY);
@@ -39,7 +39,7 @@ public class PLayerActorImpl implements PlayerActor {
 				if (playerContext == null) {
 					//没有找到对应的PlayerContext
 					logger.error("not find player context");
-					PlayerContext.sendError(ctx, 00001);
+					PlayerContext.sendError(ctx, 10001);
 					return;
 				}
 				actionMeta.getMethod().invoke(actionMeta.getExecutor(), playerContext, messageLite);
@@ -51,7 +51,7 @@ public class PLayerActorImpl implements PlayerActor {
 		} catch (Exception e) {
 			e.printStackTrace();
 			//系统错误
-			PlayerContext.sendError(ctx, 00001);
+			PlayerContext.sendError(ctx, 10001);
 		}
 
 	}
@@ -67,6 +67,11 @@ public class PLayerActorImpl implements PlayerActor {
 	public void checkRefresh(PlayerContext playerContext) {
 		
 		
+	}
+
+	@Override
+	public void login(PlayerContext playerContext) {
+		gameEventDispatcher.login(playerContext);
 	}
 
 

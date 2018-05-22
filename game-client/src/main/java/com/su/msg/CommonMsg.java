@@ -14,8 +14,8 @@ public final class CommonMsg {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface ErrorRespOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ErrorResp)
+  public interface Error_OrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Error_)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -51,17 +51,17 @@ public final class CommonMsg {
    * 错误提示
    * </pre>
    *
-   * Protobuf type {@code ErrorResp}
+   * Protobuf type {@code Error_}
    */
-  public  static final class ErrorResp extends
+  public  static final class Error_ extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ErrorResp)
-      ErrorRespOrBuilder {
-    // Use ErrorResp.newBuilder() to construct.
-    private ErrorResp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:Error_)
+      Error_OrBuilder {
+    // Use Error_.newBuilder() to construct.
+    private Error_(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ErrorResp() {
+    private Error_() {
       errorCode_ = 0;
       parameters_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
@@ -71,7 +71,7 @@ public final class CommonMsg {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ErrorResp(
+    private Error_(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -125,14 +125,14 @@ public final class CommonMsg {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.msg.CommonMsg.internal_static_ErrorResp_descriptor;
+      return com.su.msg.CommonMsg.internal_static_Error__descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.msg.CommonMsg.internal_static_ErrorResp_fieldAccessorTable
+      return com.su.msg.CommonMsg.internal_static_Error__fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.msg.CommonMsg.ErrorResp.class, com.su.msg.CommonMsg.ErrorResp.Builder.class);
+              com.su.msg.CommonMsg.Error_.class, com.su.msg.CommonMsg.Error_.Builder.class);
     }
 
     private int bitField0_;
@@ -229,10 +229,10 @@ public final class CommonMsg {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.msg.CommonMsg.ErrorResp)) {
+      if (!(obj instanceof com.su.msg.CommonMsg.Error_)) {
         return super.equals(obj);
       }
-      com.su.msg.CommonMsg.ErrorResp other = (com.su.msg.CommonMsg.ErrorResp) obj;
+      com.su.msg.CommonMsg.Error_ other = (com.su.msg.CommonMsg.Error_) obj;
 
       boolean result = true;
       result = result && (hasErrorCode() == other.hasErrorCode());
@@ -266,58 +266,58 @@ public final class CommonMsg {
       return hash;
     }
 
-    public static com.su.msg.CommonMsg.ErrorResp parseFrom(
+    public static com.su.msg.CommonMsg.Error_ parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.msg.CommonMsg.ErrorResp parseFrom(
+    public static com.su.msg.CommonMsg.Error_ parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.msg.CommonMsg.ErrorResp parseFrom(byte[] data)
+    public static com.su.msg.CommonMsg.Error_ parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.msg.CommonMsg.ErrorResp parseFrom(
+    public static com.su.msg.CommonMsg.Error_ parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.msg.CommonMsg.ErrorResp parseFrom(java.io.InputStream input)
+    public static com.su.msg.CommonMsg.Error_ parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.msg.CommonMsg.ErrorResp parseFrom(
+    public static com.su.msg.CommonMsg.Error_ parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.msg.CommonMsg.ErrorResp parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.msg.CommonMsg.Error_ parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.msg.CommonMsg.ErrorResp parseDelimitedFrom(
+    public static com.su.msg.CommonMsg.Error_ parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.msg.CommonMsg.ErrorResp parseFrom(
+    public static com.su.msg.CommonMsg.Error_ parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.msg.CommonMsg.ErrorResp parseFrom(
+    public static com.su.msg.CommonMsg.Error_ parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -329,7 +329,7 @@ public final class CommonMsg {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.msg.CommonMsg.ErrorResp prototype) {
+    public static Builder newBuilder(com.su.msg.CommonMsg.Error_ prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -348,25 +348,25 @@ public final class CommonMsg {
      * 错误提示
      * </pre>
      *
-     * Protobuf type {@code ErrorResp}
+     * Protobuf type {@code Error_}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ErrorResp)
-        com.su.msg.CommonMsg.ErrorRespOrBuilder {
+        // @@protoc_insertion_point(builder_implements:Error_)
+        com.su.msg.CommonMsg.Error_OrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.msg.CommonMsg.internal_static_ErrorResp_descriptor;
+        return com.su.msg.CommonMsg.internal_static_Error__descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.msg.CommonMsg.internal_static_ErrorResp_fieldAccessorTable
+        return com.su.msg.CommonMsg.internal_static_Error__fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.msg.CommonMsg.ErrorResp.class, com.su.msg.CommonMsg.ErrorResp.Builder.class);
+                com.su.msg.CommonMsg.Error_.class, com.su.msg.CommonMsg.Error_.Builder.class);
       }
 
-      // Construct using com.su.msg.CommonMsg.ErrorResp.newBuilder()
+      // Construct using com.su.msg.CommonMsg.Error_.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -392,23 +392,23 @@ public final class CommonMsg {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.msg.CommonMsg.internal_static_ErrorResp_descriptor;
+        return com.su.msg.CommonMsg.internal_static_Error__descriptor;
       }
 
-      public com.su.msg.CommonMsg.ErrorResp getDefaultInstanceForType() {
-        return com.su.msg.CommonMsg.ErrorResp.getDefaultInstance();
+      public com.su.msg.CommonMsg.Error_ getDefaultInstanceForType() {
+        return com.su.msg.CommonMsg.Error_.getDefaultInstance();
       }
 
-      public com.su.msg.CommonMsg.ErrorResp build() {
-        com.su.msg.CommonMsg.ErrorResp result = buildPartial();
+      public com.su.msg.CommonMsg.Error_ build() {
+        com.su.msg.CommonMsg.Error_ result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.msg.CommonMsg.ErrorResp buildPartial() {
-        com.su.msg.CommonMsg.ErrorResp result = new com.su.msg.CommonMsg.ErrorResp(this);
+      public com.su.msg.CommonMsg.Error_ buildPartial() {
+        com.su.msg.CommonMsg.Error_ result = new com.su.msg.CommonMsg.Error_(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -452,16 +452,16 @@ public final class CommonMsg {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.msg.CommonMsg.ErrorResp) {
-          return mergeFrom((com.su.msg.CommonMsg.ErrorResp)other);
+        if (other instanceof com.su.msg.CommonMsg.Error_) {
+          return mergeFrom((com.su.msg.CommonMsg.Error_)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.msg.CommonMsg.ErrorResp other) {
-        if (other == com.su.msg.CommonMsg.ErrorResp.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.msg.CommonMsg.Error_ other) {
+        if (other == com.su.msg.CommonMsg.Error_.getDefaultInstance()) return this;
         if (other.hasErrorCode()) {
           setErrorCode(other.getErrorCode());
         }
@@ -488,11 +488,11 @@ public final class CommonMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.msg.CommonMsg.ErrorResp parsedMessage = null;
+        com.su.msg.CommonMsg.Error_ parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.msg.CommonMsg.ErrorResp) e.getUnfinishedMessage();
+          parsedMessage = (com.su.msg.CommonMsg.Error_) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -638,39 +638,39 @@ public final class CommonMsg {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:ErrorResp)
+      // @@protoc_insertion_point(builder_scope:Error_)
     }
 
-    // @@protoc_insertion_point(class_scope:ErrorResp)
-    private static final com.su.msg.CommonMsg.ErrorResp DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:Error_)
+    private static final com.su.msg.CommonMsg.Error_ DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.msg.CommonMsg.ErrorResp();
+      DEFAULT_INSTANCE = new com.su.msg.CommonMsg.Error_();
     }
 
-    public static com.su.msg.CommonMsg.ErrorResp getDefaultInstance() {
+    public static com.su.msg.CommonMsg.Error_ getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<ErrorResp>
-        PARSER = new com.google.protobuf.AbstractParser<ErrorResp>() {
-      public ErrorResp parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<Error_>
+        PARSER = new com.google.protobuf.AbstractParser<Error_>() {
+      public Error_ parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ErrorResp(input, extensionRegistry);
+          return new Error_(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ErrorResp> parser() {
+    public static com.google.protobuf.Parser<Error_> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ErrorResp> getParserForType() {
+    public com.google.protobuf.Parser<Error_> getParserForType() {
       return PARSER;
     }
 
-    public com.su.msg.CommonMsg.ErrorResp getDefaultInstanceForType() {
+    public com.su.msg.CommonMsg.Error_ getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1412,10 +1412,10 @@ public final class CommonMsg {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ErrorResp_descriptor;
+    internal_static_Error__descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ErrorResp_fieldAccessorTable;
+      internal_static_Error__fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_CMD_descriptor;
   private static final 
@@ -1430,10 +1430,10 @@ public final class CommonMsg {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Common.proto\"2\n\tErrorResp\022\021\n\terrorCode" +
-      "\030\001 \001(\005\022\022\n\nparameters\030\002 \003(\t\">\n\003CMD\022\013\n\003cmd" +
-      "\030\001 \001(\005\022\014\n\004type\030\002 \001(\005\022\r\n\005sysId\030\003 \001(\005\022\r\n\005c" +
-      "ount\030\004 \001(\005B\031\n\ncom.su.msgB\tCommonMsgH\001"
+      "\n\014Common.proto\"/\n\006Error_\022\021\n\terrorCode\030\001 " +
+      "\001(\005\022\022\n\nparameters\030\002 \003(\t\">\n\003CMD\022\013\n\003cmd\030\001 " +
+      "\001(\005\022\014\n\004type\030\002 \001(\005\022\r\n\005sysId\030\003 \001(\005\022\r\n\005coun" +
+      "t\030\004 \001(\005B\031\n\ncom.su.msgB\tCommonMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1447,11 +1447,11 @@ public final class CommonMsg {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_ErrorResp_descriptor =
+    internal_static_Error__descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_ErrorResp_fieldAccessorTable = new
+    internal_static_Error__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ErrorResp_descriptor,
+        internal_static_Error__descriptor,
         new java.lang.String[] { "ErrorCode", "Parameters", });
     internal_static_CMD_descriptor =
       getDescriptor().getMessageTypes().get(1);

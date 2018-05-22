@@ -13,7 +13,7 @@ import com.su.common.mq.DataOperator;
  */
 @Component
 public class TransactionManager {
-
+	
 	private ThreadLocal<TransactionData> threadLocal = new ThreadLocal<>();
 
 	@Autowired

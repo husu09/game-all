@@ -38,14 +38,18 @@ public class ActionScan {
 					boolean mustLogin = method.getAnnotation(Action.class).mustLogin();
 					Parameter parameter = method.getParameters()[1];
 					String messageName = parameter.getType().getSimpleName();
+					System.out.println(messageName);
 					if (!protoContext.getMessageLiteMap().containsKey(messageName)) {
 						logger.error("action message is not fined {}", messageName);
+						continue;
 					}
-					if (!messageName.endsWith("Req")) {
+					if (messageName.endsWith("_") || messageName.startsWith("_")) {
 						logger.error("action message is not request {}", messageName);
+						continue;
 					}
 					if (actionContext.getActionMetaMap().containsKey(messageName)) {
 						logger.error("repeat action message {}", messageName);
+						continue;
 					}
 					actionContext.getActionMetaMap().put(messageName, new ActionMeta(mustLogin, bean, method));
 				}

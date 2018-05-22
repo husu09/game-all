@@ -5,7 +5,7 @@ option java_package = "com.su.msg";
 option java_outer_classname = "CommonMsg";
 
 // 错误提示
-message ErrorResp{
+message Error_{
  	optional int32 errorCode = 1;
  	repeated string parameters  = 2;
 }

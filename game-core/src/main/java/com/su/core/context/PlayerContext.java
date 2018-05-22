@@ -6,7 +6,7 @@ import com.su.common.po.Player;
 import com.su.common.po.PlayerDetail;
 import com.su.core.akka.PlayerActor;
 import com.su.core.netty.NettyServerHandler;
-import com.su.msg.CommonMsg.ErrorResp;
+import com.su.msg.CommonMsg.Error_;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -23,8 +23,9 @@ public class PlayerContext {
 	
 	private PlayerDetail playerDetail;
 
-	public void handleLogin(Player player) {
+	public void handleLogin(Player player, PlayerDetail playerDetail) {
 		this.player = player;
+		this.playerDetail = playerDetail;
 		ctx.channel().attr(NettyServerHandler.PLAYER_CONTEXT_KEY).set(this);
 	}
 
@@ -43,7 +44,7 @@ public class PlayerContext {
 	 */
 	public void sendError(int errCode, Object... parameters) {
 
-		ErrorResp.Builder builder = ErrorResp.newBuilder().setErrorCode(errCode);
+		Error_.Builder builder = Error_.newBuilder().setErrorCode(errCode);
 		for (Object o : parameters) {
 			builder.addParameters(o.toString());
 		}
@@ -52,7 +53,7 @@ public class PlayerContext {
 
 	public static void sendError(ChannelHandlerContext ctx, int errCode, Object... parameters) {
 
-		ErrorResp.Builder builder = ErrorResp.newBuilder().setErrorCode(errCode);
+		Error_.Builder builder = Error_.newBuilder().setErrorCode(errCode);
 		for (Object o : parameters) {
 			builder.addParameters(o.toString());
 		}

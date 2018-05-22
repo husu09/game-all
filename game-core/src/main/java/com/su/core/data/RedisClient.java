@@ -119,6 +119,8 @@ public class RedisClient {
 		try {
 			jedis = getResource();
 			value = jedis.hget(key, field);
+			if (value.equals("value"))
+				value = null;
 		} finally {
 			returnResource(jedis);
 		}

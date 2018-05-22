@@ -195,7 +195,7 @@ public class ClientContext {
 	public void showMessage(MessageLite messageLite) {
 		try {
 			String jsonStr = JsonFormat.printer().includingDefaultValueFields().print((MessageOrBuilder) messageLite);
-			showMessage(jsonStr);
+			showMessage(messageLite.getClass().getSimpleName() + jsonStr + "\n");
 		} catch (InvalidProtocolBufferException e) {
 			e.printStackTrace();
 		}

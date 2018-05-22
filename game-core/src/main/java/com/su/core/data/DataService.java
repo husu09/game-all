@@ -18,7 +18,7 @@ public class DataService {
 	@Autowired
 	private RedisService redisService;
 	@Autowired
-	private MemoryCacheService memoryService;	
+	private MemoryCacheService memoryService;
 	@Autowired
 	private IDGenerator idGenerator;
 	@Autowired
@@ -147,21 +147,20 @@ public class DataService {
 		T t = null;
 		boolean ismc = false;
 		boolean isrc = false;
-		boolean flag = false;
 		if (ismc = CacheUtil.isMemoryCache(c))
 			t = memoryService.get(c, id);
-		if (t == null && (isrc = CacheUtil.isRedisCache(t)))
+		if (t == null && (isrc = CacheUtil.isRedisCache(c)))
 			t = redisService.get(c, id);
 		if (t == null) {
 			t = dataRmiService.get(c, id);
-			flag = true;
-			transactionManager.addCache(t);
-			if (ismc)
-				memoryService.saveOrUpdate(t);
-			if (isrc)
-				redisService.saveOrUpdate(t);
+			if (t != null) {
+				if (ismc)
+					memoryService.saveOrUpdate(t);
+				if (isrc)
+					redisService.saveOrUpdate(t);
+			}
 		}
-		if (!flag)
+		if (t != null)
 			transactionManager.addCache(t);
 		return t;
 	}
@@ -198,7 +197,7 @@ public class DataService {
 			transactionManager.addCache(ts);
 		return ts;
 	}
-	
+
 	public <T> List<T> list(Class<T> c) {
 		List<T> ts = dataRmiService.list(c);
 		transactionManager.addCache(ts);
@@ -241,7 +240,7 @@ public class DataService {
 			transactionManager.addCache(ts);
 		return ts;
 	}
-	
+
 	public <T> List<T> list(Class<T> c, int first, int max) {
 		List<T> ts = dataRmiService.list(c, first, max);
 		transactionManager.addCache(ts);

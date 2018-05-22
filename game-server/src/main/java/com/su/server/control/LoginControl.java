@@ -10,7 +10,7 @@ import com.su.common.util.StringUtil;
 import com.su.core.action.Action;
 import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
-import com.su.core.event.GameEventDispatcher;
+import com.su.core.data.DataService;
 import com.su.msg.LoginMsg.Login;
 import com.su.msg.LoginMsg.Login_;
 import com.su.server.service.LoginService;
@@ -31,7 +31,7 @@ public class LoginControl {
 	private PlayerService playerService;
 
 	@Autowired
-	private GameEventDispatcher gameEventDispatcher;
+	private DataService dataService;
 
 	/**
 	 * 登录
@@ -53,17 +53,19 @@ public class LoginControl {
 			loginService.addIdCacheByName(req.getAccount(), playerId);
 		}
 		if (playerId == 0) {
-			playerContext.sendError(10002);
+			playerContext.sendError(20002);
 			return;
 		}
 		Player player = playerService.getPlayerById(playerId);
 		if (player == null) {
-			playerContext.sendError(10001);
+			playerContext.sendError(20001);
 			return;
 		}
-		playerContext.handleLogin(player);
+		playerContext.handleLogin(player, null);
 		gameContext.getPlayerContextMap().put(player.getId(), playerContext);
-		gameEventDispatcher.login(playerContext);
+		// 登录事件
+		playerContext.getActor().login(playerContext);
+
 		Login_.Builder resp = Login_.newBuilder();
 		resp.setPlayer(playerService.serializePlayer(player));
 		playerContext.write(resp);

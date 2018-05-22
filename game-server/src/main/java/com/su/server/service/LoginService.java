@@ -32,6 +32,9 @@ public class LoginService{
 	 * 通过名字获取id
 	 */
 	public long getIdCacheByName(String name) {
+		String value = redisClient.hget(RedisKey.PLAYER_NAME_ID, name);
+		if (value == null)
+			return 0;
 		return Long.parseLong(redisClient.hget(RedisKey.PLAYER_NAME_ID, name));
 	}
 

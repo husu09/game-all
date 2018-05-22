@@ -39,7 +39,7 @@ public class ComboBoxHandler implements ActionListener {
 			msgPanel.removeAll();
 			for (MessageLite messageLite : messageLiteList) {
 				String msgName = messageLite.getClass().getSimpleName();
-				if (msgName.endsWith("_") || msgName.equals("Login"))
+				if (msgName.startsWith("_") || msgName.endsWith("_") || msgName.equals("Login"))
 					continue;
 				JButton tB = new JButton(msgName);
 				tB.setPreferredSize(new Dimension(180, 25));

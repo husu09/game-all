@@ -18,6 +18,11 @@ public interface PlayerActor {
 	public void logout(PlayerContext playerContext);
 	
 	/**
+	 * 登陆
+	 * */
+	public void login(PlayerContext playerContext);
+	
+	/**
 	 * 检测刷新
 	 * */
 	public void checkRefresh(PlayerContext playerContext);
