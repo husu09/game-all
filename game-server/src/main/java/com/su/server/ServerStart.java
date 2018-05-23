@@ -75,6 +75,7 @@ public class ServerStart {
 				break;
 			}
 		}
+		
 		sc.close();
 		System.out.println("==============================关闭服务==============================");
 	}
