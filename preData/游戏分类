@@ -1,6 +1,0 @@
-{"baseScore":10,"id":1,"initTableNum":200,"maxBean":10000,"miniBean":100,"open":true,"rankingAddition":0,"siteMode":1,"siteType":1}
-{"baseScore":20,"id":2,"initTableNum":100,"maxBean":10000,"miniBean":100,"open":true,"rankingAddition":0,"siteMode":1,"siteType":1}
-{"baseScore":30,"id":3,"initTableNum":50,"maxBean":10000,"miniBean":100,"open":true,"rankingAddition":0,"siteMode":1,"siteType":1}
-{"baseScore":10,"id":4,"initTableNum":200,"maxBean":10000,"miniBean":100,"open":true,"rankingAddition":10,"siteMode":1,"siteType":2}
-{"baseScore":20,"id":5,"initTableNum":100,"maxBean":10000,"miniBean":100,"open":true,"rankingAddition":20,"siteMode":1,"siteType":2}
-{"baseScore":30,"id":6,"initTableNum":50,"maxBean":10000,"miniBean":100,"open":true,"rankingAddition":30,"siteMode":1,"siteType":2}

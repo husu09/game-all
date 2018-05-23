@@ -2,7 +2,7 @@ package com.su.excel.config;
 
 import com.su.common.obj.Item;
 
-public class BagConfig {
+public class BagCo {
 	private int id;
 	/**
 	 * 类型

@@ -6,7 +6,7 @@ import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.su.core.context.PlayerContext;
-import com.su.excel.config.SiteConfig;
+import com.su.excel.config.SiteCo;
 
 /**
  * 场所
@@ -36,9 +36,9 @@ public class Site {
 	/**
 	 * 配置
 	 */
-	private SiteConfig siteCo;
+	private SiteCo siteCo;
 
-	public Site(SiteConfig siteCo) {
+	public Site(SiteCo siteCo) {
 		this.siteCo = siteCo;
 		init();
 	}

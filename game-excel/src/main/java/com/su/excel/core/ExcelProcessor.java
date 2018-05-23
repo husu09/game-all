@@ -22,21 +22,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.su.excel.mapper.ParameterMapper;
+
 /**
  * 预处理excel数据，验证数据完整性后保存
  */
 @Component
 public class ExcelProcessor {
+	private static final Logger logger = LoggerFactory.getLogger(ExcelProcessor.class);
 
 	@Autowired
 	private ExcelContext excelContext;
+
+	@Autowired
+	private ParameterMapper parameterMapper;
 
 	@Value("${excel.dir}")
 	private String dir;
 
 	public final static String preDataDir = System.getProperty("user.dir") + "/../preData/";
-
-	private static final Logger logger = LoggerFactory.getLogger(ExcelProcessor.class);
 
 	private DataFormatter formatter = new DataFormatter();
 
@@ -61,8 +65,8 @@ public class ExcelProcessor {
 		for (File f : file.listFiles()) {
 			if (f.getName().endsWith("xlsx")) {
 				String mapName = f.getName().substring(0, f.getName().lastIndexOf("."));
-				ExcelMapper<?> map = excelContext.getExcelMappers().get(mapName);
-				if (map == null) {
+				ExcelMapper<?> mapper = excelContext.getMapperMap().get(mapName);
+				if (mapper == null) {
 					logger.error("not find mapper {}", mapName);
 					continue;
 				}
@@ -97,17 +101,13 @@ public class ExcelProcessor {
 							rowData.put(title.get(i), value);
 						}
 						if (rowData != null) {
-							Object rowObject = map.map(rowData);
+							Object rowObject = mapper.map(rowData);
 							if (rowObject == null)
 								continue;
-							excelContext.addPreData(mapName, rowObject);
+							mapper.add(rowObject);
 						}
 					}
-					if (excelContext.isEmpty(mapName)) {
-						logger.error("{} is empty", mapName);
-						continue;
-					}
-					map.finishLoad();// 加载完当前表
+					mapper.finishLoad();// 加载完当前表
 					fis.close();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -179,21 +179,23 @@ public class ExcelProcessor {
 		}
 		File[] files = dir.listFiles();
 		for (File file : files) {
-			if (!file.isFile() || !excelContext.getExcelMappers().containsKey(file.getName()))
+			if (!file.isFile() || !excelContext.getMapperMap().containsKey(file.getName()))
 				continue;
-			ExcelMapper<?> map = excelContext.getExcelMappers().get(file.getName());
+			ExcelMapper<?> mapper = excelContext.getMapperMap().get(file.getName());
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				String line = reader.readLine();
 				while (line != null) {
-					map.add(line);
+					mapper.add(line);
 					line = reader.readLine();
 				}
 				reader.close();
+				logger.info("{}：{}", mapper.getName(), mapper.all().size());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		parameterMapper.initConst();
 		logger.info("加载Excel配置成功");
 	}
 

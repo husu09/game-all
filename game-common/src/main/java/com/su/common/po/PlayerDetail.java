@@ -1,5 +1,6 @@
 package com.su.common.po;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,13 +23,16 @@ public class PlayerDetail {
 	public long getId() {
 		return id;
 	}
-
+	
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public List<Grid> getBagGrid() {
-		return JSON.parseArray(bagData, Grid.class);
+		List<Grid> gridList = JSON.parseArray(bagData, Grid.class);
+		if (gridList == null)
+			gridList = new ArrayList<>();
+		return gridList;
 	}
 	
 	public void updateBagData() {

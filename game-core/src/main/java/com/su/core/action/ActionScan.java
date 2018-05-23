@@ -38,7 +38,6 @@ public class ActionScan {
 					boolean mustLogin = method.getAnnotation(Action.class).mustLogin();
 					Parameter parameter = method.getParameters()[1];
 					String messageName = parameter.getType().getSimpleName();
-					System.out.println(messageName);
 					if (!protoContext.getMessageLiteMap().containsKey(messageName)) {
 						logger.error("action message is not fined {}", messageName);
 						continue;

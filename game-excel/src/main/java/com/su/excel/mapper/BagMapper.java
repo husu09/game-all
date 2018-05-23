@@ -1,15 +1,20 @@
-package com.su.excel.map;
+package com.su.excel.mapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.su.common.constant.EffectConst;
+import com.su.common.util.ParseUtil;
 import com.su.common.util.TimeUtil;
-import com.su.excel.config.BagConfig;
+import com.su.excel.config.BagCo;
 import com.su.excel.core.AbstractExcelMapper;
 import com.su.excel.core.RowData;
 
 @Component
-public class BagConf extends AbstractExcelMapper<BagConfig> {
+public class BagMapper extends AbstractExcelMapper<BagCo> {
+
+	@Autowired
+	private ParameterMapper parameterMapper;
 
 	@Override
 	public String getName() {
@@ -17,8 +22,8 @@ public class BagConf extends AbstractExcelMapper<BagConfig> {
 	}
 
 	@Override
-	public BagConfig map(RowData rowData) {
-		BagConfig temp = new BagConfig();
+	public BagCo map(RowData rowData) {
+		BagCo temp = new BagCo();
 		temp.setId(rowData.getInt("id"));
 		temp.setType(rowData.getInt("lx"));
 		temp.setQuality(rowData.getInt("pz"));
@@ -29,7 +34,9 @@ public class BagConf extends AbstractExcelMapper<BagConfig> {
 			temp.setEffectItem(rowData.getItem("syxg"));
 		}
 		temp.setExpirationTime(rowData.getInt("yxq") * TimeUtil.ONE_DAY);
-		temp.setLimit(rowData.getInt("djsx"));
+		int limit = rowData.getInt("djsx");
+		limit = limit == 0 ? ParseUtil.getInt(parameterMapper.get(1001).getValue()) : limit;
+		temp.setLimit(limit);
 		return temp;
 	}
 

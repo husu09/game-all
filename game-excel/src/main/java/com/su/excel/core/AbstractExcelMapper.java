@@ -26,8 +26,8 @@ public abstract class AbstractExcelMapper<T> implements ExcelMapper<T> {
 	private Map<Integer, T> storageMap = new HashMap<>();
 
 	@PostConstruct
-	public void init() {
-		excelContext.getExcelMappers().put(getName(), this);
+	protected void init() {
+		excelContext.getMapperMap().put(getName(), this);
 	}
 
 	@Override
@@ -62,10 +62,24 @@ public abstract class AbstractExcelMapper<T> implements ExcelMapper<T> {
 		try {
 			Field field = t.getClass().getDeclaredField("id");
 			field.setAccessible(true);
-			storageMap.put(field.getInt(t), t);
+			int id = field.getInt(t);
+			storageMap.put(id, t);
 		} catch (Exception e) {
-			throw new RuntimeException(t.getClass() + " 没有id字段");
+			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void add(Object obj) {
+		try {
+			Field field = obj.getClass().getDeclaredField("id");
+			field.setAccessible(true);
+			int id = field.getInt(obj);
+			storageMap.put(id, (T) obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

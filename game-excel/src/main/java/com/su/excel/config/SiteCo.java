@@ -1,6 +1,6 @@
 package com.su.excel.config;
 
-public class SiteConfig {
+public class SiteCo {
 	private int id;
 	/**
 	 * 类型

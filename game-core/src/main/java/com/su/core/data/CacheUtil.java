@@ -68,6 +68,7 @@ public class CacheUtil {
 					if (id != null)
 						return true;
 				} catch (Exception e) {
+					e.printStackTrace();
 					return false;
 				}
 			}

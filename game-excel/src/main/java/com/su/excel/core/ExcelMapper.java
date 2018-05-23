@@ -16,6 +16,10 @@ public interface ExcelMapper<T> {
 	 * 映射
 	 * */
 	public T map(RowData rowData);
+	/**
+	 * 添加配置数据
+	 * */
+	public void add(Object obj);
 	
 	/**
 	 * 加载完当前配置表时调用
@@ -41,4 +45,5 @@ public interface ExcelMapper<T> {
 	 * 添加配置数据
 	 * */
 	public void add(String value);
+
 }

@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.su.common.obj.Grid;
 import com.su.common.obj.Item;
+import com.su.common.po.PlayerDetail;
 import com.su.common.util.TimeUtil;
 import com.su.core.context.PlayerContext;
 import com.su.core.data.DataService;
-import com.su.excel.config.BagConfig;
-import com.su.excel.map.BagConf;
+import com.su.excel.config.BagCo;
+import com.su.excel.mapper.BagMapper;
 import com.su.msg.BagMsg.DeleteItem_;
 import com.su.msg.BagMsg.UpdateItem_;
 import com.su.msg.BagMsg._Grid;
@@ -24,9 +25,11 @@ public class BagService {
 	private Logger logger = LoggerFactory.getLogger(BagService.class);
 
 	@Autowired
-	private BagConf bagConf;
+	private BagMapper bagConf;
 	@Autowired
 	private LogServer logServer;
+	@Autowired
+	private PlayerService playerService;
 	@Autowired
 	private DataService dataService;
 
@@ -34,13 +37,14 @@ public class BagService {
 	 * 添加物品
 	 */
 	public boolean addItem(PlayerContext playerContext, Item item, int reason) {
+		PlayerDetail playerDetail  = playerService.getPlayerDetail(playerContext.getPlayerId());
 		// 排序规则：类型小的 < 品质小 < id小
-		BagConfig bagCo = bagConf.get(item.getSysId());
+		BagCo bagCo = bagConf.get(item.getSysId());
 		if (bagCo == null) {
 			logger.error("找不到对应的配置 {}", item.getSysId());
 			return false;
 		}
-		List<Grid> bagGrid = playerContext.getPlayerDetail().getBagGrid();
+		List<Grid> bagGrid = playerDetail.getBagGrid();
 		for (int i = 0; i < bagGrid.size(); i++) {
 			// 全部已添加
 			if (item.getCount() == 0)
@@ -68,7 +72,7 @@ public class BagService {
 				continue;
 			}
 			if (grid.getType() == item.getType()) {
-				BagConfig currBagCo = bagConf.get(grid.getSysId());
+				BagCo currBagCo = bagConf.get(grid.getSysId());
 				if (currBagCo.getQuality() > bagCo.getQuality()) {
 					createGrid(playerContext, bagGrid, i, item, bagCo);
 				} else if (currBagCo.getQuality() == bagCo.getQuality() && currBagCo.getId() > bagCo.getId()) {
@@ -82,6 +86,8 @@ public class BagService {
 		if (item.getCount() > 0) {
 			createGrid(playerContext, bagGrid, bagGrid.size(), item, bagCo);
 		}
+		playerDetail.updateBagData();
+		dataService.update(playerDetail);
 		// 流水
 		logServer.addResourceLog(reason, item.getCount(), -1);
 		return true;
@@ -91,8 +97,9 @@ public class BagService {
 	 * 扣除物品
 	 */
 	public boolean eddItem(PlayerContext playerContext, Item item, int reason) {
+		PlayerDetail playerDetail  = playerService.getPlayerDetail(playerContext.getPlayerId());
 		int haveCount = 0;
-		List<Grid> bagGrid = playerContext.getPlayerDetail().getBagGrid();
+		List<Grid> bagGrid = playerDetail.getBagGrid();
 		for (int i = 0; i < bagGrid.size(); i++) {
 			Grid grid = bagGrid.get(i);
 			if (grid.getType() > item.getType())
@@ -131,6 +138,8 @@ public class BagService {
 				}
 			}
 		}
+		playerDetail.updateBagData();
+		dataService.update(playerDetail);
 		// 流水
 		logServer.addResourceLog(reason, item.getCount(), haveCount - item.getCount());
 		return true;
@@ -139,7 +148,7 @@ public class BagService {
 	/**
 	 * 创建新格子
 	 */
-	private void createGrid(PlayerContext playerContext, List<Grid> bagGrid, int index, Item item, BagConfig bagCo) {
+	private void createGrid(PlayerContext playerContext, List<Grid> bagGrid, int index, Item item, BagCo bagCo) {
 		// 全部已添加
 		if (item.getCount() == 0)
 			return;

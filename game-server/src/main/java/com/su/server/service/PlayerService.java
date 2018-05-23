@@ -24,6 +24,9 @@ public class PlayerService {
 		return dataService.get(Player.class, id);
 	}
 	
+	/**
+	 * 获取 playerDetail 对象
+	 * */
 	public PlayerDetail getPlayerDetail(long id) {
 		PlayerDetail playerDetail = dataService.get(PlayerDetail.class, id);
 		if (playerDetail == null) {
@@ -31,8 +34,9 @@ public class PlayerService {
 			playerDetail.setId(id);
 			dataService.save(playerDetail);
 		}
+		return playerDetail;
 	}
-	
+
 	public _Player serializePlayer(Player player) {
 		_Player.Builder builder = _Player.newBuilder();
 		builder.setId(player.getId());

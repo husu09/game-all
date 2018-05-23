@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.su.core.event.GameEventAdapter;
-import com.su.excel.map.SiteConf;
+import com.su.excel.mapper.SiteMapper;
 import com.su.server.obj.play.Site;
 
 @Service
@@ -19,7 +19,7 @@ public class SiteService extends GameEventAdapter {
 	private Map<Integer, Site> siteMap = new HashMap<>();
 
 	@Autowired
-	private SiteConf siteConf;
+	private SiteMapper siteConf;
 
 	@Override
 	public void serverStart() {

@@ -33,12 +33,13 @@ public class IDGenerator {
 	private Map<String, AtomicLong> idMap = new HashMap<>();
 
 	public long next(Object o) {
-		if (CacheUtil.isPersistent(o)){
-			return ;
+		long id = getId(o);
+		if (id != 0) {
+			return id;
 		}
 		String parentKey = CacheUtil.getParentKey(o);
 		AtomicLong atomicLong = idMap.get(parentKey);
-		long id = atomicLong.incrementAndGet();
+		id = atomicLong.incrementAndGet();
 		setId(o, id);
 		return id;
 	}
@@ -69,33 +70,33 @@ public class IDGenerator {
 		if (!flag)
 			logger.info("对象没有id属性{}", o);
 	}
-	
+
 	/**
 	 * 获取 id
-	 * */
+	 */
 	public long getId(Object o) {
-		if (o == null) return 0;
+		long id = 0;
+		if (o == null)
+			return id;
 		Field[] fields = o.getClass().getDeclaredFields();
 		for (Field f : fields) {
 			if (f.isAnnotationPresent(Id.class)) {
 				try {
 					f.setAccessible(true);
-					Object id = f.get(o);
-					if (id != null)
-						return (long) id;
+					id = (long) f.get(o);
 				} catch (Exception e) {
-					return false;
+					e.printStackTrace();
 				}
 			}
 		}
-		return false;
+		return id;
 	}
 
 	public void init() {
 		scan(packName);
 		logger.info("id生成器初始化成功 {}", packName);
 	}
-	
+
 	public void scan(String packName) {
 		String packPath = packName.replace(".", "/");
 		String realPath = IDGenerator.class.getClassLoader().getResource(packPath).getPath();
