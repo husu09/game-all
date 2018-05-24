@@ -28,5 +28,3 @@ message DeleteItem_ {
 message UpdateItem_ {
 	optional _Grid grid = 1;
 }
-
-

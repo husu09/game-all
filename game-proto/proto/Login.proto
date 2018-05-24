@@ -5,6 +5,7 @@ option java_package = "com.su.msg";
 option java_outer_classname = "LoginMsg";
 
 import "Player.proto";
+import "Bag.proto";
 
 // 登录
 message Login{
@@ -13,5 +14,6 @@ message Login{
 }
 message Login_{
 	optional _Player player = 1;	// 玩家数据
+	repeated _Grid grid = 2;	// 背包数据
 }
 

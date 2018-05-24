@@ -59,11 +59,11 @@ public class LoginControl {
 		}
 		playerContext.handleLogin(player.getId());
 		gameContext.getPlayerContextMap().put(player.getId(), playerContext);
-		// 登录事件
-		playerContext.getActor().login(playerContext);
-
+		
 		Login_.Builder resp = Login_.newBuilder();
 		resp.setPlayer(playerService.serializePlayer(player));
+		// 登录事件
+		playerContext.getActor().login(playerContext, resp);
 		playerContext.write(resp);
 
 		loginService.addPlayerCache(player);

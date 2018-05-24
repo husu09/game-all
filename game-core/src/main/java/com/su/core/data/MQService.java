@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.su.common.mq.DataOperator;
 import com.su.common.mq.MQMessage;
+import com.su.common.util.CustomConvert;
 
 /**
  * mq 服务对象
@@ -22,7 +23,7 @@ public class MQService {
 		MQMessage mqMessage = new MQMessage();
 		mqMessage.setClassName(t.getClass().getCanonicalName());
 		mqMessage.setMqOperator(DataOperator.SAVE);
-		mqMessage.setData(JSON.toJSONString(t));
+		mqMessage.setData(CustomConvert.toJSONString(t));
 		mqClient.produce(JSON.toJSONString(mqMessage));
 	}
 
@@ -43,7 +44,7 @@ public class MQService {
 		MQMessage mqMessage = new MQMessage();
 		mqMessage.setClassName(t.getClass().getCanonicalName());
 		mqMessage.setMqOperator(DataOperator.UPDATE);
-		mqMessage.setData(JSON.toJSONString(t));
+		mqMessage.setData(CustomConvert.toJSONString(t));
 		mqClient.produce(JSON.toJSONString(mqMessage));
 	}
 
@@ -63,7 +64,7 @@ public class MQService {
 		MQMessage mqMessage = new MQMessage();
 		mqMessage.setClassName(t.getClass().getCanonicalName());
 		mqMessage.setMqOperator(DataOperator.DELETE);
-		mqMessage.setData(JSON.toJSONString(t));
+		mqMessage.setData(CustomConvert.toJSONString(t));
 		mqClient.produce(JSON.toJSONString(mqMessage));
 	}
 
@@ -84,7 +85,7 @@ public class MQService {
 		MQMessage mqMessage = new MQMessage();
 		mqMessage.setClassName(t.getClass().getCanonicalName());
 		mqMessage.setMqOperator(dataOperator);
-		mqMessage.setData(JSON.toJSONString(t));
+		mqMessage.setData(CustomConvert.toJSONString(t));
 		mqClient.produce(JSON.toJSONString(mqMessage));
 	}
 	

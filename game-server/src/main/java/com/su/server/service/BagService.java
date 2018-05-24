@@ -13,14 +13,16 @@ import com.su.common.po.PlayerDetail;
 import com.su.common.util.TimeUtil;
 import com.su.core.context.PlayerContext;
 import com.su.core.data.DataService;
+import com.su.core.event.GameEventAdapter;
 import com.su.excel.config.BagCo;
 import com.su.excel.mapper.BagMapper;
 import com.su.msg.BagMsg.DeleteItem_;
 import com.su.msg.BagMsg.UpdateItem_;
 import com.su.msg.BagMsg._Grid;
+import com.su.msg.LoginMsg.Login_.Builder;
 
 @Service
-public class BagService {
+public class BagService extends GameEventAdapter {
 
 	private Logger logger = LoggerFactory.getLogger(BagService.class);
 
@@ -59,7 +61,7 @@ public class BagService {
 				}
 				int addCount = item.getCount();
 				if (item.getCount() + grid.getCount() > bagCo.getLimit()) {
-					addCount = item.getCount() + grid.getCount() - bagCo.getLimit();
+					addCount  = bagCo.getLimit() - grid.getCount();
 					item.setCount(item.getCount() - addCount);
 				} else {
 					item.setCount(0);
@@ -184,4 +186,15 @@ public class BagService {
 		builder.setEndTime(grid.getEndTime());
 		return builder.build();
 	}
+
+	@Override
+	public void login(PlayerContext playerContext, Builder builder) {
+		PlayerDetail playerDetail = playerService.getPlayerDetail(playerContext.getPlayerId());
+		List<Grid> gridList = playerDetail.getGridList();
+		for (int i = 0; i < gridList.size(); i ++ ) {
+			builder.addGrid(serializeGrid(i, gridList.get(i)));
+		}
+	}
+	
+	
 }

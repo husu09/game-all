@@ -23,6 +23,10 @@ public class PlayerDetail {
 	@Transient
 	private List<Grid> gridList;
 	
+	public PlayerDetail() {
+		
+	}
+	
 	public PlayerDetail(long id){
 		this.id = id;
 	}

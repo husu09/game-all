@@ -855,6 +855,50 @@ public final class LoginMsg {
      * <code>optional ._Player player = 1;</code>
      */
     com.su.msg.PlayerMsg._PlayerOrBuilder getPlayerOrBuilder();
+
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    java.util.List<com.su.msg.BagMsg._Grid> 
+        getGridList();
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    com.su.msg.BagMsg._Grid getGrid(int index);
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    int getGridCount();
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    java.util.List<? extends com.su.msg.BagMsg._GridOrBuilder> 
+        getGridOrBuilderList();
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    com.su.msg.BagMsg._GridOrBuilder getGridOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code Login_}
@@ -868,6 +912,7 @@ public final class LoginMsg {
       super(builder);
     }
     private Login_() {
+      grid_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -911,6 +956,15 @@ public final class LoginMsg {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                grid_ = new java.util.ArrayList<com.su.msg.BagMsg._Grid>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              grid_.add(
+                  input.readMessage(com.su.msg.BagMsg._Grid.PARSER, extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -919,6 +973,9 @@ public final class LoginMsg {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          grid_ = java.util.Collections.unmodifiableList(grid_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -969,6 +1026,61 @@ public final class LoginMsg {
       return player_ == null ? com.su.msg.PlayerMsg._Player.getDefaultInstance() : player_;
     }
 
+    public static final int GRID_FIELD_NUMBER = 2;
+    private java.util.List<com.su.msg.BagMsg._Grid> grid_;
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    public java.util.List<com.su.msg.BagMsg._Grid> getGridList() {
+      return grid_;
+    }
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    public java.util.List<? extends com.su.msg.BagMsg._GridOrBuilder> 
+        getGridOrBuilderList() {
+      return grid_;
+    }
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    public int getGridCount() {
+      return grid_.size();
+    }
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    public com.su.msg.BagMsg._Grid getGrid(int index) {
+      return grid_.get(index);
+    }
+    /**
+     * <pre>
+     * 背包数据
+     * </pre>
+     *
+     * <code>repeated ._Grid grid = 2;</code>
+     */
+    public com.su.msg.BagMsg._GridOrBuilder getGridOrBuilder(
+        int index) {
+      return grid_.get(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -984,6 +1096,9 @@ public final class LoginMsg {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, getPlayer());
       }
+      for (int i = 0; i < grid_.size(); i++) {
+        output.writeMessage(2, grid_.get(i));
+      }
       unknownFields.writeTo(output);
     }
 
@@ -995,6 +1110,10 @@ public final class LoginMsg {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getPlayer());
+      }
+      for (int i = 0; i < grid_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, grid_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1018,6 +1137,8 @@ public final class LoginMsg {
         result = result && getPlayer()
             .equals(other.getPlayer());
       }
+      result = result && getGridList()
+          .equals(other.getGridList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1032,6 +1153,10 @@ public final class LoginMsg {
       if (hasPlayer()) {
         hash = (37 * hash) + PLAYER_FIELD_NUMBER;
         hash = (53 * hash) + getPlayer().hashCode();
+      }
+      if (getGridCount() > 0) {
+        hash = (37 * hash) + GRID_FIELD_NUMBER;
+        hash = (53 * hash) + getGridList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1148,6 +1273,7 @@ public final class LoginMsg {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getPlayerFieldBuilder();
+          getGridFieldBuilder();
         }
       }
       public Builder clear() {
@@ -1158,6 +1284,12 @@ public final class LoginMsg {
           playerBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        if (gridBuilder_ == null) {
+          grid_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          gridBuilder_.clear();
+        }
         return this;
       }
 
@@ -1189,6 +1321,15 @@ public final class LoginMsg {
           result.player_ = player_;
         } else {
           result.player_ = playerBuilder_.build();
+        }
+        if (gridBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            grid_ = java.util.Collections.unmodifiableList(grid_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.grid_ = grid_;
+        } else {
+          result.grid_ = gridBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1234,6 +1375,32 @@ public final class LoginMsg {
         if (other == com.su.msg.LoginMsg.Login_.getDefaultInstance()) return this;
         if (other.hasPlayer()) {
           mergePlayer(other.getPlayer());
+        }
+        if (gridBuilder_ == null) {
+          if (!other.grid_.isEmpty()) {
+            if (grid_.isEmpty()) {
+              grid_ = other.grid_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureGridIsMutable();
+              grid_.addAll(other.grid_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.grid_.isEmpty()) {
+            if (gridBuilder_.isEmpty()) {
+              gridBuilder_.dispose();
+              gridBuilder_ = null;
+              grid_ = other.grid_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              gridBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getGridFieldBuilder() : null;
+            } else {
+              gridBuilder_.addAllMessages(other.grid_);
+            }
+          }
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1416,6 +1583,318 @@ public final class LoginMsg {
         }
         return playerBuilder_;
       }
+
+      private java.util.List<com.su.msg.BagMsg._Grid> grid_ =
+        java.util.Collections.emptyList();
+      private void ensureGridIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          grid_ = new java.util.ArrayList<com.su.msg.BagMsg._Grid>(grid_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.msg.BagMsg._Grid, com.su.msg.BagMsg._Grid.Builder, com.su.msg.BagMsg._GridOrBuilder> gridBuilder_;
+
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public java.util.List<com.su.msg.BagMsg._Grid> getGridList() {
+        if (gridBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(grid_);
+        } else {
+          return gridBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public int getGridCount() {
+        if (gridBuilder_ == null) {
+          return grid_.size();
+        } else {
+          return gridBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public com.su.msg.BagMsg._Grid getGrid(int index) {
+        if (gridBuilder_ == null) {
+          return grid_.get(index);
+        } else {
+          return gridBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public Builder setGrid(
+          int index, com.su.msg.BagMsg._Grid value) {
+        if (gridBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGridIsMutable();
+          grid_.set(index, value);
+          onChanged();
+        } else {
+          gridBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public Builder setGrid(
+          int index, com.su.msg.BagMsg._Grid.Builder builderForValue) {
+        if (gridBuilder_ == null) {
+          ensureGridIsMutable();
+          grid_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          gridBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public Builder addGrid(com.su.msg.BagMsg._Grid value) {
+        if (gridBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGridIsMutable();
+          grid_.add(value);
+          onChanged();
+        } else {
+          gridBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public Builder addGrid(
+          int index, com.su.msg.BagMsg._Grid value) {
+        if (gridBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGridIsMutable();
+          grid_.add(index, value);
+          onChanged();
+        } else {
+          gridBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public Builder addGrid(
+          com.su.msg.BagMsg._Grid.Builder builderForValue) {
+        if (gridBuilder_ == null) {
+          ensureGridIsMutable();
+          grid_.add(builderForValue.build());
+          onChanged();
+        } else {
+          gridBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public Builder addGrid(
+          int index, com.su.msg.BagMsg._Grid.Builder builderForValue) {
+        if (gridBuilder_ == null) {
+          ensureGridIsMutable();
+          grid_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          gridBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public Builder addAllGrid(
+          java.lang.Iterable<? extends com.su.msg.BagMsg._Grid> values) {
+        if (gridBuilder_ == null) {
+          ensureGridIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, grid_);
+          onChanged();
+        } else {
+          gridBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public Builder clearGrid() {
+        if (gridBuilder_ == null) {
+          grid_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          gridBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public Builder removeGrid(int index) {
+        if (gridBuilder_ == null) {
+          ensureGridIsMutable();
+          grid_.remove(index);
+          onChanged();
+        } else {
+          gridBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public com.su.msg.BagMsg._Grid.Builder getGridBuilder(
+          int index) {
+        return getGridFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public com.su.msg.BagMsg._GridOrBuilder getGridOrBuilder(
+          int index) {
+        if (gridBuilder_ == null) {
+          return grid_.get(index);  } else {
+          return gridBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public java.util.List<? extends com.su.msg.BagMsg._GridOrBuilder> 
+           getGridOrBuilderList() {
+        if (gridBuilder_ != null) {
+          return gridBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(grid_);
+        }
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public com.su.msg.BagMsg._Grid.Builder addGridBuilder() {
+        return getGridFieldBuilder().addBuilder(
+            com.su.msg.BagMsg._Grid.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public com.su.msg.BagMsg._Grid.Builder addGridBuilder(
+          int index) {
+        return getGridFieldBuilder().addBuilder(
+            index, com.su.msg.BagMsg._Grid.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * 背包数据
+       * </pre>
+       *
+       * <code>repeated ._Grid grid = 2;</code>
+       */
+      public java.util.List<com.su.msg.BagMsg._Grid.Builder> 
+           getGridBuilderList() {
+        return getGridFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.msg.BagMsg._Grid, com.su.msg.BagMsg._Grid.Builder, com.su.msg.BagMsg._GridOrBuilder> 
+          getGridFieldBuilder() {
+        if (gridBuilder_ == null) {
+          gridBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.su.msg.BagMsg._Grid, com.su.msg.BagMsg._Grid.Builder, com.su.msg.BagMsg._GridOrBuilder>(
+                  grid_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          grid_ = null;
+        }
+        return gridBuilder_;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
@@ -1484,10 +1963,11 @@ public final class LoginMsg {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Login.proto\032\014Player.proto\"&\n\005Login\022\017\n\007" +
-      "account\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\"\"\n\006Login_\022\030\n" +
-      "\006player\030\001 \001(\0132\010._PlayerB\030\n\ncom.su.msgB\010L" +
-      "oginMsgH\001"
+      "\n\013Login.proto\032\014Player.proto\032\tBag.proto\"&" +
+      "\n\005Login\022\017\n\007account\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\"8" +
+      "\n\006Login_\022\030\n\006player\030\001 \001(\0132\010._Player\022\024\n\004gr" +
+      "id\030\002 \003(\0132\006._GridB\030\n\ncom.su.msgB\010LoginMsg" +
+      "H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1501,6 +1981,7 @@ public final class LoginMsg {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.su.msg.PlayerMsg.getDescriptor(),
+          com.su.msg.BagMsg.getDescriptor(),
         }, assigner);
     internal_static_Login_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -1513,8 +1994,9 @@ public final class LoginMsg {
     internal_static_Login__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Login__descriptor,
-        new java.lang.String[] { "Player", });
+        new java.lang.String[] { "Player", "Grid", });
     com.su.msg.PlayerMsg.getDescriptor();
+    com.su.msg.BagMsg.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

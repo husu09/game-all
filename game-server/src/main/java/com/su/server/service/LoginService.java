@@ -5,12 +5,15 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.su.common.po.Player;
+import com.su.core.context.PlayerContext;
 import com.su.core.data.RedisClient;
+import com.su.core.event.GameEventAdapter;
+import com.su.msg.LoginMsg.Login_;
 import com.su.server.constant.RedisKey;
 import com.su.server.obj.PlayerCoreData;
 
 @Service
-public class LoginService{
+public class LoginService extends GameEventAdapter{
 	@Autowired
 	private RedisClient redisClient;
 
@@ -62,4 +65,10 @@ public class LoginService{
 		return JSON.parseObject(value, PlayerCoreData.class);
 	}
 
+	@Override
+	public void login(PlayerContext playerContext, Login_.Builder builder) {
+		
+	}
+	
+	
 }

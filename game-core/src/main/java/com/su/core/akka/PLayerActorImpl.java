@@ -10,6 +10,7 @@ import com.su.core.action.ActionMeta;
 import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventDispatcher;
 import com.su.core.netty.NettyServerHandler;
+import com.su.msg.LoginMsg.Login_;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.Attribute;
@@ -67,8 +68,8 @@ public class PLayerActorImpl implements PlayerActor {
 	}
 
 	@Override
-	public void login(PlayerContext playerContext) {
-		gameEventDispatcher.login(playerContext);
+	public void login(PlayerContext playerContext, Login_.Builder builder) {
+		gameEventDispatcher.login(playerContext, builder);
 	}
 
 }

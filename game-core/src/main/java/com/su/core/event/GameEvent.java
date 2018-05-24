@@ -1,6 +1,7 @@
 package com.su.core.event;
 
 import com.su.core.context.PlayerContext;
+import com.su.msg.LoginMsg.Login_;
 
 public interface GameEvent {
 	/**
@@ -26,7 +27,7 @@ public interface GameEvent {
 	/**
 	 * 登录
 	 */
-	public void login(PlayerContext playerContext);
+	public void login(PlayerContext playerContext, Login_.Builder builder);
 
 	/**
 	 * 登出

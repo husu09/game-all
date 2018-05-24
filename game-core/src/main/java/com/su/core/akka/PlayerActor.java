@@ -2,6 +2,7 @@ package com.su.core.akka;
 
 import com.google.protobuf.MessageLite;
 import com.su.core.context.PlayerContext;
+import com.su.msg.LoginMsg.Login_;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -20,7 +21,7 @@ public interface PlayerActor {
 	/**
 	 * 登陆
 	 * */
-	public void login(PlayerContext playerContext);
+	public void login(PlayerContext playerContext, Login_.Builder builder);
 	
 	/**
 	 * 检测刷新

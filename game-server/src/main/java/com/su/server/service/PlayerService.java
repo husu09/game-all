@@ -5,11 +5,13 @@ import org.springframework.stereotype.Service;
 
 import com.su.common.po.Player;
 import com.su.common.po.PlayerDetail;
+import com.su.core.context.PlayerContext;
 import com.su.core.data.DataService;
+import com.su.core.event.GameEventAdapter;
 import com.su.msg.PlayerMsg._Player;
 
 @Service
-public class PlayerService {
+public class PlayerService extends GameEventAdapter{
 	@Autowired
 	private DataService dataService;
 
@@ -42,4 +44,10 @@ public class PlayerService {
 		builder.setName(player.getName());
 		return builder.build();
 	}
+
+	@Override
+	public void logout(PlayerContext playerContext) {
+	
+	}
+	
 }
