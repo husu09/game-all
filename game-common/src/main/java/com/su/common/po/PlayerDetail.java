@@ -15,13 +15,17 @@ public class PlayerDetail {
 	@Id
 	private long id;
 	/**
-	 * 用户id
-	 * */
-	private long playerId;
-	/**
 	 * 背包
 	 * */
 	private String bagData;
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	
 	public List<Grid> getBagGrid() {
 		return JSON.parseArray(bagData, Grid.class);
@@ -30,4 +34,5 @@ public class PlayerDetail {
 	public void updateBagData() {
 		bagData = JSON.toJSONString(bagData);
 	}
+	
 }

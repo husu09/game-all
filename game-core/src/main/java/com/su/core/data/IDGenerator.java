@@ -33,6 +33,9 @@ public class IDGenerator {
 	private Map<String, AtomicLong> idMap = new HashMap<>();
 
 	public long next(Object o) {
+		if (CacheUtil.isPersistent(o)){
+			return ;
+		}
 		String parentKey = CacheUtil.getParentKey(o);
 		AtomicLong atomicLong = idMap.get(parentKey);
 		long id = atomicLong.incrementAndGet();
@@ -65,6 +68,27 @@ public class IDGenerator {
 		}
 		if (!flag)
 			logger.info("对象没有id属性{}", o);
+	}
+	
+	/**
+	 * 获取 id
+	 * */
+	public long getId(Object o) {
+		if (o == null) return 0;
+		Field[] fields = o.getClass().getDeclaredFields();
+		for (Field f : fields) {
+			if (f.isAnnotationPresent(Id.class)) {
+				try {
+					f.setAccessible(true);
+					Object id = f.get(o);
+					if (id != null)
+						return (long) id;
+				} catch (Exception e) {
+					return false;
+				}
+			}
+		}
+		return false;
 	}
 
 	public void init() {

@@ -73,11 +73,11 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 		PlayerContext playerContext = ctx.channel().attr(PLAYER_CONTEXT_KEY).get();
 		PlayerActor processorActor = ctx.channel().attr(PROCESSOR_ACTOR_KEY).get();
 		if (playerContext != null) {
-			if (playerContext.getPlayer() != null) {
+			if (playerContext.getPlayerId() != 0) {
 				// 退出事件
 				playerContext.getActor().logout(playerContext);
 				// 从所有玩家上下文移除
-				gameContext.getPlayerContextMap().remove(playerContext.getPlayer().getId());
+				gameContext.getPlayerContextMap().remove(playerContext.getPlayerId());
 			}
 		}
 		if (processorActor != null) {

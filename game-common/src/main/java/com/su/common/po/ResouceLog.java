@@ -9,7 +9,7 @@ import com.su.common.data.Cache;
 @Entity
 public class ResouceLog {
 	@Id
-	private int id;
+	private long id;
 	/**
 	 * 添加或扣除的操作
 	 * */

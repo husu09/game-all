@@ -23,6 +23,9 @@ public class TransactionManager {
 	@Autowired
 	private RedisService redisService;
 
+	/**
+	 * 获取每个线程独立的事务数据
+	 * */
 	private TransactionData getTransactionData() {
 		TransactionData transactionData = threadLocal.get();
 		if (transactionData == null) {
@@ -37,7 +40,10 @@ public class TransactionManager {
 		return transactionData;
 
 	}
-
+	
+	/**
+	 * 记录一个事务中所有的数据库操作，成功时提交，失败时清空
+	 * */
 	public void addDataOperator(DataOperator dataOperator, Collection<Object> os) {
 		if (os == null)
 			return;
@@ -52,7 +58,10 @@ public class TransactionManager {
 		TransactionData transactionData = getTransactionData();
 		transactionData.getLazyDataOperator().put(dataOperator, o);
 	}
-
+	
+	/**
+	 * 记录事件中操作的对象，失败时直接清其在内存和 reids 中的缓存
+	 * */
 	public void addCache(Collection<Object> os) {
 		if (os == null)
 			return;

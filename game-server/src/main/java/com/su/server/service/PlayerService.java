@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.su.common.po.Player;
+import com.su.common.po.PlayerDetail;
 import com.su.core.data.DataService;
 import com.su.msg.PlayerMsg._Player;
 
@@ -21,6 +22,15 @@ public class PlayerService {
 
 	public Player getPlayerById(long id) {
 		return dataService.get(Player.class, id);
+	}
+	
+	public PlayerDetail getPlayerDetail(long id) {
+		PlayerDetail playerDetail = dataService.get(PlayerDetail.class, id);
+		if (playerDetail == null) {
+			playerDetail = new PlayerDetail();
+			playerDetail.setId(id);
+			dataService.save(playerDetail);
+		}
 	}
 	
 	public _Player serializePlayer(Player player) {

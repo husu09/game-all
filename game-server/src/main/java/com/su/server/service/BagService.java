@@ -11,6 +11,7 @@ import com.su.common.obj.Grid;
 import com.su.common.obj.Item;
 import com.su.common.util.TimeUtil;
 import com.su.core.context.PlayerContext;
+import com.su.core.data.DataService;
 import com.su.excel.config.BagConfig;
 import com.su.excel.map.BagConf;
 import com.su.msg.BagMsg.DeleteItem_;
@@ -26,60 +27,60 @@ public class BagService {
 	private BagConf bagConf;
 	@Autowired
 	private LogServer logServer;
+	@Autowired
+	private DataService dataService;
 
 	/**
 	 * 添加物品
 	 */
 	public boolean addItem(PlayerContext playerContext, Item item, int reason) {
-		synchronized (playerContext.getPlayerDetail()) {
-			// 排序规则：类型小的 < 品质小 < id小
-			BagConfig bagCo = bagConf.get(item.getSysId());
-			if (bagCo == null) {
-				logger.error("找不到对应的配置 {}", item.getSysId());
-				return false;
-			}
-			List<Grid> bagGrid = playerContext.getPlayerDetail().getBagGrid();
-			for (int i = 0; i < bagGrid.size(); i++) {
-				// 全部已添加
-				if (item.getCount() == 0)
-					break;
+		// 排序规则：类型小的 < 品质小 < id小
+		BagConfig bagCo = bagConf.get(item.getSysId());
+		if (bagCo == null) {
+			logger.error("找不到对应的配置 {}", item.getSysId());
+			return false;
+		}
+		List<Grid> bagGrid = playerContext.getPlayerDetail().getBagGrid();
+		for (int i = 0; i < bagGrid.size(); i++) {
+			// 全部已添加
+			if (item.getCount() == 0)
+				break;
 
-				Grid grid = bagGrid.get(i);
+			Grid grid = bagGrid.get(i);
 
-				// id 相同叠加物品
-				if (grid.getSysId() == item.getSysId()) {
-					if (grid.getCount() >= bagCo.getLimit()) {
-						continue;
-					}
-					int addCount = item.getCount();
-					if (item.getCount() + grid.getCount() > bagCo.getLimit()) {
-						addCount = item.getCount() + grid.getCount() - bagCo.getLimit();
-						item.setCount(item.getCount() - addCount);
-					} else {
-						item.setCount(0);
-					}
-					grid.setCount(grid.getCount() + addCount);
-					// 通知
-					UpdateItem_.Builder builder = UpdateItem_.newBuilder();
-					builder.setGrid(serializeGrid(i, grid));
-					playerContext.write(builder);
+			// id 相同叠加物品
+			if (grid.getSysId() == item.getSysId()) {
+				if (grid.getCount() >= bagCo.getLimit()) {
 					continue;
 				}
-				if (grid.getType() == item.getType()) {
-					BagConfig currBagCo = bagConf.get(grid.getSysId());
-					if (currBagCo.getQuality() > bagCo.getQuality()) {
-						createGrid(playerContext, bagGrid, i, item, bagCo);
-					} else if (currBagCo.getQuality() == bagCo.getQuality() && currBagCo.getId() > bagCo.getId()) {
-						createGrid(playerContext, bagGrid, i, item, bagCo);
-					}
-				} else if (grid.getType() > item.getType()) {
+				int addCount = item.getCount();
+				if (item.getCount() + grid.getCount() > bagCo.getLimit()) {
+					addCount = item.getCount() + grid.getCount() - bagCo.getLimit();
+					item.setCount(item.getCount() - addCount);
+				} else {
+					item.setCount(0);
+				}
+				grid.setCount(grid.getCount() + addCount);
+				// 通知
+				UpdateItem_.Builder builder = UpdateItem_.newBuilder();
+				builder.setGrid(serializeGrid(i, grid));
+				playerContext.write(builder);
+				continue;
+			}
+			if (grid.getType() == item.getType()) {
+				BagConfig currBagCo = bagConf.get(grid.getSysId());
+				if (currBagCo.getQuality() > bagCo.getQuality()) {
+					createGrid(playerContext, bagGrid, i, item, bagCo);
+				} else if (currBagCo.getQuality() == bagCo.getQuality() && currBagCo.getId() > bagCo.getId()) {
 					createGrid(playerContext, bagGrid, i, item, bagCo);
 				}
+			} else if (grid.getType() > item.getType()) {
+				createGrid(playerContext, bagGrid, i, item, bagCo);
 			}
-			// 找不到可以叠加或插入的位置，直接添加到末尾
-			if (item.getCount() > 0) {
-				createGrid(playerContext, bagGrid, bagGrid.size(), item, bagCo);
-			}
+		}
+		// 找不到可以叠加或插入的位置，直接添加到末尾
+		if (item.getCount() > 0) {
+			createGrid(playerContext, bagGrid, bagGrid.size(), item, bagCo);
 		}
 		// 流水
 		logServer.addResourceLog(reason, item.getCount(), -1);
@@ -91,43 +92,41 @@ public class BagService {
 	 */
 	public boolean eddItem(PlayerContext playerContext, Item item, int reason) {
 		int haveCount = 0;
-		synchronized (playerContext.getPlayerDetail()) {
-			List<Grid> bagGrid = playerContext.getPlayerDetail().getBagGrid();
-			for (int i = 0; i < bagGrid.size(); i++) {
-				Grid grid = bagGrid.get(i);
-				if (grid.getType() > item.getType())
-					break;
+		List<Grid> bagGrid = playerContext.getPlayerDetail().getBagGrid();
+		for (int i = 0; i < bagGrid.size(); i++) {
+			Grid grid = bagGrid.get(i);
+			if (grid.getType() > item.getType())
+				break;
 
-				if (item.getSysId() == grid.getSysId())
-					haveCount += grid.getCount();
-			}
-			if (haveCount < item.getCount()) {
-				return false;
-			}
-			UpdateItem_.Builder updateItem_ = null;
-			DeleteItem_.Builder deleteItem_ = null;
-			// 从后往前，数量少的先扣
-			for (int i = bagGrid.size(); i > -1; i--) {
-				Grid grid = bagGrid.get(i);
-				if (item.getSysId() == grid.getSysId()) {
-					if (grid.getCount() > item.getCount()) {
-						grid.setCount(grid.getCount() - item.getCount());
+			if (item.getSysId() == grid.getSysId())
+				haveCount += grid.getCount();
+		}
+		if (haveCount < item.getCount()) {
+			return false;
+		}
+		UpdateItem_.Builder updateItem_ = null;
+		DeleteItem_.Builder deleteItem_ = null;
+		// 从后往前，数量少的先扣
+		for (int i = bagGrid.size(); i > -1; i--) {
+			Grid grid = bagGrid.get(i);
+			if (item.getSysId() == grid.getSysId()) {
+				if (grid.getCount() > item.getCount()) {
+					grid.setCount(grid.getCount() - item.getCount());
+					// 通知
+					if (updateItem_ == null)
+						updateItem_ = UpdateItem_.newBuilder();
+					updateItem_.setGrid(serializeGrid(i, grid));
+					playerContext.write(updateItem_);
+					break;
+				} else {
+					item.setCount(item.getCount() - grid.getCount());
+					if (item.getCount() == 0) {
 						// 通知
-						if (updateItem_ == null)
-							updateItem_ = UpdateItem_.newBuilder();
-						updateItem_.setGrid(serializeGrid(i, grid));
-						playerContext.write(updateItem_);
+						if (deleteItem_ == null)
+							deleteItem_ = DeleteItem_.newBuilder();
+						deleteItem_.setIndex(i);
+						playerContext.write(deleteItem_);
 						break;
-					} else {
-						item.setCount(item.getCount() - grid.getCount());
-						if (item.getCount() == 0) {
-							// 通知
-							if (deleteItem_ == null)
-								deleteItem_ = DeleteItem_.newBuilder();
-							deleteItem_.setIndex(i);
-							playerContext.write(deleteItem_);
-							break;
-						}
 					}
 				}
 			}

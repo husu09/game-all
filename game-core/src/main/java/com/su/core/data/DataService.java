@@ -153,15 +153,12 @@ public class DataService {
 			t = redisService.get(c, id);
 		if (t == null) {
 			t = dataRmiService.get(c, id);
-			if (t != null) {
-				if (ismc)
-					memoryService.saveOrUpdate(t);
-				if (isrc)
-					redisService.saveOrUpdate(t);
-			}
+			if (ismc)
+				memoryService.saveOrUpdate(t);
+			if (isrc)
+				redisService.saveOrUpdate(t);
 		}
-		if (t != null)
-			transactionManager.addCache(t);
+		transactionManager.addCache(t);
 		return t;
 	}
 
@@ -174,27 +171,24 @@ public class DataService {
 			redisService.saveOrUpdate(t);
 		return t;
 	}
-
+	
+	
 	public <T> List<T> listByCache(Class<T> c) {
 		List<T> ts = null;
 		boolean ismc = false;
 		boolean isrc = false;
-		boolean flag = false;
 		if (ismc = CacheUtil.isMemoryCache(c))
 			ts = memoryService.list(c);
 		if (ts == null && (isrc = CacheUtil.isRedisCache(ts)))
 			ts = redisService.list(c);
 		if (ts == null) {
 			ts = dataRmiService.list(c);
-			flag = true;
-			transactionManager.addCache(ts);
 			if (ismc)
 				memoryService.saveOrUpdate(ts);
 			if (isrc)
 				redisService.saveOrUpdate(ts);
 		}
-		if (!flag)
-			transactionManager.addCache(ts);
+		transactionManager.addCache(ts);
 		return ts;
 	}
 
@@ -222,22 +216,18 @@ public class DataService {
 		List<T> ts = null;
 		boolean ismc = false;
 		boolean isrc = false;
-		boolean flag = false;
 		if (ismc = CacheUtil.isMemoryCache(c))
 			ts = memoryService.list(c, first, max);
 		if (ts == null && (isrc = CacheUtil.isRedisCache(ts)))
 			ts = redisService.list(c, first, max);
 		if (ts == null) {
 			ts = dataRmiService.list(c, first, max);
-			flag = true;
-			transactionManager.addCache(ts);
 			if (ismc)
 				memoryService.saveOrUpdate(ts);
 			if (isrc)
 				redisService.saveOrUpdate(ts);
 		}
-		if (!flag)
-			transactionManager.addCache(ts);
+		transactionManager.addCache(ts);
 		return ts;
 	}
 

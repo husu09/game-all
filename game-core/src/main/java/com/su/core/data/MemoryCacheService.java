@@ -18,9 +18,7 @@ public class MemoryCacheService {
 		if (!CacheUtil.isPersistent(o)) {
 			return;
 		}
-		if (!cache.contains(o)) {
-			cache.add(o);
-		}
+		cache.add(o);
 	}
 
 	public void saveOrUpdate(Collection<Object> os) {

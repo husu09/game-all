@@ -10,7 +10,6 @@ import com.su.common.util.StringUtil;
 import com.su.core.action.Action;
 import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
-import com.su.core.data.DataService;
 import com.su.msg.LoginMsg.Login;
 import com.su.msg.LoginMsg.Login_;
 import com.su.server.service.LoginService;
@@ -29,9 +28,6 @@ public class LoginControl {
 
 	@Autowired
 	private PlayerService playerService;
-
-	@Autowired
-	private DataService dataService;
 
 	/**
 	 * 登录
@@ -61,7 +57,7 @@ public class LoginControl {
 			playerContext.sendError(20001);
 			return;
 		}
-		playerContext.handleLogin(player, null);
+		playerContext.handleLogin(player.getId());
 		gameContext.getPlayerContextMap().put(player.getId(), playerContext);
 		// 登录事件
 		playerContext.getActor().login(playerContext);

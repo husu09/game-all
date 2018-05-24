@@ -2,8 +2,6 @@ package com.su.core.context;
 
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
-import com.su.common.po.Player;
-import com.su.common.po.PlayerDetail;
 import com.su.core.akka.PlayerActor;
 import com.su.core.netty.NettyServerHandler;
 import com.su.msg.CommonMsg.Error_;
@@ -19,13 +17,10 @@ public class PlayerContext {
 
 	private PlayerActor actor;
 	
-	private Player player;
-	
-	private PlayerDetail playerDetail;
+	private long playerId;
 
-	public void handleLogin(Player player, PlayerDetail playerDetail) {
-		this.player = player;
-		this.playerDetail = playerDetail;
+	public void handleLogin(long playerId) {
+		this.playerId = playerId;
 		ctx.channel().attr(NettyServerHandler.PLAYER_CONTEXT_KEY).set(this);
 	}
 
@@ -76,21 +71,8 @@ public class PlayerContext {
 		this.actor = actor;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public long getPlayerId() {
+		return playerId;
 	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-
-	public PlayerDetail getPlayerDetail() {
-		return playerDetail;
-	}
-
-	public void setPlayerDetail(PlayerDetail playerDetail) {
-		this.playerDetail = playerDetail;
-	}
-	
 	
 }

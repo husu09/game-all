@@ -21,13 +21,10 @@ public class MemoryCache {
 	public void add(Object o) {
 		Map<String, Object> map = classValueMap.get(o.getClass());
 		if (map == null) {
-			synchronized (this) {
-				map = classValueMap.get(o.getClass());
-				if (map == null) {
-					map = new ConcurrentHashMap<>();
-					classValueMap.put(o.getClass(), map);
-				}
-			}
+			map = new ConcurrentHashMap<>();
+			Map<String, Object> reValue = classValueMap.putIfAbsent(o.getClass(), map);
+			if (reValue != null)
+				map = reValue;
 		}
 		map.put(CacheUtil.getKey(o), o);
 	}
@@ -41,13 +38,6 @@ public class MemoryCache {
 	
 	public void remove(Class<?> c) {
 		classValueMap.remove(c);
-	}
-
-	public boolean contains(Object o) {
-		Map<String, Object> map = classValueMap.get(o.getClass());
-		if (map == null)
-			return false;
-		return map.containsKey(CacheUtil.getKey(o));
 	}
 
 	public <T> T get(Class<T> c, long id) {

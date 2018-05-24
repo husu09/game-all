@@ -59,7 +59,7 @@ public class GamePlayer implements Delayed {
 
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
-		this.id = playerContext.getPlayer().getId();
+		//this.id = playerContext.getPlayer().getId();
 		handCards = new Card[HAND_CARDS_NUM];
 	}
 
