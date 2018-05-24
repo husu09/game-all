@@ -13,7 +13,7 @@ import org.springframework.remoting.rmi.RmiProxyFactoryBean;
 import com.su.common.rmi.DataRmiService;
 
 @Configuration
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(basePackages = { "com.su" })
 @PropertySource("serverConfig.properties")
 public class ServerConfig {

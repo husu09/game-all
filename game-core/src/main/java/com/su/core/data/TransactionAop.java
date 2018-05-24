@@ -12,7 +12,7 @@ public class TransactionAop {
 	@Autowired
 	private TransactionManager transactionManager;
 	
-	//@Around("execution (* com.su.server.service.*.*(..))")
+	@Around("execution (* com.su.server.service.*.*(..))")
 	public Object transactionProcess(ProceedingJoinPoint pj) throws Throwable {
 		Object result = null;
 		try {

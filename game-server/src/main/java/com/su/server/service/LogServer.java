@@ -2,11 +2,12 @@ package com.su.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.su.common.po.ResouceLog;
 import com.su.core.data.DataService;
 
-@Component
+@Service
 public class LogServer {
 	@Autowired
 	private DataService dataService;
