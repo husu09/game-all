@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.su.common.mq.MQMessage;
 import com.su.common.mq.DataOperator;
+import com.su.common.mq.MQMessage;
 
 /**
  * mq 服务对象
@@ -87,5 +87,5 @@ public class MQService {
 		mqMessage.setData(JSON.toJSONString(t));
 		mqClient.produce(JSON.toJSONString(mqMessage));
 	}
-
+	
 }

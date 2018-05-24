@@ -18,9 +18,9 @@ import com.rabbitmq.client.Envelope;
 
 @Component
 public class MQCustomer {
-	
+
 	private Logger logger = LoggerFactory.getLogger(MQCustomer.class);
-	
+
 	@Value("${mq.queueName}")
 	private String queueName;
 	@Value("${mq.host}")
@@ -52,9 +52,7 @@ public class MQCustomer {
 				}
 			};
 			boolean autoAck = false;
-			for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
-				channel.basicConsume(queueName, autoAck, consumer);
-			}
+			channel.basicConsume(queueName, autoAck, consumer);
 			logger.info("启动RabbitMQ服务成功");
 		} catch (Exception e) {
 			e.printStackTrace();

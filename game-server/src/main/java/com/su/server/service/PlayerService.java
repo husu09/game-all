@@ -30,8 +30,7 @@ public class PlayerService {
 	public PlayerDetail getPlayerDetail(long id) {
 		PlayerDetail playerDetail = dataService.get(PlayerDetail.class, id);
 		if (playerDetail == null) {
-			playerDetail = new PlayerDetail();
-			playerDetail.setId(id);
+			playerDetail = new PlayerDetail(id);
 			dataService.save(playerDetail);
 		}
 		return playerDetail;

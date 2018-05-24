@@ -44,7 +44,7 @@ public class BagService {
 			logger.error("找不到对应的配置 {}", item.getSysId());
 			return false;
 		}
-		List<Grid> bagGrid = playerDetail.getBagGrid();
+		List<Grid> bagGrid = playerDetail.getGridList();
 		for (int i = 0; i < bagGrid.size(); i++) {
 			// 全部已添加
 			if (item.getCount() == 0)
@@ -99,7 +99,7 @@ public class BagService {
 	public boolean eddItem(PlayerContext playerContext, Item item, int reason) {
 		PlayerDetail playerDetail  = playerService.getPlayerDetail(playerContext.getPlayerId());
 		int haveCount = 0;
-		List<Grid> bagGrid = playerDetail.getBagGrid();
+		List<Grid> bagGrid = playerDetail.getGridList();
 		for (int i = 0; i < bagGrid.size(); i++) {
 			Grid grid = bagGrid.get(i);
 			if (grid.getType() > item.getType())

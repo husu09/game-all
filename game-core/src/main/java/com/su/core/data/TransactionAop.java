@@ -19,8 +19,10 @@ public class TransactionAop {
 			// 执行目标方法
 			result = pj.proceed();
 			transactionManager.commit();
+			System.out.println("commint...........");
 		} catch (Throwable e) {
 			transactionManager.rollblack();
+			System.out.println("rollblack...........");
 			throw e;
 		}
 		return result;

@@ -8,6 +8,7 @@ import java.util.Map;
 import com.su.common.mq.DataOperator;
 
 public class TransactionData {
+	
 	/**
 	 * 延时操作，成功时提交清除，失败时清除
 	 */

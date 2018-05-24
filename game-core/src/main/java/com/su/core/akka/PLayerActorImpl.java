@@ -15,20 +15,18 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.Attribute;
 
 public class PLayerActorImpl implements PlayerActor {
-	
-	
+
 	private Logger logger = LoggerFactory.getLogger(PlayerActor.class);
 
 	private ActionContext actionContext = SpringsUtil.getContext().getBean(ActionContext.class);
 	private GameEventDispatcher gameEventDispatcher = SpringsUtil.getContext().getBean(GameEventDispatcher.class);
-	
 
 	@Override
 	public void process(ChannelHandlerContext ctx, MessageLite messageLite) {
 		try {
 			ActionMeta actionMeta = actionContext.getActionMetaMap().get(messageLite.getClass().getSimpleName());
 			if (actionMeta == null) {
-				//没有找到对应的协议处理类
+				// 没有找到对应的协议处理类
 				logger.error("not find action-meta {}", messageLite.getClass().getSimpleName());
 				PlayerContext.sendError(ctx, 10001);
 				return;
@@ -37,42 +35,40 @@ public class PLayerActorImpl implements PlayerActor {
 			if (actionMeta.isMustLogin()) {
 				PlayerContext playerContext = attr.get();
 				if (playerContext == null) {
-					//没有找到对应的PlayerContext
+					// 没有找到对应的PlayerContext
 					logger.error("not find player context");
 					PlayerContext.sendError(ctx, 10001);
 					return;
 				}
 				actionMeta.getMethod().invoke(actionMeta.getExecutor(), playerContext, messageLite);
+			} else {
+				PlayerContext playerContext = new PlayerContext();
+				playerContext.setCtx(ctx);
+				playerContext.setActor(this);
+				actionMeta.getMethod().invoke(actionMeta.getExecutor(), playerContext, messageLite);
 			}
-			PlayerContext playerContext = new PlayerContext();
-			playerContext.setCtx(ctx);
-			playerContext.setActor(this);
-			actionMeta.getMethod().invoke(actionMeta.getExecutor(), playerContext, messageLite);
 		} catch (Exception e) {
 			e.printStackTrace();
-			//系统错误
+			// 系统错误
 			PlayerContext.sendError(ctx, 10001);
 		}
 
 	}
 
-
 	@Override
 	public void logout(PlayerContext playerContext) {
 		gameEventDispatcher.logout(playerContext);
-		
+
 	}
 
 	@Override
 	public void checkRefresh(PlayerContext playerContext) {
-		
-		
+
 	}
 
 	@Override
 	public void login(PlayerContext playerContext) {
 		gameEventDispatcher.login(playerContext);
 	}
-
 
 }
