@@ -14,5 +14,6 @@
   	<module>game-excel</module>
   	<module>game-play</module>
   	<module>game-console</module>
+  	<module>game-example</module>
   </modules>
 </project>

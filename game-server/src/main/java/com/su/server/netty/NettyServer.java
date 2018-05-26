@@ -1,18 +1,3 @@
-/*
- * Copyright 2012 The Netty Project
- *
- * The Netty Project licenses this file to you under the Apache License,
- * version 2.0 (the "License"); you may not use this file except in compliance
- * with the License. You may obtain a copy of the License at:
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations
- * under the License.
- */
 package com.su.server.netty;
 
 import org.slf4j.Logger;
@@ -35,12 +20,9 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-/**
- * Modification of {@link EchoServer} which utilizes Java object serialization.
- */
 @Component
 public final class NettyServer {
-	
+
 	private Logger logger = LoggerFactory.getLogger(NettyServer.class);
 
 	@Autowired
@@ -49,8 +31,6 @@ public final class NettyServer {
 	private ProtoEncoder protoEncoder;
 	@Autowired
 	private NettyServerHandler nettyServerHandler;
-	//@Autowired
-	//private HeartbeatHandler heartbeatHandler;
 
 	@Value("${server.port}")
 	private int port;
@@ -61,27 +41,16 @@ public final class NettyServer {
 	public void start() {
 		bossGroup = new NioEventLoopGroup();
 		workerGroup = new NioEventLoopGroup();
-		try {
-			ServerBootstrap b = new ServerBootstrap();
-			b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-					.handler(new LoggingHandler(LogLevel.INFO)).childHandler(new ChannelInitializer<SocketChannel>() {
-						@Override
-						public void initChannel(SocketChannel ch) throws Exception {
-							ChannelPipeline p = ch.pipeline();
-							p.addLast(protoEncoder, new ProtoLengthPrepender(), protoDecoder, nettyServerHandler);
-							/*
-							 * p.addLast(new IdleStateHandler(0, 0, 120),
-							 * heartbeatHandler, protoEncoder, new
-							 * ProtoLengthPrepender(), protoDecoder,
-							 * nettyServerHandler);
-							 */
-						}
-					});
-			// Bind and start to accept incoming connections.
-			b.bind(port).sync();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		ServerBootstrap b = new ServerBootstrap();
+		b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).handler(new LoggingHandler(LogLevel.INFO))
+				.childHandler(new ChannelInitializer<SocketChannel>() {
+					@Override
+					public void initChannel(SocketChannel ch) throws Exception {
+						ChannelPipeline p = ch.pipeline();
+						p.addLast(protoEncoder, protoDecoder, nettyServerHandler);
+					}
+				});
+		b.bind(port);
 		logger.info("启动Netty服务 {}", port);
 	}
 
@@ -90,5 +59,5 @@ public final class NettyServer {
 		workerGroup.shutdownGracefully();
 		logger.info("关闭Netty服务");
 	}
-	
+
 }
