@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.su.proto.core.ProtoDecoder;
 import com.su.proto.core.ProtoEncoder;
-import com.su.proto.core.ProtoLengthPrepender;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -41,16 +40,22 @@ public final class NettyServer {
 	public void start() {
 		bossGroup = new NioEventLoopGroup();
 		workerGroup = new NioEventLoopGroup();
-		ServerBootstrap b = new ServerBootstrap();
-		b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).handler(new LoggingHandler(LogLevel.INFO))
-				.childHandler(new ChannelInitializer<SocketChannel>() {
-					@Override
-					public void initChannel(SocketChannel ch) throws Exception {
-						ChannelPipeline p = ch.pipeline();
-						p.addLast(protoEncoder, protoDecoder, nettyServerHandler);
-					}
-				});
-		b.bind(port);
+		try {
+			ServerBootstrap b = new ServerBootstrap();
+			b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+					.handler(new LoggingHandler(LogLevel.INFO))
+					.childHandler(new ChannelInitializer<SocketChannel>() {
+						@Override
+						public void initChannel(SocketChannel ch) throws Exception {
+							ChannelPipeline p = ch.pipeline();
+							p.addLast(protoEncoder, protoDecoder, nettyServerHandler);
+						}
+					});
+			// Bind and start to accept incoming connections.
+			b.bind(port).sync();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		logger.info("启动Netty服务 {}", port);
 	}
 
