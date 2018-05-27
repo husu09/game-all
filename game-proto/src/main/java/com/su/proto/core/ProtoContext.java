@@ -2,34 +2,17 @@ package com.su.proto.core;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
 
-/**
- *	proto协议存储结构
- */
 @Component
 public class ProtoContext {
 
-	private Map<String, MessageLite> map = new HashMap<>();
+	private Map<String, MessageLite> MessageLiteMap = new HashMap<>();
 
-	public void add(String messageName, MessageLite messageLite) {
-		map.put(messageName, messageLite);
-	}
-
-	public MessageLite get(String messageName) {
-		return map.get(messageName);
-	}
-
-	public boolean contains(String messageName) {
-		return map.containsKey(messageName);
-	}
-	
-	public Set<Entry<String, MessageLite>> all() {
-		return map.entrySet();
+	public Map<String, MessageLite> getMessageLiteMap() {
+		return MessageLiteMap;
 	}
 }

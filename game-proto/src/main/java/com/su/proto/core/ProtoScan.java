@@ -11,9 +11,6 @@ import org.springframework.stereotype.Component;
 import com.google.protobuf.MessageLite;
 import com.su.common.util.CommonUtils;
 
-/**
- * 扫描指定包下的所有proto协议
- */
 @Component
 public class ProtoScan {
 
@@ -25,6 +22,9 @@ public class ProtoScan {
 	@Value("${proto.packName}")
 	private String protoPackName;
 
+	/**
+	 * 扫描指定包名下的所有 protobuf 协议
+	 */
 	public void scan(String packName) {
 		String packPath = packName.replace(".", "/");
 		String realPath = ProtoScan.class.getClassLoader().getResource(packPath).getPath();
@@ -40,7 +40,7 @@ public class ProtoScan {
 					if (arr.length == 2 && !arr[1].endsWith("OrBuilder") && !CommonUtils.isInteger(arr[1])) {
 						Class<?> c = Class.forName(packName + "." + arr[0] + "$" + arr[1]);
 						MessageLite messageLite = (MessageLite) c.getMethod("getDefaultInstance").invoke(null);
-						protoContext.add(c.getSimpleName(), messageLite);
+						protoContext.getMessageLiteMap().put(c.getSimpleName(), messageLite);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
