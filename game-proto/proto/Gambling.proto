@@ -22,11 +22,9 @@ message _GamePlayer {
 	optional int32 cardNum = 3;			// 手牌数量
 	optional int32 team = 4;			// 玩家队伍（0：红方，1：蓝方）
 	optional int32 multiple = 5;		// 倍数
-	optional int32 score = 6;			// 得分
-	optional int32 state = 7;			// 状态
-	optional int64 deadline = 8;		// 截止时间
-	optional int32 isAuto = 9;			// 是否托管
+	optional int32 isAuto = 6;			// 是否托管
 }
+
 
 message _Table {
 	repeated PGamePlayer players = 1;	// 玩家
