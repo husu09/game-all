@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SpringsUtil implements ApplicationContextAware {
+public class SpringUtil implements ApplicationContextAware {
 
 	private static ApplicationContext applicationContext;
 
@@ -16,7 +16,7 @@ public class SpringsUtil implements ApplicationContextAware {
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		SpringsUtil.applicationContext = applicationContext;
+		SpringUtil.applicationContext = applicationContext;
 	}
 
 }

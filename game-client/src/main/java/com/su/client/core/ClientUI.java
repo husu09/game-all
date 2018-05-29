@@ -27,7 +27,7 @@ import com.su.client.handler.ComboBoxHandler;
 import com.su.client.handler.LoginButtonHandler;
 import com.su.client.handler.SendButtonHandler;
 import com.su.client.proto.ProtoContext;
-import com.su.common.util.SpringsUtil;
+import com.su.common.util.SpringUtil;
 
 @Component
 public class ClientUI {
@@ -55,7 +55,7 @@ public class ClientUI {
 		frame.setLayout(new BorderLayout());
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
-				AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) SpringsUtil
+				AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) SpringUtil
 						.getContext();
 				client.stop();
 				context.close();

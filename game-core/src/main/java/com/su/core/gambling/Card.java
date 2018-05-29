@@ -1,5 +1,6 @@
 package com.su.core.gambling;
 
+import com.su.core.gambling.enums.Suit;
 import com.su.msg.GamblingMsg._Card;
 
 public class Card implements Comparable<Card> {

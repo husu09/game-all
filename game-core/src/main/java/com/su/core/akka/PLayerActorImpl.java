@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.protobuf.MessageLite;
-import com.su.common.util.SpringsUtil;
+import com.su.common.util.SpringUtil;
 import com.su.core.action.ActionContext;
 import com.su.core.action.ActionMeta;
 import com.su.core.context.PlayerContext;
@@ -19,8 +19,8 @@ public class PLayerActorImpl implements PlayerActor {
 
 	private Logger logger = LoggerFactory.getLogger(PlayerActor.class);
 
-	private ActionContext actionContext = SpringsUtil.getContext().getBean(ActionContext.class);
-	private GameEventDispatcher gameEventDispatcher = SpringsUtil.getContext().getBean(GameEventDispatcher.class);
+	private ActionContext actionContext = SpringUtil.getContext().getBean(ActionContext.class);
+	private GameEventDispatcher gameEventDispatcher = SpringUtil.getContext().getBean(GameEventDispatcher.class);
 
 	@Override
 	public void process(ChannelHandlerContext ctx, MessageLite messageLite) {

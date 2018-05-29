@@ -6,8 +6,10 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.common.util.CommonUtil;
-import com.su.common.util.SpringsUtil;
+import com.su.common.util.SpringUtil;
 import com.su.core.akka.AkkaContext;
+import com.su.core.akka.TableActor;
+import com.su.core.akka.TableActorImpl;
 import com.su.core.context.PlayerContext;
 import com.su.core.gambling.enums.CallState;
 import com.su.core.gambling.enums.CardType;
@@ -17,7 +19,7 @@ import com.su.core.gambling.enums.TableState;
 /**
  * 牌桌对象
  */
-public class Table {
+public class Table implements Delayed{
 	/**
 	 * 牌
 	 */
@@ -56,13 +58,27 @@ public class Table {
 	 * 操作时间
 	 */
 	private long opTime;
-	/**
-	 * 结算时间
-	 * */
-	private long closeTime;
+	
+	private Site site;
+	
+	private TableActor tableActor;
 
-
-
+	AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
+	
+	public Table() {
+		tableActor = akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
+		/*this.site = site;
+		this.actor = this.akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
+		// 卡牌
+		Card[] oneCards = Card.getADeckOfCards();
+		Card[] cards = new Card[Card.CARDS_NUM * 2];
+		System.arraycopy(oneCards, 0, cards, 0, Card.CARDS_NUM);
+		System.arraycopy(oneCards, 0, cards, Card.CARDS_NUM, Card.CARDS_NUM);
+		this.cards = cards;*/
+		
+	}
+	
+	
 	
 	public PTable toProto() {
 		for (GamePlayer player : players) {
@@ -90,16 +106,7 @@ public class Table {
 		return pTable;
 	}
 
-	public Table(Site site) {
-		this.site = site;
-		this.actor = this.akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
-		// 卡牌
-		Card[] oneCards = Card.getADeckOfCards();
-		Card[] cards = new Card[Card.CARDS_NUM * 2];
-		System.arraycopy(oneCards, 0, cards, 0, Card.CARDS_NUM);
-		System.arraycopy(oneCards, 0, cards, Card.CARDS_NUM, Card.CARDS_NUM);
-		this.cards = cards;
-	}
+	
 
 	private Multiple addMultiple(MultipleType multipleType) {
 		Multiple multiple = multiples[multipleType.ordinal()];
@@ -175,10 +182,10 @@ public class Table {
 	/**
 	 * 发牌
 	 */
-	private void deal() {
+	public void deal() {
 		int index = 0;
 		for (int i = 1; i <= this.cards.length; i++) {
-			this.players[(this.hold + i) % 4].getHandCards()[index] = this.cards[i];
+			this.players[(this.dealer + i) % 4 - 1].getHandCards()[index] = this.cards[i];
 			if (i % 4 == 0)
 				index++;
 		}
@@ -186,17 +193,23 @@ public class Table {
 			Arrays.sort(this.players[i].getHandCards());
 		}
 	}
-
+	
+	/**
+	 * 加倍
+	 * */
+	public void doubles() {
+		
+	}
+	
 	/**
 	 * 过牌
 	 */
 	public void check(GamePlayer player) {
-		if (player.getState() != PlayerState.OPERATING  || state != TableState.PLAYING) {
+		if (player.getState() != PlayerState.OPERATE  || state != TableState.DRAW) {
 			player.getPlayerContext().sendError(0);
 			return;
 		}
-		site.getDeadLineQueue().remove(player);
-		player.setState(PlayerState.WATCH);
+		player.setState(PlayerState.WAIT);
 		pGamePlayerBuilder.setState(player.getState().ordinal());
 		player.setDeadLine(0);
 		pGamePlayerBuilder.setDeadline(player.getDeadLine());
@@ -422,12 +435,188 @@ public class Table {
 		}
 	}
 
-	public TableActor getActor() {
-		return actor;
+	
+	public Card[] getCards() {
+		return cards;
 	}
+
+
+
+	public void setCards(Card[] cards) {
+		this.cards = cards;
+	}
+
+
+
+	public GamePlayer[] getPlayers() {
+		return players;
+	}
+
+
+
+	public void setPlayers(GamePlayer[] players) {
+		this.players = players;
+	}
+
+
+
+	public TableState getState() {
+		return state;
+	}
+
+
+
+	public void setState(TableState state) {
+		this.state = state;
+	}
+
+
+
+	public int getRoundScore() {
+		return roundScore;
+	}
+
+
+
+	public void setRoundScore(int roundScore) {
+		this.roundScore = roundScore;
+	}
+
+
+
+	public Card getCallCard() {
+		return callCard;
+	}
+
+
+
+	public void setCallCard(Card callCard) {
+		this.callCard = callCard;
+	}
+
+
+
+	public Multiple[] getMultiples() {
+		return multiples;
+	}
+
+
+
+	public void setMultiples(Multiple[] multiples) {
+		this.multiples = multiples;
+	}
+
+
+
+	public Card[] getLastCards() {
+		return lastCards;
+	}
+
+
+
+	public void setLastCards(Card[] lastCards) {
+		this.lastCards = lastCards;
+	}
+
+
+
+	public CardType getLastCardType() {
+		return lastCardType;
+	}
+
+
+
+	public void setLastCardType(CardType lastCardType) {
+		this.lastCardType = lastCardType;
+	}
+
+
+
+	public int getLastOp() {
+		return lastOp;
+	}
+
+
+
+	public void setLastOp(int lastOp) {
+		this.lastOp = lastOp;
+	}
+
+
+
+	public int getDealer() {
+		return dealer;
+	}
+
+
+
+	public void setDealer(int dealer) {
+		this.dealer = dealer;
+	}
+
+
+
+	public long getOpTime() {
+		return opTime;
+	}
+
+
+
+	public void setOpTime(long opTime) {
+		this.opTime = opTime;
+	}
+
+
 
 	public Site getSite() {
 		return site;
+	}
+
+
+
+	public void setSite(Site site) {
+		this.site = site;
+	}
+
+
+
+	public TableActor getTableActor() {
+		return tableActor;
+	}
+
+
+
+	public void setTableActor(TableActor tableActor) {
+		this.tableActor = tableActor;
+	}
+
+
+
+	public AkkaContext getAkkaContext() {
+		return akkaContext;
+	}
+
+
+
+	public void setAkkaContext(AkkaContext akkaContext) {
+		this.akkaContext = akkaContext;
+	}
+
+
+
+	@Override
+	public int compareTo(Delayed o) {
+		if(this.getDelay(TimeUnit.MILLISECONDS) > o.getDelay(TimeUnit.MILLISECONDS)) {
+            return 1;
+        }else if(this.getDelay(TimeUnit.MILLISECONDS) < o.getDelay(TimeUnit.MILLISECONDS)) {
+            return -1;
+        }
+        return 0;
+	}
+
+	@Override
+	public long getDelay(TimeUnit unit) {
+		 return unit.convert(opTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
 	}
 
 }

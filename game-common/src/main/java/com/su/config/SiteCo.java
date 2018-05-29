@@ -1,4 +1,4 @@
-package com.su.excel.config;
+package com.su.config;
 
 public class SiteCo {
 	private int id;

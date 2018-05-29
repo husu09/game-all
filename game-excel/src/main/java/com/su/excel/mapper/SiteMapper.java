@@ -2,7 +2,7 @@ package com.su.excel.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.su.excel.config.SiteCo;
+import com.su.config.SiteCo;
 import com.su.excel.core.AbstractExcelMapper;
 import com.su.excel.core.RowData;
 

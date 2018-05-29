@@ -6,10 +6,15 @@ import com.su.core.gambling.enums.CardType;
 public interface TableActor {
 
 	/**
-	 * 开始
+	 * 发牌
 	 */
-	public void start(GamePlayer[] players);
-
+	public void deal();
+	
+	/**
+	 * 加倍
+	 * */
+	public void doubles(GamePlayer player);
+	
 	/**
 	 * 叫牌
 	 */
@@ -26,13 +31,13 @@ public interface TableActor {
 	public void check(GamePlayer player);
 
 	/**
-	 * 退出
-	 */
-	public void exit(GamePlayer player);
-
-	/**
 	 * 准备
 	 */
 	public void ready(GamePlayer player);
+	
+	/**
+	 * 退出
+	 */
+	public void exit(GamePlayer player);
 
 }

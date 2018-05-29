@@ -1,11 +1,22 @@
 package com.su.core.akka;
 
 import com.su.core.gambling.GamePlayer;
+import com.su.core.gambling.Table;
+import com.su.core.gambling.enums.CardType;
 
 public class TableActorImpl implements TableActor {
+	
+	private Table table;
 
 	@Override
-	public void start(GamePlayer[] players) {
+	public void deal() {
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void doubles(GamePlayer player) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -17,7 +28,7 @@ public class TableActorImpl implements TableActor {
 	}
 
 	@Override
-	public void draw(GamePlayer player, com.su.core.gambling.enums.CardType cardType, int[] index) {
+	public void draw(GamePlayer player, CardType cardType, int[] index) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -29,15 +40,17 @@ public class TableActorImpl implements TableActor {
 	}
 
 	@Override
-	public void exit(GamePlayer player) {
+	public void ready(GamePlayer player) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void ready(GamePlayer player) {
+	public void exit(GamePlayer player) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 	
 }
