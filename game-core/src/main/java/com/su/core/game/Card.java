@@ -7,7 +7,7 @@ public class Card implements Comparable<Card> {
 	 * 一幅牌的张数
 	 */
 	public static final int CARDS_NUM = 54;
-	
+
 	/**
 	 * 玩家手牌张数
 	 */
@@ -42,28 +42,19 @@ public class Card implements Comparable<Card> {
 	 */
 	static {
 		Card[] cards = new Card[CARDS_NUM];
+		int cycleNum = CARDS_NUM / 4;
 		int value = CARD_3;
-		int suit = Suit.FANG_KUAI.ordinal();
-		for (int i = 0; i < CARDS_NUM; i++) {
-			if (value + i == CARD_XIAO_WANG) {
-				cards[i] = new Card(CARD_XIAO_WANG, null);
-				continue;
+		for (int i = 0; i < cycleNum; i++) {
+			int startIndex = i * 4;
+			for (int j = 0; j < Suit.values().length; j++) {
+				cards[startIndex + j] = new Card(value, Suit.values()[j]);
 			}
-			if (value + i == CARD_DA_WANG) {
-				cards[i] = new Card(CARD_DA_WANG, null);
-				continue;
-			}
-			cards[i] = new Card(value + i, Suit.get(suit));
-			if ((i + 1) % 4 == 0) {
-				value++;
-				suit = Suit.FANG_KUAI.ordinal();
-			} else {
-				suit++;
-			}
+			value++;
 		}
+		cards[52] = new Card(CARD_XIAO_WANG, null);
+		cards[53] = new Card(CARD_DA_WANG, null);
 		ONE_CARDS = cards;
 	}
-
 	/**
 	 * 牌面
 	 */
@@ -77,7 +68,7 @@ public class Card implements Comparable<Card> {
 		this.value = value;
 		this.suit = suit;
 	}
-	
+
 	public int getValue() {
 		return value;
 	}
@@ -85,17 +76,19 @@ public class Card implements Comparable<Card> {
 	public Suit getSuit() {
 		return suit;
 	}
-	
+
 	@Override
 	public int compareTo(Card o) {
 		if (value > o.getValue())
 			return 1;
 		else if (value < o.getValue())
 			return -1;
-		if (suit.ordinal() > o.getSuit().ordinal())
-			return 1;
-		else if (suit.ordinal() < o.getSuit().ordinal())
-			return -1;
+		if (suit != null && o.getSuit() != null) {
+			if (suit.getValue() > o.getSuit().getValue())
+				return 1;
+			else if (suit.getValue() < o.getSuit().getValue())
+				return -1;
+		}
 		return 0;
 	}
 
@@ -128,7 +121,7 @@ public class Card implements Comparable<Card> {
 	public String toString() {
 		return "Card [value=" + value + ", suit=" + suit + "]";
 	}
-	
+
 	/**
 	 * 获取最大值
 	 */
@@ -153,7 +146,7 @@ public class Card implements Comparable<Card> {
 		return true;
 
 	}
-	
+
 	/**
 	 * 计算得分
 	 */

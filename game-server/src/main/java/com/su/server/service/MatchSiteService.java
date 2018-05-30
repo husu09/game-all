@@ -1,7 +1,5 @@
 package com.su.server.service;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -9,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.su.config.SiteCo;
+import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventAdapter;
 import com.su.core.game.ClassicSite;
 import com.su.core.game.MatchSite;
 import com.su.core.game.RankingSite;
+import com.su.core.game.Site;
 import com.su.core.game.enums.SiteType;
 import com.su.excel.mapper.SiteConf;
 
@@ -40,5 +40,15 @@ public class MatchSiteService extends GameEventAdapter {
 	public Map<Integer, MatchSite> getMatchSiteMap() {
 		return matchSiteMap;
 	}
-	
+
+	@Override
+	public void logout(PlayerContext playerContext) {
+		// 登出时取消匹配
+		Site inSite = playerContext.getInSite();
+		if (inSite != null && (inSite instanceof MatchSite)) {
+			MatchSite matchSite = (MatchSite) inSite;
+			matchSite.removePlayerFromMatch(playerContext.getGamePlayer());
+		}
+	}
+
 }

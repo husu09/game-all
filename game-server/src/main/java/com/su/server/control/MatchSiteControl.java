@@ -8,6 +8,7 @@ import com.su.core.context.PlayerContext;
 import com.su.core.game.MatchSite;
 import com.su.core.game.enums.SiteType;
 import com.su.msg.MatchSiteMsg.CancelMatch;
+import com.su.msg.MatchSiteMsg.CancelMatch_;
 import com.su.msg.MatchSiteMsg.GetMatchSite;
 import com.su.msg.MatchSiteMsg.GetMatchSite_;
 import com.su.msg.MatchSiteMsg.Match;
@@ -35,9 +36,9 @@ public class MatchSiteControl {
 			playerContext.sendError(1002);
 			return;
 		}
-
+		// 加入到匹配队列
 		matchSite.addPlayerToMatch(playerContext, false);
-		playerContext.write(Match_.newBuilder());
+		playerContext.write(Match_.newBuilder().setSiteId(matchSite.getSiteCo().getId()));
 	}
 
 	/**
@@ -45,6 +46,18 @@ public class MatchSiteControl {
 	 */
 	@Action
 	public void mcancelMatch(PlayerContext playerContext, CancelMatch req) {
+		if (playerContext.getGamePlayer() != null && playerContext.getGamePlayer().getState() != null) {
+			playerContext.sendError(3002);
+			return;
+		}
+		// 从匹配队列中移除
+		MatchSite matchSite = matchSiteService.getMatchSiteMap().get(req.getSiteId());
+		if (matchSite == null) {
+			playerContext.sendError(1002);
+			return;
+		}
+		matchSite.removePlayerFromMatch(playerContext.getGamePlayer());
+		playerContext.write(CancelMatch_.getDefaultInstance());
 
 	}
 
@@ -70,4 +83,6 @@ public class MatchSiteControl {
 		}
 		playerContext.write(resp);
 	}
+	
+	
 }

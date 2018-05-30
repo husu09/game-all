@@ -27,6 +27,8 @@ public class ClassicSite extends MatchSite {
 	
 	@Override
 	public synchronized void addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {
+		// 当在配置中时记录当前场
+		playerContext.setInSite(this);
 		// 验证是否可以加入匹配队列
 		if (playerContext.getGamePlayer() == null)
 			new GamePlayer(playerContext);
@@ -57,6 +59,10 @@ public class ClassicSite extends MatchSite {
 				return;
 			}
 		}
+		// 牌局开始时移除场
+		for (GamePlayer gamePlayer : gamePlayers) {
+			gamePlayer.getPlayerContext().setInSite(null);
+		}
 		// 人数足够时开始游戏
 		Table table = getIdleTableQueue().poll();
 		if (table == null) {
@@ -68,8 +74,10 @@ public class ClassicSite extends MatchSite {
 	
 	@Override
 	public synchronized void removePlayerFromMatch(GamePlayer gamePlayer) {
-		if (playerDeque.remove(gamePlayer))
+		if (playerDeque.remove(gamePlayer)) {
+			gamePlayer.getPlayerContext().setInSite(null);
 			this.playerNum --;
+		}
 	}
 
 	/**

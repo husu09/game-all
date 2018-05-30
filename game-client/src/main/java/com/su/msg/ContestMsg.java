@@ -1440,6 +1440,15 @@ public final class ContestMsg {
   public interface EnterContestSite_OrBuilder extends
       // @@protoc_insertion_point(interface_extends:EnterContestSite_)
       com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    boolean hasSiteId();
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    int getSiteId();
   }
   /**
    * Protobuf type {@code EnterContestSite_}
@@ -1453,6 +1462,7 @@ public final class ContestMsg {
       super(builder);
     }
     private EnterContestSite_() {
+      siteId_ = 0;
     }
 
     @java.lang.Override
@@ -1465,6 +1475,7 @@ public final class ContestMsg {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -1480,6 +1491,11 @@ public final class ContestMsg {
                                      extensionRegistry, tag)) {
                 done = true;
               }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              siteId_ = input.readInt32();
               break;
             }
           }
@@ -1506,6 +1522,22 @@ public final class ContestMsg {
               com.su.msg.ContestMsg.EnterContestSite_.class, com.su.msg.ContestMsg.EnterContestSite_.Builder.class);
     }
 
+    private int bitField0_;
+    public static final int SITEID_FIELD_NUMBER = 1;
+    private int siteId_;
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public boolean hasSiteId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public int getSiteId() {
+      return siteId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1518,6 +1550,9 @@ public final class ContestMsg {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, siteId_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1526,6 +1561,10 @@ public final class ContestMsg {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, siteId_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -1543,6 +1582,11 @@ public final class ContestMsg {
       com.su.msg.ContestMsg.EnterContestSite_ other = (com.su.msg.ContestMsg.EnterContestSite_) obj;
 
       boolean result = true;
+      result = result && (hasSiteId() == other.hasSiteId());
+      if (hasSiteId()) {
+        result = result && (getSiteId()
+            == other.getSiteId());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1554,6 +1598,10 @@ public final class ContestMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasSiteId()) {
+        hash = (37 * hash) + SITEID_FIELD_NUMBER;
+        hash = (53 * hash) + getSiteId();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1672,6 +1720,8 @@ public final class ContestMsg {
       }
       public Builder clear() {
         super.clear();
+        siteId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -1694,6 +1744,13 @@ public final class ContestMsg {
 
       public com.su.msg.ContestMsg.EnterContestSite_ buildPartial() {
         com.su.msg.ContestMsg.EnterContestSite_ result = new com.su.msg.ContestMsg.EnterContestSite_(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.siteId_ = siteId_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -1735,6 +1792,9 @@ public final class ContestMsg {
 
       public Builder mergeFrom(com.su.msg.ContestMsg.EnterContestSite_ other) {
         if (other == com.su.msg.ContestMsg.EnterContestSite_.getDefaultInstance()) return this;
+        if (other.hasSiteId()) {
+          setSiteId(other.getSiteId());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -1759,6 +1819,39 @@ public final class ContestMsg {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+      private int bitField0_;
+
+      private int siteId_ ;
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public boolean hasSiteId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public int getSiteId() {
+        return siteId_;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder setSiteId(int value) {
+        bitField0_ |= 0x00000001;
+        siteId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder clearSiteId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        siteId_ = 0;
+        onChanged();
         return this;
       }
       public final Builder setUnknownFields(
@@ -3134,6 +3227,15 @@ public final class ContestMsg {
   public interface Apply_OrBuilder extends
       // @@protoc_insertion_point(interface_extends:Apply_)
       com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    boolean hasSiteId();
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    int getSiteId();
   }
   /**
    * Protobuf type {@code Apply_}
@@ -3147,6 +3249,7 @@ public final class ContestMsg {
       super(builder);
     }
     private Apply_() {
+      siteId_ = 0;
     }
 
     @java.lang.Override
@@ -3159,6 +3262,7 @@ public final class ContestMsg {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -3174,6 +3278,11 @@ public final class ContestMsg {
                                      extensionRegistry, tag)) {
                 done = true;
               }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              siteId_ = input.readInt32();
               break;
             }
           }
@@ -3200,6 +3309,22 @@ public final class ContestMsg {
               com.su.msg.ContestMsg.Apply_.class, com.su.msg.ContestMsg.Apply_.Builder.class);
     }
 
+    private int bitField0_;
+    public static final int SITEID_FIELD_NUMBER = 1;
+    private int siteId_;
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public boolean hasSiteId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public int getSiteId() {
+      return siteId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -3212,6 +3337,9 @@ public final class ContestMsg {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, siteId_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -3220,6 +3348,10 @@ public final class ContestMsg {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, siteId_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -3237,6 +3369,11 @@ public final class ContestMsg {
       com.su.msg.ContestMsg.Apply_ other = (com.su.msg.ContestMsg.Apply_) obj;
 
       boolean result = true;
+      result = result && (hasSiteId() == other.hasSiteId());
+      if (hasSiteId()) {
+        result = result && (getSiteId()
+            == other.getSiteId());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -3248,6 +3385,10 @@ public final class ContestMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasSiteId()) {
+        hash = (37 * hash) + SITEID_FIELD_NUMBER;
+        hash = (53 * hash) + getSiteId();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3366,6 +3507,8 @@ public final class ContestMsg {
       }
       public Builder clear() {
         super.clear();
+        siteId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -3388,6 +3531,13 @@ public final class ContestMsg {
 
       public com.su.msg.ContestMsg.Apply_ buildPartial() {
         com.su.msg.ContestMsg.Apply_ result = new com.su.msg.ContestMsg.Apply_(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.siteId_ = siteId_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -3429,6 +3579,9 @@ public final class ContestMsg {
 
       public Builder mergeFrom(com.su.msg.ContestMsg.Apply_ other) {
         if (other == com.su.msg.ContestMsg.Apply_.getDefaultInstance()) return this;
+        if (other.hasSiteId()) {
+          setSiteId(other.getSiteId());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -3453,6 +3606,39 @@ public final class ContestMsg {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+      private int bitField0_;
+
+      private int siteId_ ;
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public boolean hasSiteId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public int getSiteId() {
+        return siteId_;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder setSiteId(int value) {
+        bitField0_ |= 0x00000001;
+        siteId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder clearSiteId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        siteId_ = 0;
+        onChanged();
         return this;
       }
       public final Builder setUnknownFields(
@@ -6115,15 +6301,16 @@ public final class ContestMsg {
       "\n\rContest.proto\"Y\n\014_ContestRank\022\020\n\010playe" +
       "rId\030\001 \001(\005\022\022\n\nplayerName\030\002 \001(\t\022\024\n\014contest" +
       "Score\030\003 \001(\005\022\r\n\005state\030\004 \001(\005\"\"\n\020EnterConte" +
-      "stSite\022\016\n\006siteId\030\001 \001(\005\"\023\n\021EnterContestSi" +
-      "te_\"!\n\017ExitContestSite\022\016\n\006siteId\030\001 \001(\005\"\022" +
-      "\n\020ExitContestSite_\"\027\n\005Apply\022\016\n\006siteId\030\001 " +
-      "\001(\005\"\010\n\006Apply_\"\035\n\013CancelApply\022\016\n\006siteId\030\001" +
-      " \001(\005\"\016\n\014CancelApply_\"7\n\022NoticeContestSit" +
-      "e_\022\016\n\006siteId\030\001 \001(\005\022\021\n\tplayerNum\030\002 \001(\005\"Z\n" +
-      "\016NoticeContest_\022\021\n\tcontestId\030\001 \001(\005\022\021\n\tba",
-      "seScore\030\002 \001(\005\022\"\n\013contestRank\030\003 \003(\0132\r._Co" +
-      "ntestRankB\032\n\ncom.su.msgB\nContestMsgH\001"
+      "stSite\022\016\n\006siteId\030\001 \001(\005\"#\n\021EnterContestSi" +
+      "te_\022\016\n\006siteId\030\001 \001(\005\"!\n\017ExitContestSite\022\016" +
+      "\n\006siteId\030\001 \001(\005\"\022\n\020ExitContestSite_\"\027\n\005Ap" +
+      "ply\022\016\n\006siteId\030\001 \001(\005\"\030\n\006Apply_\022\016\n\006siteId\030" +
+      "\001 \001(\005\"\035\n\013CancelApply\022\016\n\006siteId\030\001 \001(\005\"\016\n\014" +
+      "CancelApply_\"7\n\022NoticeContestSite_\022\016\n\006si" +
+      "teId\030\001 \001(\005\022\021\n\tplayerNum\030\002 \001(\005\"Z\n\016NoticeC",
+      "ontest_\022\021\n\tcontestId\030\001 \001(\005\022\021\n\tbaseScore\030" +
+      "\002 \001(\005\022\"\n\013contestRank\030\003 \003(\0132\r._ContestRan" +
+      "kB\032\n\ncom.su.msgB\nContestMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6154,7 +6341,7 @@ public final class ContestMsg {
     internal_static_EnterContestSite__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_EnterContestSite__descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "SiteId", });
     internal_static_ExitContestSite_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_ExitContestSite_fieldAccessorTable = new
@@ -6178,7 +6365,7 @@ public final class ContestMsg {
     internal_static_Apply__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Apply__descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "SiteId", });
     internal_static_CancelApply_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_CancelApply_fieldAccessorTable = new

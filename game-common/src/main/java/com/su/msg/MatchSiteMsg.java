@@ -1076,6 +1076,15 @@ public final class MatchSiteMsg {
   public interface Match_OrBuilder extends
       // @@protoc_insertion_point(interface_extends:Match_)
       com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    boolean hasSiteId();
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    int getSiteId();
   }
   /**
    * Protobuf type {@code Match_}
@@ -1089,6 +1098,7 @@ public final class MatchSiteMsg {
       super(builder);
     }
     private Match_() {
+      siteId_ = 0;
     }
 
     @java.lang.Override
@@ -1101,6 +1111,7 @@ public final class MatchSiteMsg {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -1116,6 +1127,11 @@ public final class MatchSiteMsg {
                                      extensionRegistry, tag)) {
                 done = true;
               }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              siteId_ = input.readInt32();
               break;
             }
           }
@@ -1142,6 +1158,22 @@ public final class MatchSiteMsg {
               com.su.msg.MatchSiteMsg.Match_.class, com.su.msg.MatchSiteMsg.Match_.Builder.class);
     }
 
+    private int bitField0_;
+    public static final int SITEID_FIELD_NUMBER = 1;
+    private int siteId_;
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public boolean hasSiteId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public int getSiteId() {
+      return siteId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1154,6 +1186,9 @@ public final class MatchSiteMsg {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, siteId_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1162,6 +1197,10 @@ public final class MatchSiteMsg {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, siteId_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -1179,6 +1218,11 @@ public final class MatchSiteMsg {
       com.su.msg.MatchSiteMsg.Match_ other = (com.su.msg.MatchSiteMsg.Match_) obj;
 
       boolean result = true;
+      result = result && (hasSiteId() == other.hasSiteId());
+      if (hasSiteId()) {
+        result = result && (getSiteId()
+            == other.getSiteId());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1190,6 +1234,10 @@ public final class MatchSiteMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasSiteId()) {
+        hash = (37 * hash) + SITEID_FIELD_NUMBER;
+        hash = (53 * hash) + getSiteId();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1308,6 +1356,8 @@ public final class MatchSiteMsg {
       }
       public Builder clear() {
         super.clear();
+        siteId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -1330,6 +1380,13 @@ public final class MatchSiteMsg {
 
       public com.su.msg.MatchSiteMsg.Match_ buildPartial() {
         com.su.msg.MatchSiteMsg.Match_ result = new com.su.msg.MatchSiteMsg.Match_(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.siteId_ = siteId_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -1371,6 +1428,9 @@ public final class MatchSiteMsg {
 
       public Builder mergeFrom(com.su.msg.MatchSiteMsg.Match_ other) {
         if (other == com.su.msg.MatchSiteMsg.Match_.getDefaultInstance()) return this;
+        if (other.hasSiteId()) {
+          setSiteId(other.getSiteId());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -1395,6 +1455,39 @@ public final class MatchSiteMsg {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+      private int bitField0_;
+
+      private int siteId_ ;
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public boolean hasSiteId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public int getSiteId() {
+        return siteId_;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder setSiteId(int value) {
+        bitField0_ |= 0x00000001;
+        siteId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder clearSiteId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        siteId_ = 0;
+        onChanged();
         return this;
       }
       public final Builder setUnknownFields(
@@ -3588,11 +3681,11 @@ public final class MatchSiteMsg {
     java.lang.String[] descriptorData = {
       "\n\017MatchSite.proto\"/\n\n_MatchSite\022\016\n\006siteI" +
       "d\030\001 \001(\005\022\021\n\tplayerNum\030\002 \001(\005\"\027\n\005Match\022\016\n\006s" +
-      "iteId\030\001 \001(\005\"\010\n\006Match_\"\035\n\013CancelMatch\022\016\n\006" +
-      "siteId\030\001 \001(\005\"\016\n\014CancelMatch_\" \n\014GetMatch" +
-      "Site\022\020\n\010siteType\030\001 \001(\005\"/\n\rGetMatchSite_\022" +
-      "\036\n\tmatchSite\030\001 \003(\0132\013._MatchSiteB\034\n\ncom.s" +
-      "u.msgB\014MatchSiteMsgH\001"
+      "iteId\030\001 \001(\005\"\030\n\006Match_\022\016\n\006siteId\030\001 \001(\005\"\035\n" +
+      "\013CancelMatch\022\016\n\006siteId\030\001 \001(\005\"\016\n\014CancelMa" +
+      "tch_\" \n\014GetMatchSite\022\020\n\010siteType\030\001 \001(\005\"/" +
+      "\n\rGetMatchSite_\022\036\n\tmatchSite\030\001 \003(\0132\013._Ma" +
+      "tchSiteB\034\n\ncom.su.msgB\014MatchSiteMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3623,7 +3716,7 @@ public final class MatchSiteMsg {
     internal_static_Match__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Match__descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "SiteId", });
     internal_static_CancelMatch_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_CancelMatch_fieldAccessorTable = new

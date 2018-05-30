@@ -50,7 +50,7 @@ public class GamePlayer implements Delayed {
 	/**
 	 * 牌桌
 	 */
-	private Table table;
+	private volatile Table table;
 	/**
 	 * 玩家上下文
 	 */

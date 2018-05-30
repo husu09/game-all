@@ -14,7 +14,7 @@ message Match {
 	optional int32 siteId = 1;	
 }
 message Match_ {
-	
+	optional int32 siteId = 1;	
 }
 
 // 取消匹配

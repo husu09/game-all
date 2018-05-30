@@ -23,8 +23,8 @@ public class ScheduleManager {
 
 	private ScheduledExecutorService schedulePool = Executors
 			.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
-
-	private ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+	
+	private ExecutorService pool = Executors.newCachedThreadPool();
 
 	public void start() {
 		// 定时任务

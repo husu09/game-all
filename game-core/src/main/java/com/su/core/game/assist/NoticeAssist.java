@@ -1,6 +1,4 @@
-package com.su.core.game.assist.notice;
-
-import javax.annotation.PostConstruct;
+package com.su.core.game.assist;
 
 import org.springframework.stereotype.Component;
 
@@ -13,12 +11,6 @@ import com.su.msg.TableMsg._Table;
 
 @Component
 public class NoticeAssist {
-	
-	@PostConstruct
-	public void initialize(){ 
-		NoticeAssistFactory.addNoticeAssist(this);
-	}
-	
 	/**
 	 * 通知所有状态
 	 */
@@ -34,24 +26,34 @@ public class NoticeAssist {
 	 */
 	public _Table serializeTable(Table table, _Table.Builder builder, GamePlayer currGamePlayer) {
 		builder.clear();
+		// 玩家
 		for (GamePlayer otherGamePlayer : table.getPlayers())
 			builder.addPlayer(serializeGamePlayer(otherGamePlayer, table.getGamePlayerBuilder(),
 					currGamePlayer.equals(otherGamePlayer)));
 		for (int multiple : table.getMultiples())
 			builder.addMultiple(multiple);
-		builder.setState(table.getState().getValue());
-		for (Card card : table.getLastCards()) {
-			if (card != null)
-				builder.addLastCard(serializeCard(card, table.getCardBuilder()));
+		if (table.getState() != null)
+			builder.setState(table.getState().getValue());
+		if (table.getLastCards() != null) {
+			for (Card card : table.getLastCards()) {
+				if (card != null)
+					builder.addLastCard(serializeCard(card, table.getCardBuilder()));
+			}
 		}
-		builder.setLastCardType(table.getLastCardType().getValue());
-		builder.setLastOp(table.getLastOp());
+		if (table.getLastCardType() != null)
+			builder.setLastCardType(table.getLastCardType().getValue());
+		if (table.getLastOp() != null)
+			builder.setLastOp(table.getLastOp());
 		builder.setRoundScore(table.getRoundScore());
-		builder.setCallCard(serializeCard(table.getCallCard(), table.getCardBuilder()));
-		builder.setCallType(table.getCallType().getValue());
-		builder.setCallOp(table.getCallOp());
+		if (table.getCallCard() != null)
+			builder.setCallCard(serializeCard(table.getCallCard(), table.getCardBuilder()));
+		if (table.getCallType() != null)
+			builder.setCallType(table.getCallType().getValue());
+		if (table.getCallOp() != null)
+			builder.setCallOp(table.getCallOp());
 		builder.setDealer(table.getDealer());
-		builder.setWaitTime(table.getWaitTime());
+		if (table.getWaitTime() != null)
+			builder.setWaitTime(table.getWaitTime());
 		builder.setType(table.getSite().getSiteType().getValue());
 		return builder.build();
 	}
@@ -62,6 +64,7 @@ public class NoticeAssist {
 	public _GamePlayer serializeGamePlayer(GamePlayer gamePlayer, _GamePlayer.Builder builder, boolean isContainHands) {
 		builder.clear();
 		builder.setId(gamePlayer.getId());
+		// 就否包含手牌
 		if (isContainHands)
 			for (Card card : gamePlayer.getHandCards()) {
 				if (card != null)
@@ -72,8 +75,10 @@ public class NoticeAssist {
 		builder.setMultiple(gamePlayer.getMultiple());
 		builder.setScore(gamePlayer.getScore());
 		builder.setIsAuto(gamePlayer.getIsAuto());
-		builder.setState(gamePlayer.getState().getValue());
-		builder.setOpTime(gamePlayer.getOpTime());
+		if (gamePlayer.getState() != null)
+			builder.setState(gamePlayer.getState().getValue());
+		if (gamePlayer.getOpTime() != null)
+			builder.setOpTime(gamePlayer.getOpTime());
 		builder.setContestScore(gamePlayer.getContestScore());
 		builder.setIsQuit(gamePlayer.getIsQuit());
 		return builder.build();
@@ -85,7 +90,8 @@ public class NoticeAssist {
 	public _Card serializeCard(Card card, _Card.Builder builder) {
 		builder.clear();
 		builder.setValue(card.getValue());
-		builder.setSuit(card.getSuit().getValue());
+		if (card.getSuit() != null)
+			builder.setSuit(card.getSuit().getValue());
 		return builder.build();
 	}
 

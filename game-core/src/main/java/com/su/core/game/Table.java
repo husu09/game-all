@@ -15,10 +15,9 @@ import com.su.common.util.TimeUtil;
 import com.su.core.akka.AkkaContext;
 import com.su.core.game.actor.TableActor;
 import com.su.core.game.actor.TableActorImpl;
+import com.su.core.game.assist.NoticeAssist;
 import com.su.core.game.assist.card.CardAssist;
 import com.su.core.game.assist.card.CardAssistManager;
-import com.su.core.game.assist.notice.NoticeAssist;
-import com.su.core.game.assist.notice.NoticeAssistFactory;
 import com.su.core.game.enums.CallType;
 import com.su.core.game.enums.CardType;
 import com.su.core.game.enums.MultipleType;
@@ -96,7 +95,7 @@ public abstract class Table implements Delayed {
 	 * 辅助对象
 	 */
 	protected CardAssistManager cardAssistManager = SpringUtil.getContext().getBean(CardAssistManager.class);
-	protected NoticeAssist noticeAssist = NoticeAssistFactory.getNoticeAssist(this.getClass());
+	protected NoticeAssist noticeAssist = SpringUtil.getContext().getBean(NoticeAssist.class);
 	/**
 	 * 通知使用的 build 对象
 	 */
@@ -190,12 +189,12 @@ public abstract class Table implements Delayed {
 		// 洗牌
 		shuffle();
 		// 发牌
-		int index = 0;
-		for (int i = 1; i <= this.cards.length; i++) {
-			this.players[(this.dealer + i) % 4 - 1].getHandCards()[index] = this.cards[i];
-			this.cards[i] = null;
-			if (i % 4 == 0)
-				index++;
+		int cycleCount = this.cards.length/4;
+		for (int i = 0; i < cycleCount; i++) {
+			int startIndex = i * GameConst.PLAYER_COUNT;
+			for (int j = 0 ; j < GameConst.PLAYER_COUNT; j ++) {
+				this.players[this.dealer + j % 4].getHandCards()[i] = this.cards[startIndex + j];
+			}
 		}
 		for (int i = 0; i < this.players.length; i++) {
 			Arrays.sort(this.players[i].getHandCards(), Collections.reverseOrder());

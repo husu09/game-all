@@ -10,6 +10,7 @@ import com.su.common.util.StringUtil;
 import com.su.core.action.Action;
 import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
+import com.su.core.event.GameEventDispatcher;
 import com.su.msg.LoginMsg.Login;
 import com.su.msg.LoginMsg.Login_;
 import com.su.server.service.LoginService;
@@ -28,6 +29,9 @@ public class LoginControl {
 
 	@Autowired
 	private PlayerService playerService;
+	
+	@Autowired
+	private GameEventDispatcher gameEventDispatcher;
 
 	/**
 	 * 登录
@@ -40,19 +44,21 @@ public class LoginControl {
 		}
 
 		long playerId = loginService.getIdCacheByAccount(req.getAccount());
+		Player player = null;
 		if (playerId == 0) {
 			// 创建用户
-			Player player = new Player();
+			player = new Player();
 			player.setAccount(req.getAccount());
 			player.setName(req.getName());
 			playerId = playerService.createPlayer(player);
+			if (playerId == 0) {
+				playerContext.sendError(20002);
+				return;
+			}
 			loginService.addIdCacheByAccount(req.getAccount(), playerId);
+		} else {
+			 player = playerService.getPlayerById(playerId);
 		}
-		if (playerId == 0) {
-			playerContext.sendError(20002);
-			return;
-		}
-		Player player = playerService.getPlayerById(playerId);
 		if (player == null) {
 			playerContext.sendError(20001);
 			return;
@@ -63,7 +69,7 @@ public class LoginControl {
 		Login_.Builder resp = Login_.newBuilder();
 		resp.setPlayer(playerService.serializePlayer(player));
 		// 登录事件
-		playerContext.getActor().login(playerContext, resp);
+		gameEventDispatcher.login(playerContext, resp);
 		playerContext.write(resp);
 
 		loginService.addPlayerCache(player);

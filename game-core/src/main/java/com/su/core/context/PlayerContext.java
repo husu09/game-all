@@ -4,6 +4,7 @@ import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.core.akka.PlayerActor;
 import com.su.core.game.GamePlayer;
+import com.su.core.game.Site;
 import com.su.core.netty.NettyServerHandler;
 import com.su.msg.CommonMsg.Error_;
 import com.su.msg.PlayerMsg._Player;
@@ -22,6 +23,11 @@ public class PlayerContext {
 	private long playerId;
 	
 	private volatile GamePlayer gamePlayer;
+	
+	/**
+	 * 当在匹配状态时记录所在的场
+	 * */
+	private volatile Site inSite;
 	
 	/**
 	 * 玩家更新数据
@@ -111,6 +117,13 @@ public class PlayerContext {
 	public void setNotice(boolean isNotice) {
 		this.isNotice = isNotice;
 	}
-	
+
+	public Site getInSite() {
+		return inSite;
+	}
+
+	public void setInSite(Site inSite) {
+		this.inSite = inSite;
+	}
 	
 }
