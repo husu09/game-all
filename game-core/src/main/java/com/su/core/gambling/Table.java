@@ -65,19 +65,15 @@ public class Table implements Delayed{
 
 	AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
 	
-	public Table() {
+	public Table(Site site) {
 		tableActor = akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
-		/*this.site = site;
-		this.actor = this.akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
-		// 卡牌
-		Card[] oneCards = Card.getADeckOfCards();
+		this.site = site;
+		// 初始化牌
 		Card[] cards = new Card[Card.CARDS_NUM * 2];
-		System.arraycopy(oneCards, 0, cards, 0, Card.CARDS_NUM);
-		System.arraycopy(oneCards, 0, cards, Card.CARDS_NUM, Card.CARDS_NUM);
-		this.cards = cards;*/
-		
+		System.arraycopy(Card.ONE_CARDS, 0, cards, 0, Card.CARDS_NUM);
+		System.arraycopy(Card.ONE_CARDS, 0, cards, Card.CARDS_NUM, Card.CARDS_NUM);
+		this.cards = cards;
 	}
-	
 	
 	
 	public PTable toProto() {
@@ -166,7 +162,14 @@ public class Table implements Delayed{
 			gamePlayerNoticeBuilder.clear();
 		}
 	}
-
+	
+	/**
+	 * 重置牌桌
+	 * */
+	public void reset() {
+		
+	}
+	
 	/**
 	 * 洗牌
 	 */
@@ -183,6 +186,8 @@ public class Table implements Delayed{
 	 * 发牌
 	 */
 	public void deal() {
+		// 洗牌
+		shuffle();
 		int index = 0;
 		for (int i = 1; i <= this.cards.length; i++) {
 			this.players[(this.dealer + i) % 4 - 1].getHandCards()[index] = this.cards[i];
@@ -197,8 +202,9 @@ public class Table implements Delayed{
 	/**
 	 * 加倍
 	 * */
-	public void doubles() {
-		
+	public boolean doubles(GamePlayer player, int multiple) {
+		player.setMultipleValue(player.getMultipleValue() + multiple);
+		return true;
 	}
 	
 	/**
@@ -455,6 +461,13 @@ public class Table implements Delayed{
 
 
 	public void setPlayers(GamePlayer[] players) {
+		if (this.players != null)
+			throw new RuntimeException("error operate");
+		// 玩家数据
+		for (int i = 0; i < players.length; i++) {
+			players[i].setIndex(i);
+			players[i].setTable(this);
+		}
 		this.players = players;
 	}
 

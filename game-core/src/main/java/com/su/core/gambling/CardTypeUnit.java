@@ -1,5 +1,7 @@
 package com.su.core.gambling;
 
+import com.su.core.gambling.enums.CardType;
+
 public class CardTypeUnit {
 
 	/**

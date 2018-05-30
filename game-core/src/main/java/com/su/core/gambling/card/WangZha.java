@@ -3,7 +3,7 @@ package com.su.core.gambling.card;
 import org.springframework.stereotype.Component;
 
 import com.su.core.gambling.Card;
-import com.su.core.gambling.CardType;
+import com.su.core.gambling.enums.CardType;
 
 @Component
 public class WangZha extends BaseCardProcessor {

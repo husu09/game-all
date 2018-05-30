@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.su.core.gambling.CardType;
+import com.su.core.gambling.enums.CardType;
 
 @Component
 public class CardProcessorManager {

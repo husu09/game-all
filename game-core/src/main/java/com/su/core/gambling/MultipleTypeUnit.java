@@ -1,4 +1,4 @@
-package com.su.server.obj.play;
+package com.su.core.gambling;
 
 public class MultipleTypeUnit {
 

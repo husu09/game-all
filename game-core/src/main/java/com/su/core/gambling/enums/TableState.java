@@ -2,27 +2,19 @@ package com.su.core.gambling.enums;
 
 public enum TableState {
 	/**
-	 * 等待 0
-	 * */
-	WAIT,
-	/**
-	 * 发牌 1
-	 * */
-	DEAL,
-	/**
-	 * 加倍 2
+	 * 加倍 1
 	 * */
 	DOUBLES,
 	/**
-	 * 叫牌 3
+	 * 叫牌 2
 	 * */
 	CALL,
 	/**
-	 * 出牌 4
+	 * 出牌 3
 	 * */
 	DRAW,
 	/**
-	 * 结算 5
+	 * 结算 4
 	 * */
 	CLOSE
 }

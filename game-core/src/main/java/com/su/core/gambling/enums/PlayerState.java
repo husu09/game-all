@@ -2,27 +2,19 @@ package com.su.core.gambling.enums;
 
 public enum PlayerState {
 	/**
-	 * 排队 0
-	 */
-	QUEUE,
-	/**
-	 * 等待 1
-	 */
-	WAIT,
-	/**
-	 * 准备 2
+	 * 准备 1
 	 */
 	READY,
 	/**
-	 * 游戏中 3
+	 * 等待 2
 	 */
-	PLAY,
+	WAIT,
 	/**
-	 * 操作中 4
+	 * 操作中 3
 	 */
 	OPERATE,
 	/**
-	 * 出完牌 5
+	 * 出完牌 4
 	 * */
 	FINISH
 

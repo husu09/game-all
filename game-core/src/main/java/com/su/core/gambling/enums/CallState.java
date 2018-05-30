@@ -10,7 +10,7 @@ public enum CallState {
 	 * */
 	DARK,
 	/**
-	 * 明牌 2
+	 * 明叫 2
 	 * */
 	LIGHT
 }

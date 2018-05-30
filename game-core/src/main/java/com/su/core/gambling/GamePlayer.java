@@ -47,13 +47,14 @@ public class GamePlayer {
 	private Table table;
 	
 	private PlayerContext playerContext;
-
+	
+	public GamePlayer(PlayerContext playerContext) {
+		this.playerContext = playerContext;
+		this.id = playerContext.getPlayerId();
+	}
+	
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public int getIndex() {
@@ -132,8 +133,5 @@ public class GamePlayer {
 		return playerContext;
 	}
 
-	public void setPlayerContext(PlayerContext playerContext) {
-		this.playerContext = playerContext;
-	}
 	
 }

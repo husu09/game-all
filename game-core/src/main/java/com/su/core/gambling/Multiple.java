@@ -1,6 +1,6 @@
-package com.su.server.obj.play;
+package com.su.core.gambling;
 
-import com.su.msg.PlayMsg.PMultiple;
+
 
 public class Multiple {
 	private int value;
