@@ -29,8 +29,7 @@ public class TableActorImpl implements TableActor {
 
 	@Override
 	public void call(GamePlayer player, int index) {
-		// TODO Auto-generated method stub
-		
+		table.call(player, index);
 	}
 
 	@Override

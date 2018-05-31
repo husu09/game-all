@@ -11,6 +11,7 @@ import com.su.core.gambling.GamePlayer;
 import com.su.core.gambling.Site;
 import com.su.core.gambling.enums.PlayerState;
 import com.su.excel.mapper.BagMapper;
+import com.su.msg.GamblingMsg.Call;
 import com.su.msg.GamblingMsg.Double;
 import com.su.msg.GamblingMsg.Start;
 import com.su.server.service.BagService;
@@ -69,6 +70,22 @@ public class GamblingControl {
 		if (!result) {
 			bagService.addItem(playerContext, GamblingConst.DOUBLES_ITEM, 0);
 		}
-		
+	}
+	
+	/**
+	 * 叫牌
+	 * */
+	public void call(PlayerContext playerContext, Call req) {
+		// 游戏用户检测
+		GamePlayer gamePlayer = playerContext.getGamePlayer();
+		if (gamePlayer == null) {
+			playerContext.sendError(3001);
+			return;
+		}
+		if (gamePlayer.getState() != PlayerState.OPERATE) {
+			playerContext.sendError(3002);
+			return;
+		}
+		gamePlayer.getTable().getActor().call(gamePlayer, req.getCardIndex());
 	}
 }
