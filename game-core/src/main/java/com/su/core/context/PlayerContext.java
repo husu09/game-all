@@ -3,6 +3,7 @@ package com.su.core.context;
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.core.akka.PlayerActor;
+import com.su.core.gambling.GamePlayer;
 import com.su.core.netty.NettyServerHandler;
 import com.su.msg.CommonMsg.Error_;
 
@@ -18,6 +19,8 @@ public class PlayerContext {
 	private PlayerActor actor;
 	
 	private long playerId;
+	
+	private GamePlayer gamePlayer;
 
 	public void handleLogin(long playerId) {
 		this.playerId = playerId;
@@ -75,6 +78,14 @@ public class PlayerContext {
 
 	public long getPlayerId() {
 		return playerId;
+	}
+
+	public GamePlayer getGamePlayer() {
+		return gamePlayer;
+	}
+
+	public void setGamePlayer(GamePlayer gamePlayer) {
+		this.gamePlayer = gamePlayer;
 	}
 	
 }

@@ -34,7 +34,7 @@ public class GamePlayer {
 	/**
 	 * 状态
 	 */
-	private PlayerState state;
+	private volatile PlayerState state;
 	/**
 	 * 是否托管
 	 */
@@ -51,6 +51,7 @@ public class GamePlayer {
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 		this.id = playerContext.getPlayerId();
+		playerContext.setGamePlayer(this);
 	}
 	
 	public long getId() {

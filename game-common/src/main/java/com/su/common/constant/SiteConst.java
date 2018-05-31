@@ -1,4 +1,4 @@
-package com.su.server.constant;
+package com.su.common.constant;
 
 public class SiteConst {
 	/**

@@ -37,7 +37,7 @@ public final class GamblingMsg {
 
     /**
      * <pre>
-     * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
+     * 花色（1：方块，2：梅花，3：红桃，4：黑桃）
      * </pre>
      *
      * <code>optional int32 suit = 2;</code>
@@ -45,7 +45,7 @@ public final class GamblingMsg {
     boolean hasSuit();
     /**
      * <pre>
-     * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
+     * 花色（1：方块，2：梅花，3：红桃，4：黑桃）
      * </pre>
      *
      * <code>optional int32 suit = 2;</code>
@@ -158,7 +158,7 @@ public final class GamblingMsg {
     private int suit_;
     /**
      * <pre>
-     * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
+     * 花色（1：方块，2：梅花，3：红桃，4：黑桃）
      * </pre>
      *
      * <code>optional int32 suit = 2;</code>
@@ -168,7 +168,7 @@ public final class GamblingMsg {
     }
     /**
      * <pre>
-     * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
+     * 花色（1：方块，2：梅花，3：红桃，4：黑桃）
      * </pre>
      *
      * <code>optional int32 suit = 2;</code>
@@ -538,7 +538,7 @@ public final class GamblingMsg {
       private int suit_ ;
       /**
        * <pre>
-       * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
+       * 花色（1：方块，2：梅花，3：红桃，4：黑桃）
        * </pre>
        *
        * <code>optional int32 suit = 2;</code>
@@ -548,7 +548,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
+       * 花色（1：方块，2：梅花，3：红桃，4：黑桃）
        * </pre>
        *
        * <code>optional int32 suit = 2;</code>
@@ -558,7 +558,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
+       * 花色（1：方块，2：梅花，3：红桃，4：黑桃）
        * </pre>
        *
        * <code>optional int32 suit = 2;</code>
@@ -571,7 +571,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 花色（0：方块，1：梅花，2：红桃，3：黑桃）
+       * 花色（1：方块，2：梅花，3：红桃，4：黑桃）
        * </pre>
        *
        * <code>optional int32 suit = 2;</code>
@@ -1332,7 +1332,7 @@ public final class GamblingMsg {
 
     /**
      * <pre>
-     * 玩家队伍（0：暂无队伍，1：红方，2：蓝方）
+     * 玩家队伍（1：红方，2：蓝方）
      * </pre>
      *
      * <code>optional int32 team = 4;</code>
@@ -1340,7 +1340,7 @@ public final class GamblingMsg {
     boolean hasTeam();
     /**
      * <pre>
-     * 玩家队伍（0：暂无队伍，1：红方，2：蓝方）
+     * 玩家队伍（1：红方，2：蓝方）
      * </pre>
      *
      * <code>optional int32 team = 4;</code>
@@ -1400,7 +1400,7 @@ public final class GamblingMsg {
 
     /**
      * <pre>
-     * 玩家状态（0：等待，1：准备，2：游戏中）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
      * </pre>
      *
      * <code>optional int32 pState = 8;</code>
@@ -1408,7 +1408,7 @@ public final class GamblingMsg {
     boolean hasPState();
     /**
      * <pre>
-     * 玩家状态（0：等待，1：准备，2：游戏中）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
      * </pre>
      *
      * <code>optional int32 pState = 8;</code>
@@ -1642,7 +1642,7 @@ public final class GamblingMsg {
     private int team_;
     /**
      * <pre>
-     * 玩家队伍（0：暂无队伍，1：红方，2：蓝方）
+     * 玩家队伍（1：红方，2：蓝方）
      * </pre>
      *
      * <code>optional int32 team = 4;</code>
@@ -1652,7 +1652,7 @@ public final class GamblingMsg {
     }
     /**
      * <pre>
-     * 玩家队伍（0：暂无队伍，1：红方，2：蓝方）
+     * 玩家队伍（1：红方，2：蓝方）
      * </pre>
      *
      * <code>optional int32 team = 4;</code>
@@ -1734,7 +1734,7 @@ public final class GamblingMsg {
     private int pState_;
     /**
      * <pre>
-     * 玩家状态（0：等待，1：准备，2：游戏中）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
      * </pre>
      *
      * <code>optional int32 pState = 8;</code>
@@ -1744,7 +1744,7 @@ public final class GamblingMsg {
     }
     /**
      * <pre>
-     * 玩家状态（0：等待，1：准备，2：游戏中）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
      * </pre>
      *
      * <code>optional int32 pState = 8;</code>
@@ -2655,7 +2655,7 @@ public final class GamblingMsg {
       private int team_ ;
       /**
        * <pre>
-       * 玩家队伍（0：暂无队伍，1：红方，2：蓝方）
+       * 玩家队伍（1：红方，2：蓝方）
        * </pre>
        *
        * <code>optional int32 team = 4;</code>
@@ -2665,7 +2665,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 玩家队伍（0：暂无队伍，1：红方，2：蓝方）
+       * 玩家队伍（1：红方，2：蓝方）
        * </pre>
        *
        * <code>optional int32 team = 4;</code>
@@ -2675,7 +2675,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 玩家队伍（0：暂无队伍，1：红方，2：蓝方）
+       * 玩家队伍（1：红方，2：蓝方）
        * </pre>
        *
        * <code>optional int32 team = 4;</code>
@@ -2688,7 +2688,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 玩家队伍（0：暂无队伍，1：红方，2：蓝方）
+       * 玩家队伍（1：红方，2：蓝方）
        * </pre>
        *
        * <code>optional int32 team = 4;</code>
@@ -2847,7 +2847,7 @@ public final class GamblingMsg {
       private int pState_ ;
       /**
        * <pre>
-       * 玩家状态（0：等待，1：准备，2：游戏中）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
        * </pre>
        *
        * <code>optional int32 pState = 8;</code>
@@ -2857,7 +2857,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 玩家状态（0：等待，1：准备，2：游戏中）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
        * </pre>
        *
        * <code>optional int32 pState = 8;</code>
@@ -2867,7 +2867,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 玩家状态（0：等待，1：准备，2：游戏中）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
        * </pre>
        *
        * <code>optional int32 pState = 8;</code>
@@ -2880,7 +2880,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 玩家状态（0：等待，1：准备，2：游戏中）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
        * </pre>
        *
        * <code>optional int32 pState = 8;</code>
@@ -3034,7 +3034,7 @@ public final class GamblingMsg {
 
     /**
      * <pre>
-     * 牌桌状态（0：准备，1：发牌，2：加倍，3：叫牌，4：出牌，5：结算）
+     * 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
      * </pre>
      *
      * <code>optional int32 tState = 3;</code>
@@ -3042,7 +3042,7 @@ public final class GamblingMsg {
     boolean hasTState();
     /**
      * <pre>
-     * 牌桌状态（0：准备，1：发牌，2：加倍，3：叫牌，4：出牌，5：结算）
+     * 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
      * </pre>
      *
      * <code>optional int32 tState = 3;</code>
@@ -3051,27 +3051,96 @@ public final class GamblingMsg {
 
     /**
      * <pre>
-     * 牌权
+     * 最后出牌
      * </pre>
      *
-     * <code>optional int32 hold = 4;</code>
+     * <code>repeated ._Card lastCard = 4;</code>
      */
-    boolean hasHold();
+    java.util.List<com.su.msg.GamblingMsg._Card> 
+        getLastCardList();
     /**
      * <pre>
-     * 牌权
+     * 最后出牌
      * </pre>
      *
-     * <code>optional int32 hold = 4;</code>
+     * <code>repeated ._Card lastCard = 4;</code>
      */
-    int getHold();
+    com.su.msg.GamblingMsg._Card getLastCard(int index);
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated ._Card lastCard = 4;</code>
+     */
+    int getLastCardCount();
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated ._Card lastCard = 4;</code>
+     */
+    java.util.List<? extends com.su.msg.GamblingMsg._CardOrBuilder> 
+        getLastCardOrBuilderList();
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated ._Card lastCard = 4;</code>
+     */
+    com.su.msg.GamblingMsg._CardOrBuilder getLastCardOrBuilder(
+        int index);
+
+    /**
+     * <pre>
+     * 最后牌型
+     * </pre>
+     *
+     * <code>repeated int32 cardType = 5;</code>
+     */
+    java.util.List<java.lang.Integer> getCardTypeList();
+    /**
+     * <pre>
+     * 最后牌型
+     * </pre>
+     *
+     * <code>repeated int32 cardType = 5;</code>
+     */
+    int getCardTypeCount();
+    /**
+     * <pre>
+     * 最后牌型
+     * </pre>
+     *
+     * <code>repeated int32 cardType = 5;</code>
+     */
+    int getCardType(int index);
+
+    /**
+     * <pre>
+     * 最后出牌玩家
+     * </pre>
+     *
+     * <code>optional int32 lastOp = 6;</code>
+     */
+    boolean hasLastOp();
+    /**
+     * <pre>
+     * 最后出牌玩家
+     * </pre>
+     *
+     * <code>optional int32 lastOp = 6;</code>
+     */
+    int getLastOp();
 
     /**
      * <pre>
      * 轮分
      * </pre>
      *
-     * <code>optional int32 roundScore = 5;</code>
+     * <code>optional int32 roundScore = 7;</code>
      */
     boolean hasRoundScore();
     /**
@@ -3079,7 +3148,7 @@ public final class GamblingMsg {
      * 轮分
      * </pre>
      *
-     * <code>optional int32 roundScore = 5;</code>
+     * <code>optional int32 roundScore = 7;</code>
      */
     int getRoundScore();
 
@@ -3088,7 +3157,7 @@ public final class GamblingMsg {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional ._Card callCard = 6;</code>
+     * <code>optional ._Card callCard = 8;</code>
      */
     boolean hasCallCard();
     /**
@@ -3096,7 +3165,7 @@ public final class GamblingMsg {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional ._Card callCard = 6;</code>
+     * <code>optional ._Card callCard = 8;</code>
      */
     com.su.msg.GamblingMsg._Card getCallCard();
     /**
@@ -3104,7 +3173,7 @@ public final class GamblingMsg {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional ._Card callCard = 6;</code>
+     * <code>optional ._Card callCard = 8;</code>
      */
     com.su.msg.GamblingMsg._CardOrBuilder getCallCardOrBuilder();
 
@@ -3113,7 +3182,7 @@ public final class GamblingMsg {
      * 叫牌状态
      * </pre>
      *
-     * <code>optional int32 callState = 7;</code>
+     * <code>optional int32 callState = 9;</code>
      */
     boolean hasCallState();
     /**
@@ -3121,7 +3190,7 @@ public final class GamblingMsg {
      * 叫牌状态
      * </pre>
      *
-     * <code>optional int32 callState = 7;</code>
+     * <code>optional int32 callState = 9;</code>
      */
     int getCallState();
 
@@ -3130,7 +3199,7 @@ public final class GamblingMsg {
      * 庄家
      * </pre>
      *
-     * <code>optional int32 dealer = 8;</code>
+     * <code>optional int32 dealer = 10;</code>
      */
     boolean hasDealer();
     /**
@@ -3138,33 +3207,16 @@ public final class GamblingMsg {
      * 庄家
      * </pre>
      *
-     * <code>optional int32 dealer = 8;</code>
+     * <code>optional int32 dealer = 10;</code>
      */
     int getDealer();
-
-    /**
-     * <pre>
-     * 出牌玩家
-     * </pre>
-     *
-     * <code>optional int32 opPlayer = 9;</code>
-     */
-    boolean hasOpPlayer();
-    /**
-     * <pre>
-     * 出牌玩家
-     * </pre>
-     *
-     * <code>optional int32 opPlayer = 9;</code>
-     */
-    int getOpPlayer();
 
     /**
      * <pre>
      * 操作时间（秒）
      * </pre>
      *
-     * <code>optional int32 opTime = 10;</code>
+     * <code>optional int32 opTime = 11;</code>
      */
     boolean hasOpTime();
     /**
@@ -3172,7 +3224,7 @@ public final class GamblingMsg {
      * 操作时间（秒）
      * </pre>
      *
-     * <code>optional int32 opTime = 10;</code>
+     * <code>optional int32 opTime = 11;</code>
      */
     int getOpTime();
   }
@@ -3191,11 +3243,12 @@ public final class GamblingMsg {
       player_ = java.util.Collections.emptyList();
       comMultiple_ = java.util.Collections.emptyList();
       tState_ = 0;
-      hold_ = 0;
+      lastCard_ = java.util.Collections.emptyList();
+      cardType_ = java.util.Collections.emptyList();
+      lastOp_ = 0;
       roundScore_ = 0;
       callState_ = 0;
       dealer_ = 0;
-      opPlayer_ = 0;
       opTime_ = 0;
     }
 
@@ -3250,17 +3303,47 @@ public final class GamblingMsg {
               tState_ = input.readInt32();
               break;
             }
-            case 32: {
-              bitField0_ |= 0x00000002;
-              hold_ = input.readInt32();
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                lastCard_ = new java.util.ArrayList<com.su.msg.GamblingMsg._Card>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              lastCard_.add(
+                  input.readMessage(com.su.msg.GamblingMsg._Card.PARSER, extensionRegistry));
               break;
             }
             case 40: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                cardType_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              cardType_.add(input.readInt32());
+              break;
+            }
+            case 42: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
+                cardType_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                cardType_.add(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000002;
+              lastOp_ = input.readInt32();
+              break;
+            }
+            case 56: {
               bitField0_ |= 0x00000004;
               roundScore_ = input.readInt32();
               break;
             }
-            case 50: {
+            case 66: {
               com.su.msg.GamblingMsg._Card.Builder subBuilder = null;
               if (((bitField0_ & 0x00000008) == 0x00000008)) {
                 subBuilder = callCard_.toBuilder();
@@ -3273,23 +3356,18 @@ public final class GamblingMsg {
               bitField0_ |= 0x00000008;
               break;
             }
-            case 56: {
+            case 72: {
               bitField0_ |= 0x00000010;
               callState_ = input.readInt32();
               break;
             }
-            case 64: {
+            case 80: {
               bitField0_ |= 0x00000020;
               dealer_ = input.readInt32();
               break;
             }
-            case 72: {
+            case 88: {
               bitField0_ |= 0x00000040;
-              opPlayer_ = input.readInt32();
-              break;
-            }
-            case 80: {
-              bitField0_ |= 0x00000080;
               opTime_ = input.readInt32();
               break;
             }
@@ -3306,6 +3384,12 @@ public final class GamblingMsg {
         }
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           comMultiple_ = java.util.Collections.unmodifiableList(comMultiple_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          lastCard_ = java.util.Collections.unmodifiableList(lastCard_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          cardType_ = java.util.Collections.unmodifiableList(cardType_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3438,7 +3522,7 @@ public final class GamblingMsg {
     private int tState_;
     /**
      * <pre>
-     * 牌桌状态（0：准备，1：发牌，2：加倍，3：叫牌，4：出牌，5：结算）
+     * 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
      * </pre>
      *
      * <code>optional int32 tState = 3;</code>
@@ -3448,7 +3532,7 @@ public final class GamblingMsg {
     }
     /**
      * <pre>
-     * 牌桌状态（0：准备，1：发牌，2：加倍，3：叫牌，4：出牌，5：结算）
+     * 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
      * </pre>
      *
      * <code>optional int32 tState = 3;</code>
@@ -3457,37 +3541,126 @@ public final class GamblingMsg {
       return tState_;
     }
 
-    public static final int HOLD_FIELD_NUMBER = 4;
-    private int hold_;
+    public static final int LASTCARD_FIELD_NUMBER = 4;
+    private java.util.List<com.su.msg.GamblingMsg._Card> lastCard_;
     /**
      * <pre>
-     * 牌权
+     * 最后出牌
      * </pre>
      *
-     * <code>optional int32 hold = 4;</code>
+     * <code>repeated ._Card lastCard = 4;</code>
      */
-    public boolean hasHold() {
+    public java.util.List<com.su.msg.GamblingMsg._Card> getLastCardList() {
+      return lastCard_;
+    }
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated ._Card lastCard = 4;</code>
+     */
+    public java.util.List<? extends com.su.msg.GamblingMsg._CardOrBuilder> 
+        getLastCardOrBuilderList() {
+      return lastCard_;
+    }
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated ._Card lastCard = 4;</code>
+     */
+    public int getLastCardCount() {
+      return lastCard_.size();
+    }
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated ._Card lastCard = 4;</code>
+     */
+    public com.su.msg.GamblingMsg._Card getLastCard(int index) {
+      return lastCard_.get(index);
+    }
+    /**
+     * <pre>
+     * 最后出牌
+     * </pre>
+     *
+     * <code>repeated ._Card lastCard = 4;</code>
+     */
+    public com.su.msg.GamblingMsg._CardOrBuilder getLastCardOrBuilder(
+        int index) {
+      return lastCard_.get(index);
+    }
+
+    public static final int CARDTYPE_FIELD_NUMBER = 5;
+    private java.util.List<java.lang.Integer> cardType_;
+    /**
+     * <pre>
+     * 最后牌型
+     * </pre>
+     *
+     * <code>repeated int32 cardType = 5;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getCardTypeList() {
+      return cardType_;
+    }
+    /**
+     * <pre>
+     * 最后牌型
+     * </pre>
+     *
+     * <code>repeated int32 cardType = 5;</code>
+     */
+    public int getCardTypeCount() {
+      return cardType_.size();
+    }
+    /**
+     * <pre>
+     * 最后牌型
+     * </pre>
+     *
+     * <code>repeated int32 cardType = 5;</code>
+     */
+    public int getCardType(int index) {
+      return cardType_.get(index);
+    }
+
+    public static final int LASTOP_FIELD_NUMBER = 6;
+    private int lastOp_;
+    /**
+     * <pre>
+     * 最后出牌玩家
+     * </pre>
+     *
+     * <code>optional int32 lastOp = 6;</code>
+     */
+    public boolean hasLastOp() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <pre>
-     * 牌权
+     * 最后出牌玩家
      * </pre>
      *
-     * <code>optional int32 hold = 4;</code>
+     * <code>optional int32 lastOp = 6;</code>
      */
-    public int getHold() {
-      return hold_;
+    public int getLastOp() {
+      return lastOp_;
     }
 
-    public static final int ROUNDSCORE_FIELD_NUMBER = 5;
+    public static final int ROUNDSCORE_FIELD_NUMBER = 7;
     private int roundScore_;
     /**
      * <pre>
      * 轮分
      * </pre>
      *
-     * <code>optional int32 roundScore = 5;</code>
+     * <code>optional int32 roundScore = 7;</code>
      */
     public boolean hasRoundScore() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
@@ -3497,20 +3670,20 @@ public final class GamblingMsg {
      * 轮分
      * </pre>
      *
-     * <code>optional int32 roundScore = 5;</code>
+     * <code>optional int32 roundScore = 7;</code>
      */
     public int getRoundScore() {
       return roundScore_;
     }
 
-    public static final int CALLCARD_FIELD_NUMBER = 6;
+    public static final int CALLCARD_FIELD_NUMBER = 8;
     private com.su.msg.GamblingMsg._Card callCard_;
     /**
      * <pre>
      * 被叫的牌
      * </pre>
      *
-     * <code>optional ._Card callCard = 6;</code>
+     * <code>optional ._Card callCard = 8;</code>
      */
     public boolean hasCallCard() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
@@ -3520,7 +3693,7 @@ public final class GamblingMsg {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional ._Card callCard = 6;</code>
+     * <code>optional ._Card callCard = 8;</code>
      */
     public com.su.msg.GamblingMsg._Card getCallCard() {
       return callCard_ == null ? com.su.msg.GamblingMsg._Card.getDefaultInstance() : callCard_;
@@ -3530,20 +3703,20 @@ public final class GamblingMsg {
      * 被叫的牌
      * </pre>
      *
-     * <code>optional ._Card callCard = 6;</code>
+     * <code>optional ._Card callCard = 8;</code>
      */
     public com.su.msg.GamblingMsg._CardOrBuilder getCallCardOrBuilder() {
       return callCard_ == null ? com.su.msg.GamblingMsg._Card.getDefaultInstance() : callCard_;
     }
 
-    public static final int CALLSTATE_FIELD_NUMBER = 7;
+    public static final int CALLSTATE_FIELD_NUMBER = 9;
     private int callState_;
     /**
      * <pre>
      * 叫牌状态
      * </pre>
      *
-     * <code>optional int32 callState = 7;</code>
+     * <code>optional int32 callState = 9;</code>
      */
     public boolean hasCallState() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
@@ -3553,20 +3726,20 @@ public final class GamblingMsg {
      * 叫牌状态
      * </pre>
      *
-     * <code>optional int32 callState = 7;</code>
+     * <code>optional int32 callState = 9;</code>
      */
     public int getCallState() {
       return callState_;
     }
 
-    public static final int DEALER_FIELD_NUMBER = 8;
+    public static final int DEALER_FIELD_NUMBER = 10;
     private int dealer_;
     /**
      * <pre>
      * 庄家
      * </pre>
      *
-     * <code>optional int32 dealer = 8;</code>
+     * <code>optional int32 dealer = 10;</code>
      */
     public boolean hasDealer() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
@@ -3576,53 +3749,30 @@ public final class GamblingMsg {
      * 庄家
      * </pre>
      *
-     * <code>optional int32 dealer = 8;</code>
+     * <code>optional int32 dealer = 10;</code>
      */
     public int getDealer() {
       return dealer_;
     }
 
-    public static final int OPPLAYER_FIELD_NUMBER = 9;
-    private int opPlayer_;
-    /**
-     * <pre>
-     * 出牌玩家
-     * </pre>
-     *
-     * <code>optional int32 opPlayer = 9;</code>
-     */
-    public boolean hasOpPlayer() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <pre>
-     * 出牌玩家
-     * </pre>
-     *
-     * <code>optional int32 opPlayer = 9;</code>
-     */
-    public int getOpPlayer() {
-      return opPlayer_;
-    }
-
-    public static final int OPTIME_FIELD_NUMBER = 10;
+    public static final int OPTIME_FIELD_NUMBER = 11;
     private int opTime_;
     /**
      * <pre>
      * 操作时间（秒）
      * </pre>
      *
-     * <code>optional int32 opTime = 10;</code>
+     * <code>optional int32 opTime = 11;</code>
      */
     public boolean hasOpTime() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <pre>
      * 操作时间（秒）
      * </pre>
      *
-     * <code>optional int32 opTime = 10;</code>
+     * <code>optional int32 opTime = 11;</code>
      */
     public int getOpTime() {
       return opTime_;
@@ -3649,26 +3799,29 @@ public final class GamblingMsg {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(3, tState_);
       }
+      for (int i = 0; i < lastCard_.size(); i++) {
+        output.writeMessage(4, lastCard_.get(i));
+      }
+      for (int i = 0; i < cardType_.size(); i++) {
+        output.writeInt32(5, cardType_.get(i));
+      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(4, hold_);
+        output.writeInt32(6, lastOp_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(5, roundScore_);
+        output.writeInt32(7, roundScore_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(6, getCallCard());
+        output.writeMessage(8, getCallCard());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(7, callState_);
+        output.writeInt32(9, callState_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(8, dealer_);
+        output.writeInt32(10, dealer_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(9, opPlayer_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(10, opTime_);
+        output.writeInt32(11, opTime_);
       }
       unknownFields.writeTo(output);
     }
@@ -3690,33 +3843,42 @@ public final class GamblingMsg {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, tState_);
       }
+      for (int i = 0; i < lastCard_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, lastCard_.get(i));
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < cardType_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(cardType_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getCardTypeList().size();
+      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, hold_);
+          .computeInt32Size(6, lastOp_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, roundScore_);
+          .computeInt32Size(7, roundScore_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getCallCard());
+          .computeMessageSize(8, getCallCard());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, callState_);
+          .computeInt32Size(9, callState_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, dealer_);
+          .computeInt32Size(10, dealer_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, opPlayer_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, opTime_);
+          .computeInt32Size(11, opTime_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3744,10 +3906,14 @@ public final class GamblingMsg {
         result = result && (getTState()
             == other.getTState());
       }
-      result = result && (hasHold() == other.hasHold());
-      if (hasHold()) {
-        result = result && (getHold()
-            == other.getHold());
+      result = result && getLastCardList()
+          .equals(other.getLastCardList());
+      result = result && getCardTypeList()
+          .equals(other.getCardTypeList());
+      result = result && (hasLastOp() == other.hasLastOp());
+      if (hasLastOp()) {
+        result = result && (getLastOp()
+            == other.getLastOp());
       }
       result = result && (hasRoundScore() == other.hasRoundScore());
       if (hasRoundScore()) {
@@ -3768,11 +3934,6 @@ public final class GamblingMsg {
       if (hasDealer()) {
         result = result && (getDealer()
             == other.getDealer());
-      }
-      result = result && (hasOpPlayer() == other.hasOpPlayer());
-      if (hasOpPlayer()) {
-        result = result && (getOpPlayer()
-            == other.getOpPlayer());
       }
       result = result && (hasOpTime() == other.hasOpTime());
       if (hasOpTime()) {
@@ -3802,9 +3963,17 @@ public final class GamblingMsg {
         hash = (37 * hash) + TSTATE_FIELD_NUMBER;
         hash = (53 * hash) + getTState();
       }
-      if (hasHold()) {
-        hash = (37 * hash) + HOLD_FIELD_NUMBER;
-        hash = (53 * hash) + getHold();
+      if (getLastCardCount() > 0) {
+        hash = (37 * hash) + LASTCARD_FIELD_NUMBER;
+        hash = (53 * hash) + getLastCardList().hashCode();
+      }
+      if (getCardTypeCount() > 0) {
+        hash = (37 * hash) + CARDTYPE_FIELD_NUMBER;
+        hash = (53 * hash) + getCardTypeList().hashCode();
+      }
+      if (hasLastOp()) {
+        hash = (37 * hash) + LASTOP_FIELD_NUMBER;
+        hash = (53 * hash) + getLastOp();
       }
       if (hasRoundScore()) {
         hash = (37 * hash) + ROUNDSCORE_FIELD_NUMBER;
@@ -3821,10 +3990,6 @@ public final class GamblingMsg {
       if (hasDealer()) {
         hash = (37 * hash) + DEALER_FIELD_NUMBER;
         hash = (53 * hash) + getDealer();
-      }
-      if (hasOpPlayer()) {
-        hash = (37 * hash) + OPPLAYER_FIELD_NUMBER;
-        hash = (53 * hash) + getOpPlayer();
       }
       if (hasOpTime()) {
         hash = (37 * hash) + OPTIME_FIELD_NUMBER;
@@ -3946,6 +4111,7 @@ public final class GamblingMsg {
                 .alwaysUseFieldBuilders) {
           getPlayerFieldBuilder();
           getComMultipleFieldBuilder();
+          getLastCardFieldBuilder();
           getCallCardFieldBuilder();
         }
       }
@@ -3965,24 +4131,30 @@ public final class GamblingMsg {
         }
         tState_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        hold_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        roundScore_ = 0;
+        if (lastCardBuilder_ == null) {
+          lastCard_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          lastCardBuilder_.clear();
+        }
+        cardType_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000010);
+        lastOp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        roundScore_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         if (callCardBuilder_ == null) {
           callCard_ = null;
         } else {
           callCardBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000020);
-        callState_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        dealer_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
-        opPlayer_ = 0;
+        callState_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
-        opTime_ = 0;
+        dealer_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
+        opTime_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -4029,15 +4201,29 @@ public final class GamblingMsg {
           to_bitField0_ |= 0x00000001;
         }
         result.tState_ = tState_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (lastCardBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            lastCard_ = java.util.Collections.unmodifiableList(lastCard_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.lastCard_ = lastCard_;
+        } else {
+          result.lastCard_ = lastCardBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          cardType_ = java.util.Collections.unmodifiableList(cardType_);
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.cardType_ = cardType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.hold_ = hold_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+        result.lastOp_ = lastOp_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000004;
         }
         result.roundScore_ = roundScore_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000008;
         }
         if (callCardBuilder_ == null) {
@@ -4045,20 +4231,16 @@ public final class GamblingMsg {
         } else {
           result.callCard_ = callCardBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000010;
         }
         result.callState_ = callState_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000020;
         }
         result.dealer_ = dealer_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000040;
-        }
-        result.opPlayer_ = opPlayer_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000080;
         }
         result.opTime_ = opTime_;
         result.bitField0_ = to_bitField0_;
@@ -4158,8 +4340,44 @@ public final class GamblingMsg {
         if (other.hasTState()) {
           setTState(other.getTState());
         }
-        if (other.hasHold()) {
-          setHold(other.getHold());
+        if (lastCardBuilder_ == null) {
+          if (!other.lastCard_.isEmpty()) {
+            if (lastCard_.isEmpty()) {
+              lastCard_ = other.lastCard_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureLastCardIsMutable();
+              lastCard_.addAll(other.lastCard_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.lastCard_.isEmpty()) {
+            if (lastCardBuilder_.isEmpty()) {
+              lastCardBuilder_.dispose();
+              lastCardBuilder_ = null;
+              lastCard_ = other.lastCard_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              lastCardBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getLastCardFieldBuilder() : null;
+            } else {
+              lastCardBuilder_.addAllMessages(other.lastCard_);
+            }
+          }
+        }
+        if (!other.cardType_.isEmpty()) {
+          if (cardType_.isEmpty()) {
+            cardType_ = other.cardType_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureCardTypeIsMutable();
+            cardType_.addAll(other.cardType_);
+          }
+          onChanged();
+        }
+        if (other.hasLastOp()) {
+          setLastOp(other.getLastOp());
         }
         if (other.hasRoundScore()) {
           setRoundScore(other.getRoundScore());
@@ -4172,9 +4390,6 @@ public final class GamblingMsg {
         }
         if (other.hasDealer()) {
           setDealer(other.getDealer());
-        }
-        if (other.hasOpPlayer()) {
-          setOpPlayer(other.getOpPlayer());
         }
         if (other.hasOpTime()) {
           setOpTime(other.getOpTime());
@@ -4834,7 +5049,7 @@ public final class GamblingMsg {
       private int tState_ ;
       /**
        * <pre>
-       * 牌桌状态（0：准备，1：发牌，2：加倍，3：叫牌，4：出牌，5：结算）
+       * 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
        * </pre>
        *
        * <code>optional int32 tState = 3;</code>
@@ -4844,7 +5059,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 牌桌状态（0：准备，1：发牌，2：加倍，3：叫牌，4：出牌，5：结算）
+       * 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
        * </pre>
        *
        * <code>optional int32 tState = 3;</code>
@@ -4854,7 +5069,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 牌桌状态（0：准备，1：发牌，2：加倍，3：叫牌，4：出牌，5：结算）
+       * 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
        * </pre>
        *
        * <code>optional int32 tState = 3;</code>
@@ -4867,7 +5082,7 @@ public final class GamblingMsg {
       }
       /**
        * <pre>
-       * 牌桌状态（0：准备，1：发牌，2：加倍，3：叫牌，4：出牌，5：结算）
+       * 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
        * </pre>
        *
        * <code>optional int32 tState = 3;</code>
@@ -4879,50 +5094,456 @@ public final class GamblingMsg {
         return this;
       }
 
-      private int hold_ ;
+      private java.util.List<com.su.msg.GamblingMsg._Card> lastCard_ =
+        java.util.Collections.emptyList();
+      private void ensureLastCardIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          lastCard_ = new java.util.ArrayList<com.su.msg.GamblingMsg._Card>(lastCard_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.msg.GamblingMsg._Card, com.su.msg.GamblingMsg._Card.Builder, com.su.msg.GamblingMsg._CardOrBuilder> lastCardBuilder_;
+
       /**
        * <pre>
-       * 牌权
+       * 最后出牌
        * </pre>
        *
-       * <code>optional int32 hold = 4;</code>
+       * <code>repeated ._Card lastCard = 4;</code>
        */
-      public boolean hasHold() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+      public java.util.List<com.su.msg.GamblingMsg._Card> getLastCardList() {
+        if (lastCardBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(lastCard_);
+        } else {
+          return lastCardBuilder_.getMessageList();
+        }
       }
       /**
        * <pre>
-       * 牌权
+       * 最后出牌
        * </pre>
        *
-       * <code>optional int32 hold = 4;</code>
+       * <code>repeated ._Card lastCard = 4;</code>
        */
-      public int getHold() {
-        return hold_;
+      public int getLastCardCount() {
+        if (lastCardBuilder_ == null) {
+          return lastCard_.size();
+        } else {
+          return lastCardBuilder_.getCount();
+        }
       }
       /**
        * <pre>
-       * 牌权
+       * 最后出牌
        * </pre>
        *
-       * <code>optional int32 hold = 4;</code>
+       * <code>repeated ._Card lastCard = 4;</code>
        */
-      public Builder setHold(int value) {
-        bitField0_ |= 0x00000008;
-        hold_ = value;
+      public com.su.msg.GamblingMsg._Card getLastCard(int index) {
+        if (lastCardBuilder_ == null) {
+          return lastCard_.get(index);
+        } else {
+          return lastCardBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public Builder setLastCard(
+          int index, com.su.msg.GamblingMsg._Card value) {
+        if (lastCardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLastCardIsMutable();
+          lastCard_.set(index, value);
+          onChanged();
+        } else {
+          lastCardBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public Builder setLastCard(
+          int index, com.su.msg.GamblingMsg._Card.Builder builderForValue) {
+        if (lastCardBuilder_ == null) {
+          ensureLastCardIsMutable();
+          lastCard_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          lastCardBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public Builder addLastCard(com.su.msg.GamblingMsg._Card value) {
+        if (lastCardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLastCardIsMutable();
+          lastCard_.add(value);
+          onChanged();
+        } else {
+          lastCardBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public Builder addLastCard(
+          int index, com.su.msg.GamblingMsg._Card value) {
+        if (lastCardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLastCardIsMutable();
+          lastCard_.add(index, value);
+          onChanged();
+        } else {
+          lastCardBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public Builder addLastCard(
+          com.su.msg.GamblingMsg._Card.Builder builderForValue) {
+        if (lastCardBuilder_ == null) {
+          ensureLastCardIsMutable();
+          lastCard_.add(builderForValue.build());
+          onChanged();
+        } else {
+          lastCardBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public Builder addLastCard(
+          int index, com.su.msg.GamblingMsg._Card.Builder builderForValue) {
+        if (lastCardBuilder_ == null) {
+          ensureLastCardIsMutable();
+          lastCard_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          lastCardBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public Builder addAllLastCard(
+          java.lang.Iterable<? extends com.su.msg.GamblingMsg._Card> values) {
+        if (lastCardBuilder_ == null) {
+          ensureLastCardIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, lastCard_);
+          onChanged();
+        } else {
+          lastCardBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public Builder clearLastCard() {
+        if (lastCardBuilder_ == null) {
+          lastCard_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          lastCardBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public Builder removeLastCard(int index) {
+        if (lastCardBuilder_ == null) {
+          ensureLastCardIsMutable();
+          lastCard_.remove(index);
+          onChanged();
+        } else {
+          lastCardBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public com.su.msg.GamblingMsg._Card.Builder getLastCardBuilder(
+          int index) {
+        return getLastCardFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public com.su.msg.GamblingMsg._CardOrBuilder getLastCardOrBuilder(
+          int index) {
+        if (lastCardBuilder_ == null) {
+          return lastCard_.get(index);  } else {
+          return lastCardBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public java.util.List<? extends com.su.msg.GamblingMsg._CardOrBuilder> 
+           getLastCardOrBuilderList() {
+        if (lastCardBuilder_ != null) {
+          return lastCardBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(lastCard_);
+        }
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public com.su.msg.GamblingMsg._Card.Builder addLastCardBuilder() {
+        return getLastCardFieldBuilder().addBuilder(
+            com.su.msg.GamblingMsg._Card.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public com.su.msg.GamblingMsg._Card.Builder addLastCardBuilder(
+          int index) {
+        return getLastCardFieldBuilder().addBuilder(
+            index, com.su.msg.GamblingMsg._Card.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       * 最后出牌
+       * </pre>
+       *
+       * <code>repeated ._Card lastCard = 4;</code>
+       */
+      public java.util.List<com.su.msg.GamblingMsg._Card.Builder> 
+           getLastCardBuilderList() {
+        return getLastCardFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.msg.GamblingMsg._Card, com.su.msg.GamblingMsg._Card.Builder, com.su.msg.GamblingMsg._CardOrBuilder> 
+          getLastCardFieldBuilder() {
+        if (lastCardBuilder_ == null) {
+          lastCardBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.su.msg.GamblingMsg._Card, com.su.msg.GamblingMsg._Card.Builder, com.su.msg.GamblingMsg._CardOrBuilder>(
+                  lastCard_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          lastCard_ = null;
+        }
+        return lastCardBuilder_;
+      }
+
+      private java.util.List<java.lang.Integer> cardType_ = java.util.Collections.emptyList();
+      private void ensureCardTypeIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          cardType_ = new java.util.ArrayList<java.lang.Integer>(cardType_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      /**
+       * <pre>
+       * 最后牌型
+       * </pre>
+       *
+       * <code>repeated int32 cardType = 5;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getCardTypeList() {
+        return java.util.Collections.unmodifiableList(cardType_);
+      }
+      /**
+       * <pre>
+       * 最后牌型
+       * </pre>
+       *
+       * <code>repeated int32 cardType = 5;</code>
+       */
+      public int getCardTypeCount() {
+        return cardType_.size();
+      }
+      /**
+       * <pre>
+       * 最后牌型
+       * </pre>
+       *
+       * <code>repeated int32 cardType = 5;</code>
+       */
+      public int getCardType(int index) {
+        return cardType_.get(index);
+      }
+      /**
+       * <pre>
+       * 最后牌型
+       * </pre>
+       *
+       * <code>repeated int32 cardType = 5;</code>
+       */
+      public Builder setCardType(
+          int index, int value) {
+        ensureCardTypeIsMutable();
+        cardType_.set(index, value);
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * 牌权
+       * 最后牌型
        * </pre>
        *
-       * <code>optional int32 hold = 4;</code>
+       * <code>repeated int32 cardType = 5;</code>
        */
-      public Builder clearHold() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        hold_ = 0;
+      public Builder addCardType(int value) {
+        ensureCardTypeIsMutable();
+        cardType_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后牌型
+       * </pre>
+       *
+       * <code>repeated int32 cardType = 5;</code>
+       */
+      public Builder addAllCardType(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureCardTypeIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, cardType_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后牌型
+       * </pre>
+       *
+       * <code>repeated int32 cardType = 5;</code>
+       */
+      public Builder clearCardType() {
+        cardType_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+
+      private int lastOp_ ;
+      /**
+       * <pre>
+       * 最后出牌玩家
+       * </pre>
+       *
+       * <code>optional int32 lastOp = 6;</code>
+       */
+      public boolean hasLastOp() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <pre>
+       * 最后出牌玩家
+       * </pre>
+       *
+       * <code>optional int32 lastOp = 6;</code>
+       */
+      public int getLastOp() {
+        return lastOp_;
+      }
+      /**
+       * <pre>
+       * 最后出牌玩家
+       * </pre>
+       *
+       * <code>optional int32 lastOp = 6;</code>
+       */
+      public Builder setLastOp(int value) {
+        bitField0_ |= 0x00000020;
+        lastOp_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 最后出牌玩家
+       * </pre>
+       *
+       * <code>optional int32 lastOp = 6;</code>
+       */
+      public Builder clearLastOp() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        lastOp_ = 0;
         onChanged();
         return this;
       }
@@ -4933,17 +5554,17 @@ public final class GamblingMsg {
        * 轮分
        * </pre>
        *
-       * <code>optional int32 roundScore = 5;</code>
+       * <code>optional int32 roundScore = 7;</code>
        */
       public boolean hasRoundScore() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <pre>
        * 轮分
        * </pre>
        *
-       * <code>optional int32 roundScore = 5;</code>
+       * <code>optional int32 roundScore = 7;</code>
        */
       public int getRoundScore() {
         return roundScore_;
@@ -4953,10 +5574,10 @@ public final class GamblingMsg {
        * 轮分
        * </pre>
        *
-       * <code>optional int32 roundScore = 5;</code>
+       * <code>optional int32 roundScore = 7;</code>
        */
       public Builder setRoundScore(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000040;
         roundScore_ = value;
         onChanged();
         return this;
@@ -4966,10 +5587,10 @@ public final class GamblingMsg {
        * 轮分
        * </pre>
        *
-       * <code>optional int32 roundScore = 5;</code>
+       * <code>optional int32 roundScore = 7;</code>
        */
       public Builder clearRoundScore() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000040);
         roundScore_ = 0;
         onChanged();
         return this;
@@ -4983,17 +5604,17 @@ public final class GamblingMsg {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional ._Card callCard = 6;</code>
+       * <code>optional ._Card callCard = 8;</code>
        */
       public boolean hasCallCard() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
        * <pre>
        * 被叫的牌
        * </pre>
        *
-       * <code>optional ._Card callCard = 6;</code>
+       * <code>optional ._Card callCard = 8;</code>
        */
       public com.su.msg.GamblingMsg._Card getCallCard() {
         if (callCardBuilder_ == null) {
@@ -5007,7 +5628,7 @@ public final class GamblingMsg {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional ._Card callCard = 6;</code>
+       * <code>optional ._Card callCard = 8;</code>
        */
       public Builder setCallCard(com.su.msg.GamblingMsg._Card value) {
         if (callCardBuilder_ == null) {
@@ -5019,7 +5640,7 @@ public final class GamblingMsg {
         } else {
           callCardBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000080;
         return this;
       }
       /**
@@ -5027,7 +5648,7 @@ public final class GamblingMsg {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional ._Card callCard = 6;</code>
+       * <code>optional ._Card callCard = 8;</code>
        */
       public Builder setCallCard(
           com.su.msg.GamblingMsg._Card.Builder builderForValue) {
@@ -5037,7 +5658,7 @@ public final class GamblingMsg {
         } else {
           callCardBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000080;
         return this;
       }
       /**
@@ -5045,11 +5666,11 @@ public final class GamblingMsg {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional ._Card callCard = 6;</code>
+       * <code>optional ._Card callCard = 8;</code>
        */
       public Builder mergeCallCard(com.su.msg.GamblingMsg._Card value) {
         if (callCardBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+          if (((bitField0_ & 0x00000080) == 0x00000080) &&
               callCard_ != null &&
               callCard_ != com.su.msg.GamblingMsg._Card.getDefaultInstance()) {
             callCard_ =
@@ -5061,7 +5682,7 @@ public final class GamblingMsg {
         } else {
           callCardBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000080;
         return this;
       }
       /**
@@ -5069,7 +5690,7 @@ public final class GamblingMsg {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional ._Card callCard = 6;</code>
+       * <code>optional ._Card callCard = 8;</code>
        */
       public Builder clearCallCard() {
         if (callCardBuilder_ == null) {
@@ -5078,7 +5699,7 @@ public final class GamblingMsg {
         } else {
           callCardBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       /**
@@ -5086,10 +5707,10 @@ public final class GamblingMsg {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional ._Card callCard = 6;</code>
+       * <code>optional ._Card callCard = 8;</code>
        */
       public com.su.msg.GamblingMsg._Card.Builder getCallCardBuilder() {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000080;
         onChanged();
         return getCallCardFieldBuilder().getBuilder();
       }
@@ -5098,7 +5719,7 @@ public final class GamblingMsg {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional ._Card callCard = 6;</code>
+       * <code>optional ._Card callCard = 8;</code>
        */
       public com.su.msg.GamblingMsg._CardOrBuilder getCallCardOrBuilder() {
         if (callCardBuilder_ != null) {
@@ -5113,7 +5734,7 @@ public final class GamblingMsg {
        * 被叫的牌
        * </pre>
        *
-       * <code>optional ._Card callCard = 6;</code>
+       * <code>optional ._Card callCard = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.su.msg.GamblingMsg._Card, com.su.msg.GamblingMsg._Card.Builder, com.su.msg.GamblingMsg._CardOrBuilder> 
@@ -5135,17 +5756,17 @@ public final class GamblingMsg {
        * 叫牌状态
        * </pre>
        *
-       * <code>optional int32 callState = 7;</code>
+       * <code>optional int32 callState = 9;</code>
        */
       public boolean hasCallState() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
        * <pre>
        * 叫牌状态
        * </pre>
        *
-       * <code>optional int32 callState = 7;</code>
+       * <code>optional int32 callState = 9;</code>
        */
       public int getCallState() {
         return callState_;
@@ -5155,10 +5776,10 @@ public final class GamblingMsg {
        * 叫牌状态
        * </pre>
        *
-       * <code>optional int32 callState = 7;</code>
+       * <code>optional int32 callState = 9;</code>
        */
       public Builder setCallState(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000100;
         callState_ = value;
         onChanged();
         return this;
@@ -5168,10 +5789,10 @@ public final class GamblingMsg {
        * 叫牌状态
        * </pre>
        *
-       * <code>optional int32 callState = 7;</code>
+       * <code>optional int32 callState = 9;</code>
        */
       public Builder clearCallState() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000100);
         callState_ = 0;
         onChanged();
         return this;
@@ -5183,17 +5804,17 @@ public final class GamblingMsg {
        * 庄家
        * </pre>
        *
-       * <code>optional int32 dealer = 8;</code>
+       * <code>optional int32 dealer = 10;</code>
        */
       public boolean hasDealer() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <pre>
        * 庄家
        * </pre>
        *
-       * <code>optional int32 dealer = 8;</code>
+       * <code>optional int32 dealer = 10;</code>
        */
       public int getDealer() {
         return dealer_;
@@ -5203,10 +5824,10 @@ public final class GamblingMsg {
        * 庄家
        * </pre>
        *
-       * <code>optional int32 dealer = 8;</code>
+       * <code>optional int32 dealer = 10;</code>
        */
       public Builder setDealer(int value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000200;
         dealer_ = value;
         onChanged();
         return this;
@@ -5216,59 +5837,11 @@ public final class GamblingMsg {
        * 庄家
        * </pre>
        *
-       * <code>optional int32 dealer = 8;</code>
+       * <code>optional int32 dealer = 10;</code>
        */
       public Builder clearDealer() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000200);
         dealer_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int opPlayer_ ;
-      /**
-       * <pre>
-       * 出牌玩家
-       * </pre>
-       *
-       * <code>optional int32 opPlayer = 9;</code>
-       */
-      public boolean hasOpPlayer() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <pre>
-       * 出牌玩家
-       * </pre>
-       *
-       * <code>optional int32 opPlayer = 9;</code>
-       */
-      public int getOpPlayer() {
-        return opPlayer_;
-      }
-      /**
-       * <pre>
-       * 出牌玩家
-       * </pre>
-       *
-       * <code>optional int32 opPlayer = 9;</code>
-       */
-      public Builder setOpPlayer(int value) {
-        bitField0_ |= 0x00000100;
-        opPlayer_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * 出牌玩家
-       * </pre>
-       *
-       * <code>optional int32 opPlayer = 9;</code>
-       */
-      public Builder clearOpPlayer() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        opPlayer_ = 0;
         onChanged();
         return this;
       }
@@ -5279,17 +5852,17 @@ public final class GamblingMsg {
        * 操作时间（秒）
        * </pre>
        *
-       * <code>optional int32 opTime = 10;</code>
+       * <code>optional int32 opTime = 11;</code>
        */
       public boolean hasOpTime() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <pre>
        * 操作时间（秒）
        * </pre>
        *
-       * <code>optional int32 opTime = 10;</code>
+       * <code>optional int32 opTime = 11;</code>
        */
       public int getOpTime() {
         return opTime_;
@@ -5299,10 +5872,10 @@ public final class GamblingMsg {
        * 操作时间（秒）
        * </pre>
        *
-       * <code>optional int32 opTime = 10;</code>
+       * <code>optional int32 opTime = 11;</code>
        */
       public Builder setOpTime(int value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         opTime_ = value;
         onChanged();
         return this;
@@ -5312,10 +5885,10 @@ public final class GamblingMsg {
        * 操作时间（秒）
        * </pre>
        *
-       * <code>optional int32 opTime = 10;</code>
+       * <code>optional int32 opTime = 11;</code>
        */
       public Builder clearOpTime() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         opTime_ = 0;
         onChanged();
         return this;
@@ -13451,21 +14024,22 @@ public final class GamblingMsg {
       " \001(\003\022\030\n\010handCard\030\002 \003(\0132\006._Card\022\017\n\007cardNu" +
       "m\030\003 \001(\005\022\014\n\004team\030\004 \001(\005\022\020\n\010multiple\030\005 \001(\005\022" +
       "\r\n\005score\030\006 \001(\005\022\016\n\006isAuto\030\007 \001(\005\022\016\n\006pState" +
-      "\030\010 \001(\005\"\330\001\n\006_Table\022\034\n\006player\030\001 \003(\0132\014._Gam" +
+      "\030\010 \001(\005\"\364\001\n\006_Table\022\034\n\006player\030\001 \003(\0132\014._Gam" +
       "ePlayer\022\037\n\013comMultiple\030\002 \003(\0132\n._Multiple" +
-      "\022\016\n\006tState\030\003 \001(\005\022\014\n\004hold\030\004 \001(\005\022\022\n\nroundS" +
-      "core\030\005 \001(\005\022\030\n\010callCard\030\006 \001(\0132\006._Card\022\021\n\t",
-      "callState\030\007 \001(\005\022\016\n\006dealer\030\010 \001(\005\022\020\n\010opPla" +
-      "yer\030\t \001(\005\022\016\n\006opTime\030\n \001(\005\"\027\n\005Start\022\016\n\006si" +
-      "teId\030\001 \001(\005\"\010\n\006Start_\"\031\n\004Call\022\021\n\tcardInde" +
-      "x\030\001 \001(\005\"\007\n\005Call_\",\n\004Draw\022\020\n\010cardType\030\001 \001" +
-      "(\005\022\022\n\ncardIndexs\030\002 \003(\005\"\007\n\005Draw_\"\007\n\005Check" +
-      "\"\010\n\006Check_\"\007\n\005Ready\"\010\n\006Ready_\"\006\n\004Quit\"\007\n" +
-      "\005Quit_\"\010\n\006Double\"\t\n\007Double_\"\006\n\004Auto\"\007\n\005A" +
-      "uto_\"5\n\021UpdateGamePlayer_\022 \n\ngamePlayer\030" +
-      "\001 \003(\0132\014._GamePlayer\",\n\022UpdateTableNotice" +
-      "_\022\026\n\005table\030\001 \001(\0132\007._TableB\033\n\ncom.su.msgB",
-      "\013GamblingMsgH\001"
+      "\022\016\n\006tState\030\003 \001(\005\022\030\n\010lastCard\030\004 \003(\0132\006._Ca" +
+      "rd\022\020\n\010cardType\030\005 \003(\005\022\016\n\006lastOp\030\006 \001(\005\022\022\n\n",
+      "roundScore\030\007 \001(\005\022\030\n\010callCard\030\010 \001(\0132\006._Ca" +
+      "rd\022\021\n\tcallState\030\t \001(\005\022\016\n\006dealer\030\n \001(\005\022\016\n" +
+      "\006opTime\030\013 \001(\005\"\027\n\005Start\022\016\n\006siteId\030\001 \001(\005\"\010" +
+      "\n\006Start_\"\031\n\004Call\022\021\n\tcardIndex\030\001 \001(\005\"\007\n\005C" +
+      "all_\",\n\004Draw\022\020\n\010cardType\030\001 \001(\005\022\022\n\ncardIn" +
+      "dexs\030\002 \003(\005\"\007\n\005Draw_\"\007\n\005Check\"\010\n\006Check_\"\007" +
+      "\n\005Ready\"\010\n\006Ready_\"\006\n\004Quit\"\007\n\005Quit_\"\010\n\006Do" +
+      "uble\"\t\n\007Double_\"\006\n\004Auto\"\007\n\005Auto_\"5\n\021Upda" +
+      "teGamePlayer_\022 \n\ngamePlayer\030\001 \003(\0132\014._Gam" +
+      "ePlayer\",\n\022UpdateTableNotice_\022\026\n\005table\030\001",
+      " \001(\0132\007._TableB\033\n\ncom.su.msgB\013GamblingMsg" +
+      "H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -13502,7 +14076,7 @@ public final class GamblingMsg {
     internal_static__Table_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__Table_descriptor,
-        new java.lang.String[] { "Player", "ComMultiple", "TState", "Hold", "RoundScore", "CallCard", "CallState", "Dealer", "OpPlayer", "OpTime", });
+        new java.lang.String[] { "Player", "ComMultiple", "TState", "LastCard", "CardType", "LastOp", "RoundScore", "CallCard", "CallState", "Dealer", "OpTime", });
     internal_static_Start_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_Start_fieldAccessorTable = new

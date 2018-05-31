@@ -41,15 +41,19 @@ public class Table implements Delayed{
 	 */
 	private Card callCard;
 	/**
+	 * 被叫的牌的类型
+	 * */
+	private CardType callCardTyep;
+	/**
 	 * 公共倍数
 	 */
-	private Multiple[] multiples;
+	private int[] multiples;
 	/**
 	 * 最后出牌
 	 */
 	private Card[] lastCards;
 	private CardType lastCardType;
-	private int lastOp;
+	private Integer lastOp;
 	/**
 	 * 庄家
 	 */
@@ -57,16 +61,16 @@ public class Table implements Delayed{
 	/**
 	 * 操作时间
 	 */
-	private long opTime;
+	private Long opTime;
 	
 	private Site site;
 	
-	private TableActor tableActor;
+	private TableActor actor;
 
 	AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
 	
 	public Table(Site site) {
-		tableActor = akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
+		actor = akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
 		this.site = site;
 		// 初始化牌
 		Card[] cards = new Card[Card.CARDS_NUM * 2];
@@ -164,10 +168,19 @@ public class Table implements Delayed{
 	}
 	
 	/**
-	 * 重置牌桌
+	 * 重置牌桌状态
 	 * */
 	public void reset() {
-		
+		roundScore = 0;
+		callCard = null;
+		callCardTyep = null;
+		for (int i = 0; i < multiples.length; i ++) {
+			multiples[i] = 0;
+		}
+		lastCards = null;
+		lastCardType = null;
+		lastOp = null;
+		opTime = null;
 	}
 	
 	/**
@@ -186,6 +199,8 @@ public class Table implements Delayed{
 	 * 发牌
 	 */
 	public void deal() {
+		// 重置
+		reset();
 		// 洗牌
 		shuffle();
 		int index = 0;
@@ -459,7 +474,6 @@ public class Table implements Delayed{
 	}
 
 
-
 	public void setPlayers(GamePlayer[] players) {
 		if (this.players != null)
 			throw new RuntimeException("error operate");
@@ -467,6 +481,7 @@ public class Table implements Delayed{
 		for (int i = 0; i < players.length; i++) {
 			players[i].setIndex(i);
 			players[i].setTable(this);
+			players[i].setState(PlayerState.READY);
 		}
 		this.players = players;
 	}
@@ -593,14 +608,14 @@ public class Table implements Delayed{
 
 
 
-	public TableActor getTableActor() {
-		return tableActor;
+	public TableActor getActor() {
+		return actor;
 	}
 
 
 
 	public void setTableActor(TableActor tableActor) {
-		this.tableActor = tableActor;
+		this.actor = tableActor;
 	}
 
 

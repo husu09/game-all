@@ -7,18 +7,24 @@ import com.su.core.gambling.enums.CardType;
 public class TableActorImpl implements TableActor {
 	
 	private Table table;
-
+	
+	public TableActorImpl(Table table) {
+		this.table = table;
+	}
+	
+	@Override
+	public void setPlayers(GamePlayer[] players) {
+		table.setPlayers(players);
+	}
+	
 	@Override
 	public void deal() {
-		
-		// TODO Auto-generated method stub
-		
+		table.deal();
 	}
 
 	@Override
-	public void doubles(GamePlayer player) {
-		// TODO Auto-generated method stub
-		
+	public boolean doubles(GamePlayer player, int multiple) {
+		return table.doubles(player, multiple);
 	}
 
 	@Override

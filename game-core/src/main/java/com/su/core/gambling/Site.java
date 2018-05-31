@@ -9,7 +9,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.su.config.SiteCo;
 import com.su.core.context.PlayerContext;
-import com.su.core.gambling.enums.PlayerState;
 
 /**
  * 场所
@@ -39,28 +38,26 @@ public class Site {
 	public Site(SiteCo siteCo) {
 		// 初始化牌桌
 		for (int i = 0; i < siteCo.getInitTableNum(); i ++) {
-			Table table = new Table();
+			Table table = new Table(this);
 			tableQueue.offer(table);
 		}
 	}
 	
 	
 	/**
-	 * 处理玩家加入
+	 * 开始匹配
 	 */
 	public void startMatch(PlayerContext playerContext) {
 		GamePlayer gamePlayer = gamePlayerMap.get(playerContext.getPlayerId());
 		if (gamePlayer == null) {
-			gamePlayer = new GamePlayer();
+			gamePlayer = new GamePlayer(playerContext);
 			gamePlayerMap.put(gamePlayer.getId(), gamePlayer);
 		} else if(gamePlayer != null && gamePlayer.getState() != null) {
 			// 已经在游戏中
 			return;
-			
 		}
 		playerNum.incrementAndGet();
 		playerDeque.offerLast(gamePlayer);
-		gamePlayer.setState(PlayerState.QUEUE);
 		// 尝试从队列中获取4个玩家
 		GamePlayer[] gamePlayers = new GamePlayer[4];
 		for (int i = 0; i < 4; i++) {
@@ -78,8 +75,8 @@ public class Site {
 		// 人数足够时开始游戏
 		Table table = tableQueue.poll();
 		if (table == null) {
-			table = new Table();
+			table = new Table(this);
 		}
-		table.getActor().start(gamePlayers);
+		table.getActor().setPlayers(gamePlayers);
 	}	
 }
