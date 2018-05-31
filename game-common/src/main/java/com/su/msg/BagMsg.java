@@ -2004,17 +2004,25 @@ public final class BagMsg {
      * 索引
      * </pre>
      *
-     * <code>optional int32 index = 1;</code>
+     * <code>repeated int32 index = 1;</code>
      */
-    boolean hasIndex();
+    java.util.List<java.lang.Integer> getIndexList();
     /**
      * <pre>
      * 索引
      * </pre>
      *
-     * <code>optional int32 index = 1;</code>
+     * <code>repeated int32 index = 1;</code>
      */
-    int getIndex();
+    int getIndexCount();
+    /**
+     * <pre>
+     * 索引
+     * </pre>
+     *
+     * <code>repeated int32 index = 1;</code>
+     */
+    int getIndex(int index);
   }
   /**
    * <pre>
@@ -2032,7 +2040,7 @@ public final class BagMsg {
       super(builder);
     }
     private DeleteItem_() {
-      index_ = 0;
+      index_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -2064,8 +2072,24 @@ public final class BagMsg {
               break;
             }
             case 8: {
-              bitField0_ |= 0x00000001;
-              index_ = input.readInt32();
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                index_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              index_.add(input.readInt32());
+              break;
+            }
+            case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
+                index_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                index_.add(input.readInt32());
+              }
+              input.popLimit(limit);
               break;
             }
           }
@@ -2076,6 +2100,9 @@ public final class BagMsg {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          index_ = java.util.Collections.unmodifiableList(index_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -2092,28 +2119,38 @@ public final class BagMsg {
               com.su.msg.BagMsg.DeleteItem_.class, com.su.msg.BagMsg.DeleteItem_.Builder.class);
     }
 
-    private int bitField0_;
     public static final int INDEX_FIELD_NUMBER = 1;
-    private int index_;
+    private java.util.List<java.lang.Integer> index_;
     /**
      * <pre>
      * 索引
      * </pre>
      *
-     * <code>optional int32 index = 1;</code>
+     * <code>repeated int32 index = 1;</code>
      */
-    public boolean hasIndex() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+    public java.util.List<java.lang.Integer>
+        getIndexList() {
+      return index_;
     }
     /**
      * <pre>
      * 索引
      * </pre>
      *
-     * <code>optional int32 index = 1;</code>
+     * <code>repeated int32 index = 1;</code>
      */
-    public int getIndex() {
-      return index_;
+    public int getIndexCount() {
+      return index_.size();
+    }
+    /**
+     * <pre>
+     * 索引
+     * </pre>
+     *
+     * <code>repeated int32 index = 1;</code>
+     */
+    public int getIndex(int index) {
+      return index_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2128,8 +2165,8 @@ public final class BagMsg {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, index_);
+      for (int i = 0; i < index_.size(); i++) {
+        output.writeInt32(1, index_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -2139,9 +2176,14 @@ public final class BagMsg {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, index_);
+      {
+        int dataSize = 0;
+        for (int i = 0; i < index_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(index_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getIndexList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2160,11 +2202,8 @@ public final class BagMsg {
       com.su.msg.BagMsg.DeleteItem_ other = (com.su.msg.BagMsg.DeleteItem_) obj;
 
       boolean result = true;
-      result = result && (hasIndex() == other.hasIndex());
-      if (hasIndex()) {
-        result = result && (getIndex()
-            == other.getIndex());
-      }
+      result = result && getIndexList()
+          .equals(other.getIndexList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2176,9 +2215,9 @@ public final class BagMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasIndex()) {
+      if (getIndexCount() > 0) {
         hash = (37 * hash) + INDEX_FIELD_NUMBER;
-        hash = (53 * hash) + getIndex();
+        hash = (53 * hash) + getIndexList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2302,7 +2341,7 @@ public final class BagMsg {
       }
       public Builder clear() {
         super.clear();
-        index_ = 0;
+        index_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -2327,12 +2366,11 @@ public final class BagMsg {
       public com.su.msg.BagMsg.DeleteItem_ buildPartial() {
         com.su.msg.BagMsg.DeleteItem_ result = new com.su.msg.BagMsg.DeleteItem_(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          index_ = java.util.Collections.unmodifiableList(index_);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.index_ = index_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -2374,8 +2412,15 @@ public final class BagMsg {
 
       public Builder mergeFrom(com.su.msg.BagMsg.DeleteItem_ other) {
         if (other == com.su.msg.BagMsg.DeleteItem_.getDefaultInstance()) return this;
-        if (other.hasIndex()) {
-          setIndex(other.getIndex());
+        if (!other.index_.isEmpty()) {
+          if (index_.isEmpty()) {
+            index_ = other.index_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureIndexIsMutable();
+            index_.addAll(other.index_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2405,37 +2450,55 @@ public final class BagMsg {
       }
       private int bitField0_;
 
-      private int index_ ;
-      /**
-       * <pre>
-       * 索引
-       * </pre>
-       *
-       * <code>optional int32 index = 1;</code>
-       */
-      public boolean hasIndex() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+      private java.util.List<java.lang.Integer> index_ = java.util.Collections.emptyList();
+      private void ensureIndexIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          index_ = new java.util.ArrayList<java.lang.Integer>(index_);
+          bitField0_ |= 0x00000001;
+         }
       }
       /**
        * <pre>
        * 索引
        * </pre>
        *
-       * <code>optional int32 index = 1;</code>
+       * <code>repeated int32 index = 1;</code>
        */
-      public int getIndex() {
-        return index_;
+      public java.util.List<java.lang.Integer>
+          getIndexList() {
+        return java.util.Collections.unmodifiableList(index_);
       }
       /**
        * <pre>
        * 索引
        * </pre>
        *
-       * <code>optional int32 index = 1;</code>
+       * <code>repeated int32 index = 1;</code>
        */
-      public Builder setIndex(int value) {
-        bitField0_ |= 0x00000001;
-        index_ = value;
+      public int getIndexCount() {
+        return index_.size();
+      }
+      /**
+       * <pre>
+       * 索引
+       * </pre>
+       *
+       * <code>repeated int32 index = 1;</code>
+       */
+      public int getIndex(int index) {
+        return index_.get(index);
+      }
+      /**
+       * <pre>
+       * 索引
+       * </pre>
+       *
+       * <code>repeated int32 index = 1;</code>
+       */
+      public Builder setIndex(
+          int index, int value) {
+        ensureIndexIsMutable();
+        index_.set(index, value);
         onChanged();
         return this;
       }
@@ -2444,11 +2507,39 @@ public final class BagMsg {
        * 索引
        * </pre>
        *
-       * <code>optional int32 index = 1;</code>
+       * <code>repeated int32 index = 1;</code>
+       */
+      public Builder addIndex(int value) {
+        ensureIndexIsMutable();
+        index_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 索引
+       * </pre>
+       *
+       * <code>repeated int32 index = 1;</code>
+       */
+      public Builder addAllIndex(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureIndexIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, index_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 索引
+       * </pre>
+       *
+       * <code>repeated int32 index = 1;</code>
        */
       public Builder clearIndex() {
+        index_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
-        index_ = 0;
         onChanged();
         return this;
       }
@@ -2506,17 +2597,28 @@ public final class BagMsg {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional ._Grid grid = 1;</code>
+     * <code>repeated ._Grid grid = 1;</code>
      */
-    boolean hasGrid();
+    java.util.List<com.su.msg.BagMsg._Grid> 
+        getGridList();
     /**
-     * <code>optional ._Grid grid = 1;</code>
+     * <code>repeated ._Grid grid = 1;</code>
      */
-    com.su.msg.BagMsg._Grid getGrid();
+    com.su.msg.BagMsg._Grid getGrid(int index);
     /**
-     * <code>optional ._Grid grid = 1;</code>
+     * <code>repeated ._Grid grid = 1;</code>
      */
-    com.su.msg.BagMsg._GridOrBuilder getGridOrBuilder();
+    int getGridCount();
+    /**
+     * <code>repeated ._Grid grid = 1;</code>
+     */
+    java.util.List<? extends com.su.msg.BagMsg._GridOrBuilder> 
+        getGridOrBuilderList();
+    /**
+     * <code>repeated ._Grid grid = 1;</code>
+     */
+    com.su.msg.BagMsg._GridOrBuilder getGridOrBuilder(
+        int index);
   }
   /**
    * <pre>
@@ -2534,6 +2636,7 @@ public final class BagMsg {
       super(builder);
     }
     private UpdateItem_() {
+      grid_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -2565,16 +2668,12 @@ public final class BagMsg {
               break;
             }
             case 10: {
-              com.su.msg.BagMsg._Grid.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = grid_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                grid_ = new java.util.ArrayList<com.su.msg.BagMsg._Grid>();
+                mutable_bitField0_ |= 0x00000001;
               }
-              grid_ = input.readMessage(com.su.msg.BagMsg._Grid.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(grid_);
-                grid_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
+              grid_.add(
+                  input.readMessage(com.su.msg.BagMsg._Grid.PARSER, extensionRegistry));
               break;
             }
           }
@@ -2585,6 +2684,9 @@ public final class BagMsg {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          grid_ = java.util.Collections.unmodifiableList(grid_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -2601,26 +2703,39 @@ public final class BagMsg {
               com.su.msg.BagMsg.UpdateItem_.class, com.su.msg.BagMsg.UpdateItem_.Builder.class);
     }
 
-    private int bitField0_;
     public static final int GRID_FIELD_NUMBER = 1;
-    private com.su.msg.BagMsg._Grid grid_;
+    private java.util.List<com.su.msg.BagMsg._Grid> grid_;
     /**
-     * <code>optional ._Grid grid = 1;</code>
+     * <code>repeated ._Grid grid = 1;</code>
      */
-    public boolean hasGrid() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+    public java.util.List<com.su.msg.BagMsg._Grid> getGridList() {
+      return grid_;
     }
     /**
-     * <code>optional ._Grid grid = 1;</code>
+     * <code>repeated ._Grid grid = 1;</code>
      */
-    public com.su.msg.BagMsg._Grid getGrid() {
-      return grid_ == null ? com.su.msg.BagMsg._Grid.getDefaultInstance() : grid_;
+    public java.util.List<? extends com.su.msg.BagMsg._GridOrBuilder> 
+        getGridOrBuilderList() {
+      return grid_;
     }
     /**
-     * <code>optional ._Grid grid = 1;</code>
+     * <code>repeated ._Grid grid = 1;</code>
      */
-    public com.su.msg.BagMsg._GridOrBuilder getGridOrBuilder() {
-      return grid_ == null ? com.su.msg.BagMsg._Grid.getDefaultInstance() : grid_;
+    public int getGridCount() {
+      return grid_.size();
+    }
+    /**
+     * <code>repeated ._Grid grid = 1;</code>
+     */
+    public com.su.msg.BagMsg._Grid getGrid(int index) {
+      return grid_.get(index);
+    }
+    /**
+     * <code>repeated ._Grid grid = 1;</code>
+     */
+    public com.su.msg.BagMsg._GridOrBuilder getGridOrBuilder(
+        int index) {
+      return grid_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -2635,8 +2750,8 @@ public final class BagMsg {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, getGrid());
+      for (int i = 0; i < grid_.size(); i++) {
+        output.writeMessage(1, grid_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -2646,9 +2761,9 @@ public final class BagMsg {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      for (int i = 0; i < grid_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getGrid());
+          .computeMessageSize(1, grid_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2667,11 +2782,8 @@ public final class BagMsg {
       com.su.msg.BagMsg.UpdateItem_ other = (com.su.msg.BagMsg.UpdateItem_) obj;
 
       boolean result = true;
-      result = result && (hasGrid() == other.hasGrid());
-      if (hasGrid()) {
-        result = result && getGrid()
-            .equals(other.getGrid());
-      }
+      result = result && getGridList()
+          .equals(other.getGridList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2683,9 +2795,9 @@ public final class BagMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasGrid()) {
+      if (getGridCount() > 0) {
         hash = (37 * hash) + GRID_FIELD_NUMBER;
-        hash = (53 * hash) + getGrid().hashCode();
+        hash = (53 * hash) + getGridList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2811,11 +2923,11 @@ public final class BagMsg {
       public Builder clear() {
         super.clear();
         if (gridBuilder_ == null) {
-          grid_ = null;
+          grid_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           gridBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -2839,16 +2951,15 @@ public final class BagMsg {
       public com.su.msg.BagMsg.UpdateItem_ buildPartial() {
         com.su.msg.BagMsg.UpdateItem_ result = new com.su.msg.BagMsg.UpdateItem_(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
         if (gridBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            grid_ = java.util.Collections.unmodifiableList(grid_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
           result.grid_ = grid_;
         } else {
           result.grid_ = gridBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -2890,8 +3001,31 @@ public final class BagMsg {
 
       public Builder mergeFrom(com.su.msg.BagMsg.UpdateItem_ other) {
         if (other == com.su.msg.BagMsg.UpdateItem_.getDefaultInstance()) return this;
-        if (other.hasGrid()) {
-          mergeGrid(other.getGrid());
+        if (gridBuilder_ == null) {
+          if (!other.grid_.isEmpty()) {
+            if (grid_.isEmpty()) {
+              grid_ = other.grid_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureGridIsMutable();
+              grid_.addAll(other.grid_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.grid_.isEmpty()) {
+            if (gridBuilder_.isEmpty()) {
+              gridBuilder_.dispose();
+              gridBuilder_ = null;
+              grid_ = other.grid_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              gridBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getGridFieldBuilder() : null;
+            } else {
+              gridBuilder_.addAllMessages(other.grid_);
+            }
+          }
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2921,117 +3055,239 @@ public final class BagMsg {
       }
       private int bitField0_;
 
-      private com.su.msg.BagMsg._Grid grid_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.msg.BagMsg._Grid, com.su.msg.BagMsg._Grid.Builder, com.su.msg.BagMsg._GridOrBuilder> gridBuilder_;
-      /**
-       * <code>optional ._Grid grid = 1;</code>
-       */
-      public boolean hasGrid() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+      private java.util.List<com.su.msg.BagMsg._Grid> grid_ =
+        java.util.Collections.emptyList();
+      private void ensureGridIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          grid_ = new java.util.ArrayList<com.su.msg.BagMsg._Grid>(grid_);
+          bitField0_ |= 0x00000001;
+         }
       }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.msg.BagMsg._Grid, com.su.msg.BagMsg._Grid.Builder, com.su.msg.BagMsg._GridOrBuilder> gridBuilder_;
+
       /**
-       * <code>optional ._Grid grid = 1;</code>
+       * <code>repeated ._Grid grid = 1;</code>
        */
-      public com.su.msg.BagMsg._Grid getGrid() {
+      public java.util.List<com.su.msg.BagMsg._Grid> getGridList() {
         if (gridBuilder_ == null) {
-          return grid_ == null ? com.su.msg.BagMsg._Grid.getDefaultInstance() : grid_;
+          return java.util.Collections.unmodifiableList(grid_);
         } else {
-          return gridBuilder_.getMessage();
+          return gridBuilder_.getMessageList();
         }
       }
       /**
-       * <code>optional ._Grid grid = 1;</code>
+       * <code>repeated ._Grid grid = 1;</code>
        */
-      public Builder setGrid(com.su.msg.BagMsg._Grid value) {
+      public int getGridCount() {
+        if (gridBuilder_ == null) {
+          return grid_.size();
+        } else {
+          return gridBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public com.su.msg.BagMsg._Grid getGrid(int index) {
+        if (gridBuilder_ == null) {
+          return grid_.get(index);
+        } else {
+          return gridBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public Builder setGrid(
+          int index, com.su.msg.BagMsg._Grid value) {
         if (gridBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          grid_ = value;
+          ensureGridIsMutable();
+          grid_.set(index, value);
           onChanged();
         } else {
-          gridBuilder_.setMessage(value);
+          gridBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional ._Grid grid = 1;</code>
+       * <code>repeated ._Grid grid = 1;</code>
        */
       public Builder setGrid(
+          int index, com.su.msg.BagMsg._Grid.Builder builderForValue) {
+        if (gridBuilder_ == null) {
+          ensureGridIsMutable();
+          grid_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          gridBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public Builder addGrid(com.su.msg.BagMsg._Grid value) {
+        if (gridBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGridIsMutable();
+          grid_.add(value);
+          onChanged();
+        } else {
+          gridBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public Builder addGrid(
+          int index, com.su.msg.BagMsg._Grid value) {
+        if (gridBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGridIsMutable();
+          grid_.add(index, value);
+          onChanged();
+        } else {
+          gridBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public Builder addGrid(
           com.su.msg.BagMsg._Grid.Builder builderForValue) {
         if (gridBuilder_ == null) {
-          grid_ = builderForValue.build();
+          ensureGridIsMutable();
+          grid_.add(builderForValue.build());
           onChanged();
         } else {
-          gridBuilder_.setMessage(builderForValue.build());
+          gridBuilder_.addMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional ._Grid grid = 1;</code>
+       * <code>repeated ._Grid grid = 1;</code>
        */
-      public Builder mergeGrid(com.su.msg.BagMsg._Grid value) {
+      public Builder addGrid(
+          int index, com.su.msg.BagMsg._Grid.Builder builderForValue) {
         if (gridBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              grid_ != null &&
-              grid_ != com.su.msg.BagMsg._Grid.getDefaultInstance()) {
-            grid_ =
-              com.su.msg.BagMsg._Grid.newBuilder(grid_).mergeFrom(value).buildPartial();
-          } else {
-            grid_ = value;
-          }
+          ensureGridIsMutable();
+          grid_.add(index, builderForValue.build());
           onChanged();
         } else {
-          gridBuilder_.mergeFrom(value);
+          gridBuilder_.addMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>optional ._Grid grid = 1;</code>
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public Builder addAllGrid(
+          java.lang.Iterable<? extends com.su.msg.BagMsg._Grid> values) {
+        if (gridBuilder_ == null) {
+          ensureGridIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, grid_);
+          onChanged();
+        } else {
+          gridBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
        */
       public Builder clearGrid() {
         if (gridBuilder_ == null) {
-          grid_ = null;
+          grid_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           gridBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
       /**
-       * <code>optional ._Grid grid = 1;</code>
+       * <code>repeated ._Grid grid = 1;</code>
        */
-      public com.su.msg.BagMsg._Grid.Builder getGridBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getGridFieldBuilder().getBuilder();
+      public Builder removeGrid(int index) {
+        if (gridBuilder_ == null) {
+          ensureGridIsMutable();
+          grid_.remove(index);
+          onChanged();
+        } else {
+          gridBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>optional ._Grid grid = 1;</code>
+       * <code>repeated ._Grid grid = 1;</code>
        */
-      public com.su.msg.BagMsg._GridOrBuilder getGridOrBuilder() {
-        if (gridBuilder_ != null) {
-          return gridBuilder_.getMessageOrBuilder();
-        } else {
-          return grid_ == null ?
-              com.su.msg.BagMsg._Grid.getDefaultInstance() : grid_;
+      public com.su.msg.BagMsg._Grid.Builder getGridBuilder(
+          int index) {
+        return getGridFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public com.su.msg.BagMsg._GridOrBuilder getGridOrBuilder(
+          int index) {
+        if (gridBuilder_ == null) {
+          return grid_.get(index);  } else {
+          return gridBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>optional ._Grid grid = 1;</code>
+       * <code>repeated ._Grid grid = 1;</code>
        */
-      private com.google.protobuf.SingleFieldBuilderV3<
+      public java.util.List<? extends com.su.msg.BagMsg._GridOrBuilder> 
+           getGridOrBuilderList() {
+        if (gridBuilder_ != null) {
+          return gridBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(grid_);
+        }
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public com.su.msg.BagMsg._Grid.Builder addGridBuilder() {
+        return getGridFieldBuilder().addBuilder(
+            com.su.msg.BagMsg._Grid.getDefaultInstance());
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public com.su.msg.BagMsg._Grid.Builder addGridBuilder(
+          int index) {
+        return getGridFieldBuilder().addBuilder(
+            index, com.su.msg.BagMsg._Grid.getDefaultInstance());
+      }
+      /**
+       * <code>repeated ._Grid grid = 1;</code>
+       */
+      public java.util.List<com.su.msg.BagMsg._Grid.Builder> 
+           getGridBuilderList() {
+        return getGridFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
           com.su.msg.BagMsg._Grid, com.su.msg.BagMsg._Grid.Builder, com.su.msg.BagMsg._GridOrBuilder> 
           getGridFieldBuilder() {
         if (gridBuilder_ == null) {
-          gridBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          gridBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.su.msg.BagMsg._Grid, com.su.msg.BagMsg._Grid.Builder, com.su.msg.BagMsg._GridOrBuilder>(
-                  getGrid(),
+                  grid_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
           grid_ = null;
@@ -3125,8 +3381,8 @@ public final class BagMsg {
       "ype\030\002 \001(\005\022\r\n\005sysId\030\003 \001(\005\022\r\n\005count\030\004 \001(\005\022" +
       "\017\n\007endTime\030\005 \001(\003\"*\n\007UseItem\022\r\n\005index\030\001 \001" +
       "(\005\022\020\n\010useCount\030\002 \001(\005\"\n\n\010UseItem_\"\034\n\013Dele" +
-      "teItem_\022\r\n\005index\030\001 \001(\005\"#\n\013UpdateItem_\022\024\n" +
-      "\004grid\030\001 \001(\0132\006._GridB\026\n\ncom.su.msgB\006BagMs" +
+      "teItem_\022\r\n\005index\030\001 \003(\005\"#\n\013UpdateItem_\022\024\n" +
+      "\004grid\030\001 \003(\0132\006._GridB\026\n\ncom.su.msgB\006BagMs" +
       "gH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

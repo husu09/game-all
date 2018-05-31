@@ -1,7 +1,6 @@
 package com.su.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.su.common.po.ResouceLog;
@@ -17,8 +16,9 @@ public class LogServer {
 	 * @param useCount	使用数量
 	 * @param leftCount	剩余数量（-1 表示没统计）
 	 */
-	public void addResourceLog(int reason, int useCount, int leftCount) {
+	public void addResourceLog(long playerId, int reason, int useCount, int leftCount) {
 		ResouceLog resouceLog = new ResouceLog();
+		resouceLog.setId(playerId);
 		resouceLog.setReason(reason);
 		resouceLog.setUseCount(useCount);
 		resouceLog.setLeftCount(leftCount);

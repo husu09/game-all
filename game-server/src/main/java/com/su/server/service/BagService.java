@@ -46,6 +46,11 @@ public class BagService extends GameEventAdapter {
 			logger.error("找不到对应的配置 {}", item.getSysId());
 			return false;
 		}
+		if (item.getCount() <= 0) {
+			logger.error("item 个数为 {}", item.getCount());
+			return false;
+		}
+		UpdateItem_.Builder builder = UpdateItem_.newBuilder();
 		List<Grid> bagGrid = playerDetail.getGridList();
 		for (int i = 0; i < bagGrid.size(); i++) {
 			// 全部已添加
@@ -67,38 +72,38 @@ public class BagService extends GameEventAdapter {
 					item.setCount(0);
 				}
 				grid.setCount(grid.getCount() + addCount);
-				// 通知
-				UpdateItem_.Builder builder = UpdateItem_.newBuilder();
-				builder.setGrid(serializeGrid(i, grid));
-				playerContext.write(builder);
+				
+				builder.addGrid(serializeGrid(i, grid));
 				continue;
 			}
 			if (grid.getType() == item.getType()) {
 				BagCo currBagCo = bagConf.get(grid.getSysId());
 				if (currBagCo.getQuality() > bagCo.getQuality()) {
-					createGrid(playerContext, bagGrid, i, item, bagCo);
+					createGrid(playerContext, bagGrid, i, item, bagCo,builder);
 				} else if (currBagCo.getQuality() == bagCo.getQuality() && currBagCo.getId() > bagCo.getId()) {
-					createGrid(playerContext, bagGrid, i, item, bagCo);
+					createGrid(playerContext, bagGrid, i, item, bagCo,builder);
 				}
 			} else if (grid.getType() > item.getType()) {
-				createGrid(playerContext, bagGrid, i, item, bagCo);
+				createGrid(playerContext, bagGrid, i, item, bagCo,builder);
 			}
 		}
 		// 找不到可以叠加或插入的位置，直接添加到末尾
 		if (item.getCount() > 0) {
-			createGrid(playerContext, bagGrid, bagGrid.size(), item, bagCo);
+			createGrid(playerContext, bagGrid, bagGrid.size(), item, bagCo,builder);
 		}
 		playerDetail.updateBagData();
 		dataService.update(playerDetail);
+		// 通知
+		playerContext.write(builder);
 		// 流水
-		logServer.addResourceLog(reason, item.getCount(), -1);
+		logServer.addResourceLog(playerContext.getPlayerId(), reason, item.getCount(), -1);
 		return true;
 	}
 
 	/**
 	 * 扣除物品
 	 */
-	public boolean eddItem(PlayerContext playerContext, Item item, int reason) {
+	public boolean eddItem(PlayerContext playerContext,Item item, int reason) {
 		PlayerDetail playerDetail  = playerService.getPlayerDetail(playerContext.getPlayerId());
 		int haveCount = 0;
 		List<Grid> bagGrid = playerDetail.getGridList();
@@ -124,8 +129,8 @@ public class BagService extends GameEventAdapter {
 					// 通知
 					if (updateItem_ == null)
 						updateItem_ = UpdateItem_.newBuilder();
-					updateItem_.setGrid(serializeGrid(i, grid));
-					playerContext.write(updateItem_);
+					updateItem_.addGrid(serializeGrid(i, grid));
+					
 					break;
 				} else {
 					item.setCount(item.getCount() - grid.getCount());
@@ -133,8 +138,8 @@ public class BagService extends GameEventAdapter {
 						// 通知
 						if (deleteItem_ == null)
 							deleteItem_ = DeleteItem_.newBuilder();
-						deleteItem_.setIndex(i);
-						playerContext.write(deleteItem_);
+						deleteItem_.addIndex(i);
+						
 						break;
 					}
 				}
@@ -142,15 +147,17 @@ public class BagService extends GameEventAdapter {
 		}
 		playerDetail.updateBagData();
 		dataService.update(playerDetail);
+		playerContext.write(updateItem_);
+		playerContext.write(deleteItem_);
 		// 流水
-		logServer.addResourceLog(reason, item.getCount(), haveCount - item.getCount());
+		logServer.addResourceLog(playerContext.getPlayerId(), reason, item.getCount(), haveCount - item.getCount());
 		return true;
 	}
 
 	/**
 	 * 创建新格子
 	 */
-	private void createGrid(PlayerContext playerContext, List<Grid> bagGrid, int index, Item item, BagCo bagCo) {
+	private void createGrid(PlayerContext playerContext, List<Grid> bagGrid, int index, Item item, BagCo bagCo,UpdateItem_.Builder builder) {
 		// 全部已添加
 		if (item.getCount() == 0)
 			return;
@@ -169,12 +176,9 @@ public class BagService extends GameEventAdapter {
 			grid.setEndTime(TimeUtil.getCurrTime() + bagCo.getExpirationTime());
 		}
 		bagGrid.add(index, grid);
-		// 通知
-		UpdateItem_.Builder builder = UpdateItem_.newBuilder();
-		builder.setGrid(serializeGrid(index, grid));
-		playerContext.write(builder);
+		builder.addGrid(serializeGrid(index, grid));
 
-		createGrid(playerContext, bagGrid, index + 1, item, bagCo);
+		createGrid(playerContext, bagGrid, index + 1, item, bagCo, builder);
 	}
 
 	public _Grid serializeGrid(int index, Grid grid) {

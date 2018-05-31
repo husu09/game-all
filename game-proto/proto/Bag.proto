@@ -22,9 +22,9 @@ message UseItem_ {
 }
 // 删除通知（前端需要同步更改后续索引）
 message DeleteItem_ {
-	optional int32 index = 1;		// 索引
+	repeated int32 index = 1;		// 索引
 }
 // 更新通知
 message UpdateItem_ {
-	optional _Grid grid = 1;
+	repeated _Grid grid = 1;
 }

@@ -25,6 +25,8 @@ public class PlayerContext {
 	}
 
 	public void write(MessageLiteOrBuilder msg) {
+		if (msg == null)
+			return;
 		if (msg instanceof MessageLite) {
 			ctx.writeAndFlush(msg);
 		}

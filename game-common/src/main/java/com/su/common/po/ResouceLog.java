@@ -11,6 +11,10 @@ public class ResouceLog {
 	@Id
 	private long id;
 	/**
+	 * 玩家id
+	 * */
+	private long playerId;
+	/**
 	 * 添加或扣除的操作
 	 * */
 	private int reason;
@@ -47,5 +51,10 @@ public class ResouceLog {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+	public long getPlayerId() {
+		return playerId;
+	}
+	public void setPlayerId(long playerId) {
+		this.playerId = playerId;
+	}
 }
