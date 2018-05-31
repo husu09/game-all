@@ -1,13 +1,16 @@
-syntax = "proto3";
-package com.su.proto;
-option java_outer_classname = "LoginProto";
-import "proto/Player.proto";
+syntax = "proto2";
+
+option optimize_for = SPEED;
+option java_package = "com.su.proto";
+option java_outer_classname = "LoginMsg";
+
+import "Player.proto";
 
 // 登录
 message LoginReq {
-	string name = 1;	// 用户名
+	optional string name = 1;	// 用户名
 }
 message LoginResp {
-	PlayerDataPro playerData = 1;	// 玩家数据
+	optional PPlayer player = 1;	// 玩家数据
 }
 

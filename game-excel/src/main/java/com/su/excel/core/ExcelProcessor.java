@@ -59,9 +59,9 @@ public class ExcelProcessor {
 		for (File f : file.listFiles()) {
 			if (f.getName().endsWith("xlsx")) {
 				String mapName = f.getName().substring(0, f.getName().lastIndexOf("."));
-				if (!excelContext.containsMap(mapName))
+				if (!excelContext.getExcelMaps().containsKey(mapName))
 					continue;
-				ExcelMap<?> map = excelContext.getMap(mapName);
+				ExcelMap<?> map = excelContext.getExcelMaps().get(mapName);
 				try {
 					FileInputStream fis = new FileInputStream(dir + f.getName());
 					Workbook workbook = null;
@@ -130,7 +130,7 @@ public class ExcelProcessor {
 			}
 
 		}
-		excelContext.callFinishLoadAll(); // 加载完所有表
+		excelContext.doFinishLoadAll(); // 加载完所有表
 		excelContext.savePreData(preDataDir); // 保存预处理数据
 	}
 
@@ -145,9 +145,9 @@ public class ExcelProcessor {
 		}
 		File[] files = dir.listFiles();
 		for (File file : files) {
-			if (!file.isFile() || !excelContext.containsMap(file.getName()))
+			if (!file.isFile() || !excelContext.getExcelMaps().containsKey(file.getName()))
 				continue;
-			ExcelMap<?> map = excelContext.getMap(file.getName());
+			ExcelMap<?> map = excelContext.getExcelMaps().get(file.getName());
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				String line = reader.readLine();
@@ -162,5 +162,5 @@ public class ExcelProcessor {
 		}
 		logger.info("加载Excel配置成功");
 	}
-	
+
 }

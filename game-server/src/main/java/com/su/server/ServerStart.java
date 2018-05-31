@@ -23,7 +23,6 @@ public class ServerStart {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ServerConfig.class);
 		System.out.println("==============================启动服务==============================");
-		// 加载配置
 		context.getBean(ExcelProcessor.class).reload();
 		context.getBean(IDGenerator.class).init();
 		context.getBean(ActionScan.class).scan();

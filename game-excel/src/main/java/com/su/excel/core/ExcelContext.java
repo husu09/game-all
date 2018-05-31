@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
@@ -21,30 +20,23 @@ public class ExcelContext {
 	/**
 	 * 配置映射类
 	 */
-	private Map<String, ExcelMap<?>> maps = new HashMap<>();
+	private Map<String, ExcelMap<?>> excelMaps = new HashMap<>();
 
 	/**
 	 * 预处理数据
 	 */
 	private Map<String, List<Object>> preData = new HashMap<>();
-
-	public void addMap(String name, ExcelMap<?> map) {
-		maps.put(name, map);
-	}
-
-	public boolean containsMap(String mapName) {
-		return maps.containsKey(mapName);
-	}
-
-	public ExcelMap<?> getMap(String mapName) {
-		return maps.get(mapName);
+	
+	
+	public Map<String, ExcelMap<?>> getExcelMaps() {
+		return excelMaps;
 	}
 
 	/**
 	 * 所有配置加载完成时调用
 	 */
-	public void callFinishLoadAll() {
-		for (ExcelMap<?> map : maps.values()) {
+	public void doFinishLoadAll() {
+		for (ExcelMap<?> map : excelMaps.values()) {
 			map.finishLoadAll();
 		}
 	}

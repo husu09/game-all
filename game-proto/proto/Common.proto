@@ -1,10 +1,12 @@
-syntax = "proto3";
-package com.su.proto;
-option java_outer_classname = "CommonProto";
+syntax = "proto2";
+
+option optimize_for = SPEED;
+option java_package = "com.su.proto";
+option java_outer_classname = "CommonMsg";
 
 // 错误提示
 message ErrorResp{
- 	int32 errorCode = 1;
+ 	optional int32 errorCode = 1;
  	repeated string parameters  = 2;
 }
 

@@ -27,7 +27,7 @@ public abstract class ExcelMapAdapter<T> implements ExcelMap<T> {
 
 	@PostConstruct
 	public void init() {
-		excelManager.addMap(getName(), this);
+		excelManager.getExcelMaps().put(getName(), this);
 	}
 
 	@Override
@@ -50,8 +50,7 @@ public abstract class ExcelMapAdapter<T> implements ExcelMap<T> {
 		return storageMap.values();
 	}
 
-	@Override
-	public Class<T> getTypeClass() {
+	private Class<T> getTypeClass() {
 		Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
 		return entityClass;

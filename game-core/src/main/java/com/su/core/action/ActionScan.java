@@ -18,6 +18,7 @@ import com.su.proto.core.ProtoContext;
  */
 @Component
 public class ActionScan {
+
 	private Logger logger = LoggerFactory.getLogger(ActionScan.class);
 
 	@Autowired
@@ -26,8 +27,7 @@ public class ActionScan {
 	private ProtoContext protoContext;
 
 	public void scan() {
-		
-		
+
 		Map<String, Object> beans = SpringUtil.getContext().getBeansWithAnnotation(Controller.class);
 
 		for (Object bean : beans.values()) {
@@ -38,17 +38,16 @@ public class ActionScan {
 					boolean mustLogin = method.getAnnotation(Action.class).mustLogin();
 					Parameter parameter = method.getParameters()[1];
 					String messageName = parameter.getType().getSimpleName();
-					if (!protoContext.contains(messageName)) {
-						logger.info("协议不存在：{}", messageName);
+					if (!protoContext.getMessageLiteMap().containsKey(messageName)) {
+						logger.error("action message is not fined {}", messageName);
 					}
 					if (!messageName.endsWith("Req")) {
-						logger.info("不是请求协议：{}", messageName);
+						logger.error("action message is not request {}", messageName);
 					}
-					if (actionContext.contains(messageName)) {
-						logger.info("重复的消息处理对象：{}", messageName);
+					if (actionContext.getActionMetaMap().containsKey(messageName)) {
+						logger.error("repeat action message {}", messageName);
 					}
-
-					actionContext.add(messageName, new ActionMeta(mustLogin, bean, method));
+					actionContext.getActionMetaMap().put(messageName, new ActionMeta(mustLogin, bean, method));
 				}
 			}
 		}

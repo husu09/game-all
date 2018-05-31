@@ -4,7 +4,7 @@ import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.common.po.Player;
 import com.su.proto.CommonProto.ErrorResp;
-import com.su.server.akka.ActionActor;
+import com.su.server.akka.PlayerActor;
 import com.su.server.netty.NettyServerHandler;
 import com.su.server.obj.play.GamePlayer;
 
@@ -17,15 +17,9 @@ public class PlayerContext {
 
 	private ChannelHandlerContext ctx;
 
-	private ActionActor actor;
+	private PlayerActor actor;
 	
 	private Player player;
-	
-	/**
-	 * 对局中
-	 * */
-	private GamePlayer gamePlayer;
-	
 
 	public void handleLogin(Player player) {
 		this.player = player;
@@ -71,11 +65,11 @@ public class PlayerContext {
 		this.ctx = ctx;
 	}
 
-	public ActionActor getActor() {
+	public PlayerActor getActor() {
 		return actor;
 	}
 
-	public void setActor(ActionActor actor) {
+	public void setActor(PlayerActor actor) {
 		this.actor = actor;
 	}
 

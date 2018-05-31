@@ -1,6 +1,8 @@
-syntax = "proto3";
-package com.su.proto;
-option java_outer_classname = "PlayProto";
+syntax = "proto2";
+
+option optimize_for = SPEED;
+option java_package = "com.su.proto";
+option java_outer_classname = "PlayMsg";
 
 message PCard {
 	 optional int32 value = 1;	// 牌面
@@ -15,9 +17,9 @@ message PMultiple {
 message PTable {
 	repeated PGamePlayer players = 1;	// 玩家
 	repeated PMultiple multiples = 2;	// 倍数
-	 optional int32 state = 3;		// 状态
+	optional int32 state = 3;		// 状态
 	optional  int32 hold = 4;	// 牌权
-	 optional int32 roundScore = 5; // 轮分
+	optional int32 roundScore = 5; // 轮分
 	optional  PCard callCard = 6;	// 被叫的牌
 	optional int32	callState = 7;	// 叫牌状态
 	repeated PCard lastCards = 8;	// 最后出牌
@@ -25,13 +27,13 @@ message PTable {
 }
 
 message PGamePlayer {
-	 optional int64 id = 1;
+	optional int64 id = 1;
 	repeated PCard handCards = 2;	// 玩家手牌
 	optional int32 cardNum = 3;	// 手牌数量
 	optional int32 team = 4;	// 玩家队伍（0：红方，1：蓝方）
 	optional int32 multipleValue = 5;	// 倍数
 	optional int32 score = 6;	// 得分
-optional int32 state = 7;	// 状态
+	optional int32 state = 7;	// 状态
 	optional int64 deadline = 8;	// 截止时间
 	optional int32 isAuto = 9;	// 是否托管
 }
@@ -54,7 +56,7 @@ message CallResp {
 
 // 出牌
 message DrawReq {
-	 optionalint32 cardType = 1;	// 牌型
+	optional int32 cardType = 1;	// 牌型
 	repeated int32 cardIndexs = 2;	// 出牌索引
 }
 message DrawResp {
@@ -108,7 +110,7 @@ message GamePlayerNotice{
 
 // 牌桌数据更新通知
 message TableNotice{
-	 optional PTable table = 1;
+	optional PTable table = 1;
 }
 
 

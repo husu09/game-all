@@ -10,33 +10,51 @@ import akka.japi.Creator;
 @Component
 public class AkkaContext {
 
-	private ActorSystem system = ActorSystem.create("GAME");
+	private static final ActorSystem system = ActorSystem.create("GAME");
 
 	/**
-	 * 创建Actor
+	 * 创建actor
 	 */
-	public <T> T createActor(Class<T> interfaceCls, Class implementCls) {
+	public <T> T createActor(Class<T> interfaceCls, Class<T> implementCls) {
 		return TypedActor.get(system).typedActorOf(new TypedProps<T>(interfaceCls, implementCls));
 	}
-	
-	public <T> T createActor(Class<T> interfaceCls, Class implementCls, Object obj) {
+
+	/**
+	 * 创建actor（带参数的）
+	 */
+	public <T> T createActor(Class<T> interfaceCls, Class implementCls, Object... objs) {
 		return TypedActor.get(system).typedActorOf(new TypedProps<T>(interfaceCls, new Creator<T>() {
 			@Override
 			public T create() throws Exception {
-				return (T) implementCls.getConstructor(obj.getClass()).newInstance(obj);
+				Class[] classzs = new Class[objs.length];
+				for (int i = 0; i < objs.length; i++) {
+					classzs[i] = objs[i].getClass();
+				}
+				return (T) implementCls.getConstructor(classzs).newInstance(objs);
 			}
 		}));
 	}
 
 	/**
-	 * 获取 ActorSystem
-	 */
-	public ActorSystem getActorSystem() {
-		return system;
-	}
-
+	 * 关闭actorySystem
+	 * */
 	public void close() {
 		system.terminate();
 	}
+	
+	/**
+	 * 关闭 acotr
+	 * */
+	public void stop(Object obj) {
+		TypedActor.get(system).stop(obj);
+	}
+	
+	/**
+	 * 关闭 acotr（等待所有调用完成后关闭）
+	 * */
+	public void poisonPill(Object obj) {
+		TypedActor.get(system).poisonPill(obj);
+	}
+	
 
 }

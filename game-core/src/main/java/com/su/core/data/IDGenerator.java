@@ -59,7 +59,7 @@ public class IDGenerator {
 					break;
 				} catch (Exception e) {
 					e.printStackTrace();
-					logger.info("设置对象id失败{} {}", o, id);
+					logger.error("设置对象id失败{} {}", o, id);
 				}
 			}
 		}

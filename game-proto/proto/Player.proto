@@ -1,15 +1,17 @@
 syntax = "proto2";
-package com.su.proto;
-option java_outer_classname = "PlayerProto";
+
+option optimize_for = SPEED;
+option java_package = "com.su.proto";
+option java_outer_classname = "PlayerMsg";
 
 // 玩家数据
-message PlayerDataPro {
-	 int64 id = 1[default = -1];			// id
-	 string name = 2;						// 名字
-	 string picture = 3;					// 头像
-	 int32 level = 4 [default = -1];		// 等级
-	 int32 vipLevel = 5 [default = -1];		// vip等级
-	 int32 vipExp = 6[default = -1];		// vip经验
+message PPlayer {
+	 optional int64 id = 1;			// id
+	optional  string name = 2;						// 名字
+	optional  string picture = 3;					// 头像
+	optional  int32 level = 4 ;		// 等级
+	 optional int32 vipLevel = 5 ;		// vip等级
+	 optional int32 vipExp = 6;		// vip经验
 }
 
 // 获取玩家数据
@@ -17,6 +19,6 @@ message GetPlayerDataReq {
 	
 }
 message GetPlayerDataResp {
-	 PlayerDataPro playerData = 1;
+	optional PPlayer player = 1;
 }
 

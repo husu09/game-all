@@ -35,11 +35,6 @@ public interface ExcelMap<T> {
 	public Collection<T> all();
 	
 	/**
-	 * 获取当前配置的类型
-	 * */
-	public Class<?> getTypeClass();
-	
-	/**
 	 * 添加配置数据
 	 * */
 	public void add(String value);

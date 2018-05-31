@@ -20,8 +20,8 @@ import org.springframework.stereotype.Component;
 
 import com.google.protobuf.MessageLite;
 import com.su.core.akka.AkkaContext;
-import com.su.server.akka.ActionActor;
-import com.su.server.akka.ActionActorImpl;
+import com.su.server.akka.PlayerActor;
+import com.su.server.akka.PLayerActorImpl;
 import com.su.server.context.GameContext;
 import com.su.server.context.PlayerContext;
 
@@ -45,16 +45,16 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	private GameContext gameContext;
 
 	public static final AttributeKey<PlayerContext> PLAYER_CONTEXT_KEY = AttributeKey.valueOf("PLAYER_CONTEXT_KEY");
-	public static final AttributeKey<ActionActor> PROCESSOR_ACTOR_KEY = AttributeKey.valueOf("PROCESSOR_ACTOR_KEY");
+	public static final AttributeKey<PlayerActor> PROCESSOR_ACTOR_KEY = AttributeKey.valueOf("PROCESSOR_ACTOR_KEY");
 
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		Attribute<ActionActor> attr = ctx.channel().attr(PROCESSOR_ACTOR_KEY);
-		ActionActor actionActor = attr.get();
+		Attribute<PlayerActor> attr = ctx.channel().attr(PROCESSOR_ACTOR_KEY);
+		PlayerActor actionActor = attr.get();
 		if (actionActor != null) {
 			actionActor.process(ctx, (MessageLite) msg);
 		} else {
-			actionActor = akkaContext.createActor(ActionActor.class, ActionActorImpl.class);
+			actionActor = akkaContext.createActor(PlayerActor.class, PLayerActorImpl.class);
 			attr.set(actionActor);
 			actionActor.process(ctx, (MessageLite) msg);
 		}
@@ -71,18 +71,18 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 		PlayerContext playerContext = ctx.channel().attr(PLAYER_CONTEXT_KEY).get();
-		ActionActor processorActor = ctx.channel().attr(PROCESSOR_ACTOR_KEY).get();
+		PlayerActor processorActor = ctx.channel().attr(PROCESSOR_ACTOR_KEY).get();
 		if (playerContext != null) {
 			if (playerContext.getPlayer() != null) {
 				// 退出事件
 				playerContext.getActor().logout(playerContext);
 				// 从所有玩家上下文移除
-				gameContext.removePlayerContext(playerContext.getPlayer().getId());
+				gameContext.getPlayerContextMap().remove(playerContext.getPlayer().getId());
 			}
 		}
 		if (processorActor != null) {
 			// 关闭 actor
-			processorActor.stop();
+			akkaContext.poisonPill(processorActor);
 		}
 	}
 
