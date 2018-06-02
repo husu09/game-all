@@ -4,9 +4,18 @@ public enum Team {
 	/**
 	 * 红 1
 	 * */
-	RED,
+	RED(1),
 	/**
 	 * 蓝 2
 	 * */
-	BLUE
+	BLUE(2);
+	private int value;
+	
+	Team(int value){
+		this.value = value;
+	}
+
+	public int getValue() {
+		return value;
+	}
 }

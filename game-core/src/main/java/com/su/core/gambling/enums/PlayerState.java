@@ -4,18 +4,27 @@ public enum PlayerState {
 	/**
 	 * 准备 1
 	 */
-	READY,
+	READY(1),
 	/**
 	 * 等待 2
 	 */
-	WAIT,
+	WAIT(2),
 	/**
 	 * 操作中 3
 	 */
-	OPERATE,
+	OPERATE(3),
 	/**
 	 * 出完牌 4
-	 * */
-	FINISH
+	 */
+	FINISH(4);
+	private int value;
+
+	PlayerState(int value) {
+		this.value = value;
+	}
+
+	public int getValue() {
+		return value;
+	}
 
 }
