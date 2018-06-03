@@ -22,7 +22,7 @@ public interface TableActor {
 	/**
 	 * 叫牌
 	 */
-	public void call(GamePlayer player, int index);
+	public void call(GamePlayer player, int callType, int index);
 
 	/**
 	 * 出牌

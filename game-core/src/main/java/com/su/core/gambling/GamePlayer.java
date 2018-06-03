@@ -1,5 +1,8 @@
 package com.su.core.gambling;
 
+import java.util.concurrent.Delayed;
+import java.util.concurrent.TimeUnit;
+
 import com.su.core.context.PlayerContext;
 import com.su.core.gambling.enums.PlayerState;
 import com.su.core.gambling.enums.Team;
@@ -8,7 +11,7 @@ import com.su.core.gambling.enums.Team;
 /**
  * 游戏中的玩家对象
  */
-public class GamePlayer {
+public class GamePlayer  implements Delayed{
 	
 	private long id;
 	/**
@@ -38,11 +41,15 @@ public class GamePlayer {
 	/**
 	 * 是否托管
 	 */
-	private int isAuto;
+	private boolean isAuto;
 	/**
 	 * 名次
 	 * */
-	private int rank;
+	private Integer rank;
+	/**
+	 * 操作时间
+	 * */
+	private Long opTime;
 	
 	private Table table;
 	
@@ -51,7 +58,10 @@ public class GamePlayer {
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 		this.id = playerContext.getPlayerId();
+		// 设置玩家上下文持有游戏对象
 		playerContext.setGamePlayer(this);
+		handCards = new Card[Card.HAND_CARDS_NUM];
+		
 	}
 	
 	public long getId() {
@@ -106,13 +116,6 @@ public class GamePlayer {
 		this.state = state;
 	}
 
-	public int getIsAuto() {
-		return isAuto;
-	}
-
-	public void setIsAuto(int isAuto) {
-		this.isAuto = isAuto;
-	}
 
 	public int getRank() {
 		return rank;
@@ -133,6 +136,48 @@ public class GamePlayer {
 	public PlayerContext getPlayerContext() {
 		return playerContext;
 	}
+	
+
+	public Long getOpTime() {
+		return opTime;
+	}
+
+	public void setOpTime(Long opTime) {
+		this.opTime = opTime;
+	}
+
+	@Override
+	public int compareTo(Delayed o) {
+		if(this.getDelay(TimeUnit.MILLISECONDS) > o.getDelay(TimeUnit.MILLISECONDS)) {
+            return 1;
+        }else if(this.getDelay(TimeUnit.MILLISECONDS) < o.getDelay(TimeUnit.MILLISECONDS)) {
+            return -1;
+        }
+        return 0;
+	}
+
+	@Override
+	public long getDelay(TimeUnit unit) {
+		 return unit.convert(opTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+	}
+	
+	/**
+	 * 重置玩家状态
+	 * */
+	public void reset() {
+		// 重置用户手牌
+		for (int i = 0; i < handCards.length; i ++) {
+			handCards[i] = null; 
+		}
+		team = null;
+		multipleValue = 0;
+		score = 0;
+		state = null;
+		isAuto = false;
+		rank = null;
+		opTime = null;
+	}
+
 
 	
 }

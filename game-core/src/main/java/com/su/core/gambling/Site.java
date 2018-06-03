@@ -1,7 +1,5 @@
 package com.su.core.gambling;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.DelayQueue;
@@ -19,11 +17,7 @@ public class Site {
 	 */
 	private AtomicInteger playerNum = new AtomicInteger();
 	/**
-	 * 玩家游戏对象
-	 * */
-	private Map<Long, GamePlayer> gamePlayerMap = new ConcurrentHashMap<>();
-	/**
-	 * 玩家队列
+	 * 匹配中的玩家队列
 	 */
 	private ConcurrentLinkedDeque<GamePlayer> playerDeque = new ConcurrentLinkedDeque<>();
 	/**
@@ -33,31 +27,32 @@ public class Site {
 	/**
 	 * 需要操作的牌桌队列
 	 */
-	private DelayQueue<Table> opTableQueue = new DelayQueue<>();
+	private DelayQueue<Table> waitTableQueue = new DelayQueue<>();
+	/**
+	 * 需要操作的玩家队列
+	 */
+	private DelayQueue<GamePlayer> waitGamePlayerQueue = new DelayQueue<>();
 
 	public Site(SiteCo siteCo) {
 		// 初始化牌桌
-		for (int i = 0; i < siteCo.getInitTableNum(); i ++) {
+		for (int i = 0; i < siteCo.getInitTableNum(); i++) {
 			Table table = new Table(this);
 			tableQueue.offer(table);
 		}
 	}
-	
-	
+
 	/**
 	 * 开始匹配
 	 */
 	public void startMatch(PlayerContext playerContext) {
-		GamePlayer gamePlayer = gamePlayerMap.get(playerContext.getPlayerId());
-		if (gamePlayer == null) {
-			gamePlayer = new GamePlayer(playerContext);
-			gamePlayerMap.put(gamePlayer.getId(), gamePlayer);
-		} else if(gamePlayer != null && gamePlayer.getState() != null) {
+		if (playerContext.getGamePlayer() == null) {
+			playerContext.setGamePlayer(new GamePlayer(playerContext));
+		} else if (playerContext.getGamePlayer().getState() != null) {
 			// 已经在游戏中
 			return;
 		}
 		playerNum.incrementAndGet();
-		playerDeque.offerLast(gamePlayer);
+		playerDeque.offerLast(playerContext.getGamePlayer());
 		// 尝试从队列中获取4个玩家
 		GamePlayer[] gamePlayers = new GamePlayer[4];
 		for (int i = 0; i < 4; i++) {
@@ -78,5 +73,14 @@ public class Site {
 			table = new Table(this);
 		}
 		table.getActor().setPlayers(gamePlayers);
-	}	
+	}
+
+	public DelayQueue<Table> getWaitTableQueue() {
+		return waitTableQueue;
+	}
+
+	public DelayQueue<GamePlayer> getWaitGamePlayerQueue() {
+		return waitGamePlayerQueue;
+	}
+	
 }

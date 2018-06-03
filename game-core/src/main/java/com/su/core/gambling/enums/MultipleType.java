@@ -59,4 +59,5 @@ public enum MultipleType {
 	public int getValue() {
 		return value;
 	}
+	
 }

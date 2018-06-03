@@ -5,7 +5,7 @@ public class MultipleTypeUnit {
 	/**
 	 * 获取倍数
 	 */
-	public static MultipleType getMultiple(CardType cardType, Card[] cards) {
+	/*public static MultipleType getMultiple(CardType cardType, Card[] cards) {
 		switch (cardType) {
 		case ZHA_DAN:
 			if (cards.length == 6)
@@ -27,5 +27,5 @@ public class MultipleTypeUnit {
 			break;
 		}
 		return null;
-	}
+	}*/
 }

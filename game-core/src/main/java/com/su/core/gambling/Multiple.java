@@ -23,17 +23,5 @@ public class Multiple {
 		return type;
 	}
 
-	public PMultiple toProto() {
-		PMultiple.Builder builder = PMultiple.newBuilder();
-		return toProto(builder);
-	}
-
-	public PMultiple toProto(PMultiple.Builder builder) {
-		builder.setType(type);
-		builder.setValue(value);
-		PMultiple pMultiple = builder.build();
-		builder.clear();
-		return pMultiple;
-	}
 
 }

@@ -28,8 +28,8 @@ public class TableActorImpl implements TableActor {
 	}
 
 	@Override
-	public void call(GamePlayer player, int index) {
-		table.call(player, index);
+	public void call(GamePlayer player,int callType, int index) {
+		table.call(player, callType, index);
 	}
 
 	@Override

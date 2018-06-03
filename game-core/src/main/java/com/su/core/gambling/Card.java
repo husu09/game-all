@@ -1,13 +1,17 @@
 package com.su.core.gambling;
 
 import com.su.core.gambling.enums.Suit;
-import com.su.msg.GamblingMsg._Card;
 
 public class Card implements Comparable<Card> {
 	/**
 	 * 一幅牌的张数
 	 */
 	public static final int CARDS_NUM = 54;
+	
+	/**
+	 * 玩家手牌张数
+	 */
+	public static final int HAND_CARDS_NUM = CARDS_NUM * 2 / 4;
 
 	/**
 	 * 卡牌对应的值
@@ -27,15 +31,15 @@ public class Card implements Comparable<Card> {
 	public static final int CARD_2 = 15;
 	public static final int CARD_XIAO_WANG = 16;
 	public static final int CARD_DA_WANG = 17;
-	
+
 	/**
 	 * 一幅牌
-	 * */
+	 */
 	public static final Card[] ONE_CARDS;
-	
+
 	/**
 	 * 初始化一幅牌
-	 * */
+	 */
 	static {
 		Card[] cards = new Card[CARDS_NUM];
 		int value = CARD_3;
@@ -59,7 +63,7 @@ public class Card implements Comparable<Card> {
 		}
 		ONE_CARDS = cards;
 	}
-	
+
 	/**
 	 * 牌面
 	 */
@@ -88,6 +92,31 @@ public class Card implements Comparable<Card> {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((suit == null) ? 0 : suit.hashCode());
+		result = prime * result + value;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		if (suit != other.suit)
+			return false;
+		if (value != other.value)
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return "Card [value=" + value + ", suit=" + suit + "]";
 	}
@@ -98,20 +127,6 @@ public class Card implements Comparable<Card> {
 
 	public Suit getSuit() {
 		return suit;
-	}
-
-	public _Card toProto() {
-		_Card.Builder builder = _Card.newBuilder();
-		return toProto(builder);
-	}
-
-	public _Card toProto(_Card.Builder builder) {
-		builder.setValue(value);
-		if (suit != null)
-			builder.setSuit(suit.ordinal());
-		_Card pCard = builder.build();
-		builder.clear();
-		return pCard;
 	}
 
 }

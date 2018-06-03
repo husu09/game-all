@@ -50,7 +50,8 @@ message Start_ {
 
 // 叫牌
 message Call {
-	optional int32 cardIndex = 1;	// 出牌索引
+	optional int32 callType = 1;	// 叫牌状态（1：叫牌，2：暗叫，3：明叫）
+	optional int32 cardIndex = 2;	// 出牌索引
 }
 message Call_ {
 	

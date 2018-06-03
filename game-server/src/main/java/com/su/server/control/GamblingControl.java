@@ -86,6 +86,6 @@ public class GamblingControl {
 			playerContext.sendError(3002);
 			return;
 		}
-		gamePlayer.getTable().getActor().call(gamePlayer, req.getCardIndex());
+		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
 	}
 }

@@ -6827,10 +6827,27 @@ public final class GamblingMsg {
 
     /**
      * <pre>
+     * 叫牌状态（1：叫牌，2：暗叫，3：明叫）
+     * </pre>
+     *
+     * <code>optional int32 callType = 1;</code>
+     */
+    boolean hasCallType();
+    /**
+     * <pre>
+     * 叫牌状态（1：叫牌，2：暗叫，3：明叫）
+     * </pre>
+     *
+     * <code>optional int32 callType = 1;</code>
+     */
+    int getCallType();
+
+    /**
+     * <pre>
      * 出牌索引
      * </pre>
      *
-     * <code>optional int32 cardIndex = 1;</code>
+     * <code>optional int32 cardIndex = 2;</code>
      */
     boolean hasCardIndex();
     /**
@@ -6838,7 +6855,7 @@ public final class GamblingMsg {
      * 出牌索引
      * </pre>
      *
-     * <code>optional int32 cardIndex = 1;</code>
+     * <code>optional int32 cardIndex = 2;</code>
      */
     int getCardIndex();
   }
@@ -6858,6 +6875,7 @@ public final class GamblingMsg {
       super(builder);
     }
     private Call() {
+      callType_ = 0;
       cardIndex_ = 0;
     }
 
@@ -6891,6 +6909,11 @@ public final class GamblingMsg {
             }
             case 8: {
               bitField0_ |= 0x00000001;
+              callType_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
               cardIndex_ = input.readInt32();
               break;
             }
@@ -6919,24 +6942,47 @@ public final class GamblingMsg {
     }
 
     private int bitField0_;
-    public static final int CARDINDEX_FIELD_NUMBER = 1;
+    public static final int CALLTYPE_FIELD_NUMBER = 1;
+    private int callType_;
+    /**
+     * <pre>
+     * 叫牌状态（1：叫牌，2：暗叫，3：明叫）
+     * </pre>
+     *
+     * <code>optional int32 callType = 1;</code>
+     */
+    public boolean hasCallType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     * 叫牌状态（1：叫牌，2：暗叫，3：明叫）
+     * </pre>
+     *
+     * <code>optional int32 callType = 1;</code>
+     */
+    public int getCallType() {
+      return callType_;
+    }
+
+    public static final int CARDINDEX_FIELD_NUMBER = 2;
     private int cardIndex_;
     /**
      * <pre>
      * 出牌索引
      * </pre>
      *
-     * <code>optional int32 cardIndex = 1;</code>
+     * <code>optional int32 cardIndex = 2;</code>
      */
     public boolean hasCardIndex() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <pre>
      * 出牌索引
      * </pre>
      *
-     * <code>optional int32 cardIndex = 1;</code>
+     * <code>optional int32 cardIndex = 2;</code>
      */
     public int getCardIndex() {
       return cardIndex_;
@@ -6955,7 +7001,10 @@ public final class GamblingMsg {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, cardIndex_);
+        output.writeInt32(1, callType_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, cardIndex_);
       }
       unknownFields.writeTo(output);
     }
@@ -6967,7 +7016,11 @@ public final class GamblingMsg {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, cardIndex_);
+          .computeInt32Size(1, callType_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, cardIndex_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -6986,6 +7039,11 @@ public final class GamblingMsg {
       com.su.msg.GamblingMsg.Call other = (com.su.msg.GamblingMsg.Call) obj;
 
       boolean result = true;
+      result = result && (hasCallType() == other.hasCallType());
+      if (hasCallType()) {
+        result = result && (getCallType()
+            == other.getCallType());
+      }
       result = result && (hasCardIndex() == other.hasCardIndex());
       if (hasCardIndex()) {
         result = result && (getCardIndex()
@@ -7002,6 +7060,10 @@ public final class GamblingMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasCallType()) {
+        hash = (37 * hash) + CALLTYPE_FIELD_NUMBER;
+        hash = (53 * hash) + getCallType();
+      }
       if (hasCardIndex()) {
         hash = (37 * hash) + CARDINDEX_FIELD_NUMBER;
         hash = (53 * hash) + getCardIndex();
@@ -7128,8 +7190,10 @@ public final class GamblingMsg {
       }
       public Builder clear() {
         super.clear();
-        cardIndex_ = 0;
+        callType_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        cardIndex_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -7156,6 +7220,10 @@ public final class GamblingMsg {
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
+        }
+        result.callType_ = callType_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
         }
         result.cardIndex_ = cardIndex_;
         result.bitField0_ = to_bitField0_;
@@ -7200,6 +7268,9 @@ public final class GamblingMsg {
 
       public Builder mergeFrom(com.su.msg.GamblingMsg.Call other) {
         if (other == com.su.msg.GamblingMsg.Call.getDefaultInstance()) return this;
+        if (other.hasCallType()) {
+          setCallType(other.getCallType());
+        }
         if (other.hasCardIndex()) {
           setCardIndex(other.getCardIndex());
         }
@@ -7231,23 +7302,71 @@ public final class GamblingMsg {
       }
       private int bitField0_;
 
+      private int callType_ ;
+      /**
+       * <pre>
+       * 叫牌状态（1：叫牌，2：暗叫，3：明叫）
+       * </pre>
+       *
+       * <code>optional int32 callType = 1;</code>
+       */
+      public boolean hasCallType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       * 叫牌状态（1：叫牌，2：暗叫，3：明叫）
+       * </pre>
+       *
+       * <code>optional int32 callType = 1;</code>
+       */
+      public int getCallType() {
+        return callType_;
+      }
+      /**
+       * <pre>
+       * 叫牌状态（1：叫牌，2：暗叫，3：明叫）
+       * </pre>
+       *
+       * <code>optional int32 callType = 1;</code>
+       */
+      public Builder setCallType(int value) {
+        bitField0_ |= 0x00000001;
+        callType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 叫牌状态（1：叫牌，2：暗叫，3：明叫）
+       * </pre>
+       *
+       * <code>optional int32 callType = 1;</code>
+       */
+      public Builder clearCallType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        callType_ = 0;
+        onChanged();
+        return this;
+      }
+
       private int cardIndex_ ;
       /**
        * <pre>
        * 出牌索引
        * </pre>
        *
-       * <code>optional int32 cardIndex = 1;</code>
+       * <code>optional int32 cardIndex = 2;</code>
        */
       public boolean hasCardIndex() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <pre>
        * 出牌索引
        * </pre>
        *
-       * <code>optional int32 cardIndex = 1;</code>
+       * <code>optional int32 cardIndex = 2;</code>
        */
       public int getCardIndex() {
         return cardIndex_;
@@ -7257,10 +7376,10 @@ public final class GamblingMsg {
        * 出牌索引
        * </pre>
        *
-       * <code>optional int32 cardIndex = 1;</code>
+       * <code>optional int32 cardIndex = 2;</code>
        */
       public Builder setCardIndex(int value) {
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         cardIndex_ = value;
         onChanged();
         return this;
@@ -7270,10 +7389,10 @@ public final class GamblingMsg {
        * 出牌索引
        * </pre>
        *
-       * <code>optional int32 cardIndex = 1;</code>
+       * <code>optional int32 cardIndex = 2;</code>
        */
       public Builder clearCardIndex() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         cardIndex_ = 0;
         onChanged();
         return this;
@@ -14031,15 +14150,15 @@ public final class GamblingMsg {
       "roundScore\030\007 \001(\005\022\030\n\010callCard\030\010 \001(\0132\006._Ca" +
       "rd\022\021\n\tcallState\030\t \001(\005\022\016\n\006dealer\030\n \001(\005\022\016\n" +
       "\006opTime\030\013 \001(\005\"\027\n\005Start\022\016\n\006siteId\030\001 \001(\005\"\010" +
-      "\n\006Start_\"\031\n\004Call\022\021\n\tcardIndex\030\001 \001(\005\"\007\n\005C" +
-      "all_\",\n\004Draw\022\020\n\010cardType\030\001 \001(\005\022\022\n\ncardIn" +
-      "dexs\030\002 \003(\005\"\007\n\005Draw_\"\007\n\005Check\"\010\n\006Check_\"\007" +
-      "\n\005Ready\"\010\n\006Ready_\"\006\n\004Quit\"\007\n\005Quit_\"\010\n\006Do" +
-      "uble\"\t\n\007Double_\"\006\n\004Auto\"\007\n\005Auto_\"5\n\021Upda" +
-      "teGamePlayer_\022 \n\ngamePlayer\030\001 \003(\0132\014._Gam" +
-      "ePlayer\",\n\022UpdateTableNotice_\022\026\n\005table\030\001",
-      " \001(\0132\007._TableB\033\n\ncom.su.msgB\013GamblingMsg" +
-      "H\001"
+      "\n\006Start_\"+\n\004Call\022\020\n\010callType\030\001 \001(\005\022\021\n\tca" +
+      "rdIndex\030\002 \001(\005\"\007\n\005Call_\",\n\004Draw\022\020\n\010cardTy" +
+      "pe\030\001 \001(\005\022\022\n\ncardIndexs\030\002 \003(\005\"\007\n\005Draw_\"\007\n" +
+      "\005Check\"\010\n\006Check_\"\007\n\005Ready\"\010\n\006Ready_\"\006\n\004Q" +
+      "uit\"\007\n\005Quit_\"\010\n\006Double\"\t\n\007Double_\"\006\n\004Aut" +
+      "o\"\007\n\005Auto_\"5\n\021UpdateGamePlayer_\022 \n\ngameP" +
+      "layer\030\001 \003(\0132\014._GamePlayer\",\n\022UpdateTable",
+      "Notice_\022\026\n\005table\030\001 \001(\0132\007._TableB\033\n\ncom.s" +
+      "u.msgB\013GamblingMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14094,7 +14213,7 @@ public final class GamblingMsg {
     internal_static_Call_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Call_descriptor,
-        new java.lang.String[] { "CardIndex", });
+        new java.lang.String[] { "CallType", "CardIndex", });
     internal_static_Call__descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_Call__fieldAccessorTable = new
