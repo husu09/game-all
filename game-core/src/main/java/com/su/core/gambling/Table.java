@@ -27,7 +27,7 @@ import com.su.core.gambling.util.MultipleUtil;
 /**
  * 牌桌对象
  */
-public class Table implements Delayed{
+public class Table implements Delayed {
 	/**
 	 * 牌
 	 */
@@ -70,35 +70,35 @@ public class Table implements Delayed{
 	private Long waitTime;
 	/**
 	 * 排名
-	 * */
+	 */
 	private Integer[] ranks;
-	
+
 	private Site site;
-	
+
 	private TableActor actor;
 
 	private AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
 	private CardProcessorManager cardManager = SpringUtil.getContext().getBean(CardProcessorManager.class);
-	
+
 	private Logger logger = LoggerFactory.getLogger(Table.class);
-	
+
 	/**
 	 * 叫牌时间
-	 * */
-	private static final int CALL_WAIT_TIME  = TimeUtil.ONE_SECOND * 15;
+	 */
+	private static final int CALL_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
 	 * 出牌时间
-	 * */
-	private static final int OPERATE_WAIT_TIME  = TimeUtil.ONE_SECOND * 15;
+	 */
+	private static final int OPERATE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
 	 * 结算时等待时间
-	 * */
+	 */
 	private static final int CLOSE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
 	 * 加倍时间
-	 * */
+	 */
 	private static final int DOUBLES_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
-	
+
 	public Table(Site site) {
 		actor = akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
 		this.site = site;
@@ -110,27 +110,27 @@ public class Table implements Delayed{
 		multiples = new int[MultipleType.values().length];
 		this.ranks = new Integer[4];
 	}
-	
+
 	/**
 	 * 清空牌桌数据（解散牌桌时）
-	 * */
+	 */
 	public void clean() {
 		reset();
 		// 清空玩家
-		for (int i = 0; i < this.players.length; i ++) 
+		for (int i = 0; i < this.players.length; i++)
 			this.players[i] = null;
 	}
-	
+
 	/**
 	 * 重置牌桌状态（开始下一局时）
-	 * */
+	 */
 	public void reset() {
 		roundScore = 0;
 		// 叫牌状态
 		callCard = null;
 		callType = null;
 		// 重置倍数
-		for (int i = 0; i < multiples.length; i ++) {
+		for (int i = 0; i < multiples.length; i++) {
 			multiples[i] = 0;
 		}
 		// 最后出牌
@@ -145,7 +145,7 @@ public class Table implements Delayed{
 		}
 		this.state = null;
 	}
-	
+
 	/**
 	 * 洗牌
 	 */
@@ -180,14 +180,14 @@ public class Table implements Delayed{
 		for (GamePlayer gamePlayer : players) {
 			gamePlayer.setState(PlayerState.OPERATE);
 		}
-		waitTime  = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
+		waitTime = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
 		site.getWaitTableQueue().put(this);
 		// TODO 通知
 	}
-	
+
 	/**
 	 * 加倍
-	 * */
+	 */
 	public boolean doubles(GamePlayer player, int multiple) {
 		if (player.getState() != PlayerState.OPERATE) {
 			logger.error("{} Player state is not operate {}", player.getId(), player.getState());
@@ -204,26 +204,23 @@ public class Table implements Delayed{
 		if (isSameState(PlayerState.WAIT)) {
 			doublesToDraw();
 		}
-		//TODO 通知
+		// TODO 通知
 		return true;
 	}
-	
+
 	/**
 	 * 加倍状态切换到出牌状态
-	 * */
-	private void doublesToDraw(){
+	 */
+	private void doublesToDraw() {
 		GamePlayer player = this.players[this.callOp];
 		player.setState(PlayerState.OPERATE);
 		player.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
 		this.site.getWaitGamePlayerQueue().put(player);
 	}
-	
-	
-	
-	
+
 	/**
 	 * 是否是同一状态
-	 * */
+	 */
 	private boolean isSameState(PlayerState playerState) {
 		for (GamePlayer otherPlayer : this.players) {
 			if (otherPlayer.getState() != playerState)
@@ -231,7 +228,7 @@ public class Table implements Delayed{
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 过牌
 	 */
@@ -242,14 +239,14 @@ public class Table implements Delayed{
 		}
 		player.setState(PlayerState.WAIT);
 		this.site.getWaitGamePlayerQueue().remove(player);
-		
+
 		if (state == TableState.CALL) {
 			// 不叫
 			// 叫牌结束切换状态
 			if (isSameState(PlayerState.WAIT)) {
 				callToDoubles();
 			}
-			
+
 		} else if (state == TableState.DOUBLES) {
 			// 不加倍
 			// 加倍结束切换状态
@@ -259,7 +256,7 @@ public class Table implements Delayed{
 		} else if (state == TableState.DRAW) {
 			// 过牌
 			// 处理下家
-			GamePlayer nextPlayer =  players[player.getIndex() + 1 % 4];
+			GamePlayer nextPlayer = players[player.getIndex() + 1 % 4];
 			nextPlayer.setState(PlayerState.OPERATE);
 			nextPlayer.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
 			this.site.getWaitGamePlayerQueue().put(nextPlayer);
@@ -293,6 +290,8 @@ public class Table implements Delayed{
 			logger.error("{} Call verify fail {}", player.getId(), card);
 			return;
 		}
+		// 倍数
+		addToComMultiple(callType, cards);
 		if (callType == CallType.LIGHT) {
 			// 牌桌
 			this.callCard = card;
@@ -330,14 +329,14 @@ public class Table implements Delayed{
 			if (isSameState(PlayerState.WAIT)) {
 				callToDoubles();
 			}
-			
 		}
 		// TODO 通知
-		
+
 	}
+
 	/**
 	 * 叫牌切换到加倍状态
-	 * */
+	 */
 	private void callToDoubles() {
 		// 没人叫牌则重新开始
 		if (this.callOp == null) {
@@ -349,6 +348,16 @@ public class Table implements Delayed{
 			}
 			this.waitTime = TimeUtil.getCurrTime() + CALL_WAIT_TIME;
 			this.site.getWaitTableQueue().put(this);
+		}
+	}
+
+	/**
+	 * 增加公共倍数
+	 */
+	private void addToComMultiple(Object o, Card[] cards) {
+		MultipleType multiple = MultipleUtil.getMultiple(o, cards);
+		if (multiple != null) {
+			this.multiples[multiple.ordinal()] += multiple.getValue();
 		}
 	}
 
@@ -372,16 +381,17 @@ public class Table implements Delayed{
 		}
 		// 出牌
 		Card[] cards = new Card[indexs.length];
-		for (int i = 0; i < indexs.length ; i ++) {
+		for (int i = 0; i < indexs.length; i++) {
 			Card card = player.getHandCards()[indexs[i]];
 			if (card == null) {
-				logger.error("{} Indexs not match handCards {] {}", player.getId(), Arrays.toString(indexs), Arrays.toString(player.getHandCards()));
+				logger.error("{} Indexs not match handCards {] {}", player.getId(), Arrays.toString(indexs),
+						Arrays.toString(player.getHandCards()));
 				return;
 			}
 			cards[i] = card;
 			player.getHandCards()[indexs[i]] = null;
 		}
-		
+
 		// 出牌验证
 		CardProcessor cardProcessor = cardManager.getCardProcessor().get(cardType);
 		if (!cardProcessor.verify(cards)) {
@@ -389,72 +399,164 @@ public class Table implements Delayed{
 			return;
 		}
 		if (!cardProcessor.compare(cards, this.lastCardType, this.lastCards)) {
-			logger.error("{} Cards not BG. lastCards {} {}", player.getId(), Arrays.toString(cards), Arrays.toString(this.lastCards));
+			logger.error("{} Cards not BG. lastCards {} {}", player.getId(), Arrays.toString(cards),
+					Arrays.toString(this.lastCards));
 			return;
 		}
+		// 当前玩家
+		player.setState(PlayerState.WAIT);
+		this.site.getWaitGamePlayerQueue().remove(player);
 		// 倍数
-		MultipleType multiple = MultipleUtil.getMultiple(cardType, cards);
-		if (multiple != null) {
-			this.multiples[multiple.ordinal()] += multiple.getValue();
-		}
+		addToComMultiple(cardType, cards);
 		// 得分
-		if (this.lastOp == player.getIndex() && this.roundScore != 0) {
-			player.setScore(player.getScore() + this.roundScore);
-			this.roundScore = 0;
+		if (this.callType != CallType.DARK && this.callType != CallType.LIGHT) {
+			if (this.lastOp == player.getIndex() && this.roundScore != 0) {
+				player.setScore(player.getScore() + this.roundScore);
+				this.roundScore = 0;
+			}
 		}
+		// TODO 计算分数
+		// 
 		// 队伍
 		if (player.getTeam() == null && this.callType != CallType.LIGHT) {
 			for (Card card : cards) {
 				if (card.equals(this.callCard)) {
-					GamePlayer callPlayer = this.players[this.callOp];
-					player.setTeam(callPlayer.getTeam());
-					
-					for (GamePlayer otherPlayer : this.players) {
-						if (otherPlayer.equals(player) || otherPlayer.equals(callPlayer))
-							continue;
-						otherPlayer.setTeam(Team.BLUE);
+					if (player.getIndex() != this.callOp) {
+						// 叫牌
+						GamePlayer callPlayer = this.players[this.callOp];
+						player.setTeam(callPlayer.getTeam());
+						for (GamePlayer otherPlayer : this.players) {
+							if (otherPlayer.equals(player) || otherPlayer.equals(callPlayer))
+								continue;
+							otherPlayer.setTeam(Team.BLUE);
+						}
+					} else
+
+					if (card != this.callCard && card.equals(this.callCard)) {
+						// 暗叫
+						MultipleType callMultiple = MultipleUtil.getMultiple(CallType.DARK, null);
+						this.multiples[callMultiple.ordinal()] += callMultiple.getValue();
+						for (GamePlayer otherPlayer : this.players) {
+							if (otherPlayer.equals(player))
+								continue;
+							otherPlayer.setTeam(Team.BLUE);
+						}
 					}
+
 				}
 			}
 		}
 		// 出牌后
-		boolean isFinish = true;
-		for (Card card : player.getHandCards()) {
-			if (card != null) {
-				isFinish =false;
+		doDrawAfter(player);
+		// 牌桌
+		this.lastCards = cards;
+		this.lastCardType = cardType;
+		this.lastOp = player.getIndex();
+		// TODO 通知
+	}
+
+	/**
+	 * 获取下家
+	 */
+	private GamePlayer getNextPlayer(GamePlayer player) {
+		GamePlayer nextPlayer = null;
+		if (player.getState() == PlayerState.FINISH) {
+			for (GamePlayer otherPlayer : this.players) {
+				if (player.equals(otherPlayer))
+					continue;
+				if (player.getTeam() == otherPlayer.getTeam()) {
+					nextPlayer = otherPlayer;
+					break;
+				}
+			}
+		} else {
+			nextPlayer = players[player.getIndex() + 1 % 4];
+		}
+		return nextPlayer;
+
+	}
+
+	/**
+	 * 添加排行
+	 */
+	private int addToRanks(GamePlayer player) {
+		int rank = -1;
+		for (int i = 0; i < this.ranks.length; i++) {
+			if (this.ranks[i] == null) {
+				this.ranks[i] = player.getIndex();
+				rank = i;
 				break;
 			}
 		}
-		if (isFinish) {
+		return rank;
+	}
+
+	/**
+	 * 排行数量
+	 */
+	private int getRanksCount() {
+		int count = 0;
+		for (int i = 0; i < this.ranks.length; i++) {
+			if (this.ranks[i] != null)
+				count++;
+			else
+				break;
+		}
+		return count;
+	}
+
+	/**
+	 * 是否完成
+	 */
+	private boolean isFinish(GamePlayer player) {
+		for (Card card : player.getHandCards()) {
+			if (card != null)
+				return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 玩家出牌后处理
+	 */
+	private void doDrawAfter(GamePlayer player) {
+		if (isFinish(player)) {
 			player.setState(PlayerState.FINISH);
+			// 全部出完后还没有队伍，则可以判断是蓝方
 			if (player.getTeam() == null)
 				player.setTeam(Team.BLUE);
-			// 结算
+			// 排名
+			int result = addToRanks(player);
+			if (result == -1) {
+				logger.error("{} Rank is error {}", player.getId(), result);
+				return;
+			}
+			// TODO 一方得分超过 100 获胜
+			// 判断牌局是否结束
 			if (this.callType == CallType.LIGHT || this.callType == CallType.DARK) {
 				if (this.callOp == player.getIndex()) {
-					// 其它玩家
+					// 其它玩家扣除资源
 					for (GamePlayer otherPlayer : this.players) {
 						if (player.equals(otherPlayer))
 							continue;
 						if (player.getTeam() == null)
 							player.setTeam(Team.BLUE);
 						otherPlayer.setState(PlayerState.FINISH);
-						// 扣除资源
 						// 排名
-						for (int i = 0; i < ranks.length; i ++) {
-							if (ranks[i] == null){
-								ranks[i] = player.getIndex();
+						for (int i = 0; i < ranks.length; i++) {
+							if (ranks[i] == null) {
+								ranks[i] = otherPlayer.getIndex();
 								break;
 							}
 						}
-						
-						
+						// 扣除资源
+
 					}
 					// 当前玩家添加资源
 					// 牌桌
 					this.state = TableState.CLOSE;
 					// TODO 通知
-					
+
 				} else {
 					// 当前玩家扣除资源
 					// 其它玩家
@@ -466,8 +568,8 @@ public class Table implements Delayed{
 						otherPlayer.setState(PlayerState.FINISH);
 						// 添加资源
 						// 排名
-						for (int i = 0; i < ranks.length; i ++) {
-							if (ranks[i] == null){
+						for (int i = 0; i < ranks.length; i++) {
+							if (ranks[i] == null) {
 								ranks[i] = player.getIndex();
 								break;
 							}
@@ -477,198 +579,97 @@ public class Table implements Delayed{
 					this.state = TableState.CLOSE;
 					// TODO 通知
 				}
-			}
-			// 排名
-			for (int i = 0; i < ranks.length; i ++) {
-				if (ranks[i] == null){
-					ranks[i] = player.getIndex();
-					break;
+
+			} else if (getRanksCount() >= 3) {
+				GamePlayer lastPlayer = getLastPlayer();
+				lastPlayer.setState(PlayerState.FINISH);
+				int redCount = getTeamCount(Team.RED);
+				// 赢的队伍
+				Team winnerTeam = Team.RED;
+				if (redCount < 2) {
+					lastPlayer.setTeam(Team.RED);
+					winnerTeam = Team.BLUE;
+				} else {
+					lastPlayer.setTeam(Team.BLUE);
 				}
+				// 排名
+				ranks[ranks.length - 1] = lastPlayer.getIndex();
+
+				for (GamePlayer otherPlayer : this.players) {
+					if (otherPlayer.getTeam() == winnerTeam) {
+						// 添加资源
+					} else {
+						// 扣除资源
+					}
+				}
+
+			} else {
+				// 游戏未结束，由下家出牌
+				GamePlayer nextPlayer = getNextPlayer(player);
+				nextPlayer.setState(PlayerState.OPERATE);
+				// 托管状态自行出牌
+				if (nextPlayer.isAuto()) {
+					draw(nextPlayer, 0, null);
+				} else {
+					this.site.getWaitGamePlayerQueue().put(nextPlayer);
+				}
+
 			}
-			// 
 			
+			// TODO 最后倍数计算
+			/**
+			 * 一方获得200分，满分
+			 * 一方获得一二名，全胜不计算得分
+			 * 双方都是100分时，第一名那方获胜
+			 * 最终倍数  = 公共倍数 * 红方玩家倍数 * 蓝方玩家倍数
+			 * 游戏结束后，末游玩家所得到的分数为一游玩家所有，手中未出的分数归另一方所有。
+			 * */
+
 		}
-		
-		// 牌桌
-		this.lastCards = cards;
-		this.lastCardType = cardType;
-		this.lastOp = player.getIndex();
-		// 自己
-		player.setState(PlayerState.WAIT);
-		this.site.getWaitGamePlayerQueue().remove(player);
-		// 下家
-		
-		nextPlayer.setState(PlayerState.OPERATE);
-		nextPlayer.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
-		this.site.getWaitGamePlayerQueue().put(nextPlayer);
-		// TODO 通知
 	}
-	
-	
-	
+
 	/**
-	 * 获取下家
-	 * */
-	private GamePlayer getNextPlayer(GamePlayer player) {
-		GamePlayer nextPlayer =  null;
-		if (player.getState() == PlayerState.FINISH) {
-			for (GamePlayer otherPlayer : this.players) {
-				if (player.equals(otherPlayer))
-					continue;
-				if (player.getTeam() == otherPlayer.getTeam()){
-					nextPlayer = otherPlayer;
-					break;
-				}
-			}
-		} else {
-			nextPlayer = players[player.getIndex() + 1 % 4];
-		}
-		return nextPlayer;
-		
-	}
-	
-	/**
-	 * 添加排行
-	 * */
-	private int addToRanks(GamePlayer player) {
-		int rank = -1;
-		for (int i = 0; i < this.ranks.length; i ++) {
-			if ( this.ranks[i] == null){
-				 this.ranks[i] = player.getIndex();
-				rank = i;
-				break;
-			}
-		}
-		return rank;
-	}
-	
-	/**
-	 * 排行数量
-	 * */
-	private int getRanksCount(GamePlayer player) {
+	 * 获取任意一方的人数
+	 */
+	private int getTeamCount(Team team) {
 		int count = 0;
-		for (int i = 0; i < this.ranks.length; i ++) {
-			if ( this.ranks[i] != null)
-				count ++;
-			else 
-				break;
+		for (GamePlayer otherPlayer : this.players) {
+			if (team == otherPlayer.getTeam())
+				count++;
 		}
 		return count;
 	}
-	
-	/**
-	 * 是否完成
-	 * */
-	private boolean isFinish(GamePlayer player) {
-		for (Card card : player.getHandCards()) {
-			if (card != null) 
-				return false;
-		}
-		return true;
-	}
-	
-	/**
-	 * 玩家出牌后处理
-	 * */
-	private void doDrawAfter(GamePlayer player) {
-		
-	}
-	
-	/**
-	 * 处理玩家出牌完成
-	 * */
-	private void doDrawFinish(GamePlayer player) {
 
-		player.setState(PlayerState.FINISH);
-		if (player.getTeam() == null)
-			player.setTeam(Team.BLUE);
-		// 结算
-		if (this.callType == CallType.LIGHT || this.callType == CallType.DARK) {
-			if (this.callOp == player.getIndex()) {
-				// 其它玩家
-				for (GamePlayer otherPlayer : this.players) {
-					if (player.equals(otherPlayer))
-						continue;
-					if (player.getTeam() == null)
-						player.setTeam(Team.BLUE);
-					otherPlayer.setState(PlayerState.FINISH);
-					// 扣除资源
-					// 排名
-					for (int i = 0; i < ranks.length; i ++) {
-						if (ranks[i] == null){
-							ranks[i] = player.getIndex();
-							break;
-						}
-					}
-					
-					
-				}
-				// 当前玩家添加资源
-				// 牌桌
-				this.state = TableState.CLOSE;
-				// TODO 通知
-				
-			} else {
-				// 当前玩家扣除资源
-				// 其它玩家
-				for (GamePlayer otherPlayer : this.players) {
-					if (player.equals(otherPlayer))
-						continue;
-					if (player.getTeam() == null)
-						player.setTeam(Team.BLUE);
-					otherPlayer.setState(PlayerState.FINISH);
-					// 添加资源
-					// 排名
-					for (int i = 0; i < ranks.length; i ++) {
-						if (ranks[i] == null){
-							ranks[i] = player.getIndex();
-							break;
-						}
-					}
-				}
-				// 牌桌
-				this.state = TableState.CLOSE;
-				// TODO 通知
-			}
-		}
-		// 排名
-		for (int i = 0; i < ranks.length; i ++) {
-			if (ranks[i] == null){
-				ranks[i] = player.getIndex();
+	/**
+	 * 获取最后名的玩家
+	 */
+	private GamePlayer getLastPlayer() {
+		GamePlayer lastPlayer = null;
+		for (GamePlayer otherPlayer : this.players) {
+			if (otherPlayer.getState() == null) {
+				lastPlayer = otherPlayer;
 				break;
 			}
 		}
-		// 
-		
-	
+		return lastPlayer;
 	}
-	
+
+	/**
+	 * 处理玩家出牌完成
+	 */
+	private void doDrawFinish(GamePlayer player) {
+
+	}
+
 	/**
 	 * 结算
-	 * */
+	 */
 	private void close(GamePlayer[] winneres) {
-		// 当前玩家扣除资源
-		// 其它玩家
-		for (GamePlayer otherPlayer : this.players) {
-			if (player.equals(otherPlayer))
-				continue;
-			if (player.getTeam() == null)
-				player.setTeam(Team.BLUE);
-			otherPlayer.setState(PlayerState.FINISH);
-			// 添加资源
-			// 排名
-			for (int i = 0; i < ranks.length; i ++) {
-				if (ranks[i] == null){
-					ranks[i] = player.getIndex();
-					break;
-				}
-			}
-		}
 		// 牌桌
 		this.state = TableState.CLOSE;
 		// TODO 通知
 	}
-	
+
 	/**
 	 * 退出
 	 */
@@ -694,32 +695,28 @@ public class Table implements Delayed{
 	public void ready(GamePlayer player) {
 		player.setState(PlayerState.READY);
 		// 全部准备，开始游戏
-		for (GamePlayer otherPlayer : this.players) {
-			if (otherPlayer.getState() != PlayerState.READY) {
-				return;
-			}
+		if (isSameState(PlayerState.READY)) {
+			reset();
+			deal();
 		}
-		// 重置牌桌状态、发牌
-		reset();
-		deal();
 	}
 
 	/**
 	 * 重连
 	 */
 	public void reconnect(PlayerContext playerContext) {
-		if (playerContext.getGamePlayer().getTable() == null) 
+		if (playerContext.getGamePlayer().getTable() == null)
 			return;
 		playerContext.getGamePlayer().setAuto(false);
 		// TODO 通知
-		
+
 	}
 
 	/**
 	 * 玩家超时
 	 */
 	public void checkWaiting(GamePlayer player) {
-		
+
 	}
 
 	/**
@@ -727,27 +724,22 @@ public class Table implements Delayed{
 	 */
 	public void checkWaiting() {
 		// 加倍超时
-		
+
 		// 结算超时
-		
+
 	}
-	
+
 	public Card[] getCards() {
 		return cards;
 	}
-
-
 
 	public void setCards(Card[] cards) {
 		this.cards = cards;
 	}
 
-
-
 	public GamePlayer[] getPlayers() {
 		return players;
 	}
-
 
 	public void setPlayers(GamePlayer[] players) {
 		if (this.players != null)
@@ -760,153 +752,110 @@ public class Table implements Delayed{
 		this.players = players;
 	}
 
-
-
 	public TableState getState() {
 		return state;
 	}
 
-
 	/**
 	 * 设置牌桌状态
-	 * */
+	 */
 	public void setState(TableState state) {
 		this.state = state;
 	}
-
-
 
 	public int getRoundScore() {
 		return roundScore;
 	}
 
-
-
 	public void setRoundScore(int roundScore) {
 		this.roundScore = roundScore;
 	}
-
-
 
 	public Card getCallCard() {
 		return callCard;
 	}
 
-
-
 	public void setCallCard(Card callCard) {
 		this.callCard = callCard;
 	}
-
 
 	public Card[] getLastCards() {
 		return lastCards;
 	}
 
-
-
 	public void setLastCards(Card[] lastCards) {
 		this.lastCards = lastCards;
 	}
-
-
 
 	public CardType getLastCardType() {
 		return lastCardType;
 	}
 
-
-
 	public void setLastCardType(CardType lastCardType) {
 		this.lastCardType = lastCardType;
 	}
-
-
 
 	public int getLastOp() {
 		return lastOp;
 	}
 
-
-
 	public void setLastOp(int lastOp) {
 		this.lastOp = lastOp;
 	}
-
-
 
 	public int getDealer() {
 		return dealer;
 	}
 
-
-
 	public void setDealer(int dealer) {
 		this.dealer = dealer;
 	}
-
-
 
 	public long getOpTime() {
 		return waitTime;
 	}
 
-
-
 	public void setOpTime(long opTime) {
 		this.waitTime = opTime;
 	}
-
-
 
 	public Site getSite() {
 		return site;
 	}
 
-
-
 	public void setSite(Site site) {
 		this.site = site;
 	}
-
-
 
 	public TableActor getActor() {
 		return actor;
 	}
 
-
-
 	public void setTableActor(TableActor tableActor) {
 		this.actor = tableActor;
 	}
-
-
 
 	public AkkaContext getAkkaContext() {
 		return akkaContext;
 	}
 
-
-
 	public void setAkkaContext(AkkaContext akkaContext) {
 		this.akkaContext = akkaContext;
 	}
 
-
 	@Override
 	public int compareTo(Delayed o) {
-		if(this.getDelay(TimeUnit.MILLISECONDS) > o.getDelay(TimeUnit.MILLISECONDS)) {
-            return 1;
-        }else if(this.getDelay(TimeUnit.MILLISECONDS) < o.getDelay(TimeUnit.MILLISECONDS)) {
-            return -1;
-        }
-        return 0;
+		if (this.getDelay(TimeUnit.MILLISECONDS) > o.getDelay(TimeUnit.MILLISECONDS)) {
+			return 1;
+		} else if (this.getDelay(TimeUnit.MILLISECONDS) < o.getDelay(TimeUnit.MILLISECONDS)) {
+			return -1;
+		}
+		return 0;
 	}
 
 	@Override
 	public long getDelay(TimeUnit unit) {
-		 return unit.convert(waitTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+		return unit.convert(waitTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
 	}
 
 }
