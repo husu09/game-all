@@ -4,8 +4,6 @@ option optimize_for = SPEED;
 option java_package = "com.su.msg";
 option java_outer_classname = "GamblingMsg";
 
-
-
 message _Card {
 	 optional int32 value = 1;	// 牌面
 	 optional int32 suit = 2;	// 花色（0：方块，1：梅花，2：红桃，3：黑桃）
@@ -20,22 +18,25 @@ message _GamePlayer {
 	optional int64 id = 1;				// 玩家id
 	repeated _Card handCard = 2;		// 玩家手牌
 	optional int32 cardNum = 3;			// 手牌数量
-	optional int32 team = 4;			// 玩家队伍（0：红方，1：蓝方）
-	optional int32 multiple = 5;		// 倍数
-	optional int32 isAuto = 6;			// 是否托管
+	optional int32 team = 4;			// 玩家队伍（0：暂无队伍，1：红方，2：蓝方）
+	optional int32 multiple = 5;		// 玩家加倍
+	optional int32 score = 6;			// 得分
+	optional int32 isAuto = 7;			// 是否托管
+	optional int32 pState = 8;			// 玩家状态（0：等待，1：准备，2：游戏中）
 }
 
 
 message _Table {
-	repeated PGamePlayer players = 1;	// 玩家
-	repeated PMultiple multiples = 2;	// 倍数
-	optional int32 state = 3;			// 状态
-	optional  int32 hold = 4;		// 牌权
-	optional int32 roundScore = 5; 	// 轮分
-	optional  PCard callCard = 6;	// 被叫的牌
-	optional int32	callState = 7;	// 叫牌状态
-	repeated PCard lastCards = 8;	// 最后出牌
-	optional int32 dealer = 9;	// 庄家
+	repeated _GamePlayer player = 1;		// 玩家
+	repeated _Multiple comMultiple = 2;		// 公共倍数
+	optional int32 tState = 3;				// 牌桌状态（0：准备，1：发牌，2：加倍，3：叫牌，4：出牌，5：结算）
+	optional int32 hold = 4;				// 牌权
+	optional int32 roundScore = 5; 			// 轮分
+	optional _Card callCard = 6;			// 被叫的牌
+	optional int32 callState = 7;			// 叫牌状态
+	optional int32 dealer = 8;				// 庄家
+	optional int32 opPlayer = 9;			// 出牌玩家
+	optional int32 opTime = 10;				// 操作时间（秒）
 }
 
 // 开始匹配
@@ -99,10 +100,10 @@ message Auto_{
 
 // 玩家数据更新通知
 message UpdateGamePlayer_{
-	repeated PGamePlayer gamePlayer = 1;	
+	repeated _GamePlayer gamePlayer = 1;	
 }
 
 // 牌桌数据更新通知
 message UpdateTableNotice_{
-	optional PTable table = 1;
+	optional _Table table = 1;
 }

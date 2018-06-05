@@ -7,10 +7,6 @@ public class SiteCo {
 	 * */
 	private int siteType;
 	/**
-	 * 模式
-	 * */
-	private int siteMode;
-	/**
 	 * 是否开放
 	 * */
 	private boolean isOpen;
@@ -34,6 +30,7 @@ public class SiteCo {
 	 * 排位得分加成%
 	 * */
 	private int rankingAddition;
+	
 	public int getId() {
 		return id;
 	}
@@ -45,12 +42,6 @@ public class SiteCo {
 	}
 	public void setSiteType(int siteType) {
 		this.siteType = siteType;
-	}
-	public int getSiteMode() {
-		return siteMode;
-	}
-	public void setSiteMode(int siteMode) {
-		this.siteMode = siteMode;
 	}
 	public boolean isOpen() {
 		return isOpen;
@@ -88,6 +79,4 @@ public class SiteCo {
 	public void setRankingAddition(int rankingAddition) {
 		this.rankingAddition = rankingAddition;
 	}
-	
-	
 } 

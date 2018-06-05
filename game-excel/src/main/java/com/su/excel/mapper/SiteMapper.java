@@ -11,7 +11,7 @@ public class SiteMapper extends AbstractExcelMapper<SiteCo> {
 
 	@Override
 	public String getName() {
-		return "游戏分类";
+		return "Y游戏场";
 	}
 
 	@Override
@@ -19,7 +19,6 @@ public class SiteMapper extends AbstractExcelMapper<SiteCo> {
 		SiteCo t = new SiteCo();
 		t.setId(rowData.getInt("id"));
 		t.setSiteType(rowData.getInt("lx"));
-		t.setSiteMode(rowData.getInt("ms"));
 		t.setOpen(rowData.getBoolean("sfkf"));
 		t.setBaseScore(rowData.getInt("df"));
 		t.setMiniBean(rowData.getInt("rczdxz"));
