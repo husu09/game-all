@@ -1,5 +1,6 @@
-package com.su.core.gambling.util;
+package com.su.core.gambling.service;
 
+import com.su.core.gambling.AutoResult;
 import com.su.core.gambling.Card;
 import com.su.core.gambling.GamePlayer;
 import com.su.core.gambling.enums.CardType;
@@ -27,57 +28,5 @@ public class AIService {
 		return autoResult;
 	}
 	
-	/**
-	 * 获取单张
-	 * */
-	private void getDanZhang() {
-		
-	}
-	/**
-	 * 获取对子
-	 * */
-	private void getDuiZi() {
-		
-	}
-	/**
-	 * 获取连对
-	 * */
-	private void getLianDui() {
-		
-	}
 	
-	/**
-	 * 获取顺子
-	 * */
-	private void getShunZi() {
-		
-	}
-	
-	/**
-	 * 获取510K
-	 * */
-	private void get510K() {
-		
-	}
-	
-	/**
-	 * 获取炸弹
-	 * */
-	private void getZhaDan() {
-		
-	}
-	
-	/**
-	 * 获取同花510K
-	 * */
-	private void getDanZhangT510K() {
-		
-	}
-	
-	/**
-	 * 获取王炸
-	 * */
-	private void getWangZha() {
-		
-	}
 }

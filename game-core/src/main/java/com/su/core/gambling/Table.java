@@ -22,7 +22,6 @@ import com.su.core.gambling.enums.MultipleType;
 import com.su.core.gambling.enums.PlayerState;
 import com.su.core.gambling.enums.TableState;
 import com.su.core.gambling.enums.Team;
-import com.su.core.gambling.util.MultipleUtil;
 
 /**
  * 牌桌对象
@@ -82,14 +81,6 @@ public class Table implements Delayed {
 	private Logger logger = LoggerFactory.getLogger(Table.class);
 
 	/**
-	 * 叫牌时间
-	 */
-	private static final int CALL_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
-	/**
-	 * 出牌时间
-	 */
-	private static final int OPERATE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
-	/**
 	 * 结算时等待时间
 	 */
 	private static final int CLOSE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
@@ -122,21 +113,23 @@ public class Table implements Delayed {
 		// 清空玩家
 		for (int i = 0; i < this.players.length; i++)
 			this.players[i] = null;
+		// 庄家
+		this.dealer = 0;
 	}
 
 	/**
 	 * 重置牌桌状态（开始下一局时）
 	 */
 	public void reset() {
+		// 轮分
 		this.roundScore = 0;
 		// 叫牌状态
 		this.callCard = null;
 		this.callType = null;
 		this.callOp = null;
 		// 重置倍数
-		for (int i = 0; i < this.multiples.length; i++) {
+		for (int i = 0; i < this.multiples.length; i++) 
 			this.multiples[i] = 0;
-		}
 		// 最后出牌
 		this.lastCards = null;
 		this.lastCardType = null;
@@ -147,6 +140,10 @@ public class Table implements Delayed {
 		for (GamePlayer gamePlayer : this.players) {
 			gamePlayer.reset();
 		}
+		// 排名
+		for (int i = 0 ; i < this.ranks.length; i ++) 
+			this.ranks[i] = null;
+		// 状态
 		this.state = null;
 	}
 
@@ -178,15 +175,24 @@ public class Table implements Delayed {
 		for (int i = 0; i < this.players.length; i++) {
 			Arrays.sort(this.players[i].getHandCards());
 		}
-		// 设置牌桌状态
-		this.state = TableState.CALL;
 		// 设置玩家
 		for (GamePlayer gamePlayer : this.players) {
 			gamePlayer.setState(PlayerState.OPERATE);
 		}
-		this.waitTime = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
-		this.site.getWaitTableQueue().put(this);
+		// 设置牌桌状态
+		setState(TableState.DOUBLES, true);
 		// TODO 通知
+	}
+	
+	/**
+	 * 设置状态
+	 * */
+	private void setState(TableState state, boolean isDelay) {
+		this.state = TableState.DOUBLES;
+		if (isDelay) {
+			this.waitTime = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
+			this.site.getWaitTableQueue().put(this);
+		}
 	}
 
 	/**
@@ -203,20 +209,23 @@ public class Table implements Delayed {
 		}
 		player.setMultipleValue(player.getMultipleValue() + multiple);
 		player.setState(PlayerState.WAIT);
-		this.site.getWaitGamePlayerQueue().remove(player);
 		// 加倍结束切换状态
 		if (isSameState(PlayerState.WAIT)) {
-			doublesToDraw();
+			doublesToCall();
 		}
 		// TODO 通知
 		return true;
 	}
 
 	/**
-	 * 加倍状态切换到出牌状态
+	 * 加倍状态切换到叫牌状态
 	 */
-	private void doublesToDraw() {
-		GamePlayer player = this.players[this.callOp];
+	private void doublesToCall() {
+		this.site.getWaitTableQueue().remove(this);
+		// 牌桌
+		this.state = TableState.CALL;
+		// 玩家
+		GamePlayer player = this.players[this.dealer];
 		player.setState(PlayerState.OPERATE);
 		player.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
 		this.site.getWaitGamePlayerQueue().put(player);
@@ -242,22 +251,22 @@ public class Table implements Delayed {
 			return;
 		}
 		player.setState(PlayerState.WAIT);
-		this.site.getWaitGamePlayerQueue().remove(player);
 
 		if (state == TableState.CALL) {
 			// 不叫
 			// 叫牌结束切换状态
 			if (isSameState(PlayerState.WAIT)) {
-				callToDoubles();
+				callToDraw();
 			}
 
 		} else if (state == TableState.DOUBLES) {
 			// 不加倍
 			// 加倍结束切换状态
 			if (isSameState(PlayerState.WAIT)) {
-				doublesToDraw();
+				doublesToCall();
 			}
 		} else if (state == TableState.DRAW) {
+			this.site.getWaitGamePlayerQueue().remove(player);
 			// 过牌
 			// 处理下家
 			GamePlayer nextPlayer = players[player.getIndex() + 1 % 4];
@@ -301,19 +310,18 @@ public class Table implements Delayed {
 			this.callCard = card;
 			this.callType = callType;
 			this.callOp = player.getIndex();
-			this.state = TableState.DOUBLES;
+			this.state = TableState.DRAW;
 			// 当前玩家
 			player.setTeam(Team.RED);
 			player.setState(PlayerState.OPERATE);
 			player.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
-			site.getWaitGamePlayerQueue().put(player);
+			this.site.getWaitGamePlayerQueue().put(player);
 			// 其它玩家
 			for (GamePlayer gamePlayer : players) {
 				if (gamePlayer.equals(player))
 					continue;
 				gamePlayer.setTeam(Team.BLUE);
 				gamePlayer.setState(PlayerState.WAIT);
-				site.getWaitGamePlayerQueue().remove(gamePlayer);
 			}
 		} else {
 			// 只有庄家可以叫牌
@@ -328,10 +336,9 @@ public class Table implements Delayed {
 			// 当前玩家
 			player.setTeam(Team.RED);
 			player.setState(PlayerState.WAIT);
-			this.site.getWaitGamePlayerQueue().remove(player);
 			// 全部操作完
 			if (isSameState(PlayerState.WAIT)) {
-				callToDoubles();
+				callToDraw();
 			}
 		}
 		// TODO 通知
@@ -339,19 +346,24 @@ public class Table implements Delayed {
 	}
 
 	/**
-	 * 叫牌切换到加倍状态
+	 * 叫牌切换到出牌状态
 	 */
-	private void callToDoubles() {
+	private void callToDraw() {
+		this.site.getWaitTableQueue().remove(this);
 		// 没人叫牌则重新开始
 		if (this.callOp == null) {
+			reset();
 			deal();
 		} else {
-			this.state = TableState.DOUBLES;
-			for (GamePlayer otherPlayer : this.players) {
-				otherPlayer.setState(PlayerState.OPERATE);
-			}
-			this.waitTime = TimeUtil.getCurrTime() + CALL_WAIT_TIME;
-			this.site.getWaitTableQueue().put(this);
+			// 牌桌
+			this.state = TableState.DRAW;
+			// 玩家
+			GamePlayer player = this.players[this.callOp];
+			player.setTeam(Team.RED);
+			player.setState(PlayerState.OPERATE);
+			player.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
+			this.site.getWaitGamePlayerQueue().put(player);
+			
 		}
 	}
 
@@ -359,7 +371,7 @@ public class Table implements Delayed {
 	 * 增加公共倍数
 	 */
 	private void addToComMultiple(Object o, Card[] cards) {
-		MultipleType multiple = MultipleUtil.getMultiple(o, cards);
+		MultipleType multiple = MultipleType.getMultiple(o, cards);
 		if (multiple != null) {
 			this.multiples[multiple.ordinal()] += multiple.getValue();
 		}
@@ -438,7 +450,7 @@ public class Table implements Delayed {
 
 					if (card != this.callCard && card.equals(this.callCard)) {
 						// 暗叫
-						MultipleType callMultiple = MultipleUtil.getMultiple(CallType.DARK, null);
+						MultipleType callMultiple = MultipleType.getMultiple(CallType.DARK, null);
 						this.multiples[callMultiple.ordinal()] += callMultiple.getValue();
 						for (GamePlayer otherPlayer : this.players) {
 							if (otherPlayer.equals(player))

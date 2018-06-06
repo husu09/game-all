@@ -3,8 +3,10 @@ package com.su.core.gambling;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
+import com.su.common.util.TimeUtil;
 import com.su.core.context.PlayerContext;
 import com.su.core.gambling.enums.PlayerState;
+import com.su.core.gambling.enums.TableState;
 import com.su.core.gambling.enums.Team;
 
 
@@ -54,6 +56,15 @@ public class GamePlayer  implements Delayed{
 	private Table table;
 	
 	private PlayerContext playerContext;
+	
+	/**
+	 * 叫牌时间
+	 */
+	private static final int CALL_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
+	/**
+	 * 出牌时间
+	 */
+	private static final int OPERATE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
@@ -217,6 +228,22 @@ public class GamePlayer  implements Delayed{
 		this.opTime = null;
 	}
 	
+	
+	/**
+	 * 设置状态
+	 * */
+	public void setState(PlayerState state, boolean isDelay) {
+		this.state = state;
+		if (isDelay && state == PlayerState.OPERATE) {
+			if (this.table.getState() == TableState.CALL)
+				this.opTime = TimeUtil.getCurrTime() + CALL_WAIT_TIME;
+			else if (this.table.getState() == TableState.DRAW) 
+				this.opTime = TimeUtil.getCurrTime() + OPERATE_WAIT_TIME;
+			else 
+				return;
+			this.table.getSite().getWaitGamePlayerQueue().put(this);
+		}
+	}
 
 
 	

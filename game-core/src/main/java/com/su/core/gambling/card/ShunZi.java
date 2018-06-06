@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import com.su.core.gambling.Card;
 import com.su.core.gambling.enums.CardType;
-import com.su.core.gambling.util.CardUtil;
 
 @Component
 public class ShunZi extends BaseCardProcessor {
@@ -37,7 +36,7 @@ public class ShunZi extends BaseCardProcessor {
 		if (getCardType() == lastCardType) {
 			if (cards.length != lastCards.length)
 				return false;
-			if (CardUtil.getMax(cards).getValue() > CardUtil.getMax(lastCards).getValue())
+			if (Card.getMax(cards).getValue() > Card.getMax(lastCards).getValue())
 				return true;
 		}
 		return false;

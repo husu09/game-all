@@ -1,4 +1,4 @@
-package com.su.core.gambling.util;
+package com.su.core.gambling;
 
 import com.su.core.gambling.Card;
 import com.su.core.gambling.enums.CardType;
