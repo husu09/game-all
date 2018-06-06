@@ -321,9 +321,13 @@ public class Table implements Delayed {
 				gamePlayer.setState(PlayerState.WAIT);
 			}
 		} else {
+			
 			// 牌桌
 			this.callCard = card;
-			this.callType = callType;
+			if (CallType.isDark(card, player.getHandCards())) 
+				this.callType = CallType.DARK;
+			 else 
+				 this.callType = callType;
 			this.callOp = player.getIndex();
 			// 当前玩家
 			player.setTeam(Team.RED);
@@ -493,6 +497,9 @@ public class Table implements Delayed {
 				break;
 			}
 		}
+		if (rank == -1) {
+			logger.error("{} Rank is error {}", player.getId(), result);
+		}
 		return rank;
 	}
 
@@ -531,14 +538,13 @@ public class Table implements Delayed {
 			if (player.getTeam() == null)
 				player.setTeam(Team.BLUE);
 			// 排名
-			int result = addToRanks(player);
-			if (result == -1) {
-				logger.error("{} Rank is error {}", player.getId(), result);
-				return;
-			}
-			// TODO 一方得分超过 100 获胜
+			addToRanks(player);
+			
 			// 判断牌局是否结束
+			// 处理玩家队伍和排名
 			if (this.callType == CallType.LIGHT || this.callType == CallType.DARK) {
+				// 牌桌
+				setState(TableState.CLOSE);
 				if (this.callOp == player.getIndex()) {
 					// 其它玩家扣除资源
 					for (GamePlayer otherPlayer : this.players) {
@@ -548,23 +554,16 @@ public class Table implements Delayed {
 							player.setTeam(Team.BLUE);
 						otherPlayer.setState(PlayerState.FINISH);
 						// 排名
-						for (int i = 0; i < ranks.length; i++) {
-							if (ranks[i] == null) {
-								ranks[i] = otherPlayer.getIndex();
-								break;
-							}
-						}
+						addToRanks(otherPlayer);
 						// 扣除资源
 
 					}
 					// 当前玩家添加资源
-					// 牌桌
-					this.state = TableState.CLOSE;
 					// TODO 通知
 
 				} else {
 					// 当前玩家扣除资源
-					// 其它玩家
+					// 其它玩家添加资源
 					for (GamePlayer otherPlayer : this.players) {
 						if (player.equals(otherPlayer))
 							continue;
@@ -573,12 +572,7 @@ public class Table implements Delayed {
 						otherPlayer.setState(PlayerState.FINISH);
 						// 添加资源
 						// 排名
-						for (int i = 0; i < ranks.length; i++) {
-							if (ranks[i] == null) {
-								ranks[i] = player.getIndex();
-								break;
-							}
-						}
+						addToRanks(otherPlayer);
 					}
 					// 牌桌
 					this.state = TableState.CLOSE;
@@ -629,7 +623,11 @@ public class Table implements Delayed {
 
 		}
 	}
-
+	
+	/**
+	 * 牌局是否结束
+	 * */
+	
 	/**
 	 * 获取任意一方的人数
 	 */
@@ -666,7 +664,7 @@ public class Table implements Delayed {
 	/**
 	 * 结算
 	 */
-	private void close(GamePlayer[] winneres) {
+	private void close(Team team) {
 		// 牌桌
 		this.state = TableState.CLOSE;
 		// TODO 通知

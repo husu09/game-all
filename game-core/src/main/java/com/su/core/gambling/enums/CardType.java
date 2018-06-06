@@ -3,6 +3,8 @@ package com.su.core.gambling.enums;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.su.core.gambling.Card;
+
 public enum CardType {
 	/**
 	 * 单张 1
@@ -57,5 +59,5 @@ public enum CardType {
 	public static CardType get(int value) {
 		return map.get(value);
 	}
-
+	
 }

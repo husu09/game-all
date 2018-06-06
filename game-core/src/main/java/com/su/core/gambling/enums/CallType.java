@@ -52,9 +52,15 @@ public enum CallType {
 		boolean isSuccess = false;
 		switch (callType) {
 		case CALL:
-		case DARK:
 			for (Card c : cards) {
 				if (c != null && c.equals(card)) {
+					isSuccess = true;
+					break;
+				}
+			}
+		case DARK:
+			for (Card c : cards) {
+				if (c != null && c != card && c.equals(card)) {
 					isSuccess = true;
 					break;
 				}
@@ -67,5 +73,16 @@ public enum CallType {
 			break;
 		}
 		return isSuccess;
+	}
+
+	/**
+	 * 是否是暗叫
+	 */
+	public static boolean isDark(Card callCard, Card[] handCards) {
+		for (Card card : handCards) {
+			if (callCard == card)
+				return true;
+		}
+		return false;
 	}
 }
