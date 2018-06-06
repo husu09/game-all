@@ -122,11 +122,6 @@ public class GamePlayer  implements Delayed{
 		return state;
 	}
 
-	public void setState(PlayerState state) {
-		this.state = state;
-	}
-
-
 	public int getRank() {
 		return rank;
 	}
@@ -233,6 +228,8 @@ public class GamePlayer  implements Delayed{
 	 * 设置状态
 	 * */
 	public void setState(PlayerState state, boolean isDelay) {
+		if (this.state == PlayerState.OPERATE)
+			this.table.getSite().getWaitGamePlayerQueue().remove(this);
 		this.state = state;
 		if (isDelay && state == PlayerState.OPERATE) {
 			if (this.table.getState() == TableState.CALL)
@@ -243,6 +240,10 @@ public class GamePlayer  implements Delayed{
 				return;
 			this.table.getSite().getWaitGamePlayerQueue().put(this);
 		}
+	}
+	
+	public void setState(PlayerState state) {
+		setState(state, true);
 	}
 
 

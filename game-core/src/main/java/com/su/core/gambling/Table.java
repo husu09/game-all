@@ -90,7 +90,7 @@ public class Table implements Delayed {
 	private static final int DOUBLES_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
 	 * 参与玩家人数
-	 * */
+	 */
 	private static final int PLAYER_COUNT = 4;
 
 	public Table(Site site) {
@@ -128,7 +128,7 @@ public class Table implements Delayed {
 		this.callType = null;
 		this.callOp = null;
 		// 重置倍数
-		for (int i = 0; i < this.multiples.length; i++) 
+		for (int i = 0; i < this.multiples.length; i++)
 			this.multiples[i] = 0;
 		// 最后出牌
 		this.lastCards = null;
@@ -141,7 +141,7 @@ public class Table implements Delayed {
 			gamePlayer.reset();
 		}
 		// 排名
-		for (int i = 0 ; i < this.ranks.length; i ++) 
+		for (int i = 0; i < this.ranks.length; i++)
 			this.ranks[i] = null;
 		// 状态
 		this.state = null;
@@ -177,22 +177,27 @@ public class Table implements Delayed {
 		}
 		// 设置玩家
 		for (GamePlayer gamePlayer : this.players) {
-			gamePlayer.setState(PlayerState.OPERATE);
+			gamePlayer.setState(PlayerState.OPERATE, false);
 		}
 		// 设置牌桌状态
-		setState(TableState.DOUBLES, true);
+		setState(TableState.DOUBLES);
 		// TODO 通知
 	}
-	
+
 	/**
 	 * 设置状态
-	 * */
-	private void setState(TableState state, boolean isDelay) {
-		this.state = TableState.DOUBLES;
-		if (isDelay) {
+	 */
+	private void setState(TableState state) {
+		if (this.state == TableState.DOUBLES || this.state == TableState.CLOSE)
+			this.site.getWaitTableQueue().remove(this);
+		this.state = state;
+		if (this.state == TableState.DOUBLES)
 			this.waitTime = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
-			this.site.getWaitTableQueue().put(this);
-		}
+		else if (this.state == TableState.CLOSE)
+			this.waitTime = TimeUtil.getCurrTime() + CLOSE_WAIT_TIME;
+		else
+			return;
+		this.site.getWaitTableQueue().put(this);
 	}
 
 	/**
@@ -221,14 +226,11 @@ public class Table implements Delayed {
 	 * 加倍状态切换到叫牌状态
 	 */
 	private void doublesToCall() {
-		this.site.getWaitTableQueue().remove(this);
 		// 牌桌
-		this.state = TableState.CALL;
+		setState(TableState.CALL);
 		// 玩家
 		GamePlayer player = this.players[this.dealer];
 		player.setState(PlayerState.OPERATE);
-		player.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
-		this.site.getWaitGamePlayerQueue().put(player);
 	}
 
 	/**
@@ -266,13 +268,10 @@ public class Table implements Delayed {
 				doublesToCall();
 			}
 		} else if (state == TableState.DRAW) {
-			this.site.getWaitGamePlayerQueue().remove(player);
 			// 过牌
 			// 处理下家
-			GamePlayer nextPlayer = players[player.getIndex() + 1 % 4];
+			GamePlayer nextPlayer = getNextPlayer(player);
 			nextPlayer.setState(PlayerState.OPERATE);
-			nextPlayer.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
-			this.site.getWaitGamePlayerQueue().put(nextPlayer);
 		}
 		// TODO 通知
 	}
@@ -310,12 +309,10 @@ public class Table implements Delayed {
 			this.callCard = card;
 			this.callType = callType;
 			this.callOp = player.getIndex();
-			this.state = TableState.DRAW;
+			setState(TableState.DRAW);
 			// 当前玩家
 			player.setTeam(Team.RED);
 			player.setState(PlayerState.OPERATE);
-			player.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
-			this.site.getWaitGamePlayerQueue().put(player);
 			// 其它玩家
 			for (GamePlayer gamePlayer : players) {
 				if (gamePlayer.equals(player))
@@ -324,11 +321,6 @@ public class Table implements Delayed {
 				gamePlayer.setState(PlayerState.WAIT);
 			}
 		} else {
-			// 只有庄家可以叫牌
-			if (player.getIndex() != this.dealer) {
-				logger.error("{} Player is not dealer {} {}", player.getId(), player.getIndex(), this.dealer);
-				return;
-			}
 			// 牌桌
 			this.callCard = card;
 			this.callType = callType;
@@ -339,6 +331,10 @@ public class Table implements Delayed {
 			// 全部操作完
 			if (isSameState(PlayerState.WAIT)) {
 				callToDraw();
+			} else {
+				// 下家
+				GamePlayer nextPlayer = getNextPlayer(player);
+				nextPlayer.setState(PlayerState.OPERATE);
 			}
 		}
 		// TODO 通知
@@ -349,21 +345,16 @@ public class Table implements Delayed {
 	 * 叫牌切换到出牌状态
 	 */
 	private void callToDraw() {
-		this.site.getWaitTableQueue().remove(this);
 		// 没人叫牌则重新开始
 		if (this.callOp == null) {
 			reset();
 			deal();
 		} else {
 			// 牌桌
-			this.state = TableState.DRAW;
+			setState(TableState.DRAW);
 			// 玩家
 			GamePlayer player = this.players[this.callOp];
-			player.setTeam(Team.RED);
 			player.setState(PlayerState.OPERATE);
-			player.setOpTime(TimeUtil.getCurrTime() + OPERATE_WAIT_TIME);
-			this.site.getWaitGamePlayerQueue().put(player);
-			
 		}
 	}
 
@@ -421,18 +412,17 @@ public class Table implements Delayed {
 		}
 		// 当前玩家
 		player.setState(PlayerState.WAIT);
-		this.site.getWaitGamePlayerQueue().remove(player);
 		// 倍数
 		addToComMultiple(cardType, cards);
-		// 得分
+		// 轮分
 		if (this.callType != CallType.DARK && this.callType != CallType.LIGHT) {
 			if (this.lastOp == player.getIndex() && this.roundScore != 0) {
 				player.setScore(player.getScore() + this.roundScore);
 				this.roundScore = 0;
 			}
 		}
-		// TODO 计算分数
-		// 
+		// 得分
+		this.roundScore += Card.getScore(cards);
 		// 队伍
 		if (player.getTeam() == null && this.callType != CallType.LIGHT) {
 			for (Card card : cards) {
@@ -446,12 +436,9 @@ public class Table implements Delayed {
 								continue;
 							otherPlayer.setTeam(Team.BLUE);
 						}
-					} else
-
-					if (card != this.callCard && card.equals(this.callCard)) {
+					} else if (card != this.callCard && card.equals(this.callCard)) {
 						// 暗叫
-						MultipleType callMultiple = MultipleType.getMultiple(CallType.DARK, null);
-						this.multiples[callMultiple.ordinal()] += callMultiple.getValue();
+						addToComMultiple(CallType.DARK, null);
 						for (GamePlayer otherPlayer : this.players) {
 							if (otherPlayer.equals(player))
 								continue;
@@ -470,7 +457,7 @@ public class Table implements Delayed {
 		this.lastOp = player.getIndex();
 		// TODO 记录出牌
 		// TODO 通知
-		
+
 	}
 
 	/**
@@ -633,15 +620,12 @@ public class Table implements Delayed {
 				}
 
 			}
-			
+
 			// TODO 最后倍数计算
 			/**
-			 * 一方获得200分，满分
-			 * 一方获得一二名，全胜不计算得分
-			 * 双方都是100分时，第一名那方获胜
-			 * 最终倍数  = 公共倍数 * 红方玩家倍数 * 蓝方玩家倍数
+			 * 一方获得200分，满分 一方获得一二名，全胜不计算得分 双方都是100分时，第一名那方获胜 最终倍数 = 公共倍数 * 红方玩家倍数 * 蓝方玩家倍数
 			 * 游戏结束后，末游玩家所得到的分数为一游玩家所有，手中未出的分数归另一方所有。
-			 * */
+			 */
 
 		}
 	}
@@ -772,13 +756,6 @@ public class Table implements Delayed {
 
 	public TableState getState() {
 		return state;
-	}
-
-	/**
-	 * 设置牌桌状态
-	 */
-	public void setState(TableState state) {
-		this.state = state;
 	}
 
 	public int getRoundScore() {

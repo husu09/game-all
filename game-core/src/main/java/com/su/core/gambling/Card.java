@@ -153,5 +153,20 @@ public class Card implements Comparable<Card> {
 		return true;
 
 	}
+	
+	/**
+	 * 计算得分
+	 */
+	public static int getScore(Card[] cards) {
+		int score = 0;
+		for (Card card : cards) {
+			if (card.getValue() == CARD_5) {
+				score += 5;
+			} else if (card.getValue() == CARD_10 || card.getValue() == CARD_K) {
+				score += 10;
+			}
+		}
+		return score;
+	}
 
 }
