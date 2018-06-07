@@ -9,10 +9,14 @@ import com.su.core.action.Action;
 import com.su.core.context.PlayerContext;
 import com.su.core.gambling.GamePlayer;
 import com.su.core.gambling.Site;
-import com.su.core.gambling.enums.PlayerState;
 import com.su.excel.mapper.BagMapper;
+import com.su.msg.GamblingMsg.Auto;
 import com.su.msg.GamblingMsg.Call;
 import com.su.msg.GamblingMsg.Double;
+import com.su.msg.GamblingMsg.Draw;
+import com.su.msg.GamblingMsg.Quit;
+import com.su.msg.GamblingMsg.Ready;
+import com.su.msg.GamblingMsg.Reconn;
 import com.su.msg.GamblingMsg.Start;
 import com.su.server.service.BagService;
 import com.su.server.service.GamblingService;
@@ -33,8 +37,10 @@ public class GamblingControl {
 	@Action
 	public void start(PlayerContext playerContext, Start req) {
 		Site site = gamblingService.getSiteMap().get(req.getSiteId());
-		if (site == null)
+		if (site == null) {
 			playerContext.sendError(1002);
+			return;
+		}
 		site.startMatch(playerContext);
 	}
 	
@@ -60,10 +66,6 @@ public class GamblingControl {
 			playerContext.sendError(3001);
 			return;
 		}
-		if (gamePlayer.getState() != PlayerState.OPERATE) {
-			playerContext.sendError(3002);
-			return;
-		}
 		// 加倍
 		boolean result = gamePlayer.getTable().getActor().doubles(gamePlayer, bagCo.getEffectNum());
 		// 加倍失败返还道具
@@ -75,6 +77,7 @@ public class GamblingControl {
 	/**
 	 * 叫牌
 	 * */
+	@Action
 	public void call(PlayerContext playerContext, Call req) {
 		// 游戏用户检测
 		GamePlayer gamePlayer = playerContext.getGamePlayer();
@@ -82,8 +85,74 @@ public class GamblingControl {
 			playerContext.sendError(3001);
 			return;
 		}
-		if (gamePlayer.getState() != PlayerState.OPERATE) {
-			playerContext.sendError(3002);
+		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
+	}
+	
+	/**
+	 * 出牌
+	 * */
+	@Action
+	public void draw(PlayerContext playerContext, Draw req) {
+		// 游戏用户检测
+		GamePlayer gamePlayer = playerContext.getGamePlayer();
+		if (gamePlayer == null) {
+			playerContext.sendError(3001);
+			return;
+		}
+		gamePlayer.getTable().getActor().draw(gamePlayer, req.getCardType(), req.getCardIndexsList());
+	}
+	
+	/**
+	 * 托管
+	 * */
+	@Action
+	public void auto(PlayerContext playerContext, Auto req) {
+		// 游戏用户检测
+		GamePlayer gamePlayer = playerContext.getGamePlayer();
+		if (gamePlayer == null) {
+			playerContext.sendError(3001);
+			return;
+		}
+		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
+	}
+	
+	/**
+	 * 准备
+	 * */
+	@Action
+	public void ready(PlayerContext playerContext, Ready req) {
+		// 游戏用户检测
+		GamePlayer gamePlayer = playerContext.getGamePlayer();
+		if (gamePlayer == null) {
+			playerContext.sendError(3001);
+			return;
+		}
+		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
+	}
+	
+	/**
+	 * 退出
+	 * */
+	@Action
+	public void quit(PlayerContext playerContext, Quit req) {
+		// 游戏用户检测
+		GamePlayer gamePlayer = playerContext.getGamePlayer();
+		if (gamePlayer == null) {
+			playerContext.sendError(3001);
+			return;
+		}
+		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
+	}
+	
+	/**
+	 * 重连
+	 * */
+	@Action
+	public void Reconn(PlayerContext playerContext, Reconn req) {
+		// 游戏用户检测
+		GamePlayer gamePlayer = playerContext.getGamePlayer();
+		if (gamePlayer == null) {
+			playerContext.sendError(3001);
 			return;
 		}
 		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());

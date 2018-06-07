@@ -665,7 +665,7 @@ public class Table implements Delayed {
 		int blueMultiple = sumMultiple / getTeamCount(Team.BLUE);
 		// 玩家结算
 		for (GamePlayer otherPlayer : this.players) {
-			CardResult cardResult = new CardResult();
+			TableResult cardResult = new TableResult();
 			cardResult.setPlayerContext(otherPlayer.getPlayerContext());
 			cardResult.setSiteCo(null);
 			if (otherPlayer.getTeam() == winTeam)

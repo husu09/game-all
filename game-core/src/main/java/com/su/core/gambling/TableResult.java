@@ -6,7 +6,7 @@ import com.su.core.context.PlayerContext;
 /**
  * 牌局结果
  * */
-public class CardResult {
+public class TableResult {
 	private PlayerContext playerContext;
 	/**
 	 * 倍数

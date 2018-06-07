@@ -43,5 +43,10 @@ public interface TableActor {
 	 * 退出
 	 */
 	public void exit(GamePlayer player);
+	
+	/**
+	 * 重连
+	 * */
+	public void reconn(GamePlayer player);
 
 }

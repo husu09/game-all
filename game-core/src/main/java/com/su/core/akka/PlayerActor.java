@@ -2,7 +2,7 @@ package com.su.core.akka;
 
 import com.google.protobuf.MessageLite;
 import com.su.core.context.PlayerContext;
-import com.su.core.gambling.CardResult;
+import com.su.core.gambling.TableResult;
 import com.su.msg.LoginMsg.Login_;
 
 import io.netty.channel.ChannelHandlerContext;
@@ -32,6 +32,6 @@ public interface PlayerActor {
 	/**
 	 * 处理牌局结果
 	 * */
-	public void doCardResult(CardResult cardResult);
+	public void doTableResult(TableResult tableResult);
 	
 }

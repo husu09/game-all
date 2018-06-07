@@ -9,7 +9,7 @@ import com.su.core.action.ActionContext;
 import com.su.core.action.ActionMeta;
 import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventDispatcher;
-import com.su.core.gambling.CardResult;
+import com.su.core.gambling.TableResult;
 import com.su.core.netty.NettyServerHandler;
 import com.su.msg.LoginMsg.Login_;
 
@@ -74,7 +74,7 @@ public class PLayerActorImpl implements PlayerActor {
 	}
 
 	@Override
-	public void doCardResult(CardResult cardResult) {
+	public void doTableResult(TableResult tableResult) {
 		
 	}
 
