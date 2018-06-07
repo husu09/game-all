@@ -52,6 +52,8 @@ public enum CallType {
 		boolean isSuccess = false;
 		switch (callType) {
 		case CALL:
+			if (card != null && (card.getValue() == Card.CARD_XIAO_WANG || card.getValue() == Card.CARD_DA_WANG))
+				return false;
 			for (Card c : cards) {
 				if (c != null && c.equals(card)) {
 					isSuccess = true;
@@ -59,6 +61,8 @@ public enum CallType {
 				}
 			}
 		case DARK:
+			if (card != null && (card.getValue() == Card.CARD_XIAO_WANG || card.getValue() == Card.CARD_DA_WANG))
+				return false;
 			for (Card c : cards) {
 				if (c != null && c != card && c.equals(card)) {
 					isSuccess = true;

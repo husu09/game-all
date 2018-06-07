@@ -1,6 +1,6 @@
 package com.su.core.gambling.service;
 
-import com.su.core.gambling.AutoResult;
+import com.su.core.gambling.AutoCards;
 import com.su.core.gambling.Card;
 import com.su.core.gambling.GamePlayer;
 import com.su.core.gambling.enums.CardType;
@@ -14,8 +14,8 @@ public class AIService {
 	 * @param player	当前玩家
 	 * @return
 	 */
-	public AutoResult getAutoResult(GamePlayer lastPlayer, CardType lastCardType, Card[] lastCards, GamePlayer player) {
-		AutoResult autoResult = null;
+	public AutoCards getAutoResult(GamePlayer lastPlayer, CardType lastCardType, Card[] lastCards, GamePlayer player) {
+		AutoCards autoResult = null;
 		if (lastPlayer == null || lastPlayer.equals(player)) {
 			// 获取最小的牌
 		} else if (player.getTeam() == lastPlayer.getTeam()) {

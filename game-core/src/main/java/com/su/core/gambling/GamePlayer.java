@@ -31,7 +31,7 @@ public class GamePlayer  implements Delayed{
 	/**
 	 * 倍数
 	 */
-	private int multipleValue;
+	private int multiple;
 	/**
 	 * 分数
 	 */
@@ -102,12 +102,12 @@ public class GamePlayer  implements Delayed{
 		this.team = team;
 	}
 
-	public int getMultipleValue() {
-		return multipleValue;
+	public int getMultiple() {
+		return multiple;
 	}
 
-	public void setMultipleValue(int multipleValue) {
-		this.multipleValue = multipleValue;
+	public void setMultiple(int multipleValue) {
+		this.multiple = multipleValue;
 	}
 
 	public int getScore() {
@@ -215,7 +215,7 @@ public class GamePlayer  implements Delayed{
 			this.handCards[i] = null; 
 		}
 		this.team = null;
-		this.multipleValue = 0;
+		this.multiple = 0;
 		this.score = 0;
 		this.state = null;
 		this.isAuto = false;
@@ -244,6 +244,13 @@ public class GamePlayer  implements Delayed{
 	
 	public void setState(PlayerState state) {
 		setState(state, true);
+	}
+	
+	/**
+	 * 添加得分
+	 * */
+	public void addScore(int addScore) {
+		this.score += addScore;
 	}
 
 

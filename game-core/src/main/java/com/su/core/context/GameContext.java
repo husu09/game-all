@@ -15,6 +15,9 @@ public class GameContext {
 	 * */
 	private volatile boolean stopping;
 	
+	/**
+	 * 在线玩家
+	 * */
 	private Map<Long, PlayerContext> playerContextMap = new ConcurrentHashMap<>();
 
 	public Map<Long, PlayerContext> getPlayerContextMap() {

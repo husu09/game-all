@@ -61,7 +61,7 @@ public enum MultipleType {
 	public int getValue() {
 		return value;
 	}
-	
+
 	/**
 	 * 获取倍数
 	 */
@@ -88,12 +88,13 @@ public enum MultipleType {
 					return MultipleType.QI_ZHA;
 				if (cards.length == 8)
 					return MultipleType.TIAN_ZHA;
-
 			} else if (o == CardType.WANG_ZHA) {
 				return MultipleType.WANG_ZHA;
 			}
+		} else if (o instanceof MultipleType) {
+			return (MultipleType) o;
 		}
 		return null;
 	}
-	
+
 }
