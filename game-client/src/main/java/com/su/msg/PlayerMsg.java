@@ -734,389 +734,8 @@ public final class PlayerMsg {
 
   }
 
-  public interface GetPlayerDataOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetPlayerData)
-      com.google.protobuf.MessageOrBuilder {
-  }
-  /**
-   * <pre>
-   * 获取玩家数据
-   * </pre>
-   *
-   * Protobuf type {@code GetPlayerData}
-   */
-  public  static final class GetPlayerData extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:GetPlayerData)
-      GetPlayerDataOrBuilder {
-    // Use GetPlayerData.newBuilder() to construct.
-    private GetPlayerData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private GetPlayerData() {
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private GetPlayerData(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.su.msg.PlayerMsg.internal_static_GetPlayerData_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.su.msg.PlayerMsg.internal_static_GetPlayerData_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.su.msg.PlayerMsg.GetPlayerData.class, com.su.msg.PlayerMsg.GetPlayerData.Builder.class);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.su.msg.PlayerMsg.GetPlayerData)) {
-        return super.equals(obj);
-      }
-      com.su.msg.PlayerMsg.GetPlayerData other = (com.su.msg.PlayerMsg.GetPlayerData) obj;
-
-      boolean result = true;
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.su.msg.PlayerMsg.GetPlayerData parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.su.msg.PlayerMsg.GetPlayerData parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.su.msg.PlayerMsg.GetPlayerData parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.su.msg.PlayerMsg.GetPlayerData parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.su.msg.PlayerMsg.GetPlayerData parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.su.msg.PlayerMsg.GetPlayerData parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.su.msg.PlayerMsg.GetPlayerData parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.su.msg.PlayerMsg.GetPlayerData parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.su.msg.PlayerMsg.GetPlayerData parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.su.msg.PlayerMsg.GetPlayerData parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.su.msg.PlayerMsg.GetPlayerData prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     * 获取玩家数据
-     * </pre>
-     *
-     * Protobuf type {@code GetPlayerData}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetPlayerData)
-        com.su.msg.PlayerMsg.GetPlayerDataOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.su.msg.PlayerMsg.internal_static_GetPlayerData_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.su.msg.PlayerMsg.internal_static_GetPlayerData_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.su.msg.PlayerMsg.GetPlayerData.class, com.su.msg.PlayerMsg.GetPlayerData.Builder.class);
-      }
-
-      // Construct using com.su.msg.PlayerMsg.GetPlayerData.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.su.msg.PlayerMsg.internal_static_GetPlayerData_descriptor;
-      }
-
-      public com.su.msg.PlayerMsg.GetPlayerData getDefaultInstanceForType() {
-        return com.su.msg.PlayerMsg.GetPlayerData.getDefaultInstance();
-      }
-
-      public com.su.msg.PlayerMsg.GetPlayerData build() {
-        com.su.msg.PlayerMsg.GetPlayerData result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.su.msg.PlayerMsg.GetPlayerData buildPartial() {
-        com.su.msg.PlayerMsg.GetPlayerData result = new com.su.msg.PlayerMsg.GetPlayerData(this);
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.msg.PlayerMsg.GetPlayerData) {
-          return mergeFrom((com.su.msg.PlayerMsg.GetPlayerData)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.su.msg.PlayerMsg.GetPlayerData other) {
-        if (other == com.su.msg.PlayerMsg.GetPlayerData.getDefaultInstance()) return this;
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.su.msg.PlayerMsg.GetPlayerData parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.msg.PlayerMsg.GetPlayerData) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:GetPlayerData)
-    }
-
-    // @@protoc_insertion_point(class_scope:GetPlayerData)
-    private static final com.su.msg.PlayerMsg.GetPlayerData DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.su.msg.PlayerMsg.GetPlayerData();
-    }
-
-    public static com.su.msg.PlayerMsg.GetPlayerData getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetPlayerData>
-        PARSER = new com.google.protobuf.AbstractParser<GetPlayerData>() {
-      public GetPlayerData parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetPlayerData(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<GetPlayerData> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<GetPlayerData> getParserForType() {
-      return PARSER;
-    }
-
-    public com.su.msg.PlayerMsg.GetPlayerData getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface GetPlayerData_OrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetPlayerData_)
+  public interface UpdatePlayer_OrBuilder extends
+      // @@protoc_insertion_point(interface_extends:UpdatePlayer_)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1133,17 +752,21 @@ public final class PlayerMsg {
     com.su.msg.PlayerMsg._PlayerOrBuilder getPlayerOrBuilder();
   }
   /**
-   * Protobuf type {@code GetPlayerData_}
+   * <pre>
+   * 玩家数据更新通知
+   * </pre>
+   *
+   * Protobuf type {@code UpdatePlayer_}
    */
-  public  static final class GetPlayerData_ extends
+  public  static final class UpdatePlayer_ extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:GetPlayerData_)
-      GetPlayerData_OrBuilder {
-    // Use GetPlayerData_.newBuilder() to construct.
-    private GetPlayerData_(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:UpdatePlayer_)
+      UpdatePlayer_OrBuilder {
+    // Use UpdatePlayer_.newBuilder() to construct.
+    private UpdatePlayer_(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private GetPlayerData_() {
+    private UpdatePlayer_() {
     }
 
     @java.lang.Override
@@ -1151,7 +774,7 @@ public final class PlayerMsg {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private GetPlayerData_(
+    private UpdatePlayer_(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1201,14 +824,14 @@ public final class PlayerMsg {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.msg.PlayerMsg.internal_static_GetPlayerData__descriptor;
+      return com.su.msg.PlayerMsg.internal_static_UpdatePlayer__descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.msg.PlayerMsg.internal_static_GetPlayerData__fieldAccessorTable
+      return com.su.msg.PlayerMsg.internal_static_UpdatePlayer__fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.msg.PlayerMsg.GetPlayerData_.class, com.su.msg.PlayerMsg.GetPlayerData_.Builder.class);
+              com.su.msg.PlayerMsg.UpdatePlayer_.class, com.su.msg.PlayerMsg.UpdatePlayer_.Builder.class);
     }
 
     private int bitField0_;
@@ -1271,10 +894,10 @@ public final class PlayerMsg {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.msg.PlayerMsg.GetPlayerData_)) {
+      if (!(obj instanceof com.su.msg.PlayerMsg.UpdatePlayer_)) {
         return super.equals(obj);
       }
-      com.su.msg.PlayerMsg.GetPlayerData_ other = (com.su.msg.PlayerMsg.GetPlayerData_) obj;
+      com.su.msg.PlayerMsg.UpdatePlayer_ other = (com.su.msg.PlayerMsg.UpdatePlayer_) obj;
 
       boolean result = true;
       result = result && (hasPlayer() == other.hasPlayer());
@@ -1302,58 +925,58 @@ public final class PlayerMsg {
       return hash;
     }
 
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseFrom(
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseFrom(
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseFrom(byte[] data)
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseFrom(
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseFrom(java.io.InputStream input)
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseFrom(
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseDelimitedFrom(
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseFrom(
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.msg.PlayerMsg.GetPlayerData_ parseFrom(
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1365,7 +988,7 @@ public final class PlayerMsg {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.msg.PlayerMsg.GetPlayerData_ prototype) {
+    public static Builder newBuilder(com.su.msg.PlayerMsg.UpdatePlayer_ prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -1380,25 +1003,29 @@ public final class PlayerMsg {
       return builder;
     }
     /**
-     * Protobuf type {@code GetPlayerData_}
+     * <pre>
+     * 玩家数据更新通知
+     * </pre>
+     *
+     * Protobuf type {@code UpdatePlayer_}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetPlayerData_)
-        com.su.msg.PlayerMsg.GetPlayerData_OrBuilder {
+        // @@protoc_insertion_point(builder_implements:UpdatePlayer_)
+        com.su.msg.PlayerMsg.UpdatePlayer_OrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.msg.PlayerMsg.internal_static_GetPlayerData__descriptor;
+        return com.su.msg.PlayerMsg.internal_static_UpdatePlayer__descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.msg.PlayerMsg.internal_static_GetPlayerData__fieldAccessorTable
+        return com.su.msg.PlayerMsg.internal_static_UpdatePlayer__fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.msg.PlayerMsg.GetPlayerData_.class, com.su.msg.PlayerMsg.GetPlayerData_.Builder.class);
+                com.su.msg.PlayerMsg.UpdatePlayer_.class, com.su.msg.PlayerMsg.UpdatePlayer_.Builder.class);
       }
 
-      // Construct using com.su.msg.PlayerMsg.GetPlayerData_.newBuilder()
+      // Construct using com.su.msg.PlayerMsg.UpdatePlayer_.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1427,23 +1054,23 @@ public final class PlayerMsg {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.msg.PlayerMsg.internal_static_GetPlayerData__descriptor;
+        return com.su.msg.PlayerMsg.internal_static_UpdatePlayer__descriptor;
       }
 
-      public com.su.msg.PlayerMsg.GetPlayerData_ getDefaultInstanceForType() {
-        return com.su.msg.PlayerMsg.GetPlayerData_.getDefaultInstance();
+      public com.su.msg.PlayerMsg.UpdatePlayer_ getDefaultInstanceForType() {
+        return com.su.msg.PlayerMsg.UpdatePlayer_.getDefaultInstance();
       }
 
-      public com.su.msg.PlayerMsg.GetPlayerData_ build() {
-        com.su.msg.PlayerMsg.GetPlayerData_ result = buildPartial();
+      public com.su.msg.PlayerMsg.UpdatePlayer_ build() {
+        com.su.msg.PlayerMsg.UpdatePlayer_ result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.msg.PlayerMsg.GetPlayerData_ buildPartial() {
-        com.su.msg.PlayerMsg.GetPlayerData_ result = new com.su.msg.PlayerMsg.GetPlayerData_(this);
+      public com.su.msg.PlayerMsg.UpdatePlayer_ buildPartial() {
+        com.su.msg.PlayerMsg.UpdatePlayer_ result = new com.su.msg.PlayerMsg.UpdatePlayer_(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1486,16 +1113,16 @@ public final class PlayerMsg {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.msg.PlayerMsg.GetPlayerData_) {
-          return mergeFrom((com.su.msg.PlayerMsg.GetPlayerData_)other);
+        if (other instanceof com.su.msg.PlayerMsg.UpdatePlayer_) {
+          return mergeFrom((com.su.msg.PlayerMsg.UpdatePlayer_)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.msg.PlayerMsg.GetPlayerData_ other) {
-        if (other == com.su.msg.PlayerMsg.GetPlayerData_.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.msg.PlayerMsg.UpdatePlayer_ other) {
+        if (other == com.su.msg.PlayerMsg.UpdatePlayer_.getDefaultInstance()) return this;
         if (other.hasPlayer()) {
           mergePlayer(other.getPlayer());
         }
@@ -1512,11 +1139,11 @@ public final class PlayerMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.msg.PlayerMsg.GetPlayerData_ parsedMessage = null;
+        com.su.msg.PlayerMsg.UpdatePlayer_ parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.msg.PlayerMsg.GetPlayerData_) e.getUnfinishedMessage();
+          parsedMessage = (com.su.msg.PlayerMsg.UpdatePlayer_) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1655,39 +1282,39 @@ public final class PlayerMsg {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:GetPlayerData_)
+      // @@protoc_insertion_point(builder_scope:UpdatePlayer_)
     }
 
-    // @@protoc_insertion_point(class_scope:GetPlayerData_)
-    private static final com.su.msg.PlayerMsg.GetPlayerData_ DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:UpdatePlayer_)
+    private static final com.su.msg.PlayerMsg.UpdatePlayer_ DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.msg.PlayerMsg.GetPlayerData_();
+      DEFAULT_INSTANCE = new com.su.msg.PlayerMsg.UpdatePlayer_();
     }
 
-    public static com.su.msg.PlayerMsg.GetPlayerData_ getDefaultInstance() {
+    public static com.su.msg.PlayerMsg.UpdatePlayer_ getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetPlayerData_>
-        PARSER = new com.google.protobuf.AbstractParser<GetPlayerData_>() {
-      public GetPlayerData_ parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<UpdatePlayer_>
+        PARSER = new com.google.protobuf.AbstractParser<UpdatePlayer_>() {
+      public UpdatePlayer_ parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetPlayerData_(input, extensionRegistry);
+          return new UpdatePlayer_(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<GetPlayerData_> parser() {
+    public static com.google.protobuf.Parser<UpdatePlayer_> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<GetPlayerData_> getParserForType() {
+    public com.google.protobuf.Parser<UpdatePlayer_> getParserForType() {
       return PARSER;
     }
 
-    public com.su.msg.PlayerMsg.GetPlayerData_ getDefaultInstanceForType() {
+    public com.su.msg.PlayerMsg.UpdatePlayer_ getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1699,15 +1326,10 @@ public final class PlayerMsg {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static__Player_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetPlayerData_descriptor;
+    internal_static_UpdatePlayer__descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GetPlayerData_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetPlayerData__descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GetPlayerData__fieldAccessorTable;
+      internal_static_UpdatePlayer__fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1718,9 +1340,9 @@ public final class PlayerMsg {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Player.proto\"#\n\007_Player\022\n\n\002id\030\001 \001(\003\022\014\n" +
-      "\004name\030\002 \001(\t\"\017\n\rGetPlayerData\"*\n\016GetPlaye" +
-      "rData_\022\030\n\006player\030\001 \001(\0132\010._PlayerB\031\n\ncom." +
-      "su.msgB\tPlayerMsgH\001"
+      "\004name\030\002 \001(\t\")\n\rUpdatePlayer_\022\030\n\006player\030\001" +
+      " \001(\0132\010._PlayerB\031\n\ncom.su.msgB\tPlayerMsgH" +
+      "\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1740,17 +1362,11 @@ public final class PlayerMsg {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__Player_descriptor,
         new java.lang.String[] { "Id", "Name", });
-    internal_static_GetPlayerData_descriptor =
+    internal_static_UpdatePlayer__descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_GetPlayerData_fieldAccessorTable = new
+    internal_static_UpdatePlayer__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GetPlayerData_descriptor,
-        new java.lang.String[] { });
-    internal_static_GetPlayerData__descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_GetPlayerData__fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GetPlayerData__descriptor,
+        internal_static_UpdatePlayer__descriptor,
         new java.lang.String[] { "Player", });
   }
 

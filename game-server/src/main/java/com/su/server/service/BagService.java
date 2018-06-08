@@ -29,7 +29,7 @@ public class BagService extends GameEventAdapter {
 	@Autowired
 	private BagMapper bagConf;
 	@Autowired
-	private LogServer logServer;
+	private LogService logService;
 	@Autowired
 	private PlayerService playerService;
 	@Autowired
@@ -96,7 +96,7 @@ public class BagService extends GameEventAdapter {
 		// 通知
 		playerContext.write(builder);
 		// 流水
-		logServer.addResourceLog(playerContext.getPlayerId(), reason, item.getCount(), -1);
+		logService.addItemLog(playerContext.getPlayerId(), reason, item.getSysId(), item.getCount(), -1);
 		return true;
 	}
 
@@ -150,7 +150,7 @@ public class BagService extends GameEventAdapter {
 		playerContext.write(updateItem_);
 		playerContext.write(deleteItem_);
 		// 流水
-		logServer.addResourceLog(playerContext.getPlayerId(), reason, item.getCount(), haveCount - item.getCount());
+		logService.addItemLog(playerContext.getPlayerId(), reason,item.getSysId(), item.getCount(), haveCount - item.getCount());
 		return true;
 	}
 

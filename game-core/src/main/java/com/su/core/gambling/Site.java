@@ -32,8 +32,11 @@ public class Site {
 	 * 需要操作的玩家队列
 	 */
 	private DelayQueue<GamePlayer> waitGamePlayerQueue = new DelayQueue<>();
+	
+	private SiteCo siteCo;
 
 	public Site(SiteCo siteCo) {
+		this.siteCo = siteCo;
 		// 初始化牌桌
 		for (int i = 0; i < siteCo.getInitTableNum(); i++) {
 			Table table = new Table(this);
@@ -74,6 +77,14 @@ public class Site {
 		}
 		table.getActor().setPlayers(gamePlayers);
 	}
+	
+	public ConcurrentLinkedDeque<GamePlayer> getPlayerDeque() {
+		return playerDeque;
+	}
+
+	public ConcurrentLinkedQueue<Table> getTableQueue() {
+		return tableQueue;
+	}
 
 	public DelayQueue<Table> getWaitTableQueue() {
 		return waitTableQueue;
@@ -83,12 +94,8 @@ public class Site {
 		return waitGamePlayerQueue;
 	}
 
-	public ConcurrentLinkedQueue<Table> getTableQueue() {
-		return tableQueue;
-	}
-
-	public ConcurrentLinkedDeque<GamePlayer> getPlayerDeque() {
-		return playerDeque;
+	public SiteCo getSiteCo() {
+		return siteCo;
 	}
 	
 }

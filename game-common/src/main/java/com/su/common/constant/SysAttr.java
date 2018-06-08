@@ -2,7 +2,11 @@ package com.su.common.constant;
 
 public class SysAttr {
 	/**
-	 * 欢乐豆
+	 * 花生
 	 * */
-	public final static int HAPPY_BEANS = 1;
+	public final static int PEANUT = 1;
+	/**
+	 * 道具
+	 * */
+	public final static int ITEM = 2;
 }

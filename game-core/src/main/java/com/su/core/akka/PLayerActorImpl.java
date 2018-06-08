@@ -11,7 +11,9 @@ import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventDispatcher;
 import com.su.core.gambling.TableResult;
 import com.su.core.netty.NettyServerHandler;
+import com.su.msg.BagMsg.UpdateItem_;
 import com.su.msg.LoginMsg.Login_;
+import com.su.msg.PlayerMsg.UpdatePlayer_;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.Attribute;
@@ -34,21 +36,27 @@ public class PLayerActorImpl implements PlayerActor {
 				return;
 			}
 			Attribute<PlayerContext> attr = ctx.channel().attr(NettyServerHandler.PLAYER_CONTEXT_KEY);
+			PlayerContext playerContext = attr.get();
 			if (actionMeta.isMustLogin()) {
-				PlayerContext playerContext = attr.get();
 				if (playerContext == null) {
 					// 没有找到对应的PlayerContext
 					logger.error("not find player context");
 					PlayerContext.sendError(ctx, 10001);
 					return;
 				}
+				playerContext.getBuilder().clear();
 				actionMeta.getMethod().invoke(actionMeta.getExecutor(), playerContext, messageLite);
 			} else {
-				PlayerContext playerContext = new PlayerContext();
+				if (playerContext == null)
+					playerContext = new PlayerContext();
 				playerContext.setCtx(ctx);
 				playerContext.setActor(this);
 				actionMeta.getMethod().invoke(actionMeta.getExecutor(), playerContext, messageLite);
 			}
+			// 玩家数据更新通知
+			if (playerContext.isNotice())
+				playerContext.write(UpdatePlayer_.newBuilder().setPlayer(playerContext.getBuilder()));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 系统错误

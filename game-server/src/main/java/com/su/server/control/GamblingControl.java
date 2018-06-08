@@ -56,7 +56,7 @@ public class GamblingControl {
 			return;
 		}
 		// 扣除道具
-		if(!bagService.eddItem(playerContext, GamblingConst.DOUBLES_ITEM, 0)) {
+		if(!bagService.eddItem(playerContext, GamblingConst.DOUBLES_ITEM, 2000)) {
 			playerContext.sendError(1003, GamblingConst.DOUBLES_ITEM.getType(),GamblingConst.DOUBLES_ITEM.getSysId());
 			return;
 		}

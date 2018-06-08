@@ -20,6 +20,10 @@ public class Player implements Serializable {
 	 * 名称
 	 * */
 	private String name;
+	/**
+	 * 花生
+	 * */
+	private int peanut;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -39,5 +43,10 @@ public class Player implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public int getPeanut() {
+		return peanut;
+	}
+	public void setPeanut(int peanut) {
+		this.peanut = peanut;
+	}
 }

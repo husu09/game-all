@@ -7,7 +7,7 @@ import com.su.common.data.Cache;
 
 @Cache(memoryCache=false,redisCache=false)
 @Entity
-public class ResouceLog {
+public class PeanutLog {
 	@Id
 	private long id;
 	/**

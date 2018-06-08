@@ -27,6 +27,7 @@ import com.su.core.gambling.enums.Team;
  * 牌桌对象
  */
 public class Table implements Delayed {
+	private Logger logger = LoggerFactory.getLogger(Table.class);
 	/**
 	 * 牌
 	 */
@@ -77,8 +78,6 @@ public class Table implements Delayed {
 	private TableActor actor;
 
 	private CardProcessorManager cardManager = SpringUtil.getContext().getBean(CardProcessorManager.class);
-
-	private Logger logger = LoggerFactory.getLogger(Table.class);
 
 	/**
 	 * 结算时等待时间
@@ -486,7 +485,14 @@ public class Table implements Delayed {
 			}
 		}
 
-		// TODO 记录出牌
+		// 记录出牌
+		for (int i = 0; i < cards.length; i ++) {
+			for (Card card : this.cards) {
+				if (card == null)
+					card = cards[i];
+			}
+		}
+		
 		// TODO 通知
 
 	}
@@ -665,20 +671,20 @@ public class Table implements Delayed {
 		int blueMultiple = sumMultiple / getTeamCount(Team.BLUE);
 		// 玩家结算
 		for (GamePlayer otherPlayer : this.players) {
-			TableResult cardResult = new TableResult();
-			cardResult.setPlayerContext(otherPlayer.getPlayerContext());
-			cardResult.setSiteCo(null);
+			TableResult tableResult = new TableResult();
+			tableResult.setPlayerContext(otherPlayer.getPlayerContext());
+			tableResult.setSiteCo(this.site.getSiteCo());
 			if (otherPlayer.getTeam() == winTeam)
-				cardResult.setWin(true);
+				tableResult.setWin(true);
 
 			else
-				cardResult.setWin(false);
+				tableResult.setWin(false);
 
 			if (otherPlayer.getTeam() == Team.RED)
-				cardResult.setMultiple(redMultiple);
+				tableResult.setMultiple(redMultiple);
 			else
-				cardResult.setMultiple(blueMultiple);
-			otherPlayer.getPlayerContext().getActor().doCardResult(cardResult);
+				tableResult.setMultiple(blueMultiple);
+			otherPlayer.getPlayerContext().getActor().doTableResult(tableResult);
 		}
 		// 下局的庄家
 		for (int i = 0 ; i < this.ranks.length; i ++ ) {
@@ -785,17 +791,6 @@ public class Table implements Delayed {
 
 	}
 
-	public Card[] getCards() {
-		return cards;
-	}
-
-	public void setCards(Card[] cards) {
-		this.cards = cards;
-	}
-
-	public GamePlayer[] getPlayers() {
-		return players;
-	}
 
 	public void setPlayers(GamePlayer[] players) {
 		if (this.players != null)
@@ -806,82 +801,6 @@ public class Table implements Delayed {
 			players[i].setTable(this);
 		}
 		this.players = players;
-	}
-
-	public TableState getState() {
-		return state;
-	}
-
-	public int getRoundScore() {
-		return roundScore;
-	}
-
-	public void setRoundScore(int roundScore) {
-		this.roundScore = roundScore;
-	}
-
-	public Card getCallCard() {
-		return callCard;
-	}
-
-	public void setCallCard(Card callCard) {
-		this.callCard = callCard;
-	}
-
-	public Card[] getLastCards() {
-		return lastCards;
-	}
-
-	public void setLastCards(Card[] lastCards) {
-		this.lastCards = lastCards;
-	}
-
-	public CardType getLastCardType() {
-		return lastCardType;
-	}
-
-	public void setLastCardType(CardType lastCardType) {
-		this.lastCardType = lastCardType;
-	}
-
-	public int getLastOp() {
-		return lastOp;
-	}
-
-	public void setLastOp(int lastOp) {
-		this.lastOp = lastOp;
-	}
-
-	public int getDealer() {
-		return dealer;
-	}
-
-	public void setDealer(int dealer) {
-		this.dealer = dealer;
-	}
-
-	public long getOpTime() {
-		return waitTime;
-	}
-
-	public void setOpTime(long opTime) {
-		this.waitTime = opTime;
-	}
-
-	public Site getSite() {
-		return site;
-	}
-
-	public void setSite(Site site) {
-		this.site = site;
-	}
-
-	public TableActor getActor() {
-		return actor;
-	}
-
-	public void setTableActor(TableActor tableActor) {
-		this.actor = tableActor;
 	}
 
 	@Override
@@ -897,6 +816,66 @@ public class Table implements Delayed {
 	@Override
 	public long getDelay(TimeUnit unit) {
 		return unit.convert(waitTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+	}
+
+	public GamePlayer[] getPlayers() {
+		return players;
+	}
+
+	public TableState getState() {
+		return state;
+	}
+
+	public int getRoundScore() {
+		return roundScore;
+	}
+
+	public Card getCallCard() {
+		return callCard;
+	}
+
+	public CallType getCallType() {
+		return callType;
+	}
+
+	public Integer getCallOp() {
+		return callOp;
+	}
+
+	public int[] getMultiples() {
+		return multiples;
+	}
+
+	public Card[] getLastCards() {
+		return lastCards;
+	}
+
+	public CardType getLastCardType() {
+		return lastCardType;
+	}
+
+	public Integer getLastOp() {
+		return lastOp;
+	}
+
+	public int getDealer() {
+		return dealer;
+	}
+
+	public Long getWaitTime() {
+		return waitTime;
+	}
+
+	public Integer[] getRanks() {
+		return ranks;
+	}
+
+	public Site getSite() {
+		return site;
+	}
+
+	public TableActor getActor() {
+		return actor;
 	}
 
 }

@@ -56,6 +56,12 @@ public class TableActorImpl implements TableActor {
 		
 	}
 
+	@Override
+	public void reconn(GamePlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }

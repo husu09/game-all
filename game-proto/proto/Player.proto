@@ -10,11 +10,8 @@ message _Player {
 	optional string name = 2;	// 名称
 }
 
-// 获取玩家数据
-message GetPlayerData {
-	
-}
-message GetPlayerData_ {
+// 玩家数据更新通知
+message UpdatePlayer_ {
 	optional _Player player = 1;
 }
 

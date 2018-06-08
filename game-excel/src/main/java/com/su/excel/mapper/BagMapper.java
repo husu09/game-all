@@ -35,7 +35,7 @@ public class BagMapper extends AbstractExcelMapper<BagCo> {
 		}
 		temp.setExpirationTime(rowData.getInt("yxq") * TimeUtil.ONE_DAY);
 		int limit = rowData.getInt("djsx");
-		limit = limit == 0 ? ParseUtil.getInt(parameterMapper.get(1001).getValue()) : limit;
+		limit = limit == 0 ? ParseUtil.getInt(parameterMapper.get(1).getValue()) : limit;
 		temp.setLimit(limit);
 		return temp;
 	}

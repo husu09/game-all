@@ -6,6 +6,7 @@ import com.su.core.akka.PlayerActor;
 import com.su.core.gambling.GamePlayer;
 import com.su.core.netty.NettyServerHandler;
 import com.su.msg.CommonMsg.Error_;
+import com.su.msg.PlayerMsg._Player;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -21,6 +22,11 @@ public class PlayerContext {
 	private long playerId;
 	
 	private GamePlayer gamePlayer;
+	
+	private _Player.Builder builder = _Player.newBuilder();
+	
+	private boolean isNotice;
+	
 
 	public void handleLogin(long playerId) {
 		this.playerId = playerId;
@@ -59,6 +65,10 @@ public class PlayerContext {
 		}
 		ctx.writeAndFlush(builder.build());
 	}
+	
+	public _Player.Builder getBuilder() {
+		return builder;
+	}
 
 	public ChannelHandlerContext getCtx() {
 		return ctx;
@@ -86,6 +96,14 @@ public class PlayerContext {
 
 	public void setGamePlayer(GamePlayer gamePlayer) {
 		this.gamePlayer = gamePlayer;
+	}
+
+	public boolean isNotice() {
+		return isNotice;
+	}
+
+	public void setNotice(boolean isNotice) {
+		this.isNotice = isNotice;
 	}
 	
 	

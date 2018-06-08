@@ -45,10 +45,6 @@ public class GamePlayer  implements Delayed{
 	 */
 	private boolean isAuto;
 	/**
-	 * 名次
-	 * */
-	private Integer rank;
-	/**
 	 * 操作时间
 	 * */
 	private Long opTime;
@@ -72,92 +68,6 @@ public class GamePlayer  implements Delayed{
 		this.handCards = new Card[Card.HAND_CARDS_NUM];
 		// 设置玩家上下文持有游戏对象
 		playerContext.setGamePlayer(this);
-	}
-	
-	public long getId() {
-		return id;
-	}
-
-	public int getIndex() {
-		return index;
-	}
-
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
-	public Card[] getHandCards() {
-		return handCards;
-	}
-
-	public void setHandCards(Card[] handCards) {
-		this.handCards = handCards;
-	}
-
-	public Team getTeam() {
-		return team;
-	}
-
-	public void setTeam(Team team) {
-		this.team = team;
-	}
-
-	public int getMultiple() {
-		return multiple;
-	}
-
-	public void setMultiple(int multipleValue) {
-		this.multiple = multipleValue;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
-	public PlayerState getState() {
-		return state;
-	}
-
-	public int getRank() {
-		return rank;
-	}
-
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
-
-	public Table getTable() {
-		return table;
-	}
-
-	public void setTable(Table table) {
-		this.table = table;
-	}
-
-	public PlayerContext getPlayerContext() {
-		return playerContext;
-	}
-	
-
-	public Long getOpTime() {
-		return opTime;
-	}
-
-	public void setOpTime(Long opTime) {
-		this.opTime = opTime;
-	}
-	
-	
-	public boolean isAuto() {
-		return isAuto;
-	}
-
-	public void setAuto(boolean isAuto) {
-		this.isAuto = isAuto;
 	}
 
 	@Override
@@ -219,7 +129,6 @@ public class GamePlayer  implements Delayed{
 		this.score = 0;
 		this.state = null;
 		this.isAuto = false;
-		this.rank = null;
 		this.opTime = null;
 	}
 	
@@ -253,6 +162,76 @@ public class GamePlayer  implements Delayed{
 		this.score += addScore;
 	}
 
+	public Integer getIndex() {
+		return index;
+	}
 
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
+	public int getMultiple() {
+		return multiple;
+	}
+
+	public void setMultiple(int multiple) {
+		this.multiple = multiple;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public boolean isAuto() {
+		return isAuto;
+	}
+
+	public void setAuto(boolean isAuto) {
+		this.isAuto = isAuto;
+	}
+	
+	public Long getOpTime() {
+		return opTime;
+	}
+
+	public void setOpTime(Long opTime) {
+		this.opTime = opTime;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public Card[] getHandCards() {
+		return handCards;
+	}
+
+	public PlayerState getState() {
+		return state;
+	}
+
+	public PlayerContext getPlayerContext() {
+		return playerContext;
+	}
+
+	public Table getTable() {
+		return table;
+	}
+
+	public void setTable(Table table) {
+		this.table = table;
+	}
 	
 }
