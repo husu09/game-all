@@ -48,5 +48,17 @@ public interface TableActor {
 	 * 重连
 	 * */
 	public void reconn(GamePlayer player);
+	
+	/**
+	 * 牌桌超时
+	 */
+	public void doWaitTable();
+	
+	/**
+	 * 玩家超时
+	 */
+	public void doWaitGamePlayer(GamePlayer player);
+
+	
 
 }

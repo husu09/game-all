@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.Tables;
 import com.su.common.util.CommonUtil;
 import com.su.common.util.SpringUtil;
 import com.su.common.util.TimeUtil;
@@ -740,7 +741,7 @@ public class Table implements Delayed {
 		// 牌桌
 		clean();
 		this.site.getWaitTableQueue().remove(this);
-		this.site.getTableQueue().offer(this);
+		this.site.getIdleTableQueue().offer(this);
 	}
 
 	/**
@@ -777,18 +778,27 @@ public class Table implements Delayed {
 	/**
 	 * 玩家超时
 	 */
-	public void checkWaiting(GamePlayer player) {
+	public void doWaitGamePlayer(GamePlayer player) {
 
 	}
 
 	/**
 	 * 等待超时
 	 */
-	public void checkWaiting() {
-		// 加倍超时
-
-		// 结算超时
-
+	public void doWaitTable() {
+		if (this.getState() == TableState.DOUBLES) {
+			// 加倍超时
+			for (GamePlayer otherGamePlayer : this.players) 
+				otherGamePlayer.setState(PlayerState.WAIT);
+			doublesToCall();
+		} else if (this.getState() == TableState.CLOSE) {
+			// 结算超时
+			for (GamePlayer otherGamePlayer : this.players) 
+				otherGamePlayer.clean();
+			// 牌桌
+			clean();
+			this.site.getIdleTableQueue().offer(this);
+		}
 	}
 
 

@@ -13,9 +13,9 @@ import com.su.core.data.RedisClient;
 import com.su.core.event.GameEventDispatcher;
 import com.su.core.netty.NettyServer;
 import com.su.core.proto.ProtoScan;
-import com.su.core.schedule.ScheduleManager;
 import com.su.excel.core.ExcelProcessor;
 import com.su.server.config.ServerConfig;
+import com.su.server.schedule.ScheduleManager;
 
 public class ServerStart {
 
@@ -33,9 +33,6 @@ public class ServerStart {
 		// 初始化 mq
 		MQProducer mqProducer = context.getBean(MQProducer.class);
 		mqProducer.start();
-		// 初始化定时任务管理器
-		ScheduleManager scheduleManager = context.getBean(ScheduleManager.class);
-		scheduleManager.start();
 		// 扫描协议
 		ProtoScan protoScan = context.getBean(ProtoScan.class);
 		protoScan.init();
@@ -47,6 +44,9 @@ public class ServerStart {
 		// 服务器启动事件
 		GameEventDispatcher gameEventDispatcher = context.getBean(GameEventDispatcher.class);
 		gameEventDispatcher.serverStart();
+		// 初始化定时任务管理器
+		ScheduleManager scheduleManager = context.getBean(ScheduleManager.class);
+		scheduleManager.start();
 		
 		GameContext gameContext = context.getBean(GameContext.class);
 		
@@ -59,8 +59,6 @@ public class ServerStart {
 				gameContext.setStopping(true);
 				// 关闭网络服务
 				nettyServer.stop();
-				// 关闭定时任务管理器
-				scheduleManager.stop();
 				// 关闭 mq
 				mqProducer.stop();
 				// 关闭 redis
@@ -69,6 +67,8 @@ public class ServerStart {
 				AkkaContext.close();
 				// 服务器关闭事件
 				gameEventDispatcher.serverStop();
+				// 关闭定时任务管理器
+				scheduleManager.stop();
 				
 				context.close();
 				break;

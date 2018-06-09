@@ -15,6 +15,7 @@ import com.su.common.mq.DataOperator;
 public class TransactionManager {
 	
 	private ThreadLocal<TransactionData> threadLocal = new ThreadLocal<>();
+	private ThreadLocal<Integer> callStackCount = new ThreadLocal<>();
 
 	@Autowired
 	private MQService mqService;
@@ -22,20 +23,48 @@ public class TransactionManager {
 	private MemoryCacheService memoryService;
 	@Autowired
 	private RedisService redisService;
-
+	
+	/**
+	 * 获取调用栈层数
+	 * */
+	public int getCallStackCount() {
+		Integer count = callStackCount.get();
+		if (count != null)
+			return count;
+		else 
+			return 0;
+	}
+	
+	/**
+	 * 增加调用栈层数
+	 * */
+	public void addCallStackCount() {
+		Integer count = callStackCount.get();
+		if (count == null) {
+			callStackCount.set(1);
+		} else {
+			callStackCount.set(count + 1); 
+		}
+	}
+	
+	/**
+	 * 减少调用栈层数
+	 * */
+	public void eddCallStackCount() {
+		Integer count = callStackCount.get();
+		if (count != null) {
+			callStackCount.set(count - 1); 
+		}
+	}
+	
 	/**
 	 * 获取每个线程独立的事务数据
 	 * */
 	private TransactionData getTransactionData() {
 		TransactionData transactionData = threadLocal.get();
 		if (transactionData == null) {
-			synchronized (this) {
-				if (transactionData == null) {
-					transactionData = new TransactionData();
-					threadLocal.set(transactionData);
-				}
-				return transactionData;
-			}
+			transactionData = new TransactionData();
+			threadLocal.set(transactionData);
 		}
 		return transactionData;
 

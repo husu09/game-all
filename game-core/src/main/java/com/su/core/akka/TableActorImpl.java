@@ -62,6 +62,18 @@ public class TableActorImpl implements TableActor {
 		
 	}
 
+	@Override
+	public void doWaitTable() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void doWaitGamePlayer(GamePlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }

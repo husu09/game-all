@@ -21,7 +21,10 @@ public class PlayerService extends GameEventAdapter{
 	public long createPlayer(Player player) {
 		return dataService.save(player);
 	}
-
+	
+	/**
+	 * 获取用户
+	 * */
 	public Player getPlayerById(long id) {
 		return dataService.get(Player.class, id);
 	}
@@ -37,7 +40,7 @@ public class PlayerService extends GameEventAdapter{
 		}
 		return playerDetail;
 	}
-
+	
 	public _Player serializePlayer(Player player) {
 		_Player.Builder builder = _Player.newBuilder();
 		builder.setId(player.getId());

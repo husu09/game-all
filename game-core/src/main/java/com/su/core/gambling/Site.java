@@ -23,7 +23,7 @@ public class Site {
 	/**
 	 * 空闲牌桌队列
 	 */
-	private ConcurrentLinkedQueue<Table> tableQueue = new ConcurrentLinkedQueue<>();
+	private ConcurrentLinkedQueue<Table> idleTableQueue = new ConcurrentLinkedQueue<>();
 	/**
 	 * 需要操作的牌桌队列
 	 */
@@ -40,7 +40,7 @@ public class Site {
 		// 初始化牌桌
 		for (int i = 0; i < siteCo.getInitTableNum(); i++) {
 			Table table = new Table(this);
-			tableQueue.offer(table);
+			idleTableQueue.offer(table);
 		}
 	}
 
@@ -71,19 +71,47 @@ public class Site {
 			}
 		}
 		// 人数足够时开始游戏
-		Table table = tableQueue.poll();
+		Table table = idleTableQueue.poll();
 		if (table == null) {
 			table = new Table(this);
 		}
 		table.getActor().setPlayers(gamePlayers);
 	}
 	
+	/**
+	 * 检测牌桌超时
+	 * */
+	public void doWaitTable() {
+		while (true) {
+			try {
+				Table table = waitTableQueue.take();
+				table.getActor().doWaitTable();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 检测玩家超时
+	 * */
+	public void doWaitGamePlayer(){
+		while (true) {
+			try {
+				GamePlayer gamePlayer = waitGamePlayerQueue.take();
+				gamePlayer.getTable().getActor().doWaitGamePlayer(gamePlayer);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public ConcurrentLinkedDeque<GamePlayer> getPlayerDeque() {
 		return playerDeque;
 	}
 
-	public ConcurrentLinkedQueue<Table> getTableQueue() {
-		return tableQueue;
+	public ConcurrentLinkedQueue<Table> getIdleTableQueue() {
+		return idleTableQueue;
 	}
 
 	public DelayQueue<Table> getWaitTableQueue() {

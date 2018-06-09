@@ -60,6 +60,23 @@ public final class PlayerMsg {
      */
     com.google.protobuf.ByteString
         getNameBytes();
+
+    /**
+     * <pre>
+     * 花生
+     * </pre>
+     *
+     * <code>optional int32 peanut = 3 [default = -1];</code>
+     */
+    boolean hasPeanut();
+    /**
+     * <pre>
+     * 花生
+     * </pre>
+     *
+     * <code>optional int32 peanut = 3 [default = -1];</code>
+     */
+    int getPeanut();
   }
   /**
    * <pre>
@@ -79,6 +96,7 @@ public final class PlayerMsg {
     private _Player() {
       id_ = 0L;
       name_ = "";
+      peanut_ = -1;
     }
 
     @java.lang.Override
@@ -118,6 +136,11 @@ public final class PlayerMsg {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
               name_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              peanut_ = input.readInt32();
               break;
             }
           }
@@ -222,6 +245,29 @@ public final class PlayerMsg {
       }
     }
 
+    public static final int PEANUT_FIELD_NUMBER = 3;
+    private int peanut_;
+    /**
+     * <pre>
+     * 花生
+     * </pre>
+     *
+     * <code>optional int32 peanut = 3 [default = -1];</code>
+     */
+    public boolean hasPeanut() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     * 花生
+     * </pre>
+     *
+     * <code>optional int32 peanut = 3 [default = -1];</code>
+     */
+    public int getPeanut() {
+      return peanut_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -240,6 +286,9 @@ public final class PlayerMsg {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, peanut_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -254,6 +303,10 @@ public final class PlayerMsg {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, peanut_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -282,6 +335,11 @@ public final class PlayerMsg {
         result = result && getName()
             .equals(other.getName());
       }
+      result = result && (hasPeanut() == other.hasPeanut());
+      if (hasPeanut()) {
+        result = result && (getPeanut()
+            == other.getPeanut());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -301,6 +359,10 @@ public final class PlayerMsg {
       if (hasName()) {
         hash = (37 * hash) + NAME_FIELD_NUMBER;
         hash = (53 * hash) + getName().hashCode();
+      }
+      if (hasPeanut()) {
+        hash = (37 * hash) + PEANUT_FIELD_NUMBER;
+        hash = (53 * hash) + getPeanut();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -428,6 +490,8 @@ public final class PlayerMsg {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        peanut_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -460,6 +524,10 @@ public final class PlayerMsg {
           to_bitField0_ |= 0x00000002;
         }
         result.name_ = name_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.peanut_ = peanut_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -509,6 +577,9 @@ public final class PlayerMsg {
           bitField0_ |= 0x00000002;
           name_ = other.name_;
           onChanged();
+        }
+        if (other.hasPeanut()) {
+          setPeanut(other.getPeanut());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -682,6 +753,54 @@ public final class PlayerMsg {
   }
   bitField0_ |= 0x00000002;
         name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int peanut_ = -1;
+      /**
+       * <pre>
+       * 花生
+       * </pre>
+       *
+       * <code>optional int32 peanut = 3 [default = -1];</code>
+       */
+      public boolean hasPeanut() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       * 花生
+       * </pre>
+       *
+       * <code>optional int32 peanut = 3 [default = -1];</code>
+       */
+      public int getPeanut() {
+        return peanut_;
+      }
+      /**
+       * <pre>
+       * 花生
+       * </pre>
+       *
+       * <code>optional int32 peanut = 3 [default = -1];</code>
+       */
+      public Builder setPeanut(int value) {
+        bitField0_ |= 0x00000004;
+        peanut_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 花生
+       * </pre>
+       *
+       * <code>optional int32 peanut = 3 [default = -1];</code>
+       */
+      public Builder clearPeanut() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        peanut_ = -1;
         onChanged();
         return this;
       }
@@ -1339,10 +1458,10 @@ public final class PlayerMsg {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Player.proto\"#\n\007_Player\022\n\n\002id\030\001 \001(\003\022\014\n" +
-      "\004name\030\002 \001(\t\")\n\rUpdatePlayer_\022\030\n\006player\030\001" +
-      " \001(\0132\010._PlayerB\031\n\ncom.su.msgB\tPlayerMsgH" +
-      "\001"
+      "\n\014Player.proto\"7\n\007_Player\022\n\n\002id\030\001 \001(\003\022\014\n" +
+      "\004name\030\002 \001(\t\022\022\n\006peanut\030\003 \001(\005:\002-1\")\n\rUpdat" +
+      "ePlayer_\022\030\n\006player\030\001 \001(\0132\010._PlayerB\031\n\nco" +
+      "m.su.msgB\tPlayerMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1361,7 +1480,7 @@ public final class PlayerMsg {
     internal_static__Player_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__Player_descriptor,
-        new java.lang.String[] { "Id", "Name", });
+        new java.lang.String[] { "Id", "Name", "Peanut", });
     internal_static_UpdatePlayer__descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_UpdatePlayer__fieldAccessorTable = new
