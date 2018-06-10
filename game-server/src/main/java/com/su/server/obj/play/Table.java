@@ -1,31 +1,19 @@
 package com.su.server.obj.play;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.DelayQueue;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
 import com.google.protobuf.MessageLiteOrBuilder;
-import com.google.protobuf.MessageOrBuilder;
 import com.su.common.util.CommonUtils;
-import com.su.common.util.SpringUtil;
+import com.su.common.util.SpringsUtil;
 import com.su.core.akka.AkkaContext;
-import com.su.proto.PlayProto.CardPro;
-import com.su.proto.PlayProto.GamePlayerNotice;
-import com.su.proto.PlayProto.GamePlayerPro;
-import com.su.proto.PlayProto.MultiplePro;
-import com.su.proto.PlayProto.PCard;
-import com.su.proto.PlayProto.PGamePlayer;
-import com.su.proto.PlayProto.PMultiple;
-import com.su.proto.PlayProto.PTable;
-import com.su.proto.PlayProto.TableNotice;
-import com.su.proto.PlayProto.TablePro;
-import com.su.proto.PlayProto.UpdateGamePlayerNotice;
-import com.su.proto.PlayProto.UpdateTableNotice;
-import com.su.server.constant.ErrCode;
+import com.su.proto.PlayMsg.GamePlayerNotice;
+import com.su.proto.PlayMsg.PCard;
+import com.su.proto.PlayMsg.PGamePlayer;
+import com.su.proto.PlayMsg.PMultiple;
+import com.su.proto.PlayMsg.PTable;
+import com.su.proto.PlayMsg.TableNotice;
 import com.su.server.context.PlayerContext;
 
 /**
@@ -90,7 +78,7 @@ public class Table implements Delayed {
 	 */
 	private TableActor actor;
 
-	private AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
+	private AkkaContext akkaContext = SpringsUtil.getContext().getBean(AkkaContext.class);
 
 	private PTable.Builder pTableBuiler = PTable.newBuilder();
 	private PGamePlayer.Builder pGamePlayerBuilder = PGamePlayer.newBuilder();
@@ -241,7 +229,7 @@ public class Table implements Delayed {
 	 */
 	public void check(GamePlayer player) {
 		if (player.getState() != PlayerState.OPERATING  || state != TableState.PLAYING) {
-			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
+			player.getPlayerContext().sendError(0);
 			return;
 		}
 		site.getDeadLineQueue().remove(player);
@@ -271,7 +259,7 @@ public class Table implements Delayed {
 	 */
 	public void call(GamePlayer player, int index) {
 		if (player.getState() != PlayerState.OPERATING || state != TableState.START) {
-			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
+			player.getPlayerContext().sendError(0);
 			return;
 		}
 		// 明叫
@@ -282,12 +270,12 @@ public class Table implements Delayed {
 			pTableBuiler.addMultiples(multiple.toProto(pMultipleBuilder));
 		} else {
 			if (index < 0 || index >= player.getHandCards().length) {
-				player.getPlayerContext().sendError(ErrCode.PARAMETER_ERROR);
+				player.getPlayerContext().sendError(0);
 				return;
 			}
 			Card card = player.getHandCards()[index];
 			if (card == null) {
-				player.getPlayerContext().sendError(ErrCode.SYSTEM_ERROR);
+				player.getPlayerContext().sendError(0);
 				return;
 			}
 			callCard = card;
@@ -336,7 +324,7 @@ public class Table implements Delayed {
 	 */
 	public void draw(GamePlayer player, CardType cardType, int[] indexs) {
 		if (player.getState() != PlayerState.OPERATING || state != TableState.PLAYING) {
-			player.getPlayerContext().sendError(ErrCode.PLAYER_NOT_OPERATING);
+			player.getPlayerContext().sendError(0);
 			return;
 		}
 		site.getDeadLineQueue().remove(player);
@@ -352,24 +340,24 @@ public class Table implements Delayed {
 		// 索引验证
 		for (int i = 0; i < indexs.length; i++) {
 			if (indexs[i] < 0 || indexs[i] >= player.getHandCards().length) {
-				player.getPlayerContext().sendError(ErrCode.PARAMETER_ERROR);
+				player.getPlayerContext().sendError(0);
 				return;
 			}
 			Card card = player.getHandCards()[indexs[i]];
 			if (card == null) {
-				player.getPlayerContext().sendError(ErrCode.SYSTEM_ERROR);
+				player.getPlayerContext().sendError(0);
 				return;
 			}
 			cards[i] = card;
 		}
 		// 牌型验证
 		if (!CardTypeUnit.verify(cardType, cards)) {
-			player.getPlayerContext().sendError(ErrCode.CARD_TYPE_ERROR);
+			player.getPlayerContext().sendError(0);
 			return;
 		}
 		// 比较大小
 		if (!CardTypeUnit.compare(cardType, cards, lastCardType, lastCards)) {
-			player.getPlayerContext().sendError(ErrCode.CARD_SIZE_ERROR);
+			player.getPlayerContext().sendError(0);
 			return;
 		}
 		lastCardType = cardType;
@@ -382,9 +370,9 @@ public class Table implements Delayed {
 		// 倍数
 		MultipleType multiple = MultipleTypeUnit.getMultiple(cardType, cards);
 		if (multiple != null) {
-			multiples[multiple.ordinal()] += multiple.getValue();
+			/*multiples[multiple.ordinal()] += multiple.getValue();
 			pMultipleBuilder.setType(multiple.ordinal()).setValue(multiples[multiple.ordinal()]);
-			pTableBuiler.addMultiples(pMultipleBuilder);
+			pTableBuiler.addMultiples(pMultipleBuilder);*/
 			pMultipleBuilder.clear();
 		}
 		// 变更牌权

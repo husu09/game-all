@@ -20,7 +20,6 @@ import org.springframework.stereotype.Component;
 
 import com.su.proto.core.ProtoDecoder;
 import com.su.proto.core.ProtoEncoder;
-import com.su.proto.core.ProtoLengthPrepender;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -41,7 +40,7 @@ public final class NettyClient {
 	private ProtoDecoder protoDecoder;
 	@Autowired
 	private NettyClientHandler nettyClientHandler;
-	
+
 	private EventLoopGroup group;
 
 	public void start(String host, int port) {
@@ -51,18 +50,18 @@ public final class NettyClient {
 			@Override
 			public void initChannel(SocketChannel ch) throws Exception {
 				ChannelPipeline p = ch.pipeline();
-				p.addLast(protoEncoder, new ProtoLengthPrepender(), protoDecoder, nettyClientHandler);
+				p.addLast(protoEncoder	, protoDecoder, nettyClientHandler);
 			}
 		});
 
 		// Start the connection attempt.
-		
+
 		try {
 			b.connect(host, port).sync();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public void stop() {

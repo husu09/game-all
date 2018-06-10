@@ -27,7 +27,7 @@ import com.su.client.handler.ClearButtonHandler;
 import com.su.client.handler.LoginButtonHandler;
 import com.su.client.handler.ProtoButtonHandler;
 import com.su.client.handler.SendButtonHandler;
-import com.su.common.util.SpringUtil;
+import com.su.common.util.SpringsUtil;
 import com.su.proto.core.ProtoContext;
 
 @Component
@@ -46,7 +46,6 @@ public class ClientUI {
 	private ProtoButtonHandler protoButtonHandler;
 	@Autowired
 	private SendButtonHandler sendButtonHandler;
-	
 
 	public void show() throws Exception {
 		// 窗口
@@ -57,7 +56,7 @@ public class ClientUI {
 		frame.setLayout(new BorderLayout());
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
-				AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) SpringUtil
+				AnnotationConfigApplicationContext context = (AnnotationConfigApplicationContext) SpringsUtil
 						.getContext();
 				client.stop();
 				context.close();
@@ -74,7 +73,7 @@ public class ClientUI {
 		// 左左
 		JPanel leftLeft = new JPanel();
 		leftLeft.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-		
+
 		// 第一行
 		JPanel r1p = new JPanel();
 		JLabel ipL = new JLabel("地址");
@@ -99,7 +98,7 @@ public class ClientUI {
 		clientContext.setUserNameTF(nameT);
 
 		// 第三行
-		
+
 		JPanel r3p = new JPanel();
 		JLabel passwordL = new JLabel("密码");
 		JTextField passwordT = new JTextField(20);
@@ -109,7 +108,6 @@ public class ClientUI {
 		r3p.add(passwordT);
 		r3p.add(sendB);
 		leftLeft.add(r3p);
-		
 
 		// 左下
 		JPanel leftBelow = new JPanel();
@@ -169,7 +167,7 @@ public class ClientUI {
 	 *            显示协议参数的面板
 	 */
 	private void loadProto(JComponent leftRight) {
-		for (Entry<String, MessageLite> e : protoContext.all()) {
+		for (Entry<String, MessageLite> e : protoContext.getMessageLiteMap().entrySet()) {
 			if (!e.getKey().contains("Req") || e.getKey().equals("LoginReq"))
 				continue;
 			JButton tB = new JButton(e.getKey());

@@ -3,10 +3,10 @@ package com.su.server.context;
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.common.po.Player;
-import com.su.proto.CommonProto.ErrorResp;
+import com.su.common.po.PlayerDetail;
+import com.su.proto.CommonMsg.ErrorResp;
 import com.su.server.akka.PlayerActor;
 import com.su.server.netty.NettyServerHandler;
-import com.su.server.obj.play.GamePlayer;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -20,6 +20,8 @@ public class PlayerContext {
 	private PlayerActor actor;
 	
 	private Player player;
+	
+	private PlayerDetail playerDetail;
 
 	public void handleLogin(Player player) {
 		this.player = player;
@@ -81,16 +83,13 @@ public class PlayerContext {
 		this.player = player;
 	}
 
-	public GamePlayer getGamePlayer() {
-		return gamePlayer;
+	public PlayerDetail getPlayerDetail() {
+		return playerDetail;
 	}
 
-	public void setGamePlayer(GamePlayer gamePlayer) {
-		this.gamePlayer = gamePlayer;
+	public void setPlayerDetail(PlayerDetail playerDetail) {
+		this.playerDetail = playerDetail;
 	}
-
-
 	
 	
-
 }

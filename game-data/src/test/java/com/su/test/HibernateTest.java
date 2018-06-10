@@ -21,7 +21,7 @@ public class HibernateTest {
 	public void testDao() {
 		Player p1 = new Player();
 		p1.setId(10002);
-		p1.setName("person2");
+		//p1.setName("person2");
 		baseDao.save(p1);
 	}
 }

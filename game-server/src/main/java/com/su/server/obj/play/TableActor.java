@@ -49,4 +49,6 @@ public interface TableActor {
 	 * */
 	public void checkWaiting();
 
+	void initTable(GamePlayer[] players);
+
 }

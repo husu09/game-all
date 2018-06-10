@@ -1,4 +1,4 @@
-package com.su.server.obj.play;
+package com.su.common.obj.play;
 
 import com.su.server.context.PlayerContext;
 
@@ -56,6 +56,12 @@ public class TableActorImpl implements TableActor {
 
 	@Override
 	public void checkWaiting() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void start(GamePlayer[] players) {
 		// TODO Auto-generated method stub
 		
 	}

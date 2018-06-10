@@ -1,4 +1,4 @@
-package com.su.server.obj.server;
+package com.su.server.obj;
 
 import com.su.common.po.Player;
 /**
@@ -11,7 +11,7 @@ public class PlayerCoreData {
 	
 	public PlayerCoreData(Player player) {
 		this.id = player.getId();
-		this.name = player.getName();
+		//this.name = player.getName();
 	}
 
 	public long getId() {

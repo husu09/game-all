@@ -16,13 +16,9 @@ public class GameContext {
 	private volatile boolean stopping;
 	
 	private Map<Long, PlayerContext> playerContextMap = new ConcurrentHashMap<>();
-	
+
 	public Map<Long, PlayerContext> getPlayerContextMap() {
 		return playerContextMap;
-	}
-
-	public void setPlayerContextMap(Map<Long, PlayerContext> playerContextMap) {
-		this.playerContextMap = playerContextMap;
 	}
 
 	public boolean isStopping() {

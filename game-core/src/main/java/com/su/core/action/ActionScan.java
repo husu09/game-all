@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
-import com.su.common.util.SpringUtil;
+import com.su.common.util.SpringsUtil;
 import com.su.proto.core.ProtoContext;
 
 /**
@@ -28,7 +28,7 @@ public class ActionScan {
 
 	public void scan() {
 
-		Map<String, Object> beans = SpringUtil.getContext().getBeansWithAnnotation(Controller.class);
+		Map<String, Object> beans = SpringsUtil.getContext().getBeansWithAnnotation(Controller.class);
 
 		for (Object bean : beans.values()) {
 			Method[] methods = bean.getClass().getMethods();

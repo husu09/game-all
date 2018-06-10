@@ -3,8 +3,8 @@ package com.su.server.obj.play;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
-import com.su.proto.PlayProto.PCard;
-import com.su.proto.PlayProto.PGamePlayer;
+import com.su.proto.PlayMsg.PCard;
+import com.su.proto.PlayMsg.PGamePlayer;
 import com.su.server.context.PlayerContext;
 
 /**

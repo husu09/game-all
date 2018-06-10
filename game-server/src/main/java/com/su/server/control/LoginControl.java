@@ -6,9 +6,8 @@ import org.springframework.stereotype.Controller;
 
 import com.su.common.po.Player;
 import com.su.core.action.Action;
-import com.su.proto.LoginProto.LoginReq;
-import com.su.proto.LoginProto.LoginResp;
-import com.su.server.constant.ErrCode;
+import com.su.proto.LoginMsg.LoginReq;
+import com.su.proto.LoginMsg.LoginResp;
 import com.su.server.context.GameContext;
 import com.su.server.context.PlayerContext;
 import com.su.server.event.GameEventDispatcher;
@@ -35,9 +34,9 @@ public class LoginControl {
 	 */
 	@Action(mustLogin = false)
 	public void login(PlayerContext playerContext, LoginReq req) {
-		String name = req.getName();
+		String name = req.getUserName();
 		if (StringUtils.isBlank(name)) {
-			playerContext.sendError(ErrCode.PLAYER_NAME_IS_EMPTY);
+			playerContext.sendError(0);
 			return;
 		}
 		long playerId = 0;
@@ -51,14 +50,14 @@ public class LoginControl {
 		}
 		Player player = playerService.getPlayerById(playerId);
 		if (player == null) {
-			playerContext.sendError(ErrCode.PLAYER_IS_NULL);
+			playerContext.sendError(0);
 			return;
 		}
 		playerContext.handleLogin(player);
-		gameContext.addPlayerContext(player.getId(), playerContext);
+		gameContext.getPlayerContextMap().put(player.getId(), playerContext);
 		gameEventDispatcher.login(playerContext);
 		LoginResp.Builder resp = LoginResp.newBuilder();
-		resp.setPlayerData(playerService.toPlayerDataPro(player));
+		resp.setPlayer(playerService.toPlayerDataPro(player));
 		playerContext.write(resp);
 
 		loginService.addPlayerCache(player);

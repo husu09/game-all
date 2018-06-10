@@ -6,12 +6,7 @@ option java_outer_classname = "PlayerMsg";
 
 // 玩家数据
 message PPlayer {
-	 optional int64 id = 1;			// id
-	optional  string name = 2;						// 名字
-	optional  string picture = 3;					// 头像
-	optional  int32 level = 4 ;		// 等级
-	 optional int32 vipLevel = 5 ;		// vip等级
-	 optional int32 vipExp = 6;		// vip经验
+	optional int64 id = 1;		// id
 }
 
 // 获取玩家数据

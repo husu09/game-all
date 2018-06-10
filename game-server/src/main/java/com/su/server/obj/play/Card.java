@@ -1,6 +1,6 @@
 package com.su.server.obj.play;
 
-import com.su.proto.PlayProto.PCard;
+import com.su.proto.PlayMsg.PCard;
 
 public class Card implements Comparable<Card> {
 	/**

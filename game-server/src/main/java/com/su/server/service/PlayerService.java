@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.su.common.po.Player;
 import com.su.core.data.DataService;
-import com.su.proto.PlayerProto.PlayerDataPro;
+import com.su.proto.PlayerMsg.PPlayer;
 
 @Service
 public class PlayerService {
@@ -17,7 +17,7 @@ public class PlayerService {
 	 */
 	public long createPlayer(String name) {
 		Player player = new Player();
-		player.setName(name);
+		//player.setName(name);
 		return dataService.save(player);
 	}
 
@@ -25,10 +25,9 @@ public class PlayerService {
 		return dataService.get(Player.class, id);
 	}
 	
-	public PlayerDataPro toPlayerDataPro(Player player) {
-		PlayerDataPro.Builder builder = PlayerDataPro.newBuilder();
+	public PPlayer toPlayerDataPro(Player player) {
+		PPlayer.Builder builder = PPlayer.newBuilder();
 		builder.setId(player.getId());
-		builder.setName(player.getName());
 		return builder.build();
 	}
 }

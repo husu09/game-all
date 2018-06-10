@@ -22,7 +22,7 @@ import com.su.proto.core.ProtoContext;
  */
 @Component
 public class ProtoButtonHandler implements ActionListener {
-	
+
 	@Autowired
 	private ClientContext clientContext;
 	@Autowired
@@ -35,7 +35,7 @@ public class ProtoButtonHandler implements ActionListener {
 		p.setVisible(false);
 		p.removeAll();
 		JButton but = (JButton) e.getSource();
-		MessageLite messageLite = protoContext.get(but.getText());
+		MessageLite messageLite = protoContext.getMessageLiteMap().get(but.getText());
 		clientContext.setSelectMessageLite(messageLite);
 		Class<?> c = messageLite.getClass();
 		Field[] fields = c.getDeclaredFields();

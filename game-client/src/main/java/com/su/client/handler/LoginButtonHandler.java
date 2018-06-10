@@ -10,22 +10,22 @@ import org.springframework.stereotype.Component;
 
 import com.su.client.core.ClientContext;
 import com.su.client.core.NettyClient;
-import com.su.proto.LoginProto.LoginReq;
+import com.su.proto.LoginMsg.LoginReq;
 
 /**
  * 登录
  */
 @Component
 public class LoginButtonHandler implements ActionListener {
-	
+
 	@Autowired
 	private ClientContext clientContext;
 	@Autowired
 	private NettyClient nettyClient;
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		JTextField hostTF = clientContext.getHostTF();
 		String[] arr = hostTF.getText().split(":");
 		if (arr.length < 2) {
@@ -39,12 +39,12 @@ public class LoginButtonHandler implements ActionListener {
 		}
 		// 保存数据
 		clientContext.saveData(hostTF.getText(), userNameTF.getText());
-		
+
 		if (clientContext.getCtx() != null) {
 			clientContext.getCtx().close();
-		} 
+		}
 		nettyClient.start(arr[0], Integer.parseInt(arr[1]));
-		clientContext.write(LoginReq.newBuilder().setName(userNameTF.getText()).build());
+		clientContext.write(LoginReq.newBuilder().setUserName(userNameTF.getText()).build());
 
 	}
 
