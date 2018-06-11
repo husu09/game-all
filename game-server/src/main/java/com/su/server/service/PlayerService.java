@@ -8,12 +8,16 @@ import com.su.common.po.PlayerDetail;
 import com.su.core.context.PlayerContext;
 import com.su.core.data.DataService;
 import com.su.core.event.GameEventAdapter;
+import com.su.core.gambling.TableResult;
+import com.su.msg.GamblingMsg._GamePlayerResult;
 import com.su.msg.PlayerMsg._Player;
 
 @Service
 public class PlayerService extends GameEventAdapter{
 	@Autowired
 	private DataService dataService;
+	
+	private _GamePlayerResult.Builder builder = _GamePlayerResult.newBuilder();
 
 	/**
 	 * 创建用户
@@ -51,6 +55,12 @@ public class PlayerService extends GameEventAdapter{
 	@Override
 	public void logout(PlayerContext playerContext) {
 	
+	}
+	
+	public _GamePlayerResult doTableResult(PlayerContext playerContext, TableResult tableResult) {
+		builder.clear();
+		
+		return builder.build();
 	}
 	
 }

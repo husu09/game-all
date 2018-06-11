@@ -48,10 +48,13 @@ public class Site {
 	 * 开始匹配
 	 */
 	public void startMatch(PlayerContext playerContext) {
+		// 在匹配队列中
+		if (playerDeque.contains(playerContext))
+			return;
 		if (playerContext.getGamePlayer() == null) {
 			playerContext.setGamePlayer(new GamePlayer(playerContext));
 		} else if (playerContext.getGamePlayer().getState() != null) {
-			// 已经在游戏中
+			// 在游戏中
 			return;
 		}
 		playerNum.incrementAndGet();
@@ -76,6 +79,7 @@ public class Site {
 			table = new Table(this);
 		}
 		table.getActor().setPlayers(gamePlayers);
+		table.getActor().deal();
 	}
 	
 	/**

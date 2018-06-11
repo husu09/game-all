@@ -1,7 +1,6 @@
 package com.su.core.akka;
 
 import com.su.core.gambling.GamePlayer;
-import com.su.core.gambling.enums.CardType;
 
 public interface TableActor {
 	
@@ -27,12 +26,17 @@ public interface TableActor {
 	/**
 	 * 出牌
 	 */
-	public void draw(GamePlayer player, CardType cardType, int[] index);
+	public void draw(GamePlayer player, int cardType, int[] indexs);
 
 	/**
 	 * 过牌
 	 */
 	public void check(GamePlayer player);
+	
+	/**
+	 * 托管
+	 * */
+	public void setIsAuto(GamePlayer player, int isAuto);
 
 	/**
 	 * 准备

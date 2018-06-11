@@ -43,7 +43,7 @@ public class GamePlayer  implements Delayed{
 	/**
 	 * 是否托管
 	 */
-	private boolean isAuto;
+	private int isAuto;
 	/**
 	 * 操作时间
 	 * */
@@ -120,6 +120,7 @@ public class GamePlayer  implements Delayed{
 	 * 重置玩家状态
 	 * */
 	public void reset() {
+		this.state = null;
 		// 重置用户手牌
 		for (int i = 0; i < this.handCards.length; i ++) {
 			this.handCards[i] = null; 
@@ -127,8 +128,7 @@ public class GamePlayer  implements Delayed{
 		this.team = null;
 		this.multiple = 0;
 		this.score = 0;
-		this.state = null;
-		this.isAuto = false;
+		this.isAuto = 0;
 		this.opTime = null;
 	}
 	
@@ -153,6 +153,18 @@ public class GamePlayer  implements Delayed{
 	
 	public void setState(PlayerState state) {
 		setState(state, true);
+	}
+	
+	/**
+	 * 获取手牌张数
+	 * */
+	public int getHandCardsCount() {
+		int count = 0;
+		for (Card card : this.handCards) {
+			if (card != null)
+				count++;
+		}
+		return count;
 	}
 	
 	/**
@@ -194,11 +206,11 @@ public class GamePlayer  implements Delayed{
 		this.score = score;
 	}
 
-	public boolean isAuto() {
+	public int isAuto() {
 		return isAuto;
 	}
 
-	public void setAuto(boolean isAuto) {
+	public void setAuto(int isAuto) {
 		this.isAuto = isAuto;
 	}
 	

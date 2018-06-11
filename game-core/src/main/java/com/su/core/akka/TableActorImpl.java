@@ -2,7 +2,6 @@ package com.su.core.akka;
 
 import com.su.core.gambling.GamePlayer;
 import com.su.core.gambling.Table;
-import com.su.core.gambling.enums.CardType;
 
 public class TableActorImpl implements TableActor {
 	
@@ -33,47 +32,43 @@ public class TableActorImpl implements TableActor {
 	}
 
 	@Override
-	public void draw(GamePlayer player, CardType cardType, int[] index) {
-		// TODO Auto-generated method stub
-		
+	public void draw(GamePlayer player, int cardType, int[] indexs) {
+		table.draw(player, cardType, indexs);
 	}
 
 	@Override
 	public void check(GamePlayer player) {
-		// TODO Auto-generated method stub
-		
+		table.check(player);
 	}
 
 	@Override
 	public void ready(GamePlayer player) {
-		// TODO Auto-generated method stub
-		
+		table.ready(player);
 	}
 
 	@Override
 	public void exit(GamePlayer player) {
-		// TODO Auto-generated method stub
-		
+		table.exit(player);
 	}
 
 	@Override
 	public void reconn(GamePlayer player) {
-		// TODO Auto-generated method stub
-		
+		table.reconnect(player);
 	}
 
 	@Override
 	public void doWaitTable() {
-		// TODO Auto-generated method stub
-		
+		table.doWaitTable();
 	}
 
 	@Override
 	public void doWaitGamePlayer(GamePlayer player) {
-		// TODO Auto-generated method stub
-		
+		table.doWaitGamePlayer(player);
 	}
 
-	
+	@Override
+	public void setIsAuto(GamePlayer player, int isAuto) {
+		table.setIsAuto(player, isAuto);
+	}
 	
 }

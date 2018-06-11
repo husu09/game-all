@@ -16,7 +16,9 @@ public class TableResult {
 	 * 是否胜利
 	 * */
 	private boolean isWin;
+	
 	private SiteCo siteCo;
+	
 	public PlayerContext getPlayerContext() {
 		return playerContext;
 	}

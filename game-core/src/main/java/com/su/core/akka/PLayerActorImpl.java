@@ -11,7 +11,7 @@ import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventDispatcher;
 import com.su.core.gambling.TableResult;
 import com.su.core.netty.NettyServerHandler;
-import com.su.msg.BagMsg.UpdateItem_;
+import com.su.msg.GamblingMsg._GamePlayerResult;
 import com.su.msg.LoginMsg.Login_;
 import com.su.msg.PlayerMsg.UpdatePlayer_;
 
@@ -24,6 +24,7 @@ public class PLayerActorImpl implements PlayerActor {
 
 	private ActionContext actionContext = SpringUtil.getContext().getBean(ActionContext.class);
 	private GameEventDispatcher gameEventDispatcher = SpringUtil.getContext().getBean(GameEventDispatcher.class);
+	private BridgeService bridgeService =  SpringUtil.getContext().getBean(BridgeService.class);
 
 	@Override
 	public void process(ChannelHandlerContext ctx, MessageLite messageLite) {
@@ -56,7 +57,7 @@ public class PLayerActorImpl implements PlayerActor {
 			// 玩家数据更新通知
 			if (playerContext.isNotice())
 				playerContext.write(UpdatePlayer_.newBuilder().setPlayer(playerContext.getBuilder()));
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 系统错误
@@ -82,7 +83,7 @@ public class PLayerActorImpl implements PlayerActor {
 	}
 
 	@Override
-	public void doTableResult(TableResult tableResult) {
+	public _GamePlayerResult doTableResult(TableResult tableResult) {
 		
 	}
 

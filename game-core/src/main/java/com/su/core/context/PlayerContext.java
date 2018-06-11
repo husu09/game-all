@@ -21,7 +21,7 @@ public class PlayerContext {
 	
 	private long playerId;
 	
-	private GamePlayer gamePlayer;
+	private volatile GamePlayer gamePlayer;
 	
 	private _Player.Builder builder = _Player.newBuilder();
 	

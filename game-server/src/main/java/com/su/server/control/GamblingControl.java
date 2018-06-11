@@ -18,22 +18,22 @@ import com.su.msg.GamblingMsg.Quit;
 import com.su.msg.GamblingMsg.Ready;
 import com.su.msg.GamblingMsg.Reconn;
 import com.su.msg.GamblingMsg.Start;
-import com.su.server.service.BagService;
 import com.su.server.service.GamblingService;
+import com.su.server.service.ResouceService;
 
 @Controller
 public class GamblingControl {
-	
+
 	@Autowired
 	private GamblingService gamblingService;
 	@Autowired
-	private BagService bagService;
+	private ResouceService resouceService;
 	@Autowired
 	private BagMapper bagMapper;
-	
+
 	/**
 	 * 开始匹配
-	 * */
+	 */
 	@Action
 	public void start(PlayerContext playerContext, Start req) {
 		Site site = gamblingService.getSiteMap().get(req.getSiteId());
@@ -43,10 +43,10 @@ public class GamblingControl {
 		}
 		site.startMatch(playerContext);
 	}
-	
+
 	/**
 	 * 加倍
-	 * */
+	 */
 	@Action
 	public void doubles(PlayerContext playerContext, Double req) {
 		// 获取道具配置
@@ -56,8 +56,9 @@ public class GamblingControl {
 			return;
 		}
 		// 扣除道具
-		if(!bagService.eddItem(playerContext, GamblingConst.DOUBLES_ITEM, 2000)) {
-			playerContext.sendError(1003, GamblingConst.DOUBLES_ITEM.getType(),GamblingConst.DOUBLES_ITEM.getSysId());
+
+		if (!resouceService.edd(playerContext, GamblingConst.DOUBLES_ITEM, 2001)) {
+			playerContext.sendError(1003, GamblingConst.DOUBLES_ITEM.getType(), GamblingConst.DOUBLES_ITEM.getSysId());
 			return;
 		}
 		// 游戏用户检测
@@ -70,13 +71,13 @@ public class GamblingControl {
 		boolean result = gamePlayer.getTable().getActor().doubles(gamePlayer, bagCo.getEffectNum());
 		// 加倍失败返还道具
 		if (!result) {
-			bagService.addItem(playerContext, GamblingConst.DOUBLES_ITEM, 0);
+			resouceService.add(playerContext, GamblingConst.DOUBLES_ITEM, 10001);
 		}
 	}
-	
+
 	/**
 	 * 叫牌
-	 * */
+	 */
 	@Action
 	public void call(PlayerContext playerContext, Call req) {
 		// 游戏用户检测
@@ -87,10 +88,10 @@ public class GamblingControl {
 		}
 		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
 	}
-	
+
 	/**
 	 * 出牌
-	 * */
+	 */
 	@Action
 	public void draw(PlayerContext playerContext, Draw req) {
 		// 游戏用户检测
@@ -99,12 +100,15 @@ public class GamblingControl {
 			playerContext.sendError(3001);
 			return;
 		}
-		gamePlayer.getTable().getActor().draw(gamePlayer, req.getCardType(), req.getCardIndexsList());
+		int[] indexs = new int[req.getCardIndexsCount()];
+		for (int i = 0; i < req.getCardIndexsCount(); i++)
+			indexs[i] = req.getCardIndexs(i);
+		gamePlayer.getTable().getActor().draw(gamePlayer, req.getCardType(), indexs);
 	}
-	
+
 	/**
 	 * 托管
-	 * */
+	 */
 	@Action
 	public void auto(PlayerContext playerContext, Auto req) {
 		// 游戏用户检测
@@ -113,12 +117,12 @@ public class GamblingControl {
 			playerContext.sendError(3001);
 			return;
 		}
-		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
+		gamePlayer.getTable().getActor().setIsAuto(gamePlayer, req.getIsAuto());
 	}
-	
+
 	/**
 	 * 准备
-	 * */
+	 */
 	@Action
 	public void ready(PlayerContext playerContext, Ready req) {
 		// 游戏用户检测
@@ -127,12 +131,12 @@ public class GamblingControl {
 			playerContext.sendError(3001);
 			return;
 		}
-		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
+		gamePlayer.getTable().getActor().ready(gamePlayer);
 	}
-	
+
 	/**
 	 * 退出
-	 * */
+	 */
 	@Action
 	public void quit(PlayerContext playerContext, Quit req) {
 		// 游戏用户检测
@@ -141,12 +145,12 @@ public class GamblingControl {
 			playerContext.sendError(3001);
 			return;
 		}
-		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
+		gamePlayer.getTable().getActor().exit(gamePlayer);
 	}
-	
+
 	/**
 	 * 重连
-	 * */
+	 */
 	@Action
 	public void Reconn(PlayerContext playerContext, Reconn req) {
 		// 游戏用户检测
@@ -155,6 +159,6 @@ public class GamblingControl {
 			playerContext.sendError(3001);
 			return;
 		}
-		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
+		gamePlayer.getTable().getActor().reconn(gamePlayer);
 	}
 }
