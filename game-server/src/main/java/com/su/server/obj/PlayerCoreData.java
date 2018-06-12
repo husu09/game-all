@@ -11,7 +11,7 @@ public class PlayerCoreData {
 	
 	public PlayerCoreData(Player player) {
 		this.id = player.getId();
-		//this.name = player.getName();
+		this.name = player.getName();
 	}
 
 	public long getId() {

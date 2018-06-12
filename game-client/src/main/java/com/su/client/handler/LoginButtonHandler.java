@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.su.client.core.ClientContext;
 import com.su.client.core.NettyClient;
-import com.su.proto.LoginMsg.LoginReq;
+import com.su.proto.LoginMsg.Login;
 
 /**
  * 登录
@@ -44,7 +44,7 @@ public class LoginButtonHandler implements ActionListener {
 			clientContext.getCtx().close();
 		}
 		nettyClient.start(arr[0], Integer.parseInt(arr[1]));
-		clientContext.write(LoginReq.newBuilder().setUserName(userNameTF.getText()).build());
+		clientContext.write(Login.newBuilder().setAccount(userNameTF.getText()).setName(userNameTF.getText()).build());
 
 	}
 

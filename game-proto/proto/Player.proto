@@ -5,15 +5,16 @@ option java_package = "com.su.proto";
 option java_outer_classname = "PlayerMsg";
 
 // 玩家数据
-message PPlayer {
+message _Player {
 	optional int64 id = 1;		// id
+	optional string name = 2;	// 名称
 }
 
 // 获取玩家数据
-message GetPlayerDataReq {
+message GetPlayerData {
 	
 }
-message GetPlayerDataResp {
-	optional PPlayer player = 1;
+message GetPlayerData_ {
+	optional _Player player = 1;
 }
 

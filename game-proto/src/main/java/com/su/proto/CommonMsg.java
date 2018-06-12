@@ -681,29 +681,38 @@ public final class CommonMsg {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 type = 1;</code>
+     * <code>optional int32 cmd = 1;</code>
+     */
+    boolean hasCmd();
+    /**
+     * <code>optional int32 cmd = 1;</code>
+     */
+    int getCmd();
+
+    /**
+     * <code>optional int32 type = 2;</code>
      */
     boolean hasType();
     /**
-     * <code>optional int32 type = 1;</code>
+     * <code>optional int32 type = 2;</code>
      */
     int getType();
 
     /**
-     * <code>optional int32 sysId = 2;</code>
+     * <code>optional int32 sysId = 3;</code>
      */
     boolean hasSysId();
     /**
-     * <code>optional int32 sysId = 2;</code>
+     * <code>optional int32 sysId = 3;</code>
      */
     int getSysId();
 
     /**
-     * <code>optional int32 count = 3;</code>
+     * <code>optional int32 count = 4;</code>
      */
     boolean hasCount();
     /**
-     * <code>optional int32 count = 3;</code>
+     * <code>optional int32 count = 4;</code>
      */
     int getCount();
   }
@@ -723,6 +732,7 @@ public final class CommonMsg {
       super(builder);
     }
     private CMD() {
+      cmd_ = 0;
       type_ = 0;
       sysId_ = 0;
       count_ = 0;
@@ -758,16 +768,21 @@ public final class CommonMsg {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              type_ = input.readInt32();
+              cmd_ = input.readInt32();
               break;
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              sysId_ = input.readInt32();
+              type_ = input.readInt32();
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
+              sysId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
               count_ = input.readInt32();
               break;
             }
@@ -796,46 +811,61 @@ public final class CommonMsg {
     }
 
     private int bitField0_;
-    public static final int TYPE_FIELD_NUMBER = 1;
-    private int type_;
+    public static final int CMD_FIELD_NUMBER = 1;
+    private int cmd_;
     /**
-     * <code>optional int32 type = 1;</code>
+     * <code>optional int32 cmd = 1;</code>
      */
-    public boolean hasType() {
+    public boolean hasCmd() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 type = 1;</code>
+     * <code>optional int32 cmd = 1;</code>
+     */
+    public int getCmd() {
+      return cmd_;
+    }
+
+    public static final int TYPE_FIELD_NUMBER = 2;
+    private int type_;
+    /**
+     * <code>optional int32 type = 2;</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 type = 2;</code>
      */
     public int getType() {
       return type_;
     }
 
-    public static final int SYSID_FIELD_NUMBER = 2;
+    public static final int SYSID_FIELD_NUMBER = 3;
     private int sysId_;
     /**
-     * <code>optional int32 sysId = 2;</code>
+     * <code>optional int32 sysId = 3;</code>
      */
     public boolean hasSysId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 sysId = 2;</code>
+     * <code>optional int32 sysId = 3;</code>
      */
     public int getSysId() {
       return sysId_;
     }
 
-    public static final int COUNT_FIELD_NUMBER = 3;
+    public static final int COUNT_FIELD_NUMBER = 4;
     private int count_;
     /**
-     * <code>optional int32 count = 3;</code>
+     * <code>optional int32 count = 4;</code>
      */
     public boolean hasCount() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 count = 3;</code>
+     * <code>optional int32 count = 4;</code>
      */
     public int getCount() {
       return count_;
@@ -854,13 +884,16 @@ public final class CommonMsg {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, type_);
+        output.writeInt32(1, cmd_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, sysId_);
+        output.writeInt32(2, type_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, count_);
+        output.writeInt32(3, sysId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, count_);
       }
       unknownFields.writeTo(output);
     }
@@ -872,15 +905,19 @@ public final class CommonMsg {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, type_);
+          .computeInt32Size(1, cmd_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, sysId_);
+          .computeInt32Size(2, type_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, count_);
+          .computeInt32Size(3, sysId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, count_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -899,6 +936,11 @@ public final class CommonMsg {
       com.su.proto.CommonMsg.CMD other = (com.su.proto.CommonMsg.CMD) obj;
 
       boolean result = true;
+      result = result && (hasCmd() == other.hasCmd());
+      if (hasCmd()) {
+        result = result && (getCmd()
+            == other.getCmd());
+      }
       result = result && (hasType() == other.hasType());
       if (hasType()) {
         result = result && (getType()
@@ -925,6 +967,10 @@ public final class CommonMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasCmd()) {
+        hash = (37 * hash) + CMD_FIELD_NUMBER;
+        hash = (53 * hash) + getCmd();
+      }
       if (hasType()) {
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
         hash = (53 * hash) + getType();
@@ -1059,12 +1105,14 @@ public final class CommonMsg {
       }
       public Builder clear() {
         super.clear();
-        type_ = 0;
+        cmd_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        sysId_ = 0;
+        type_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        count_ = 0;
+        sysId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        count_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -1092,13 +1140,17 @@ public final class CommonMsg {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.type_ = type_;
+        result.cmd_ = cmd_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.sysId_ = sysId_;
+        result.type_ = type_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
+        }
+        result.sysId_ = sysId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
         }
         result.count_ = count_;
         result.bitField0_ = to_bitField0_;
@@ -1143,6 +1195,9 @@ public final class CommonMsg {
 
       public Builder mergeFrom(com.su.proto.CommonMsg.CMD other) {
         if (other == com.su.proto.CommonMsg.CMD.getDefaultInstance()) return this;
+        if (other.hasCmd()) {
+          setCmd(other.getCmd());
+        }
         if (other.hasType()) {
           setType(other.getType());
         }
@@ -1180,33 +1235,65 @@ public final class CommonMsg {
       }
       private int bitField0_;
 
-      private int type_ ;
+      private int cmd_ ;
       /**
-       * <code>optional int32 type = 1;</code>
+       * <code>optional int32 cmd = 1;</code>
        */
-      public boolean hasType() {
+      public boolean hasCmd() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 type = 1;</code>
+       * <code>optional int32 cmd = 1;</code>
+       */
+      public int getCmd() {
+        return cmd_;
+      }
+      /**
+       * <code>optional int32 cmd = 1;</code>
+       */
+      public Builder setCmd(int value) {
+        bitField0_ |= 0x00000001;
+        cmd_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 cmd = 1;</code>
+       */
+      public Builder clearCmd() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        cmd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int type_ ;
+      /**
+       * <code>optional int32 type = 2;</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 type = 2;</code>
        */
       public int getType() {
         return type_;
       }
       /**
-       * <code>optional int32 type = 1;</code>
+       * <code>optional int32 type = 2;</code>
        */
       public Builder setType(int value) {
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000002;
         type_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 type = 1;</code>
+       * <code>optional int32 type = 2;</code>
        */
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         type_ = 0;
         onChanged();
         return this;
@@ -1214,31 +1301,31 @@ public final class CommonMsg {
 
       private int sysId_ ;
       /**
-       * <code>optional int32 sysId = 2;</code>
+       * <code>optional int32 sysId = 3;</code>
        */
       public boolean hasSysId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 sysId = 2;</code>
+       * <code>optional int32 sysId = 3;</code>
        */
       public int getSysId() {
         return sysId_;
       }
       /**
-       * <code>optional int32 sysId = 2;</code>
+       * <code>optional int32 sysId = 3;</code>
        */
       public Builder setSysId(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         sysId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 sysId = 2;</code>
+       * <code>optional int32 sysId = 3;</code>
        */
       public Builder clearSysId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         sysId_ = 0;
         onChanged();
         return this;
@@ -1246,31 +1333,31 @@ public final class CommonMsg {
 
       private int count_ ;
       /**
-       * <code>optional int32 count = 3;</code>
+       * <code>optional int32 count = 4;</code>
        */
       public boolean hasCount() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int32 count = 3;</code>
+       * <code>optional int32 count = 4;</code>
        */
       public int getCount() {
         return count_;
       }
       /**
-       * <code>optional int32 count = 3;</code>
+       * <code>optional int32 count = 4;</code>
        */
       public Builder setCount(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         count_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 count = 3;</code>
+       * <code>optional int32 count = 4;</code>
        */
       public Builder clearCount() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         count_ = 0;
         onChanged();
         return this;
@@ -1344,9 +1431,9 @@ public final class CommonMsg {
   static {
     java.lang.String[] descriptorData = {
       "\n\014Common.proto\"2\n\tErrorResp\022\021\n\terrorCode" +
-      "\030\001 \001(\005\022\022\n\nparameters\030\002 \003(\t\"1\n\003CMD\022\014\n\004typ" +
-      "e\030\001 \001(\005\022\r\n\005sysId\030\002 \001(\005\022\r\n\005count\030\003 \001(\005B\033\n" +
-      "\014com.su.protoB\tCommonMsgH\001"
+      "\030\001 \001(\005\022\022\n\nparameters\030\002 \003(\t\">\n\003CMD\022\013\n\003cmd" +
+      "\030\001 \001(\005\022\014\n\004type\030\002 \001(\005\022\r\n\005sysId\030\003 \001(\005\022\r\n\005c" +
+      "ount\030\004 \001(\005B\033\n\014com.su.protoB\tCommonMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1371,7 +1458,7 @@ public final class CommonMsg {
     internal_static_CMD_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CMD_descriptor,
-        new java.lang.String[] { "Type", "SysId", "Count", });
+        new java.lang.String[] { "Cmd", "Type", "SysId", "Count", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

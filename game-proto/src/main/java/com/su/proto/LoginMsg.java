@@ -14,53 +14,80 @@ public final class LoginMsg {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface LoginReqOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:LoginReq)
+  public interface LoginOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Login)
       com.google.protobuf.MessageOrBuilder {
 
     /**
      * <pre>
-     * 用户名
+     * 账号
      * </pre>
      *
-     * <code>optional string userName = 1;</code>
+     * <code>optional string account = 1;</code>
      */
-    boolean hasUserName();
+    boolean hasAccount();
     /**
      * <pre>
-     * 用户名
+     * 账号
      * </pre>
      *
-     * <code>optional string userName = 1;</code>
+     * <code>optional string account = 1;</code>
      */
-    java.lang.String getUserName();
+    java.lang.String getAccount();
     /**
      * <pre>
-     * 用户名
+     * 账号
      * </pre>
      *
-     * <code>optional string userName = 1;</code>
+     * <code>optional string account = 1;</code>
      */
     com.google.protobuf.ByteString
-        getUserNameBytes();
+        getAccountBytes();
+
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    boolean hasName();
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
   }
   /**
    * <pre>
    * 登录
    * </pre>
    *
-   * Protobuf type {@code LoginReq}
+   * Protobuf type {@code Login}
    */
-  public  static final class LoginReq extends
+  public  static final class Login extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:LoginReq)
-      LoginReqOrBuilder {
-    // Use LoginReq.newBuilder() to construct.
-    private LoginReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:Login)
+      LoginOrBuilder {
+    // Use Login.newBuilder() to construct.
+    private Login(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private LoginReq() {
-      userName_ = "";
+    private Login() {
+      account_ = "";
+      name_ = "";
     }
 
     @java.lang.Override
@@ -68,7 +95,7 @@ public final class LoginMsg {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private LoginReq(
+    private Login(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -94,7 +121,13 @@ public final class LoginMsg {
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              userName_ = bs;
+              account_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              name_ = bs;
               break;
             }
           }
@@ -111,38 +144,38 @@ public final class LoginMsg {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.LoginMsg.internal_static_LoginReq_descriptor;
+      return com.su.proto.LoginMsg.internal_static_Login_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.LoginMsg.internal_static_LoginReq_fieldAccessorTable
+      return com.su.proto.LoginMsg.internal_static_Login_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.LoginMsg.LoginReq.class, com.su.proto.LoginMsg.LoginReq.Builder.class);
+              com.su.proto.LoginMsg.Login.class, com.su.proto.LoginMsg.Login.Builder.class);
     }
 
     private int bitField0_;
-    public static final int USERNAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object userName_;
+    public static final int ACCOUNT_FIELD_NUMBER = 1;
+    private volatile java.lang.Object account_;
     /**
      * <pre>
-     * 用户名
+     * 账号
      * </pre>
      *
-     * <code>optional string userName = 1;</code>
+     * <code>optional string account = 1;</code>
      */
-    public boolean hasUserName() {
+    public boolean hasAccount() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <pre>
-     * 用户名
+     * 账号
      * </pre>
      *
-     * <code>optional string userName = 1;</code>
+     * <code>optional string account = 1;</code>
      */
-    public java.lang.String getUserName() {
-      java.lang.Object ref = userName_;
+    public java.lang.String getAccount() {
+      java.lang.Object ref = account_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -150,26 +183,80 @@ public final class LoginMsg {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          userName_ = s;
+          account_ = s;
         }
         return s;
       }
     }
     /**
      * <pre>
-     * 用户名
+     * 账号
      * </pre>
      *
-     * <code>optional string userName = 1;</code>
+     * <code>optional string account = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getUserNameBytes() {
-      java.lang.Object ref = userName_;
+        getAccountBytes() {
+      java.lang.Object ref = account_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        userName_ = b;
+        account_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object name_;
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -189,7 +276,10 @@ public final class LoginMsg {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, userName_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, account_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
       }
       unknownFields.writeTo(output);
     }
@@ -200,7 +290,10 @@ public final class LoginMsg {
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, userName_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, account_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -213,16 +306,21 @@ public final class LoginMsg {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.LoginMsg.LoginReq)) {
+      if (!(obj instanceof com.su.proto.LoginMsg.Login)) {
         return super.equals(obj);
       }
-      com.su.proto.LoginMsg.LoginReq other = (com.su.proto.LoginMsg.LoginReq) obj;
+      com.su.proto.LoginMsg.Login other = (com.su.proto.LoginMsg.Login) obj;
 
       boolean result = true;
-      result = result && (hasUserName() == other.hasUserName());
-      if (hasUserName()) {
-        result = result && getUserName()
-            .equals(other.getUserName());
+      result = result && (hasAccount() == other.hasAccount());
+      if (hasAccount()) {
+        result = result && getAccount()
+            .equals(other.getAccount());
+      }
+      result = result && (hasName() == other.hasName());
+      if (hasName()) {
+        result = result && getName()
+            .equals(other.getName());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -235,67 +333,71 @@ public final class LoginMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasUserName()) {
-        hash = (37 * hash) + USERNAME_FIELD_NUMBER;
-        hash = (53 * hash) + getUserName().hashCode();
+      if (hasAccount()) {
+        hash = (37 * hash) + ACCOUNT_FIELD_NUMBER;
+        hash = (53 * hash) + getAccount().hashCode();
+      }
+      if (hasName()) {
+        hash = (37 * hash) + NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getName().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.su.proto.LoginMsg.LoginReq parseFrom(
+    public static com.su.proto.LoginMsg.Login parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.LoginMsg.LoginReq parseFrom(
+    public static com.su.proto.LoginMsg.Login parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.LoginMsg.LoginReq parseFrom(byte[] data)
+    public static com.su.proto.LoginMsg.Login parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.LoginMsg.LoginReq parseFrom(
+    public static com.su.proto.LoginMsg.Login parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.LoginMsg.LoginReq parseFrom(java.io.InputStream input)
+    public static com.su.proto.LoginMsg.Login parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.LoginMsg.LoginReq parseFrom(
+    public static com.su.proto.LoginMsg.Login parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.LoginMsg.LoginReq parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.LoginMsg.Login parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.LoginMsg.LoginReq parseDelimitedFrom(
+    public static com.su.proto.LoginMsg.Login parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.LoginMsg.LoginReq parseFrom(
+    public static com.su.proto.LoginMsg.Login parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.LoginMsg.LoginReq parseFrom(
+    public static com.su.proto.LoginMsg.Login parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -307,7 +409,7 @@ public final class LoginMsg {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.LoginMsg.LoginReq prototype) {
+    public static Builder newBuilder(com.su.proto.LoginMsg.Login prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -326,25 +428,25 @@ public final class LoginMsg {
      * 登录
      * </pre>
      *
-     * Protobuf type {@code LoginReq}
+     * Protobuf type {@code Login}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:LoginReq)
-        com.su.proto.LoginMsg.LoginReqOrBuilder {
+        // @@protoc_insertion_point(builder_implements:Login)
+        com.su.proto.LoginMsg.LoginOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.LoginMsg.internal_static_LoginReq_descriptor;
+        return com.su.proto.LoginMsg.internal_static_Login_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.LoginMsg.internal_static_LoginReq_fieldAccessorTable
+        return com.su.proto.LoginMsg.internal_static_Login_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.LoginMsg.LoginReq.class, com.su.proto.LoginMsg.LoginReq.Builder.class);
+                com.su.proto.LoginMsg.Login.class, com.su.proto.LoginMsg.Login.Builder.class);
       }
 
-      // Construct using com.su.proto.LoginMsg.LoginReq.newBuilder()
+      // Construct using com.su.proto.LoginMsg.Login.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -361,36 +463,42 @@ public final class LoginMsg {
       }
       public Builder clear() {
         super.clear();
-        userName_ = "";
+        account_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.LoginMsg.internal_static_LoginReq_descriptor;
+        return com.su.proto.LoginMsg.internal_static_Login_descriptor;
       }
 
-      public com.su.proto.LoginMsg.LoginReq getDefaultInstanceForType() {
-        return com.su.proto.LoginMsg.LoginReq.getDefaultInstance();
+      public com.su.proto.LoginMsg.Login getDefaultInstanceForType() {
+        return com.su.proto.LoginMsg.Login.getDefaultInstance();
       }
 
-      public com.su.proto.LoginMsg.LoginReq build() {
-        com.su.proto.LoginMsg.LoginReq result = buildPartial();
+      public com.su.proto.LoginMsg.Login build() {
+        com.su.proto.LoginMsg.Login result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.LoginMsg.LoginReq buildPartial() {
-        com.su.proto.LoginMsg.LoginReq result = new com.su.proto.LoginMsg.LoginReq(this);
+      public com.su.proto.LoginMsg.Login buildPartial() {
+        com.su.proto.LoginMsg.Login result = new com.su.proto.LoginMsg.Login(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.userName_ = userName_;
+        result.account_ = account_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.name_ = name_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -423,19 +531,24 @@ public final class LoginMsg {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.LoginMsg.LoginReq) {
-          return mergeFrom((com.su.proto.LoginMsg.LoginReq)other);
+        if (other instanceof com.su.proto.LoginMsg.Login) {
+          return mergeFrom((com.su.proto.LoginMsg.Login)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.LoginMsg.LoginReq other) {
-        if (other == com.su.proto.LoginMsg.LoginReq.getDefaultInstance()) return this;
-        if (other.hasUserName()) {
+      public Builder mergeFrom(com.su.proto.LoginMsg.Login other) {
+        if (other == com.su.proto.LoginMsg.Login.getDefaultInstance()) return this;
+        if (other.hasAccount()) {
           bitField0_ |= 0x00000001;
-          userName_ = other.userName_;
+          account_ = other.account_;
+          onChanged();
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -451,11 +564,11 @@ public final class LoginMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.LoginMsg.LoginReq parsedMessage = null;
+        com.su.proto.LoginMsg.Login parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.LoginMsg.LoginReq) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.LoginMsg.Login) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -466,32 +579,32 @@ public final class LoginMsg {
       }
       private int bitField0_;
 
-      private java.lang.Object userName_ = "";
+      private java.lang.Object account_ = "";
       /**
        * <pre>
-       * 用户名
+       * 账号
        * </pre>
        *
-       * <code>optional string userName = 1;</code>
+       * <code>optional string account = 1;</code>
        */
-      public boolean hasUserName() {
+      public boolean hasAccount() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <pre>
-       * 用户名
+       * 账号
        * </pre>
        *
-       * <code>optional string userName = 1;</code>
+       * <code>optional string account = 1;</code>
        */
-      public java.lang.String getUserName() {
-        java.lang.Object ref = userName_;
+      public java.lang.String getAccount() {
+        java.lang.Object ref = account_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            userName_ = s;
+            account_ = s;
           }
           return s;
         } else {
@@ -500,19 +613,19 @@ public final class LoginMsg {
       }
       /**
        * <pre>
-       * 用户名
+       * 账号
        * </pre>
        *
-       * <code>optional string userName = 1;</code>
+       * <code>optional string account = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getUserNameBytes() {
-        java.lang.Object ref = userName_;
+          getAccountBytes() {
+        java.lang.Object ref = account_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          userName_ = b;
+          account_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -520,48 +633,148 @@ public final class LoginMsg {
       }
       /**
        * <pre>
-       * 用户名
+       * 账号
        * </pre>
        *
-       * <code>optional string userName = 1;</code>
+       * <code>optional string account = 1;</code>
        */
-      public Builder setUserName(
+      public Builder setAccount(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        userName_ = value;
+        account_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * 用户名
+       * 账号
        * </pre>
        *
-       * <code>optional string userName = 1;</code>
+       * <code>optional string account = 1;</code>
        */
-      public Builder clearUserName() {
+      public Builder clearAccount() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userName_ = getDefaultInstance().getUserName();
+        account_ = getDefaultInstance().getAccount();
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * 用户名
+       * 账号
        * </pre>
        *
-       * <code>optional string userName = 1;</code>
+       * <code>optional string account = 1;</code>
        */
-      public Builder setUserNameBytes(
+      public Builder setAccountBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        userName_ = value;
+        account_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
         onChanged();
         return this;
       }
@@ -576,46 +789,46 @@ public final class LoginMsg {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:LoginReq)
+      // @@protoc_insertion_point(builder_scope:Login)
     }
 
-    // @@protoc_insertion_point(class_scope:LoginReq)
-    private static final com.su.proto.LoginMsg.LoginReq DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:Login)
+    private static final com.su.proto.LoginMsg.Login DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.LoginMsg.LoginReq();
+      DEFAULT_INSTANCE = new com.su.proto.LoginMsg.Login();
     }
 
-    public static com.su.proto.LoginMsg.LoginReq getDefaultInstance() {
+    public static com.su.proto.LoginMsg.Login getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<LoginReq>
-        PARSER = new com.google.protobuf.AbstractParser<LoginReq>() {
-      public LoginReq parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<Login>
+        PARSER = new com.google.protobuf.AbstractParser<Login>() {
+      public Login parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LoginReq(input, extensionRegistry);
+          return new Login(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<LoginReq> parser() {
+    public static com.google.protobuf.Parser<Login> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<LoginReq> getParserForType() {
+    public com.google.protobuf.Parser<Login> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.LoginMsg.LoginReq getDefaultInstanceForType() {
+    public com.su.proto.LoginMsg.Login getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface LoginRespOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:LoginResp)
+  public interface Login_OrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Login_)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -623,7 +836,7 @@ public final class LoginMsg {
      * 玩家数据
      * </pre>
      *
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
     boolean hasPlayer();
     /**
@@ -631,30 +844,30 @@ public final class LoginMsg {
      * 玩家数据
      * </pre>
      *
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
-    com.su.proto.PlayerMsg.PPlayer getPlayer();
+    com.su.proto.PlayerMsg._Player getPlayer();
     /**
      * <pre>
      * 玩家数据
      * </pre>
      *
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
-    com.su.proto.PlayerMsg.PPlayerOrBuilder getPlayerOrBuilder();
+    com.su.proto.PlayerMsg._PlayerOrBuilder getPlayerOrBuilder();
   }
   /**
-   * Protobuf type {@code LoginResp}
+   * Protobuf type {@code Login_}
    */
-  public  static final class LoginResp extends
+  public  static final class Login_ extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:LoginResp)
-      LoginRespOrBuilder {
-    // Use LoginResp.newBuilder() to construct.
-    private LoginResp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:Login_)
+      Login_OrBuilder {
+    // Use Login_.newBuilder() to construct.
+    private Login_(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private LoginResp() {
+    private Login_() {
     }
 
     @java.lang.Override
@@ -662,7 +875,7 @@ public final class LoginMsg {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private LoginResp(
+    private Login_(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -686,11 +899,11 @@ public final class LoginMsg {
               break;
             }
             case 10: {
-              com.su.proto.PlayerMsg.PPlayer.Builder subBuilder = null;
+              com.su.proto.PlayerMsg._Player.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = player_.toBuilder();
               }
-              player_ = input.readMessage(com.su.proto.PlayerMsg.PPlayer.PARSER, extensionRegistry);
+              player_ = input.readMessage(com.su.proto.PlayerMsg._Player.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(player_);
                 player_ = subBuilder.buildPartial();
@@ -712,25 +925,25 @@ public final class LoginMsg {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.LoginMsg.internal_static_LoginResp_descriptor;
+      return com.su.proto.LoginMsg.internal_static_Login__descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.LoginMsg.internal_static_LoginResp_fieldAccessorTable
+      return com.su.proto.LoginMsg.internal_static_Login__fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.LoginMsg.LoginResp.class, com.su.proto.LoginMsg.LoginResp.Builder.class);
+              com.su.proto.LoginMsg.Login_.class, com.su.proto.LoginMsg.Login_.Builder.class);
     }
 
     private int bitField0_;
     public static final int PLAYER_FIELD_NUMBER = 1;
-    private com.su.proto.PlayerMsg.PPlayer player_;
+    private com.su.proto.PlayerMsg._Player player_;
     /**
      * <pre>
      * 玩家数据
      * </pre>
      *
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
     public boolean hasPlayer() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -740,20 +953,20 @@ public final class LoginMsg {
      * 玩家数据
      * </pre>
      *
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
-    public com.su.proto.PlayerMsg.PPlayer getPlayer() {
-      return player_ == null ? com.su.proto.PlayerMsg.PPlayer.getDefaultInstance() : player_;
+    public com.su.proto.PlayerMsg._Player getPlayer() {
+      return player_ == null ? com.su.proto.PlayerMsg._Player.getDefaultInstance() : player_;
     }
     /**
      * <pre>
      * 玩家数据
      * </pre>
      *
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
-    public com.su.proto.PlayerMsg.PPlayerOrBuilder getPlayerOrBuilder() {
-      return player_ == null ? com.su.proto.PlayerMsg.PPlayer.getDefaultInstance() : player_;
+    public com.su.proto.PlayerMsg._PlayerOrBuilder getPlayerOrBuilder() {
+      return player_ == null ? com.su.proto.PlayerMsg._Player.getDefaultInstance() : player_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -794,10 +1007,10 @@ public final class LoginMsg {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.LoginMsg.LoginResp)) {
+      if (!(obj instanceof com.su.proto.LoginMsg.Login_)) {
         return super.equals(obj);
       }
-      com.su.proto.LoginMsg.LoginResp other = (com.su.proto.LoginMsg.LoginResp) obj;
+      com.su.proto.LoginMsg.Login_ other = (com.su.proto.LoginMsg.Login_) obj;
 
       boolean result = true;
       result = result && (hasPlayer() == other.hasPlayer());
@@ -825,58 +1038,58 @@ public final class LoginMsg {
       return hash;
     }
 
-    public static com.su.proto.LoginMsg.LoginResp parseFrom(
+    public static com.su.proto.LoginMsg.Login_ parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.LoginMsg.LoginResp parseFrom(
+    public static com.su.proto.LoginMsg.Login_ parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.LoginMsg.LoginResp parseFrom(byte[] data)
+    public static com.su.proto.LoginMsg.Login_ parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.LoginMsg.LoginResp parseFrom(
+    public static com.su.proto.LoginMsg.Login_ parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.LoginMsg.LoginResp parseFrom(java.io.InputStream input)
+    public static com.su.proto.LoginMsg.Login_ parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.LoginMsg.LoginResp parseFrom(
+    public static com.su.proto.LoginMsg.Login_ parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.LoginMsg.LoginResp parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.LoginMsg.Login_ parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.LoginMsg.LoginResp parseDelimitedFrom(
+    public static com.su.proto.LoginMsg.Login_ parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.LoginMsg.LoginResp parseFrom(
+    public static com.su.proto.LoginMsg.Login_ parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.LoginMsg.LoginResp parseFrom(
+    public static com.su.proto.LoginMsg.Login_ parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -888,7 +1101,7 @@ public final class LoginMsg {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.LoginMsg.LoginResp prototype) {
+    public static Builder newBuilder(com.su.proto.LoginMsg.Login_ prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -903,25 +1116,25 @@ public final class LoginMsg {
       return builder;
     }
     /**
-     * Protobuf type {@code LoginResp}
+     * Protobuf type {@code Login_}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:LoginResp)
-        com.su.proto.LoginMsg.LoginRespOrBuilder {
+        // @@protoc_insertion_point(builder_implements:Login_)
+        com.su.proto.LoginMsg.Login_OrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.LoginMsg.internal_static_LoginResp_descriptor;
+        return com.su.proto.LoginMsg.internal_static_Login__descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.LoginMsg.internal_static_LoginResp_fieldAccessorTable
+        return com.su.proto.LoginMsg.internal_static_Login__fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.LoginMsg.LoginResp.class, com.su.proto.LoginMsg.LoginResp.Builder.class);
+                com.su.proto.LoginMsg.Login_.class, com.su.proto.LoginMsg.Login_.Builder.class);
       }
 
-      // Construct using com.su.proto.LoginMsg.LoginResp.newBuilder()
+      // Construct using com.su.proto.LoginMsg.Login_.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -950,23 +1163,23 @@ public final class LoginMsg {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.LoginMsg.internal_static_LoginResp_descriptor;
+        return com.su.proto.LoginMsg.internal_static_Login__descriptor;
       }
 
-      public com.su.proto.LoginMsg.LoginResp getDefaultInstanceForType() {
-        return com.su.proto.LoginMsg.LoginResp.getDefaultInstance();
+      public com.su.proto.LoginMsg.Login_ getDefaultInstanceForType() {
+        return com.su.proto.LoginMsg.Login_.getDefaultInstance();
       }
 
-      public com.su.proto.LoginMsg.LoginResp build() {
-        com.su.proto.LoginMsg.LoginResp result = buildPartial();
+      public com.su.proto.LoginMsg.Login_ build() {
+        com.su.proto.LoginMsg.Login_ result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.LoginMsg.LoginResp buildPartial() {
-        com.su.proto.LoginMsg.LoginResp result = new com.su.proto.LoginMsg.LoginResp(this);
+      public com.su.proto.LoginMsg.Login_ buildPartial() {
+        com.su.proto.LoginMsg.Login_ result = new com.su.proto.LoginMsg.Login_(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1009,16 +1222,16 @@ public final class LoginMsg {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.LoginMsg.LoginResp) {
-          return mergeFrom((com.su.proto.LoginMsg.LoginResp)other);
+        if (other instanceof com.su.proto.LoginMsg.Login_) {
+          return mergeFrom((com.su.proto.LoginMsg.Login_)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.LoginMsg.LoginResp other) {
-        if (other == com.su.proto.LoginMsg.LoginResp.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.LoginMsg.Login_ other) {
+        if (other == com.su.proto.LoginMsg.Login_.getDefaultInstance()) return this;
         if (other.hasPlayer()) {
           mergePlayer(other.getPlayer());
         }
@@ -1035,11 +1248,11 @@ public final class LoginMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.LoginMsg.LoginResp parsedMessage = null;
+        com.su.proto.LoginMsg.Login_ parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.LoginMsg.LoginResp) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.LoginMsg.Login_) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1050,15 +1263,15 @@ public final class LoginMsg {
       }
       private int bitField0_;
 
-      private com.su.proto.PlayerMsg.PPlayer player_ = null;
+      private com.su.proto.PlayerMsg._Player player_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayerMsg.PPlayer, com.su.proto.PlayerMsg.PPlayer.Builder, com.su.proto.PlayerMsg.PPlayerOrBuilder> playerBuilder_;
+          com.su.proto.PlayerMsg._Player, com.su.proto.PlayerMsg._Player.Builder, com.su.proto.PlayerMsg._PlayerOrBuilder> playerBuilder_;
       /**
        * <pre>
        * 玩家数据
        * </pre>
        *
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
       public boolean hasPlayer() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -1068,11 +1281,11 @@ public final class LoginMsg {
        * 玩家数据
        * </pre>
        *
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public com.su.proto.PlayerMsg.PPlayer getPlayer() {
+      public com.su.proto.PlayerMsg._Player getPlayer() {
         if (playerBuilder_ == null) {
-          return player_ == null ? com.su.proto.PlayerMsg.PPlayer.getDefaultInstance() : player_;
+          return player_ == null ? com.su.proto.PlayerMsg._Player.getDefaultInstance() : player_;
         } else {
           return playerBuilder_.getMessage();
         }
@@ -1082,9 +1295,9 @@ public final class LoginMsg {
        * 玩家数据
        * </pre>
        *
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public Builder setPlayer(com.su.proto.PlayerMsg.PPlayer value) {
+      public Builder setPlayer(com.su.proto.PlayerMsg._Player value) {
         if (playerBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1102,10 +1315,10 @@ public final class LoginMsg {
        * 玩家数据
        * </pre>
        *
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
       public Builder setPlayer(
-          com.su.proto.PlayerMsg.PPlayer.Builder builderForValue) {
+          com.su.proto.PlayerMsg._Player.Builder builderForValue) {
         if (playerBuilder_ == null) {
           player_ = builderForValue.build();
           onChanged();
@@ -1120,15 +1333,15 @@ public final class LoginMsg {
        * 玩家数据
        * </pre>
        *
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public Builder mergePlayer(com.su.proto.PlayerMsg.PPlayer value) {
+      public Builder mergePlayer(com.su.proto.PlayerMsg._Player value) {
         if (playerBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
               player_ != null &&
-              player_ != com.su.proto.PlayerMsg.PPlayer.getDefaultInstance()) {
+              player_ != com.su.proto.PlayerMsg._Player.getDefaultInstance()) {
             player_ =
-              com.su.proto.PlayerMsg.PPlayer.newBuilder(player_).mergeFrom(value).buildPartial();
+              com.su.proto.PlayerMsg._Player.newBuilder(player_).mergeFrom(value).buildPartial();
           } else {
             player_ = value;
           }
@@ -1144,7 +1357,7 @@ public final class LoginMsg {
        * 玩家数据
        * </pre>
        *
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
       public Builder clearPlayer() {
         if (playerBuilder_ == null) {
@@ -1161,9 +1374,9 @@ public final class LoginMsg {
        * 玩家数据
        * </pre>
        *
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public com.su.proto.PlayerMsg.PPlayer.Builder getPlayerBuilder() {
+      public com.su.proto.PlayerMsg._Player.Builder getPlayerBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getPlayerFieldBuilder().getBuilder();
@@ -1173,14 +1386,14 @@ public final class LoginMsg {
        * 玩家数据
        * </pre>
        *
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public com.su.proto.PlayerMsg.PPlayerOrBuilder getPlayerOrBuilder() {
+      public com.su.proto.PlayerMsg._PlayerOrBuilder getPlayerOrBuilder() {
         if (playerBuilder_ != null) {
           return playerBuilder_.getMessageOrBuilder();
         } else {
           return player_ == null ?
-              com.su.proto.PlayerMsg.PPlayer.getDefaultInstance() : player_;
+              com.su.proto.PlayerMsg._Player.getDefaultInstance() : player_;
         }
       }
       /**
@@ -1188,14 +1401,14 @@ public final class LoginMsg {
        * 玩家数据
        * </pre>
        *
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayerMsg.PPlayer, com.su.proto.PlayerMsg.PPlayer.Builder, com.su.proto.PlayerMsg.PPlayerOrBuilder> 
+          com.su.proto.PlayerMsg._Player, com.su.proto.PlayerMsg._Player.Builder, com.su.proto.PlayerMsg._PlayerOrBuilder> 
           getPlayerFieldBuilder() {
         if (playerBuilder_ == null) {
           playerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.su.proto.PlayerMsg.PPlayer, com.su.proto.PlayerMsg.PPlayer.Builder, com.su.proto.PlayerMsg.PPlayerOrBuilder>(
+              com.su.proto.PlayerMsg._Player, com.su.proto.PlayerMsg._Player.Builder, com.su.proto.PlayerMsg._PlayerOrBuilder>(
                   getPlayer(),
                   getParentForChildren(),
                   isClean());
@@ -1214,54 +1427,54 @@ public final class LoginMsg {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:LoginResp)
+      // @@protoc_insertion_point(builder_scope:Login_)
     }
 
-    // @@protoc_insertion_point(class_scope:LoginResp)
-    private static final com.su.proto.LoginMsg.LoginResp DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:Login_)
+    private static final com.su.proto.LoginMsg.Login_ DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.LoginMsg.LoginResp();
+      DEFAULT_INSTANCE = new com.su.proto.LoginMsg.Login_();
     }
 
-    public static com.su.proto.LoginMsg.LoginResp getDefaultInstance() {
+    public static com.su.proto.LoginMsg.Login_ getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<LoginResp>
-        PARSER = new com.google.protobuf.AbstractParser<LoginResp>() {
-      public LoginResp parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<Login_>
+        PARSER = new com.google.protobuf.AbstractParser<Login_>() {
+      public Login_ parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new LoginResp(input, extensionRegistry);
+          return new Login_(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<LoginResp> parser() {
+    public static com.google.protobuf.Parser<Login_> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<LoginResp> getParserForType() {
+    public com.google.protobuf.Parser<Login_> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.LoginMsg.LoginResp getDefaultInstanceForType() {
+    public com.su.proto.LoginMsg.Login_ getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_LoginReq_descriptor;
+    internal_static_Login_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_LoginReq_fieldAccessorTable;
+      internal_static_Login_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_LoginResp_descriptor;
+    internal_static_Login__descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_LoginResp_fieldAccessorTable;
+      internal_static_Login__fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1271,10 +1484,10 @@ public final class LoginMsg {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Login.proto\032\014Player.proto\"\034\n\010LoginReq\022" +
-      "\020\n\010userName\030\001 \001(\t\"%\n\tLoginResp\022\030\n\006player" +
-      "\030\001 \001(\0132\010.PPlayerB\032\n\014com.su.protoB\010LoginM" +
-      "sgH\001"
+      "\n\013Login.proto\032\014Player.proto\"&\n\005Login\022\017\n\007" +
+      "account\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\"\"\n\006Login_\022\030\n" +
+      "\006player\030\001 \001(\0132\010._PlayerB\032\n\014com.su.protoB" +
+      "\010LoginMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1289,17 +1502,17 @@ public final class LoginMsg {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.su.proto.PlayerMsg.getDescriptor(),
         }, assigner);
-    internal_static_LoginReq_descriptor =
+    internal_static_Login_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_LoginReq_fieldAccessorTable = new
+    internal_static_Login_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_LoginReq_descriptor,
-        new java.lang.String[] { "UserName", });
-    internal_static_LoginResp_descriptor =
+        internal_static_Login_descriptor,
+        new java.lang.String[] { "Account", "Name", });
+    internal_static_Login__descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_LoginResp_fieldAccessorTable = new
+    internal_static_Login__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_LoginResp_descriptor,
+        internal_static_Login__descriptor,
         new java.lang.String[] { "Player", });
     com.su.proto.PlayerMsg.getDescriptor();
   }

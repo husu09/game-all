@@ -13,9 +13,13 @@ public class Player implements Serializable {
 	@Id
 	private long id;
 	/**
-	 * 名字
+	 * 账号
 	 */
 	private String account;
+	/**
+	 * 名称
+	 * */
+	private String name;
 	
 	public long getId() {
 		return id;
@@ -29,8 +33,11 @@ public class Player implements Serializable {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	
-	
-	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 }

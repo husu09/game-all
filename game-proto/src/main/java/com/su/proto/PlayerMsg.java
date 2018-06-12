@@ -14,8 +14,8 @@ public final class PlayerMsg {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface PPlayerOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:PPlayer)
+  public interface _PlayerOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:_Player)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -34,24 +34,51 @@ public final class PlayerMsg {
      * <code>optional int64 id = 1;</code>
      */
     long getId();
+
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    boolean hasName();
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
   }
   /**
    * <pre>
    * 玩家数据
    * </pre>
    *
-   * Protobuf type {@code PPlayer}
+   * Protobuf type {@code _Player}
    */
-  public  static final class PPlayer extends
+  public  static final class _Player extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:PPlayer)
-      PPlayerOrBuilder {
-    // Use PPlayer.newBuilder() to construct.
-    private PPlayer(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:_Player)
+      _PlayerOrBuilder {
+    // Use _Player.newBuilder() to construct.
+    private _Player(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private PPlayer() {
+    private _Player() {
       id_ = 0L;
+      name_ = "";
     }
 
     @java.lang.Override
@@ -59,7 +86,7 @@ public final class PlayerMsg {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private PPlayer(
+    private _Player(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -87,6 +114,12 @@ public final class PlayerMsg {
               id_ = input.readInt64();
               break;
             }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              name_ = bs;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -101,14 +134,14 @@ public final class PlayerMsg {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayerMsg.internal_static_PPlayer_descriptor;
+      return com.su.proto.PlayerMsg.internal_static__Player_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayerMsg.internal_static_PPlayer_fieldAccessorTable
+      return com.su.proto.PlayerMsg.internal_static__Player_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayerMsg.PPlayer.class, com.su.proto.PlayerMsg.PPlayer.Builder.class);
+              com.su.proto.PlayerMsg._Player.class, com.su.proto.PlayerMsg._Player.Builder.class);
     }
 
     private int bitField0_;
@@ -135,6 +168,60 @@ public final class PlayerMsg {
       return id_;
     }
 
+    public static final int NAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object name_;
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * 名称
+     * </pre>
+     *
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -150,6 +237,9 @@ public final class PlayerMsg {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt64(1, id_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -162,6 +252,9 @@ public final class PlayerMsg {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, id_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -173,16 +266,21 @@ public final class PlayerMsg {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayerMsg.PPlayer)) {
+      if (!(obj instanceof com.su.proto.PlayerMsg._Player)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayerMsg.PPlayer other = (com.su.proto.PlayerMsg.PPlayer) obj;
+      com.su.proto.PlayerMsg._Player other = (com.su.proto.PlayerMsg._Player) obj;
 
       boolean result = true;
       result = result && (hasId() == other.hasId());
       if (hasId()) {
         result = result && (getId()
             == other.getId());
+      }
+      result = result && (hasName() == other.hasName());
+      if (hasName()) {
+        result = result && getName()
+            .equals(other.getName());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -200,63 +298,67 @@ public final class PlayerMsg {
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getId());
       }
+      if (hasName()) {
+        hash = (37 * hash) + NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getName().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.su.proto.PlayerMsg.PPlayer parseFrom(
+    public static com.su.proto.PlayerMsg._Player parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayerMsg.PPlayer parseFrom(
+    public static com.su.proto.PlayerMsg._Player parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.PPlayer parseFrom(byte[] data)
+    public static com.su.proto.PlayerMsg._Player parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayerMsg.PPlayer parseFrom(
+    public static com.su.proto.PlayerMsg._Player parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.PPlayer parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayerMsg._Player parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayerMsg.PPlayer parseFrom(
+    public static com.su.proto.PlayerMsg._Player parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.PPlayer parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayerMsg._Player parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayerMsg.PPlayer parseDelimitedFrom(
+    public static com.su.proto.PlayerMsg._Player parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.PPlayer parseFrom(
+    public static com.su.proto.PlayerMsg._Player parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayerMsg.PPlayer parseFrom(
+    public static com.su.proto.PlayerMsg._Player parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -268,7 +370,7 @@ public final class PlayerMsg {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayerMsg.PPlayer prototype) {
+    public static Builder newBuilder(com.su.proto.PlayerMsg._Player prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -287,25 +389,25 @@ public final class PlayerMsg {
      * 玩家数据
      * </pre>
      *
-     * Protobuf type {@code PPlayer}
+     * Protobuf type {@code _Player}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:PPlayer)
-        com.su.proto.PlayerMsg.PPlayerOrBuilder {
+        // @@protoc_insertion_point(builder_implements:_Player)
+        com.su.proto.PlayerMsg._PlayerOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayerMsg.internal_static_PPlayer_descriptor;
+        return com.su.proto.PlayerMsg.internal_static__Player_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayerMsg.internal_static_PPlayer_fieldAccessorTable
+        return com.su.proto.PlayerMsg.internal_static__Player_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayerMsg.PPlayer.class, com.su.proto.PlayerMsg.PPlayer.Builder.class);
+                com.su.proto.PlayerMsg._Player.class, com.su.proto.PlayerMsg._Player.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayerMsg.PPlayer.newBuilder()
+      // Construct using com.su.proto.PlayerMsg._Player.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -324,34 +426,40 @@ public final class PlayerMsg {
         super.clear();
         id_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayerMsg.internal_static_PPlayer_descriptor;
+        return com.su.proto.PlayerMsg.internal_static__Player_descriptor;
       }
 
-      public com.su.proto.PlayerMsg.PPlayer getDefaultInstanceForType() {
-        return com.su.proto.PlayerMsg.PPlayer.getDefaultInstance();
+      public com.su.proto.PlayerMsg._Player getDefaultInstanceForType() {
+        return com.su.proto.PlayerMsg._Player.getDefaultInstance();
       }
 
-      public com.su.proto.PlayerMsg.PPlayer build() {
-        com.su.proto.PlayerMsg.PPlayer result = buildPartial();
+      public com.su.proto.PlayerMsg._Player build() {
+        com.su.proto.PlayerMsg._Player result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayerMsg.PPlayer buildPartial() {
-        com.su.proto.PlayerMsg.PPlayer result = new com.su.proto.PlayerMsg.PPlayer(this);
+      public com.su.proto.PlayerMsg._Player buildPartial() {
+        com.su.proto.PlayerMsg._Player result = new com.su.proto.PlayerMsg._Player(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
         result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.name_ = name_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -384,18 +492,23 @@ public final class PlayerMsg {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayerMsg.PPlayer) {
-          return mergeFrom((com.su.proto.PlayerMsg.PPlayer)other);
+        if (other instanceof com.su.proto.PlayerMsg._Player) {
+          return mergeFrom((com.su.proto.PlayerMsg._Player)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayerMsg.PPlayer other) {
-        if (other == com.su.proto.PlayerMsg.PPlayer.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayerMsg._Player other) {
+        if (other == com.su.proto.PlayerMsg._Player.getDefaultInstance()) return this;
         if (other.hasId()) {
           setId(other.getId());
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -410,11 +523,11 @@ public final class PlayerMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayerMsg.PPlayer parsedMessage = null;
+        com.su.proto.PlayerMsg._Player parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayerMsg.PPlayer) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayerMsg._Player) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -472,6 +585,106 @@ public final class PlayerMsg {
         onChanged();
         return this;
       }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 名称
+       * </pre>
+       *
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
@@ -483,46 +696,46 @@ public final class PlayerMsg {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:PPlayer)
+      // @@protoc_insertion_point(builder_scope:_Player)
     }
 
-    // @@protoc_insertion_point(class_scope:PPlayer)
-    private static final com.su.proto.PlayerMsg.PPlayer DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:_Player)
+    private static final com.su.proto.PlayerMsg._Player DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayerMsg.PPlayer();
+      DEFAULT_INSTANCE = new com.su.proto.PlayerMsg._Player();
     }
 
-    public static com.su.proto.PlayerMsg.PPlayer getDefaultInstance() {
+    public static com.su.proto.PlayerMsg._Player getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<PPlayer>
-        PARSER = new com.google.protobuf.AbstractParser<PPlayer>() {
-      public PPlayer parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<_Player>
+        PARSER = new com.google.protobuf.AbstractParser<_Player>() {
+      public _Player parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PPlayer(input, extensionRegistry);
+          return new _Player(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<PPlayer> parser() {
+    public static com.google.protobuf.Parser<_Player> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PPlayer> getParserForType() {
+    public com.google.protobuf.Parser<_Player> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayerMsg.PPlayer getDefaultInstanceForType() {
+    public com.su.proto.PlayerMsg._Player getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface GetPlayerDataReqOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetPlayerDataReq)
+  public interface GetPlayerDataOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GetPlayerData)
       com.google.protobuf.MessageOrBuilder {
   }
   /**
@@ -530,17 +743,17 @@ public final class PlayerMsg {
    * 获取玩家数据
    * </pre>
    *
-   * Protobuf type {@code GetPlayerDataReq}
+   * Protobuf type {@code GetPlayerData}
    */
-  public  static final class GetPlayerDataReq extends
+  public  static final class GetPlayerData extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:GetPlayerDataReq)
-      GetPlayerDataReqOrBuilder {
-    // Use GetPlayerDataReq.newBuilder() to construct.
-    private GetPlayerDataReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:GetPlayerData)
+      GetPlayerDataOrBuilder {
+    // Use GetPlayerData.newBuilder() to construct.
+    private GetPlayerData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private GetPlayerDataReq() {
+    private GetPlayerData() {
     }
 
     @java.lang.Override
@@ -548,7 +761,7 @@ public final class PlayerMsg {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private GetPlayerDataReq(
+    private GetPlayerData(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -584,14 +797,14 @@ public final class PlayerMsg {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayerMsg.internal_static_GetPlayerDataReq_descriptor;
+      return com.su.proto.PlayerMsg.internal_static_GetPlayerData_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayerMsg.internal_static_GetPlayerDataReq_fieldAccessorTable
+      return com.su.proto.PlayerMsg.internal_static_GetPlayerData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayerMsg.GetPlayerDataReq.class, com.su.proto.PlayerMsg.GetPlayerDataReq.Builder.class);
+              com.su.proto.PlayerMsg.GetPlayerData.class, com.su.proto.PlayerMsg.GetPlayerData.Builder.class);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -625,10 +838,10 @@ public final class PlayerMsg {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayerMsg.GetPlayerDataReq)) {
+      if (!(obj instanceof com.su.proto.PlayerMsg.GetPlayerData)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayerMsg.GetPlayerDataReq other = (com.su.proto.PlayerMsg.GetPlayerDataReq) obj;
+      com.su.proto.PlayerMsg.GetPlayerData other = (com.su.proto.PlayerMsg.GetPlayerData) obj;
 
       boolean result = true;
       result = result && unknownFields.equals(other.unknownFields);
@@ -647,58 +860,58 @@ public final class PlayerMsg {
       return hash;
     }
 
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseFrom(byte[] data)
+    public static com.su.proto.PlayerMsg.GetPlayerData parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayerMsg.GetPlayerData parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayerMsg.GetPlayerData parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseDelimitedFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -710,7 +923,7 @@ public final class PlayerMsg {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayerMsg.GetPlayerDataReq prototype) {
+    public static Builder newBuilder(com.su.proto.PlayerMsg.GetPlayerData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -729,25 +942,25 @@ public final class PlayerMsg {
      * 获取玩家数据
      * </pre>
      *
-     * Protobuf type {@code GetPlayerDataReq}
+     * Protobuf type {@code GetPlayerData}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetPlayerDataReq)
-        com.su.proto.PlayerMsg.GetPlayerDataReqOrBuilder {
+        // @@protoc_insertion_point(builder_implements:GetPlayerData)
+        com.su.proto.PlayerMsg.GetPlayerDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayerMsg.internal_static_GetPlayerDataReq_descriptor;
+        return com.su.proto.PlayerMsg.internal_static_GetPlayerData_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayerMsg.internal_static_GetPlayerDataReq_fieldAccessorTable
+        return com.su.proto.PlayerMsg.internal_static_GetPlayerData_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayerMsg.GetPlayerDataReq.class, com.su.proto.PlayerMsg.GetPlayerDataReq.Builder.class);
+                com.su.proto.PlayerMsg.GetPlayerData.class, com.su.proto.PlayerMsg.GetPlayerData.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayerMsg.GetPlayerDataReq.newBuilder()
+      // Construct using com.su.proto.PlayerMsg.GetPlayerData.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -769,23 +982,23 @@ public final class PlayerMsg {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayerMsg.internal_static_GetPlayerDataReq_descriptor;
+        return com.su.proto.PlayerMsg.internal_static_GetPlayerData_descriptor;
       }
 
-      public com.su.proto.PlayerMsg.GetPlayerDataReq getDefaultInstanceForType() {
-        return com.su.proto.PlayerMsg.GetPlayerDataReq.getDefaultInstance();
+      public com.su.proto.PlayerMsg.GetPlayerData getDefaultInstanceForType() {
+        return com.su.proto.PlayerMsg.GetPlayerData.getDefaultInstance();
       }
 
-      public com.su.proto.PlayerMsg.GetPlayerDataReq build() {
-        com.su.proto.PlayerMsg.GetPlayerDataReq result = buildPartial();
+      public com.su.proto.PlayerMsg.GetPlayerData build() {
+        com.su.proto.PlayerMsg.GetPlayerData result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayerMsg.GetPlayerDataReq buildPartial() {
-        com.su.proto.PlayerMsg.GetPlayerDataReq result = new com.su.proto.PlayerMsg.GetPlayerDataReq(this);
+      public com.su.proto.PlayerMsg.GetPlayerData buildPartial() {
+        com.su.proto.PlayerMsg.GetPlayerData result = new com.su.proto.PlayerMsg.GetPlayerData(this);
         onBuilt();
         return result;
       }
@@ -817,16 +1030,16 @@ public final class PlayerMsg {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayerMsg.GetPlayerDataReq) {
-          return mergeFrom((com.su.proto.PlayerMsg.GetPlayerDataReq)other);
+        if (other instanceof com.su.proto.PlayerMsg.GetPlayerData) {
+          return mergeFrom((com.su.proto.PlayerMsg.GetPlayerData)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayerMsg.GetPlayerDataReq other) {
-        if (other == com.su.proto.PlayerMsg.GetPlayerDataReq.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayerMsg.GetPlayerData other) {
+        if (other == com.su.proto.PlayerMsg.GetPlayerData.getDefaultInstance()) return this;
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -840,11 +1053,11 @@ public final class PlayerMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayerMsg.GetPlayerDataReq parsedMessage = null;
+        com.su.proto.PlayerMsg.GetPlayerData parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayerMsg.GetPlayerDataReq) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayerMsg.GetPlayerData) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -864,73 +1077,73 @@ public final class PlayerMsg {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:GetPlayerDataReq)
+      // @@protoc_insertion_point(builder_scope:GetPlayerData)
     }
 
-    // @@protoc_insertion_point(class_scope:GetPlayerDataReq)
-    private static final com.su.proto.PlayerMsg.GetPlayerDataReq DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:GetPlayerData)
+    private static final com.su.proto.PlayerMsg.GetPlayerData DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayerMsg.GetPlayerDataReq();
+      DEFAULT_INSTANCE = new com.su.proto.PlayerMsg.GetPlayerData();
     }
 
-    public static com.su.proto.PlayerMsg.GetPlayerDataReq getDefaultInstance() {
+    public static com.su.proto.PlayerMsg.GetPlayerData getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetPlayerDataReq>
-        PARSER = new com.google.protobuf.AbstractParser<GetPlayerDataReq>() {
-      public GetPlayerDataReq parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetPlayerData>
+        PARSER = new com.google.protobuf.AbstractParser<GetPlayerData>() {
+      public GetPlayerData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetPlayerDataReq(input, extensionRegistry);
+          return new GetPlayerData(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<GetPlayerDataReq> parser() {
+    public static com.google.protobuf.Parser<GetPlayerData> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<GetPlayerDataReq> getParserForType() {
+    public com.google.protobuf.Parser<GetPlayerData> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayerMsg.GetPlayerDataReq getDefaultInstanceForType() {
+    public com.su.proto.PlayerMsg.GetPlayerData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface GetPlayerDataRespOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GetPlayerDataResp)
+  public interface GetPlayerData_OrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GetPlayerData_)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
     boolean hasPlayer();
     /**
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
-    com.su.proto.PlayerMsg.PPlayer getPlayer();
+    com.su.proto.PlayerMsg._Player getPlayer();
     /**
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
-    com.su.proto.PlayerMsg.PPlayerOrBuilder getPlayerOrBuilder();
+    com.su.proto.PlayerMsg._PlayerOrBuilder getPlayerOrBuilder();
   }
   /**
-   * Protobuf type {@code GetPlayerDataResp}
+   * Protobuf type {@code GetPlayerData_}
    */
-  public  static final class GetPlayerDataResp extends
+  public  static final class GetPlayerData_ extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:GetPlayerDataResp)
-      GetPlayerDataRespOrBuilder {
-    // Use GetPlayerDataResp.newBuilder() to construct.
-    private GetPlayerDataResp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:GetPlayerData_)
+      GetPlayerData_OrBuilder {
+    // Use GetPlayerData_.newBuilder() to construct.
+    private GetPlayerData_(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private GetPlayerDataResp() {
+    private GetPlayerData_() {
     }
 
     @java.lang.Override
@@ -938,7 +1151,7 @@ public final class PlayerMsg {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private GetPlayerDataResp(
+    private GetPlayerData_(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -962,11 +1175,11 @@ public final class PlayerMsg {
               break;
             }
             case 10: {
-              com.su.proto.PlayerMsg.PPlayer.Builder subBuilder = null;
+              com.su.proto.PlayerMsg._Player.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = player_.toBuilder();
               }
-              player_ = input.readMessage(com.su.proto.PlayerMsg.PPlayer.PARSER, extensionRegistry);
+              player_ = input.readMessage(com.su.proto.PlayerMsg._Player.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(player_);
                 player_ = subBuilder.buildPartial();
@@ -988,36 +1201,36 @@ public final class PlayerMsg {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.su.proto.PlayerMsg.internal_static_GetPlayerDataResp_descriptor;
+      return com.su.proto.PlayerMsg.internal_static_GetPlayerData__descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.su.proto.PlayerMsg.internal_static_GetPlayerDataResp_fieldAccessorTable
+      return com.su.proto.PlayerMsg.internal_static_GetPlayerData__fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.su.proto.PlayerMsg.GetPlayerDataResp.class, com.su.proto.PlayerMsg.GetPlayerDataResp.Builder.class);
+              com.su.proto.PlayerMsg.GetPlayerData_.class, com.su.proto.PlayerMsg.GetPlayerData_.Builder.class);
     }
 
     private int bitField0_;
     public static final int PLAYER_FIELD_NUMBER = 1;
-    private com.su.proto.PlayerMsg.PPlayer player_;
+    private com.su.proto.PlayerMsg._Player player_;
     /**
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
     public boolean hasPlayer() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
-    public com.su.proto.PlayerMsg.PPlayer getPlayer() {
-      return player_ == null ? com.su.proto.PlayerMsg.PPlayer.getDefaultInstance() : player_;
+    public com.su.proto.PlayerMsg._Player getPlayer() {
+      return player_ == null ? com.su.proto.PlayerMsg._Player.getDefaultInstance() : player_;
     }
     /**
-     * <code>optional .PPlayer player = 1;</code>
+     * <code>optional ._Player player = 1;</code>
      */
-    public com.su.proto.PlayerMsg.PPlayerOrBuilder getPlayerOrBuilder() {
-      return player_ == null ? com.su.proto.PlayerMsg.PPlayer.getDefaultInstance() : player_;
+    public com.su.proto.PlayerMsg._PlayerOrBuilder getPlayerOrBuilder() {
+      return player_ == null ? com.su.proto.PlayerMsg._Player.getDefaultInstance() : player_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1058,10 +1271,10 @@ public final class PlayerMsg {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.su.proto.PlayerMsg.GetPlayerDataResp)) {
+      if (!(obj instanceof com.su.proto.PlayerMsg.GetPlayerData_)) {
         return super.equals(obj);
       }
-      com.su.proto.PlayerMsg.GetPlayerDataResp other = (com.su.proto.PlayerMsg.GetPlayerDataResp) obj;
+      com.su.proto.PlayerMsg.GetPlayerData_ other = (com.su.proto.PlayerMsg.GetPlayerData_) obj;
 
       boolean result = true;
       result = result && (hasPlayer() == other.hasPlayer());
@@ -1089,58 +1302,58 @@ public final class PlayerMsg {
       return hash;
     }
 
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseFrom(byte[] data)
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseFrom(java.io.InputStream input)
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseDelimitedFrom(java.io.InputStream input)
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseDelimitedFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp parseFrom(
+    public static com.su.proto.PlayerMsg.GetPlayerData_ parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1152,7 +1365,7 @@ public final class PlayerMsg {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.su.proto.PlayerMsg.GetPlayerDataResp prototype) {
+    public static Builder newBuilder(com.su.proto.PlayerMsg.GetPlayerData_ prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -1167,25 +1380,25 @@ public final class PlayerMsg {
       return builder;
     }
     /**
-     * Protobuf type {@code GetPlayerDataResp}
+     * Protobuf type {@code GetPlayerData_}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GetPlayerDataResp)
-        com.su.proto.PlayerMsg.GetPlayerDataRespOrBuilder {
+        // @@protoc_insertion_point(builder_implements:GetPlayerData_)
+        com.su.proto.PlayerMsg.GetPlayerData_OrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.su.proto.PlayerMsg.internal_static_GetPlayerDataResp_descriptor;
+        return com.su.proto.PlayerMsg.internal_static_GetPlayerData__descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.su.proto.PlayerMsg.internal_static_GetPlayerDataResp_fieldAccessorTable
+        return com.su.proto.PlayerMsg.internal_static_GetPlayerData__fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.su.proto.PlayerMsg.GetPlayerDataResp.class, com.su.proto.PlayerMsg.GetPlayerDataResp.Builder.class);
+                com.su.proto.PlayerMsg.GetPlayerData_.class, com.su.proto.PlayerMsg.GetPlayerData_.Builder.class);
       }
 
-      // Construct using com.su.proto.PlayerMsg.GetPlayerDataResp.newBuilder()
+      // Construct using com.su.proto.PlayerMsg.GetPlayerData_.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1214,23 +1427,23 @@ public final class PlayerMsg {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.su.proto.PlayerMsg.internal_static_GetPlayerDataResp_descriptor;
+        return com.su.proto.PlayerMsg.internal_static_GetPlayerData__descriptor;
       }
 
-      public com.su.proto.PlayerMsg.GetPlayerDataResp getDefaultInstanceForType() {
-        return com.su.proto.PlayerMsg.GetPlayerDataResp.getDefaultInstance();
+      public com.su.proto.PlayerMsg.GetPlayerData_ getDefaultInstanceForType() {
+        return com.su.proto.PlayerMsg.GetPlayerData_.getDefaultInstance();
       }
 
-      public com.su.proto.PlayerMsg.GetPlayerDataResp build() {
-        com.su.proto.PlayerMsg.GetPlayerDataResp result = buildPartial();
+      public com.su.proto.PlayerMsg.GetPlayerData_ build() {
+        com.su.proto.PlayerMsg.GetPlayerData_ result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.su.proto.PlayerMsg.GetPlayerDataResp buildPartial() {
-        com.su.proto.PlayerMsg.GetPlayerDataResp result = new com.su.proto.PlayerMsg.GetPlayerDataResp(this);
+      public com.su.proto.PlayerMsg.GetPlayerData_ buildPartial() {
+        com.su.proto.PlayerMsg.GetPlayerData_ result = new com.su.proto.PlayerMsg.GetPlayerData_(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1273,16 +1486,16 @@ public final class PlayerMsg {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.su.proto.PlayerMsg.GetPlayerDataResp) {
-          return mergeFrom((com.su.proto.PlayerMsg.GetPlayerDataResp)other);
+        if (other instanceof com.su.proto.PlayerMsg.GetPlayerData_) {
+          return mergeFrom((com.su.proto.PlayerMsg.GetPlayerData_)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.su.proto.PlayerMsg.GetPlayerDataResp other) {
-        if (other == com.su.proto.PlayerMsg.GetPlayerDataResp.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.su.proto.PlayerMsg.GetPlayerData_ other) {
+        if (other == com.su.proto.PlayerMsg.GetPlayerData_.getDefaultInstance()) return this;
         if (other.hasPlayer()) {
           mergePlayer(other.getPlayer());
         }
@@ -1299,11 +1512,11 @@ public final class PlayerMsg {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.su.proto.PlayerMsg.GetPlayerDataResp parsedMessage = null;
+        com.su.proto.PlayerMsg.GetPlayerData_ parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.su.proto.PlayerMsg.GetPlayerDataResp) e.getUnfinishedMessage();
+          parsedMessage = (com.su.proto.PlayerMsg.GetPlayerData_) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1314,29 +1527,29 @@ public final class PlayerMsg {
       }
       private int bitField0_;
 
-      private com.su.proto.PlayerMsg.PPlayer player_ = null;
+      private com.su.proto.PlayerMsg._Player player_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayerMsg.PPlayer, com.su.proto.PlayerMsg.PPlayer.Builder, com.su.proto.PlayerMsg.PPlayerOrBuilder> playerBuilder_;
+          com.su.proto.PlayerMsg._Player, com.su.proto.PlayerMsg._Player.Builder, com.su.proto.PlayerMsg._PlayerOrBuilder> playerBuilder_;
       /**
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
       public boolean hasPlayer() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public com.su.proto.PlayerMsg.PPlayer getPlayer() {
+      public com.su.proto.PlayerMsg._Player getPlayer() {
         if (playerBuilder_ == null) {
-          return player_ == null ? com.su.proto.PlayerMsg.PPlayer.getDefaultInstance() : player_;
+          return player_ == null ? com.su.proto.PlayerMsg._Player.getDefaultInstance() : player_;
         } else {
           return playerBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public Builder setPlayer(com.su.proto.PlayerMsg.PPlayer value) {
+      public Builder setPlayer(com.su.proto.PlayerMsg._Player value) {
         if (playerBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1350,10 +1563,10 @@ public final class PlayerMsg {
         return this;
       }
       /**
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
       public Builder setPlayer(
-          com.su.proto.PlayerMsg.PPlayer.Builder builderForValue) {
+          com.su.proto.PlayerMsg._Player.Builder builderForValue) {
         if (playerBuilder_ == null) {
           player_ = builderForValue.build();
           onChanged();
@@ -1364,15 +1577,15 @@ public final class PlayerMsg {
         return this;
       }
       /**
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public Builder mergePlayer(com.su.proto.PlayerMsg.PPlayer value) {
+      public Builder mergePlayer(com.su.proto.PlayerMsg._Player value) {
         if (playerBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
               player_ != null &&
-              player_ != com.su.proto.PlayerMsg.PPlayer.getDefaultInstance()) {
+              player_ != com.su.proto.PlayerMsg._Player.getDefaultInstance()) {
             player_ =
-              com.su.proto.PlayerMsg.PPlayer.newBuilder(player_).mergeFrom(value).buildPartial();
+              com.su.proto.PlayerMsg._Player.newBuilder(player_).mergeFrom(value).buildPartial();
           } else {
             player_ = value;
           }
@@ -1384,7 +1597,7 @@ public final class PlayerMsg {
         return this;
       }
       /**
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
       public Builder clearPlayer() {
         if (playerBuilder_ == null) {
@@ -1397,33 +1610,33 @@ public final class PlayerMsg {
         return this;
       }
       /**
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public com.su.proto.PlayerMsg.PPlayer.Builder getPlayerBuilder() {
+      public com.su.proto.PlayerMsg._Player.Builder getPlayerBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getPlayerFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
-      public com.su.proto.PlayerMsg.PPlayerOrBuilder getPlayerOrBuilder() {
+      public com.su.proto.PlayerMsg._PlayerOrBuilder getPlayerOrBuilder() {
         if (playerBuilder_ != null) {
           return playerBuilder_.getMessageOrBuilder();
         } else {
           return player_ == null ?
-              com.su.proto.PlayerMsg.PPlayer.getDefaultInstance() : player_;
+              com.su.proto.PlayerMsg._Player.getDefaultInstance() : player_;
         }
       }
       /**
-       * <code>optional .PPlayer player = 1;</code>
+       * <code>optional ._Player player = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.su.proto.PlayerMsg.PPlayer, com.su.proto.PlayerMsg.PPlayer.Builder, com.su.proto.PlayerMsg.PPlayerOrBuilder> 
+          com.su.proto.PlayerMsg._Player, com.su.proto.PlayerMsg._Player.Builder, com.su.proto.PlayerMsg._PlayerOrBuilder> 
           getPlayerFieldBuilder() {
         if (playerBuilder_ == null) {
           playerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.su.proto.PlayerMsg.PPlayer, com.su.proto.PlayerMsg.PPlayer.Builder, com.su.proto.PlayerMsg.PPlayerOrBuilder>(
+              com.su.proto.PlayerMsg._Player, com.su.proto.PlayerMsg._Player.Builder, com.su.proto.PlayerMsg._PlayerOrBuilder>(
                   getPlayer(),
                   getParentForChildren(),
                   isClean());
@@ -1442,59 +1655,59 @@ public final class PlayerMsg {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:GetPlayerDataResp)
+      // @@protoc_insertion_point(builder_scope:GetPlayerData_)
     }
 
-    // @@protoc_insertion_point(class_scope:GetPlayerDataResp)
-    private static final com.su.proto.PlayerMsg.GetPlayerDataResp DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:GetPlayerData_)
+    private static final com.su.proto.PlayerMsg.GetPlayerData_ DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.su.proto.PlayerMsg.GetPlayerDataResp();
+      DEFAULT_INSTANCE = new com.su.proto.PlayerMsg.GetPlayerData_();
     }
 
-    public static com.su.proto.PlayerMsg.GetPlayerDataResp getDefaultInstance() {
+    public static com.su.proto.PlayerMsg.GetPlayerData_ getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetPlayerDataResp>
-        PARSER = new com.google.protobuf.AbstractParser<GetPlayerDataResp>() {
-      public GetPlayerDataResp parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetPlayerData_>
+        PARSER = new com.google.protobuf.AbstractParser<GetPlayerData_>() {
+      public GetPlayerData_ parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetPlayerDataResp(input, extensionRegistry);
+          return new GetPlayerData_(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<GetPlayerDataResp> parser() {
+    public static com.google.protobuf.Parser<GetPlayerData_> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<GetPlayerDataResp> getParserForType() {
+    public com.google.protobuf.Parser<GetPlayerData_> getParserForType() {
       return PARSER;
     }
 
-    public com.su.proto.PlayerMsg.GetPlayerDataResp getDefaultInstanceForType() {
+    public com.su.proto.PlayerMsg.GetPlayerData_ getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_PPlayer_descriptor;
+    internal_static__Player_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_PPlayer_fieldAccessorTable;
+      internal_static__Player_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetPlayerDataReq_descriptor;
+    internal_static_GetPlayerData_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GetPlayerDataReq_fieldAccessorTable;
+      internal_static_GetPlayerData_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GetPlayerDataResp_descriptor;
+    internal_static_GetPlayerData__descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GetPlayerDataResp_fieldAccessorTable;
+      internal_static_GetPlayerData__fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1504,10 +1717,10 @@ public final class PlayerMsg {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Player.proto\"\025\n\007PPlayer\022\n\n\002id\030\001 \001(\003\"\022\n" +
-      "\020GetPlayerDataReq\"-\n\021GetPlayerDataResp\022\030" +
-      "\n\006player\030\001 \001(\0132\010.PPlayerB\033\n\014com.su.proto" +
-      "B\tPlayerMsgH\001"
+      "\n\014Player.proto\"#\n\007_Player\022\n\n\002id\030\001 \001(\003\022\014\n" +
+      "\004name\030\002 \001(\t\"\017\n\rGetPlayerData\"*\n\016GetPlaye" +
+      "rData_\022\030\n\006player\030\001 \001(\0132\010._PlayerB\033\n\014com." +
+      "su.protoB\tPlayerMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1521,23 +1734,23 @@ public final class PlayerMsg {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_PPlayer_descriptor =
+    internal_static__Player_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_PPlayer_fieldAccessorTable = new
+    internal_static__Player_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_PPlayer_descriptor,
-        new java.lang.String[] { "Id", });
-    internal_static_GetPlayerDataReq_descriptor =
+        internal_static__Player_descriptor,
+        new java.lang.String[] { "Id", "Name", });
+    internal_static_GetPlayerData_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_GetPlayerDataReq_fieldAccessorTable = new
+    internal_static_GetPlayerData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GetPlayerDataReq_descriptor,
+        internal_static_GetPlayerData_descriptor,
         new java.lang.String[] { });
-    internal_static_GetPlayerDataResp_descriptor =
+    internal_static_GetPlayerData__descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_GetPlayerDataResp_fieldAccessorTable = new
+    internal_static_GetPlayerData__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GetPlayerDataResp_descriptor,
+        internal_static_GetPlayerData__descriptor,
         new java.lang.String[] { "Player", });
   }
 

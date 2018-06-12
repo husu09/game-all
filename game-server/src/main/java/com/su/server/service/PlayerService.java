@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.su.common.po.Player;
 import com.su.core.data.DataService;
-import com.su.proto.PlayerMsg.PPlayer;
+import com.su.proto.PlayerMsg._Player;
 
 @Service
 public class PlayerService {
@@ -15,9 +15,7 @@ public class PlayerService {
 	/**
 	 * 创建用户
 	 */
-	public long createPlayer(String name) {
-		Player player = new Player();
-		//player.setName(name);
+	public long createPlayer(Player player) {
 		return dataService.save(player);
 	}
 
@@ -25,9 +23,10 @@ public class PlayerService {
 		return dataService.get(Player.class, id);
 	}
 	
-	public PPlayer toPlayerDataPro(Player player) {
-		PPlayer.Builder builder = PPlayer.newBuilder();
+	public _Player serializePlayer(Player player) {
+		_Player.Builder builder = _Player.newBuilder();
 		builder.setId(player.getId());
+		builder.setName(player.getName());
 		return builder.build();
 	}
 }
