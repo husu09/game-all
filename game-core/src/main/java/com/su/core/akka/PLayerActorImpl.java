@@ -84,7 +84,7 @@ public class PLayerActorImpl implements PlayerActor {
 
 	@Override
 	public _GamePlayerResult doTableResult(TableResult tableResult) {
-		
+		return bridgeService.doTableResult(tableResult.getPlayerContext(), tableResult);
 	}
 
 }

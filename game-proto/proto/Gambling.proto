@@ -37,11 +37,11 @@ message _Table {
 	optional int64 waitTime = 12[default = -1];		// 等待时间（毫秒）
 }
 
-// 开始匹配
-message Start {
+// 匹配
+message Match {
 	optional int32 siteId = 1;	// 场所id
 }
-message Start_ {
+message Match_ {
 	
 }
 

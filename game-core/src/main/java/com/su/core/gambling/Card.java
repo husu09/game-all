@@ -53,7 +53,7 @@ public class Card implements Comparable<Card> {
 				cards[i] = new Card(CARD_DA_WANG, null);
 				continue;
 			}
-			cards[i] = new Card(value + i, Suit.values()[suit]);
+			cards[i] = new Card(value + i, Suit.get(suit));
 			if ((i + 1) % 4 == 0) {
 				value++;
 				suit = Suit.FANG_KUAI.ordinal();

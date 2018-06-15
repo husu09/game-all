@@ -120,7 +120,7 @@ public class GamePlayer  implements Delayed{
 	 * 重置玩家状态
 	 * */
 	public void reset() {
-		this.state = null;
+		// this.state = null;
 		// 重置用户手牌
 		for (int i = 0; i < this.handCards.length; i ++) {
 			this.handCards[i] = null; 

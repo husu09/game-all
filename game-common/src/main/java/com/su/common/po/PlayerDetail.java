@@ -23,6 +23,11 @@ public class PlayerDetail {
 	@Transient
 	private List<Grid> gridList;
 	
+	/**
+	 * 连胜次数
+	 * */
+	private int continueWinCount;
+	
 	public PlayerDetail() {
 		
 	}
@@ -48,5 +53,15 @@ public class PlayerDetail {
 	public void updateBagData() {
 		bagData = JSON.toJSONString(getGridList());
 	}
+
+	public int getContinueWinCount() {
+		return continueWinCount;
+	}
+
+	public void setContinueWinCount(int continueWinCount) {
+		this.continueWinCount = continueWinCount;
+	}
+	
+	
 
 }

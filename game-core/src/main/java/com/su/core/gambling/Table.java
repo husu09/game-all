@@ -1,6 +1,7 @@
 package com.su.core.gambling;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
@@ -13,7 +14,6 @@ import com.su.common.util.TimeUtil;
 import com.su.core.akka.AkkaContext;
 import com.su.core.akka.TableActor;
 import com.su.core.akka.TableActorImpl;
-import com.su.core.context.PlayerContext;
 import com.su.core.gambling.card.CardProcessor;
 import com.su.core.gambling.card.CardProcessorManager;
 import com.su.core.gambling.enums.CallType;
@@ -23,6 +23,9 @@ import com.su.core.gambling.enums.PlayerState;
 import com.su.core.gambling.enums.TableState;
 import com.su.core.gambling.enums.Team;
 import com.su.core.gambling.service.NoticeService;
+import com.su.msg.GamblingMsg.Match_;
+import com.su.msg.GamblingMsg.Quit_;
+import com.su.msg.GamblingMsg.TableResult_;
 import com.su.msg.GamblingMsg._Card;
 import com.su.msg.GamblingMsg._GamePlayer;
 import com.su.msg.GamblingMsg._Table;
@@ -83,7 +86,7 @@ public class Table implements Delayed {
 
 	private CardProcessorManager cardManager = SpringUtil.getContext().getBean(CardProcessorManager.class);
 	private NoticeService noticeService = SpringUtil.getContext().getBean(NoticeService.class);
-	
+
 	/**
 	 * 结算时等待时间
 	 */
@@ -96,10 +99,10 @@ public class Table implements Delayed {
 	 * 参与玩家人数
 	 */
 	private static final int PLAYER_COUNT = 4;
-	
+
 	/**
 	 * 通知
-	 * */
+	 */
 	private _Table.Builder tableBuilder = _Table.newBuilder();
 	private _GamePlayer.Builder gamePlayerBuilder = _GamePlayer.newBuilder();
 	private _Card.Builder cardBuilder = _Card.newBuilder();
@@ -185,10 +188,10 @@ public class Table implements Delayed {
 				index++;
 		}
 		for (int i = 0; i < this.players.length; i++) {
-			Arrays.sort(this.players[i].getHandCards());
+			Arrays.sort(this.players[i].getHandCards(), Collections.reverseOrder());
 		}
 		// 转换到时叫牌状态
-		dealToCall();
+		doublesToDraw();
 		// 通知
 		noticeService.noticeAllData(this);
 	}
@@ -225,7 +228,7 @@ public class Table implements Delayed {
 		player.setState(PlayerState.WAIT);
 		// 加倍结束切换状态
 		if (isSameState(PlayerState.WAIT)) {
-			dealToCall();
+			doublesToDraw();
 		}
 		// 通知
 		noticeService.noticeAllData(this);
@@ -233,13 +236,13 @@ public class Table implements Delayed {
 	}
 
 	/**
-	 * 加倍状态切换到叫牌状态
+	 * 加倍状态切换到出牌状态
 	 */
-	private void dealToCall() {
+	private void doublesToDraw() {
 		// 牌桌
-		setState(TableState.CALL);
+		setState(TableState.DRAW);
 		// 玩家
-		GamePlayer player = this.players[this.dealer];
+		GamePlayer player = this.players[this.callOp];
 		player.setState(PlayerState.OPERATE);
 	}
 
@@ -268,14 +271,14 @@ public class Table implements Delayed {
 			// 不叫
 			// 叫牌结束切换状态
 			if (isSameState(PlayerState.WAIT)) {
-				callToDraw();
+				callToDoubles();
 			}
 
 		} else if (state == TableState.DOUBLES) {
 			// 不加倍
 			// 加倍结束切换状态
 			if (isSameState(PlayerState.WAIT)) {
-				dealToCall();
+				doublesToDraw();
 			}
 		} else if (state == TableState.DRAW) {
 			// 过牌
@@ -313,24 +316,20 @@ public class Table implements Delayed {
 			logger.error("{} Call verify fail {}", player.getId(), card);
 			return;
 		}
-		// 倍数
-		addToMultiple(callType, cards);
 		if (callType == CallType.LIGHT) {
 			// 牌桌
 			this.callCard = card;
 			this.callType = callType;
 			this.callOp = player.getIndex();
-			setState(TableState.DRAW);
 			// 当前玩家
 			player.setTeam(Team.RED);
-			player.setState(PlayerState.OPERATE);
 			// 其它玩家
 			for (GamePlayer gamePlayer : players) {
 				if (gamePlayer.equals(player))
 					continue;
 				gamePlayer.setTeam(Team.BLUE);
-				gamePlayer.setState(PlayerState.WAIT);
 			}
+			callToDoubles();
 		} else {
 			// 只有庄家能叫牌，其它玩家只能明叫
 			if (player.getIndex() != this.dealer) {
@@ -348,32 +347,31 @@ public class Table implements Delayed {
 			player.setTeam(Team.RED);
 			player.setState(PlayerState.WAIT);
 			// 全部操作完
-			if (isSameState(PlayerState.WAIT)) {
-				callToDraw();
-			} else {
-				// 下家
-				GamePlayer nextPlayer = getNextPlayer(player);
-				nextPlayer.setState(PlayerState.OPERATE);
-			}
+			if (isSameState(PlayerState.WAIT))
+				callToDoubles();
+			else
+				doNextPlayerState(player);
 		}
+		// 倍数
+		addToMultiple(callType, cards);
 		// 通知
 		noticeService.noticeAllData(this);
 	}
 
 	/**
-	 * 叫牌切换到出牌状态
+	 * 叫牌切换到加倍状态
 	 */
-	private void callToDraw() {
+	private void callToDoubles() {
 		// 没人叫牌则重新开始
 		if (this.callOp == null) {
 			reset();
 			deal();
 		} else {
 			// 牌桌
-			setState(TableState.DRAW);
+			setState(TableState.DOUBLES);
 			// 玩家
-			GamePlayer player = this.players[this.callOp];
-			player.setState(PlayerState.OPERATE);
+			for (GamePlayer otherGamePlayer : this.players)
+				otherGamePlayer.setState(PlayerState.OPERATE, false);
 		}
 	}
 
@@ -486,26 +484,37 @@ public class Table implements Delayed {
 		this.lastCards = cards;
 		this.lastCardType = cardType;
 		this.lastOp = player.getIndex();
-		if (!doTeamRankClose(player)) {
+		if (doTeamRankClose(player)) {
+			// 游戏结束，所有玩家准备
+			for (GamePlayer otherPlayer : this.players)
+				otherPlayer.setState(PlayerState.OPERATE, false);
+		} else {
 			// 游戏未结束，由下家出牌
-			GamePlayer nextPlayer = getNextPlayer(player);
-			nextPlayer.setState(PlayerState.OPERATE);
-			// 托管状态自行出牌
-			if (nextPlayer.isAuto() == 1) {
-				check(nextPlayer);
-			}
+			doNextPlayerState(player);
 		}
 
 		// 记录出牌
-		for (int i = 0; i < cards.length; i ++) {
+		for (int i = 0; i < cards.length; i++) {
 			for (Card card : this.cards) {
 				if (card == null)
 					card = cards[i];
 			}
 		}
-		
+
 		// 通知
 		noticeService.noticeAllData(this);
+	}
+
+	/**
+	 * 处理下家状态
+	 */
+	private void doNextPlayerState(GamePlayer gamePlayer) {
+		GamePlayer nextPlayer = getNextPlayer(gamePlayer);
+		nextPlayer.setState(PlayerState.OPERATE);
+		// 托管状态自行出牌
+		if (nextPlayer.isAuto() == 1) {
+			check(nextPlayer);
+		}
 	}
 
 	/**
@@ -674,13 +683,15 @@ public class Table implements Delayed {
 		int redMultiple = sumMultiple / getTeamCount(Team.RED);
 		int blueMultiple = sumMultiple / getTeamCount(Team.BLUE);
 		// 玩家结算
+		TableResult_.Builder builder = TableResult_.newBuilder();
+		builder.setBaseScore(this.site.getSiteCo().getBaseScore());
+		builder.setWinTeam(winTeam.getValue());
 		for (GamePlayer otherPlayer : this.players) {
 			TableResult tableResult = new TableResult();
 			tableResult.setPlayerContext(otherPlayer.getPlayerContext());
 			tableResult.setSiteCo(this.site.getSiteCo());
 			if (otherPlayer.getTeam() == winTeam)
 				tableResult.setWin(true);
-
 			else
 				tableResult.setWin(false);
 
@@ -688,17 +699,21 @@ public class Table implements Delayed {
 				tableResult.setMultiple(redMultiple);
 			else
 				tableResult.setMultiple(blueMultiple);
-			otherPlayer.getPlayerContext().getActor().doTableResult(tableResult);
+			builder.addPlayerResult(otherPlayer.getPlayerContext().getActor().doTableResult(tableResult));
 		}
 		// 下局的庄家
-		for (int i = 0 ; i < this.ranks.length; i ++ ) {
-			if (this.players[this.ranks[i]] .getTeam() == winTeam) {
+		for (int i = 0; i < this.ranks.length; i++) {
+			if (this.players[this.ranks[i]].getTeam() == winTeam) {
 				this.dealer = this.players[this.ranks[i]].getIndex();
 				break;
 			}
 		}
 		// 牌桌
 		setState(TableState.CLOSE);
+		// 通知
+		for (GamePlayer otherPlayer : this.players) {
+			otherPlayer.getPlayerContext().write(builder);
+		}
 	}
 
 	/**
@@ -726,35 +741,54 @@ public class Table implements Delayed {
 		}
 		return lastPlayer;
 	}
-	
+
 	/**
 	 * 设置托管
-	 * */
-	public void setIsAuto(GamePlayer player, int isAuto) {
-		if (player.getState() != PlayerState.OPERATE) {
-			logger.error("{} Player is not operate {}", player.getId(), player.getState());
+	 */
+	public void setIsAuto(GamePlayer gamePlayer, int isAuto) {
+		if (gamePlayer.getState() != PlayerState.OPERATE) {
+			logger.error("{} Player is not operate {}", gamePlayer.getId(), gamePlayer.getState());
 			return;
 		}
-	
+		if (this.state != TableState.CALL || this.state != TableState.DOUBLES || this.state != TableState.DRAW) {
+			logger.error("Table state is not call|doubles|draw {} {}", state, Arrays.toString(players));
+			return;
+		}
+		// 状态未变更
+		if (isAuto == gamePlayer.isAuto())
+			return;
+		gamePlayer.setAuto(isAuto);
+		gamePlayer.setState(PlayerState.WAIT);
+		doNextPlayerState(gamePlayer);
 	}
 
 	/**
 	 * 退出
 	 */
 	public void exit(GamePlayer gamePlayer) {
-		// 自已退出清空数据
-		gamePlayer.clean();
-		// 其他玩家重新设置状态加入匹配
-		for (GamePlayer otherPlayer : this.players) {
-			if (gamePlayer.equals(otherPlayer))
-				continue;
-			otherPlayer.clean();
-			this.site.getPlayerDeque().offerFirst(otherPlayer);
+		if (state == TableState.CLOSE) {
+			// 自已退出清空数据
+			gamePlayer.clean();
+			// 其他玩家重新设置状态加入匹配
+			for (GamePlayer otherPlayer : this.players) {
+				if (gamePlayer.equals(otherPlayer))
+					continue;
+				otherPlayer.clean();
+				this.site.addPlayerToMatch(otherPlayer.getPlayerContext(), true);
+			}
+			// 牌桌
+			clean();
+			this.site.getWaitTableQueue().remove(this);
+			this.site.getIdleTableQueue().offer(this);
+		} else {
+			// 自已退出清空数据
+			gamePlayer.clean();
+			gamePlayer.setAuto(1);
+			if (gamePlayer.getState() == PlayerState.OPERATE)
+				check(gamePlayer);
+
+			doNextPlayerState(gamePlayer);
 		}
-		// 牌桌
-		clean();
-		this.site.getWaitTableQueue().remove(this);
-		this.site.getIdleTableQueue().offer(this);
 		// 通知
 		noticeService.noticeAllData(this);
 	}
@@ -797,9 +831,7 @@ public class Table implements Delayed {
 		if (gamePlayer.getState() != PlayerState.OPERATE)
 			return;
 		gamePlayer.setState(PlayerState.WAIT);
-		// 处理下家
-		GamePlayer nextPlayer = getNextPlayer(gamePlayer);
-		nextPlayer.setState(PlayerState.OPERATE);
+		doNextPlayerState(gamePlayer);
 		// 通知
 		noticeService.noticeAllData(this);
 	}
@@ -810,21 +842,27 @@ public class Table implements Delayed {
 	public void doWaitTable() {
 		if (this.getState() == TableState.DOUBLES) {
 			// 加倍超时
-			for (GamePlayer otherGamePlayer : this.players) 
+			for (GamePlayer otherGamePlayer : this.players)
 				otherGamePlayer.setState(PlayerState.WAIT);
-			dealToCall();
+			doublesToDraw();
 		} else if (this.getState() == TableState.CLOSE) {
 			// 结算超时
-			for (GamePlayer otherGamePlayer : this.players) 
-				otherGamePlayer.clean();
+			for (GamePlayer otherGamePlayer : this.players) {
+				if (otherGamePlayer.getState() != PlayerState.READY) {
+					otherGamePlayer.clean();
+					otherGamePlayer.getPlayerContext().write(Quit_.newBuilder());
+				} else {
+					// 准备中的玩家重新加入匹配队列
+					otherGamePlayer.clean();
+					this.site.addPlayerToMatch(otherGamePlayer.getPlayerContext(), true);
+					otherGamePlayer.getPlayerContext().write(Match_.newBuilder());
+				}
+			}
 			// 牌桌
 			clean();
 			this.site.getIdleTableQueue().offer(this);
 		}
-		// 通知
-		noticeService.noticeAllData(this);
 	}
-
 
 	public void setPlayers(GamePlayer[] players) {
 		if (this.players != null)
@@ -923,6 +961,5 @@ public class Table implements Delayed {
 	public _Card.Builder getCardBuilder() {
 		return cardBuilder;
 	}
-	
-	
+
 }

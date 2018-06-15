@@ -8,12 +8,13 @@ import com.su.core.action.Action;
 import com.su.core.context.PlayerContext;
 import com.su.msg.CommonMsg.CMD;
 import com.su.server.service.BagService;
+import com.su.server.service.ResourceService;
 
 @Controller
 public class CMDControl {
 
 	@Autowired
-	private BagService bagService;
+	private ResourceService resourceService;
 
 	@Action
 	public void cmd(PlayerContext playerContext, CMD cmd) {
@@ -23,14 +24,14 @@ public class CMDControl {
 			item.setType(cmd.getType());
 			item.setSysId(cmd.getSysId());
 			item.setCount(cmd.getCount());
-			bagService.addItem(playerContext, item, 1000);
+			resourceService.add(playerContext, item, 1000);
 		// 扣除物品
 		} else if (cmd.getCmd() == 10001) {
 			Item item = new Item();
 			item.setType(cmd.getType());
 			item.setSysId(cmd.getSysId());
 			item.setCount(cmd.getCount());
-			bagService.eddItem(playerContext, item, 2000);
+			resourceService.edd(playerContext, item, 2000);
 		}
 	}
 }

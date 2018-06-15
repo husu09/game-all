@@ -32,7 +32,7 @@ public class Site {
 	 * 需要操作的玩家队列
 	 */
 	private DelayQueue<GamePlayer> waitGamePlayerQueue = new DelayQueue<>();
-	
+
 	private SiteCo siteCo;
 
 	public Site(SiteCo siteCo) {
@@ -45,20 +45,34 @@ public class Site {
 	}
 
 	/**
-	 * 开始匹配
+	 * 添加玩家到匹配队列
 	 */
-	public void startMatch(PlayerContext playerContext) {
+	public void addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {
 		// 在匹配队列中
 		if (playerDeque.contains(playerContext))
 			return;
-		if (playerContext.getGamePlayer() == null) {
+		if (playerContext.getGamePlayer() == null)
 			playerContext.setGamePlayer(new GamePlayer(playerContext));
-		} else if (playerContext.getGamePlayer().getState() != null) {
-			// 在游戏中
-			return;
-		}
+		if (isFirst)
+			playerDeque.offerFirst(playerContext.getGamePlayer());
+		else
+			playerDeque.offer(playerContext.getGamePlayer());
 		playerNum.incrementAndGet();
-		playerDeque.offerLast(playerContext.getGamePlayer());
+		tryStart();
+	}
+
+	/**
+	 * 从匹配队列删除玩家
+	 */
+	public void removePlayerFromMatch(GamePlayer gamePlayer) {
+		if (playerDeque.remove(gamePlayer))
+			playerNum.decrementAndGet();
+	}
+
+	/**
+	 * 尝试开始游戏
+	 */
+	public void tryStart() {
 		// 尝试从队列中获取4个玩家
 		GamePlayer[] gamePlayers = new GamePlayer[4];
 		for (int i = 0; i < 4; i++) {
@@ -81,37 +95,33 @@ public class Site {
 		table.getActor().setPlayers(gamePlayers);
 		table.getActor().deal();
 	}
-	
+
 	/**
 	 * 检测牌桌超时
-	 * */
+	 */
 	public void doWaitTable() {
-		while (true) {
-			try {
+		try {
+			while (!Thread.currentThread().isInterrupted()) {
 				Table table = waitTableQueue.take();
 				table.getActor().doWaitTable();
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 检测玩家超时
-	 * */
-	public void doWaitGamePlayer(){
-		while (true) {
-			try {
+	 */
+	public void doWaitGamePlayer() {
+		try {
+			while (!Thread.currentThread().isInterrupted()) {
 				GamePlayer gamePlayer = waitGamePlayerQueue.take();
 				gamePlayer.getTable().getActor().doWaitGamePlayer(gamePlayer);
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	}
-	
-	public ConcurrentLinkedDeque<GamePlayer> getPlayerDeque() {
-		return playerDeque;
 	}
 
 	public ConcurrentLinkedQueue<Table> getIdleTableQueue() {
@@ -129,5 +139,5 @@ public class Site {
 	public SiteCo getSiteCo() {
 		return siteCo;
 	}
-	
+
 }

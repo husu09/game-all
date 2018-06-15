@@ -23,8 +23,14 @@ public class PlayerContext {
 	
 	private volatile GamePlayer gamePlayer;
 	
+	/**
+	 * 玩家更新数据
+	 * */
 	private _Player.Builder builder = _Player.newBuilder();
 	
+	/**
+	 * 是否更新玩家数据
+	 * */
 	private boolean isNotice;
 	
 

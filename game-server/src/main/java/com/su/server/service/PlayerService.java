@@ -8,16 +8,12 @@ import com.su.common.po.PlayerDetail;
 import com.su.core.context.PlayerContext;
 import com.su.core.data.DataService;
 import com.su.core.event.GameEventAdapter;
-import com.su.core.gambling.TableResult;
-import com.su.msg.GamblingMsg._GamePlayerResult;
 import com.su.msg.PlayerMsg._Player;
 
 @Service
 public class PlayerService extends GameEventAdapter{
 	@Autowired
 	private DataService dataService;
-	
-	private _GamePlayerResult.Builder builder = _GamePlayerResult.newBuilder();
 
 	/**
 	 * 创建用户
@@ -30,7 +26,10 @@ public class PlayerService extends GameEventAdapter{
 	 * 获取用户
 	 * */
 	public Player getPlayerById(long id) {
-		return dataService.get(Player.class, id);
+		 Player player = dataService.get(Player.class, id);
+		 if (player == null)
+			throw new RuntimeException("player is null " + id);
+		 return player;
 	}
 	
 	/**
@@ -49,18 +48,13 @@ public class PlayerService extends GameEventAdapter{
 		_Player.Builder builder = _Player.newBuilder();
 		builder.setId(player.getId());
 		builder.setName(player.getName());
+		builder.setPeanut(player.getPeanut());
 		return builder.build();
 	}
 
 	@Override
 	public void logout(PlayerContext playerContext) {
 	
-	}
-	
-	public _GamePlayerResult doTableResult(PlayerContext playerContext, TableResult tableResult) {
-		builder.clear();
-		
-		return builder.build();
 	}
 	
 }

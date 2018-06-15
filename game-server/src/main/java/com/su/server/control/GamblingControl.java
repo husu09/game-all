@@ -11,15 +11,23 @@ import com.su.core.gambling.GamePlayer;
 import com.su.core.gambling.Site;
 import com.su.excel.mapper.BagMapper;
 import com.su.msg.GamblingMsg.Auto;
+import com.su.msg.GamblingMsg.Auto_;
 import com.su.msg.GamblingMsg.Call;
+import com.su.msg.GamblingMsg.Call_;
 import com.su.msg.GamblingMsg.Double;
+import com.su.msg.GamblingMsg.Double_;
 import com.su.msg.GamblingMsg.Draw;
+import com.su.msg.GamblingMsg.Draw_;
+import com.su.msg.GamblingMsg.Match;
+import com.su.msg.GamblingMsg.Match_;
 import com.su.msg.GamblingMsg.Quit;
+import com.su.msg.GamblingMsg.Quit_;
 import com.su.msg.GamblingMsg.Ready;
+import com.su.msg.GamblingMsg.Ready_;
 import com.su.msg.GamblingMsg.Reconn;
-import com.su.msg.GamblingMsg.Start;
+import com.su.msg.GamblingMsg.Reconn_;
 import com.su.server.service.GamblingService;
-import com.su.server.service.ResouceService;
+import com.su.server.service.ResourceService;
 
 @Controller
 public class GamblingControl {
@@ -27,7 +35,7 @@ public class GamblingControl {
 	@Autowired
 	private GamblingService gamblingService;
 	@Autowired
-	private ResouceService resouceService;
+	private ResourceService resouceService;
 	@Autowired
 	private BagMapper bagMapper;
 
@@ -35,13 +43,18 @@ public class GamblingControl {
 	 * 开始匹配
 	 */
 	@Action
-	public void start(PlayerContext playerContext, Start req) {
+	public void match(PlayerContext playerContext, Match req) {
+		if (playerContext.getGamePlayer() != null && playerContext.getGamePlayer().getState() != null){
+			playerContext.sendError(3002);
+			return;
+		}
 		Site site = gamblingService.getSiteMap().get(req.getSiteId());
 		if (site == null) {
 			playerContext.sendError(1002);
 			return;
 		}
-		site.startMatch(playerContext);
+		site.addPlayerToMatch(playerContext, false);
+		playerContext.write(Match_.newBuilder());
 	}
 
 	/**
@@ -55,16 +68,15 @@ public class GamblingControl {
 			playerContext.sendError(1004);
 			return;
 		}
-		// 扣除道具
-
-		if (!resouceService.edd(playerContext, GamblingConst.DOUBLES_ITEM, 2001)) {
-			playerContext.sendError(1003, GamblingConst.DOUBLES_ITEM.getType(), GamblingConst.DOUBLES_ITEM.getSysId());
-			return;
-		}
 		// 游戏用户检测
 		GamePlayer gamePlayer = playerContext.getGamePlayer();
 		if (gamePlayer == null) {
 			playerContext.sendError(3001);
+			return;
+		}
+		// 扣除道具
+		if (!resouceService.edd(playerContext, GamblingConst.DOUBLES_ITEM, 2001)) {
+			playerContext.sendError(1003, GamblingConst.DOUBLES_ITEM.getType(), GamblingConst.DOUBLES_ITEM.getSysId());
 			return;
 		}
 		// 加倍
@@ -73,6 +85,7 @@ public class GamblingControl {
 		if (!result) {
 			resouceService.add(playerContext, GamblingConst.DOUBLES_ITEM, 10001);
 		}
+		playerContext.write(Double_.newBuilder());
 	}
 
 	/**
@@ -87,6 +100,7 @@ public class GamblingControl {
 			return;
 		}
 		gamePlayer.getTable().getActor().call(gamePlayer, req.getCallType(), req.getCardIndex());
+		playerContext.write(Call_.newBuilder());
 	}
 
 	/**
@@ -104,6 +118,7 @@ public class GamblingControl {
 		for (int i = 0; i < req.getCardIndexsCount(); i++)
 			indexs[i] = req.getCardIndexs(i);
 		gamePlayer.getTable().getActor().draw(gamePlayer, req.getCardType(), indexs);
+		playerContext.write(Draw_.newBuilder());
 	}
 
 	/**
@@ -118,6 +133,7 @@ public class GamblingControl {
 			return;
 		}
 		gamePlayer.getTable().getActor().setIsAuto(gamePlayer, req.getIsAuto());
+		playerContext.write(Auto_.newBuilder());
 	}
 
 	/**
@@ -132,6 +148,7 @@ public class GamblingControl {
 			return;
 		}
 		gamePlayer.getTable().getActor().ready(gamePlayer);
+		playerContext.write(Ready_.newBuilder());
 	}
 
 	/**
@@ -146,6 +163,7 @@ public class GamblingControl {
 			return;
 		}
 		gamePlayer.getTable().getActor().exit(gamePlayer);
+		playerContext.write(Quit_.newBuilder());
 	}
 
 	/**
@@ -160,5 +178,6 @@ public class GamblingControl {
 			return;
 		}
 		gamePlayer.getTable().getActor().reconn(gamePlayer);
+		playerContext.write(Reconn_.newBuilder());
 	}
 }

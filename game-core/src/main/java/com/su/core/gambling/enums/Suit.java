@@ -1,5 +1,8 @@
 package com.su.core.gambling.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Suit {
 	/**
 	 * 方块 1
@@ -19,7 +22,20 @@ public enum Suit {
 	HEI_TAO(4);
 	
 	private int value;
-	
+	private static final Map<Integer, Suit> map = new HashMap<>(Suit.values().length);
+
+	static {
+		for (Suit temp : Suit.values()) {
+			map.put(temp.getValue(), temp);
+		}
+	}
+
+	/**
+	 * 根据值获取Enum
+	 */
+	public static Suit get(int value) {
+		return map.get(value);
+	}
 	Suit(int value){
 		this.value = value;
 	}
