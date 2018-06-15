@@ -1,6 +1,8 @@
-package com.su.core.gambling;
+package com.su.core.gambling.util;
 
-public class CardUnit {
+import com.su.core.gambling.Card;
+
+public class CardUtil {
 	/**
 	 * 获取最大值
 	 */
@@ -25,4 +27,5 @@ public class CardUnit {
 		return true;
 
 	}
+	
 }

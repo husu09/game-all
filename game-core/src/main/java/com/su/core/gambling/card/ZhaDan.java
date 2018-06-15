@@ -3,8 +3,8 @@ package com.su.core.gambling.card;
 import org.springframework.stereotype.Component;
 
 import com.su.core.gambling.Card;
-import com.su.core.gambling.CardUnit;
 import com.su.core.gambling.enums.CardType;
+import com.su.core.gambling.util.CardUtil;
 
 @Component
 public class ZhaDan  extends BaseCardProcessor {
@@ -41,7 +41,7 @@ public class ZhaDan  extends BaseCardProcessor {
 					return false;
 			}
 		} else if (lastCardType.equals(CardType.T_510K)) {
-			if (CardUnit.isTongHua(lastCards)) {
+			if (CardUtil.isTongHua(lastCards)) {
 				if (cards.length < 7)
 					return false;
 			} else {

@@ -77,7 +77,15 @@ public class Card implements Comparable<Card> {
 		this.value = value;
 		this.suit = suit;
 	}
+	
+	public int getValue() {
+		return value;
+	}
 
+	public Suit getSuit() {
+		return suit;
+	}
+	
 	@Override
 	public int compareTo(Card o) {
 		if (value > o.getValue())
@@ -119,14 +127,6 @@ public class Card implements Comparable<Card> {
 	@Override
 	public String toString() {
 		return "Card [value=" + value + ", suit=" + suit + "]";
-	}
-
-	public int getValue() {
-		return value;
-	}
-
-	public Suit getSuit() {
-		return suit;
 	}
 
 }

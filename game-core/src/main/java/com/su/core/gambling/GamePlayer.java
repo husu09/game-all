@@ -17,7 +17,7 @@ public class GamePlayer  implements Delayed{
 	/**
 	 * 坐位
 	 */
-	private int index;
+	private Integer index;
 	/**
 	 * 手牌
 	 */
@@ -145,6 +145,37 @@ public class GamePlayer  implements Delayed{
 	public void setOpTime(Long opTime) {
 		this.opTime = opTime;
 	}
+	
+	
+	public boolean isAuto() {
+		return isAuto;
+	}
+
+	public void setAuto(boolean isAuto) {
+		this.isAuto = isAuto;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GamePlayer other = (GamePlayer) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 
 	@Override
 	public int compareTo(Delayed o) {
@@ -159,6 +190,15 @@ public class GamePlayer  implements Delayed{
 	@Override
 	public long getDelay(TimeUnit unit) {
 		 return unit.convert(opTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+	}
+	
+	/**
+	 * 清空玩家状态
+	 * */
+	public void clean() {
+		reset();
+		this.index = null;
+		this.table = null;
 	}
 	
 	/**
@@ -177,6 +217,7 @@ public class GamePlayer  implements Delayed{
 		rank = null;
 		opTime = null;
 	}
+	
 
 
 	

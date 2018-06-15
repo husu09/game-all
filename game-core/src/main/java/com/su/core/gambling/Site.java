@@ -82,5 +82,13 @@ public class Site {
 	public DelayQueue<GamePlayer> getWaitGamePlayerQueue() {
 		return waitGamePlayerQueue;
 	}
+
+	public ConcurrentLinkedQueue<Table> getTableQueue() {
+		return tableQueue;
+	}
+
+	public ConcurrentLinkedDeque<GamePlayer> getPlayerDeque() {
+		return playerDeque;
+	}
 	
 }

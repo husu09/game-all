@@ -5,8 +5,6 @@ import java.util.Map;
 
 import com.su.core.gambling.Card;
 
-
-
 public enum CallType {
 	/**
 	 * 叫牌 1
@@ -31,15 +29,15 @@ public enum CallType {
 		return value;
 
 	}
-	
+
 	private static final Map<Integer, CallType> map = new HashMap<>(CallType.values().length);
-	
+
 	static {
 		for (CallType callType : CallType.values()) {
 			map.put(callType.getValue(), callType);
 		}
 	}
-	
+
 	/**
 	 * 根据值获取Enum
 	 */
@@ -55,10 +53,8 @@ public enum CallType {
 		switch (callType) {
 		case CALL:
 		case DARK:
-			if (card == null)
-				return false;
 			for (Card c : cards) {
-				if (c.equals(card)) {
+				if (c != null && c.equals(card)) {
 					isSuccess = true;
 					break;
 				}

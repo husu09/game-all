@@ -3,8 +3,8 @@ package com.su.core.gambling.card;
 import org.springframework.stereotype.Component;
 
 import com.su.core.gambling.Card;
-import com.su.core.gambling.CardUnit;
 import com.su.core.gambling.enums.CardType;
+import com.su.core.gambling.util.CardUtil;
 
 @Component
 public class T510K  extends BaseCardProcessor {
@@ -32,8 +32,8 @@ public class T510K  extends BaseCardProcessor {
 	@Override
 	public boolean compare(Card[] cards, CardType lastCardType, Card[] lastCards) {
 		if (getCardType() == lastCardType) {
-			boolean cardsIsTH = CardUnit.isTongHua(cards);
-			boolean lastCardsIsTH = CardUnit.isTongHua(lastCards);
+			boolean cardsIsTH = CardUtil.isTongHua(cards);
+			boolean lastCardsIsTH = CardUtil.isTongHua(lastCards);
 			if (cardsIsTH && lastCardsIsTH) {
 				if (cards[0].getSuit().ordinal() <= lastCards[0].getSuit().ordinal())
 					return false;
@@ -41,7 +41,7 @@ public class T510K  extends BaseCardProcessor {
 			if (!cardsIsTH)
 				return false;
 		} else if (lastCardType.equals(CardType.ZHA_DAN)) {
-			if (CardUnit.isTongHua(cards)) {
+			if (CardUtil.isTongHua(cards)) {
 				if (lastCards.length >= 7)
 					return false;
 			} else {
