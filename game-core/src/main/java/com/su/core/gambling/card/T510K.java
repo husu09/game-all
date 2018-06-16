@@ -19,11 +19,11 @@ public class T510K  extends BaseCardProcessor {
 	public boolean verify(Card[] cards) {
 		if (cards.length != 3)
 			return false;
-		if (cards[0].getValue() != Card.CARD_K)
+		if (cards[0].getValue() != Card.CARD_5)
 			return false;
 		if (cards[1].getValue() != Card.CARD_10)
 			return false;
-		if (cards[2].getValue() != Card.CARD_5)
+		if (cards[2].getValue() != Card.CARD_K)
 			return false;
 		return true;
 	}
@@ -34,7 +34,7 @@ public class T510K  extends BaseCardProcessor {
 			boolean cardsIsTH = Card.isTongHua(cards);
 			boolean lastCardsIsTH = Card.isTongHua(lastCards);
 			if (cardsIsTH && lastCardsIsTH) {
-				if (cards[0].getSuit().ordinal() <= lastCards[0].getSuit().ordinal())
+				if (cards[0].getSuit().getValue() <= lastCards[0].getSuit().getValue())
 					return false;
 			}
 			if (!cardsIsTH)

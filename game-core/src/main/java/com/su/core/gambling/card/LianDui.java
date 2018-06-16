@@ -25,7 +25,7 @@ public class LianDui extends BaseCardProcessor {
 		for (int i = 1; i < cards.length; i++) {
 			if (cards[i].getValue() > Card.CARD_A)
 				return false;
-			if (cards[i].getValue() != card.getValue() && cards[i].getValue() != card.getValue() - 1) {
+			if (cards[i].getValue() != card.getValue() && cards[i].getValue() != card.getValue() + 1) {
 				return false;
 			}
 			card = cards[i];
@@ -40,7 +40,7 @@ public class LianDui extends BaseCardProcessor {
 		if (getCardType() == lastCardType) {
 			if (cards.length != lastCards.length)
 				return false;
-			if (Card.getMax(cards).getValue() >= Card.getMax(lastCards).getValue())
+			if (Card.getMax(cards).getValue() > Card.getMax(lastCards).getValue())
 				return true;
 		}
 		return false;
