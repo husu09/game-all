@@ -182,7 +182,7 @@ public class Table implements Delayed {
 		// 发牌
 		int index = 0;
 		for (int i = 1; i <= this.cards.length; i++) {
-			this.players[(this.dealer + i - 1) % 4].getHandCards()[index] = this.cards[i];
+			this.players[(this.dealer + i) % 4 - 1].getHandCards()[index] = this.cards[i];
 			this.cards[i] = null;
 			if (i % 4 == 0)
 				index++;
@@ -353,7 +353,7 @@ public class Table implements Delayed {
 				doNextPlayerState(player);
 		}
 		// 倍数
-		addToMultiple(callType, cards);
+		addToMultiple(callType, null);
 		// 通知
 		noticeService.noticeAllData(this);
 	}
@@ -616,6 +616,14 @@ public class Table implements Delayed {
 				}
 				// 全胜
 				addToMultiple(MultipleType.QUAN_SHENG, null);
+				// 满分
+				int winScore = 0;
+				for (GamePlayer otherPlayer : this.players) {
+					if (otherPlayer.getTeam() == winTeam)
+						winScore += otherPlayer.getScore();
+				}
+				if (winScore >= 200)
+					addToMultiple(MultipleType.MAN_FEN, null);
 			} else if (getRanksCount() >= 3) {
 				GamePlayer lastPlayer = getLastPlayer();
 				if (player.getTeam() == null)
@@ -623,15 +631,14 @@ public class Table implements Delayed {
 				lastPlayer.setState(PlayerState.FINISH);
 				// 排名
 				addToRanks(lastPlayer);
-				/*
-				 * // 最后出牌玩家分数处理
-				 * this.players[this.ranks[0]].addScore(lastPlayer.getScore());
-				 * lastPlayer.setScore(0); int leftScore =
-				 * Card.getScore(lastPlayer.getHandCards());
-				 * this.players[this.ranks[1]].addScore(leftScore);
-				 */
+
+				// 最后出牌玩家分数处理
+				// 手中的分数给第一名
+				this.players[this.ranks[0]].addScore(lastPlayer.getScore());
 				// 最后玩家得分作废
 				lastPlayer.setScore(0);
+				// 未出的分数直接加个对方
+				int leftScore = Card.getScore(lastPlayer.getHandCards());
 
 				// 最后剩余轮分处理
 				if (this.roundScore != 0) {
@@ -647,6 +654,10 @@ public class Table implements Delayed {
 					else
 						blueScore += otherPlayer.getScore();
 				}
+				if (lastPlayer.getTeam() == Team.RED)
+					blueScore += leftScore;
+				else
+					redScore += blueScore;
 				if (redScore > blueScore) {
 					winTeam = Team.RED;
 				} else if (redScore == blueScore) {
@@ -655,10 +666,9 @@ public class Table implements Delayed {
 					winTeam = Team.BLUE;
 				}
 				// 满分
-				/*
-				 * if (redScore >= 200 || blueScore >= 200)
-				 * addToComMultiple(MultipleType.MAN_FEN, null);
-				 */
+				if (redScore >= 200 || blueScore >= 200)
+					addToMultiple(MultipleType.MAN_FEN, null);
+
 			}
 			if (winTeam != null) {
 				close(winTeam);
@@ -766,9 +776,10 @@ public class Table implements Delayed {
 	 * 退出
 	 */
 	public void exit(GamePlayer gamePlayer) {
+		// 自已退出清空数据
+		gamePlayer.clean();
+		gamePlayer.setState(null);
 		if (state == TableState.CLOSE) {
-			// 自已退出清空数据
-			gamePlayer.clean();
 			// 其他玩家重新设置状态加入匹配
 			for (GamePlayer otherPlayer : this.players) {
 				if (gamePlayer.equals(otherPlayer))
@@ -781,12 +792,9 @@ public class Table implements Delayed {
 			this.site.getWaitTableQueue().remove(this);
 			this.site.getIdleTableQueue().offer(this);
 		} else {
-			// 自已退出清空数据
-			gamePlayer.clean();
 			gamePlayer.setAuto(1);
 			if (gamePlayer.getState() == PlayerState.OPERATE)
 				check(gamePlayer);
-
 			doNextPlayerState(gamePlayer);
 		}
 		// 通知

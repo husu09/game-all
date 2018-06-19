@@ -23,7 +23,7 @@ public class ShunZi extends BaseCardProcessor {
 		for (int i = 1; i < cards.length; i++) {
 			if (cards[i].getValue() > Card.CARD_A)
 				return false;
-			if (cards[i].getValue() != card.getValue() - 1) {
+			if (cards[i].getValue() != card.getValue() + 1) {
 				return false;
 			}
 			card = cards[i];
