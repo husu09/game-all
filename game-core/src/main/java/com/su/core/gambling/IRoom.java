@@ -9,4 +9,8 @@ public interface IRoom {
 	 * 取消匹配
 	 * */
 	public void cancelMatch();
+	/**
+	 * 换桌
+	 * */
+	public void chageTable();
 }
