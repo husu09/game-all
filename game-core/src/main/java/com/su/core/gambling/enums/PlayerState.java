@@ -2,6 +2,10 @@ package com.su.core.gambling.enums;
 
 public enum PlayerState {
 	/**
+	 * 匹配中
+	 * */
+	MATCH(0),
+	/**
 	 * 准备 1
 	 */
 	READY(1),
