@@ -25,6 +25,7 @@ import com.su.core.gambling.enums.Team;
 import com.su.core.gambling.service.MultipleService;
 import com.su.core.gambling.service.NoticeService;
 import com.su.core.gambling.service.RankService;
+import com.su.core.gambling.service.TableService;
 import com.su.core.gambling.service.TeamService;
 import com.su.msg.GamblingMsg.Match_;
 import com.su.msg.GamblingMsg.Quit_;
@@ -91,6 +92,7 @@ public abstract class BasicTable implements ITable {
 	private MultipleService multipleService;
 	private RankService rankService;
 	private TeamService teamService;
+	private TableService tableService;
 
 	/**
 	 * 结算时等待时间
