@@ -40,8 +40,6 @@ import io.netty.util.AttributeKey;
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 	@Autowired
-	private AkkaContext akkaContext;
-	@Autowired
 	private GameContext gameContext;
 
 	public static final AttributeKey<PlayerContext> PLAYER_CONTEXT_KEY = AttributeKey.valueOf("PLAYER_CONTEXT_KEY");
@@ -54,7 +52,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 		if (actionActor != null) {
 			actionActor.process(ctx, (MessageLite) msg);
 		} else {
-			actionActor = akkaContext.createActor(PlayerActor.class, PLayerActorImpl.class);
+			actionActor = AkkaContext.createActor(PlayerActor.class, PLayerActorImpl.class);
 			attr.set(actionActor);
 			actionActor.process(ctx, (MessageLite) msg);
 		}
@@ -82,7 +80,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 		}
 		if (processorActor != null) {
 			// 关闭 actor
-			akkaContext.poisonPill(processorActor);
+			AkkaContext.poisonPill(processorActor);
 		}
 	}
 

@@ -58,10 +58,9 @@ public class GamePlayer  implements Delayed{
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 		this.id = playerContext.getPlayerId();
+		this.handCards = new Card[Card.HAND_CARDS_NUM];
 		// 设置玩家上下文持有游戏对象
 		playerContext.setGamePlayer(this);
-		handCards = new Card[Card.HAND_CARDS_NUM];
-		
 	}
 	
 	public long getId() {
@@ -206,16 +205,16 @@ public class GamePlayer  implements Delayed{
 	 * */
 	public void reset() {
 		// 重置用户手牌
-		for (int i = 0; i < handCards.length; i ++) {
-			handCards[i] = null; 
+		for (int i = 0; i < this.handCards.length; i ++) {
+			this.handCards[i] = null; 
 		}
-		team = null;
-		multipleValue = 0;
-		score = 0;
-		state = null;
-		isAuto = false;
-		rank = null;
-		opTime = null;
+		this.team = null;
+		this.multipleValue = 0;
+		this.score = 0;
+		this.state = null;
+		this.isAuto = false;
+		this.rank = null;
+		this.opTime = null;
 	}
 	
 

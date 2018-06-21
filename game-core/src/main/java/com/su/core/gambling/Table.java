@@ -77,7 +77,6 @@ public class Table implements Delayed {
 
 	private TableActor actor;
 
-	private AkkaContext akkaContext = SpringUtil.getContext().getBean(AkkaContext.class);
 	private CardProcessorManager cardManager = SpringUtil.getContext().getBean(CardProcessorManager.class);
 
 	private Logger logger = LoggerFactory.getLogger(Table.class);
@@ -98,17 +97,21 @@ public class Table implements Delayed {
 	 * 加倍时间
 	 */
 	private static final int DOUBLES_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
+	/**
+	 * 参与玩家人数
+	 * */
+	private static final int PLAYER_COUNT = 4;
 
 	public Table(Site site) {
-		actor = akkaContext.createActor(TableActor.class, TableActorImpl.class, this);
+		this.actor = AkkaContext.createActor(TableActor.class, TableActorImpl.class, this);
 		this.site = site;
 		// 初始化牌
 		Card[] cards = new Card[Card.CARDS_NUM * 2];
 		System.arraycopy(Card.ONE_CARDS, 0, cards, 0, Card.CARDS_NUM);
 		System.arraycopy(Card.ONE_CARDS, 0, cards, Card.CARDS_NUM, Card.CARDS_NUM);
 		this.cards = cards;
-		multiples = new int[MultipleType.values().length];
-		this.ranks = new Integer[4];
+		this.multiples = new int[MultipleType.values().length];
+		this.ranks = new Integer[PLAYER_COUNT];
 	}
 
 	/**
@@ -125,22 +128,23 @@ public class Table implements Delayed {
 	 * 重置牌桌状态（开始下一局时）
 	 */
 	public void reset() {
-		roundScore = 0;
+		this.roundScore = 0;
 		// 叫牌状态
-		callCard = null;
-		callType = null;
+		this.callCard = null;
+		this.callType = null;
+		this.callOp = null;
 		// 重置倍数
-		for (int i = 0; i < multiples.length; i++) {
-			multiples[i] = 0;
+		for (int i = 0; i < this.multiples.length; i++) {
+			this.multiples[i] = 0;
 		}
 		// 最后出牌
-		lastCards = null;
-		lastCardType = null;
-		lastOp = null;
+		this.lastCards = null;
+		this.lastCardType = null;
+		this.lastOp = null;
 		// 等待时间
-		waitTime = null;
+		this.waitTime = null;
 		// 重置玩家状态
-		for (GamePlayer gamePlayer : players) {
+		for (GamePlayer gamePlayer : this.players) {
 			gamePlayer.reset();
 		}
 		this.state = null;
@@ -166,22 +170,22 @@ public class Table implements Delayed {
 		shuffle();
 		// 发牌
 		int index = 0;
-		for (int i = 1; i <= cards.length; i++) {
-			players[(dealer + i - 1) % 4].getHandCards()[index] = cards[i];
+		for (int i = 1; i <= this.cards.length; i++) {
+			this.players[(this.dealer + i - 1) % 4].getHandCards()[index] = this.cards[i];
 			if (i % 4 == 0)
 				index++;
 		}
-		for (int i = 0; i < players.length; i++) {
-			Arrays.sort(players[i].getHandCards());
+		for (int i = 0; i < this.players.length; i++) {
+			Arrays.sort(this.players[i].getHandCards());
 		}
 		// 设置牌桌状态
-		state = TableState.CALL;
+		this.state = TableState.CALL;
 		// 设置玩家
-		for (GamePlayer gamePlayer : players) {
+		for (GamePlayer gamePlayer : this.players) {
 			gamePlayer.setState(PlayerState.OPERATE);
 		}
-		waitTime = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
-		site.getWaitTableQueue().put(this);
+		this.waitTime = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
+		this.site.getWaitTableQueue().put(this);
 		// TODO 通知
 	}
 
@@ -452,7 +456,9 @@ public class Table implements Delayed {
 		this.lastCards = cards;
 		this.lastCardType = cardType;
 		this.lastOp = player.getIndex();
+		// TODO 记录出牌
 		// TODO 通知
+		
 	}
 
 	/**
@@ -833,14 +839,6 @@ public class Table implements Delayed {
 
 	public void setTableActor(TableActor tableActor) {
 		this.actor = tableActor;
-	}
-
-	public AkkaContext getAkkaContext() {
-		return akkaContext;
-	}
-
-	public void setAkkaContext(AkkaContext akkaContext) {
-		this.akkaContext = akkaContext;
 	}
 
 	@Override

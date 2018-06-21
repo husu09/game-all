@@ -49,7 +49,6 @@ public class ServerStart {
 		gameEventDispatcher.serverStart();
 		
 		GameContext gameContext = context.getBean(GameContext.class);
-		AkkaContext akkaContext = context.getBean(AkkaContext.class);
 		
 		System.out.println("输入stop关闭服务器：");
 		Scanner sc = new Scanner(System.in);
@@ -67,7 +66,7 @@ public class ServerStart {
 				// 关闭 redis
 				redisClient.destroy();
 				// 关闭 akka
-				akkaContext.close();
+				AkkaContext.close();
 				// 服务器关闭事件
 				gameEventDispatcher.serverStop();
 				

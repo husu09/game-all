@@ -15,29 +15,31 @@ message _Multiple {
 }
 
 message _GamePlayer {
-	optional int64 id = 1;				// 玩家id
-	repeated _Card handCard = 2;		// 玩家手牌
-	optional int32 cardNum = 3;			// 手牌数量
-	optional int32 team = 4;			// 玩家队伍（1：红方，2：蓝方）
-	optional int32 multiple = 5;		// 玩家加倍
-	optional int32 score = 6;			// 得分
-	optional int32 isAuto = 7;			// 是否托管
-	optional int32 pState = 8;			// 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+	optional int64 id = 1[default = -1];		// 玩家id
+	repeated _Card handCard = 2;				// 玩家手牌
+	optional int32 cardNum = 3[default = -1];	// 手牌数量
+	optional int32 team = 4[default = -1];		// 玩家队伍（1：红方，2：蓝方）
+	optional int32 multiple = 5[default = -1];	// 玩家加倍
+	optional int32 score = 6[default = -1];		// 得分
+	optional int32 isAuto = 7[default = -1];	// 是否托管
+	optional int32 pState = 8[default = -1];	// 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+	optional int32 opTime = 9[default = -1];	// 操作时间（豪秒）
 }
 
 
 message _Table {
-	repeated _GamePlayer player = 1;		// 玩家
-	repeated _Multiple comMultiple = 2;		// 公共倍数
-	optional int32 tState = 3;				// 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
-	repeated _Card lastCard = 4;			// 最后出牌
-	repeated int32 cardType = 5;			// 最后牌型
-	optional int32 lastOp = 6;				// 最后出牌玩家
-	optional int32 roundScore = 7; 			// 轮分
-	optional _Card callCard = 8;			// 被叫的牌
-	optional int32 callState = 9;			// 叫牌状态
-	optional int32 dealer = 10;				// 庄家
-	optional int32 opTime = 11;				// 操作时间（秒）
+	repeated _GamePlayer player = 1;				// 玩家
+	repeated _Multiple comMultiple = 2;				// 公共倍数
+	optional int32 tState = 3[default = -1];		// 牌桌状态（1：加倍，2：叫牌，3：出牌，4：结算）
+	repeated _Card lastCard = 4;					// 最后出牌
+	repeated int32 cardType = 5[default = -1];		// 最后牌型
+	optional int32 lastOp = 6[default = -1];		// 最后出牌玩家
+	optional int32 roundScore = 7[default = -1];	// 轮分
+	optional _Card callCard = 8[default = -1];		// 被叫的牌
+	optional int32 callState = 9[default = -1];		// 叫牌状态
+	optional int32 callOp = 10[default = -1];		// 叫牌玩家
+	optional int32 dealer = 11[default = -1];		// 庄家
+	optional int32 waitTime = 12[default = -1];		// 等待时间（豪秒）
 }
 
 // 开始匹配
