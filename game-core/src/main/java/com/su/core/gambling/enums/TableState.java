@@ -2,10 +2,6 @@ package com.su.core.gambling.enums;
 
 public enum TableState {
 	/**
-	 * 空闲
-	 * */
-	IDLE(0),
-	/**
 	 * 加倍 1
 	 * */
 	DOUBLES(1),

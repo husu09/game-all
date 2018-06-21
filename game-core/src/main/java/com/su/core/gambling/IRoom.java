@@ -1,16 +1,17 @@
 package com.su.core.gambling;
 
+import java.util.concurrent.DelayQueue;
+
+/**
+ * 游戏场接口
+ * */
 public interface IRoom {
 	/**
-	 * 开始匹配
+	 * 牌桌等待队列
 	 * */
-	public void startMatch();
+	public DelayQueue<ITable> getWaitTableQueue();
 	/**
-	 * 取消匹配
+	 * 玩家等待队列
 	 * */
-	public void cancelMatch();
-	/**
-	 * 换桌
-	 * */
-	public void chageTable();
+	public DelayQueue<GamePlayer> getWaitGamePlayerQueue();
 }

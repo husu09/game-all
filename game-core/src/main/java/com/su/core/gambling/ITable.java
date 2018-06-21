@@ -1,6 +1,11 @@
 package com.su.core.gambling;
 
-public interface ITable {
+import java.util.concurrent.Delayed;
+
+/**
+ * 牌桌接口
+ * */
+public interface ITable extends Delayed {
 	/**
 	 * 设置玩家
 	 */

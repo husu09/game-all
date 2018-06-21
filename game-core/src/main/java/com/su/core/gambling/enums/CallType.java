@@ -52,25 +52,28 @@ public enum CallType {
 		boolean isSuccess = false;
 		switch (callType) {
 		case CALL:
-			if (card != null && (card.getValue() == Card.CARD_XIAO_WANG || card.getValue() == Card.CARD_DA_WANG))
+			if (card == null || (card.getValue() == Card.CARD_XIAO_WANG || card.getValue() == Card.CARD_DA_WANG))
 				return false;
 			for (Card c : cards) {
-				if (c != null && c.equals(card)) {
-					isSuccess = true;
-					break;
+				if (c != card && c.equals(card)) {
+					return false;
 				}
 			}
+			isSuccess = true;
+			break;
 		case DARK:
-			if (card != null && (card.getValue() == Card.CARD_XIAO_WANG || card.getValue() == Card.CARD_DA_WANG))
+			if (card == null || (card.getValue() == Card.CARD_XIAO_WANG || card.getValue() == Card.CARD_DA_WANG))
 				return false;
 			for (Card c : cards) {
-				if (c != null && c != card && c.equals(card)) {
+				if (c != card && c.equals(card)) {
 					isSuccess = true;
 					break;
 				}
 			}
 			break;
 		case LIGHT:
+			if (card != null)
+				return false;
 			isSuccess = true;
 			break;
 		default:

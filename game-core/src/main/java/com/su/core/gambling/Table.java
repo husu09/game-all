@@ -15,7 +15,7 @@ import com.su.core.akka.AkkaContext;
 import com.su.core.akka.TableActor;
 import com.su.core.akka.TableActorImpl;
 import com.su.core.gambling.card.CardProcessor;
-import com.su.core.gambling.card.CardProcessorManager;
+import com.su.core.gambling.card.CardService;
 import com.su.core.gambling.enums.CallType;
 import com.su.core.gambling.enums.CardType;
 import com.su.core.gambling.enums.MultipleType;
@@ -84,7 +84,7 @@ public class Table implements Delayed {
 
 	private TableActor actor;
 
-	private CardProcessorManager cardManager = SpringUtil.getContext().getBean(CardProcessorManager.class);
+	private CardService cardManager = SpringUtil.getContext().getBean(CardService.class);
 	private NoticeService noticeService = SpringUtil.getContext().getBean(NoticeService.class);
 
 	/**
@@ -370,8 +370,8 @@ public class Table implements Delayed {
 			// 牌桌
 			setState(TableState.DOUBLES);
 			// 玩家
-			for (GamePlayer otherGamePlayer : this.players)
-				otherGamePlayer.setState(PlayerState.OPERATE, false);
+			for (GamePlayer otherPlayer : this.players)
+				otherPlayer.setState(PlayerState.OPERATE, false);
 		}
 	}
 

@@ -11,7 +11,7 @@ import com.su.core.gambling.enums.CardType;
 public abstract class BaseCardProcessor implements CardProcessor{
 	
 	@Autowired
-	private CardProcessorManager CardProcessorManager;
+	private CardService CardProcessorManager;
 	
 	@PostConstruct
 	public void initialize(){ 

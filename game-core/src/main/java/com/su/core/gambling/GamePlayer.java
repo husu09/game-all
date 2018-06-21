@@ -49,7 +49,7 @@ public class GamePlayer  implements Delayed{
 	 * */
 	private Long opTime;
 	
-	private Table table;
+	private ITable table;
 	
 	private PlayerContext playerContext;
 	
@@ -238,12 +238,15 @@ public class GamePlayer  implements Delayed{
 		return playerContext;
 	}
 
-	public Table getTable() {
+	public ITable getTable() {
 		return table;
 	}
 
-	public void setTable(Table table) {
+	public void setTable(ITable table) {
 		this.table = table;
 	}
 	
+	public void addMultiple(int addMultiple) {
+		this.multiple += addMultiple;
+	}
 }

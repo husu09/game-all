@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.su.core.gambling.enums.CardType;
 
 @Component
-public class CardProcessorManager {
+public class CardService {
 	
 	private Map<CardType, CardProcessor> cardProcessor = new HashMap<>();
 

@@ -1,8 +1,8 @@
 package com.su.core.gambling;
 
 /**
- * 记牌器接口
+ * 技能接口
  * */
-public interface IRecord {
+public interface ISkill {
 
 }
