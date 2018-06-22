@@ -4,7 +4,14 @@ public interface IContest {
 	/**
 	 * 报名
 	 * */
+	public void apply();
 	/**
-	 * 退出
+	 * 取消报名
 	 * */
+	public void cancelApply();
+	/**
+	 * 退赛
+	 * */
+	public void quit();
+	
 }

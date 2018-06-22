@@ -1,4 +1,4 @@
-package com.su.core.gambling.service;
+package com.su.core.gambling.assist;
 
 import com.su.core.gambling.Card;
 import com.su.core.gambling.GamePlayer;
@@ -7,7 +7,7 @@ import com.su.core.gambling.enums.MultipleType;
 import com.su.core.gambling.enums.PlayerState;
 import com.su.core.gambling.enums.Team;
 
-public class RankService {
+public class RankAssist {
 	/**
 	 * 处理队伍、排名、结束
 	 */

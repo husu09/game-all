@@ -9,12 +9,11 @@ import com.su.core.gambling.enums.PlayerState;
 import com.su.core.gambling.enums.TableState;
 import com.su.core.gambling.enums.Team;
 
-
 /**
  * 游戏中的玩家对象
  */
-public class GamePlayer  implements Delayed{
-	
+public class GamePlayer implements Delayed {
+
 	private long id;
 	/**
 	 * 坐位
@@ -46,13 +45,17 @@ public class GamePlayer  implements Delayed{
 	private int isAuto;
 	/**
 	 * 操作时间
-	 * */
+	 */
 	private Long opTime;
-	
-	private ITable table;
-	
+	/**
+	 * 牌桌
+	 */
+	private BasicTable table;
+	/**
+	 * 玩家上下文
+	 */
 	private PlayerContext playerContext;
-	
+
 	/**
 	 * 叫牌时间
 	 */
@@ -61,7 +64,7 @@ public class GamePlayer  implements Delayed{
 	 * 出牌时间
 	 */
 	private static final int OPERATE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
-	
+
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 		this.id = playerContext.getPlayerId();
@@ -94,36 +97,36 @@ public class GamePlayer  implements Delayed{
 
 	@Override
 	public int compareTo(Delayed o) {
-		if(this.getDelay(TimeUnit.MILLISECONDS) > o.getDelay(TimeUnit.MILLISECONDS)) {
-            return 1;
-        }else if(this.getDelay(TimeUnit.MILLISECONDS) < o.getDelay(TimeUnit.MILLISECONDS)) {
-            return -1;
-        }
-        return 0;
+		if (this.getDelay(TimeUnit.MILLISECONDS) > o.getDelay(TimeUnit.MILLISECONDS)) {
+			return 1;
+		} else if (this.getDelay(TimeUnit.MILLISECONDS) < o.getDelay(TimeUnit.MILLISECONDS)) {
+			return -1;
+		}
+		return 0;
 	}
 
 	@Override
 	public long getDelay(TimeUnit unit) {
-		 return unit.convert(opTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+		return unit.convert(opTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
 	}
-	
+
 	/**
 	 * 清空玩家状态
-	 * */
+	 */
 	public void clean() {
 		reset();
 		this.index = null;
 		this.table = null;
+		this.state = null;
 	}
-	
+
 	/**
 	 * 重置玩家状态
-	 * */
+	 */
 	public void reset() {
-		// this.state = null;
 		// 重置用户手牌
-		for (int i = 0; i < this.handCards.length; i ++) {
-			this.handCards[i] = null; 
+		for (int i = 0; i < this.handCards.length; i++) {
+			this.handCards[i] = null;
 		}
 		this.team = null;
 		this.multiple = 0;
@@ -131,33 +134,32 @@ public class GamePlayer  implements Delayed{
 		this.isAuto = 0;
 		this.opTime = null;
 	}
-	
-	
+
 	/**
 	 * 设置状态
-	 * */
+	 */
 	public void setState(PlayerState state, boolean isDelay) {
 		if (this.state == PlayerState.OPERATE)
-			this.table.getSite().getWaitGamePlayerQueue().remove(this);
+			this.table.getRoom().getWaitGamePlayerQueue().remove(this);
 		this.state = state;
 		if (isDelay && state == PlayerState.OPERATE) {
 			if (this.table.getState() == TableState.CALL)
 				this.opTime = TimeUtil.getCurrTime() + CALL_WAIT_TIME;
-			else if (this.table.getState() == TableState.DRAW) 
+			else if (this.table.getState() == TableState.DRAW)
 				this.opTime = TimeUtil.getCurrTime() + OPERATE_WAIT_TIME;
-			else 
+			else
 				return;
-			this.table.getSite().getWaitGamePlayerQueue().put(this);
+			this.table.getRoom().getWaitGamePlayerQueue().put(this);
 		}
 	}
-	
+
 	public void setState(PlayerState state) {
 		setState(state, true);
 	}
-	
+
 	/**
 	 * 获取手牌张数
-	 * */
+	 */
 	public int getHandCardsCount() {
 		int count = 0;
 		for (Card card : this.handCards) {
@@ -165,13 +167,6 @@ public class GamePlayer  implements Delayed{
 				count++;
 		}
 		return count;
-	}
-	
-	/**
-	 * 添加得分
-	 * */
-	public void addScore(int addScore) {
-		this.score += addScore;
 	}
 
 	public Integer getIndex() {
@@ -213,7 +208,7 @@ public class GamePlayer  implements Delayed{
 	public void setAuto(int isAuto) {
 		this.isAuto = isAuto;
 	}
-	
+
 	public Long getOpTime() {
 		return opTime;
 	}
@@ -238,15 +233,12 @@ public class GamePlayer  implements Delayed{
 		return playerContext;
 	}
 
-	public ITable getTable() {
+	public BasicTable getTable() {
 		return table;
 	}
 
-	public void setTable(ITable table) {
+	public void setTable(BasicTable table) {
 		this.table = table;
 	}
-	
-	public void addMultiple(int addMultiple) {
-		this.multiple += addMultiple;
-	}
+
 }

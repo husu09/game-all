@@ -9,12 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.su.common.util.CommonUtil;
-import com.su.common.util.SpringUtil;
 import com.su.common.util.TimeUtil;
 import com.su.core.akka.AkkaContext;
 import com.su.core.akka.TableActor;
 import com.su.core.akka.TableActorImpl;
-import com.su.core.gambling.card.CardService;
+import com.su.core.gambling.assist.MultipleAssist;
+import com.su.core.gambling.assist.RankAssist;
+import com.su.core.gambling.assist.TableAssist;
+import com.su.core.gambling.assist.TeamAssist;
+import com.su.core.gambling.assist.card.CardAssist;
+import com.su.core.gambling.assist.card.CardAssistManager;
+import com.su.core.gambling.assist.notice.BasicNoticeAssist;
 import com.su.core.gambling.card.CardProcessor;
 import com.su.core.gambling.enums.CallType;
 import com.su.core.gambling.enums.CardType;
@@ -22,93 +27,92 @@ import com.su.core.gambling.enums.MultipleType;
 import com.su.core.gambling.enums.PlayerState;
 import com.su.core.gambling.enums.TableState;
 import com.su.core.gambling.enums.Team;
-import com.su.core.gambling.service.MultipleService;
-import com.su.core.gambling.service.NoticeService;
-import com.su.core.gambling.service.RankService;
-import com.su.core.gambling.service.TableService;
-import com.su.core.gambling.service.TeamService;
 import com.su.msg.GamblingMsg.Match_;
 import com.su.msg.GamblingMsg.Quit_;
 import com.su.msg.GamblingMsg.TableResult_;
 
-public abstract class BasicTable implements ITable {
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+public abstract class BasicTable implements Delayed {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 牌
 	 */
-	protected Card[] cards;
+	private Card[] cards;
 	/**
 	 * 玩家
 	 */
-	protected GamePlayer[] players;
+	private GamePlayer[] players;
 	/**
 	 * 状态
 	 */
-	protected TableState state;
+	private TableState state;
 	/**
 	 * 轮分
 	 */
-	protected int roundScore;
+	private int roundScore;
 	/**
 	 * 被叫的牌
 	 */
-	protected Card callCard;
-	protected CallType callType;
-	protected Integer callOp;
+	private Card callCard;
+	private CallType callType;
+	private Integer callOp;
 	/**
 	 * 公共倍数
 	 */
-	protected int[] multiples;
+	private int[] multiples;
 	/**
 	 * 最后出牌
 	 */
-	protected Card[] lastCards;
-	protected CardType lastCardType;
-	protected Integer lastOp;
+	private Card[] lastCards;
+	private CardType lastCardType;
+	private Integer lastOp;
 	/**
 	 * 庄家
 	 */
-	protected int dealer;
+	private Integer dealer;
 	/**
 	 * 结算后的等待时间
 	 */
-	protected Long waitTime;
+	private Long waitTime;
 	/**
 	 * 排名
 	 */
-	protected Integer[] ranks;
+	private Integer[] ranks;
 	/**
 	 * 房间
 	 */
-	protected IRoom room;
+	private BasicRoom room;
 	/**
 	 * 通知
 	 */
-	protected INotice notice;
-
-	protected TableActor actor;
-
-	private CardService cardService;
-	private MultipleService multipleService;
-	private RankService rankService;
-	private TeamService teamService;
-	private TableService tableService;
+	private BasicNoticeAssist noticeAssist;
+	/**
+	 * actor
+	 */
+	private BasicTable actor;
+	/**
+	 * 辅助类
+	 */
+	private CardAssistManager cardAssistManager;
+	private TableAssist tableAssist;
+	private MultipleAssist multipleAssist;
+	private TeamAssist teamAssist;
+	private RankAssist rankAssist;
 
 	/**
 	 * 结算时等待时间
 	 */
-	protected static final int CLOSE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
+	private static final int CLOSE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
 	 * 加倍时间
 	 */
-	protected static final int DOUBLES_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
+	private static final int DOUBLES_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
 	 * 参与玩家人数
 	 */
-	protected static final int PLAYER_COUNT = 4;
+	private static final int PLAYER_COUNT = 4;
 
-	public BasicTable(IRoom room, CardService cardManager) {
-		this.actor = AkkaContext.createActor(TableActor.class, TableActorImpl.class, this);
+	public BasicTable(BasicRoom room) {
+		this.actor = AkkaContext.createActor(BasicTable.class, this.getClass(), this);
 		this.room = room;
 		// 初始化牌
 		Card[] cards = new Card[Card.CARDS_NUM * 2];
@@ -124,11 +128,13 @@ public abstract class BasicTable implements ITable {
 	 */
 	public void clean() {
 		reset();
+		// 状态
+		this.state = null;
 		// 清空玩家
 		for (int i = 0; i < this.players.length; i++)
 			this.players[i] = null;
 		// 庄家
-		this.dealer = 0;
+		this.dealer = null;
 	}
 
 	/**
@@ -157,11 +163,11 @@ public abstract class BasicTable implements ITable {
 		// 排名
 		for (int i = 0; i < this.ranks.length; i++)
 			this.ranks[i] = null;
-		// 状态
-		this.state = null;
 	}
-
-	@Override
+	
+	/**
+	 * 设置玩家
+	 * */
 	public void setPlayers(GamePlayer[] players) {
 		// 玩家数据
 		for (int i = 0; i < players.length; i++) {
@@ -174,7 +180,7 @@ public abstract class BasicTable implements ITable {
 	/**
 	 * 洗牌
 	 */
-	protected void shuffle() {
+	private void shuffle() {
 		for (int i = 0; i < this.cards.length; i++) {
 			Card tmp = this.cards[i];
 			int r = CommonUtil.range(i, this.cards.length);
@@ -183,7 +189,6 @@ public abstract class BasicTable implements ITable {
 		}
 	}
 
-	@Override
 	public void deal() {
 		// 洗牌
 		shuffle();
@@ -348,8 +353,8 @@ public abstract class BasicTable implements ITable {
 			return;
 		}
 		if (!cardProcessor.compare(cards, this.lastCardType, this.lastCards)) {
-			logger.error("Cards not BG. lastCards {} {} {}",  Arrays.toString(cards),
-					Arrays.toString(this.lastCards), player.getId());
+			logger.error("Cards not BG. lastCards {} {} {}", Arrays.toString(cards), Arrays.toString(this.lastCards),
+					player.getId());
 			return;
 		}
 		// 当前玩家
@@ -629,7 +634,7 @@ public abstract class BasicTable implements ITable {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 是否完成
 	 */
@@ -640,7 +645,7 @@ public abstract class BasicTable implements ITable {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 获取任意一方的人数
 	 */
@@ -807,4 +812,69 @@ public abstract class BasicTable implements ITable {
 	public long getDelay(TimeUnit unit) {
 		return unit.convert(waitTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
 	}
+
+	public Integer getDealer() {
+		return dealer;
+	}
+
+	public void setDealer(Integer dealer) {
+		this.dealer = dealer;
+	}
+
+	public Card[] getCards() {
+		return cards;
+	}
+
+	public GamePlayer[] getPlayers() {
+		return players;
+	}
+
+	public TableState getState() {
+		return state;
+	}
+
+	public int getRoundScore() {
+		return roundScore;
+	}
+
+	public Card getCallCard() {
+		return callCard;
+	}
+
+	public CallType getCallType() {
+		return callType;
+	}
+
+	public Integer getCallOp() {
+		return callOp;
+	}
+
+	public int[] getMultiples() {
+		return multiples;
+	}
+
+	public Card[] getLastCards() {
+		return lastCards;
+	}
+
+	public CardType getLastCardType() {
+		return lastCardType;
+	}
+
+	public Integer getLastOp() {
+		return lastOp;
+	}
+
+	public Integer[] getRanks() {
+		return ranks;
+	}
+
+	public BasicRoom getRoom() {
+		return room;
+	}
+
+	public BasicTable getActor() {
+		return actor;
+	}
+
 }

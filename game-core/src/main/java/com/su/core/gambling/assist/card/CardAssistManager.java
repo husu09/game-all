@@ -1,4 +1,4 @@
-package com.su.core.gambling.card;
+package com.su.core.gambling.assist.card;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import com.su.core.gambling.enums.CardType;
 
 @Component
-public class CardService {
+public class CardAssistManager {
 	
-	private Map<CardType, CardProcessor> cardProcessor = new HashMap<>();
+	private Map<CardType, CardAssist> cardProcessor = new HashMap<>();
 
-	public Map<CardType, CardProcessor> getCardProcessor() {
+	public Map<CardType, CardAssist> getCardProcessor() {
 		return cardProcessor;
 	}
 	

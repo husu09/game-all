@@ -81,15 +81,4 @@ public enum CallType {
 		}
 		return isSuccess;
 	}
-
-	/**
-	 * 是否是暗叫
-	 */
-	public static boolean isDark(Card callCard, Card[] handCards) {
-		for (Card card : handCards) {
-			if (callCard == card)
-				return true;
-		}
-		return false;
-	}
 }

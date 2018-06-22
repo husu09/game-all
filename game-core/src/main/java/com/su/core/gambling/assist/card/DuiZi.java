@@ -1,4 +1,4 @@
-package com.su.core.gambling.card;
+package com.su.core.gambling.assist.card;
 
 import org.springframework.stereotype.Component;
 
@@ -6,16 +6,16 @@ import com.su.core.gambling.Card;
 import com.su.core.gambling.enums.CardType;
 
 @Component
-public class DanZhang extends BaseCardProcessor {
+public class DuiZi extends BasicCardAssist {
 
 	@Override
 	public CardType getCardType() {
-		return CardType.DAN_ZHANG;
+		return CardType.DUI_ZI;
 	}
 
 	@Override
 	public boolean verify(Card[] cards) {
-		if (cards.length != 1)
+		if (cards.length != 2 || cards[0].getValue() != cards[1].getValue() || cards[0].getValue() > Card.CARD_2)
 			return false;
 		return true;
 	}

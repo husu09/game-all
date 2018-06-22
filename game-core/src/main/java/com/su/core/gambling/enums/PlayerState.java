@@ -2,25 +2,21 @@ package com.su.core.gambling.enums;
 
 public enum PlayerState {
 	/**
-	 * 匹配中 1
-	 * */
-	MATCH(1),
-	/**
-	 * 准备 2
+	 * 准备 1
 	 */
-	READY(2),
+	READY(1),
 	/**
-	 * 等待 3
+	 * 等待 2
 	 */
-	WAIT(3),
+	WAIT(2),
 	/**
-	 * 操作中 4
+	 * 操作中 3
 	 */
-	OPERATE(4),
+	OPERATE(3),
 	/**
-	 * 出完牌 5
+	 * 出完牌 4
 	 */
-	FINISH(5);
+	FINISH(4);
 	private int value;
 	
 	PlayerState(int value) {

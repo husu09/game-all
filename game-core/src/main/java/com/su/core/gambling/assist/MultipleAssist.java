@@ -1,10 +1,10 @@
-package com.su.core.gambling.service;
+package com.su.core.gambling.assist;
 
 import com.su.core.gambling.Card;
 import com.su.core.gambling.ITable;
 import com.su.core.gambling.enums.MultipleType;
 
-public class MultipleService {
+public class MultipleAssist {
 	/**
 	 * 增加公共倍数
 	 */

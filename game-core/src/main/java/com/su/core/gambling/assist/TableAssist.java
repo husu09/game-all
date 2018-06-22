@@ -1,10 +1,10 @@
-package com.su.core.gambling.service;
+package com.su.core.gambling.assist;
 
 import com.su.core.gambling.Card;
 import com.su.core.gambling.GamePlayer;
 import com.su.core.gambling.enums.PlayerState;
 
-public class TableService {
+public class TableAssist {
 	/**
 	 * 是否是同一状态
 	 */

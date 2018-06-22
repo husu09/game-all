@@ -1,16 +1,14 @@
 package com.su.core.gambling;
 
+import com.su.core.context.PlayerContext;
+
 public interface IMatch {
 	/**
-	 * 开始匹配
-	 * */
-	public void startMatch();
+	 * 添加玩家到匹配队列
+	 */
+	public void addPlayerToMatch(PlayerContext playerContext, boolean isFirst);
 	/**
-	 * 取消匹配
-	 * */
-	public void cancelMatch();
-	/**
-	 * 换桌
-	 * */
-	public void chageTable();
+	 * 从匹配队列删除玩家
+	 */
+	public void removePlayerFromMatch(GamePlayer gamePlayer);
 }

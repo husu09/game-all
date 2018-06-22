@@ -140,4 +140,10 @@ public class Site {
 		return siteCo;
 	}
 
+	public AtomicInteger getPlayerNum() {
+		return playerNum;
+	}
+	
+	
+
 }

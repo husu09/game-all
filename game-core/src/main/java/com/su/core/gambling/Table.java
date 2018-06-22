@@ -14,15 +14,15 @@ import com.su.common.util.TimeUtil;
 import com.su.core.akka.AkkaContext;
 import com.su.core.akka.TableActor;
 import com.su.core.akka.TableActorImpl;
-import com.su.core.gambling.card.CardProcessor;
-import com.su.core.gambling.card.CardService;
+import com.su.core.gambling.assist.NoticeService;
+import com.su.core.gambling.card.CardAssist;
+import com.su.core.gambling.card.CardAssistManager;
 import com.su.core.gambling.enums.CallType;
 import com.su.core.gambling.enums.CardType;
 import com.su.core.gambling.enums.MultipleType;
 import com.su.core.gambling.enums.PlayerState;
 import com.su.core.gambling.enums.TableState;
 import com.su.core.gambling.enums.Team;
-import com.su.core.gambling.service.NoticeService;
 import com.su.msg.GamblingMsg.Match_;
 import com.su.msg.GamblingMsg.Quit_;
 import com.su.msg.GamblingMsg.TableResult_;
@@ -84,7 +84,7 @@ public class Table implements Delayed {
 
 	private TableActor actor;
 
-	private CardService cardManager = SpringUtil.getContext().getBean(CardService.class);
+	private CardAssistManager cardManager = SpringUtil.getContext().getBean(CardAssistManager.class);
 	private NoticeService noticeService = SpringUtil.getContext().getBean(NoticeService.class);
 
 	/**
@@ -427,7 +427,7 @@ public class Table implements Delayed {
 		}
 
 		// 出牌验证
-		CardProcessor cardProcessor = cardManager.getCardProcessor().get(cardType);
+		CardAssist cardProcessor = cardManager.getCardProcessor().get(cardType);
 		if (!cardProcessor.verify(cards)) {
 			logger.error("{} CardType not match Cards {} {}", player.getId(), cardTypeValue, Arrays.toString(indexs));
 			return;

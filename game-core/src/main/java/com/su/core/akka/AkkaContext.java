@@ -1,7 +1,5 @@
 package com.su.core.akka;
 
-import org.springframework.stereotype.Component;
-
 import akka.actor.ActorSystem;
 import akka.actor.TypedActor;
 import akka.actor.TypedProps;

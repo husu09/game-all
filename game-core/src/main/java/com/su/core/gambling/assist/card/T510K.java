@@ -1,4 +1,4 @@
-package com.su.core.gambling.card;
+package com.su.core.gambling.assist.card;
 
 import org.springframework.stereotype.Component;
 
@@ -6,7 +6,7 @@ import com.su.core.gambling.Card;
 import com.su.core.gambling.enums.CardType;
 
 @Component
-public class T510K  extends BaseCardProcessor {
+public class T510K  extends BasicCardAssist {
 
 
 

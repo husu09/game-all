@@ -1,4 +1,4 @@
-package com.su.core.gambling.service;
+package com.su.core.gambling.assist;
 
 import com.su.core.gambling.Card;
 import com.su.core.gambling.GamePlayer;
@@ -6,7 +6,7 @@ import com.su.core.gambling.enums.CallType;
 import com.su.core.gambling.enums.PlayerState;
 import com.su.core.gambling.enums.Team;
 
-public class TeamService {
+public class TeamAssist {
 	/**
 	 * 出牌时处理玩家队伍
 	 * */

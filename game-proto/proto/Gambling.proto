@@ -45,6 +45,14 @@ message Match_ {
 	
 }
 
+// 取消匹配
+message CancelMatch {
+
+}
+message CancelMatch_ {
+
+}
+
 // 叫牌
 message Call {
 	optional int32 callType = 1;	// 叫牌状态（1：叫牌，2：暗叫，3：明叫）

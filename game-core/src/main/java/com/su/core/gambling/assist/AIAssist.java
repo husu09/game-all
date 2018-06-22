@@ -1,11 +1,11 @@
-package com.su.core.gambling.service;
+package com.su.core.gambling.assist;
 
 import com.su.core.gambling.AutoCards;
 import com.su.core.gambling.Card;
 import com.su.core.gambling.GamePlayer;
 import com.su.core.gambling.enums.CardType;
 
-public class AIService {
+public class AIAssist {
 	/**
 	 * 自动出牌
 	 * @param lastPlayer 上游玩家

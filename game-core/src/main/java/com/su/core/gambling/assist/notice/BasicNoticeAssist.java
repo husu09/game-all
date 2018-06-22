@@ -1,4 +1,4 @@
-package com.su.core.gambling.service;
+package com.su.core.gambling.assist.notice;
 
 import org.springframework.stereotype.Component;
 
@@ -10,7 +10,7 @@ import com.su.msg.GamblingMsg._GamePlayer;
 import com.su.msg.GamblingMsg._Table;
 
 @Component
-public class NoticeService {
+public class BasicNoticeAssist {
 	/**
 	 * 通知所有状态
 	 */
