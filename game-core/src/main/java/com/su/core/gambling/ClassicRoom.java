@@ -12,12 +12,12 @@ public class ClassicRoom extends BasicRoom implements IMatch {
 	private ConcurrentLinkedDeque<GamePlayer> playerDeque = new ConcurrentLinkedDeque<>();
 	
 	@Override
-	public void addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {
+	public synchronized void addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {
 		// 验证是否可以加入匹配队列
-		if (playerDeque.contains(playerContext))
-			return;
 		if (playerContext.getGamePlayer() == null)
 			new GamePlayer(playerContext);
+		else if (playerDeque.contains(playerContext.getGamePlayer()))
+			return;
 		else if (playerContext.getGamePlayer().getState() != null)
 			return;
 		// 加入队列
@@ -28,6 +28,8 @@ public class ClassicRoom extends BasicRoom implements IMatch {
 		getPlayerNum().incrementAndGet();
 		// 尝试开始游戏
 		// 尝试从队列中获取4个玩家
+		if (playerDeque.size() < 4) 
+			return;
 		GamePlayer[] gamePlayers = new GamePlayer[4];
 		for (int i = 0; i < 4; i++) {
 			gamePlayers[i] = playerDeque.poll();
@@ -54,7 +56,7 @@ public class ClassicRoom extends BasicRoom implements IMatch {
 	}
 
 	@Override
-	public void removePlayerFromMatch(GamePlayer gamePlayer) {
+	public synchronized void removePlayerFromMatch(GamePlayer gamePlayer) {
 		if (playerDeque.remove(gamePlayer))
 			getPlayerNum().decrementAndGet();
 	}
