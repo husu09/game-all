@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.su.common.util.CommonUtil;
+import com.su.common.util.SpringUtil;
 import com.su.common.util.TimeUtil;
 import com.su.core.akka.AkkaContext;
 import com.su.core.akka.TableActor;
@@ -20,6 +21,7 @@ import com.su.core.gambling.assist.TeamAssist;
 import com.su.core.gambling.assist.card.CardAssist;
 import com.su.core.gambling.assist.card.CardAssistManager;
 import com.su.core.gambling.assist.notice.BasicNoticeAssist;
+import com.su.core.gambling.assist.notice.NoticeAssistFactory;
 import com.su.core.gambling.card.CardProcessor;
 import com.su.core.gambling.enums.CallType;
 import com.su.core.gambling.enums.CardType;
@@ -30,6 +32,9 @@ import com.su.core.gambling.enums.Team;
 import com.su.msg.GamblingMsg.Match_;
 import com.su.msg.GamblingMsg.Quit_;
 import com.su.msg.GamblingMsg.TableResult_;
+import com.su.msg.GamblingMsg._Card;
+import com.su.msg.GamblingMsg._GamePlayer;
+import com.su.msg.GamblingMsg._Table;
 
 public abstract class BasicTable implements Delayed {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -82,22 +87,9 @@ public abstract class BasicTable implements Delayed {
 	 */
 	private BasicRoom room;
 	/**
-	 * 通知
-	 */
-	private BasicNoticeAssist noticeAssist;
-	/**
 	 * actor
 	 */
 	private BasicTable actor;
-	/**
-	 * 辅助类
-	 */
-	private CardAssistManager cardAssistManager;
-	private TableAssist tableAssist;
-	private MultipleAssist multipleAssist;
-	private TeamAssist teamAssist;
-	private RankAssist rankAssist;
-
 	/**
 	 * 结算时等待时间
 	 */
@@ -110,6 +102,21 @@ public abstract class BasicTable implements Delayed {
 	 * 参与玩家人数
 	 */
 	private static final int PLAYER_COUNT = 4;
+	/**
+	 * 辅助对象
+	 */
+	private CardAssistManager cardAssistManager = SpringUtil.getContext().getBean(CardAssistManager.class);
+	private TableAssist tableAssist =SpringUtil.getContext().getBean(TableAssist.class);
+	private MultipleAssist multipleAssist = SpringUtil.getContext().getBean(MultipleAssist.class);
+	private TeamAssist teamAssist = SpringUtil.getContext().getBean(TeamAssist.class);
+	private RankAssist rankAssist = SpringUtil.getContext().getBean(RankAssist.class);
+	private BasicNoticeAssist noticeAssist = NoticeAssistFactory.getNoticeAssist(this.getClass());
+	/**
+	 * 通知使用的 build 对象
+	 * */
+	private _Table.Builder tableBuilder = _Table.newBuilder();
+	private _GamePlayer.Builder gamePlayerBuilder = _GamePlayer.newBuilder();
+	private _Card.Builder cardBuilder = _Card.newBuilder();
 
 	public BasicTable(BasicRoom room) {
 		this.actor = AkkaContext.createActor(BasicTable.class, this.getClass(), this);
@@ -207,10 +214,12 @@ public abstract class BasicTable implements Delayed {
 		setState(TableState.CALL);
 		this.players[this.dealer].setState(PlayerState.OPERATE);
 		// 通知
-		notice.notice(this);
+		noticeAssist.notice(this);
 	}
-
-	@Override
+	
+	/**
+	 * 叫牌
+	 * */
 	public void call(GamePlayer player, int callTypeValue, int index) {
 		if (player.getState() != PlayerState.OPERATE) {
 			logger.error("Player state is not operate {} {}", player.getState(), player.getId());
@@ -222,7 +231,7 @@ public abstract class BasicTable implements Delayed {
 		}
 		CallType callType = CallType.get(callTypeValue);
 		if (callType == null) {
-			logger.error("CallType is null {} {}", callTypeValue, player.getId());
+			logger.error("CallType is null {} {}", callType, player.getId());
 			return;
 		}
 		Card card = player.getHandCards()[index];
@@ -240,7 +249,7 @@ public abstract class BasicTable implements Delayed {
 		this.callType = callType;
 		this.callOp = player.getIndex();
 		// 倍数
-		multipleService.addMultiple(this, callType, null);
+		multipleAssist.addMultiple(this, callType, cards);
 		if (callType == CallType.LIGHT) {
 			// 当前玩家
 			player.setTeam(Team.RED);
@@ -258,35 +267,41 @@ public abstract class BasicTable implements Delayed {
 			// 全部操作完
 			if (isSameState(PlayerState.WAIT))
 				callToDoubles();
-			else
+			else {
 				doNextPlayerState(player);
+			}
 		}
 		// 通知
-		notice.notice(this);
+		noticeAssist.notice(this);
+		
 	}
 
-	@Override
+	/**
+	 * 加倍
+	 * */
 	public boolean doubles(GamePlayer player, int multiple) {
 		if (player.getState() != PlayerState.OPERATE) {
 			logger.error("Player state is not operate {} {}", player.getState(), player.getId());
 			return false;
 		}
 		if (this.state != TableState.DOUBLES) {
-			logger.error("Table state is not allow {} {}", this.state, player.getId());
+			logger.error("Table state is not doubles {} {}", this.state, player.getId());
 			return false;
 		}
-		player.addMultiple(multiple);
+		player.setMultiple(player.getMultiple() + multiple);
 		player.setState(PlayerState.WAIT);
 		// 加倍结束切换状态
 		if (isSameState(PlayerState.WAIT)) {
 			doublesToDraw();
 		}
 		// 通知
-		notice.notice(this);
+		noticeAssist.notice(this);
 		return true;
 	}
 
-	@Override
+	/**
+	 * 过牌
+	 * */
 	public void check(GamePlayer player) {
 		if (player.getState() != PlayerState.OPERATE) {
 			logger.error("Player state is not operate {} {}", player.getState(), player.getId());
@@ -315,10 +330,9 @@ public abstract class BasicTable implements Delayed {
 			return;
 		}
 		// 通知
-		notice.notice(this);
+		noticeAssist.notice(this);
 	}
-
-	@Override
+	
 	public void draw(GamePlayer player, int cardTypeValue, int[] indexs) {
 		// 验证
 		if (player.getState() != PlayerState.OPERATE) {
@@ -498,17 +512,21 @@ public abstract class BasicTable implements Delayed {
 		notice.notice(this);
 	}
 
-	@Override
+	/**
+	 * 玩家操作超时
+	 * */
 	public void doWaitGamePlayer(GamePlayer gamePlayer) {
 		if (gamePlayer.getState() != PlayerState.OPERATE)
 			return;
 		gamePlayer.setState(PlayerState.WAIT);
 		doNextPlayerState(gamePlayer);
 		// 通知
-		notice.notice(this);
+		noticeAssist.notice(this);
 	}
 
-	@Override
+	/**
+	 * 牌桌等待超时
+	 * */
 	public void doWaitTable() {
 		if (this.state == TableState.DOUBLES) {
 			// 加倍超时
@@ -520,22 +538,21 @@ public abstract class BasicTable implements Delayed {
 			for (GamePlayer otherGamePlayer : this.players) {
 				if (otherGamePlayer.getState() != PlayerState.READY) {
 					otherGamePlayer.clean();
-					// TODO
 					otherGamePlayer.getPlayerContext().write(Quit_.newBuilder());
 				} else {
-					// TODO
 					// 准备中的玩家重新加入匹配队列
 					otherGamePlayer.clean();
-					this.site.addPlayerToMatch(otherGamePlayer.getPlayerContext(), true);
-					otherGamePlayer.getPlayerContext().write(Match_.newBuilder());
+					if (this.room instanceof IMatch) {
+						((IMatch) this.room).addPlayerToMatch(otherGamePlayer.getPlayerContext(), true);
+						otherGamePlayer.getPlayerContext().write(Match_.newBuilder());
+					}
+					
 				}
 			}
-			// TODO
 			// 牌桌
 			clean();
-			this.site.getIdleTableQueue().offer(this);
+			this.room.getIdleTableQueue().offer(this);
 		}
-
 	}
 
 	/**
@@ -633,17 +650,6 @@ public abstract class BasicTable implements Delayed {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * 是否完成
-	 */
-	private boolean isFinish(GamePlayer player) {
-		for (Card card : player.getHandCards()) {
-			if (card != null)
-				return false;
-		}
-		return true;
 	}
 
 	/**
@@ -758,17 +764,12 @@ public abstract class BasicTable implements Delayed {
 					break;
 				}
 			}
-			// 没有队友时下家接风
-			if (nextPlayer == null)
-				nextPlayer = players[player.getIndex() + 1 % 4];
-		} else {
+			
+		}
+		// 没有队友时下家接风
+		if (nextPlayer == null)
 			nextPlayer = players[player.getIndex() + 1 % 4];
-		}
 		nextPlayer.setState(PlayerState.OPERATE);
-		// 托管状态自行出牌 XXX 后端直接做没有动画表现
-		if (nextPlayer.isAuto() == 1) {
-			check(nextPlayer);
-		}
 	}
 
 	/**
@@ -819,6 +820,10 @@ public abstract class BasicTable implements Delayed {
 
 	public void setDealer(Integer dealer) {
 		this.dealer = dealer;
+	}
+	
+	public Long getWaitTime() {
+		return waitTime;
 	}
 
 	public Card[] getCards() {
@@ -877,4 +882,16 @@ public abstract class BasicTable implements Delayed {
 		return actor;
 	}
 
+	public _Table.Builder getTableBuilder() {
+		return tableBuilder;
+	}
+
+	public _GamePlayer.Builder getGamePlayerBuilder() {
+		return gamePlayerBuilder;
+	}
+
+	public _Card.Builder getCardBuilder() {
+		return cardBuilder;
+	}
+	
 }

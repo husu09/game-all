@@ -1,21 +1,29 @@
 package com.su.core.gambling.assist.notice;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Component;
 
+import com.su.core.gambling.BasicTable;
 import com.su.core.gambling.Card;
 import com.su.core.gambling.GamePlayer;
-import com.su.core.gambling.Table;
 import com.su.msg.GamblingMsg._Card;
 import com.su.msg.GamblingMsg._GamePlayer;
 import com.su.msg.GamblingMsg._Table;
 
 @Component
 public class BasicNoticeAssist {
+	
+	@PostConstruct
+	public void initialize(){ 
+		NoticeAssistFactory.addNoticeAssist(this);
+	}
+	
 	/**
 	 * 通知所有状态
 	 */
-	public void noticeAllData(Table table) {
-		for (GamePlayer otherGamePlayer : table.getPlayers()) {
+	public void notice(BasicTable basicTable) {
+		for (GamePlayer otherGamePlayer : basicTable.getPlayers()) {
 			otherGamePlayer.getPlayerContext().write(serializeTable(otherGamePlayer.getTable(),
 					otherGamePlayer.getTable().getTableBuilder(), otherGamePlayer));
 		}
@@ -24,7 +32,7 @@ public class BasicNoticeAssist {
 	/**
 	 * 序列化牌桌
 	 */
-	public _Table serializeTable(Table table, _Table.Builder builder, GamePlayer currGamePlayer) {
+	public _Table serializeTable(BasicTable table, _Table.Builder builder, GamePlayer currGamePlayer) {
 		builder.clear();
 		for (GamePlayer otherGamePlayer : table.getPlayers())
 			builder.addPlayer(serializeGamePlayer(otherGamePlayer, table.getGamePlayerBuilder(),

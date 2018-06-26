@@ -37,7 +37,7 @@ public abstract class BasicRoom {
 	public DelayQueue<GamePlayer> getWaitGamePlayerQueue() {
 		return waitGamePlayerQueue;
 	}
-
+	
 	public void doWaitTable() {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
@@ -53,11 +53,16 @@ public abstract class BasicRoom {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
 				GamePlayer gamePlayer = waitGamePlayerQueue.take();
-				gamePlayer.getTable().getActor().doWaitGamePlayer(gamePlayer);
+				if (gamePlayer.getOpTime() <=  GamePlayer.AUTO_WAIT_TIME)
+					// 托管
+					gamePlayer.getTable().getActor().check(gamePlayer);
+				else
+					gamePlayer.getTable().getActor().doWaitGamePlayer(gamePlayer);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 
 }

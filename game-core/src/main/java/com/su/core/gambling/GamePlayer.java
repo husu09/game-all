@@ -64,6 +64,10 @@ public class GamePlayer implements Delayed {
 	 * 出牌时间
 	 */
 	private static final int OPERATE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
+	/**
+	 * 托管时出牌时间
+	 * */
+	public static final int AUTO_WAIT_TIME = TimeUtil.ONE_SECOND;
 
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
@@ -145,8 +149,13 @@ public class GamePlayer implements Delayed {
 		if (isDelay && state == PlayerState.OPERATE) {
 			if (this.table.getState() == TableState.CALL)
 				this.opTime = TimeUtil.getCurrTime() + CALL_WAIT_TIME;
-			else if (this.table.getState() == TableState.DRAW)
-				this.opTime = TimeUtil.getCurrTime() + OPERATE_WAIT_TIME;
+			else if (this.table.getState() == TableState.DRAW) {
+				// 托管状态下的时间
+				if (this.isAuto == 1)
+					this.opTime = TimeUtil.getCurrTime() + AUTO_WAIT_TIME;
+				else
+					this.opTime = TimeUtil.getCurrTime() + OPERATE_WAIT_TIME;
+			}
 			else
 				return;
 			this.table.getRoom().getWaitGamePlayerQueue().put(this);

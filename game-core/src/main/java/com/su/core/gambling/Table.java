@@ -58,10 +58,6 @@ public class Table implements Delayed {
 	private CallType callType;
 	private Integer callOp;
 	/**
-	 * 公共倍数
-	 */
-	private int[] multiples;
-	/**
 	 * 最后出牌
 	 */
 	private Card[] lastCards;
