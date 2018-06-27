@@ -12,100 +12,102 @@ import com.su.common.util.CommonUtil;
 import com.su.common.util.SpringUtil;
 import com.su.common.util.TimeUtil;
 import com.su.core.akka.AkkaContext;
-import com.su.core.akka.TableActor;
-import com.su.core.akka.TableActorImpl;
-import com.su.core.gambling.assist.NoticeService;
-import com.su.core.gambling.card.CardAssist;
-import com.su.core.gambling.card.CardAssistManager;
+import com.su.core.gambling.assist.card.CardAssist;
+import com.su.core.gambling.assist.card.CardAssistManager;
+import com.su.core.gambling.assist.notice.NoticeAssist;
+import com.su.core.gambling.assist.notice.NoticeAssistFactory;
 import com.su.core.gambling.enums.CallType;
 import com.su.core.gambling.enums.CardType;
 import com.su.core.gambling.enums.MultipleType;
 import com.su.core.gambling.enums.PlayerState;
 import com.su.core.gambling.enums.TableState;
 import com.su.core.gambling.enums.Team;
-import com.su.msg.GamblingMsg.Match_;
-import com.su.msg.GamblingMsg.Quit_;
 import com.su.msg.GamblingMsg.TableResult_;
 import com.su.msg.GamblingMsg._Card;
 import com.su.msg.GamblingMsg._GamePlayer;
 import com.su.msg.GamblingMsg._Table;
 
-/**
- * 牌桌对象
- */
-public class Table implements Delayed {
-	private Logger logger = LoggerFactory.getLogger(Table.class);
+public abstract class Table implements Delayed {
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 牌
 	 */
-	private Card[] cards;
+	protected Card[] cards;
 	/**
 	 * 玩家
 	 */
-	private GamePlayer[] players;
+	protected GamePlayer[] players;
 	/**
 	 * 状态
 	 */
-	private TableState state;
+	protected TableState state;
 	/**
 	 * 轮分
 	 */
-	private int roundScore;
+	protected int roundScore;
 	/**
 	 * 被叫的牌
 	 */
-	private Card callCard;
-	private CallType callType;
-	private Integer callOp;
+	protected Card callCard;
+	protected CallType callType;
+	protected Integer callOp;
+	/**
+	 * 公共倍数
+	 */
+	protected int[] multiples;
 	/**
 	 * 最后出牌
 	 */
-	private Card[] lastCards;
-	private CardType lastCardType;
-	private Integer lastOp;
+	protected Card[] lastCards;
+	protected CardType lastCardType;
+	protected Integer lastOp;
 	/**
 	 * 庄家
 	 */
-	private int dealer;
+	protected int dealer;
 	/**
 	 * 结算后的等待时间
 	 */
-	private Long waitTime;
+	protected Long waitTime;
 	/**
 	 * 排名
 	 */
-	private Integer[] ranks;
-
-	private Site site;
-
-	private TableActor actor;
-
-	private CardAssistManager cardManager = SpringUtil.getContext().getBean(CardAssistManager.class);
-	private NoticeService noticeService = SpringUtil.getContext().getBean(NoticeService.class);
-
+	protected Integer[] ranks;
+	/**
+	 * 房间
+	 */
+	protected Room room;
+	/**
+	 * actor
+	 */
+	protected Table actor;
 	/**
 	 * 结算时等待时间
 	 */
-	private static final int CLOSE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
+	protected static final int CLOSE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
 	 * 加倍时间
 	 */
-	private static final int DOUBLES_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
+	protected static final int DOUBLES_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
 	 * 参与玩家人数
 	 */
-	private static final int PLAYER_COUNT = 4;
-
+	protected static final int PLAYER_COUNT = 4;
 	/**
-	 * 通知
+	 * 辅助对象
+	 */
+	protected CardAssistManager cardAssistManager = SpringUtil.getContext().getBean(CardAssistManager.class);
+	protected NoticeAssist noticeAssist = NoticeAssistFactory.getNoticeAssist(this.getClass());
+	/**
+	 * 通知使用的 build 对象
 	 */
 	private _Table.Builder tableBuilder = _Table.newBuilder();
 	private _GamePlayer.Builder gamePlayerBuilder = _GamePlayer.newBuilder();
 	private _Card.Builder cardBuilder = _Card.newBuilder();
 
-	public Table(Site site) {
-		this.actor = AkkaContext.createActor(TableActor.class, TableActorImpl.class, this);
-		this.site = site;
+	public Table(Room room) {
+		this.actor = AkkaContext.createActor(Table.class, this.getClass(), this);
+		this.room = room;
 		// 初始化牌
 		Card[] cards = new Card[Card.CARDS_NUM * 2];
 		System.arraycopy(Card.ONE_CARDS, 0, cards, 0, Card.CARDS_NUM);
@@ -120,6 +122,8 @@ public class Table implements Delayed {
 	 */
 	public void clean() {
 		reset();
+		// 状态
+		setState(null);
 		// 清空玩家
 		for (int i = 0; i < this.players.length; i++)
 			this.players[i] = null;
@@ -153,8 +157,18 @@ public class Table implements Delayed {
 		// 排名
 		for (int i = 0; i < this.ranks.length; i++)
 			this.ranks[i] = null;
-		// 状态
-		this.state = null;
+	}
+
+	/**
+	 * 设置玩家
+	 */
+	public void setPlayers(GamePlayer[] players) {
+		// 玩家数据
+		for (int i = 0; i < players.length; i++) {
+			players[i].setIndex(i);
+			players[i].setTable(this);
+		}
+		this.players = players;
 	}
 
 	/**
@@ -170,9 +184,15 @@ public class Table implements Delayed {
 	}
 
 	/**
+	 * 发牌前处理
+	 */
+	public abstract void beforDeal();
+
+	/**
 	 * 发牌
 	 */
 	public void deal() {
+		beforDeal();
 		// 洗牌
 		shuffle();
 		// 发牌
@@ -186,137 +206,53 @@ public class Table implements Delayed {
 		for (int i = 0; i < this.players.length; i++) {
 			Arrays.sort(this.players[i].getHandCards(), Collections.reverseOrder());
 		}
-		// 转换到时叫牌状态
-		doublesToDraw();
+		// 转换到叫牌状态
+		setState(TableState.CALL);
+		this.players[this.dealer].setState(PlayerState.OPERATE);
 		// 通知
-		noticeService.noticeAllData(this);
+		noticeAssist.notice(this);
 	}
 
 	/**
-	 * 设置状态
+	 * 叫牌后
 	 */
-	private void setState(TableState state) {
-		if (this.state == TableState.DOUBLES || this.state == TableState.CLOSE)
-			this.site.getWaitTableQueue().remove(this);
-		this.state = state;
-		if (this.state == TableState.DOUBLES)
-			this.waitTime = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
-		else if (this.state == TableState.CLOSE)
-			this.waitTime = TimeUtil.getCurrTime() + CLOSE_WAIT_TIME;
-		else
-			return;
-		this.site.getWaitTableQueue().put(this);
-	}
-
-	/**
-	 * 加倍
-	 */
-	public boolean doubles(GamePlayer player, int multiple) {
-		if (player.getState() != PlayerState.OPERATE) {
-			logger.error("{} Player state is not operate {}", player.getId(), player.getState());
-			return false;
-		}
-		if (state != TableState.DOUBLES) {
-			logger.error("Table state is not doubles {} {}", state, Arrays.toString(players));
-			return false;
-		}
-		player.setMultiple(player.getMultiple() + multiple);
-		player.setState(PlayerState.WAIT);
-		// 加倍结束切换状态
-		if (isSameState(PlayerState.WAIT)) {
-			doublesToDraw();
-		}
-		// 通知
-		noticeService.noticeAllData(this);
-		return true;
-	}
-
-	/**
-	 * 加倍状态切换到出牌状态
-	 */
-	private void doublesToDraw() {
-		// 牌桌
-		setState(TableState.DRAW);
-		// 玩家
-		GamePlayer player = this.players[this.callOp];
-		player.setState(PlayerState.OPERATE);
-	}
-
-	/**
-	 * 是否是同一状态
-	 */
-	private boolean isSameState(PlayerState playerState) {
-		for (GamePlayer otherPlayer : this.players) {
-			if (otherPlayer.getState() != playerState)
-				return false;
-		}
-		return true;
-	}
-
-	/**
-	 * 过牌
-	 */
-	public void check(GamePlayer player) {
-		if (player.getState() != PlayerState.OPERATE) {
-			logger.error("{} Player state is not operate {}", player.getId(), player.getState());
-			return;
-		}
-		player.setState(PlayerState.WAIT);
-
-		if (state == TableState.CALL) {
-			// 不叫
-			// 叫牌结束切换状态
-			if (isSameState(PlayerState.WAIT)) {
-				callToDoubles();
-			}
-
-		} else if (state == TableState.DOUBLES) {
-			// 不加倍
-			// 加倍结束切换状态
-			if (isSameState(PlayerState.WAIT)) {
-				doublesToDraw();
-			}
-		} else if (state == TableState.DRAW) {
-			// 过牌
-			// 处理下家
-			GamePlayer nextPlayer = getNextPlayer(player);
-			nextPlayer.setState(PlayerState.OPERATE);
-		}
-		// 通知
-		noticeService.noticeAllData(this);
-	}
+	public abstract void callAfter(GamePlayer playe, CallType callType, Card card);
 
 	/**
 	 * 叫牌
 	 */
 	public void call(GamePlayer player, int callTypeValue, int index) {
 		if (player.getState() != PlayerState.OPERATE) {
-			logger.error("{} Player state is not operate {}", player.getId(), player.getState());
+			logger.error("Player state is not operate {} {}", player.getState(), player.getId());
 			return;
 		}
 		if (this.state != TableState.CALL) {
-			logger.error("Table state is not doubles {} {}", this.state, Arrays.toString(players));
+			logger.error("Table state is not call {} {}", this.state, player.getId());
 			return;
 		}
 		CallType callType = CallType.get(callTypeValue);
 		if (callType == null) {
-			logger.error("{} CallType is null", player.getId());
+			logger.error("CallType is null {} {}", callType, player.getId());
 			return;
 		}
 		Card card = player.getHandCards()[index];
-		if (card == null) {
-			logger.error("{} Card is null", player.getId());
-			return;
-		}
 		if (!CallType.verify(callType, player.getHandCards(), card)) {
-			logger.error("{} Call verify fail {}", player.getId(), card);
+			logger.error("Call verify fail {} {} {}", callType, card, player.getId());
 			return;
 		}
+		// 只有庄家能叫牌，其它玩家只能明叫
+		if (callType != CallType.LIGHT && player.getIndex() != this.dealer) {
+			logger.error("Player is not call {} {} {} {}", callType, this.dealer, player.getIndex(), player.getId());
+			return;
+		}
+		// 牌桌
+		this.callCard = card;
+		this.callType = callType;
+		this.callOp = player.getIndex();
+		callAfter(player, callType, card);
+		// 倍数
+		addMultiple(callType, cards);
 		if (callType == CallType.LIGHT) {
-			// 牌桌
-			this.callCard = card;
-			this.callType = callType;
-			this.callOp = player.getIndex();
 			// 当前玩家
 			player.setTeam(Team.RED);
 			// 其它玩家
@@ -327,69 +263,82 @@ public class Table implements Delayed {
 			}
 			callToDoubles();
 		} else {
-			// 只有庄家能叫牌，其它玩家只能明叫
-			if (player.getIndex() != this.dealer) {
-				logger.error("{} Player is not call {} {}", player.getId(), player.getIndex(), this.dealer);
-				return;
-			}
-			// 牌桌
-			this.callCard = card;
-			if (CallType.isDark(card, player.getHandCards()))
-				this.callType = CallType.DARK;
-			else
-				this.callType = callType;
-			this.callOp = player.getIndex();
 			// 当前玩家
 			player.setTeam(Team.RED);
 			player.setState(PlayerState.WAIT);
 			// 全部操作完
 			if (isSameState(PlayerState.WAIT))
 				callToDoubles();
-			else
+			else {
 				doNextPlayerState(player);
+			}
 		}
-		// 倍数
-		addToMultiple(callType, null);
 		// 通知
-		noticeService.noticeAllData(this);
+		noticeAssist.notice(this);
+
 	}
 
 	/**
-	 * 叫牌切换到加倍状态
+	 * 加倍
 	 */
-	private void callToDoubles() {
-		// 没人叫牌则重新开始
-		if (this.callOp == null) {
-			reset();
-			deal();
+	public boolean doubles(GamePlayer player, int multiple) {
+		if (player.getState() != PlayerState.OPERATE) {
+			logger.error("Player state is not operate {} {}", player.getState(), player.getId());
+			return false;
+		}
+		if (this.state != TableState.DOUBLES) {
+			logger.error("Table state is not doubles {} {}", this.state, player.getId());
+			return false;
+		}
+		player.setMultiple(player.getMultiple() + multiple);
+		player.setState(PlayerState.WAIT);
+		// 加倍结束切换状态
+		if (isSameState(PlayerState.WAIT)) {
+			doublesToDraw();
+		}
+		// 通知
+		noticeAssist.notice(this);
+		return true;
+	}
+
+	/**
+	 * 过牌
+	 */
+	public void check(GamePlayer player) {
+		if (player.getState() != PlayerState.OPERATE) {
+			logger.error("Player state is not operate {} {}", player.getState(), player.getId());
+			return;
+		}
+		player.setState(PlayerState.WAIT);
+
+		if (this.state == TableState.CALL) {
+			// 不叫
+			// 叫牌结束切换状态
+			if (isSameState(PlayerState.WAIT))
+				callToDoubles();
+
+		} else if (this.state == TableState.DOUBLES) {
+			// 不加倍
+			// 加倍结束切换状态
+			if (isSameState(PlayerState.WAIT))
+				doublesToDraw();
+
+		} else if (this.state == TableState.DRAW) {
+			// 过牌
+			// 处理下家
+			doNextPlayerState(player);
 		} else {
-			// 牌桌
-			setState(TableState.DOUBLES);
-			// 玩家
-			for (GamePlayer otherPlayer : this.players)
-				otherPlayer.setState(PlayerState.OPERATE, false);
+			logger.error("Table state is not allow {} {}", this.state, player.getId());
+			return;
 		}
+		// 通知
+		noticeAssist.notice(this);
 	}
 
 	/**
-	 * 增加公共倍数
+	 * 出牌后
 	 */
-	private void addToMultiple(Object o, Card[] cards) {
-		MultipleType multiple = MultipleType.getMultiple(o, cards);
-		if (multiple != null) {
-			this.multiples[multiple.ordinal()] += multiple.getValue();
-		}
-	}
-
-	/**
-	 * 扣除公共倍数
-	 */
-	private void eddToMultiple(Object o, Card[] cards) {
-		MultipleType multiple = MultipleType.getMultiple(o, cards);
-		if (multiple != null && this.multiples[multiple.ordinal()] >= multiple.getValue()) {
-			this.multiples[multiple.ordinal()] -= multiple.getValue();
-		}
-	}
+	public abstract void drawAfter(GamePlayer player, CardType cardType, Card[] cards);
 
 	/**
 	 * 出牌
@@ -397,16 +346,16 @@ public class Table implements Delayed {
 	public void draw(GamePlayer player, int cardTypeValue, int[] indexs) {
 		// 验证
 		if (player.getState() != PlayerState.OPERATE) {
-			logger.error("{} Player is not operate {}", player.getId(), player.getState());
+			logger.error("Player state is not operate {} {}", player.getState(), player.getId());
 			return;
 		}
 		if (state != TableState.DRAW) {
-			logger.error("Table state is not doubles {} {}", state, Arrays.toString(players));
+			logger.error("Table state is not allow {} {}", this.state, player.getId());
 			return;
 		}
 		CardType cardType = CardType.get(cardTypeValue);
 		if (cardType == null) {
-			logger.error("{} CardType is null {}", player.getId(), cardTypeValue);
+			logger.error("CardType is null {} {}", cardTypeValue, player.getId());
 			return;
 		}
 		// 出牌
@@ -414,8 +363,7 @@ public class Table implements Delayed {
 		for (int i = 0; i < indexs.length; i++) {
 			Card card = player.getHandCards()[indexs[i]];
 			if (card == null) {
-				logger.error("{} Indexs not match handCards {] {}", player.getId(), Arrays.toString(indexs),
-						Arrays.toString(player.getHandCards()));
+				logger.error("Indexs not match handCards {} {}", indexs[i], player.getId());
 				return;
 			}
 			cards[i] = card;
@@ -423,67 +371,44 @@ public class Table implements Delayed {
 		}
 
 		// 出牌验证
-		CardAssist cardProcessor = cardManager.getCardProcessor().get(cardType);
+		CardAssist cardProcessor = cardAssistManager.getCardProcessor().get(cardType);
 		if (!cardProcessor.verify(cards)) {
-			logger.error("{} CardType not match Cards {} {}", player.getId(), cardTypeValue, Arrays.toString(indexs));
+			logger.error(" CardType not match Cards {} {} {}", cardTypeValue, Arrays.toString(cards), player.getId());
 			return;
 		}
 		if (!cardProcessor.compare(cards, this.lastCardType, this.lastCards)) {
-			logger.error("{} Cards not BG. lastCards {} {}", player.getId(), Arrays.toString(cards),
-					Arrays.toString(this.lastCards));
+			logger.error("Cards not BG. lastCards {} {} {}", Arrays.toString(cards), Arrays.toString(this.lastCards),
+					player.getId());
 			return;
 		}
 		// 当前玩家
 		player.setState(PlayerState.WAIT);
 		// 倍数
-		addToMultiple(cardType, cards);
+		addMultiple(cardType, cards);
 		// 轮分
+		this.roundScore += Card.getScore(cards);
 		if (this.callType != CallType.LIGHT) {
 			if (this.lastOp == player.getIndex() && this.roundScore != 0) {
 				player.setScore(player.getScore() + this.roundScore);
 				this.roundScore = 0;
 			}
 		}
-		// 得分
-		this.roundScore += Card.getScore(cards);
-		// 出牌时处理玩家队伍
-		if (player.getTeam() == null && this.callType != CallType.LIGHT) {
-			for (Card card : cards) {
-				if (card.equals(this.callCard)) {
-					if (player.getIndex() != this.callOp) {
-						// 叫牌
-						GamePlayer callPlayer = this.players[this.callOp];
-						player.setTeam(callPlayer.getTeam());
-						for (GamePlayer otherPlayer : this.players) {
-							if (otherPlayer.equals(player) || otherPlayer.equals(callPlayer))
-								continue;
-							otherPlayer.setTeam(Team.BLUE);
-						}
-					} else if (card != this.callCard && card.equals(this.callCard)) {
-						// 暗叫
-						eddToMultiple(CallType.CALL, null);
-						addToMultiple(CallType.DARK, null);
-						player.setScore(0);
-						for (GamePlayer otherPlayer : this.players) {
-							if (otherPlayer.equals(player))
-								continue;
-							otherPlayer.setTeam(Team.BLUE);
-							// 清空积分
-							otherPlayer.setScore(0);
-						}
-					}
-
-				}
-			}
-		}
 		// 牌桌
 		this.lastCards = cards;
 		this.lastCardType = cardType;
 		this.lastOp = player.getIndex();
-		if (doTeamRankClose(player)) {
-			// 游戏结束，所有玩家准备
-			for (GamePlayer otherPlayer : this.players)
-				otherPlayer.setState(PlayerState.OPERATE, false);
+		drawAfter(player, cardType, cards);
+		doPlayerTeamWithDraw(player, cards);
+		// 出牌完成
+		if (isFinish(player)) {
+			player.setState(PlayerState.FINISH);
+			if (player.getTeam() == null)
+				player.setTeam(Team.BLUE);
+			// 排名
+			addToRanks(player);
+			Team winTeam = getWinTeam(player);
+			if (winTeam != null)
+				close(winTeam);
 		} else {
 			// 游戏未结束，由下家出牌
 			doNextPlayerState(player);
@@ -498,40 +423,265 @@ public class Table implements Delayed {
 		}
 
 		// 通知
-		noticeService.noticeAllData(this);
+		noticeAssist.notice(this);
 	}
 
 	/**
-	 * 处理下家状态
+	 * 出牌后处理玩家队伍
 	 */
-	private void doNextPlayerState(GamePlayer gamePlayer) {
-		GamePlayer nextPlayer = getNextPlayer(gamePlayer);
-		nextPlayer.setState(PlayerState.OPERATE);
-		// 托管状态自行出牌
-		if (nextPlayer.isAuto() == 1) {
-			check(nextPlayer);
-		}
-	}
-
-	/**
-	 * 获取下家
-	 */
-	private GamePlayer getNextPlayer(GamePlayer player) {
-		GamePlayer nextPlayer = null;
-		if (player.getState() == PlayerState.FINISH) {
-			for (GamePlayer otherPlayer : this.players) {
-				if (player.equals(otherPlayer))
-					continue;
-				if (player.getTeam() == otherPlayer.getTeam()) {
-					nextPlayer = otherPlayer;
-					break;
+	public void doPlayerTeamWithDraw(GamePlayer player, Card[] cards) {
+		if (this.callType == CallType.LIGHT)
+			return;
+		for (Card card : cards) {
+			if (card != this.callCard && card.equals(this.callCard)) {
+				if (player.getIndex() != this.callOp) {
+					// 叫牌
+					GamePlayer callPlayer = this.players[this.callOp];
+					player.setTeam(callPlayer.getTeam());
+					for (GamePlayer otherPlayer : this.players) {
+						if (otherPlayer.equals(player) || otherPlayer.equals(callPlayer))
+							continue;
+						otherPlayer.setTeam(Team.BLUE);
+					}
+				} else {
+					// 暗叫
+					// 倍数
+					eddMultiple(CallType.CALL, null);
+					addMultiple(CallType.DARK, null);
+					// 清空积分
+					for (GamePlayer otherPlayer : this.players) {
+						otherPlayer.setScore(0);
+						if (otherPlayer.equals(player))
+							continue;
+						otherPlayer.setTeam(Team.BLUE);
+					}
+					this.roundScore = 0;
+					this.callType = CallType.DARK;
 				}
-			}
-		} else {
-			nextPlayer = players[player.getIndex() + 1 % 4];
-		}
-		return nextPlayer;
 
+			}
+
+		}
+	}
+
+	/**
+	 * 获取获胜的队伍
+	 */
+	public Team getWinTeam(GamePlayer player) {
+		Team winTeam = null;
+
+		if (this.callType == CallType.LIGHT || this.callType == CallType.DARK && this.players[this.ranks[0]] != null) {
+			winTeam = this.players[ranks[0]].getTeam();
+		} else if (this.players[ranks[0]].getTeam() == this.players[ranks[1]].getTeam()) {
+			winTeam = this.players[ranks[0]].getTeam();
+			for (GamePlayer otherPlayer : this.players) {
+				if (player.getTeam() == null)
+					player.setTeam(winTeam.getReverse());
+				otherPlayer.setState(PlayerState.FINISH);
+				// 排名
+				addToRanks(otherPlayer);
+			}
+			// 全胜
+			addMultiple(MultipleType.QUAN_SHENG, null);
+			// 满分
+			int winScore = 0;
+			for (GamePlayer otherPlayer : this.players) {
+				if (otherPlayer.getTeam() == winTeam)
+					winScore += otherPlayer.getScore();
+			}
+			if (winScore >= 200)
+				addMultiple(MultipleType.MAN_FEN, null);
+		} else if (getRanksCount() >= 3) {
+			GamePlayer lastPlayer = getLastPlayer();
+			if (player.getTeam() == null)
+				player.setTeam(this.players[this.ranks[2]].getTeam().getReverse());
+			lastPlayer.setState(PlayerState.FINISH);
+			// 排名
+			addToRanks(lastPlayer);
+
+			// 最后出牌玩家分数处理
+			// 手中的分数给第一名
+			this.players[this.ranks[0]].setScore(this.players[this.ranks[0]].getScore() + lastPlayer.getScore());
+			// 最后玩家得分作废
+			lastPlayer.setScore(0);
+			// 未出的分数直接加个对方
+			int leftScore = Card.getScore(lastPlayer.getHandCards());
+
+			// 最后剩余轮分处理
+			if (this.roundScore != 0) {
+				player.setScore(player.getScore() + this.roundScore);
+				this.roundScore = 0;
+			}
+			// 计算总分
+			int redScore = 0;
+			int blueScore = 0;
+			for (GamePlayer otherPlayer : this.players) {
+				if (otherPlayer.getTeam() == Team.RED)
+					redScore += otherPlayer.getScore();
+				else
+					blueScore += otherPlayer.getScore();
+			}
+			if (lastPlayer.getTeam() == Team.RED)
+				blueScore += leftScore;
+			else
+				redScore += blueScore;
+
+			if (redScore > blueScore) {
+				winTeam = Team.RED;
+			} else if (redScore == blueScore) {
+				winTeam = this.players[ranks[0]].getTeam();
+			} else {
+				winTeam = Team.BLUE;
+			}
+			// 满分
+			if (redScore >= 200 || blueScore >= 200)
+				addMultiple(MultipleType.MAN_FEN, null);
+
+		}
+		return winTeam;
+	}
+
+	/**
+	 * 结算前
+	 */
+	public abstract void beforeClose(Team winTeam);
+	/**
+	 * 子类实现的结算方法
+	 * */
+	public abstract void doClose(TableResult_.Builder builder,Team winTeam,int redMultiple, int blueMultiple);
+
+	/**
+	 * 结算
+	 */
+	public void close(Team winTeam) {
+		beforeClose(winTeam);
+		// 计算倍数
+		int sumMultiple = 0;
+		for (int multiple : this.multiples) {
+			sumMultiple *= multiple;
+		}
+		for (GamePlayer otherPlayer : this.players) {
+			sumMultiple *= otherPlayer.getMultiple();
+		}
+		int redMultiple = sumMultiple / getTeamCount(Team.RED);
+		int blueMultiple = sumMultiple / getTeamCount(Team.BLUE);
+		// 玩家结算
+		TableResult_.Builder builder = TableResult_.newBuilder();
+		builder.setWinTeam(winTeam.getValue());
+		doClose(builder,winTeam, redMultiple, blueMultiple);
+		// 下局的庄家
+		for (int i = 0; i < this.ranks.length; i++) {
+			if (this.players[this.ranks[i]].getTeam() == winTeam) {
+				this.dealer = this.players[this.ranks[i]].getIndex();
+				break;
+			}
+		}
+		// 牌桌
+		setState(TableState.CLOSE);
+		// 通知
+		for (GamePlayer otherPlayer : this.players) {
+			otherPlayer.getPlayerContext().write(builder);
+		}
+
+	}
+
+	/**
+	 * 准备
+	 */
+	public void ready(GamePlayer player) {
+		if (player.getState() != PlayerState.OPERATE) {
+			logger.error("Player state is not operate {} {}", player.getState(), player.getId());
+			return;
+		}
+		if (this.state != TableState.CLOSE) {
+			logger.error("Table state is not allow {} {}", this.state, player.getId());
+			return;
+		}
+		player.setState(PlayerState.READY);
+		// 全部准备，开始游戏
+		if (isSameState(PlayerState.READY)) {
+			reset();
+			deal();
+		}
+	}
+	
+	public abstract void doExit(GamePlayer gamePlayer);
+
+	/**
+	 * 退出
+	 */
+	public void  exit(GamePlayer gamePlayer) {
+		doExit(gamePlayer);
+		// 通知
+		noticeAssist.notice(this);
+	}
+
+	/**
+	 * 重连
+	 */
+	public void reconnect(GamePlayer gamePlayer) {
+		gamePlayer.setAuto(0);
+		// 通知
+		noticeAssist.notice(this);
+	}
+
+	/**
+	 * 玩家操作超时
+	 */
+	public void doWaitGamePlayer(GamePlayer gamePlayer) {
+		if (gamePlayer.getState() != PlayerState.OPERATE)
+			return;
+		gamePlayer.setState(PlayerState.WAIT);
+		doNextPlayerState(gamePlayer);
+		// 通知
+		noticeAssist.notice(this);
+	}
+	
+	/**
+	 * 结算超时
+	 * */
+	public abstract void doWaitClose();
+	
+	/**
+	 * 牌桌等待超时
+	 */
+	public void doWaitTable() {
+		if (this.state == TableState.DOUBLES) {
+			// 加倍超时
+			for (GamePlayer otherGamePlayer : this.players)
+				otherGamePlayer.setState(PlayerState.WAIT);
+			doublesToDraw();
+		} else if (this.state == TableState.CLOSE) {
+			doWaitClose();
+		}
+		// 通知
+		noticeAssist.notice(this);
+	}
+
+	/**
+	 * 获取任意一方的人数
+	 */
+	private int getTeamCount(Team team) {
+		int count = 0;
+		for (GamePlayer otherPlayer : this.players) {
+			if (team == otherPlayer.getTeam())
+				count++;
+		}
+		return count;
+	}
+
+	/**
+	 * 获取最后名的玩家
+	 */
+	private GamePlayer getLastPlayer() {
+		GamePlayer lastPlayer = null;
+		for (GamePlayer otherPlayer : this.players) {
+			if (otherPlayer.getState() != PlayerState.FINISH) {
+				lastPlayer = otherPlayer;
+				break;
+			}
+		}
+		return lastPlayer;
 	}
 
 	/**
@@ -578,305 +728,119 @@ public class Table implements Delayed {
 	}
 
 	/**
-	 * 处理队伍、排名、结束
+	 * 加倍状态切换到出牌状态
 	 */
-	private boolean doTeamRankClose(GamePlayer player) {
-		if (isFinish(player)) {
-			player.setState(PlayerState.FINISH);
-			// 全部出完后还没有队伍，则可以判断是蓝方
-			if (player.getTeam() == null)
-				player.setTeam(Team.BLUE);
-			// 排名
-			addToRanks(player);
-			// 判断牌局是否结束
-			// 处理玩家队伍和排名
-			Team winTeam = null;
-			if (this.callType == CallType.LIGHT || this.callType == CallType.DARK) {
-				winTeam = this.players[ranks[0]].getTeam();
-				for (GamePlayer otherPlayer : this.players) {
-					if (player.getTeam() == null)
-						player.setTeam(Team.BLUE);
-					otherPlayer.setState(PlayerState.FINISH);
-					// 排名
-					addToRanks(otherPlayer);
-				}
-			} else if (this.ranks[0] != null && this.ranks[1] != null
-					&& this.players[ranks[0]].getTeam() == this.players[ranks[1]].getTeam()) {
-				winTeam = this.players[ranks[0]].getTeam();
-				for (GamePlayer otherPlayer : this.players) {
-					if (player.getTeam() == null)
-						player.setTeam(this.players[ranks[0]].getTeam().getReverse());
-					otherPlayer.setState(PlayerState.FINISH);
-					// 排名
-					addToRanks(otherPlayer);
-				}
-				// 全胜
-				addToMultiple(MultipleType.QUAN_SHENG, null);
-				// 满分
-				int winScore = 0;
-				for (GamePlayer otherPlayer : this.players) {
-					if (otherPlayer.getTeam() == winTeam)
-						winScore += otherPlayer.getScore();
-				}
-				if (winScore >= 200)
-					addToMultiple(MultipleType.MAN_FEN, null);
-			} else if (getRanksCount() >= 3) {
-				GamePlayer lastPlayer = getLastPlayer();
-				if (player.getTeam() == null)
-					player.setTeam(this.players[this.ranks[2]].getTeam().getReverse());
-				lastPlayer.setState(PlayerState.FINISH);
-				// 排名
-				addToRanks(lastPlayer);
-
-				// 最后出牌玩家分数处理
-				// 手中的分数给第一名
-				this.players[this.ranks[0]].addScore(lastPlayer.getScore());
-				// 最后玩家得分作废
-				lastPlayer.setScore(0);
-				// 未出的分数直接加个对方
-				int leftScore = Card.getScore(lastPlayer.getHandCards());
-
-				// 最后剩余轮分处理
-				if (this.roundScore != 0) {
-					player.setScore(player.getScore() + this.roundScore);
-					this.roundScore = 0;
-				}
-				// 计算总分
-				int redScore = 0;
-				int blueScore = 0;
-				for (GamePlayer otherPlayer : this.players) {
-					if (otherPlayer.getTeam() == Team.RED)
-						redScore += otherPlayer.getScore();
-					else
-						blueScore += otherPlayer.getScore();
-				}
-				if (lastPlayer.getTeam() == Team.RED)
-					blueScore += leftScore;
-				else
-					redScore += blueScore;
-				if (redScore > blueScore) {
-					winTeam = Team.RED;
-				} else if (redScore == blueScore) {
-					winTeam = this.players[ranks[0]].getTeam();
-				} else {
-					winTeam = Team.BLUE;
-				}
-				// 满分
-				if (redScore >= 200 || blueScore >= 200)
-					addToMultiple(MultipleType.MAN_FEN, null);
-
-			}
-			if (winTeam != null) {
-				close(winTeam);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * 结算
-	 */
-	private void close(Team winTeam) {
-		// 计算倍数
-		int sumMultiple = 0;
-		for (int multiple : this.multiples) {
-			sumMultiple += multiple;
-		}
-		for (GamePlayer otherPlayer : this.players) {
-			sumMultiple += otherPlayer.getMultiple();
-		}
-		int redMultiple = sumMultiple / getTeamCount(Team.RED);
-		int blueMultiple = sumMultiple / getTeamCount(Team.BLUE);
-		// 玩家结算
-		TableResult_.Builder builder = TableResult_.newBuilder();
-		builder.setBaseScore(this.site.getSiteCo().getBaseScore());
-		builder.setWinTeam(winTeam.getValue());
-		for (GamePlayer otherPlayer : this.players) {
-			TableResult tableResult = new TableResult();
-			tableResult.setPlayerContext(otherPlayer.getPlayerContext());
-			tableResult.setSiteCo(this.site.getSiteCo());
-			if (otherPlayer.getTeam() == winTeam)
-				tableResult.setWin(true);
-			else
-				tableResult.setWin(false);
-
-			if (otherPlayer.getTeam() == Team.RED)
-				tableResult.setMultiple(redMultiple);
-			else
-				tableResult.setMultiple(blueMultiple);
-			builder.addPlayerResult(otherPlayer.getPlayerContext().getActor().doTableResult(tableResult));
-		}
-		// 下局的庄家
-		for (int i = 0; i < this.ranks.length; i++) {
-			if (this.players[this.ranks[i]].getTeam() == winTeam) {
-				this.dealer = this.players[this.ranks[i]].getIndex();
-				break;
-			}
-		}
+	private void doublesToDraw() {
 		// 牌桌
-		setState(TableState.CLOSE);
-		// 通知
-		for (GamePlayer otherPlayer : this.players) {
-			otherPlayer.getPlayerContext().write(builder);
-		}
+		setState(TableState.DRAW);
+		// 玩家
+		GamePlayer player = this.players[this.callOp];
+		player.setState(PlayerState.OPERATE);
 	}
 
 	/**
-	 * 获取任意一方的人数
+	 * 叫牌切换到加倍状态
 	 */
-	private int getTeamCount(Team team) {
-		int count = 0;
-		for (GamePlayer otherPlayer : this.players) {
-			if (team == otherPlayer.getTeam())
-				count++;
-		}
-		return count;
-	}
-
-	/**
-	 * 获取最后名的玩家
-	 */
-	private GamePlayer getLastPlayer() {
-		GamePlayer lastPlayer = null;
-		for (GamePlayer otherPlayer : this.players) {
-			if (otherPlayer.getState() != PlayerState.FINISH) {
-				lastPlayer = otherPlayer;
-				break;
-			}
-		}
-		return lastPlayer;
-	}
-
-	/**
-	 * 设置托管
-	 */
-	public void setIsAuto(GamePlayer gamePlayer, int isAuto) {
-		if (gamePlayer.getState() != PlayerState.OPERATE) {
-			logger.error("{} Player is not operate {}", gamePlayer.getId(), gamePlayer.getState());
-			return;
-		}
-		if (this.state != TableState.CALL || this.state != TableState.DOUBLES || this.state != TableState.DRAW) {
-			logger.error("Table state is not call|doubles|draw {} {}", state, Arrays.toString(players));
-			return;
-		}
-		// 状态未变更
-		if (isAuto == gamePlayer.isAuto())
-			return;
-		gamePlayer.setAuto(isAuto);
-		gamePlayer.setState(PlayerState.WAIT);
-		doNextPlayerState(gamePlayer);
-	}
-
-	/**
-	 * 退出
-	 */
-	public void exit(GamePlayer gamePlayer) {
-		// 自已退出清空数据
-		gamePlayer.clean();
-		gamePlayer.setState(null);
-		if (state == TableState.CLOSE) {
-			// 其他玩家重新设置状态加入匹配
-			for (GamePlayer otherPlayer : this.players) {
-				if (gamePlayer.equals(otherPlayer))
-					continue;
-				otherPlayer.clean();
-				this.site.addPlayerToMatch(otherPlayer.getPlayerContext(), true);
-			}
-			// 牌桌
-			clean();
-			this.site.getWaitTableQueue().remove(this);
-			this.site.getIdleTableQueue().offer(this);
-		} else {
-			gamePlayer.setAuto(1);
-			if (gamePlayer.getState() == PlayerState.OPERATE)
-				check(gamePlayer);
-			doNextPlayerState(gamePlayer);
-		}
-		// 通知
-		noticeService.noticeAllData(this);
-	}
-
-	/**
-	 * 准备
-	 */
-	public void ready(GamePlayer player) {
-		if (player.getState() != PlayerState.OPERATE) {
-			logger.error("{} Player state is not operate {}", player.getId(), player.getState());
-			return;
-		}
-		if (state != TableState.CLOSE) {
-			logger.error("Table state is not doubles {} {}", state, Arrays.toString(players));
-			return;
-		}
-		player.setState(PlayerState.READY);
-		// 全部准备，开始游戏
-		if (isSameState(PlayerState.READY)) {
+	private void callToDoubles() {
+		// 没人叫牌则重新开始
+		if (this.callOp == null) {
 			reset();
 			deal();
+		} else {
+			// 牌桌
+			setState(TableState.DOUBLES);
+			// 玩家
+			for (GamePlayer otherPlayer : this.players)
+				otherPlayer.setState(PlayerState.OPERATE, false, 0);
 		}
-		// 通知
-		noticeService.noticeAllData(this);
 	}
 
 	/**
-	 * 重连
+	 * 处理下家状态
 	 */
-	public void reconnect(GamePlayer gamePlayer) {
-		gamePlayer.setAuto(0);
-		// 通知
-		noticeService.noticeAllData(this);
-	}
-
-	/**
-	 * 玩家超时
-	 */
-	public void doWaitGamePlayer(GamePlayer gamePlayer) {
-		if (gamePlayer.getState() != PlayerState.OPERATE)
-			return;
-		gamePlayer.setState(PlayerState.WAIT);
-		doNextPlayerState(gamePlayer);
-		// 通知
-		noticeService.noticeAllData(this);
-	}
-
-	/**
-	 * 等待超时
-	 */
-	public void doWaitTable() {
-		if (this.getState() == TableState.DOUBLES) {
-			// 加倍超时
-			for (GamePlayer otherGamePlayer : this.players)
-				otherGamePlayer.setState(PlayerState.WAIT);
-			doublesToDraw();
-		} else if (this.getState() == TableState.CLOSE) {
-			// 结算超时
-			for (GamePlayer otherGamePlayer : this.players) {
-				if (otherGamePlayer.getState() != PlayerState.READY) {
-					otherGamePlayer.clean();
-					otherGamePlayer.getPlayerContext().write(Quit_.newBuilder());
-				} else {
-					// 准备中的玩家重新加入匹配队列
-					otherGamePlayer.clean();
-					this.site.addPlayerToMatch(otherGamePlayer.getPlayerContext(), true);
-					otherGamePlayer.getPlayerContext().write(Match_.newBuilder());
+	private void doNextPlayerState(GamePlayer player) {
+		GamePlayer nextPlayer = null;
+		if (player.getState() == PlayerState.FINISH) {
+			// 队友接风
+			for (GamePlayer otherPlayer : this.players) {
+				if (player.equals(otherPlayer))
+					continue;
+				if (player.getTeam() == otherPlayer.getTeam()) {
+					nextPlayer = otherPlayer;
+					break;
 				}
 			}
-			// 牌桌
-			clean();
-			this.site.getIdleTableQueue().offer(this);
+
+		}
+		// 没有队友时下家接风
+		if (nextPlayer == null)
+			nextPlayer = players[player.getIndex() + 1 % 4];
+		nextPlayer.setState(PlayerState.OPERATE);
+	}
+
+	/**
+	 * 是否是同一状态
+	 */
+	private boolean isSameState(PlayerState playerState) {
+		for (GamePlayer otherPlayer : this.players) {
+			if (otherPlayer.getState() != playerState)
+				return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 增加公共倍数
+	 */
+	public void addMultiple(Object o, Card[] cards) {
+		MultipleType multiple = MultipleType.getMultiple(o, cards);
+		if (multiple != null) {
+			this.multiples[multiple.ordinal()] += multiple.getValue();
 		}
 	}
 
-	public void setPlayers(GamePlayer[] players) {
-		if (this.players != null)
-			throw new RuntimeException("error operate");
-		// 玩家数据
-		for (int i = 0; i < players.length; i++) {
-			players[i].setIndex(i);
-			players[i].setTable(this);
+	/**
+	 * 扣除公共倍数
+	 */
+	public void eddMultiple(Object o, Card[] cards) {
+		MultipleType multiple = MultipleType.getMultiple(o, cards);
+		if (multiple != null && this.multiples[multiple.ordinal()] >= multiple.getValue()) {
+			this.multiples[multiple.ordinal()] -= multiple.getValue();
 		}
-		this.players = players;
+	}
+
+	/**
+	 * 添加排行
+	 */
+	public int addToRanks(Table table, GamePlayer player) {
+		int rank = -1;
+		for (int i = 0; i < this.ranks.length; i++) {
+			if (this.ranks[i] == null) {
+				this.ranks[i] = player.getIndex();
+				rank = i;
+				break;
+			}
+		}
+		if (rank == -1) {
+			logger.error("{} Rank is error {}", player.getId(), rank);
+		}
+		return rank;
+	}
+
+	/**
+	 * 设置状态
+	 */
+	private void setState(TableState state) {
+		if (this.state == TableState.DOUBLES || this.state == TableState.CLOSE)
+			this.room.getWaitTableQueue().remove(this);
+		this.state = state;
+		if (this.state == TableState.DOUBLES)
+			this.waitTime = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
+		else if (this.state == TableState.CLOSE)
+			this.waitTime = TimeUtil.getCurrTime() + CLOSE_WAIT_TIME;
+		else
+			return;
+		this.room.getWaitTableQueue().put(this);
 	}
 
 	@Override
@@ -893,13 +857,13 @@ public class Table implements Delayed {
 	public long getDelay(TimeUnit unit) {
 		return unit.convert(waitTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
 	}
+	
+	public Card[] getCards() {
+		return cards;
+	}
 
 	public GamePlayer[] getPlayers() {
 		return players;
-	}
-
-	public TableState getState() {
-		return state;
 	}
 
 	public int getRoundScore() {
@@ -946,11 +910,15 @@ public class Table implements Delayed {
 		return ranks;
 	}
 
-	public Site getSite() {
-		return site;
+	public TableState getState() {
+		return state;
 	}
 
-	public TableActor getActor() {
+	public Room getRoom() {
+		return room;
+	}
+
+	public Table getActor() {
 		return actor;
 	}
 

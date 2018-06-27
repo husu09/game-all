@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class BasicRoom {
+public abstract class Room {
 	/**
 	 * 玩家人数
 	 */
@@ -12,11 +12,11 @@ public abstract class BasicRoom {
 	/**
 	 * 空闲牌桌队列
 	 */
-	private ConcurrentLinkedQueue<BasicTable> idleTableQueue = new ConcurrentLinkedQueue<>();
+	private ConcurrentLinkedQueue<Table> idleTableQueue = new ConcurrentLinkedQueue<>();
 	/**
 	 * 需要操作的牌桌队列
 	 */
-	private DelayQueue<BasicTable> waitTableQueue = new DelayQueue<>();
+	private DelayQueue<Table> waitTableQueue = new DelayQueue<>();
 	/**
 	 * 需要操作的玩家队列
 	 */
@@ -26,11 +26,11 @@ public abstract class BasicRoom {
 		return playerNum;
 	}
 	
-	public ConcurrentLinkedQueue<BasicTable> getIdleTableQueue() {
+	public ConcurrentLinkedQueue<Table> getIdleTableQueue() {
 		return idleTableQueue;
 	}
 
-	public DelayQueue<BasicTable> getWaitTableQueue() {
+	public DelayQueue<Table> getWaitTableQueue() {
 		return waitTableQueue;
 	}
 
@@ -41,7 +41,7 @@ public abstract class BasicRoom {
 	public void doWaitTable() {
 		try {
 			while (!Thread.currentThread().isInterrupted()) {
-				BasicTable table = waitTableQueue.take();
+				Table table = waitTableQueue.take();
 				table.getActor().doWaitTable();
 			}
 		} catch (Exception e) {

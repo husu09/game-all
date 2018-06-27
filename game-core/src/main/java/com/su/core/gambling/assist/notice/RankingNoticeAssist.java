@@ -1,5 +1,5 @@
 package com.su.core.gambling.assist.notice;
 
-public class RankingNoticeAssist  extends BasicNoticeAssist {
+public class RankingNoticeAssist  extends NoticeAssist {
 
 }

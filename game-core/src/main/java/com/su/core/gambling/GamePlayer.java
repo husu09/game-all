@@ -50,7 +50,7 @@ public class GamePlayer implements Delayed {
 	/**
 	 * 牌桌
 	 */
-	private BasicTable table;
+	private Table table;
 	/**
 	 * 玩家上下文
 	 */
@@ -66,7 +66,7 @@ public class GamePlayer implements Delayed {
 	private static final int OPERATE_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
 	 * 托管时出牌时间
-	 * */
+	 */
 	public static final int AUTO_WAIT_TIME = TimeUtil.ONE_SECOND;
 
 	public GamePlayer(PlayerContext playerContext) {
@@ -121,7 +121,7 @@ public class GamePlayer implements Delayed {
 		reset();
 		this.index = null;
 		this.table = null;
-		this.state = null;
+		setState(null);
 	}
 
 	/**
@@ -142,28 +142,31 @@ public class GamePlayer implements Delayed {
 	/**
 	 * 设置状态
 	 */
-	public void setState(PlayerState state, boolean isDelay) {
+	public void setState(PlayerState state, boolean isDelay, int subTime) {
 		if (this.state == PlayerState.OPERATE)
 			this.table.getRoom().getWaitGamePlayerQueue().remove(this);
 		this.state = state;
 		if (isDelay && state == PlayerState.OPERATE) {
 			if (this.table.getState() == TableState.CALL)
-				this.opTime = TimeUtil.getCurrTime() + CALL_WAIT_TIME;
+				// 托管状态下的时间
+				if (this.isAuto == 1)
+					this.opTime = TimeUtil.getCurrTime() + AUTO_WAIT_TIME;
+				else
+					this.opTime = TimeUtil.getCurrTime() + CALL_WAIT_TIME - subTime;
 			else if (this.table.getState() == TableState.DRAW) {
 				// 托管状态下的时间
 				if (this.isAuto == 1)
 					this.opTime = TimeUtil.getCurrTime() + AUTO_WAIT_TIME;
 				else
-					this.opTime = TimeUtil.getCurrTime() + OPERATE_WAIT_TIME;
-			}
-			else
+					this.opTime = TimeUtil.getCurrTime() + OPERATE_WAIT_TIME - subTime;
+			} else
 				return;
 			this.table.getRoom().getWaitGamePlayerQueue().put(this);
 		}
 	}
 
 	public void setState(PlayerState state) {
-		setState(state, true);
+		setState(state, true, 0);
 	}
 
 	/**
@@ -216,6 +219,15 @@ public class GamePlayer implements Delayed {
 
 	public void setAuto(int isAuto) {
 		this.isAuto = isAuto;
+		if (this.isAuto == 1) {
+			if (this.state == PlayerState.OPERATE)
+				setState(PlayerState.OPERATE, true, 0);
+		} else if (this.isAuto == 0) {
+			// 如果当前玩家是操作状态，计算剩余可用时间
+			if (this.state == PlayerState.OPERATE) {
+				setState(PlayerState.OPERATE, true, (int) (TimeUtil.getCurrTime() - this.opTime));
+			}
+		}
 	}
 
 	public Long getOpTime() {
@@ -242,11 +254,11 @@ public class GamePlayer implements Delayed {
 		return playerContext;
 	}
 
-	public BasicTable getTable() {
+	public Table getTable() {
 		return table;
 	}
 
-	public void setTable(BasicTable table) {
+	public void setTable(Table table) {
 		this.table = table;
 	}
 
