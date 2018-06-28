@@ -1,10 +1,10 @@
 package com.su.common.constant;
 
-import com.su.common.obj.Item;
+import com.su.common.obj.Goods;
 
 public class GamblingConst {
 	/**
 	 * 加倍道具
 	 * */
-	public static Item DOUBLES_ITEM;
+	public static Goods DOUBLES_ITEM;
 }

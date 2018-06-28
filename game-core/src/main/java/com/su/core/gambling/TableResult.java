@@ -1,6 +1,6 @@
 package com.su.core.gambling;
 
-import com.su.config.SiteCo;
+import com.su.config.FieldCo;
 import com.su.core.context.PlayerContext;
 
 /**
@@ -17,7 +17,7 @@ public class TableResult {
 	 * */
 	private boolean isWin;
 	
-	private SiteCo siteCo;
+	private FieldCo siteCo;
 	
 	public PlayerContext getPlayerContext() {
 		return playerContext;
@@ -37,10 +37,10 @@ public class TableResult {
 	public void setWin(boolean isWin) {
 		this.isWin = isWin;
 	}
-	public SiteCo getSiteCo() {
+	public FieldCo getSiteCo() {
 		return siteCo;
 	}
-	public void setSiteCo(SiteCo siteCo) {
+	public void setSiteCo(FieldCo siteCo) {
 		this.siteCo = siteCo;
 	}
 }

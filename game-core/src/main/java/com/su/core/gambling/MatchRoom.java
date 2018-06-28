@@ -2,7 +2,7 @@ package com.su.core.gambling;
 
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-import com.su.config.SiteCo;
+import com.su.config.FieldCo;
 import com.su.core.context.PlayerContext;
 import com.su.core.gambling.enums.PlayerState;
 
@@ -12,9 +12,9 @@ public class MatchRoom extends Room{
 	 */
 	private ConcurrentLinkedDeque<GamePlayer> playerDeque = new ConcurrentLinkedDeque<>();
 
-	private SiteCo siteCo;
+	private FieldCo siteCo;
 
-	public MatchRoom(SiteCo siteCo) {
+	public MatchRoom(FieldCo siteCo) {
 		this.siteCo = siteCo;
 		// 初始化牌桌
 		for (int i = 0; i < siteCo.getInitTableNum(); i++) {
@@ -74,7 +74,7 @@ public class MatchRoom extends Room{
 	/**
 	 * 获取配置对象
 	 */
-	public SiteCo getSiteCo() {
+	public FieldCo getSiteCo() {
 		return siteCo;
 	}
 

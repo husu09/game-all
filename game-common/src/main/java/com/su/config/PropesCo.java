@@ -1,8 +1,8 @@
 package com.su.config;
 
-import com.su.common.obj.Item;
+import com.su.common.obj.Goods;
 
-public class BagCo {
+public class PropesCo {
 	private int id;
 	/**
 	 * 类型
@@ -19,7 +19,7 @@ public class BagCo {
 	/**
 	 * 使用效果
 	 */
-	private Item effectItem;
+	private Goods effectItem;
 	private int effectNum;
 	/**
 	 * 有效期/毫秒
@@ -55,10 +55,10 @@ public class BagCo {
 	public void setUseType(int useType) {
 		this.useType = useType;
 	}
-	public Item getEffectItem() {
+	public Goods getEffectItem() {
 		return effectItem;
 	}
-	public void setEffectItem(Item effectItem) {
+	public void setEffectItem(Goods effectItem) {
 		this.effectItem = effectItem;
 	}
 	public int getEffectNum() {

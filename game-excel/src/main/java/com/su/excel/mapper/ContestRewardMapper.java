@@ -2,12 +2,12 @@ package com.su.excel.mapper;
 
 import org.springframework.stereotype.Component;
 
-import com.su.config.SiteCo;
+import com.su.config.FieldCo;
 import com.su.excel.core.AbstractExcelMapper;
 import com.su.excel.core.RowData;
 
 @Component
-public class SiteMapper extends AbstractExcelMapper<SiteCo> {
+public class ContestRewardMapper extends AbstractExcelMapper<FieldCo> {
 
 	@Override
 	public String getName() {
@@ -15,8 +15,8 @@ public class SiteMapper extends AbstractExcelMapper<SiteCo> {
 	}
 
 	@Override
-	public SiteCo map(RowData rowData) {
-		SiteCo t = new SiteCo();
+	public FieldCo map(RowData rowData) {
+		FieldCo t = new FieldCo();
 		t.setId(rowData.getInt("id"));
 		t.setSiteType(rowData.getInt("lx"));
 		t.setOpen(rowData.getBoolean("sfkf"));

@@ -1,6 +1,6 @@
 package com.su.common.util;
 
-import com.su.common.obj.Item;
+import com.su.common.obj.Goods;
 
 public class ParseUtil {
 
@@ -16,12 +16,12 @@ public class ParseUtil {
 		return false;
 	}
 
-	public static Item getItem(String value) {
+	public static Goods getGoods(String value) {
 		String[] splits = value.split("_");
-		Item item = new Item();
-		item.setType(Integer.parseInt(splits[0]));
-		item.setSysId(Integer.parseInt(splits[1]));
-		item.setCount(Integer.parseInt(splits[2]));
-		return item;
+		Goods goods = new Goods();
+		goods.setType(Integer.parseInt(splits[0]));
+		goods.setSysId(Integer.parseInt(splits[1]));
+		goods.setCount(Integer.parseInt(splits[2]));
+		return goods;
 	}
 }

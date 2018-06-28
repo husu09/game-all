@@ -3,6 +3,7 @@ package com.su.excel.mapper;
 import org.springframework.stereotype.Component;
 
 import com.su.common.constant.GamblingConst;
+import com.su.common.constant.RankingConst;
 import com.su.common.util.ParseUtil;
 import com.su.config.KVCo;
 import com.su.excel.core.AbstractExcelMapper;
@@ -28,7 +29,8 @@ public class ParameterMapper extends AbstractExcelMapper<KVCo> {
 	 * 初始化常量
 	 * */
 	public void initConst() {
-		GamblingConst.DOUBLES_ITEM = ParseUtil.getItem(get(2).getValue());
+		GamblingConst.DOUBLES_ITEM = ParseUtil.getGoods(get(2).getValue());
+		RankingConst.RANKING_SCORE = ParseUtil.getInt(get(3).getValue());
 	}
 
 }

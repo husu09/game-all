@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.su.common.constant.GamblingConst;
-import com.su.config.BagCo;
+import com.su.config.PropesCo;
 import com.su.core.action.Action;
 import com.su.core.context.PlayerContext;
 import com.su.core.gambling.GamePlayer;
 import com.su.core.gambling.Site;
-import com.su.excel.mapper.BagMapper;
+import com.su.excel.mapper.PropesMapper;
 import com.su.msg.GamblingMsg.Auto;
 import com.su.msg.GamblingMsg.Auto_;
 import com.su.msg.GamblingMsg.Call;
@@ -37,7 +37,7 @@ public class GamblingControl {
 	@Autowired
 	private ResourceService resouceService;
 	@Autowired
-	private BagMapper bagMapper;
+	private PropesMapper bagMapper;
 
 	/**
 	 * 开始匹配
@@ -63,7 +63,7 @@ public class GamblingControl {
 	@Action
 	public void doubles(PlayerContext playerContext, Double req) {
 		// 获取道具配置
-		BagCo bagCo = bagMapper.get(GamblingConst.DOUBLES_ITEM.getSysId());
+		PropesCo bagCo = bagMapper.get(GamblingConst.DOUBLES_ITEM.getSysId());
 		if (bagCo == null) {
 			playerContext.sendError(1004);
 			return;

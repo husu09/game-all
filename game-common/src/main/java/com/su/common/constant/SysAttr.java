@@ -6,7 +6,12 @@ public class SysAttr {
 	 * */
 	public final static int PEANUT = 1;
 	/**
+	 * 钻石
+	 * */
+	public final static int DIAMOND = 2;
+	/**
 	 * 道具
 	 * */
-	public final static int ITEM = 2;
+	public final static int ITEM = 3;
+	
 }

@@ -1,6 +1,6 @@
 package com.su.config;
 
-public class SiteCo {
+public class FieldCo {
 	private int id;
 	/**
 	 * 类型

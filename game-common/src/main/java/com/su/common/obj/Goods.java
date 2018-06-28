@@ -3,7 +3,7 @@ package com.su.common.obj;
 /**
  * 物品
  * */
-public class Item {
+public class Goods {
 	/**
 	 * 类型
 	 * */
