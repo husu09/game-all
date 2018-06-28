@@ -77,7 +77,6 @@ message Check {
 message Check_ {
 	
 }
-
 // 准备
 message Ready {
 
