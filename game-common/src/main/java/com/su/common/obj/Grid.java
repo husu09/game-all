@@ -17,9 +17,13 @@ public class Grid {
 	 * */
 	private int count;
 	/**
-	 * 有效时间
+	 * 有效类型
 	 * */
-	private long endTime;
+	private int effType;
+	/**
+	 * 有效值
+	 * */
+	private long effValue;
 	
 	public int getType() {
 		return type;
@@ -39,10 +43,17 @@ public class Grid {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public long getEndTime() {
-		return endTime;
+	public long getEffValue() {
+		return effValue;
 	}
-	public void setEndTime(long endTime) {
-		this.endTime = endTime;
-	}	
+	public void setEffValue(long effValue) {
+		this.effValue = effValue;
+	}
+	public int getEffType() {
+		return effType;
+	}
+	public void setEffType(int effType) {
+		this.effType = effType;
+	}
+	
 }

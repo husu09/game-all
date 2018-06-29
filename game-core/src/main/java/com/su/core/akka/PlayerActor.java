@@ -2,7 +2,7 @@ package com.su.core.akka;
 
 import com.google.protobuf.MessageLite;
 import com.su.core.context.PlayerContext;
-import com.su.core.gambling.TableResult;
+import com.su.core.game.TableResult;
 import com.su.msg.GamblingMsg._GamePlayerResult;
 import com.su.msg.LoginMsg.Login_;
 

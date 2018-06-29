@@ -6084,6 +6084,760 @@ public final class GamblingMsg {
 
   }
 
+  public interface CancelMatchOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CancelMatch)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * <pre>
+   * 取消匹配
+   * </pre>
+   *
+   * Protobuf type {@code CancelMatch}
+   */
+  public  static final class CancelMatch extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CancelMatch)
+      CancelMatchOrBuilder {
+    // Use CancelMatch.newBuilder() to construct.
+    private CancelMatch(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CancelMatch() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CancelMatch(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.su.msg.GamblingMsg.internal_static_CancelMatch_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.su.msg.GamblingMsg.internal_static_CancelMatch_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.su.msg.GamblingMsg.CancelMatch.class, com.su.msg.GamblingMsg.CancelMatch.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.su.msg.GamblingMsg.CancelMatch)) {
+        return super.equals(obj);
+      }
+      com.su.msg.GamblingMsg.CancelMatch other = (com.su.msg.GamblingMsg.CancelMatch) obj;
+
+      boolean result = true;
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.su.msg.GamblingMsg.CancelMatch parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.su.msg.GamblingMsg.CancelMatch prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * 取消匹配
+     * </pre>
+     *
+     * Protobuf type {@code CancelMatch}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CancelMatch)
+        com.su.msg.GamblingMsg.CancelMatchOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.su.msg.GamblingMsg.internal_static_CancelMatch_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.su.msg.GamblingMsg.internal_static_CancelMatch_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.su.msg.GamblingMsg.CancelMatch.class, com.su.msg.GamblingMsg.CancelMatch.Builder.class);
+      }
+
+      // Construct using com.su.msg.GamblingMsg.CancelMatch.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.su.msg.GamblingMsg.internal_static_CancelMatch_descriptor;
+      }
+
+      public com.su.msg.GamblingMsg.CancelMatch getDefaultInstanceForType() {
+        return com.su.msg.GamblingMsg.CancelMatch.getDefaultInstance();
+      }
+
+      public com.su.msg.GamblingMsg.CancelMatch build() {
+        com.su.msg.GamblingMsg.CancelMatch result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.su.msg.GamblingMsg.CancelMatch buildPartial() {
+        com.su.msg.GamblingMsg.CancelMatch result = new com.su.msg.GamblingMsg.CancelMatch(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.su.msg.GamblingMsg.CancelMatch) {
+          return mergeFrom((com.su.msg.GamblingMsg.CancelMatch)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.su.msg.GamblingMsg.CancelMatch other) {
+        if (other == com.su.msg.GamblingMsg.CancelMatch.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.su.msg.GamblingMsg.CancelMatch parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.su.msg.GamblingMsg.CancelMatch) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CancelMatch)
+    }
+
+    // @@protoc_insertion_point(class_scope:CancelMatch)
+    private static final com.su.msg.GamblingMsg.CancelMatch DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.su.msg.GamblingMsg.CancelMatch();
+    }
+
+    public static com.su.msg.GamblingMsg.CancelMatch getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<CancelMatch>
+        PARSER = new com.google.protobuf.AbstractParser<CancelMatch>() {
+      public CancelMatch parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new CancelMatch(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CancelMatch> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CancelMatch> getParserForType() {
+      return PARSER;
+    }
+
+    public com.su.msg.GamblingMsg.CancelMatch getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface CancelMatch_OrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CancelMatch_)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code CancelMatch_}
+   */
+  public  static final class CancelMatch_ extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CancelMatch_)
+      CancelMatch_OrBuilder {
+    // Use CancelMatch_.newBuilder() to construct.
+    private CancelMatch_(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CancelMatch_() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CancelMatch_(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.su.msg.GamblingMsg.internal_static_CancelMatch__descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.su.msg.GamblingMsg.internal_static_CancelMatch__fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.su.msg.GamblingMsg.CancelMatch_.class, com.su.msg.GamblingMsg.CancelMatch_.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.su.msg.GamblingMsg.CancelMatch_)) {
+        return super.equals(obj);
+      }
+      com.su.msg.GamblingMsg.CancelMatch_ other = (com.su.msg.GamblingMsg.CancelMatch_) obj;
+
+      boolean result = true;
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.GamblingMsg.CancelMatch_ parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.su.msg.GamblingMsg.CancelMatch_ prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CancelMatch_}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CancelMatch_)
+        com.su.msg.GamblingMsg.CancelMatch_OrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.su.msg.GamblingMsg.internal_static_CancelMatch__descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.su.msg.GamblingMsg.internal_static_CancelMatch__fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.su.msg.GamblingMsg.CancelMatch_.class, com.su.msg.GamblingMsg.CancelMatch_.Builder.class);
+      }
+
+      // Construct using com.su.msg.GamblingMsg.CancelMatch_.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.su.msg.GamblingMsg.internal_static_CancelMatch__descriptor;
+      }
+
+      public com.su.msg.GamblingMsg.CancelMatch_ getDefaultInstanceForType() {
+        return com.su.msg.GamblingMsg.CancelMatch_.getDefaultInstance();
+      }
+
+      public com.su.msg.GamblingMsg.CancelMatch_ build() {
+        com.su.msg.GamblingMsg.CancelMatch_ result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.su.msg.GamblingMsg.CancelMatch_ buildPartial() {
+        com.su.msg.GamblingMsg.CancelMatch_ result = new com.su.msg.GamblingMsg.CancelMatch_(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.su.msg.GamblingMsg.CancelMatch_) {
+          return mergeFrom((com.su.msg.GamblingMsg.CancelMatch_)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.su.msg.GamblingMsg.CancelMatch_ other) {
+        if (other == com.su.msg.GamblingMsg.CancelMatch_.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.su.msg.GamblingMsg.CancelMatch_ parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.su.msg.GamblingMsg.CancelMatch_) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CancelMatch_)
+    }
+
+    // @@protoc_insertion_point(class_scope:CancelMatch_)
+    private static final com.su.msg.GamblingMsg.CancelMatch_ DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.su.msg.GamblingMsg.CancelMatch_();
+    }
+
+    public static com.su.msg.GamblingMsg.CancelMatch_ getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<CancelMatch_>
+        PARSER = new com.google.protobuf.AbstractParser<CancelMatch_>() {
+      public CancelMatch_ parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new CancelMatch_(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CancelMatch_> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CancelMatch_> getParserForType() {
+      return PARSER;
+    }
+
+    public com.su.msg.GamblingMsg.CancelMatch_ getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface CallOrBuilder extends
       // @@protoc_insertion_point(interface_extends:Call)
       com.google.protobuf.MessageOrBuilder {
@@ -15795,6 +16549,16 @@ public final class GamblingMsg {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Match__fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CancelMatch_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CancelMatch_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CancelMatch__descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CancelMatch__fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Call_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -15917,20 +16681,20 @@ public final class GamblingMsg {
       "\001(\0132\006._Card\022\024\n\010callType\030\t \001(\005:\002-1\022\022\n\006cal" +
       "lOp\030\n \001(\005:\002-1\022\022\n\006dealer\030\013 \001(\005:\002-1\022\024\n\010wai" +
       "tTime\030\014 \001(\003:\002-1\"\027\n\005Match\022\016\n\006siteId\030\001 \001(\005" +
-      "\"\010\n\006Match_\"+\n\004Call\022\020\n\010callType\030\001 \001(\005\022\021\n\t" +
-      "cardIndex\030\002 \001(\005\"\007\n\005Call_\",\n\004Draw\022\020\n\010card" +
-      "Type\030\001 \001(\005\022\022\n\ncardIndexs\030\002 \003(\005\"\007\n\005Draw_\"" +
-      "\007\n\005Check\"\010\n\006Check_\"\007\n\005Ready\"\010\n\006Ready_\"\006\n" +
-      "\004Quit\"\007\n\005Quit_\"\010\n\006Double\"\t\n\007Double_\"\026\n\004A" +
-      "uto\022\016\n\006isAuto\030\001 \001(\005\"\007\n\005Auto_\"\010\n\006Reconn\"\t",
-      "\n\007Reconn_\"5\n\021UpdateGamePlayer_\022 \n\ngamePl" +
-      "ayer\030\001 \003(\0132\014._GamePlayer\"&\n\014UpdateTable_" +
-      "\022\026\n\005table\030\001 \001(\0132\007._Table\"5\n\021_GamePlayerR" +
-      "esult\022\020\n\010multiple\030\001 \001(\005\022\016\n\006peanut\030\002 \001(\005\"" +
-      "\\\n\014TableResult_\022\021\n\tbaseScore\030\001 \001(\005\022\017\n\007wi" +
-      "nTeam\030\002 \001(\005\022(\n\014playerResult\030\003 \003(\0132\022._Gam" +
-      "ePlayerResultB\033\n\ncom.su.msgB\013GamblingMsg" +
-      "H\001"
+      "\"\010\n\006Match_\"\r\n\013CancelMatch\"\016\n\014CancelMatch" +
+      "_\"+\n\004Call\022\020\n\010callType\030\001 \001(\005\022\021\n\tcardIndex" +
+      "\030\002 \001(\005\"\007\n\005Call_\",\n\004Draw\022\020\n\010cardType\030\001 \001(" +
+      "\005\022\022\n\ncardIndexs\030\002 \003(\005\"\007\n\005Draw_\"\007\n\005Check\"" +
+      "\010\n\006Check_\"\007\n\005Ready\"\010\n\006Ready_\"\006\n\004Quit\"\007\n\005" +
+      "Quit_\"\010\n\006Double\"\t\n\007Double_\"\026\n\004Auto\022\016\n\006is",
+      "Auto\030\001 \001(\005\"\007\n\005Auto_\"\010\n\006Reconn\"\t\n\007Reconn_" +
+      "\"5\n\021UpdateGamePlayer_\022 \n\ngamePlayer\030\001 \003(" +
+      "\0132\014._GamePlayer\"&\n\014UpdateTable_\022\026\n\005table" +
+      "\030\001 \001(\0132\007._Table\"5\n\021_GamePlayerResult\022\020\n\010" +
+      "multiple\030\001 \001(\005\022\016\n\006peanut\030\002 \001(\005\"\\\n\014TableR" +
+      "esult_\022\021\n\tbaseScore\030\001 \001(\005\022\017\n\007winTeam\030\002 \001" +
+      "(\005\022(\n\014playerResult\030\003 \003(\0132\022._GamePlayerRe" +
+      "sultB\033\n\ncom.su.msgB\013GamblingMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15974,122 +16738,134 @@ public final class GamblingMsg {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Match__descriptor,
         new java.lang.String[] { });
-    internal_static_Call_descriptor =
+    internal_static_CancelMatch_descriptor =
       getDescriptor().getMessageTypes().get(5);
+    internal_static_CancelMatch_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CancelMatch_descriptor,
+        new java.lang.String[] { });
+    internal_static_CancelMatch__descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_CancelMatch__fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CancelMatch__descriptor,
+        new java.lang.String[] { });
+    internal_static_Call_descriptor =
+      getDescriptor().getMessageTypes().get(7);
     internal_static_Call_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Call_descriptor,
         new java.lang.String[] { "CallType", "CardIndex", });
     internal_static_Call__descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_Call__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Call__descriptor,
         new java.lang.String[] { });
     internal_static_Draw_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_Draw_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Draw_descriptor,
         new java.lang.String[] { "CardType", "CardIndexs", });
     internal_static_Draw__descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_Draw__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Draw__descriptor,
         new java.lang.String[] { });
     internal_static_Check_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_Check_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Check_descriptor,
         new java.lang.String[] { });
     internal_static_Check__descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_Check__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Check__descriptor,
         new java.lang.String[] { });
     internal_static_Ready_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_Ready_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Ready_descriptor,
         new java.lang.String[] { });
     internal_static_Ready__descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_Ready__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Ready__descriptor,
         new java.lang.String[] { });
     internal_static_Quit_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_Quit_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Quit_descriptor,
         new java.lang.String[] { });
     internal_static_Quit__descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_Quit__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Quit__descriptor,
         new java.lang.String[] { });
     internal_static_Double_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_Double_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Double_descriptor,
         new java.lang.String[] { });
     internal_static_Double__descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_Double__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Double__descriptor,
         new java.lang.String[] { });
     internal_static_Auto_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_Auto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Auto_descriptor,
         new java.lang.String[] { "IsAuto", });
     internal_static_Auto__descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_Auto__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Auto__descriptor,
         new java.lang.String[] { });
     internal_static_Reconn_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_Reconn_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Reconn_descriptor,
         new java.lang.String[] { });
     internal_static_Reconn__descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_Reconn__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Reconn__descriptor,
         new java.lang.String[] { });
     internal_static_UpdateGamePlayer__descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_UpdateGamePlayer__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UpdateGamePlayer__descriptor,
         new java.lang.String[] { "GamePlayer", });
     internal_static_UpdateTable__descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(24);
     internal_static_UpdateTable__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UpdateTable__descriptor,
         new java.lang.String[] { "Table", });
     internal_static__GamePlayerResult_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(25);
     internal_static__GamePlayerResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__GamePlayerResult_descriptor,
         new java.lang.String[] { "Multiple", "Peanut", });
     internal_static_TableResult__descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_TableResult__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TableResult__descriptor,

@@ -9,7 +9,7 @@ import com.su.core.action.ActionContext;
 import com.su.core.action.ActionMeta;
 import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventDispatcher;
-import com.su.core.gambling.TableResult;
+import com.su.core.game.TableResult;
 import com.su.core.netty.NettyServerHandler;
 import com.su.msg.GamblingMsg._GamePlayerResult;
 import com.su.msg.LoginMsg.Login_;

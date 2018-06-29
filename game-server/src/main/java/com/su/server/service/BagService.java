@@ -7,14 +7,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.su.common.constant.BagConst;
 import com.su.common.obj.Grid;
 import com.su.common.po.PlayerDetail;
 import com.su.common.util.TimeUtil;
-import com.su.config.PropesCo;
+import com.su.config.BagCo;
 import com.su.core.context.PlayerContext;
 import com.su.core.data.DataService;
 import com.su.core.event.GameEventAdapter;
-import com.su.excel.mapper.PropesMapper;
+import com.su.excel.mapper.BagConf;
 import com.su.msg.BagMsg.DeleteItem_;
 import com.su.msg.BagMsg.UpdateItem_;
 import com.su.msg.BagMsg._Grid;
@@ -26,7 +27,7 @@ public class BagService extends GameEventAdapter {
 	private Logger logger = LoggerFactory.getLogger(BagService.class);
 
 	@Autowired
-	private PropesMapper bagConf;
+	private BagConf bagConf;
 	@Autowired
 	private LogService logService;
 	@Autowired
@@ -41,7 +42,7 @@ public class BagService extends GameEventAdapter {
 		int oriCount = count;
 		PlayerDetail playerDetail = playerService.getPlayerDetail(playerContext.getPlayerId());
 		// 排序规则：类型小的 < 品质小 < id小
-		PropesCo bagCo = bagConf.get(sysId);
+		BagCo bagCo = bagConf.get(sysId);
 		if (bagCo == null) {
 			logger.error("找不到对应的配置 {}", sysId);
 			return false;
@@ -56,9 +57,7 @@ public class BagService extends GameEventAdapter {
 			// 全部已添加
 			if (count == 0)
 				break;
-
 			Grid grid = bagGrid.get(i);
-
 			// id 相同叠加物品
 			if (grid.getSysId() == sysId) {
 				if (grid.getCount() >= bagCo.getLimit()) {
@@ -75,9 +74,9 @@ public class BagService extends GameEventAdapter {
 
 				builder.addGrid(serializeGrid(i, grid));
 				continue;
-			}
+			} 
 			if (grid.getType() == type) {
-				PropesCo currBagCo = bagConf.get(grid.getSysId());
+				BagCo currBagCo = bagConf.get(grid.getSysId());
 				if (currBagCo.getQuality() > bagCo.getQuality()) {
 					createGrid(playerContext, bagGrid, i, type, sysId, count, bagCo, builder);
 				} else if (currBagCo.getQuality() == bagCo.getQuality() && currBagCo.getId() > bagCo.getId()) {
@@ -159,7 +158,7 @@ public class BagService extends GameEventAdapter {
 	 * 创建新格子
 	 */
 	private void createGrid(PlayerContext playerContext, List<Grid> bagGrid, int index, int type, int sysId, int count,
-			PropesCo bagCo, UpdateItem_.Builder builder) {
+			BagCo bagCo, UpdateItem_.Builder builder) {
 		// 全部已添加
 		if (count == 0)
 			return;
@@ -174,9 +173,10 @@ public class BagService extends GameEventAdapter {
 			count = 0;
 		}
 		grid.setCount(addCount);
-		if (bagCo.getExpirationTime() != 0) {
-			grid.setEndTime(TimeUtil.getCurrTime() + bagCo.getExpirationTime());
-		}
+		if (bagCo.getEffTyep() == BagConst.EFF_TYPE_TIME)
+			grid.setEffValue(TimeUtil.getCurrTime() + bagCo.getEffValue() * TimeUtil.ONE_DAY);
+		else if (bagCo.getEffTyep() == BagConst.EFF_TYPE_COUNT)
+			grid.setEffValue(bagCo.getEffValue());
 		bagGrid.add(index, grid);
 		builder.addGrid(serializeGrid(index, grid));
 
@@ -189,7 +189,8 @@ public class BagService extends GameEventAdapter {
 		builder.setType(grid.getType());
 		builder.setSysId(grid.getSysId());
 		builder.setCount(grid.getCount());
-		builder.setEndTime(grid.getEndTime());
+		builder.setEffType(grid.getEffType());
+		builder.setEffValue(grid.getEffValue());
 		return builder.build();
 	}
 

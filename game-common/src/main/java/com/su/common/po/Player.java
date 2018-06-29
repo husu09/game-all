@@ -24,6 +24,10 @@ public class Player implements Serializable {
 	 * 花生
 	 * */
 	private int peanut;
+	/**
+	 * 段位
+	 * */
+	private int rankStep;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -49,4 +53,11 @@ public class Player implements Serializable {
 	public void setPeanut(int peanut) {
 		this.peanut = peanut;
 	}
+	public int getRankStep() {
+		return rankStep;
+	}
+	public void setRankStep(int rankStep) {
+		this.rankStep = rankStep;
+	}
+	
 }

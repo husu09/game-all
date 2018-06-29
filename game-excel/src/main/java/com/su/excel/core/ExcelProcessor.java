@@ -22,8 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.su.excel.mapper.ParameterMapper;
-
 /**
  * 预处理excel数据，验证数据完整性后保存
  */
@@ -34,12 +32,15 @@ public class ExcelProcessor {
 	@Autowired
 	private ExcelContext excelContext;
 
-	@Autowired
-	private ParameterMapper parameterMapper;
-
+	/**
+	 * 配置表目录
+	 */
 	@Value("${excel.dir}")
 	private String dir;
 
+	/**
+	 * 保存预处理数据的目录
+	 */
 	public final static String preDataDir = System.getProperty("user.dir") + "/../preData/";
 
 	private DataFormatter formatter = new DataFormatter();
@@ -104,17 +105,17 @@ public class ExcelProcessor {
 							Object rowObject = mapper.map(rowData);
 							if (rowObject == null)
 								continue;
-							mapper.add(rowObject);
+							mapper.beforeAdd(rowObject);
 						}
 					}
-					mapper.finishLoad();// 加载完当前表
+					mapper.beforeFinishLoad();// 加载完当前表
 					fis.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		excelContext.doFinishLoadAll(); // 加载完所有表
+		excelContext.doBeforeFinishLoadAll(); // 加载完所有表
 		excelContext.savePreData(preDataDir); // 保存预处理数据
 	}
 
@@ -186,16 +187,19 @@ public class ExcelProcessor {
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				String line = reader.readLine();
 				while (line != null) {
-					mapper.add(line);
+					mapper.afterAdd(line);
 					line = reader.readLine();
 				}
 				reader.close();
+				// 加载完当前配置
+				mapper.afterFinishLoad();
 				logger.info("{}：{}", mapper.getName(), mapper.all().size());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		parameterMapper.initConst();
+		// 加载完所有配置
+		excelContext.doAfterFinishLoadAll();
 		logger.info("加载Excel配置成功");
 	}
 

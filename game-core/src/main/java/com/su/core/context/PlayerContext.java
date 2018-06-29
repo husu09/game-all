@@ -3,7 +3,7 @@ package com.su.core.context;
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.core.akka.PlayerActor;
-import com.su.core.gambling.GamePlayer;
+import com.su.core.game.GamePlayer;
 import com.su.core.netty.NettyServerHandler;
 import com.su.msg.CommonMsg.Error_;
 import com.su.msg.PlayerMsg._Player;

@@ -1,0 +1,32 @@
+syntax = "proto2";
+
+option optimize_for = SPEED;
+option java_package = "com.su.msg";
+option java_outer_classname = "ContestMsg";
+
+message _ContestRank {
+	optional int32 playerId = 1;	// 玩家id
+	optional string playerName = 2;	// 玩家姓名
+}
+
+message _Contest {
+	optional int32 contestId = 1;	// 比赛id
+	optional int32 baseScore = 2;	// 底分
+	repeated _ContestRank contestRank = 3;		// 排名
+}
+
+// 报名
+message Apply {
+	optional int32 contestId = 1;	// 比赛id
+}
+message Apply_ {
+	
+}
+
+// 取消报名
+message CancelApply {
+
+}
+message CancelApply_ {
+
+}

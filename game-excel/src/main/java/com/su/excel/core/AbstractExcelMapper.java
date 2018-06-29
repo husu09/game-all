@@ -29,16 +29,31 @@ public abstract class AbstractExcelMapper<T> implements ExcelMapper<T> {
 	protected void init() {
 		excelContext.getMapperMap().put(getName(), this);
 	}
+	
 
 	@Override
-	public void finishLoad() {
-
+	public void beforeFinishLoad() {
+		
 	}
+
 
 	@Override
-	public void finishLoadAll() {
-
+	public void beforeFinishLoadAll() {
+		
 	}
+
+
+	@Override
+	public void afterFinishLoad() {
+		
+	}
+
+
+	@Override
+	public void afterFinishLoadAll() {
+		
+	}
+
 
 	@Override
 	public T get(int id) {
@@ -57,7 +72,7 @@ public abstract class AbstractExcelMapper<T> implements ExcelMapper<T> {
 	}
 
 	@Override
-	public void add(String value) {
+	public void afterAdd(String value) {
 		T t = JSON.parseObject(value, getTypeClass());
 		try {
 			Field field = t.getClass().getDeclaredField("id");
@@ -70,7 +85,7 @@ public abstract class AbstractExcelMapper<T> implements ExcelMapper<T> {
 	}
 
 	@Override
-	public void add(Object obj) {
+	public void beforeAdd(Object obj) {
 		try {
 			Field field = obj.getClass().getDeclaredField("id");
 			field.setAccessible(true);

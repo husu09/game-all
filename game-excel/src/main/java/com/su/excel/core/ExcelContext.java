@@ -30,9 +30,18 @@ public class ExcelContext {
 	/**
 	 * 所有配置加载完成时调用
 	 */
-	public void doFinishLoadAll() {
+	public void doBeforeFinishLoadAll() {
 		for (ExcelMapper<?> mapper : mapperMap.values()) {
-			mapper.finishLoadAll();
+			mapper.beforeFinishLoadAll();
+		}
+	}
+	
+	/**
+	 * 所有配置加载完成时调用
+	 */
+	public void doAfterFinishLoadAll() {
+		for (ExcelMapper<?> mapper : mapperMap.values()) {
+			mapper.afterFinishLoadAll();
 		}
 	}
 

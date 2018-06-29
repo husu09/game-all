@@ -88,20 +88,37 @@ public final class BagMsg {
 
     /**
      * <pre>
-     * 有效时间
+     * 有效类型
      * </pre>
      *
-     * <code>optional int64 endTime = 5;</code>
+     * <code>optional int64 effType = 5;</code>
      */
-    boolean hasEndTime();
+    boolean hasEffType();
     /**
      * <pre>
-     * 有效时间
+     * 有效类型
      * </pre>
      *
-     * <code>optional int64 endTime = 5;</code>
+     * <code>optional int64 effType = 5;</code>
      */
-    long getEndTime();
+    long getEffType();
+
+    /**
+     * <pre>
+     * 有效值
+     * </pre>
+     *
+     * <code>optional int64 effValue = 6;</code>
+     */
+    boolean hasEffValue();
+    /**
+     * <pre>
+     * 有效值
+     * </pre>
+     *
+     * <code>optional int64 effValue = 6;</code>
+     */
+    long getEffValue();
   }
   /**
    * <pre>
@@ -123,7 +140,8 @@ public final class BagMsg {
       type_ = 0;
       sysId_ = 0;
       count_ = 0;
-      endTime_ = 0L;
+      effType_ = 0L;
+      effValue_ = 0L;
     }
 
     @java.lang.Override
@@ -176,7 +194,12 @@ public final class BagMsg {
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              endTime_ = input.readInt64();
+              effType_ = input.readInt64();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              effValue_ = input.readInt64();
               break;
             }
           }
@@ -296,27 +319,50 @@ public final class BagMsg {
       return count_;
     }
 
-    public static final int ENDTIME_FIELD_NUMBER = 5;
-    private long endTime_;
+    public static final int EFFTYPE_FIELD_NUMBER = 5;
+    private long effType_;
     /**
      * <pre>
-     * 有效时间
+     * 有效类型
      * </pre>
      *
-     * <code>optional int64 endTime = 5;</code>
+     * <code>optional int64 effType = 5;</code>
      */
-    public boolean hasEndTime() {
+    public boolean hasEffType() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <pre>
-     * 有效时间
+     * 有效类型
      * </pre>
      *
-     * <code>optional int64 endTime = 5;</code>
+     * <code>optional int64 effType = 5;</code>
      */
-    public long getEndTime() {
-      return endTime_;
+    public long getEffType() {
+      return effType_;
+    }
+
+    public static final int EFFVALUE_FIELD_NUMBER = 6;
+    private long effValue_;
+    /**
+     * <pre>
+     * 有效值
+     * </pre>
+     *
+     * <code>optional int64 effValue = 6;</code>
+     */
+    public boolean hasEffValue() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <pre>
+     * 有效值
+     * </pre>
+     *
+     * <code>optional int64 effValue = 6;</code>
+     */
+    public long getEffValue() {
+      return effValue_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -344,7 +390,10 @@ public final class BagMsg {
         output.writeInt32(4, count_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(5, endTime_);
+        output.writeInt64(5, effType_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(6, effValue_);
       }
       unknownFields.writeTo(output);
     }
@@ -372,7 +421,11 @@ public final class BagMsg {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, endTime_);
+          .computeInt64Size(5, effType_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, effValue_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -411,10 +464,15 @@ public final class BagMsg {
         result = result && (getCount()
             == other.getCount());
       }
-      result = result && (hasEndTime() == other.hasEndTime());
-      if (hasEndTime()) {
-        result = result && (getEndTime()
-            == other.getEndTime());
+      result = result && (hasEffType() == other.hasEffType());
+      if (hasEffType()) {
+        result = result && (getEffType()
+            == other.getEffType());
+      }
+      result = result && (hasEffValue() == other.hasEffValue());
+      if (hasEffValue()) {
+        result = result && (getEffValue()
+            == other.getEffValue());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -443,10 +501,15 @@ public final class BagMsg {
         hash = (37 * hash) + COUNT_FIELD_NUMBER;
         hash = (53 * hash) + getCount();
       }
-      if (hasEndTime()) {
-        hash = (37 * hash) + ENDTIME_FIELD_NUMBER;
+      if (hasEffType()) {
+        hash = (37 * hash) + EFFTYPE_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getEndTime());
+            getEffType());
+      }
+      if (hasEffValue()) {
+        hash = (37 * hash) + EFFVALUE_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getEffValue());
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -578,8 +641,10 @@ public final class BagMsg {
         bitField0_ = (bitField0_ & ~0x00000004);
         count_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        endTime_ = 0L;
+        effType_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
+        effValue_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -623,7 +688,11 @@ public final class BagMsg {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.endTime_ = endTime_;
+        result.effType_ = effType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.effValue_ = effValue_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -678,8 +747,11 @@ public final class BagMsg {
         if (other.hasCount()) {
           setCount(other.getCount());
         }
-        if (other.hasEndTime()) {
-          setEndTime(other.getEndTime());
+        if (other.hasEffType()) {
+          setEffType(other.getEffType());
+        }
+        if (other.hasEffValue()) {
+          setEffValue(other.getEffValue());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -901,50 +973,98 @@ public final class BagMsg {
         return this;
       }
 
-      private long endTime_ ;
+      private long effType_ ;
       /**
        * <pre>
-       * 有效时间
+       * 有效类型
        * </pre>
        *
-       * <code>optional int64 endTime = 5;</code>
+       * <code>optional int64 effType = 5;</code>
        */
-      public boolean hasEndTime() {
+      public boolean hasEffType() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <pre>
-       * 有效时间
+       * 有效类型
        * </pre>
        *
-       * <code>optional int64 endTime = 5;</code>
+       * <code>optional int64 effType = 5;</code>
        */
-      public long getEndTime() {
-        return endTime_;
+      public long getEffType() {
+        return effType_;
       }
       /**
        * <pre>
-       * 有效时间
+       * 有效类型
        * </pre>
        *
-       * <code>optional int64 endTime = 5;</code>
+       * <code>optional int64 effType = 5;</code>
        */
-      public Builder setEndTime(long value) {
+      public Builder setEffType(long value) {
         bitField0_ |= 0x00000010;
-        endTime_ = value;
+        effType_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * 有效时间
+       * 有效类型
        * </pre>
        *
-       * <code>optional int64 endTime = 5;</code>
+       * <code>optional int64 effType = 5;</code>
        */
-      public Builder clearEndTime() {
+      public Builder clearEffType() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        endTime_ = 0L;
+        effType_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long effValue_ ;
+      /**
+       * <pre>
+       * 有效值
+       * </pre>
+       *
+       * <code>optional int64 effValue = 6;</code>
+       */
+      public boolean hasEffValue() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <pre>
+       * 有效值
+       * </pre>
+       *
+       * <code>optional int64 effValue = 6;</code>
+       */
+      public long getEffValue() {
+        return effValue_;
+      }
+      /**
+       * <pre>
+       * 有效值
+       * </pre>
+       *
+       * <code>optional int64 effValue = 6;</code>
+       */
+      public Builder setEffValue(long value) {
+        bitField0_ |= 0x00000020;
+        effValue_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 有效值
+       * </pre>
+       *
+       * <code>optional int64 effValue = 6;</code>
+       */
+      public Builder clearEffValue() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        effValue_ = 0L;
         onChanged();
         return this;
       }
@@ -3377,13 +3497,13 @@ public final class BagMsg {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tBag.proto\"S\n\005_Grid\022\r\n\005index\030\001 \001(\005\022\014\n\004t" +
+      "\n\tBag.proto\"e\n\005_Grid\022\r\n\005index\030\001 \001(\005\022\014\n\004t" +
       "ype\030\002 \001(\005\022\r\n\005sysId\030\003 \001(\005\022\r\n\005count\030\004 \001(\005\022" +
-      "\017\n\007endTime\030\005 \001(\003\"*\n\007UseItem\022\r\n\005index\030\001 \001" +
-      "(\005\022\020\n\010useCount\030\002 \001(\005\"\n\n\010UseItem_\"\034\n\013Dele" +
-      "teItem_\022\r\n\005index\030\001 \003(\005\"#\n\013UpdateItem_\022\024\n" +
-      "\004grid\030\001 \003(\0132\006._GridB\026\n\ncom.su.msgB\006BagMs" +
-      "gH\001"
+      "\017\n\007effType\030\005 \001(\003\022\020\n\010effValue\030\006 \001(\003\"*\n\007Us" +
+      "eItem\022\r\n\005index\030\001 \001(\005\022\020\n\010useCount\030\002 \001(\005\"\n" +
+      "\n\010UseItem_\"\034\n\013DeleteItem_\022\r\n\005index\030\001 \003(\005" +
+      "\"#\n\013UpdateItem_\022\024\n\004grid\030\001 \003(\0132\006._GridB\026\n" +
+      "\ncom.su.msgB\006BagMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3402,7 +3522,7 @@ public final class BagMsg {
     internal_static__Grid_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__Grid_descriptor,
-        new java.lang.String[] { "Index", "Type", "SysId", "Count", "EndTime", });
+        new java.lang.String[] { "Index", "Type", "SysId", "Count", "EffType", "EffValue", });
     internal_static_UseItem_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_UseItem_fieldAccessorTable = new

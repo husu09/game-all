@@ -3,8 +3,8 @@ package com.su.core.akka;
 import java.util.Map;
 
 import com.su.core.context.PlayerContext;
-import com.su.core.gambling.Site;
-import com.su.core.gambling.TableResult;
+import com.su.core.game.Site;
+import com.su.core.game.TableResult;
 import com.su.msg.GamblingMsg._GamePlayerResult;
 
 /**
@@ -14,10 +14,14 @@ public interface BridgeService {
 	/**
 	 * 牌局结算
 	 * */
-	_GamePlayerResult doTableResult(PlayerContext playerContext, TableResult tableResult);
+	public _GamePlayerResult doTableResult(PlayerContext playerContext, TableResult tableResult);
 	
 	/**
 	 * 获取所有场
 	 * */
-	Map<Integer, Site> getSiteMap();
+	public Map<Integer, Site> getSiteMap();
+	
+	/**
+	 * 获取玩家对象
+	 * */
 }

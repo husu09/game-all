@@ -11,25 +11,24 @@ public interface ExcelMapper<T> {
 	 * 返回文件名
 	 * */
 	public String getName();
-	
 	/**
-	 * 映射
+	 * 行数据映射成对象
 	 * */
 	public T map(RowData rowData);
 	/**
-	 * 添加配置数据
+	 * 添加配置
 	 * */
-	public void add(Object obj);
+	public void beforeAdd(Object obj);
 	
 	/**
-	 * 加载完当前配置表时调用
+	 * （预处理）加载完当前配置表时调用
 	 * */
-	public void finishLoad();
+	public void beforeFinishLoad();
 	
 	/**
-	 * 加载完所有配置时调用
+	 * （预处理）加载完所有配置时调用
 	 * */
-	public void finishLoadAll();
+	public void beforeFinishLoadAll();
 	
 	/**
 	 * 通过 id 获取配置
@@ -42,8 +41,17 @@ public interface ExcelMapper<T> {
 	public Collection<T> all();
 	
 	/**
-	 * 添加配置数据
+	 * （使用时）添加配置数据
 	 * */
-	public void add(String value);
+	public void afterAdd(String value);
+	/**
+	 * （使用时）加载完当前配置表时调用
+	 * */
+	public void afterFinishLoad();
+	
+	/**
+	 * （使用时）加载完所有配置时调用
+	 * */
+	public void afterFinishLoadAll();
 
 }

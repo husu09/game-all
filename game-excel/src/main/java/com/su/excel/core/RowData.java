@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.su.common.obj.Goods;
+import com.su.common.obj.KV;
 import com.su.common.util.ParseUtil;
 
 /**
@@ -32,4 +33,10 @@ public class RowData {
 	public Goods getGoods(String key) {
 		return ParseUtil.getGoods(data.get(key));
 	}
+
+	public KV<Integer> getKVI(String key) {
+		return ParseUtil.getKVI(data.get(key));
+	}
+	
+	
 }
