@@ -1,0 +1,108 @@
+syntax = "proto2";
+
+option optimize_for = SPEED;
+option java_package = "com.su.msg";
+option java_outer_classname = "GamblingMsg";
+
+message _Card {
+	 optional int32 value = 1;	// 牌面
+	 optional int32 suit = 2;	// 花色（0：方块，1：梅花，2：红桃，3：黑桃）
+}
+
+message _Multiple {
+	 optional int32 type = 1;	// 类型
+	 optional int32 value = 2;	// 倍数
+}
+
+message _GamePlayer {
+	optional int64 id = 1;				// 玩家id
+	repeated _Card handCard = 2;		// 玩家手牌
+	optional int32 cardNum = 3;			// 手牌数量
+	optional int32 team = 4;			// 玩家队伍（0：红方，1：蓝方）
+	optional int32 multiple = 5;		// 倍数
+	optional int32 score = 6;			// 得分
+	optional int32 state = 7;			// 状态
+	optional int64 deadline = 8;		// 截止时间
+	optional int32 isAuto = 9;			// 是否托管
+}
+
+message _Table {
+	repeated PGamePlayer players = 1;	// 玩家
+	repeated PMultiple multiples = 2;	// 倍数
+	optional int32 state = 3;			// 状态
+	optional  int32 hold = 4;		// 牌权
+	optional int32 roundScore = 5; 	// 轮分
+	optional  PCard callCard = 6;	// 被叫的牌
+	optional int32	callState = 7;	// 叫牌状态
+	repeated PCard lastCards = 8;	// 最后出牌
+	optional int32 dealer = 9;	// 庄家
+}
+
+// 开始匹配
+message Start {
+	optional int32 siteId = 1;	// 场所id
+}
+message Start_ {
+	
+}
+
+// 叫牌
+message Call {
+	optional int32 cardIndex = 1;	// 出牌索引
+}
+message Call_ {
+	
+}
+
+// 出牌
+message Draw{
+	optional int32 cardType = 1;	// 牌型
+	repeated int32 cardIndexs = 2;	// 出牌索引
+}
+message Draw_{
+	
+}
+// 过牌
+message Check {
+
+}
+message Check_ {
+	
+}
+
+// 准备
+message Ready {
+
+}
+message Ready_ {
+
+}
+// 退出
+message Quit {
+
+}
+message Quit_ {
+
+}
+// 加倍
+message Double{
+
+}
+message Double_{
+}
+
+// 托管
+message Auto{
+}
+message Auto_{
+}
+
+// 玩家数据更新通知
+message UpdateGamePlayer_{
+	repeated PGamePlayer gamePlayer = 1;	
+}
+
+// 牌桌数据更新通知
+message UpdateTableNotice_{
+	optional PTable table = 1;
+}

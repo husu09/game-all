@@ -5,7 +5,7 @@ import javax.persistence.Id;
 
 import com.su.common.data.Cache;
 
-@Cache
+@Cache(memoryCache=false,redisCache=false)
 @Entity
 public class ResouceLog {
 	@Id
