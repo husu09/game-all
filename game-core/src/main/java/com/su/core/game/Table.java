@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.su.common.constant.GameConst;
 import com.su.common.util.CommonUtil;
 import com.su.common.util.SpringUtil;
 import com.su.common.util.TimeUtil;
@@ -90,10 +91,6 @@ public abstract class Table implements Delayed {
 	 */
 	protected static final int DOUBLES_WAIT_TIME = TimeUtil.ONE_SECOND * 15;
 	/**
-	 * 参与玩家人数
-	 */
-	protected static final int PLAYER_COUNT = 4;
-	/**
 	 * 辅助对象
 	 */
 	protected CardAssistManager cardAssistManager = SpringUtil.getContext().getBean(CardAssistManager.class);
@@ -114,7 +111,7 @@ public abstract class Table implements Delayed {
 		System.arraycopy(Card.ONE_CARDS, 0, cards, Card.CARDS_NUM, Card.CARDS_NUM);
 		this.cards = cards;
 		this.multiples = new int[MultipleType.values().length];
-		this.ranks = new Integer[PLAYER_COUNT];
+		this.ranks = new Integer[GameConst.PLAYER_COUNT];
 	}
 
 	/**
@@ -167,6 +164,7 @@ public abstract class Table implements Delayed {
 		for (int i = 0; i < players.length; i++) {
 			players[i].setIndex(i);
 			players[i].setTable(this);
+			players[i].setState(PlayerState.WAIT);
 		}
 		this.players = players;
 	}

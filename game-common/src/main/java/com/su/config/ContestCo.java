@@ -13,9 +13,9 @@ public class ContestCo {
 	 * */
 	private int addedScore;
 	/**
-	 * 桌数
+	 * 初始个数
 	 * */
-	private int tableNum;
+	private int contestNum;
 	/**
 	 * 初始积分
 	 * */
@@ -46,11 +46,11 @@ public class ContestCo {
 	public void setAddedScore(int addedScore) {
 		this.addedScore = addedScore;
 	}
-	public int getTableNum() {
-		return tableNum;
+	public int getContestNum() {
+		return contestNum;
 	}
-	public void setTableNum(int tableNum) {
-		this.tableNum = tableNum;
+	public void setContestNum(int contestNum) {
+		this.contestNum = contestNum;
 	}
 	public int getInitScore() {
 		return initScore;

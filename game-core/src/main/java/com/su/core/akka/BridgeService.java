@@ -2,6 +2,7 @@ package com.su.core.akka;
 
 import java.util.Map;
 
+import com.su.common.po.Player;
 import com.su.core.context.PlayerContext;
 import com.su.core.game.Site;
 import com.su.core.game.TableResult;
@@ -24,4 +25,5 @@ public interface BridgeService {
 	/**
 	 * 获取玩家对象
 	 * */
+	public Player getPlayerById(long id);
 }

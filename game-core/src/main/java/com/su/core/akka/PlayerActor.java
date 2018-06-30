@@ -35,4 +35,8 @@ public interface PlayerActor {
 	 * */
 	public _GamePlayerResult doTableResult(TableResult tableResult);
 	
+	/**
+	 * 处理比赛结束
+	 * */
+	public void doContestClose(int ranking);
 }

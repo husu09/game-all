@@ -3,11 +3,12 @@ package com.su.core.game;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import com.su.common.constant.GameConst;
 import com.su.config.SiteCo;
 import com.su.core.context.PlayerContext;
 import com.su.core.game.enums.PlayerState;
 
-public class ClassicSite extends Site {
+public class ClassicSite extends Site implements IMatch {
 	/**
 	 * 匹配中的玩家队列
 	 */
@@ -23,7 +24,8 @@ public class ClassicSite extends Site {
 			getIdleTableQueue().offer(table);
 		}
 	}
-
+	
+	@Override
 	public synchronized void addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {
 		// 验证是否可以加入匹配队列
 		if (playerContext.getGamePlayer() == null)
@@ -40,10 +42,10 @@ public class ClassicSite extends Site {
 		getPlayerNum().incrementAndGet();
 		// 尝试开始游戏
 		// 尝试从队列中获取4个玩家
-		if (playerDeque.size() < 4)
+		if (playerDeque.size() < GameConst.PLAYER_COUNT)
 			return;
-		GamePlayer[] gamePlayers = new GamePlayer[4];
-		for (int i = 0; i < 4; i++) {
+		GamePlayer[] gamePlayers = new GamePlayer[GameConst.PLAYER_COUNT];
+		for (int i = 0; i < GameConst.PLAYER_COUNT; i++) {
 			gamePlayers[i] = playerDeque.poll();
 			if (gamePlayers[i] == null) {
 				// 不足4人时重新排队
@@ -66,7 +68,8 @@ public class ClassicSite extends Site {
 		table.getActor().setPlayers(gamePlayers);
 		table.getActor().deal();
 	}
-
+	
+	@Override
 	public synchronized void removePlayerFromMatch(GamePlayer gamePlayer) {
 		if (playerDeque.remove(gamePlayer))
 			getPlayerNum().decrementAndGet();
@@ -75,6 +78,7 @@ public class ClassicSite extends Site {
 	/**
 	 * 获取配置对象
 	 */
+	@Override
 	public SiteCo getSiteCo() {
 		return siteCo;
 	}

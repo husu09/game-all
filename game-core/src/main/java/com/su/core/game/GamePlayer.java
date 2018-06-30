@@ -55,6 +55,10 @@ public class GamePlayer implements Delayed {
 	 * 玩家上下文
 	 */
 	private PlayerContext playerContext;
+	/**
+	 * 比赛积分
+	 * */
+	private int contestScore;
 
 	/**
 	 * 叫牌时间
@@ -262,4 +266,11 @@ public class GamePlayer implements Delayed {
 		this.table = table;
 	}
 
+	public int getContestScore() {
+		return contestScore;
+	}
+
+	public void setContestScore(int contestScore) {
+		this.contestScore = contestScore;
+	}
 }

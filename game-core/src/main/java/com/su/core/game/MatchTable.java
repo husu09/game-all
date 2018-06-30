@@ -7,41 +7,19 @@ import com.su.msg.GamblingMsg.Match_;
 import com.su.msg.GamblingMsg.Quit_;
 import com.su.msg.GamblingMsg.TableResult_.Builder;
 
-public class ContestTable  extends Table {
-
-	private Contest contest;
+/**
+ * 可匹配的牌桌
+ */
+public abstract class MatchTable extends Table {
 	
-	public ContestTable(Site room, Contest contest) {
+	protected IMatch match;
+	
+	public MatchTable(Site room) {
 		super(room);
-		this.contest = contest;
-	}
-
-	@Override
-	public void doClose(Builder builder, Team winTeam, int redMultiple, int blueMultiple) {
-		builder.setBaseScore(this.match.getSiteCo().getBaseScore());
-		for (GamePlayer otherPlayer : this.players) {
-			TableResult tableResult = new TableResult();
-			tableResult.setPlayerContext(otherPlayer.getPlayerContext());
-			tableResult.setSiteCo(this.match.getSiteCo());
-			if (otherPlayer.getTeam() == winTeam)
-				tableResult.setWin(true);
-			else
-				tableResult.setWin(false);
-
-			if (otherPlayer.getTeam() == Team.RED)
-				tableResult.setMultiple(redMultiple);
-			else
-				tableResult.setMultiple(blueMultiple);
-			builder.addPlayerResult(otherPlayer.getPlayerContext().getActor().doTableResult(tableResult));
-		}
-	
-		// 清空牌桌
-		this.clean();
 	}
 
 	@Override
 	public void doExit(GamePlayer gamePlayer) {
-
 		// 自已退出清空数据
 		gamePlayer.clean();
 		if (state == TableState.CLOSE) {
@@ -61,8 +39,6 @@ public class ContestTable  extends Table {
 		} else {
 			gamePlayer.setAuto(1);
 		}
-	
-		
 	}
 
 	@Override
@@ -83,7 +59,26 @@ public class ContestTable  extends Table {
 		clean();
 		this.site.getIdleTableQueue().offer(this);
 
-	
+	}
+
+	@Override
+	public void doClose(Builder builder, Team winTeam, int redMultiple, int blueMultiple) {
+		builder.setBaseScore(this.match.getSiteCo().getBaseScore());
+		for (GamePlayer otherPlayer : this.players) {
+			TableResult tableResult = new TableResult();
+			tableResult.setPlayerContext(otherPlayer.getPlayerContext());
+			tableResult.setSiteCo(this.match.getSiteCo());
+			if (otherPlayer.getTeam() == winTeam)
+				tableResult.setWin(true);
+			else
+				tableResult.setWin(false);
+
+			if (otherPlayer.getTeam() == Team.RED)
+				tableResult.setMultiple(redMultiple);
+			else
+				tableResult.setMultiple(blueMultiple);
+			builder.addPlayerResult(otherPlayer.getPlayerContext().getActor().doTableResult(tableResult));
+		}
 	}
 
 }

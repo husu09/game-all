@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.su.common.constant.SiteConst;
 import com.su.common.constant.SysAttr;
 import com.su.common.po.Player;
 import com.su.common.po.PlayerDetail;
@@ -29,6 +28,9 @@ public class BridgeServiceImpl implements BridgeService {
 	@Autowired
 	private SiteService siteService;
 
+	/**
+	 * 牌局结束处理
+	 */
 	@Override
 	public _GamePlayerResult doTableResult(PlayerContext playerContext, TableResult tableResult) {
 		Player player = playerService.getPlayerById(tableResult.getPlayerContext().getPlayerId());
@@ -71,6 +73,14 @@ public class BridgeServiceImpl implements BridgeService {
 	@Override
 	public Map<Integer, Site> getSiteMap() {
 		return siteService.getSiteMap();
+	}
+
+	/**
+	 * 根据 id 查找玩家
+	 */
+	@Override
+	public Player getPlayerById(long id) {
+		return playerService.getPlayerById(id);
 	}
 
 }

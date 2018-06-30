@@ -20,7 +20,7 @@ public class ContestConf extends AbstractExcelMapper<ContestCo> {
 		t.setId(rowData.getInt("id"));
 		t.setBaseScore(rowData.getInt("csdf"));
 		t.setAddedScore(rowData.getInt("dfzl"));
-		t.setTableNum(rowData.getInt("cszs"));
+		t.setContestNum(rowData.getInt("csbss"));
 		t.setInitScore(rowData.getInt("csjf"));
 		t.setCost(rowData.getGoods("bmxh"));
 		t.setPlayerNum(rowData.getInt("csrs"));

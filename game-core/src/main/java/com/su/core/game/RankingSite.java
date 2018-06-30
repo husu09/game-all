@@ -1,32 +1,35 @@
 package com.su.core.game;
 
-import java.util.ArrayDeque;
 import java.util.Comparator;
-import java.util.Deque;
+import java.util.Iterator;
 import java.util.TreeSet;
 
+import com.su.common.constant.GameConst;
+import com.su.common.po.Player;
+import com.su.common.util.ArrayUtil;
+import com.su.common.util.SpringUtil;
 import com.su.config.SiteCo;
 import com.su.core.akka.BridgeService;
 import com.su.core.context.PlayerContext;
 import com.su.core.game.enums.PlayerState;
 
-public class RankingSite extends Site {
-	
-	
-	
+public class RankingSite extends Site implements IMatch {
+
+	private BridgeService bridgeService = SpringUtil.getContext().getBean(BridgeService.class);
+
 	/**
-	 * 匹配中的玩家队列
+	 * 匹配中的玩家队列，段位小的排前面
 	 */
 	private TreeSet<GamePlayer> playerSet = new TreeSet<>(new Comparator<GamePlayer>() {
-		
+
 		@Override
 		public int compare(GamePlayer playerOne, GamePlayer playerTwo) {
-			return -1;
+			Player one = bridgeService.getPlayerById(playerOne.getId());
+			Player two = bridgeService.getPlayerById(playerTwo.getId());
+			return two.getRankStep() - one.getRankStep();
 		}
-		
+
 	});
-	
-	
 
 	private SiteCo siteCo;
 
@@ -38,37 +41,31 @@ public class RankingSite extends Site {
 			getIdleTableQueue().offer(table);
 		}
 	}
-
-	public synchronized void addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {/*
+	
+	@Override
+	public synchronized void addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {
 		// 验证是否可以加入匹配队列
 		if (playerContext.getGamePlayer() == null)
 			new GamePlayer(playerContext);
-		else if (playerDeque.contains(playerContext.getGamePlayer()))
+		else if (playerSet.contains(playerContext.getGamePlayer()))
 			return;
 		else if (playerContext.getGamePlayer().getState() != null)
 			return;
-		// 加入队列
-		if (isFirst)
-			playerDeque.offerFirst(playerContext.getGamePlayer());
-		else
-			playerDeque.offer(playerContext.getGamePlayer());
+		playerSet.add(playerContext.getGamePlayer());
 		getPlayerNum().incrementAndGet();
-		// 尝试开始游戏
-		// 尝试从队列中获取4个玩家
-		if (playerDeque.size() < 4)
+
+		GamePlayer[] players = new GamePlayer[GameConst.PLAYER_COUNT];
+		for (Iterator<GamePlayer> it = playerSet.iterator(); it.hasNext();) {
+			GamePlayer player = it.next();
+			GamePlayer last = ArrayUtil.getLast(players);
+			if (last != null && bridgeService.getPlayerById(last.getId()).getRankStep()
+					/ 10 != bridgeService.getPlayerById(player.getId()).getRankStep() / 10)
+				break;
+		}
+		if (ArrayUtil.getCount(players) >= GameConst.PLAYER_COUNT) {
+			for (int i = 0; i < players.length; i++)
+				playerSet.remove(players[i]);
 			return;
-		GamePlayer[] gamePlayers = new GamePlayer[4];
-		for (int i = 0; i < 4; i++) {
-			gamePlayers[i] = playerDeque.poll();
-			if (gamePlayers[i] == null) {
-				// 不足4人时重新排队
-				for (GamePlayer oGamePlayer : gamePlayers) {
-					if (oGamePlayer == null)
-						break;
-					playerDeque.offerFirst(oGamePlayer);
-				}
-				return;
-			}
 		}
 		// 人数足够时开始游戏
 		Table table = getIdleTableQueue().poll();
@@ -76,20 +73,22 @@ public class RankingSite extends Site {
 			table = new RankingTable(this);
 		}
 		// 设置玩家状态
-		for (GamePlayer otherPlayers : gamePlayers)
+		for (GamePlayer otherPlayers : players)
 			otherPlayers.setState(PlayerState.WAIT);
-		table.getActor().setPlayers(gamePlayers);
+		table.getActor().setPlayers(players);
 		table.getActor().deal();
-	*/}
+	}
 
-	public synchronized void removePlayerFromMatch(GamePlayer gamePlayer) {/*
-		if (playerDeque.remove(gamePlayer))
+	@Override
+	public synchronized void removePlayerFromMatch(GamePlayer gamePlayer) {
+		if (playerSet.remove(gamePlayer))
 			getPlayerNum().decrementAndGet();
-	*/}
+	}
 
 	/**
 	 * 获取配置对象
 	 */
+	@Override
 	public SiteCo getSiteCo() {
 		return siteCo;
 	}

@@ -87,4 +87,9 @@ public class PLayerActorImpl implements PlayerActor {
 		return bridgeService.doTableResult(tableResult.getPlayerContext(), tableResult);
 	}
 
+	@Override
+	public void doContestClose(int ranking) {
+		
+	}
+
 }
