@@ -92,4 +92,9 @@ public class PLayerActorImpl implements PlayerActor {
 		
 	}
 
+	@Override
+	public void getPlayerById(long id) {
+		
+	}
+
 }

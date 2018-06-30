@@ -77,6 +77,40 @@ public final class PlayerMsg {
      * <code>optional int32 peanut = 3 [default = -1];</code>
      */
     int getPeanut();
+
+    /**
+     * <pre>
+     * 排位分
+     * </pre>
+     *
+     * <code>optional int32 rankingScore = 4 [default = -1];</code>
+     */
+    boolean hasRankingScore();
+    /**
+     * <pre>
+     * 排位分
+     * </pre>
+     *
+     * <code>optional int32 rankingScore = 4 [default = -1];</code>
+     */
+    int getRankingScore();
+
+    /**
+     * <pre>
+     * 段位
+     * </pre>
+     *
+     * <code>optional int32 rankingStep = 5 [default = -1];</code>
+     */
+    boolean hasRankingStep();
+    /**
+     * <pre>
+     * 段位
+     * </pre>
+     *
+     * <code>optional int32 rankingStep = 5 [default = -1];</code>
+     */
+    int getRankingStep();
   }
   /**
    * <pre>
@@ -97,6 +131,8 @@ public final class PlayerMsg {
       id_ = 0L;
       name_ = "";
       peanut_ = -1;
+      rankingScore_ = -1;
+      rankingStep_ = -1;
     }
 
     @java.lang.Override
@@ -141,6 +177,16 @@ public final class PlayerMsg {
             case 24: {
               bitField0_ |= 0x00000004;
               peanut_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              rankingScore_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              rankingStep_ = input.readInt32();
               break;
             }
           }
@@ -268,6 +314,52 @@ public final class PlayerMsg {
       return peanut_;
     }
 
+    public static final int RANKINGSCORE_FIELD_NUMBER = 4;
+    private int rankingScore_;
+    /**
+     * <pre>
+     * 排位分
+     * </pre>
+     *
+     * <code>optional int32 rankingScore = 4 [default = -1];</code>
+     */
+    public boolean hasRankingScore() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     * 排位分
+     * </pre>
+     *
+     * <code>optional int32 rankingScore = 4 [default = -1];</code>
+     */
+    public int getRankingScore() {
+      return rankingScore_;
+    }
+
+    public static final int RANKINGSTEP_FIELD_NUMBER = 5;
+    private int rankingStep_;
+    /**
+     * <pre>
+     * 段位
+     * </pre>
+     *
+     * <code>optional int32 rankingStep = 5 [default = -1];</code>
+     */
+    public boolean hasRankingStep() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <pre>
+     * 段位
+     * </pre>
+     *
+     * <code>optional int32 rankingStep = 5 [default = -1];</code>
+     */
+    public int getRankingStep() {
+      return rankingStep_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -289,6 +381,12 @@ public final class PlayerMsg {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, peanut_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, rankingScore_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, rankingStep_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -307,6 +405,14 @@ public final class PlayerMsg {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, peanut_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, rankingScore_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, rankingStep_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -340,6 +446,16 @@ public final class PlayerMsg {
         result = result && (getPeanut()
             == other.getPeanut());
       }
+      result = result && (hasRankingScore() == other.hasRankingScore());
+      if (hasRankingScore()) {
+        result = result && (getRankingScore()
+            == other.getRankingScore());
+      }
+      result = result && (hasRankingStep() == other.hasRankingStep());
+      if (hasRankingStep()) {
+        result = result && (getRankingStep()
+            == other.getRankingStep());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -363,6 +479,14 @@ public final class PlayerMsg {
       if (hasPeanut()) {
         hash = (37 * hash) + PEANUT_FIELD_NUMBER;
         hash = (53 * hash) + getPeanut();
+      }
+      if (hasRankingScore()) {
+        hash = (37 * hash) + RANKINGSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getRankingScore();
+      }
+      if (hasRankingStep()) {
+        hash = (37 * hash) + RANKINGSTEP_FIELD_NUMBER;
+        hash = (53 * hash) + getRankingStep();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -492,6 +616,10 @@ public final class PlayerMsg {
         bitField0_ = (bitField0_ & ~0x00000002);
         peanut_ = -1;
         bitField0_ = (bitField0_ & ~0x00000004);
+        rankingScore_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        rankingStep_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -528,6 +656,14 @@ public final class PlayerMsg {
           to_bitField0_ |= 0x00000004;
         }
         result.peanut_ = peanut_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.rankingScore_ = rankingScore_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.rankingStep_ = rankingStep_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -580,6 +716,12 @@ public final class PlayerMsg {
         }
         if (other.hasPeanut()) {
           setPeanut(other.getPeanut());
+        }
+        if (other.hasRankingScore()) {
+          setRankingScore(other.getRankingScore());
+        }
+        if (other.hasRankingStep()) {
+          setRankingStep(other.getRankingStep());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -801,6 +943,102 @@ public final class PlayerMsg {
       public Builder clearPeanut() {
         bitField0_ = (bitField0_ & ~0x00000004);
         peanut_ = -1;
+        onChanged();
+        return this;
+      }
+
+      private int rankingScore_ = -1;
+      /**
+       * <pre>
+       * 排位分
+       * </pre>
+       *
+       * <code>optional int32 rankingScore = 4 [default = -1];</code>
+       */
+      public boolean hasRankingScore() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       * 排位分
+       * </pre>
+       *
+       * <code>optional int32 rankingScore = 4 [default = -1];</code>
+       */
+      public int getRankingScore() {
+        return rankingScore_;
+      }
+      /**
+       * <pre>
+       * 排位分
+       * </pre>
+       *
+       * <code>optional int32 rankingScore = 4 [default = -1];</code>
+       */
+      public Builder setRankingScore(int value) {
+        bitField0_ |= 0x00000008;
+        rankingScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 排位分
+       * </pre>
+       *
+       * <code>optional int32 rankingScore = 4 [default = -1];</code>
+       */
+      public Builder clearRankingScore() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        rankingScore_ = -1;
+        onChanged();
+        return this;
+      }
+
+      private int rankingStep_ = -1;
+      /**
+       * <pre>
+       * 段位
+       * </pre>
+       *
+       * <code>optional int32 rankingStep = 5 [default = -1];</code>
+       */
+      public boolean hasRankingStep() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <pre>
+       * 段位
+       * </pre>
+       *
+       * <code>optional int32 rankingStep = 5 [default = -1];</code>
+       */
+      public int getRankingStep() {
+        return rankingStep_;
+      }
+      /**
+       * <pre>
+       * 段位
+       * </pre>
+       *
+       * <code>optional int32 rankingStep = 5 [default = -1];</code>
+       */
+      public Builder setRankingStep(int value) {
+        bitField0_ |= 0x00000010;
+        rankingStep_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 段位
+       * </pre>
+       *
+       * <code>optional int32 rankingStep = 5 [default = -1];</code>
+       */
+      public Builder clearRankingStep() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        rankingStep_ = -1;
         onChanged();
         return this;
       }
@@ -1458,10 +1696,11 @@ public final class PlayerMsg {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Player.proto\"7\n\007_Player\022\n\n\002id\030\001 \001(\003\022\014\n" +
-      "\004name\030\002 \001(\t\022\022\n\006peanut\030\003 \001(\005:\002-1\")\n\rUpdat" +
-      "ePlayer_\022\030\n\006player\030\001 \001(\0132\010._PlayerB\031\n\nco" +
-      "m.su.msgB\tPlayerMsgH\001"
+      "\n\014Player.proto\"j\n\007_Player\022\n\n\002id\030\001 \001(\003\022\014\n" +
+      "\004name\030\002 \001(\t\022\022\n\006peanut\030\003 \001(\005:\002-1\022\030\n\014ranki" +
+      "ngScore\030\004 \001(\005:\002-1\022\027\n\013rankingStep\030\005 \001(\005:\002" +
+      "-1\")\n\rUpdatePlayer_\022\030\n\006player\030\001 \001(\0132\010._P" +
+      "layerB\031\n\ncom.su.msgB\tPlayerMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1480,7 +1719,7 @@ public final class PlayerMsg {
     internal_static__Player_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__Player_descriptor,
-        new java.lang.String[] { "Id", "Name", "Peanut", });
+        new java.lang.String[] { "Id", "Name", "Peanut", "RankingScore", "RankingStep", });
     internal_static_UpdatePlayer__descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_UpdatePlayer__fieldAccessorTable = new

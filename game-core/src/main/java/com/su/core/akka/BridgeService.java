@@ -13,17 +13,8 @@ import com.su.msg.GamblingMsg._GamePlayerResult;
  * */
 public interface BridgeService {
 	/**
-	 * 牌局结算
-	 * */
-	public _GamePlayerResult doTableResult(PlayerContext playerContext, TableResult tableResult);
-	
-	/**
 	 * 获取所有场
 	 * */
 	public Map<Integer, Site> getSiteMap();
 	
-	/**
-	 * 获取玩家对象
-	 * */
-	public Player getPlayerById(long id);
 }

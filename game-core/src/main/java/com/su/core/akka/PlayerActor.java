@@ -39,4 +39,9 @@ public interface PlayerActor {
 	 * 处理比赛结束
 	 * */
 	public void doContestClose(int ranking);
+	
+	/**
+	 * 获取 Plyaer
+	 * */
+	public void getPlayerById(long id);
 }

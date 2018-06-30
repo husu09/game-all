@@ -5,15 +5,15 @@ option java_package = "com.su.msg";
 option java_outer_classname = "ContestMsg";
 
 message _ContestRank {
-	optional int32 playerId = 1;	// 玩家id
-	optional string playerName = 2;	// 玩家姓名
+	optional int32 playerId = 1;		// 玩家id
+	optional string playerName = 2;		// 玩家姓名
 	optional int32 contestScore = 3;	// 排名分数
-	optional int32 isOut= 4;	// 是否淘汰 1：淘汰、0：未淘汰
+	optional int32 isOut= 4;			// 是否淘汰 1：淘汰、0：未淘汰
 }
 
 message _Contest {
-	optional int32 contestId = 1;	// 比赛id
-	optional int32 baseScore = 2;	// 底分
+	optional int32 contestId = 1;				// 比赛id
+	optional int32 baseScore = 2;				// 底分
 	repeated _ContestRank contestRank = 3;		// 排名
 }
 
@@ -34,7 +34,6 @@ message Apply {
 	optional int32 siteId = 1;
 }
 message Apply_ {
-
 }
 
 // 取消报名
@@ -42,5 +41,9 @@ message CancelApply {
 	optional int32 siteId = 1;
 }
 message CancelApply_ {
+}
 
+// 通知比赛更新
+message noticeContest_ {
+	optional _Contest contest = 1;
 }

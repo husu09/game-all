@@ -814,6 +814,23 @@ public final class TableMsg {
      * <code>optional int64 opTime = 9 [default = -1];</code>
      */
     long getOpTime();
+
+    /**
+     * <pre>
+     * 比赛积分
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 10 [default = -1];</code>
+     */
+    boolean hasContestScore();
+    /**
+     * <pre>
+     * 比赛积分
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 10 [default = -1];</code>
+     */
+    int getContestScore();
   }
   /**
    * Protobuf type {@code _GamePlayer}
@@ -836,6 +853,7 @@ public final class TableMsg {
       isAuto_ = -1;
       state_ = -1;
       opTime_ = -1L;
+      contestScore_ = -1;
     }
 
     @java.lang.Override
@@ -913,6 +931,11 @@ public final class TableMsg {
             case 72: {
               bitField0_ |= 0x00000080;
               opTime_ = input.readInt64();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000100;
+              contestScore_ = input.readInt32();
               break;
             }
           }
@@ -1182,6 +1205,29 @@ public final class TableMsg {
       return opTime_;
     }
 
+    public static final int CONTESTSCORE_FIELD_NUMBER = 10;
+    private int contestScore_;
+    /**
+     * <pre>
+     * 比赛积分
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 10 [default = -1];</code>
+     */
+    public boolean hasContestScore() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <pre>
+     * 比赛积分
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 10 [default = -1];</code>
+     */
+    public int getContestScore() {
+      return contestScore_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1220,6 +1266,9 @@ public final class TableMsg {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt64(9, opTime_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(10, contestScore_);
       }
       unknownFields.writeTo(output);
     }
@@ -1264,6 +1313,10 @@ public final class TableMsg {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(9, opTime_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, contestScore_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1324,6 +1377,11 @@ public final class TableMsg {
         result = result && (getOpTime()
             == other.getOpTime());
       }
+      result = result && (hasContestScore() == other.hasContestScore());
+      if (hasContestScore()) {
+        result = result && (getContestScore()
+            == other.getContestScore());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1372,6 +1430,10 @@ public final class TableMsg {
         hash = (37 * hash) + OPTIME_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getOpTime());
+      }
+      if (hasContestScore()) {
+        hash = (37 * hash) + CONTESTSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getContestScore();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1514,6 +1576,8 @@ public final class TableMsg {
         bitField0_ = (bitField0_ & ~0x00000080);
         opTime_ = -1L;
         bitField0_ = (bitField0_ & ~0x00000100);
+        contestScore_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -1579,6 +1643,10 @@ public final class TableMsg {
           to_bitField0_ |= 0x00000080;
         }
         result.opTime_ = opTime_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.contestScore_ = contestScore_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1670,6 +1738,9 @@ public final class TableMsg {
         }
         if (other.hasOpTime()) {
           setOpTime(other.getOpTime());
+        }
+        if (other.hasContestScore()) {
+          setContestScore(other.getContestScore());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2394,6 +2465,54 @@ public final class TableMsg {
         onChanged();
         return this;
       }
+
+      private int contestScore_ = -1;
+      /**
+       * <pre>
+       * 比赛积分
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 10 [default = -1];</code>
+       */
+      public boolean hasContestScore() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <pre>
+       * 比赛积分
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 10 [default = -1];</code>
+       */
+      public int getContestScore() {
+        return contestScore_;
+      }
+      /**
+       * <pre>
+       * 比赛积分
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 10 [default = -1];</code>
+       */
+      public Builder setContestScore(int value) {
+        bitField0_ |= 0x00000200;
+        contestScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 比赛积分
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 10 [default = -1];</code>
+       */
+      public Builder clearContestScore() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        contestScore_ = -1;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
@@ -2720,6 +2839,23 @@ public final class TableMsg {
      * <code>optional int64 waitTime = 12 [default = -1];</code>
      */
     long getWaitTime();
+
+    /**
+     * <pre>
+     * 牌桌类型	1：经典、2：排位、3：比赛
+     * </pre>
+     *
+     * <code>optional int32 type = 13 [default = -1];</code>
+     */
+    boolean hasType();
+    /**
+     * <pre>
+     * 牌桌类型	1：经典、2：排位、3：比赛
+     * </pre>
+     *
+     * <code>optional int32 type = 13 [default = -1];</code>
+     */
+    int getType();
   }
   /**
    * Protobuf type {@code _Table}
@@ -2744,6 +2880,7 @@ public final class TableMsg {
       callOp_ = -1;
       dealer_ = -1;
       waitTime_ = -1L;
+      type_ = -1;
     }
 
     @java.lang.Override
@@ -2864,6 +3001,11 @@ public final class TableMsg {
             case 96: {
               bitField0_ |= 0x00000100;
               waitTime_ = input.readInt64();
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00000200;
+              type_ = input.readInt32();
               break;
             }
           }
@@ -3261,6 +3403,29 @@ public final class TableMsg {
       return waitTime_;
     }
 
+    public static final int TYPE_FIELD_NUMBER = 13;
+    private int type_;
+    /**
+     * <pre>
+     * 牌桌类型	1：经典、2：排位、3：比赛
+     * </pre>
+     *
+     * <code>optional int32 type = 13 [default = -1];</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <pre>
+     * 牌桌类型	1：经典、2：排位、3：比赛
+     * </pre>
+     *
+     * <code>optional int32 type = 13 [default = -1];</code>
+     */
+    public int getType() {
+      return type_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -3308,6 +3473,9 @@ public final class TableMsg {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeInt64(12, waitTime_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(13, type_);
       }
       unknownFields.writeTo(output);
     }
@@ -3369,6 +3537,10 @@ public final class TableMsg {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(12, waitTime_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(13, type_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3438,6 +3610,11 @@ public final class TableMsg {
         result = result && (getWaitTime()
             == other.getWaitTime());
       }
+      result = result && (hasType() == other.hasType());
+      if (hasType()) {
+        result = result && (getType()
+            == other.getType());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -3497,6 +3674,10 @@ public final class TableMsg {
         hash = (37 * hash) + WAITTIME_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getWaitTime());
+      }
+      if (hasType()) {
+        hash = (37 * hash) + TYPE_FIELD_NUMBER;
+        hash = (53 * hash) + getType();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -3655,6 +3836,8 @@ public final class TableMsg {
         bitField0_ = (bitField0_ & ~0x00000400);
         waitTime_ = -1L;
         bitField0_ = (bitField0_ & ~0x00000800);
+        type_ = -1;
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -3742,6 +3925,10 @@ public final class TableMsg {
           to_bitField0_ |= 0x00000100;
         }
         result.waitTime_ = waitTime_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.type_ = type_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3872,6 +4059,9 @@ public final class TableMsg {
         }
         if (other.hasWaitTime()) {
           setWaitTime(other.getWaitTime());
+        }
+        if (other.hasType()) {
+          setType(other.getType());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5153,6 +5343,54 @@ public final class TableMsg {
       public Builder clearWaitTime() {
         bitField0_ = (bitField0_ & ~0x00000800);
         waitTime_ = -1L;
+        onChanged();
+        return this;
+      }
+
+      private int type_ = -1;
+      /**
+       * <pre>
+       * 牌桌类型	1：经典、2：排位、3：比赛
+       * </pre>
+       *
+       * <code>optional int32 type = 13 [default = -1];</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <pre>
+       * 牌桌类型	1：经典、2：排位、3：比赛
+       * </pre>
+       *
+       * <code>optional int32 type = 13 [default = -1];</code>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <pre>
+       * 牌桌类型	1：经典、2：排位、3：比赛
+       * </pre>
+       *
+       * <code>optional int32 type = 13 [default = -1];</code>
+       */
+      public Builder setType(int value) {
+        bitField0_ |= 0x00001000;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 牌桌类型	1：经典、2：排位、3：比赛
+       * </pre>
+       *
+       * <code>optional int32 type = 13 [default = -1];</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        type_ = -1;
         onChanged();
         return this;
       }
@@ -10317,7 +10555,7 @@ public final class TableMsg {
 
     /**
      * <pre>
-     * 是否托管
+     * 是否托管 1：托管、2：取消托管
      * </pre>
      *
      * <code>optional int32 isAuto = 1;</code>
@@ -10325,7 +10563,7 @@ public final class TableMsg {
     boolean hasIsAuto();
     /**
      * <pre>
-     * 是否托管
+     * 是否托管 1：托管、2：取消托管
      * </pre>
      *
      * <code>optional int32 isAuto = 1;</code>
@@ -10413,7 +10651,7 @@ public final class TableMsg {
     private int isAuto_;
     /**
      * <pre>
-     * 是否托管
+     * 是否托管 1：托管、2：取消托管
      * </pre>
      *
      * <code>optional int32 isAuto = 1;</code>
@@ -10423,7 +10661,7 @@ public final class TableMsg {
     }
     /**
      * <pre>
-     * 是否托管
+     * 是否托管 1：托管、2：取消托管
      * </pre>
      *
      * <code>optional int32 isAuto = 1;</code>
@@ -10724,7 +10962,7 @@ public final class TableMsg {
       private int isAuto_ ;
       /**
        * <pre>
-       * 是否托管
+       * 是否托管 1：托管、2：取消托管
        * </pre>
        *
        * <code>optional int32 isAuto = 1;</code>
@@ -10734,7 +10972,7 @@ public final class TableMsg {
       }
       /**
        * <pre>
-       * 是否托管
+       * 是否托管 1：托管、2：取消托管
        * </pre>
        *
        * <code>optional int32 isAuto = 1;</code>
@@ -10744,7 +10982,7 @@ public final class TableMsg {
       }
       /**
        * <pre>
-       * 是否托管
+       * 是否托管 1：托管、2：取消托管
        * </pre>
        *
        * <code>optional int32 isAuto = 1;</code>
@@ -10757,7 +10995,7 @@ public final class TableMsg {
       }
       /**
        * <pre>
-       * 是否托管
+       * 是否托管 1：托管、2：取消托管
        * </pre>
        *
        * <code>optional int32 isAuto = 1;</code>
@@ -13307,7 +13545,7 @@ public final class TableMsg {
      * 花生
      * </pre>
      *
-     * <code>optional int32 peanut = 2;</code>
+     * <code>optional int32 peanut = 2 [default = -1];</code>
      */
     boolean hasPeanut();
     /**
@@ -13315,9 +13553,43 @@ public final class TableMsg {
      * 花生
      * </pre>
      *
-     * <code>optional int32 peanut = 2;</code>
+     * <code>optional int32 peanut = 2 [default = -1];</code>
      */
     int getPeanut();
+
+    /**
+     * <pre>
+     * 竞技分
+     * </pre>
+     *
+     * <code>optional int32 rankingScore = 3 [default = -1];</code>
+     */
+    boolean hasRankingScore();
+    /**
+     * <pre>
+     * 竞技分
+     * </pre>
+     *
+     * <code>optional int32 rankingScore = 3 [default = -1];</code>
+     */
+    int getRankingScore();
+
+    /**
+     * <pre>
+     * 比赛积分
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 4 [default = -1];</code>
+     */
+    boolean hasContestScore();
+    /**
+     * <pre>
+     * 比赛积分
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 4 [default = -1];</code>
+     */
+    int getContestScore();
   }
   /**
    * Protobuf type {@code _GamePlayerResult}
@@ -13332,7 +13604,9 @@ public final class TableMsg {
     }
     private _GamePlayerResult() {
       multiple_ = 0;
-      peanut_ = 0;
+      peanut_ = -1;
+      rankingScore_ = -1;
+      contestScore_ = -1;
     }
 
     @java.lang.Override
@@ -13371,6 +13645,16 @@ public final class TableMsg {
             case 16: {
               bitField0_ |= 0x00000002;
               peanut_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              rankingScore_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              contestScore_ = input.readInt32();
               break;
             }
           }
@@ -13428,7 +13712,7 @@ public final class TableMsg {
      * 花生
      * </pre>
      *
-     * <code>optional int32 peanut = 2;</code>
+     * <code>optional int32 peanut = 2 [default = -1];</code>
      */
     public boolean hasPeanut() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -13438,10 +13722,56 @@ public final class TableMsg {
      * 花生
      * </pre>
      *
-     * <code>optional int32 peanut = 2;</code>
+     * <code>optional int32 peanut = 2 [default = -1];</code>
      */
     public int getPeanut() {
       return peanut_;
+    }
+
+    public static final int RANKINGSCORE_FIELD_NUMBER = 3;
+    private int rankingScore_;
+    /**
+     * <pre>
+     * 竞技分
+     * </pre>
+     *
+     * <code>optional int32 rankingScore = 3 [default = -1];</code>
+     */
+    public boolean hasRankingScore() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     * 竞技分
+     * </pre>
+     *
+     * <code>optional int32 rankingScore = 3 [default = -1];</code>
+     */
+    public int getRankingScore() {
+      return rankingScore_;
+    }
+
+    public static final int CONTESTSCORE_FIELD_NUMBER = 4;
+    private int contestScore_;
+    /**
+     * <pre>
+     * 比赛积分
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 4 [default = -1];</code>
+     */
+    public boolean hasContestScore() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     * 比赛积分
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 4 [default = -1];</code>
+     */
+    public int getContestScore() {
+      return contestScore_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -13462,6 +13792,12 @@ public final class TableMsg {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, peanut_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, rankingScore_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, contestScore_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -13477,6 +13813,14 @@ public final class TableMsg {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, peanut_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, rankingScore_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, contestScore_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -13505,6 +13849,16 @@ public final class TableMsg {
         result = result && (getPeanut()
             == other.getPeanut());
       }
+      result = result && (hasRankingScore() == other.hasRankingScore());
+      if (hasRankingScore()) {
+        result = result && (getRankingScore()
+            == other.getRankingScore());
+      }
+      result = result && (hasContestScore() == other.hasContestScore());
+      if (hasContestScore()) {
+        result = result && (getContestScore()
+            == other.getContestScore());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -13523,6 +13877,14 @@ public final class TableMsg {
       if (hasPeanut()) {
         hash = (37 * hash) + PEANUT_FIELD_NUMBER;
         hash = (53 * hash) + getPeanut();
+      }
+      if (hasRankingScore()) {
+        hash = (37 * hash) + RANKINGSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getRankingScore();
+      }
+      if (hasContestScore()) {
+        hash = (37 * hash) + CONTESTSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getContestScore();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -13644,8 +14006,12 @@ public final class TableMsg {
         super.clear();
         multiple_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        peanut_ = 0;
+        peanut_ = -1;
         bitField0_ = (bitField0_ & ~0x00000002);
+        rankingScore_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        contestScore_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -13678,6 +14044,14 @@ public final class TableMsg {
           to_bitField0_ |= 0x00000002;
         }
         result.peanut_ = peanut_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.rankingScore_ = rankingScore_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.contestScore_ = contestScore_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -13725,6 +14099,12 @@ public final class TableMsg {
         }
         if (other.hasPeanut()) {
           setPeanut(other.getPeanut());
+        }
+        if (other.hasRankingScore()) {
+          setRankingScore(other.getRankingScore());
+        }
+        if (other.hasContestScore()) {
+          setContestScore(other.getContestScore());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -13802,13 +14182,13 @@ public final class TableMsg {
         return this;
       }
 
-      private int peanut_ ;
+      private int peanut_ = -1;
       /**
        * <pre>
        * 花生
        * </pre>
        *
-       * <code>optional int32 peanut = 2;</code>
+       * <code>optional int32 peanut = 2 [default = -1];</code>
        */
       public boolean hasPeanut() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -13818,7 +14198,7 @@ public final class TableMsg {
        * 花生
        * </pre>
        *
-       * <code>optional int32 peanut = 2;</code>
+       * <code>optional int32 peanut = 2 [default = -1];</code>
        */
       public int getPeanut() {
         return peanut_;
@@ -13828,7 +14208,7 @@ public final class TableMsg {
        * 花生
        * </pre>
        *
-       * <code>optional int32 peanut = 2;</code>
+       * <code>optional int32 peanut = 2 [default = -1];</code>
        */
       public Builder setPeanut(int value) {
         bitField0_ |= 0x00000002;
@@ -13841,11 +14221,107 @@ public final class TableMsg {
        * 花生
        * </pre>
        *
-       * <code>optional int32 peanut = 2;</code>
+       * <code>optional int32 peanut = 2 [default = -1];</code>
        */
       public Builder clearPeanut() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        peanut_ = 0;
+        peanut_ = -1;
+        onChanged();
+        return this;
+      }
+
+      private int rankingScore_ = -1;
+      /**
+       * <pre>
+       * 竞技分
+       * </pre>
+       *
+       * <code>optional int32 rankingScore = 3 [default = -1];</code>
+       */
+      public boolean hasRankingScore() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       * 竞技分
+       * </pre>
+       *
+       * <code>optional int32 rankingScore = 3 [default = -1];</code>
+       */
+      public int getRankingScore() {
+        return rankingScore_;
+      }
+      /**
+       * <pre>
+       * 竞技分
+       * </pre>
+       *
+       * <code>optional int32 rankingScore = 3 [default = -1];</code>
+       */
+      public Builder setRankingScore(int value) {
+        bitField0_ |= 0x00000004;
+        rankingScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 竞技分
+       * </pre>
+       *
+       * <code>optional int32 rankingScore = 3 [default = -1];</code>
+       */
+      public Builder clearRankingScore() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        rankingScore_ = -1;
+        onChanged();
+        return this;
+      }
+
+      private int contestScore_ = -1;
+      /**
+       * <pre>
+       * 比赛积分
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 4 [default = -1];</code>
+       */
+      public boolean hasContestScore() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       * 比赛积分
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 4 [default = -1];</code>
+       */
+      public int getContestScore() {
+        return contestScore_;
+      }
+      /**
+       * <pre>
+       * 比赛积分
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 4 [default = -1];</code>
+       */
+      public Builder setContestScore(int value) {
+        bitField0_ |= 0x00000008;
+        contestScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 比赛积分
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 4 [default = -1];</code>
+       */
+      public Builder clearContestScore() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        contestScore_ = -1;
         onChanged();
         return this;
       }
@@ -15015,32 +15491,34 @@ public final class TableMsg {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Table.proto\"$\n\005_Card\022\r\n\005value\030\001 \001(\005\022\014\n" +
-      "\004suit\030\002 \001(\005\"\302\001\n\013_GamePlayer\022\016\n\002id\030\001 \001(\003:" +
+      "\004suit\030\002 \001(\005\"\334\001\n\013_GamePlayer\022\016\n\002id\030\001 \001(\003:" +
       "\002-1\022\030\n\010handCard\030\002 \003(\0132\006._Card\022\023\n\007cardNum" +
       "\030\003 \001(\005:\002-1\022\020\n\004team\030\004 \001(\005:\002-1\022\024\n\010multiple" +
       "\030\005 \001(\005:\002-1\022\021\n\005score\030\006 \001(\005:\002-1\022\022\n\006isAuto\030" +
       "\007 \001(\005:\002-1\022\021\n\005state\030\010 \001(\005:\002-1\022\022\n\006opTime\030\t" +
-      " \001(\003:\002-1\"\231\002\n\006_Table\022\034\n\006player\030\001 \003(\0132\014._G" +
-      "amePlayer\022\020\n\010multiple\030\002 \003(\005\022\021\n\005state\030\003 \001" +
-      "(\005:\002-1\022\030\n\010lastCard\030\004 \003(\0132\006._Card\022\030\n\014last" +
-      "CardType\030\005 \001(\005:\002-1\022\022\n\006lastOp\030\006 \001(\005:\002-1\022\026",
-      "\n\nroundScore\030\007 \001(\005:\002-1\022\030\n\010callCard\030\010 \001(\013" +
-      "2\006._Card\022\024\n\010callType\030\t \001(\005:\002-1\022\022\n\006callOp" +
-      "\030\n \001(\005:\002-1\022\022\n\006dealer\030\013 \001(\005:\002-1\022\024\n\010waitTi" +
-      "me\030\014 \001(\003:\002-1\"+\n\004Call\022\020\n\010callType\030\001 \001(\005\022\021" +
-      "\n\tcardIndex\030\002 \001(\005\"\007\n\005Call_\",\n\004Draw\022\020\n\010ca" +
-      "rdType\030\001 \001(\005\022\022\n\ncardIndexs\030\002 \003(\005\"\007\n\005Draw" +
-      "_\"\007\n\005Check\"\010\n\006Check_\"\007\n\005Ready\"\010\n\006Ready_\"" +
-      "\006\n\004Quit\"\007\n\005Quit_\"\010\n\006Double\"\t\n\007Double_\"\026\n" +
-      "\004Auto\022\016\n\006isAuto\030\001 \001(\005\"\007\n\005Auto_\"\010\n\006Reconn" +
-      "\"\t\n\007Reconn_\"5\n\021UpdateGamePlayer_\022 \n\ngame",
-      "Player\030\001 \003(\0132\014._GamePlayer\"&\n\014UpdateTabl" +
-      "e_\022\026\n\005table\030\001 \001(\0132\007._Table\"5\n\021_GamePlaye" +
-      "rResult\022\020\n\010multiple\030\001 \001(\005\022\016\n\006peanut\030\002 \001(" +
-      "\005\"\\\n\014TableResult_\022\021\n\tbaseScore\030\001 \001(\005\022\017\n\007" +
-      "winTeam\030\002 \001(\005\022(\n\014playerResult\030\003 \003(\0132\022._G" +
-      "amePlayerResultB\030\n\ncom.su.msgB\010TableMsgH" +
-      "\001"
+      " \001(\003:\002-1\022\030\n\014contestScore\030\n \001(\005:\002-1\"\253\002\n\006_" +
+      "Table\022\034\n\006player\030\001 \003(\0132\014._GamePlayer\022\020\n\010m" +
+      "ultiple\030\002 \003(\005\022\021\n\005state\030\003 \001(\005:\002-1\022\030\n\010last" +
+      "Card\030\004 \003(\0132\006._Card\022\030\n\014lastCardType\030\005 \001(\005",
+      ":\002-1\022\022\n\006lastOp\030\006 \001(\005:\002-1\022\026\n\nroundScore\030\007" +
+      " \001(\005:\002-1\022\030\n\010callCard\030\010 \001(\0132\006._Card\022\024\n\010ca" +
+      "llType\030\t \001(\005:\002-1\022\022\n\006callOp\030\n \001(\005:\002-1\022\022\n\006" +
+      "dealer\030\013 \001(\005:\002-1\022\024\n\010waitTime\030\014 \001(\003:\002-1\022\020" +
+      "\n\004type\030\r \001(\005:\002-1\"+\n\004Call\022\020\n\010callType\030\001 \001" +
+      "(\005\022\021\n\tcardIndex\030\002 \001(\005\"\007\n\005Call_\",\n\004Draw\022\020" +
+      "\n\010cardType\030\001 \001(\005\022\022\n\ncardIndexs\030\002 \003(\005\"\007\n\005" +
+      "Draw_\"\007\n\005Check\"\010\n\006Check_\"\007\n\005Ready\"\010\n\006Rea" +
+      "dy_\"\006\n\004Quit\"\007\n\005Quit_\"\010\n\006Double\"\t\n\007Double" +
+      "_\"\026\n\004Auto\022\016\n\006isAuto\030\001 \001(\005\"\007\n\005Auto_\"\010\n\006Re",
+      "conn\"\t\n\007Reconn_\"5\n\021UpdateGamePlayer_\022 \n\n" +
+      "gamePlayer\030\001 \003(\0132\014._GamePlayer\"&\n\014Update" +
+      "Table_\022\026\n\005table\030\001 \001(\0132\007._Table\"m\n\021_GameP" +
+      "layerResult\022\020\n\010multiple\030\001 \001(\005\022\022\n\006peanut\030" +
+      "\002 \001(\005:\002-1\022\030\n\014rankingScore\030\003 \001(\005:\002-1\022\030\n\014c" +
+      "ontestScore\030\004 \001(\005:\002-1\"\\\n\014TableResult_\022\021\n" +
+      "\tbaseScore\030\001 \001(\005\022\017\n\007winTeam\030\002 \001(\005\022(\n\014pla" +
+      "yerResult\030\003 \003(\0132\022._GamePlayerResultB\030\n\nc" +
+      "om.su.msgB\010TableMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15065,13 +15543,13 @@ public final class TableMsg {
     internal_static__GamePlayer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__GamePlayer_descriptor,
-        new java.lang.String[] { "Id", "HandCard", "CardNum", "Team", "Multiple", "Score", "IsAuto", "State", "OpTime", });
+        new java.lang.String[] { "Id", "HandCard", "CardNum", "Team", "Multiple", "Score", "IsAuto", "State", "OpTime", "ContestScore", });
     internal_static__Table_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static__Table_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__Table_descriptor,
-        new java.lang.String[] { "Player", "Multiple", "State", "LastCard", "LastCardType", "LastOp", "RoundScore", "CallCard", "CallType", "CallOp", "Dealer", "WaitTime", });
+        new java.lang.String[] { "Player", "Multiple", "State", "LastCard", "LastCardType", "LastOp", "RoundScore", "CallCard", "CallType", "CallOp", "Dealer", "WaitTime", "Type", });
     internal_static_Call_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_Call_fieldAccessorTable = new
@@ -15185,7 +15663,7 @@ public final class TableMsg {
     internal_static__GamePlayerResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__GamePlayerResult_descriptor,
-        new java.lang.String[] { "Multiple", "Peanut", });
+        new java.lang.String[] { "Multiple", "Peanut", "RankingScore", "ContestScore", });
     internal_static_TableResult__descriptor =
       getDescriptor().getMessageTypes().get(22);
     internal_static_TableResult__fieldAccessorTable = new

@@ -1,6 +1,5 @@
 package com.su.core.game;
 
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,10 +8,6 @@ public abstract class Site {
 	 * 玩家人数
 	 */
 	private AtomicInteger playerNum = new AtomicInteger();
-	/**
-	 * 空闲牌桌队列
-	 */
-	private ConcurrentLinkedQueue<Table> idleTableQueue = new ConcurrentLinkedQueue<>();
 	/**
 	 * 需要操作的牌桌队列
 	 */
@@ -24,10 +19,6 @@ public abstract class Site {
 	
 	public AtomicInteger getPlayerNum() {
 		return playerNum;
-	}
-	
-	public ConcurrentLinkedQueue<Table> getIdleTableQueue() {
-		return idleTableQueue;
 	}
 
 	public DelayQueue<Table> getWaitTableQueue() {

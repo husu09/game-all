@@ -13,9 +13,8 @@ import com.su.core.akka.BridgeService;
 import com.su.core.context.PlayerContext;
 import com.su.core.game.enums.PlayerState;
 
-public class RankingSite extends Site implements IMatch {
+public class RankingSite extends MatchSite {
 
-	private BridgeService bridgeService = SpringUtil.getContext().getBean(BridgeService.class);
 
 	/**
 	 * 匹配中的玩家队列，段位小的排前面
@@ -24,6 +23,7 @@ public class RankingSite extends Site implements IMatch {
 
 		@Override
 		public int compare(GamePlayer playerOne, GamePlayer playerTwo) {
+			
 			Player one = bridgeService.getPlayerById(playerOne.getId());
 			Player two = bridgeService.getPlayerById(playerTwo.getId());
 			return two.getRankStep() - one.getRankStep();

@@ -6,9 +6,8 @@ import java.util.Deque;
 import com.su.common.constant.GameConst;
 import com.su.config.SiteCo;
 import com.su.core.context.PlayerContext;
-import com.su.core.game.enums.PlayerState;
 
-public class ClassicSite extends Site implements IMatch {
+public class ClassicSite extends MatchSite {
 	/**
 	 * 匹配中的玩家队列
 	 */
@@ -62,9 +61,6 @@ public class ClassicSite extends Site implements IMatch {
 		if (table == null) {
 			table = new ClassicTable(this);
 		}
-		// 设置玩家状态
-		for (GamePlayer otherPlayers : gamePlayers)
-			otherPlayers.setState(PlayerState.WAIT);
 		table.getActor().setPlayers(gamePlayers);
 		table.getActor().deal();
 	}

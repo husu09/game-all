@@ -42,7 +42,7 @@ public class ContestSite extends Site {
 			Contest contest = contestQueue.poll();
 			if (contest == null)
 				contest = new Contest(this);
-			// TODO 
+			// TODO
 			playerList.clear();
 			getPlayerNum().set(0);
 		}

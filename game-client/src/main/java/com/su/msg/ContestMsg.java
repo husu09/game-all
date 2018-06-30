@@ -60,6 +60,40 @@ public final class ContestMsg {
      */
     com.google.protobuf.ByteString
         getPlayerNameBytes();
+
+    /**
+     * <pre>
+     * 排名分数
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 3;</code>
+     */
+    boolean hasContestScore();
+    /**
+     * <pre>
+     * 排名分数
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 3;</code>
+     */
+    int getContestScore();
+
+    /**
+     * <pre>
+     * 是否淘汰 1：淘汰、0：未淘汰
+     * </pre>
+     *
+     * <code>optional int32 isOut = 4;</code>
+     */
+    boolean hasIsOut();
+    /**
+     * <pre>
+     * 是否淘汰 1：淘汰、0：未淘汰
+     * </pre>
+     *
+     * <code>optional int32 isOut = 4;</code>
+     */
+    int getIsOut();
   }
   /**
    * Protobuf type {@code _ContestRank}
@@ -75,6 +109,8 @@ public final class ContestMsg {
     private _ContestRank() {
       playerId_ = 0;
       playerName_ = "";
+      contestScore_ = 0;
+      isOut_ = 0;
     }
 
     @java.lang.Override
@@ -114,6 +150,16 @@ public final class ContestMsg {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
               playerName_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              contestScore_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              isOut_ = input.readInt32();
               break;
             }
           }
@@ -218,6 +264,52 @@ public final class ContestMsg {
       }
     }
 
+    public static final int CONTESTSCORE_FIELD_NUMBER = 3;
+    private int contestScore_;
+    /**
+     * <pre>
+     * 排名分数
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 3;</code>
+     */
+    public boolean hasContestScore() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <pre>
+     * 排名分数
+     * </pre>
+     *
+     * <code>optional int32 contestScore = 3;</code>
+     */
+    public int getContestScore() {
+      return contestScore_;
+    }
+
+    public static final int ISOUT_FIELD_NUMBER = 4;
+    private int isOut_;
+    /**
+     * <pre>
+     * 是否淘汰 1：淘汰、0：未淘汰
+     * </pre>
+     *
+     * <code>optional int32 isOut = 4;</code>
+     */
+    public boolean hasIsOut() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <pre>
+     * 是否淘汰 1：淘汰、0：未淘汰
+     * </pre>
+     *
+     * <code>optional int32 isOut = 4;</code>
+     */
+    public int getIsOut() {
+      return isOut_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -236,6 +328,12 @@ public final class ContestMsg {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, playerName_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, contestScore_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, isOut_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -250,6 +348,14 @@ public final class ContestMsg {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, playerName_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, contestScore_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, isOut_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -278,6 +384,16 @@ public final class ContestMsg {
         result = result && getPlayerName()
             .equals(other.getPlayerName());
       }
+      result = result && (hasContestScore() == other.hasContestScore());
+      if (hasContestScore()) {
+        result = result && (getContestScore()
+            == other.getContestScore());
+      }
+      result = result && (hasIsOut() == other.hasIsOut());
+      if (hasIsOut()) {
+        result = result && (getIsOut()
+            == other.getIsOut());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -296,6 +412,14 @@ public final class ContestMsg {
       if (hasPlayerName()) {
         hash = (37 * hash) + PLAYERNAME_FIELD_NUMBER;
         hash = (53 * hash) + getPlayerName().hashCode();
+      }
+      if (hasContestScore()) {
+        hash = (37 * hash) + CONTESTSCORE_FIELD_NUMBER;
+        hash = (53 * hash) + getContestScore();
+      }
+      if (hasIsOut()) {
+        hash = (37 * hash) + ISOUT_FIELD_NUMBER;
+        hash = (53 * hash) + getIsOut();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -419,6 +543,10 @@ public final class ContestMsg {
         bitField0_ = (bitField0_ & ~0x00000001);
         playerName_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        contestScore_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        isOut_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -451,6 +579,14 @@ public final class ContestMsg {
           to_bitField0_ |= 0x00000002;
         }
         result.playerName_ = playerName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.contestScore_ = contestScore_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.isOut_ = isOut_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -500,6 +636,12 @@ public final class ContestMsg {
           bitField0_ |= 0x00000002;
           playerName_ = other.playerName_;
           onChanged();
+        }
+        if (other.hasContestScore()) {
+          setContestScore(other.getContestScore());
+        }
+        if (other.hasIsOut()) {
+          setIsOut(other.getIsOut());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -673,6 +815,102 @@ public final class ContestMsg {
   }
   bitField0_ |= 0x00000002;
         playerName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int contestScore_ ;
+      /**
+       * <pre>
+       * 排名分数
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 3;</code>
+       */
+      public boolean hasContestScore() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <pre>
+       * 排名分数
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 3;</code>
+       */
+      public int getContestScore() {
+        return contestScore_;
+      }
+      /**
+       * <pre>
+       * 排名分数
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 3;</code>
+       */
+      public Builder setContestScore(int value) {
+        bitField0_ |= 0x00000004;
+        contestScore_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 排名分数
+       * </pre>
+       *
+       * <code>optional int32 contestScore = 3;</code>
+       */
+      public Builder clearContestScore() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        contestScore_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int isOut_ ;
+      /**
+       * <pre>
+       * 是否淘汰 1：淘汰、0：未淘汰
+       * </pre>
+       *
+       * <code>optional int32 isOut = 4;</code>
+       */
+      public boolean hasIsOut() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <pre>
+       * 是否淘汰 1：淘汰、0：未淘汰
+       * </pre>
+       *
+       * <code>optional int32 isOut = 4;</code>
+       */
+      public int getIsOut() {
+        return isOut_;
+      }
+      /**
+       * <pre>
+       * 是否淘汰 1：淘汰、0：未淘汰
+       * </pre>
+       *
+       * <code>optional int32 isOut = 4;</code>
+       */
+      public Builder setIsOut(int value) {
+        bitField0_ |= 0x00000008;
+        isOut_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 是否淘汰 1：淘汰、0：未淘汰
+       * </pre>
+       *
+       * <code>optional int32 isOut = 4;</code>
+       */
+      public Builder clearIsOut() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        isOut_ = 0;
         onChanged();
         return this;
       }
@@ -1821,26 +2059,1727 @@ public final class ContestMsg {
 
   }
 
+  public interface _ContestSiteOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:_ContestSite)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    boolean hasSiteId();
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    int getSiteId();
+
+    /**
+     * <pre>
+     * 玩家数量
+     * </pre>
+     *
+     * <code>optional int32 playerNum = 2;</code>
+     */
+    boolean hasPlayerNum();
+    /**
+     * <pre>
+     * 玩家数量
+     * </pre>
+     *
+     * <code>optional int32 playerNum = 2;</code>
+     */
+    int getPlayerNum();
+  }
+  /**
+   * Protobuf type {@code _ContestSite}
+   */
+  public  static final class _ContestSite extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:_ContestSite)
+      _ContestSiteOrBuilder {
+    // Use _ContestSite.newBuilder() to construct.
+    private _ContestSite(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private _ContestSite() {
+      siteId_ = 0;
+      playerNum_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private _ContestSite(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              siteId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              playerNum_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.su.msg.ContestMsg.internal_static__ContestSite_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.su.msg.ContestMsg.internal_static__ContestSite_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.su.msg.ContestMsg._ContestSite.class, com.su.msg.ContestMsg._ContestSite.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int SITEID_FIELD_NUMBER = 1;
+    private int siteId_;
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public boolean hasSiteId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public int getSiteId() {
+      return siteId_;
+    }
+
+    public static final int PLAYERNUM_FIELD_NUMBER = 2;
+    private int playerNum_;
+    /**
+     * <pre>
+     * 玩家数量
+     * </pre>
+     *
+     * <code>optional int32 playerNum = 2;</code>
+     */
+    public boolean hasPlayerNum() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     * 玩家数量
+     * </pre>
+     *
+     * <code>optional int32 playerNum = 2;</code>
+     */
+    public int getPlayerNum() {
+      return playerNum_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, siteId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, playerNum_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, siteId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, playerNum_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.su.msg.ContestMsg._ContestSite)) {
+        return super.equals(obj);
+      }
+      com.su.msg.ContestMsg._ContestSite other = (com.su.msg.ContestMsg._ContestSite) obj;
+
+      boolean result = true;
+      result = result && (hasSiteId() == other.hasSiteId());
+      if (hasSiteId()) {
+        result = result && (getSiteId()
+            == other.getSiteId());
+      }
+      result = result && (hasPlayerNum() == other.hasPlayerNum());
+      if (hasPlayerNum()) {
+        result = result && (getPlayerNum()
+            == other.getPlayerNum());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasSiteId()) {
+        hash = (37 * hash) + SITEID_FIELD_NUMBER;
+        hash = (53 * hash) + getSiteId();
+      }
+      if (hasPlayerNum()) {
+        hash = (37 * hash) + PLAYERNUM_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerNum();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.su.msg.ContestMsg._ContestSite parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.ContestMsg._ContestSite parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg._ContestSite parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.ContestMsg._ContestSite parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg._ContestSite parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg._ContestSite parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg._ContestSite parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg._ContestSite parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg._ContestSite parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg._ContestSite parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.su.msg.ContestMsg._ContestSite prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code _ContestSite}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:_ContestSite)
+        com.su.msg.ContestMsg._ContestSiteOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.su.msg.ContestMsg.internal_static__ContestSite_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.su.msg.ContestMsg.internal_static__ContestSite_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.su.msg.ContestMsg._ContestSite.class, com.su.msg.ContestMsg._ContestSite.Builder.class);
+      }
+
+      // Construct using com.su.msg.ContestMsg._ContestSite.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        siteId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        playerNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.su.msg.ContestMsg.internal_static__ContestSite_descriptor;
+      }
+
+      public com.su.msg.ContestMsg._ContestSite getDefaultInstanceForType() {
+        return com.su.msg.ContestMsg._ContestSite.getDefaultInstance();
+      }
+
+      public com.su.msg.ContestMsg._ContestSite build() {
+        com.su.msg.ContestMsg._ContestSite result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.su.msg.ContestMsg._ContestSite buildPartial() {
+        com.su.msg.ContestMsg._ContestSite result = new com.su.msg.ContestMsg._ContestSite(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.siteId_ = siteId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.playerNum_ = playerNum_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.su.msg.ContestMsg._ContestSite) {
+          return mergeFrom((com.su.msg.ContestMsg._ContestSite)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.su.msg.ContestMsg._ContestSite other) {
+        if (other == com.su.msg.ContestMsg._ContestSite.getDefaultInstance()) return this;
+        if (other.hasSiteId()) {
+          setSiteId(other.getSiteId());
+        }
+        if (other.hasPlayerNum()) {
+          setPlayerNum(other.getPlayerNum());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.su.msg.ContestMsg._ContestSite parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.su.msg.ContestMsg._ContestSite) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int siteId_ ;
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public boolean hasSiteId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public int getSiteId() {
+        return siteId_;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder setSiteId(int value) {
+        bitField0_ |= 0x00000001;
+        siteId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder clearSiteId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        siteId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int playerNum_ ;
+      /**
+       * <pre>
+       * 玩家数量
+       * </pre>
+       *
+       * <code>optional int32 playerNum = 2;</code>
+       */
+      public boolean hasPlayerNum() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       * 玩家数量
+       * </pre>
+       *
+       * <code>optional int32 playerNum = 2;</code>
+       */
+      public int getPlayerNum() {
+        return playerNum_;
+      }
+      /**
+       * <pre>
+       * 玩家数量
+       * </pre>
+       *
+       * <code>optional int32 playerNum = 2;</code>
+       */
+      public Builder setPlayerNum(int value) {
+        bitField0_ |= 0x00000002;
+        playerNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 玩家数量
+       * </pre>
+       *
+       * <code>optional int32 playerNum = 2;</code>
+       */
+      public Builder clearPlayerNum() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        playerNum_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:_ContestSite)
+    }
+
+    // @@protoc_insertion_point(class_scope:_ContestSite)
+    private static final com.su.msg.ContestMsg._ContestSite DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.su.msg.ContestMsg._ContestSite();
+    }
+
+    public static com.su.msg.ContestMsg._ContestSite getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<_ContestSite>
+        PARSER = new com.google.protobuf.AbstractParser<_ContestSite>() {
+      public _ContestSite parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new _ContestSite(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<_ContestSite> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<_ContestSite> getParserForType() {
+      return PARSER;
+    }
+
+    public com.su.msg.ContestMsg._ContestSite getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface getContestSiteOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:getContestSite)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * <pre>
+   * 获取比赛场信息
+   * </pre>
+   *
+   * Protobuf type {@code getContestSite}
+   */
+  public  static final class getContestSite extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:getContestSite)
+      getContestSiteOrBuilder {
+    // Use getContestSite.newBuilder() to construct.
+    private getContestSite(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private getContestSite() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private getContestSite(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.su.msg.ContestMsg.internal_static_getContestSite_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.su.msg.ContestMsg.internal_static_getContestSite_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.su.msg.ContestMsg.getContestSite.class, com.su.msg.ContestMsg.getContestSite.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.su.msg.ContestMsg.getContestSite)) {
+        return super.equals(obj);
+      }
+      com.su.msg.ContestMsg.getContestSite other = (com.su.msg.ContestMsg.getContestSite) obj;
+
+      boolean result = true;
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.su.msg.ContestMsg.getContestSite parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.ContestMsg.getContestSite parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.getContestSite parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.ContestMsg.getContestSite parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.getContestSite parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg.getContestSite parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.getContestSite parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg.getContestSite parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.getContestSite parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg.getContestSite parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.su.msg.ContestMsg.getContestSite prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * 获取比赛场信息
+     * </pre>
+     *
+     * Protobuf type {@code getContestSite}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:getContestSite)
+        com.su.msg.ContestMsg.getContestSiteOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.su.msg.ContestMsg.internal_static_getContestSite_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.su.msg.ContestMsg.internal_static_getContestSite_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.su.msg.ContestMsg.getContestSite.class, com.su.msg.ContestMsg.getContestSite.Builder.class);
+      }
+
+      // Construct using com.su.msg.ContestMsg.getContestSite.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.su.msg.ContestMsg.internal_static_getContestSite_descriptor;
+      }
+
+      public com.su.msg.ContestMsg.getContestSite getDefaultInstanceForType() {
+        return com.su.msg.ContestMsg.getContestSite.getDefaultInstance();
+      }
+
+      public com.su.msg.ContestMsg.getContestSite build() {
+        com.su.msg.ContestMsg.getContestSite result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.su.msg.ContestMsg.getContestSite buildPartial() {
+        com.su.msg.ContestMsg.getContestSite result = new com.su.msg.ContestMsg.getContestSite(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.su.msg.ContestMsg.getContestSite) {
+          return mergeFrom((com.su.msg.ContestMsg.getContestSite)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.su.msg.ContestMsg.getContestSite other) {
+        if (other == com.su.msg.ContestMsg.getContestSite.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.su.msg.ContestMsg.getContestSite parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.su.msg.ContestMsg.getContestSite) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:getContestSite)
+    }
+
+    // @@protoc_insertion_point(class_scope:getContestSite)
+    private static final com.su.msg.ContestMsg.getContestSite DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.su.msg.ContestMsg.getContestSite();
+    }
+
+    public static com.su.msg.ContestMsg.getContestSite getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<getContestSite>
+        PARSER = new com.google.protobuf.AbstractParser<getContestSite>() {
+      public getContestSite parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new getContestSite(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<getContestSite> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<getContestSite> getParserForType() {
+      return PARSER;
+    }
+
+    public com.su.msg.ContestMsg.getContestSite getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface getContestSite_OrBuilder extends
+      // @@protoc_insertion_point(interface_extends:getContestSite_)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    java.util.List<com.su.msg.ContestMsg._ContestSite> 
+        getContestSiteList();
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    com.su.msg.ContestMsg._ContestSite getContestSite(int index);
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    int getContestSiteCount();
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    java.util.List<? extends com.su.msg.ContestMsg._ContestSiteOrBuilder> 
+        getContestSiteOrBuilderList();
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    com.su.msg.ContestMsg._ContestSiteOrBuilder getContestSiteOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code getContestSite_}
+   */
+  public  static final class getContestSite_ extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:getContestSite_)
+      getContestSite_OrBuilder {
+    // Use getContestSite_.newBuilder() to construct.
+    private getContestSite_(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private getContestSite_() {
+      contestSite_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private getContestSite_(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                contestSite_ = new java.util.ArrayList<com.su.msg.ContestMsg._ContestSite>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              contestSite_.add(
+                  input.readMessage(com.su.msg.ContestMsg._ContestSite.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          contestSite_ = java.util.Collections.unmodifiableList(contestSite_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.su.msg.ContestMsg.internal_static_getContestSite__descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.su.msg.ContestMsg.internal_static_getContestSite__fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.su.msg.ContestMsg.getContestSite_.class, com.su.msg.ContestMsg.getContestSite_.Builder.class);
+    }
+
+    public static final int CONTESTSITE_FIELD_NUMBER = 1;
+    private java.util.List<com.su.msg.ContestMsg._ContestSite> contestSite_;
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    public java.util.List<com.su.msg.ContestMsg._ContestSite> getContestSiteList() {
+      return contestSite_;
+    }
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    public java.util.List<? extends com.su.msg.ContestMsg._ContestSiteOrBuilder> 
+        getContestSiteOrBuilderList() {
+      return contestSite_;
+    }
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    public int getContestSiteCount() {
+      return contestSite_.size();
+    }
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    public com.su.msg.ContestMsg._ContestSite getContestSite(int index) {
+      return contestSite_.get(index);
+    }
+    /**
+     * <code>repeated ._ContestSite contestSite = 1;</code>
+     */
+    public com.su.msg.ContestMsg._ContestSiteOrBuilder getContestSiteOrBuilder(
+        int index) {
+      return contestSite_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < contestSite_.size(); i++) {
+        output.writeMessage(1, contestSite_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < contestSite_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, contestSite_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.su.msg.ContestMsg.getContestSite_)) {
+        return super.equals(obj);
+      }
+      com.su.msg.ContestMsg.getContestSite_ other = (com.su.msg.ContestMsg.getContestSite_) obj;
+
+      boolean result = true;
+      result = result && getContestSiteList()
+          .equals(other.getContestSiteList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getContestSiteCount() > 0) {
+        hash = (37 * hash) + CONTESTSITE_FIELD_NUMBER;
+        hash = (53 * hash) + getContestSiteList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.su.msg.ContestMsg.getContestSite_ parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.ContestMsg.getContestSite_ parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.getContestSite_ parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.ContestMsg.getContestSite_ parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.getContestSite_ parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg.getContestSite_ parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.getContestSite_ parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg.getContestSite_ parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.getContestSite_ parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg.getContestSite_ parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.su.msg.ContestMsg.getContestSite_ prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code getContestSite_}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:getContestSite_)
+        com.su.msg.ContestMsg.getContestSite_OrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.su.msg.ContestMsg.internal_static_getContestSite__descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.su.msg.ContestMsg.internal_static_getContestSite__fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.su.msg.ContestMsg.getContestSite_.class, com.su.msg.ContestMsg.getContestSite_.Builder.class);
+      }
+
+      // Construct using com.su.msg.ContestMsg.getContestSite_.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getContestSiteFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (contestSiteBuilder_ == null) {
+          contestSite_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          contestSiteBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.su.msg.ContestMsg.internal_static_getContestSite__descriptor;
+      }
+
+      public com.su.msg.ContestMsg.getContestSite_ getDefaultInstanceForType() {
+        return com.su.msg.ContestMsg.getContestSite_.getDefaultInstance();
+      }
+
+      public com.su.msg.ContestMsg.getContestSite_ build() {
+        com.su.msg.ContestMsg.getContestSite_ result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.su.msg.ContestMsg.getContestSite_ buildPartial() {
+        com.su.msg.ContestMsg.getContestSite_ result = new com.su.msg.ContestMsg.getContestSite_(this);
+        int from_bitField0_ = bitField0_;
+        if (contestSiteBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            contestSite_ = java.util.Collections.unmodifiableList(contestSite_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.contestSite_ = contestSite_;
+        } else {
+          result.contestSite_ = contestSiteBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.su.msg.ContestMsg.getContestSite_) {
+          return mergeFrom((com.su.msg.ContestMsg.getContestSite_)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.su.msg.ContestMsg.getContestSite_ other) {
+        if (other == com.su.msg.ContestMsg.getContestSite_.getDefaultInstance()) return this;
+        if (contestSiteBuilder_ == null) {
+          if (!other.contestSite_.isEmpty()) {
+            if (contestSite_.isEmpty()) {
+              contestSite_ = other.contestSite_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureContestSiteIsMutable();
+              contestSite_.addAll(other.contestSite_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.contestSite_.isEmpty()) {
+            if (contestSiteBuilder_.isEmpty()) {
+              contestSiteBuilder_.dispose();
+              contestSiteBuilder_ = null;
+              contestSite_ = other.contestSite_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              contestSiteBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getContestSiteFieldBuilder() : null;
+            } else {
+              contestSiteBuilder_.addAllMessages(other.contestSite_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.su.msg.ContestMsg.getContestSite_ parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.su.msg.ContestMsg.getContestSite_) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<com.su.msg.ContestMsg._ContestSite> contestSite_ =
+        java.util.Collections.emptyList();
+      private void ensureContestSiteIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          contestSite_ = new java.util.ArrayList<com.su.msg.ContestMsg._ContestSite>(contestSite_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.msg.ContestMsg._ContestSite, com.su.msg.ContestMsg._ContestSite.Builder, com.su.msg.ContestMsg._ContestSiteOrBuilder> contestSiteBuilder_;
+
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public java.util.List<com.su.msg.ContestMsg._ContestSite> getContestSiteList() {
+        if (contestSiteBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(contestSite_);
+        } else {
+          return contestSiteBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public int getContestSiteCount() {
+        if (contestSiteBuilder_ == null) {
+          return contestSite_.size();
+        } else {
+          return contestSiteBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public com.su.msg.ContestMsg._ContestSite getContestSite(int index) {
+        if (contestSiteBuilder_ == null) {
+          return contestSite_.get(index);
+        } else {
+          return contestSiteBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public Builder setContestSite(
+          int index, com.su.msg.ContestMsg._ContestSite value) {
+        if (contestSiteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureContestSiteIsMutable();
+          contestSite_.set(index, value);
+          onChanged();
+        } else {
+          contestSiteBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public Builder setContestSite(
+          int index, com.su.msg.ContestMsg._ContestSite.Builder builderForValue) {
+        if (contestSiteBuilder_ == null) {
+          ensureContestSiteIsMutable();
+          contestSite_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          contestSiteBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public Builder addContestSite(com.su.msg.ContestMsg._ContestSite value) {
+        if (contestSiteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureContestSiteIsMutable();
+          contestSite_.add(value);
+          onChanged();
+        } else {
+          contestSiteBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public Builder addContestSite(
+          int index, com.su.msg.ContestMsg._ContestSite value) {
+        if (contestSiteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureContestSiteIsMutable();
+          contestSite_.add(index, value);
+          onChanged();
+        } else {
+          contestSiteBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public Builder addContestSite(
+          com.su.msg.ContestMsg._ContestSite.Builder builderForValue) {
+        if (contestSiteBuilder_ == null) {
+          ensureContestSiteIsMutable();
+          contestSite_.add(builderForValue.build());
+          onChanged();
+        } else {
+          contestSiteBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public Builder addContestSite(
+          int index, com.su.msg.ContestMsg._ContestSite.Builder builderForValue) {
+        if (contestSiteBuilder_ == null) {
+          ensureContestSiteIsMutable();
+          contestSite_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          contestSiteBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public Builder addAllContestSite(
+          java.lang.Iterable<? extends com.su.msg.ContestMsg._ContestSite> values) {
+        if (contestSiteBuilder_ == null) {
+          ensureContestSiteIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, contestSite_);
+          onChanged();
+        } else {
+          contestSiteBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public Builder clearContestSite() {
+        if (contestSiteBuilder_ == null) {
+          contestSite_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          contestSiteBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public Builder removeContestSite(int index) {
+        if (contestSiteBuilder_ == null) {
+          ensureContestSiteIsMutable();
+          contestSite_.remove(index);
+          onChanged();
+        } else {
+          contestSiteBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public com.su.msg.ContestMsg._ContestSite.Builder getContestSiteBuilder(
+          int index) {
+        return getContestSiteFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public com.su.msg.ContestMsg._ContestSiteOrBuilder getContestSiteOrBuilder(
+          int index) {
+        if (contestSiteBuilder_ == null) {
+          return contestSite_.get(index);  } else {
+          return contestSiteBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public java.util.List<? extends com.su.msg.ContestMsg._ContestSiteOrBuilder> 
+           getContestSiteOrBuilderList() {
+        if (contestSiteBuilder_ != null) {
+          return contestSiteBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(contestSite_);
+        }
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public com.su.msg.ContestMsg._ContestSite.Builder addContestSiteBuilder() {
+        return getContestSiteFieldBuilder().addBuilder(
+            com.su.msg.ContestMsg._ContestSite.getDefaultInstance());
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public com.su.msg.ContestMsg._ContestSite.Builder addContestSiteBuilder(
+          int index) {
+        return getContestSiteFieldBuilder().addBuilder(
+            index, com.su.msg.ContestMsg._ContestSite.getDefaultInstance());
+      }
+      /**
+       * <code>repeated ._ContestSite contestSite = 1;</code>
+       */
+      public java.util.List<com.su.msg.ContestMsg._ContestSite.Builder> 
+           getContestSiteBuilderList() {
+        return getContestSiteFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.su.msg.ContestMsg._ContestSite, com.su.msg.ContestMsg._ContestSite.Builder, com.su.msg.ContestMsg._ContestSiteOrBuilder> 
+          getContestSiteFieldBuilder() {
+        if (contestSiteBuilder_ == null) {
+          contestSiteBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.su.msg.ContestMsg._ContestSite, com.su.msg.ContestMsg._ContestSite.Builder, com.su.msg.ContestMsg._ContestSiteOrBuilder>(
+                  contestSite_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          contestSite_ = null;
+        }
+        return contestSiteBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:getContestSite_)
+    }
+
+    // @@protoc_insertion_point(class_scope:getContestSite_)
+    private static final com.su.msg.ContestMsg.getContestSite_ DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.su.msg.ContestMsg.getContestSite_();
+    }
+
+    public static com.su.msg.ContestMsg.getContestSite_ getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<getContestSite_>
+        PARSER = new com.google.protobuf.AbstractParser<getContestSite_>() {
+      public getContestSite_ parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new getContestSite_(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<getContestSite_> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<getContestSite_> getParserForType() {
+      return PARSER;
+    }
+
+    public com.su.msg.ContestMsg.getContestSite_ getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ApplyOrBuilder extends
       // @@protoc_insertion_point(interface_extends:Apply)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <pre>
-     * 比赛id
-     * </pre>
-     *
-     * <code>optional int32 contestId = 1;</code>
+     * <code>optional int32 siteId = 1;</code>
      */
-    boolean hasContestId();
+    boolean hasSiteId();
     /**
-     * <pre>
-     * 比赛id
-     * </pre>
-     *
-     * <code>optional int32 contestId = 1;</code>
+     * <code>optional int32 siteId = 1;</code>
      */
-    int getContestId();
+    int getSiteId();
   }
   /**
    * <pre>
@@ -1858,7 +3797,7 @@ public final class ContestMsg {
       super(builder);
     }
     private Apply() {
-      contestId_ = 0;
+      siteId_ = 0;
     }
 
     @java.lang.Override
@@ -1891,7 +3830,7 @@ public final class ContestMsg {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              contestId_ = input.readInt32();
+              siteId_ = input.readInt32();
               break;
             }
           }
@@ -1919,27 +3858,19 @@ public final class ContestMsg {
     }
 
     private int bitField0_;
-    public static final int CONTESTID_FIELD_NUMBER = 1;
-    private int contestId_;
+    public static final int SITEID_FIELD_NUMBER = 1;
+    private int siteId_;
     /**
-     * <pre>
-     * 比赛id
-     * </pre>
-     *
-     * <code>optional int32 contestId = 1;</code>
+     * <code>optional int32 siteId = 1;</code>
      */
-    public boolean hasContestId() {
+    public boolean hasSiteId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <pre>
-     * 比赛id
-     * </pre>
-     *
-     * <code>optional int32 contestId = 1;</code>
+     * <code>optional int32 siteId = 1;</code>
      */
-    public int getContestId() {
-      return contestId_;
+    public int getSiteId() {
+      return siteId_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1955,7 +3886,7 @@ public final class ContestMsg {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, contestId_);
+        output.writeInt32(1, siteId_);
       }
       unknownFields.writeTo(output);
     }
@@ -1967,7 +3898,7 @@ public final class ContestMsg {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, contestId_);
+          .computeInt32Size(1, siteId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1986,10 +3917,10 @@ public final class ContestMsg {
       com.su.msg.ContestMsg.Apply other = (com.su.msg.ContestMsg.Apply) obj;
 
       boolean result = true;
-      result = result && (hasContestId() == other.hasContestId());
-      if (hasContestId()) {
-        result = result && (getContestId()
-            == other.getContestId());
+      result = result && (hasSiteId() == other.hasSiteId());
+      if (hasSiteId()) {
+        result = result && (getSiteId()
+            == other.getSiteId());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -2002,9 +3933,9 @@ public final class ContestMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasContestId()) {
-        hash = (37 * hash) + CONTESTID_FIELD_NUMBER;
-        hash = (53 * hash) + getContestId();
+      if (hasSiteId()) {
+        hash = (37 * hash) + SITEID_FIELD_NUMBER;
+        hash = (53 * hash) + getSiteId();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -2128,7 +4059,7 @@ public final class ContestMsg {
       }
       public Builder clear() {
         super.clear();
-        contestId_ = 0;
+        siteId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -2157,7 +4088,7 @@ public final class ContestMsg {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.contestId_ = contestId_;
+        result.siteId_ = siteId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2200,8 +4131,8 @@ public final class ContestMsg {
 
       public Builder mergeFrom(com.su.msg.ContestMsg.Apply other) {
         if (other == com.su.msg.ContestMsg.Apply.getDefaultInstance()) return this;
-        if (other.hasContestId()) {
-          setContestId(other.getContestId());
+        if (other.hasSiteId()) {
+          setSiteId(other.getSiteId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2231,50 +4162,34 @@ public final class ContestMsg {
       }
       private int bitField0_;
 
-      private int contestId_ ;
+      private int siteId_ ;
       /**
-       * <pre>
-       * 比赛id
-       * </pre>
-       *
-       * <code>optional int32 contestId = 1;</code>
+       * <code>optional int32 siteId = 1;</code>
        */
-      public boolean hasContestId() {
+      public boolean hasSiteId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <pre>
-       * 比赛id
-       * </pre>
-       *
-       * <code>optional int32 contestId = 1;</code>
+       * <code>optional int32 siteId = 1;</code>
        */
-      public int getContestId() {
-        return contestId_;
+      public int getSiteId() {
+        return siteId_;
       }
       /**
-       * <pre>
-       * 比赛id
-       * </pre>
-       *
-       * <code>optional int32 contestId = 1;</code>
+       * <code>optional int32 siteId = 1;</code>
        */
-      public Builder setContestId(int value) {
+      public Builder setSiteId(int value) {
         bitField0_ |= 0x00000001;
-        contestId_ = value;
+        siteId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       * 比赛id
-       * </pre>
-       *
-       * <code>optional int32 contestId = 1;</code>
+       * <code>optional int32 siteId = 1;</code>
        */
-      public Builder clearContestId() {
+      public Builder clearSiteId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        contestId_ = 0;
+        siteId_ = 0;
         onChanged();
         return this;
       }
@@ -2703,6 +4618,15 @@ public final class ContestMsg {
   public interface CancelApplyOrBuilder extends
       // @@protoc_insertion_point(interface_extends:CancelApply)
       com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    boolean hasSiteId();
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    int getSiteId();
   }
   /**
    * <pre>
@@ -2720,6 +4644,7 @@ public final class ContestMsg {
       super(builder);
     }
     private CancelApply() {
+      siteId_ = 0;
     }
 
     @java.lang.Override
@@ -2732,6 +4657,7 @@ public final class ContestMsg {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -2747,6 +4673,11 @@ public final class ContestMsg {
                                      extensionRegistry, tag)) {
                 done = true;
               }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              siteId_ = input.readInt32();
               break;
             }
           }
@@ -2773,6 +4704,22 @@ public final class ContestMsg {
               com.su.msg.ContestMsg.CancelApply.class, com.su.msg.ContestMsg.CancelApply.Builder.class);
     }
 
+    private int bitField0_;
+    public static final int SITEID_FIELD_NUMBER = 1;
+    private int siteId_;
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public boolean hasSiteId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 siteId = 1;</code>
+     */
+    public int getSiteId() {
+      return siteId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -2785,6 +4732,9 @@ public final class ContestMsg {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, siteId_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2793,6 +4743,10 @@ public final class ContestMsg {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, siteId_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -2810,6 +4764,11 @@ public final class ContestMsg {
       com.su.msg.ContestMsg.CancelApply other = (com.su.msg.ContestMsg.CancelApply) obj;
 
       boolean result = true;
+      result = result && (hasSiteId() == other.hasSiteId());
+      if (hasSiteId()) {
+        result = result && (getSiteId()
+            == other.getSiteId());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2821,6 +4780,10 @@ public final class ContestMsg {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasSiteId()) {
+        hash = (37 * hash) + SITEID_FIELD_NUMBER;
+        hash = (53 * hash) + getSiteId();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2943,6 +4906,8 @@ public final class ContestMsg {
       }
       public Builder clear() {
         super.clear();
+        siteId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -2965,6 +4930,13 @@ public final class ContestMsg {
 
       public com.su.msg.ContestMsg.CancelApply buildPartial() {
         com.su.msg.ContestMsg.CancelApply result = new com.su.msg.ContestMsg.CancelApply(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.siteId_ = siteId_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -3006,6 +4978,9 @@ public final class ContestMsg {
 
       public Builder mergeFrom(com.su.msg.ContestMsg.CancelApply other) {
         if (other == com.su.msg.ContestMsg.CancelApply.getDefaultInstance()) return this;
+        if (other.hasSiteId()) {
+          setSiteId(other.getSiteId());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -3030,6 +5005,39 @@ public final class ContestMsg {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+      private int bitField0_;
+
+      private int siteId_ ;
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public boolean hasSiteId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public int getSiteId() {
+        return siteId_;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder setSiteId(int value) {
+        bitField0_ |= 0x00000001;
+        siteId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 siteId = 1;</code>
+       */
+      public Builder clearSiteId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        siteId_ = 0;
+        onChanged();
         return this;
       }
       public final Builder setUnknownFields(
@@ -3454,6 +5462,592 @@ public final class ContestMsg {
 
   }
 
+  public interface noticeContest_OrBuilder extends
+      // @@protoc_insertion_point(interface_extends:noticeContest_)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional ._Contest contest = 1;</code>
+     */
+    boolean hasContest();
+    /**
+     * <code>optional ._Contest contest = 1;</code>
+     */
+    com.su.msg.ContestMsg._Contest getContest();
+    /**
+     * <code>optional ._Contest contest = 1;</code>
+     */
+    com.su.msg.ContestMsg._ContestOrBuilder getContestOrBuilder();
+  }
+  /**
+   * <pre>
+   * 通知比赛更新
+   * </pre>
+   *
+   * Protobuf type {@code noticeContest_}
+   */
+  public  static final class noticeContest_ extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:noticeContest_)
+      noticeContest_OrBuilder {
+    // Use noticeContest_.newBuilder() to construct.
+    private noticeContest_(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private noticeContest_() {
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private noticeContest_(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.su.msg.ContestMsg._Contest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = contest_.toBuilder();
+              }
+              contest_ = input.readMessage(com.su.msg.ContestMsg._Contest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(contest_);
+                contest_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.su.msg.ContestMsg.internal_static_noticeContest__descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.su.msg.ContestMsg.internal_static_noticeContest__fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.su.msg.ContestMsg.noticeContest_.class, com.su.msg.ContestMsg.noticeContest_.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int CONTEST_FIELD_NUMBER = 1;
+    private com.su.msg.ContestMsg._Contest contest_;
+    /**
+     * <code>optional ._Contest contest = 1;</code>
+     */
+    public boolean hasContest() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional ._Contest contest = 1;</code>
+     */
+    public com.su.msg.ContestMsg._Contest getContest() {
+      return contest_ == null ? com.su.msg.ContestMsg._Contest.getDefaultInstance() : contest_;
+    }
+    /**
+     * <code>optional ._Contest contest = 1;</code>
+     */
+    public com.su.msg.ContestMsg._ContestOrBuilder getContestOrBuilder() {
+      return contest_ == null ? com.su.msg.ContestMsg._Contest.getDefaultInstance() : contest_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, getContest());
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getContest());
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.su.msg.ContestMsg.noticeContest_)) {
+        return super.equals(obj);
+      }
+      com.su.msg.ContestMsg.noticeContest_ other = (com.su.msg.ContestMsg.noticeContest_) obj;
+
+      boolean result = true;
+      result = result && (hasContest() == other.hasContest());
+      if (hasContest()) {
+        result = result && getContest()
+            .equals(other.getContest());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasContest()) {
+        hash = (37 * hash) + CONTEST_FIELD_NUMBER;
+        hash = (53 * hash) + getContest().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.su.msg.ContestMsg.noticeContest_ parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.ContestMsg.noticeContest_ parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.noticeContest_ parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.su.msg.ContestMsg.noticeContest_ parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.noticeContest_ parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg.noticeContest_ parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.noticeContest_ parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg.noticeContest_ parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.su.msg.ContestMsg.noticeContest_ parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.su.msg.ContestMsg.noticeContest_ parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.su.msg.ContestMsg.noticeContest_ prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * 通知比赛更新
+     * </pre>
+     *
+     * Protobuf type {@code noticeContest_}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:noticeContest_)
+        com.su.msg.ContestMsg.noticeContest_OrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.su.msg.ContestMsg.internal_static_noticeContest__descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.su.msg.ContestMsg.internal_static_noticeContest__fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.su.msg.ContestMsg.noticeContest_.class, com.su.msg.ContestMsg.noticeContest_.Builder.class);
+      }
+
+      // Construct using com.su.msg.ContestMsg.noticeContest_.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getContestFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (contestBuilder_ == null) {
+          contest_ = null;
+        } else {
+          contestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.su.msg.ContestMsg.internal_static_noticeContest__descriptor;
+      }
+
+      public com.su.msg.ContestMsg.noticeContest_ getDefaultInstanceForType() {
+        return com.su.msg.ContestMsg.noticeContest_.getDefaultInstance();
+      }
+
+      public com.su.msg.ContestMsg.noticeContest_ build() {
+        com.su.msg.ContestMsg.noticeContest_ result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.su.msg.ContestMsg.noticeContest_ buildPartial() {
+        com.su.msg.ContestMsg.noticeContest_ result = new com.su.msg.ContestMsg.noticeContest_(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (contestBuilder_ == null) {
+          result.contest_ = contest_;
+        } else {
+          result.contest_ = contestBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.su.msg.ContestMsg.noticeContest_) {
+          return mergeFrom((com.su.msg.ContestMsg.noticeContest_)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.su.msg.ContestMsg.noticeContest_ other) {
+        if (other == com.su.msg.ContestMsg.noticeContest_.getDefaultInstance()) return this;
+        if (other.hasContest()) {
+          mergeContest(other.getContest());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.su.msg.ContestMsg.noticeContest_ parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.su.msg.ContestMsg.noticeContest_) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.su.msg.ContestMsg._Contest contest_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.su.msg.ContestMsg._Contest, com.su.msg.ContestMsg._Contest.Builder, com.su.msg.ContestMsg._ContestOrBuilder> contestBuilder_;
+      /**
+       * <code>optional ._Contest contest = 1;</code>
+       */
+      public boolean hasContest() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional ._Contest contest = 1;</code>
+       */
+      public com.su.msg.ContestMsg._Contest getContest() {
+        if (contestBuilder_ == null) {
+          return contest_ == null ? com.su.msg.ContestMsg._Contest.getDefaultInstance() : contest_;
+        } else {
+          return contestBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional ._Contest contest = 1;</code>
+       */
+      public Builder setContest(com.su.msg.ContestMsg._Contest value) {
+        if (contestBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          contest_ = value;
+          onChanged();
+        } else {
+          contestBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional ._Contest contest = 1;</code>
+       */
+      public Builder setContest(
+          com.su.msg.ContestMsg._Contest.Builder builderForValue) {
+        if (contestBuilder_ == null) {
+          contest_ = builderForValue.build();
+          onChanged();
+        } else {
+          contestBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional ._Contest contest = 1;</code>
+       */
+      public Builder mergeContest(com.su.msg.ContestMsg._Contest value) {
+        if (contestBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              contest_ != null &&
+              contest_ != com.su.msg.ContestMsg._Contest.getDefaultInstance()) {
+            contest_ =
+              com.su.msg.ContestMsg._Contest.newBuilder(contest_).mergeFrom(value).buildPartial();
+          } else {
+            contest_ = value;
+          }
+          onChanged();
+        } else {
+          contestBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional ._Contest contest = 1;</code>
+       */
+      public Builder clearContest() {
+        if (contestBuilder_ == null) {
+          contest_ = null;
+          onChanged();
+        } else {
+          contestBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional ._Contest contest = 1;</code>
+       */
+      public com.su.msg.ContestMsg._Contest.Builder getContestBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getContestFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional ._Contest contest = 1;</code>
+       */
+      public com.su.msg.ContestMsg._ContestOrBuilder getContestOrBuilder() {
+        if (contestBuilder_ != null) {
+          return contestBuilder_.getMessageOrBuilder();
+        } else {
+          return contest_ == null ?
+              com.su.msg.ContestMsg._Contest.getDefaultInstance() : contest_;
+        }
+      }
+      /**
+       * <code>optional ._Contest contest = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.su.msg.ContestMsg._Contest, com.su.msg.ContestMsg._Contest.Builder, com.su.msg.ContestMsg._ContestOrBuilder> 
+          getContestFieldBuilder() {
+        if (contestBuilder_ == null) {
+          contestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.su.msg.ContestMsg._Contest, com.su.msg.ContestMsg._Contest.Builder, com.su.msg.ContestMsg._ContestOrBuilder>(
+                  getContest(),
+                  getParentForChildren(),
+                  isClean());
+          contest_ = null;
+        }
+        return contestBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:noticeContest_)
+    }
+
+    // @@protoc_insertion_point(class_scope:noticeContest_)
+    private static final com.su.msg.ContestMsg.noticeContest_ DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.su.msg.ContestMsg.noticeContest_();
+    }
+
+    public static com.su.msg.ContestMsg.noticeContest_ getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<noticeContest_>
+        PARSER = new com.google.protobuf.AbstractParser<noticeContest_>() {
+      public noticeContest_ parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new noticeContest_(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<noticeContest_> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<noticeContest_> getParserForType() {
+      return PARSER;
+    }
+
+    public com.su.msg.ContestMsg.noticeContest_ getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static__ContestRank_descriptor;
   private static final 
@@ -3464,6 +6058,21 @@ public final class ContestMsg {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static__Contest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static__ContestSite_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static__ContestSite_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_getContestSite_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_getContestSite_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_getContestSite__descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_getContestSite__fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Apply_descriptor;
   private static final 
@@ -3484,6 +6093,11 @@ public final class ContestMsg {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_CancelApply__fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_noticeContest__descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_noticeContest__fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3493,13 +6107,18 @@ public final class ContestMsg {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rContest.proto\"4\n\014_ContestRank\022\020\n\010playe" +
-      "rId\030\001 \001(\005\022\022\n\nplayerName\030\002 \001(\t\"T\n\010_Contes" +
-      "t\022\021\n\tcontestId\030\001 \001(\005\022\021\n\tbaseScore\030\002 \001(\005\022" +
-      "\"\n\013contestRank\030\003 \003(\0132\r._ContestRank\"\032\n\005A" +
-      "pply\022\021\n\tcontestId\030\001 \001(\005\"\010\n\006Apply_\"\r\n\013Can" +
-      "celApply\"\016\n\014CancelApply_B\032\n\ncom.su.msgB\n" +
-      "ContestMsgH\001"
+      "\n\rContest.proto\"Y\n\014_ContestRank\022\020\n\010playe" +
+      "rId\030\001 \001(\005\022\022\n\nplayerName\030\002 \001(\t\022\024\n\014contest" +
+      "Score\030\003 \001(\005\022\r\n\005isOut\030\004 \001(\005\"T\n\010_Contest\022\021" +
+      "\n\tcontestId\030\001 \001(\005\022\021\n\tbaseScore\030\002 \001(\005\022\"\n\013" +
+      "contestRank\030\003 \003(\0132\r._ContestRank\"1\n\014_Con" +
+      "testSite\022\016\n\006siteId\030\001 \001(\005\022\021\n\tplayerNum\030\002 " +
+      "\001(\005\"\020\n\016getContestSite\"5\n\017getContestSite_" +
+      "\022\"\n\013contestSite\030\001 \003(\0132\r._ContestSite\"\027\n\005" +
+      "Apply\022\016\n\006siteId\030\001 \001(\005\"\010\n\006Apply_\"\035\n\013Cance" +
+      "lApply\022\016\n\006siteId\030\001 \001(\005\"\016\n\014CancelApply_\",",
+      "\n\016noticeContest_\022\032\n\007contest\030\001 \001(\0132\t._Con" +
+      "testB\032\n\ncom.su.msgB\nContestMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3518,37 +6137,61 @@ public final class ContestMsg {
     internal_static__ContestRank_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__ContestRank_descriptor,
-        new java.lang.String[] { "PlayerId", "PlayerName", });
+        new java.lang.String[] { "PlayerId", "PlayerName", "ContestScore", "IsOut", });
     internal_static__Contest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static__Contest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__Contest_descriptor,
         new java.lang.String[] { "ContestId", "BaseScore", "ContestRank", });
-    internal_static_Apply_descriptor =
+    internal_static__ContestSite_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static__ContestSite_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static__ContestSite_descriptor,
+        new java.lang.String[] { "SiteId", "PlayerNum", });
+    internal_static_getContestSite_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_getContestSite_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_getContestSite_descriptor,
+        new java.lang.String[] { });
+    internal_static_getContestSite__descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_getContestSite__fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_getContestSite__descriptor,
+        new java.lang.String[] { "ContestSite", });
+    internal_static_Apply_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_Apply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Apply_descriptor,
-        new java.lang.String[] { "ContestId", });
+        new java.lang.String[] { "SiteId", });
     internal_static_Apply__descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_Apply__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Apply__descriptor,
         new java.lang.String[] { });
     internal_static_CancelApply_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_CancelApply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CancelApply_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "SiteId", });
     internal_static_CancelApply__descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_CancelApply__fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CancelApply__descriptor,
         new java.lang.String[] { });
+    internal_static_noticeContest__descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_noticeContest__fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_noticeContest__descriptor,
+        new java.lang.String[] { "Contest", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
