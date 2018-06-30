@@ -2,7 +2,7 @@ syntax = "proto2";
 
 option optimize_for = SPEED;
 option java_package = "com.su.msg";
-option java_outer_classname = "MatchMsg";
+option java_outer_classname = "SiteMsg";
 
 message _MatchSite {
 	optional int32 id = 1;			// id

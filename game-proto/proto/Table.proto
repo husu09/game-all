@@ -19,6 +19,7 @@ message _GamePlayer {
 	optional int32 isAuto = 7[default = -1];	// 是否托管
 	optional int32 state = 8[default = -1];		// 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
 	optional int64 opTime = 9[default = -1];	// 操作时间（毫秒）
+	optional int32 contestScore = 10[default = -1];		// 比赛积分
 }
 
 
@@ -35,6 +36,7 @@ message _Table {
 	optional int32 callOp = 10[default = -1];		// 叫牌玩家
 	optional int32 dealer = 11[default = -1];		// 庄家
 	optional int64 waitTime = 12[default = -1];		// 等待时间（毫秒）
+	optional int32 type = 13[default = -1];			// 牌桌类型
 }
 
 // 叫牌

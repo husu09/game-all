@@ -17,7 +17,7 @@ public class ContestTable  extends Table {
 	}
 
 	@Override
-	public void doClose(Builder builder, Team winTeam, int redMultiple, int blueMultiple) {
+	public void doClose(Builder builder, Team winTeam, int redMultiple, int blueMultiple) {/*
 		builder.setBaseScore(this.match.getSiteCo().getBaseScore());
 		for (GamePlayer otherPlayer : this.players) {
 			TableResult tableResult = new TableResult();
@@ -37,10 +37,10 @@ public class ContestTable  extends Table {
 	
 		// 清空牌桌
 		this.clean();
-	}
+	*/}
 
 	@Override
-	public void doExit(GamePlayer gamePlayer) {
+	public void doExit(GamePlayer gamePlayer) {/*
 
 		// 自已退出清空数据
 		gamePlayer.clean();
@@ -63,10 +63,10 @@ public class ContestTable  extends Table {
 		}
 	
 		
-	}
+	*/}
 
 	@Override
-	public void doWaitClose() {
+	public void doWaitClose() {/*
 		// 结算超时
 		for (GamePlayer otherGamePlayer : this.players) {
 			if (otherGamePlayer.getState() != PlayerState.READY) {
@@ -84,6 +84,6 @@ public class ContestTable  extends Table {
 		this.site.getIdleTableQueue().offer(this);
 
 	
-	}
+	*/}
 
 }

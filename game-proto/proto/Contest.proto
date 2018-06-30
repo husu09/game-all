@@ -7,6 +7,8 @@ option java_outer_classname = "ContestMsg";
 message _ContestRank {
 	optional int32 playerId = 1;	// 玩家id
 	optional string playerName = 2;	// 玩家姓名
+	optional int32 contestScore = 3;	// 排名分数
+	optional int32 isOut= 4;	// 是否淘汰 1：淘汰、0：未淘汰
 }
 
 message _Contest {
@@ -15,17 +17,29 @@ message _Contest {
 	repeated _ContestRank contestRank = 3;		// 排名
 }
 
+message _ContestSite {
+	optional int32 siteId = 1;		
+	optional int32 playerNum = 2;	// 玩家数量
+}
+
+// 获取比赛场信息
+message getContestSite {
+}
+message getContestSite_ {
+	repeated _ContestSite contestSite = 1;
+}
+
 // 报名
 message Apply {
-	optional int32 contestId = 1;	// 比赛id
+	optional int32 siteId = 1;
 }
 message Apply_ {
-	
+
 }
 
 // 取消报名
 message CancelApply {
-
+	optional int32 siteId = 1;
 }
 message CancelApply_ {
 
