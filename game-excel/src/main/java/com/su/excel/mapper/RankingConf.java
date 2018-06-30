@@ -7,7 +7,7 @@ import com.su.excel.core.AbstractExcelMapper;
 import com.su.excel.core.RowData;
 
 @Component
-public class RankConf extends AbstractExcelMapper<RankingCo> {
+public class RankingConf extends AbstractExcelMapper<RankingCo> {
 
 	@Override
 	public String getName() {
@@ -20,6 +20,7 @@ public class RankConf extends AbstractExcelMapper<RankingCo> {
 		t.setId(rowData.getInt("id"));
 		t.setRiseScore(rowData.getInt("jqfs"));
 		t.setReward(rowData.getGoods("dwjl"));
+		t.setEddScoreRate(rowData.getInt("kfb"));
 		return t;
 	}
 

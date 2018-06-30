@@ -12,6 +12,11 @@ public class RankingCo {
 	 * 段位奖励
 	 * */
 	private Goods reward;
+	/**
+	 * 扣分比
+	 * */
+	private int eddScoreRate;
+	
 	public int getId() {
 		return id;
 	}
@@ -30,7 +35,11 @@ public class RankingCo {
 	public void setReward(Goods reward) {
 		this.reward = reward;
 	}
-	
-	
+	public int getEddScoreRate() {
+		return eddScoreRate;
+	}
+	public void setEddScoreRate(int eddScoreRate) {
+		this.eddScoreRate = eddScoreRate;
+	}
 	
 }

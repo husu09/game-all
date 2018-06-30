@@ -3,6 +3,8 @@ package com.su.core.game;
 import java.util.concurrent.DelayQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.su.core.game.enums.SiteType;
+
 public abstract class Site {
 	/**
 	 * 玩家人数
@@ -50,6 +52,8 @@ public abstract class Site {
 			e.printStackTrace();
 		}
 	}
+	
+	public abstract SiteType getSiteType();
 	
 
 }
