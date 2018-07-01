@@ -4,6 +4,8 @@ option optimize_for = SPEED;
 option java_package = "com.su.msg";
 option java_outer_classname = "GamblingMsg";
 
+
+
 message _Card {
 	 optional int32 value = 1;	// 牌面
 	 optional int32 suit = 2;	// 花色（0：方块，1：梅花，2：红桃，3：黑桃）
