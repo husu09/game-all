@@ -23,7 +23,7 @@ public interface BridgeService {
 	 * 处理比赛结束
 	 * */
 	public void doContestClose(int ranking);
-	
+	/***/
 	public Player getPlayerById(long id);
 	
 }
