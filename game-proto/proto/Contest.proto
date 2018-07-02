@@ -19,7 +19,7 @@ message _Contest {
 
 message _ContestSite {
 	optional int32 siteId = 1;		
-	optional int32 playerNum = 2;	// 玩家数量
+	optional int32 playerNum = 2;				// 玩家数量
 }
 
 // 获取比赛场信息

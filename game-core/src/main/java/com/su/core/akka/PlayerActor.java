@@ -1,10 +1,11 @@
 package com.su.core.akka;
 
 import com.google.protobuf.MessageLite;
+import com.su.common.po.Player;
 import com.su.core.context.PlayerContext;
 import com.su.core.game.TableResult;
-import com.su.msg.GamblingMsg._GamePlayerResult;
 import com.su.msg.LoginMsg.Login_;
+import com.su.msg.TableMsg._GamePlayerResult;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -42,6 +43,7 @@ public interface PlayerActor {
 	
 	/**
 	 * 获取 Plyaer
+	 * @return 
 	 * */
-	public void getPlayerById(long id);
+	public Player getPlayerById(long id);
 }

@@ -6,6 +6,7 @@ import java.util.Deque;
 import com.su.common.constant.GameConst;
 import com.su.config.SiteCo;
 import com.su.core.context.PlayerContext;
+import com.su.core.game.enums.SiteType;
 
 public class ClassicSite extends MatchSite {
 	/**
@@ -77,6 +78,11 @@ public class ClassicSite extends MatchSite {
 	@Override
 	public SiteCo getSiteCo() {
 		return siteCo;
+	}
+
+	@Override
+	public SiteType getSiteType() {
+		return SiteType.CLASSIC;
 	}
 
 }

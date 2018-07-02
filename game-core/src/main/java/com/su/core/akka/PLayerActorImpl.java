@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.protobuf.MessageLite;
+import com.su.common.po.Player;
 import com.su.common.util.SpringUtil;
 import com.su.core.action.ActionContext;
 import com.su.core.action.ActionMeta;
@@ -11,9 +12,9 @@ import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventDispatcher;
 import com.su.core.game.TableResult;
 import com.su.core.netty.NettyServerHandler;
-import com.su.msg.GamblingMsg._GamePlayerResult;
 import com.su.msg.LoginMsg.Login_;
 import com.su.msg.PlayerMsg.UpdatePlayer_;
+import com.su.msg.TableMsg._GamePlayerResult;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.Attribute;
@@ -25,6 +26,7 @@ public class PLayerActorImpl implements PlayerActor {
 	private ActionContext actionContext = SpringUtil.getContext().getBean(ActionContext.class);
 	private GameEventDispatcher gameEventDispatcher = SpringUtil.getContext().getBean(GameEventDispatcher.class);
 	private BridgeService bridgeService =  SpringUtil.getContext().getBean(BridgeService.class);
+
 
 	@Override
 	public void process(ChannelHandlerContext ctx, MessageLite messageLite) {
@@ -84,17 +86,17 @@ public class PLayerActorImpl implements PlayerActor {
 
 	@Override
 	public _GamePlayerResult doTableResult(TableResult tableResult) {
-		return bridgeService.doTableResult(tableResult.getPlayerContext(), tableResult);
+		return bridgeService.doTableResult(tableResult);
 	}
 
 	@Override
 	public void doContestClose(int ranking) {
-		
+		bridgeService.doContestClose(ranking);
 	}
 
 	@Override
-	public void getPlayerById(long id) {
-		
+	public Player getPlayerById(long id) {
+		return 
 	}
 
 }

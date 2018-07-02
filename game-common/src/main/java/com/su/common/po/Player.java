@@ -27,7 +27,11 @@ public class Player implements Serializable {
 	/**
 	 * 段位
 	 * */
-	private int rankStep;
+	private int rankingStep;
+	/**
+	 * 排位分
+	 * */
+	private int rankingScore;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -53,11 +57,17 @@ public class Player implements Serializable {
 	public void setPeanut(int peanut) {
 		this.peanut = peanut;
 	}
-	public int getRankStep() {
-		return rankStep;
+	public int getRankingStep() {
+		return rankingStep;
 	}
-	public void setRankStep(int rankStep) {
-		this.rankStep = rankStep;
+	public void setRankingStep(int rankingStep) {
+		this.rankingStep = rankingStep;
+	}
+	public int getRankingScore() {
+		return rankingScore;
+	}
+	public void setRankingScore(int rankingScore) {
+		this.rankingScore = rankingScore;
 	}
 	
 }

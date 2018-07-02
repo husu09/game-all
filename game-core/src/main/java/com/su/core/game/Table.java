@@ -23,10 +23,10 @@ import com.su.core.game.enums.MultipleType;
 import com.su.core.game.enums.PlayerState;
 import com.su.core.game.enums.TableState;
 import com.su.core.game.enums.Team;
-import com.su.msg.GamblingMsg.TableResult_;
-import com.su.msg.GamblingMsg._Card;
-import com.su.msg.GamblingMsg._GamePlayer;
-import com.su.msg.GamblingMsg._Table;
+import com.su.msg.TableMsg.TableResult_;
+import com.su.msg.TableMsg._Card;
+import com.su.msg.TableMsg._GamePlayer;
+import com.su.msg.TableMsg._Table;
 
 public abstract class Table implements Delayed {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());

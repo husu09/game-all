@@ -35,7 +35,7 @@ public class ScheduleManager {
 			}
 		}, 0, 1, TimeUnit.SECONDS);
 
-		// 任务
+		// 游戏逻辑
 		for (Site site : bridgeService.getSiteMap().values()) {
 			pool.execute(new Runnable() {
 

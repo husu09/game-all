@@ -1,6 +1,7 @@
 package com.su.excel.core;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 配置文件映射接口
@@ -38,7 +39,7 @@ public interface ExcelMapper<T> {
 	/**
 	 * 获取所有配置
 	 * */
-	public Collection<T> all();
+	public List<T> all();
 	
 	/**
 	 * （使用时）添加配置数据

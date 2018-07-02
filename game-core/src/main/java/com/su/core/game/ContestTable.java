@@ -1,11 +1,7 @@
 package com.su.core.game;
 
-import com.su.core.game.enums.PlayerState;
-import com.su.core.game.enums.TableState;
 import com.su.core.game.enums.Team;
-import com.su.msg.GamblingMsg.Match_;
-import com.su.msg.GamblingMsg.Quit_;
-import com.su.msg.GamblingMsg.TableResult_.Builder;
+import com.su.msg.TableMsg.TableResult_;
 
 public class ContestTable  extends Table {
 
@@ -17,7 +13,7 @@ public class ContestTable  extends Table {
 	}
 
 	@Override
-	public void doClose(Builder builder, Team winTeam, int redMultiple, int blueMultiple) {/*
+	public void doClose(TableResult_.Builder builder, Team winTeam, int redMultiple, int blueMultiple) {/*
 		builder.setBaseScore(this.match.getSiteCo().getBaseScore());
 		for (GamePlayer otherPlayer : this.players) {
 			TableResult tableResult = new TableResult();

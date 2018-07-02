@@ -1,12 +1,15 @@
 package com.su.core.game;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
-import java.util.TreeMap;
 
 import com.su.common.constant.GameConst;
 import com.su.common.util.ArrayUtil;
@@ -24,7 +27,7 @@ public class Contest {
 	/**
 	 * 排名
 	 */
-	private Map<GamePlayer, Integer> rankingMap;
+	private Map<GamePlayer, ContestRanking> rankingMap;
 	/**
 	 * 底分
 	 */
@@ -37,12 +40,23 @@ public class Contest {
 	private Contest actor;
 
 	private ContestSite contestSite;
+	/**
+	 * 排名比较器
+	 */
+	private Comparator<Entry<GamePlayer, ContestRanking>> rankingComparator = new Comparator<Entry<GamePlayer, ContestRanking>>() {
+
+		@Override
+		public int compare(Entry<GamePlayer, ContestRanking> o1, Entry<GamePlayer, ContestRanking> o2) {
+			return o1.getValue().getContestScore() - o2.getValue().getContestScore();
+		}
+
+	};
 
 	public Contest(ContestSite contestSite) {
 		this.actor = AkkaContext.createActor(Contest.class, Contest.class, this);
 		this.contestSite = contestSite;
 		this.playerList = new LinkedList<>();
-		this.rankingMap = new TreeMap<>();
+		this.rankingMap = new HashMap<>();
 		// 初始化牌桌
 		this.tableNum = this.contestSite.getContestCo().getPlayerNum() / GameConst.PLAYER_COUNT;
 		this.tableQueue = new LinkedList<>();
@@ -54,9 +68,9 @@ public class Contest {
 	/**
 	 * 设置玩家
 	 */
-	public void setGamePlayer(GamePlayer[] players) {
-		for (int i = 0; i < players.length; i++)
-			this.playerList.add(players[i]);
+	public void setGamePlayer(List<GamePlayer> playerList) {
+		for (int i = 0; i < playerList.size(); i++)
+			this.playerList.add(playerList.get(i));
 		start();
 	}
 
@@ -89,25 +103,34 @@ public class Contest {
 		// 处理排名
 		for (Iterator<GamePlayer> it = this.playerList.iterator(); it.hasNext();) {
 			GamePlayer gamePlayer = it.next();
-			this.rankingMap.put(gamePlayer, gamePlayer.getContestScore());
+			ContestRanking contestRanking = this.rankingMap.get(gamePlayer);
+			if (contestRanking == null) {
+				contestRanking = new ContestRanking();
+				this.rankingMap.put(gamePlayer, contestRanking);
+			}
+			contestRanking.setContestScore(gamePlayer.getContestScore());
 			// 淘汰玩家
 			if (gamePlayer.getContestScore() < baseScore) {
 				it.remove();
+				contestRanking.setOut(true);
 			}
 		}
 		// 是否结束
 		if (this.playerList.size() < GameConst.PLAYER_COUNT) {
 			// 发放奖励
+			List<Entry<GamePlayer, ContestRanking>> tempRankingList = new ArrayList<>(rankingMap.entrySet());
+			Collections.sort(tempRankingList, this.rankingComparator);
 			int i = 1;
-			for (Entry<GamePlayer, Integer> e : this.rankingMap.entrySet()) {
+			for (Entry<GamePlayer, ContestRanking> e : tempRankingList) {
 				if (i > this.contestSite.getRewardCount())
 					break;
 				e.getKey().getPlayerContext().getActor().doContestClose(i);
 				i++;
 			}
+		} else {
+			// 开始下一轮
+			start();
 		}
-		// 开始下一轮
-		start();
 	}
 
 	public Contest getActor() {

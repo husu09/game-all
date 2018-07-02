@@ -13,5 +13,9 @@ public class SysAttr {
 	 * 道具
 	 * */
 	public final static int ITEM = 3;
+	/**
+	 * 排位分
+	 * */
+	public final static int RANKING = 4;
 	
 }

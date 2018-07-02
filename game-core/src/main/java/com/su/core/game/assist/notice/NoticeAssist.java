@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 import com.su.core.game.Card;
 import com.su.core.game.GamePlayer;
 import com.su.core.game.Table;
-import com.su.msg.GamblingMsg._Card;
-import com.su.msg.GamblingMsg._GamePlayer;
-import com.su.msg.GamblingMsg._Table;
+import com.su.msg.TableMsg._Card;
+import com.su.msg.TableMsg._GamePlayer;
+import com.su.msg.TableMsg._Table;
 
 @Component
 public class NoticeAssist {

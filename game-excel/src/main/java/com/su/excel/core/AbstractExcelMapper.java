@@ -2,8 +2,9 @@ package com.su.excel.core;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -24,6 +25,7 @@ public abstract class AbstractExcelMapper<T> implements ExcelMapper<T> {
 	 * 存储解析后的数据
 	 */
 	private Map<Integer, T> storageMap = new HashMap<>();
+	private List<T> storageList = new ArrayList<>();
 
 	@PostConstruct
 	protected void init() {
@@ -61,8 +63,8 @@ public abstract class AbstractExcelMapper<T> implements ExcelMapper<T> {
 	}
 
 	@Override
-	public Collection<T> all() {
-		return storageMap.values();
+	public List<T> all() {
+		return storageList;
 	}
 
 	private Class<T> getTypeClass() {
@@ -79,6 +81,7 @@ public abstract class AbstractExcelMapper<T> implements ExcelMapper<T> {
 			field.setAccessible(true);
 			int id = field.getInt(t);
 			storageMap.put(id, t);
+			storageList.add(t);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,6 +94,7 @@ public abstract class AbstractExcelMapper<T> implements ExcelMapper<T> {
 			field.setAccessible(true);
 			int id = field.getInt(obj);
 			storageMap.put(id, (T) obj);
+			storageList.add((T) obj);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

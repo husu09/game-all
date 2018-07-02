@@ -7,6 +7,7 @@ import java.util.Queue;
 
 import com.su.config.ContestCo;
 import com.su.core.context.PlayerContext;
+import com.su.core.game.enums.SiteType;
 
 public class ContestSite extends Site {
 	
@@ -42,7 +43,8 @@ public class ContestSite extends Site {
 			Contest contest = contestQueue.poll();
 			if (contest == null)
 				contest = new Contest(this);
-			// TODO
+			contest.setGamePlayer(playerList);
+			contest.start();
 			playerList.clear();
 			getPlayerNum().set(0);
 		}
@@ -69,6 +71,11 @@ public class ContestSite extends Site {
 	 * */
 	public int getRewardCount() {
 		return rewardCount;
+	}
+
+	@Override
+	public SiteType getSiteType() {
+		return SiteType.CONTEST;
 	}
 	
 	

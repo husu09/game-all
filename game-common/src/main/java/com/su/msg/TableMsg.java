@@ -783,7 +783,7 @@ public final class TableMsg {
 
     /**
      * <pre>
-     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
      * </pre>
      *
      * <code>optional int32 state = 8 [default = -1];</code>
@@ -791,7 +791,7 @@ public final class TableMsg {
     boolean hasState();
     /**
      * <pre>
-     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
      * </pre>
      *
      * <code>optional int32 state = 8 [default = -1];</code>
@@ -1163,7 +1163,7 @@ public final class TableMsg {
     private int state_;
     /**
      * <pre>
-     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
      * </pre>
      *
      * <code>optional int32 state = 8 [default = -1];</code>
@@ -1173,7 +1173,7 @@ public final class TableMsg {
     }
     /**
      * <pre>
-     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
      * </pre>
      *
      * <code>optional int32 state = 8 [default = -1];</code>
@@ -2373,7 +2373,7 @@ public final class TableMsg {
       private int state_ = -1;
       /**
        * <pre>
-       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
        * </pre>
        *
        * <code>optional int32 state = 8 [default = -1];</code>
@@ -2383,7 +2383,7 @@ public final class TableMsg {
       }
       /**
        * <pre>
-       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
        * </pre>
        *
        * <code>optional int32 state = 8 [default = -1];</code>
@@ -2393,7 +2393,7 @@ public final class TableMsg {
       }
       /**
        * <pre>
-       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
        * </pre>
        *
        * <code>optional int32 state = 8 [default = -1];</code>
@@ -2406,7 +2406,7 @@ public final class TableMsg {
       }
       /**
        * <pre>
-       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
        * </pre>
        *
        * <code>optional int32 state = 8 [default = -1];</code>
@@ -13590,6 +13590,23 @@ public final class TableMsg {
      * <code>optional int32 contestScore = 4 [default = -1];</code>
      */
     int getContestScore();
+
+    /**
+     * <pre>
+     * 玩家id
+     * </pre>
+     *
+     * <code>optional int64 playerId = 5 [default = -1];</code>
+     */
+    boolean hasPlayerId();
+    /**
+     * <pre>
+     * 玩家id
+     * </pre>
+     *
+     * <code>optional int64 playerId = 5 [default = -1];</code>
+     */
+    long getPlayerId();
   }
   /**
    * Protobuf type {@code _GamePlayerResult}
@@ -13607,6 +13624,7 @@ public final class TableMsg {
       peanut_ = -1;
       rankingScore_ = -1;
       contestScore_ = -1;
+      playerId_ = -1L;
     }
 
     @java.lang.Override
@@ -13655,6 +13673,11 @@ public final class TableMsg {
             case 32: {
               bitField0_ |= 0x00000008;
               contestScore_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              playerId_ = input.readInt64();
               break;
             }
           }
@@ -13774,6 +13797,29 @@ public final class TableMsg {
       return contestScore_;
     }
 
+    public static final int PLAYERID_FIELD_NUMBER = 5;
+    private long playerId_;
+    /**
+     * <pre>
+     * 玩家id
+     * </pre>
+     *
+     * <code>optional int64 playerId = 5 [default = -1];</code>
+     */
+    public boolean hasPlayerId() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <pre>
+     * 玩家id
+     * </pre>
+     *
+     * <code>optional int64 playerId = 5 [default = -1];</code>
+     */
+    public long getPlayerId() {
+      return playerId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -13798,6 +13844,9 @@ public final class TableMsg {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, contestScore_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, playerId_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -13821,6 +13870,10 @@ public final class TableMsg {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, contestScore_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, playerId_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -13859,6 +13912,11 @@ public final class TableMsg {
         result = result && (getContestScore()
             == other.getContestScore());
       }
+      result = result && (hasPlayerId() == other.hasPlayerId());
+      if (hasPlayerId()) {
+        result = result && (getPlayerId()
+            == other.getPlayerId());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -13885,6 +13943,11 @@ public final class TableMsg {
       if (hasContestScore()) {
         hash = (37 * hash) + CONTESTSCORE_FIELD_NUMBER;
         hash = (53 * hash) + getContestScore();
+      }
+      if (hasPlayerId()) {
+        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getPlayerId());
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -14012,6 +14075,8 @@ public final class TableMsg {
         bitField0_ = (bitField0_ & ~0x00000004);
         contestScore_ = -1;
         bitField0_ = (bitField0_ & ~0x00000008);
+        playerId_ = -1L;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -14052,6 +14117,10 @@ public final class TableMsg {
           to_bitField0_ |= 0x00000008;
         }
         result.contestScore_ = contestScore_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.playerId_ = playerId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -14105,6 +14174,9 @@ public final class TableMsg {
         }
         if (other.hasContestScore()) {
           setContestScore(other.getContestScore());
+        }
+        if (other.hasPlayerId()) {
+          setPlayerId(other.getPlayerId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -14322,6 +14394,54 @@ public final class TableMsg {
       public Builder clearContestScore() {
         bitField0_ = (bitField0_ & ~0x00000008);
         contestScore_ = -1;
+        onChanged();
+        return this;
+      }
+
+      private long playerId_ = -1L;
+      /**
+       * <pre>
+       * 玩家id
+       * </pre>
+       *
+       * <code>optional int64 playerId = 5 [default = -1];</code>
+       */
+      public boolean hasPlayerId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <pre>
+       * 玩家id
+       * </pre>
+       *
+       * <code>optional int64 playerId = 5 [default = -1];</code>
+       */
+      public long getPlayerId() {
+        return playerId_;
+      }
+      /**
+       * <pre>
+       * 玩家id
+       * </pre>
+       *
+       * <code>optional int64 playerId = 5 [default = -1];</code>
+       */
+      public Builder setPlayerId(long value) {
+        bitField0_ |= 0x00000010;
+        playerId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 玩家id
+       * </pre>
+       *
+       * <code>optional int64 playerId = 5 [default = -1];</code>
+       */
+      public Builder clearPlayerId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        playerId_ = -1L;
         onChanged();
         return this;
       }
@@ -15512,13 +15632,14 @@ public final class TableMsg {
       "_\"\026\n\004Auto\022\016\n\006isAuto\030\001 \001(\005\"\007\n\005Auto_\"\010\n\006Re",
       "conn\"\t\n\007Reconn_\"5\n\021UpdateGamePlayer_\022 \n\n" +
       "gamePlayer\030\001 \003(\0132\014._GamePlayer\"&\n\014Update" +
-      "Table_\022\026\n\005table\030\001 \001(\0132\007._Table\"m\n\021_GameP" +
-      "layerResult\022\020\n\010multiple\030\001 \001(\005\022\022\n\006peanut\030" +
-      "\002 \001(\005:\002-1\022\030\n\014rankingScore\030\003 \001(\005:\002-1\022\030\n\014c" +
-      "ontestScore\030\004 \001(\005:\002-1\"\\\n\014TableResult_\022\021\n" +
-      "\tbaseScore\030\001 \001(\005\022\017\n\007winTeam\030\002 \001(\005\022(\n\014pla" +
-      "yerResult\030\003 \003(\0132\022._GamePlayerResultB\030\n\nc" +
-      "om.su.msgB\010TableMsgH\001"
+      "Table_\022\026\n\005table\030\001 \001(\0132\007._Table\"\203\001\n\021_Game" +
+      "PlayerResult\022\020\n\010multiple\030\001 \001(\005\022\022\n\006peanut" +
+      "\030\002 \001(\005:\002-1\022\030\n\014rankingScore\030\003 \001(\005:\002-1\022\030\n\014" +
+      "contestScore\030\004 \001(\005:\002-1\022\024\n\010playerId\030\005 \001(\003" +
+      ":\002-1\"\\\n\014TableResult_\022\021\n\tbaseScore\030\001 \001(\005\022" +
+      "\017\n\007winTeam\030\002 \001(\005\022(\n\014playerResult\030\003 \003(\0132\022" +
+      "._GamePlayerResultB\030\n\ncom.su.msgB\010TableM" +
+      "sgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15663,7 +15784,7 @@ public final class TableMsg {
     internal_static__GamePlayerResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__GamePlayerResult_descriptor,
-        new java.lang.String[] { "Multiple", "Peanut", "RankingScore", "ContestScore", });
+        new java.lang.String[] { "Multiple", "Peanut", "RankingScore", "ContestScore", "PlayerId", });
     internal_static_TableResult__descriptor =
       getDescriptor().getMessageTypes().get(22);
     internal_static_TableResult__fieldAccessorTable = new
