@@ -1,7 +1,6 @@
 package com.su.core.game;
 
 import java.util.concurrent.DelayQueue;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import com.su.core.game.enums.SiteType;
 

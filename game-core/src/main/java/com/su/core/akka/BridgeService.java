@@ -15,7 +15,7 @@ public interface BridgeService {
 	/**
 	 * 获取所有场
 	 * */
-	public Collection<Site> getSiteMap();
+	public Collection<Site> getSiteSet();
 	/**
 	 * 处理牌局结束
 	 * */

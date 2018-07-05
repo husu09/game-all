@@ -23,7 +23,7 @@ public class RankingSite extends MatchSite {
 		public int compare(GamePlayer playerOne, GamePlayer playerTwo) {
 			Player one = getPlayerByGamePlayer(playerOne);
 			Player two = getPlayerByGamePlayer(playerTwo);
-			return two.getRankingStep() - one.getRankingStep();
+			return one.getRankingStep() - two.getRankingStep();
 		}
 
 	});
@@ -49,7 +49,7 @@ public class RankingSite extends MatchSite {
 		else if (playerContext.getGamePlayer().getState() != null)
 			return;
 		playerSet.add(playerContext.getGamePlayer());
-		getPlayerNum().incrementAndGet();
+		this.playerNum ++;
 
 		GamePlayer[] players = new GamePlayer[GameConst.PLAYER_COUNT];
 		for (Iterator<GamePlayer> it = playerSet.iterator(); it.hasNext();) {
@@ -79,7 +79,7 @@ public class RankingSite extends MatchSite {
 	@Override
 	public synchronized void removePlayerFromMatch(GamePlayer gamePlayer) {
 		if (playerSet.remove(gamePlayer))
-			getPlayerNum().decrementAndGet();
+			this.playerNum--;
 	}
 
 	/**

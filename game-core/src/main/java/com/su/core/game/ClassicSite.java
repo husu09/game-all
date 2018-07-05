@@ -39,7 +39,7 @@ public class ClassicSite extends MatchSite {
 			playerDeque.offerFirst(playerContext.getGamePlayer());
 		else
 			playerDeque.offer(playerContext.getGamePlayer());
-		getPlayerNum().incrementAndGet();
+		this.playerNum++;
 		// 尝试开始游戏
 		// 尝试从队列中获取4个玩家
 		if (playerDeque.size() < GameConst.PLAYER_COUNT)
@@ -69,7 +69,7 @@ public class ClassicSite extends MatchSite {
 	@Override
 	public synchronized void removePlayerFromMatch(GamePlayer gamePlayer) {
 		if (playerDeque.remove(gamePlayer))
-			getPlayerNum().decrementAndGet();
+			this.playerNum --;
 	}
 
 	/**

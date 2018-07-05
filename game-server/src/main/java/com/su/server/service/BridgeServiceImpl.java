@@ -30,7 +30,7 @@ public class BridgeServiceImpl implements BridgeService {
 
 
 	@Override
-	public Set<Site> getSiteMap() {
+	public Set<Site> getSiteSet() {
 		if (atoSiteSet.get() == null) {
 			Set<Site> siteSet = new HashSet<>();
 			siteSet.addAll(matchSiteService.getMatchSiteMap().values());

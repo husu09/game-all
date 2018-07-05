@@ -36,7 +36,7 @@ public class ScheduleManager {
 		}, 0, 1, TimeUnit.SECONDS);
 
 		// 游戏逻辑
-		for (Site site : bridgeService.getSiteMap().values()) {
+		for (Site site : bridgeService.getSiteSet()) {
 			pool.execute(new Runnable() {
 
 				@Override
