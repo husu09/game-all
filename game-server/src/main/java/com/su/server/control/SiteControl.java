@@ -23,13 +23,13 @@ import com.su.msg.GamblingMsg.Ready;
 import com.su.msg.GamblingMsg.Ready_;
 import com.su.msg.GamblingMsg.Reconn;
 import com.su.server.service.ResourceService;
-import com.su.server.service.SiteService;
+import com.su.server.service.MatchSiteService;
 
 @Controller
 public class SiteControl {
 
 	@Autowired
-	private SiteService siteService;
+	private MatchSiteService siteService;
 	@Autowired
 	private ResourceService resouceService;
 	@Autowired

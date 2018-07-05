@@ -96,7 +96,7 @@ public class PLayerActorImpl implements PlayerActor {
 
 	@Override
 	public Player getPlayerById(long id) {
-		return 
+		return bridgeService.getPlayerById(id);
 	}
 
 }

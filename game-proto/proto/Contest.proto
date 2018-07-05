@@ -11,22 +11,17 @@ message _ContestRank {
 	optional int32 isOut= 4;			// 是否淘汰 1：淘汰、0：未淘汰
 }
 
-message _Contest {
-	optional int32 contestId = 1;				// 比赛id
-	optional int32 baseScore = 2;				// 底分
-	repeated _ContestRank contestRank = 3;		// 排名
+// 进入比赛场
+message EnterContestSite {
+	optional int32 siteId = 1;
 }
-
-message _ContestSite {
-	optional int32 siteId = 1;		
-	optional int32 playerNum = 2;				// 玩家数量
+message EnterContestSite_ {
 }
-
-// 获取比赛场信息
-message getContestSite {
+// 退出比赛场
+message ExitContestSite {
+	optional int32 siteId = 1;
 }
-message getContestSite_ {
-	repeated _ContestSite contestSite = 1;
+message ExitContestSite_ {
 }
 
 // 报名
@@ -43,7 +38,15 @@ message CancelApply {
 message CancelApply_ {
 }
 
+// 通知比赛场更新
+message NoticeContestSite_ {
+	optional int32 siteId = 1;		
+	optional int32 playerNum = 2;				// 玩家数量
+}
+
 // 通知比赛更新
-message noticeContest_ {
-	optional _Contest contest = 1;
+message NoticeContest_ {
+	optional int32 contestId = 1;				// 比赛id
+	optional int32 baseScore = 2;				// 底分
+	repeated _ContestRank contestRank = 3;		// 排名
 }

@@ -61,5 +61,16 @@ public class ContestRewardConf extends AbstractExcelMapper<ContestRewardCo> {
 		}
 		return null;
 	}
+	
+	/**
+	 * 获取奖励个数
+	 * */
+	public int getRewardCount(int contestId) {
+		List<ContestRewardCo> list = map.get(contestId);
+		int count = 0;
+		if (list != null)
+			count = list.size();
+		return count;
+	}
 
 }

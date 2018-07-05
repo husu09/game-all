@@ -1,5 +1,6 @@
 package com.su.core.akka;
 
+import java.util.Collection;
 import java.util.Map;
 
 import com.su.common.po.Player;
@@ -14,7 +15,7 @@ public interface BridgeService {
 	/**
 	 * 获取所有场
 	 * */
-	public Map<Integer, Site> getSiteMap();
+	public Collection<Site> getSiteMap();
 	/**
 	 * 处理牌局结束
 	 * */
@@ -23,7 +24,9 @@ public interface BridgeService {
 	 * 处理比赛结束
 	 * */
 	public void doContestClose(int ranking);
-	/***/
+	/**
+	 * 获取用户
+	 * */
 	public Player getPlayerById(long id);
 	
 }

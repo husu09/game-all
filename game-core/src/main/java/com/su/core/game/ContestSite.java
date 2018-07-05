@@ -28,16 +28,18 @@ public class ContestSite extends Site {
 	
 	/**
 	 * 报名
-	 * */
-	public synchronized void apply(PlayerContext playerContext) {
+	 * @param playerContext
+	 * @return 游戏开始 true、未开始 false
+	 */
+	public synchronized boolean apply(PlayerContext playerContext) {
 		if (playerContext.getGamePlayer() == null)
 			new GamePlayer(playerContext);
 		else if (playerList.contains(playerContext.getGamePlayer()))
-			return;
+			return false;
 		else if (playerContext.getGamePlayer().getState() != null)
-			return;
+			return false;
 		playerList.add(playerContext.getGamePlayer());
-		getPlayerNum().incrementAndGet();
+		playerNum ++;
 		// 人数已满开启比赛
 		if (playerList.size() >= contestCo.getPlayerNum()) {
 			Contest contest = contestQueue.poll();
@@ -46,8 +48,10 @@ public class ContestSite extends Site {
 			contest.setGamePlayer(playerList);
 			contest.start();
 			playerList.clear();
-			getPlayerNum().set(0);
+			playerNum = 0;
+			return true;
 		}
+		return false;
 	}
 	
 	/**
@@ -55,7 +59,7 @@ public class ContestSite extends Site {
 	 * */
 	public synchronized void cancelApply(GamePlayer gamePlayer) {
 		if (playerList.remove(gamePlayer))
-			getPlayerNum().decrementAndGet();
+			playerNum--;
 		
 	}
 	

@@ -9,7 +9,7 @@ public abstract class Site {
 	/**
 	 * 玩家人数
 	 */
-	private AtomicInteger playerNum = new AtomicInteger();
+	protected int playerNum;
 	/**
 	 * 需要操作的牌桌队列
 	 */
@@ -19,7 +19,7 @@ public abstract class Site {
 	 */
 	private DelayQueue<GamePlayer> waitGamePlayerQueue = new DelayQueue<>();
 	
-	public AtomicInteger getPlayerNum() {
+	public int getPlayerNum() {
 		return playerNum;
 	}
 
