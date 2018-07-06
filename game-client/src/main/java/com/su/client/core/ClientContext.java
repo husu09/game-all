@@ -19,7 +19,6 @@ import javax.swing.JTextField;
 import org.springframework.stereotype.Component;
 
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.Message;
 import com.google.protobuf.MessageLite;
 import com.google.protobuf.MessageLiteOrBuilder;
 import com.google.protobuf.MessageOrBuilder;
@@ -62,6 +61,10 @@ public class ClientContext {
 	 * 连接对象
 	 */
 	private ChannelHandlerContext ctx;
+	/**
+	 * 协议面板
+	 */
+	private JPanel msgPanel;
 
 	private String dataPath = System.getProperty("user.dir") + "/" + ClientConst.SAVE_FILE;
 
@@ -132,6 +135,14 @@ public class ClientContext {
 		return ctx;
 	}
 
+	public JPanel getMsgPanel() {
+		return msgPanel;
+	}
+
+	public void setMsgPanel(JPanel msgPanel) {
+		this.msgPanel = msgPanel;
+	}
+
 	/**
 	 * 发送数据
 	 */
@@ -183,7 +194,7 @@ public class ClientContext {
 
 	public void showMessage(MessageLite messageLite) {
 		try {
-			String jsonStr = JsonFormat.printer().print((MessageOrBuilder) messageLite);
+			String jsonStr = JsonFormat.printer().includingDefaultValueFields().print((MessageOrBuilder) messageLite);
 			showMessage(jsonStr);
 		} catch (InvalidProtocolBufferException e) {
 			e.printStackTrace();

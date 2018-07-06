@@ -29,13 +29,6 @@ public class LoginService{
 	}
 
 	/**
-	 * 是否包含名字
-	 */
-	public boolean containsIdCacheByName(String name) {
-		return redisClient.hexists(RedisKey.PLAYER_NAME_ID, name);
-	}
-
-	/**
 	 * 通过名字获取id
 	 */
 	public long getIdCacheByName(String name) {

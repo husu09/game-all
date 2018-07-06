@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
@@ -17,26 +19,27 @@ import com.alibaba.fastjson.JSON;
 @Component
 public class ExcelContext {
 
+	private Logger logger = LoggerFactory.getLogger(ExcelProcessor.class);
+
 	/**
 	 * 配置映射类
 	 */
-	private Map<String, ExcelMap<?>> excelMaps = new HashMap<>();
+	private Map<String, ExcelMapper<?>> excelMappers = new HashMap<>();
 
 	/**
 	 * 预处理数据
 	 */
 	private Map<String, List<Object>> preData = new HashMap<>();
-	
-	
-	public Map<String, ExcelMap<?>> getExcelMaps() {
-		return excelMaps;
+
+	public Map<String, ExcelMapper<?>> getExcelMappers() {
+		return excelMappers;
 	}
 
 	/**
 	 * 所有配置加载完成时调用
 	 */
 	public void doFinishLoadAll() {
-		for (ExcelMap<?> map : excelMaps.values()) {
+		for (ExcelMapper<?> map : excelMappers.values()) {
 			map.finishLoadAll();
 		}
 	}
@@ -48,6 +51,12 @@ public class ExcelContext {
 		if (!preData.containsKey(mapName))
 			preData.put(mapName, new ArrayList<>());
 		preData.get(mapName).add(value);
+	}
+
+	public boolean isEmpty(String mapName) {
+		if (preData.get(mapName) == null || preData.get(mapName).size() == 0)
+			return true;
+		return false;
 	}
 
 	/**
@@ -69,7 +78,7 @@ public class ExcelContext {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-
+			logger.info("{}：{}", e.getKey(), e.getValue().size());
 		}
 	}
 

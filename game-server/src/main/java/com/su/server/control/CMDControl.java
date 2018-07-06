@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 
 import com.su.common.obj.Item;
 import com.su.core.action.Action;
-import com.su.proto.CommonMsg.CMD;
-import com.su.server.context.PlayerContext;
+import com.su.core.context.PlayerContext;
+import com.su.msg.CommonMsg.CMD;
 import com.su.server.service.BagService;
 
 @Controller

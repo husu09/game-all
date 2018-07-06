@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.su.client.core.ClientContext;
 import com.su.client.core.NettyClient;
-import com.su.proto.LoginMsg.Login;
+import com.su.msg.LoginMsg.Login;
 
 /**
  * 登录

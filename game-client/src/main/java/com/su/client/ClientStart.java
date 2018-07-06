@@ -4,7 +4,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.su.client.config.ClientConfig;
 import com.su.client.core.ClientUI;
-import com.su.proto.core.ProtoScan;
+import com.su.client.proto.ProtoScan;
 
 public class ClientStart {
 	

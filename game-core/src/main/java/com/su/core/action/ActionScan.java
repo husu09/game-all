@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import com.su.common.util.SpringsUtil;
-import com.su.proto.core.ProtoContext;
+import com.su.core.proto.ProtoContext;
 
 /**
  * 加载所有的协议处理者

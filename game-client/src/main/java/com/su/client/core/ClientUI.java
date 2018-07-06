@@ -6,29 +6,28 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Map.Entry;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.google.protobuf.MessageLite;
 import com.su.client.handler.ClearButtonHandler;
+import com.su.client.handler.ComboBoxHandler;
 import com.su.client.handler.LoginButtonHandler;
-import com.su.client.handler.ProtoButtonHandler;
 import com.su.client.handler.SendButtonHandler;
+import com.su.client.proto.ProtoContext;
 import com.su.common.util.SpringsUtil;
-import com.su.proto.core.ProtoContext;
 
 @Component
 public class ClientUI {
@@ -43,9 +42,9 @@ public class ClientUI {
 	@Autowired
 	private LoginButtonHandler loginButtonHandler;
 	@Autowired
-	private ProtoButtonHandler protoButtonHandler;
-	@Autowired
 	private SendButtonHandler sendButtonHandler;
+	@Autowired
+	private ComboBoxHandler comboBoxHandler;
 
 	public void show() throws Exception {
 		// 窗口
@@ -109,25 +108,37 @@ public class ClientUI {
 		r3p.add(sendB);
 		leftLeft.add(r3p);
 
+		// 第四行
+		JPanel r4p = new JPanel();
+		JComboBox<String> jcb = new JComboBox<String>();
+		for (String superName : protoContext.getMessageListeSortMap().keySet()) {
+			jcb.addItem(superName);
+		}
+		jcb.addActionListener(comboBoxHandler);
+		r4p.add(jcb);
+		leftLeft.add(r4p);
+
 		// 左下
 		JPanel leftBelow = new JPanel();
 		leftBelow.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
 		leftBelow.setPreferredSize(new Dimension(460 / 2, 550));
 		leftLeft.add(leftBelow);
-
 		leftP.add(leftLeft);
+		clientContext.setPanel(leftBelow);
 
 		// 左右
 		JPanel leftRight = new JPanel();
-		leftRight.setLayout(new GridLayout(1, 1));
+		leftRight.setLayout(new BorderLayout());
 		JPanel lrp = new JPanel();
-		lrp.setLayout(new GridLayout(0, 1));
-		JScrollPane lrsp = new JScrollPane(lrp);
-		leftRight.add(lrsp);
-		loadProto(lrp);
-		clientContext.setPanel(leftBelow);
-
+		lrp.setLayout(new FlowLayout(FlowLayout.CENTER));
+		// 一定要给 FlowLayout 设置高度，否则滚动条显示不出来
+		lrp.setPreferredSize(new Dimension(460 / 2, 1080));
+		leftRight.add(lrp);
+		JScrollPane jsp = new JScrollPane(lrp);
+		jsp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		leftRight.add(jsp);
 		leftP.add(leftRight);
+		clientContext.setMsgPanel(lrp);
 
 		// =========================
 		// 右面板
@@ -157,24 +168,4 @@ public class ClientUI {
 		frame.setVisible(true);
 
 	}
-
-	/**
-	 * 加载 proto 请求协议 UI
-	 * 
-	 * @param leftRight
-	 *            显示协议的面板
-	 * @param leftBelow
-	 *            显示协议参数的面板
-	 */
-	private void loadProto(JComponent leftRight) {
-		for (Entry<String, MessageLite> e : protoContext.getMessageLiteMap().entrySet()) {
-			if (!e.getKey().contains("Req") || e.getKey().equals("LoginReq"))
-				continue;
-			JButton tB = new JButton(e.getKey());
-			tB.setPreferredSize(new Dimension(180, 25));
-			tB.addActionListener(protoButtonHandler);
-			leftRight.add(tB);
-		}
-	}
-
 }

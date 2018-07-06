@@ -38,10 +38,12 @@ public class ExcelProcessor {
 
 	private static final Logger logger = LoggerFactory.getLogger(ExcelProcessor.class);
 
+	private DataFormatter formatter = new DataFormatter();
+
 	/**
 	 * 列名的行数
 	 */
-	private int cellNameRowNum = 2;
+	private int cellNameRowNum = 1;
 
 	/**
 	 * 预处理数据
@@ -49,19 +51,21 @@ public class ExcelProcessor {
 	public void preProcesss() {
 		File file = new File(dir);
 		if (!file.exists()) {
-			logger.info("目录不存在");
+			logger.error("目录不存在");
 			return;
 		}
 		if (!file.isDirectory()) {
-			logger.info("该路径不是目录");
+			logger.error("该路径不是目录");
 			return;
 		}
 		for (File f : file.listFiles()) {
 			if (f.getName().endsWith("xlsx")) {
 				String mapName = f.getName().substring(0, f.getName().lastIndexOf("."));
-				if (!excelContext.getExcelMaps().containsKey(mapName))
+				ExcelMapper<?> map = excelContext.getExcelMappers().get(mapName);
+				if (map == null) {
+					logger.error("not find mapper {}", mapName);
 					continue;
-				ExcelMap<?> map = excelContext.getExcelMaps().get(mapName);
+				}
 				try {
 					FileInputStream fis = new FileInputStream(dir + f.getName());
 					Workbook workbook = null;
@@ -72,55 +76,36 @@ public class ExcelProcessor {
 					}
 					Sheet sheet = workbook.getSheetAt(0);
 					Map<Integer, String> title = new HashMap<>();// <列数，列名>
-					int rowNum = 0; // 行数
-					DataFormatter formatter = new DataFormatter();
+					// 名称行
+					Row nameRow = sheet.getRow(cellNameRowNum);
+					int columnCount = 0;
+					for (Cell cell : nameRow) {
+						String cellValue = getCellValueNew(cell);
+						title.put(columnCount++, cellValue);
+					}
 					for (Row row : sheet) {
-						if (++rowNum < cellNameRowNum)
-							continue; // 跳过行头
-						int columnNum = 0; // 列数
+						if (row.getRowNum() <= cellNameRowNum)
+							continue;
 						RowData rowData = null;
-						for (Cell cell : row) {
-							String value = formatter.formatCellValue(cell);
-							switch (cell.getCellTypeEnum()) {
-							case STRING:
-								value = cell.getRichStringCellValue().getString();
-								break;
-							case NUMERIC:
-								if (DateUtil.isCellDateFormatted(cell)) {
-									value = String.valueOf(cell.getDateCellValue());
-								} else {
-									value = String.valueOf(cell.getNumericCellValue());
-								}
-								break;
-							case BOOLEAN:
-								value = String.valueOf(cell.getBooleanCellValue());
-								break;
-							case FORMULA:
-								if (cell.getCachedFormulaResultTypeEnum() == CellType.NUMERIC) {
-									if (DateUtil.isCellDateFormatted(cell)) {
-										value = String.valueOf(cell.getDateCellValue());
-									} else {
-										value = String.valueOf(cell.getNumericCellValue());
-									}
-								}
-								break;
-							case BLANK:
-								break;
-							default:
-							}
-							++columnNum;
-							if (rowNum == cellNameRowNum) // 保存列名
-								title.put(columnNum, value);
-							else {
-								if (rowData == null)
-									rowData = new RowData();
-								rowData.put(title.get(columnNum), value);
-							}
+						for (int i = 0; i < columnCount; i++) {
+							Cell cell = row.getCell(i);
+							if (cell == null)
+								continue;
+							String value = getCellValueNew(cell);
+							if (rowData == null)
+								rowData = new RowData();
+							rowData.put(title.get(i), value);
 						}
 						if (rowData != null) {
 							Object rowObject = map.map(rowData);
+							if (rowObject == null)
+								continue;
 							excelContext.addPreData(mapName, rowObject);
 						}
+					}
+					if (excelContext.isEmpty(mapName)) {
+						logger.error("{} is empty", mapName);
+						continue;
 					}
 					map.finishLoad();// 加载完当前表
 					fis.close();
@@ -128,10 +113,59 @@ public class ExcelProcessor {
 					e.printStackTrace();
 				}
 			}
-
 		}
 		excelContext.doFinishLoadAll(); // 加载完所有表
 		excelContext.savePreData(preDataDir); // 保存预处理数据
+	}
+
+	@Deprecated
+	public String getCellValue(Cell cell) {
+		String value = formatter.formatCellValue(cell);
+		switch (cell.getCellTypeEnum()) {
+		case STRING:
+			value = cell.getRichStringCellValue().getString();
+			break;
+		case NUMERIC:
+			if (DateUtil.isCellDateFormatted(cell)) {
+				value = String.valueOf(cell.getDateCellValue());
+			} else {
+				value = String.valueOf(cell.getNumericCellValue());
+			}
+			break;
+		case BOOLEAN:
+			value = String.valueOf(cell.getBooleanCellValue());
+			break;
+		case FORMULA:
+			if (cell.getCachedFormulaResultTypeEnum() == CellType.NUMERIC) {
+				if (DateUtil.isCellDateFormatted(cell)) {
+					value = String.valueOf(cell.getDateCellValue());
+				} else {
+					value = String.valueOf(cell.getNumericCellValue());
+				}
+			}
+			break;
+		case BLANK:
+			break;
+		default:
+		}
+		return value;
+	}
+
+	public String getCellValueNew(Cell cell) {
+		String value = formatter.formatCellValue(cell);
+		switch (cell.getCellTypeEnum()) {
+		case FORMULA:
+			if (cell.getCachedFormulaResultTypeEnum() == CellType.NUMERIC) {
+				if (DateUtil.isCellDateFormatted(cell)) {
+					value = String.valueOf(cell.getDateCellValue());
+				} else {
+					value = String.valueOf(cell.getNumericCellValue());
+				}
+			}
+			break;
+		default:
+		}
+		return value;
 	}
 
 	/**
@@ -145,9 +179,9 @@ public class ExcelProcessor {
 		}
 		File[] files = dir.listFiles();
 		for (File file : files) {
-			if (!file.isFile() || !excelContext.getExcelMaps().containsKey(file.getName()))
+			if (!file.isFile() || !excelContext.getExcelMappers().containsKey(file.getName()))
 				continue;
-			ExcelMap<?> map = excelContext.getExcelMaps().get(file.getName());
+			ExcelMapper<?> map = excelContext.getExcelMappers().get(file.getName());
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(file));
 				String line = reader.readLine();

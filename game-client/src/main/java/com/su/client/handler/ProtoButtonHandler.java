@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import com.google.protobuf.MessageLite;
 import com.su.client.core.ClientConst;
 import com.su.client.core.ClientContext;
-import com.su.proto.core.ProtoContext;
+import com.su.client.proto.ProtoContext;
 
 /**
  * 生成 proto 参数输入框

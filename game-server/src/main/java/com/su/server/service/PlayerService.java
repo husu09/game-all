@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.su.common.po.Player;
 import com.su.core.data.DataService;
-import com.su.proto.PlayerMsg._Player;
+import com.su.msg.PlayerMsg._Player;
 
 @Service
 public class PlayerService {

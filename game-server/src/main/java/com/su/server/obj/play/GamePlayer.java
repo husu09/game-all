@@ -3,9 +3,9 @@ package com.su.server.obj.play;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
-import com.su.proto.PlayMsg.PCard;
-import com.su.proto.PlayMsg.PGamePlayer;
-import com.su.server.context.PlayerContext;
+import com.su.core.context.PlayerContext;
+import com.su.msg.PlayMsg.PCard;
+import com.su.msg.PlayMsg.PGamePlayer;
 
 /**
  * 游戏中的玩家对象

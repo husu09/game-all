@@ -5,17 +5,19 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.su.common.obj.Grid;
 import com.su.common.obj.Item;
 import com.su.common.util.TimeUtil;
-import com.su.excel.co.BagCo;
+import com.su.core.context.PlayerContext;
+import com.su.excel.config.BagConfig;
 import com.su.excel.map.BagConf;
-import com.su.proto.BagMsg.DeleteItem_;
-import com.su.proto.BagMsg.UpdateItem_;
-import com.su.proto.BagMsg._Grid;
-import com.su.server.context.PlayerContext;
+import com.su.msg.BagMsg.DeleteItem_;
+import com.su.msg.BagMsg.UpdateItem_;
+import com.su.msg.BagMsg._Grid;
 
+@Service
 public class BagService {
 
 	private Logger logger = LoggerFactory.getLogger(BagService.class);
@@ -31,7 +33,7 @@ public class BagService {
 	public boolean addItem(PlayerContext playerContext, Item item, int reason) {
 		synchronized (playerContext.getPlayerDetail()) {
 			// 排序规则：类型小的 < 品质小 < id小
-			BagCo bagCo = bagConf.get(item.getSysId());
+			BagConfig bagCo = bagConf.get(item.getSysId());
 			if (bagCo == null) {
 				logger.error("找不到对应的配置 {}", item.getSysId());
 				return false;
@@ -64,7 +66,7 @@ public class BagService {
 					continue;
 				}
 				if (grid.getType() == item.getType()) {
-					BagCo currBagCo = bagConf.get(grid.getSysId());
+					BagConfig currBagCo = bagConf.get(grid.getSysId());
 					if (currBagCo.getQuality() > bagCo.getQuality()) {
 						createGrid(playerContext, bagGrid, i, item, bagCo);
 					} else if (currBagCo.getQuality() == bagCo.getQuality() && currBagCo.getId() > bagCo.getId()) {
@@ -138,7 +140,7 @@ public class BagService {
 	/**
 	 * 创建新格子
 	 */
-	private void createGrid(PlayerContext playerContext, List<Grid> bagGrid, int index, Item item, BagCo bagCo) {
+	private void createGrid(PlayerContext playerContext, List<Grid> bagGrid, int index, Item item, BagConfig bagCo) {
 		// 全部已添加
 		if (item.getCount() == 0)
 			return;
@@ -153,8 +155,8 @@ public class BagService {
 			item.setCount(0);
 		}
 		grid.setCount(addCount);
-		if (bagCo.getEffTime() != 0) {
-			grid.setEndTime(TimeUtil.getCurrTime() + bagCo.getEffTime() * TimeUtil.ONE_DAY);
+		if (bagCo.getExpirationTime() != 0) {
+			grid.setEndTime(TimeUtil.getCurrTime() + bagCo.getExpirationTime());
 		}
 		bagGrid.add(index, grid);
 		// 通知

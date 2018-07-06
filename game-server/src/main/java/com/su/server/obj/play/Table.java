@@ -8,13 +8,13 @@ import com.google.protobuf.MessageLiteOrBuilder;
 import com.su.common.util.CommonUtil;
 import com.su.common.util.SpringsUtil;
 import com.su.core.akka.AkkaContext;
-import com.su.proto.PlayMsg.GamePlayerNotice;
-import com.su.proto.PlayMsg.PCard;
-import com.su.proto.PlayMsg.PGamePlayer;
-import com.su.proto.PlayMsg.PMultiple;
-import com.su.proto.PlayMsg.PTable;
-import com.su.proto.PlayMsg.TableNotice;
-import com.su.server.context.PlayerContext;
+import com.su.core.context.PlayerContext;
+import com.su.msg.PlayMsg.GamePlayerNotice;
+import com.su.msg.PlayMsg.PCard;
+import com.su.msg.PlayMsg.PGamePlayer;
+import com.su.msg.PlayMsg.PMultiple;
+import com.su.msg.PlayMsg.PTable;
+import com.su.msg.PlayMsg.TableNotice;
 
 /**
  * 牌桌对象

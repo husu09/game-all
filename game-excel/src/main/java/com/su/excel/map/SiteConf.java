@@ -2,12 +2,12 @@ package com.su.excel.map;
 
 import org.springframework.stereotype.Component;
 
-import com.su.excel.co.SiteCo;
-import com.su.excel.core.ExcelMapAdapter;
+import com.su.excel.config.SiteConfig;
+import com.su.excel.core.AbstractExcelMapper;
 import com.su.excel.core.RowData;
 
 @Component
-public class SiteConf extends ExcelMapAdapter<SiteCo> {
+public class SiteConf extends AbstractExcelMapper<SiteConfig> {
 
 	@Override
 	public String getName() {
@@ -15,8 +15,8 @@ public class SiteConf extends ExcelMapAdapter<SiteCo> {
 	}
 
 	@Override
-	public SiteCo map(RowData rowData) {
-		SiteCo t = new SiteCo();
+	public SiteConfig map(RowData rowData) {
+		SiteConfig t = new SiteConfig();
 		t.setId(rowData.getInt("id"));
 		t.setSiteType(rowData.getInt("lx"));
 		t.setSiteMode(rowData.getInt("ms"));

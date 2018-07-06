@@ -8,11 +8,11 @@ import org.springframework.stereotype.Controller;
 import com.su.common.po.Player;
 import com.su.common.util.StringUtil;
 import com.su.core.action.Action;
-import com.su.proto.LoginMsg.Login;
-import com.su.proto.LoginMsg.Login_;
-import com.su.server.context.GameContext;
-import com.su.server.context.PlayerContext;
-import com.su.server.event.GameEventDispatcher;
+import com.su.core.context.GameContext;
+import com.su.core.context.PlayerContext;
+import com.su.core.event.GameEventDispatcher;
+import com.su.msg.LoginMsg.Login;
+import com.su.msg.LoginMsg.Login_;
 import com.su.server.service.LoginService;
 import com.su.server.service.PlayerService;
 
@@ -43,10 +43,8 @@ public class LoginControl {
 			return;
 		}
 
-		long playerId = 0;
-		if (loginService.containsIdCacheByName(req.getAccount())) {
-			playerId = loginService.getIdCacheByName(req.getAccount());
-		} else {
+		long playerId = loginService.getIdCacheByName(req.getAccount());
+		if (playerId == 0) {
 			// 创建用户
 			Player player = new Player();
 			player.setAccount(req.getAccount());

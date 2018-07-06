@@ -1,6 +1,6 @@
 package com.su.server.obj.play;
 
-import com.su.proto.PlayMsg.PMultiple;
+import com.su.msg.PlayMsg.PMultiple;
 
 public class Multiple {
 	private int value;
