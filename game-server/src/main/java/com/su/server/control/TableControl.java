@@ -10,6 +10,7 @@ import com.su.core.context.PlayerContext;
 import com.su.core.game.GamePlayer;
 import com.su.excel.mapper.BagConf;
 import com.su.msg.TableMsg.Auto;
+import com.su.msg.TableMsg.Auto_;
 import com.su.msg.TableMsg.Call;
 import com.su.msg.TableMsg.Call_;
 import com.su.msg.TableMsg.Double_;
@@ -20,6 +21,7 @@ import com.su.msg.TableMsg.Quit_;
 import com.su.msg.TableMsg.Ready;
 import com.su.msg.TableMsg.Ready_;
 import com.su.msg.TableMsg.Reconn;
+import com.su.msg.TableMsg.Reconn_;
 import com.su.server.service.ResourceService;
 
 @Controller
@@ -98,16 +100,16 @@ public class TableControl {
 	 * 托管
 	 */
 	@Action
-	public void auto(PlayerContext playerContext, Auto req) {/*
+	public void auto(PlayerContext playerContext, Auto req) {
 		// 游戏用户检测
 		GamePlayer gamePlayer = playerContext.getGamePlayer();
 		if (gamePlayer == null) {
 			playerContext.sendError(3001);
 			return;
 		}
-		gamePlayer.getTable().getActor().setIsAuto(gamePlayer, req.getIsAuto());
+		gamePlayer.getTable().getActor().auto(gamePlayer, req.getIsAuto());
 		playerContext.write(Auto_.newBuilder());
-	*/}
+	}
 
 	/**
 	 * 准备
@@ -143,14 +145,14 @@ public class TableControl {
 	 * 重连
 	 */
 	@Action
-	public void Reconn(PlayerContext playerContext, Reconn req) {/*
+	public void Reconn(PlayerContext playerContext, Reconn req) {
 		// 游戏用户检测
 		GamePlayer gamePlayer = playerContext.getGamePlayer();
 		if (gamePlayer == null) {
 			playerContext.sendError(3001);
 			return;
 		}
-		gamePlayer.getTable().getActor().reconn(gamePlayer);
+		gamePlayer.getTable().getActor().reconnect(gamePlayer);
 		playerContext.write(Reconn_.newBuilder());
-	*/}
+	}
 }

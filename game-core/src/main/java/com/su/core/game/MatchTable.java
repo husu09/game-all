@@ -35,7 +35,7 @@ public abstract class MatchTable extends Table {
 			clean();
 			this.matchSite.getIdleTableQueue().offer(this);
 		} else {
-			gamePlayer.setAuto(1);
+			gamePlayer.setIsAuto(1);
 			gamePlayer.getPlayerContext().setGamePlayer(null);
 			gamePlayer.getPlayerContext().write(Quit_.newBuilder());
 		}

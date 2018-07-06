@@ -80,7 +80,7 @@ public final class PlayerMsg {
 
     /**
      * <pre>
-     * 排位分
+     * 段位分
      * </pre>
      *
      * <code>optional int32 rankingScore = 4 [default = -1];</code>
@@ -88,7 +88,7 @@ public final class PlayerMsg {
     boolean hasRankingScore();
     /**
      * <pre>
-     * 排位分
+     * 段位分
      * </pre>
      *
      * <code>optional int32 rankingScore = 4 [default = -1];</code>
@@ -318,7 +318,7 @@ public final class PlayerMsg {
     private int rankingScore_;
     /**
      * <pre>
-     * 排位分
+     * 段位分
      * </pre>
      *
      * <code>optional int32 rankingScore = 4 [default = -1];</code>
@@ -328,7 +328,7 @@ public final class PlayerMsg {
     }
     /**
      * <pre>
-     * 排位分
+     * 段位分
      * </pre>
      *
      * <code>optional int32 rankingScore = 4 [default = -1];</code>
@@ -950,7 +950,7 @@ public final class PlayerMsg {
       private int rankingScore_ = -1;
       /**
        * <pre>
-       * 排位分
+       * 段位分
        * </pre>
        *
        * <code>optional int32 rankingScore = 4 [default = -1];</code>
@@ -960,7 +960,7 @@ public final class PlayerMsg {
       }
       /**
        * <pre>
-       * 排位分
+       * 段位分
        * </pre>
        *
        * <code>optional int32 rankingScore = 4 [default = -1];</code>
@@ -970,7 +970,7 @@ public final class PlayerMsg {
       }
       /**
        * <pre>
-       * 排位分
+       * 段位分
        * </pre>
        *
        * <code>optional int32 rankingScore = 4 [default = -1];</code>
@@ -983,7 +983,7 @@ public final class PlayerMsg {
       }
       /**
        * <pre>
-       * 排位分
+       * 段位分
        * </pre>
        *
        * <code>optional int32 rankingScore = 4 [default = -1];</code>

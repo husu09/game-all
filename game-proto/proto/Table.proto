@@ -17,9 +17,10 @@ message _GamePlayer {
 	optional int32 multiple = 5[default = -1];			// 玩家加倍
 	optional int32 score = 6[default = -1];				// 得分
 	optional int32 isAuto = 7[default = -1];			// 是否托管
-	optional int32 state = 8[default = -1];				// 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
+	optional int32 state = 8[default = -1];				// 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
 	optional int64 opTime = 9[default = -1];			// 操作时间（毫秒）
 	optional int32 contestScore = 10[default = -1];		// 比赛积分
+	optional int32 isQuit = 11[default = -1];			// 是否退出 1：退出
 }
 
 

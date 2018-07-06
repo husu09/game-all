@@ -16,11 +16,7 @@ public enum PlayerState {
 	/**
 	 * 出完牌 4
 	 */
-	FINISH(4),
-	/**
-	 * 退出
-	 * */
-	QUIT(5);
+	FINISH(4);
 	private int value;
 	
 	PlayerState(int value) {

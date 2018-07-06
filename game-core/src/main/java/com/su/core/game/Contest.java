@@ -31,7 +31,7 @@ public class Contest {
 	/**
 	 * 底分
 	 */
-	private int baseScore;
+	private volatile int  baseScore;
 	/**
 	 * 牌桌数
 	 */
@@ -110,9 +110,10 @@ public class Contest {
 			}
 			contestRanking.setContestScore(gamePlayer.getContestScore());
 			// 淘汰玩家
-			if (gamePlayer.getContestScore() < baseScore) {
+			if (gamePlayer.getContestScore() < baseScore || gamePlayer.getIsQuit() == 1) {
 				it.remove();
 				contestRanking.setOut(true);
+				gamePlayer.clean();
 			}
 		}
 		// 是否结束
@@ -132,9 +133,34 @@ public class Contest {
 			start();
 		}
 	}
-
+	
+	/**
+	 * 返还table
+	 * */
+	public void returnTable(Table table) {
+		this.tableQueue.offer(table);
+	}
+	
+	/**
+	 * 删除玩家
+	 * */
+	public void removePlayer(GamePlayer gamePlayer) {
+		this.playerList.remove(gamePlayer);
+	}
+	
 	public Contest getActor() {
 		return actor;
 	}
+	
+	
+	public ContestSite getContestSite() {
+		return contestSite;
+	}
+
+	public int getBaseScore() {
+		return baseScore;
+	}
+	
+
 
 }

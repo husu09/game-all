@@ -80,20 +80,20 @@ public final class ContestMsg {
 
     /**
      * <pre>
-     * 是否淘汰 1：淘汰、0：未淘汰
+     * 状态 1：淘汰，2：退出
      * </pre>
      *
-     * <code>optional int32 isOut = 4;</code>
+     * <code>optional int32 state = 4;</code>
      */
-    boolean hasIsOut();
+    boolean hasState();
     /**
      * <pre>
-     * 是否淘汰 1：淘汰、0：未淘汰
+     * 状态 1：淘汰，2：退出
      * </pre>
      *
-     * <code>optional int32 isOut = 4;</code>
+     * <code>optional int32 state = 4;</code>
      */
-    int getIsOut();
+    int getState();
   }
   /**
    * Protobuf type {@code _ContestRank}
@@ -110,7 +110,7 @@ public final class ContestMsg {
       playerId_ = 0;
       playerName_ = "";
       contestScore_ = 0;
-      isOut_ = 0;
+      state_ = 0;
     }
 
     @java.lang.Override
@@ -159,7 +159,7 @@ public final class ContestMsg {
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              isOut_ = input.readInt32();
+              state_ = input.readInt32();
               break;
             }
           }
@@ -287,27 +287,27 @@ public final class ContestMsg {
       return contestScore_;
     }
 
-    public static final int ISOUT_FIELD_NUMBER = 4;
-    private int isOut_;
+    public static final int STATE_FIELD_NUMBER = 4;
+    private int state_;
     /**
      * <pre>
-     * 是否淘汰 1：淘汰、0：未淘汰
+     * 状态 1：淘汰，2：退出
      * </pre>
      *
-     * <code>optional int32 isOut = 4;</code>
+     * <code>optional int32 state = 4;</code>
      */
-    public boolean hasIsOut() {
+    public boolean hasState() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <pre>
-     * 是否淘汰 1：淘汰、0：未淘汰
+     * 状态 1：淘汰，2：退出
      * </pre>
      *
-     * <code>optional int32 isOut = 4;</code>
+     * <code>optional int32 state = 4;</code>
      */
-    public int getIsOut() {
-      return isOut_;
+    public int getState() {
+      return state_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -332,7 +332,7 @@ public final class ContestMsg {
         output.writeInt32(3, contestScore_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, isOut_);
+        output.writeInt32(4, state_);
       }
       unknownFields.writeTo(output);
     }
@@ -355,7 +355,7 @@ public final class ContestMsg {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, isOut_);
+          .computeInt32Size(4, state_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -389,10 +389,10 @@ public final class ContestMsg {
         result = result && (getContestScore()
             == other.getContestScore());
       }
-      result = result && (hasIsOut() == other.hasIsOut());
-      if (hasIsOut()) {
-        result = result && (getIsOut()
-            == other.getIsOut());
+      result = result && (hasState() == other.hasState());
+      if (hasState()) {
+        result = result && (getState()
+            == other.getState());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -417,9 +417,9 @@ public final class ContestMsg {
         hash = (37 * hash) + CONTESTSCORE_FIELD_NUMBER;
         hash = (53 * hash) + getContestScore();
       }
-      if (hasIsOut()) {
-        hash = (37 * hash) + ISOUT_FIELD_NUMBER;
-        hash = (53 * hash) + getIsOut();
+      if (hasState()) {
+        hash = (37 * hash) + STATE_FIELD_NUMBER;
+        hash = (53 * hash) + getState();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -545,7 +545,7 @@ public final class ContestMsg {
         bitField0_ = (bitField0_ & ~0x00000002);
         contestScore_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        isOut_ = 0;
+        state_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
@@ -586,7 +586,7 @@ public final class ContestMsg {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.isOut_ = isOut_;
+        result.state_ = state_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -640,8 +640,8 @@ public final class ContestMsg {
         if (other.hasContestScore()) {
           setContestScore(other.getContestScore());
         }
-        if (other.hasIsOut()) {
-          setIsOut(other.getIsOut());
+        if (other.hasState()) {
+          setState(other.getState());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -867,50 +867,50 @@ public final class ContestMsg {
         return this;
       }
 
-      private int isOut_ ;
+      private int state_ ;
       /**
        * <pre>
-       * 是否淘汰 1：淘汰、0：未淘汰
+       * 状态 1：淘汰，2：退出
        * </pre>
        *
-       * <code>optional int32 isOut = 4;</code>
+       * <code>optional int32 state = 4;</code>
        */
-      public boolean hasIsOut() {
+      public boolean hasState() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <pre>
-       * 是否淘汰 1：淘汰、0：未淘汰
+       * 状态 1：淘汰，2：退出
        * </pre>
        *
-       * <code>optional int32 isOut = 4;</code>
+       * <code>optional int32 state = 4;</code>
        */
-      public int getIsOut() {
-        return isOut_;
+      public int getState() {
+        return state_;
       }
       /**
        * <pre>
-       * 是否淘汰 1：淘汰、0：未淘汰
+       * 状态 1：淘汰，2：退出
        * </pre>
        *
-       * <code>optional int32 isOut = 4;</code>
+       * <code>optional int32 state = 4;</code>
        */
-      public Builder setIsOut(int value) {
+      public Builder setState(int value) {
         bitField0_ |= 0x00000008;
-        isOut_ = value;
+        state_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       * 是否淘汰 1：淘汰、0：未淘汰
+       * 状态 1：淘汰，2：退出
        * </pre>
        *
-       * <code>optional int32 isOut = 4;</code>
+       * <code>optional int32 state = 4;</code>
        */
-      public Builder clearIsOut() {
+      public Builder clearState() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        isOut_ = 0;
+        state_ = 0;
         onChanged();
         return this;
       }
@@ -6114,7 +6114,7 @@ public final class ContestMsg {
     java.lang.String[] descriptorData = {
       "\n\rContest.proto\"Y\n\014_ContestRank\022\020\n\010playe" +
       "rId\030\001 \001(\005\022\022\n\nplayerName\030\002 \001(\t\022\024\n\014contest" +
-      "Score\030\003 \001(\005\022\r\n\005isOut\030\004 \001(\005\"\"\n\020EnterConte" +
+      "Score\030\003 \001(\005\022\r\n\005state\030\004 \001(\005\"\"\n\020EnterConte" +
       "stSite\022\016\n\006siteId\030\001 \001(\005\"\023\n\021EnterContestSi" +
       "te_\"!\n\017ExitContestSite\022\016\n\006siteId\030\001 \001(\005\"\022" +
       "\n\020ExitContestSite_\"\027\n\005Apply\022\016\n\006siteId\030\001 " +
@@ -6142,7 +6142,7 @@ public final class ContestMsg {
     internal_static__ContestRank_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__ContestRank_descriptor,
-        new java.lang.String[] { "PlayerId", "PlayerName", "ContestScore", "IsOut", });
+        new java.lang.String[] { "PlayerId", "PlayerName", "ContestScore", "State", });
     internal_static_EnterContestSite_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_EnterContestSite_fieldAccessorTable = new

@@ -8,7 +8,7 @@ message _ContestRank {
 	optional int32 playerId = 1;		// 玩家id
 	optional string playerName = 2;		// 玩家姓名
 	optional int32 contestScore = 3;	// 排名分数
-	optional int32 isOut= 4;			// 是否淘汰 1：淘汰、0：未淘汰
+	optional int32 state = 4;			// 状态 1：淘汰，2：退出
 }
 
 // 进入比赛场

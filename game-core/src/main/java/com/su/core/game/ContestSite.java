@@ -10,10 +10,21 @@ import com.su.core.context.PlayerContext;
 import com.su.core.game.enums.SiteType;
 
 public class ContestSite extends Site {
-	
+	/**
+	 * 配置
+	 * */
 	private ContestCo contestCo;
+	/**
+	 * 报名的玩家
+	 * */
 	private List<GamePlayer> playerList;
+	/**
+	 * 空闲的比赛
+	 * */
 	private Queue<Contest> contestQueue;
+	/**
+	 * 排名奖励的人数
+	 * */
 	private int rewardCount;
 	
 	public ContestSite(ContestCo contestCo, int rewardCount) {
@@ -45,8 +56,8 @@ public class ContestSite extends Site {
 			Contest contest = contestQueue.poll();
 			if (contest == null)
 				contest = new Contest(this);
-			contest.setGamePlayer(playerList);
-			contest.start();
+			contest.getActor().setGamePlayer(playerList);
+			contest.getActor().start();
 			playerList.clear();
 			playerNum = 0;
 			return true;

@@ -9,7 +9,6 @@ import com.su.common.po.Player;
 import com.su.common.util.ArrayUtil;
 import com.su.config.SiteCo;
 import com.su.core.context.PlayerContext;
-import com.su.core.game.enums.PlayerState;
 import com.su.core.game.enums.SiteType;
 
 public class RankingSite extends MatchSite {
@@ -50,13 +49,17 @@ public class RankingSite extends MatchSite {
 			return;
 		playerSet.add(playerContext.getGamePlayer());
 		this.playerNum ++;
-
+		
 		GamePlayer[] players = new GamePlayer[GameConst.PLAYER_COUNT];
 		for (Iterator<GamePlayer> it = playerSet.iterator(); it.hasNext();) {
 			GamePlayer player = it.next();
+			// 获取最后一名玩家
 			GamePlayer last = ArrayUtil.getLast(players);
 			if (last != null && getPlayerByGamePlayer(last).getRankingStep()
 					/ 10 != getPlayerByGamePlayer(player).getRankingStep() / 10)
+				break;
+			// 人数已满退出
+			if (!ArrayUtil.add(players, player)) 
 				break;
 		}
 		if (ArrayUtil.getCount(players) >= GameConst.PLAYER_COUNT) {
@@ -69,9 +72,6 @@ public class RankingSite extends MatchSite {
 		if (table == null) {
 			table = new RankingTable(this);
 		}
-		// 设置玩家状态
-		for (GamePlayer otherPlayers : players)
-			otherPlayers.setState(PlayerState.WAIT);
 		table.getActor().setPlayers(players);
 		table.getActor().deal();
 	}

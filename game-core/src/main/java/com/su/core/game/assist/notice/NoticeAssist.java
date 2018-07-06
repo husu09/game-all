@@ -52,6 +52,7 @@ public class NoticeAssist {
 		builder.setCallOp(table.getCallOp());
 		builder.setDealer(table.getDealer());
 		builder.setWaitTime(table.getWaitTime());
+		builder.setType(table.getSite().getSiteType().getValue());
 		return builder.build();
 	}
 
@@ -70,9 +71,11 @@ public class NoticeAssist {
 			builder.setCardNum(gamePlayer.getHandCardsCount());
 		builder.setMultiple(gamePlayer.getMultiple());
 		builder.setScore(gamePlayer.getScore());
-		builder.setIsAuto(gamePlayer.isAuto());
+		builder.setIsAuto(gamePlayer.getIsAuto());
 		builder.setState(gamePlayer.getState().getValue());
 		builder.setOpTime(gamePlayer.getOpTime());
+		builder.setContestScore(gamePlayer.getContestScore());
+		builder.setIsQuit(gamePlayer.getIsQuit());
 		return builder.build();
 	}
 

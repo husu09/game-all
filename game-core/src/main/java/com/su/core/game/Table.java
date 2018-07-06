@@ -102,9 +102,9 @@ public abstract class Table implements Delayed {
 	private _GamePlayer.Builder gamePlayerBuilder = _GamePlayer.newBuilder();
 	private _Card.Builder cardBuilder = _Card.newBuilder();
 
-	public Table(Site room) {
+	public Table(Site site) {
 		this.actor = AkkaContext.createActor(Table.class, this.getClass(), this);
-		this.site = room;
+		this.site = site;
 		// 初始化牌
 		Card[] cards = new Card[Card.CARDS_NUM * 2];
 		System.arraycopy(Card.ONE_CARDS, 0, cards, 0, Card.CARDS_NUM);
@@ -590,12 +590,19 @@ public abstract class Table implements Delayed {
 		// 通知
 		noticeAssist.notice(this);
 	}
+	
+	/**
+	 * 托管
+	 * */
+	public void auto(GamePlayer gamePlayer, int isAuto) {
+		
+	}
 
 	/**
 	 * 重连
 	 */
 	public void reconnect(GamePlayer gamePlayer) {
-		gamePlayer.setAuto(0);
+		gamePlayer.setIsAuto(0);
 		// 通知
 		noticeAssist.notice(this);
 	}
@@ -894,7 +901,7 @@ public abstract class Table implements Delayed {
 		return state;
 	}
 
-	public Site getRoom() {
+	public Site getSite() {
 		return site;
 	}
 

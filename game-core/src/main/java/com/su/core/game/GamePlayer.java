@@ -59,7 +59,10 @@ public class GamePlayer implements Delayed {
 	 * 比赛积分
 	 * */
 	private int contestScore;
-
+	/**
+	 * 是否退出
+	 * */
+	private int isQuit;
 	/**
 	 * 叫牌时间
 	 */
@@ -148,7 +151,7 @@ public class GamePlayer implements Delayed {
 	 */
 	public void setState(PlayerState state, boolean isDelay, int subTime) {
 		if (this.state == PlayerState.OPERATE)
-			this.table.getRoom().getWaitGamePlayerQueue().remove(this);
+			this.table.getSite().getWaitGamePlayerQueue().remove(this);
 		this.state = state;
 		if (isDelay && state == PlayerState.OPERATE) {
 			if (this.table.getState() == TableState.CALL)
@@ -165,7 +168,7 @@ public class GamePlayer implements Delayed {
 					this.opTime = TimeUtil.getCurrTime() + OPERATE_WAIT_TIME - subTime;
 			} else
 				return;
-			this.table.getRoom().getWaitGamePlayerQueue().put(this);
+			this.table.getSite().getWaitGamePlayerQueue().put(this);
 		}
 	}
 
@@ -216,12 +219,12 @@ public class GamePlayer implements Delayed {
 	public void setScore(int score) {
 		this.score = score;
 	}
-
-	public int isAuto() {
+	
+	public int getIsAuto() {
 		return isAuto;
 	}
 
-	public void setAuto(int isAuto) {
+	public void setIsAuto(int isAuto) {
 		this.isAuto = isAuto;
 		if (this.isAuto == 1) {
 			if (this.state == PlayerState.OPERATE)
@@ -273,4 +276,13 @@ public class GamePlayer implements Delayed {
 	public void setContestScore(int contestScore) {
 		this.contestScore = contestScore;
 	}
+
+	public int getIsQuit() {
+		return isQuit;
+	}
+
+	public void setIsQuit(int isQuit) {
+		this.isQuit = isQuit;
+	}
+
 }

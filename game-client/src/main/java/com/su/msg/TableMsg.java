@@ -783,7 +783,7 @@ public final class TableMsg {
 
     /**
      * <pre>
-     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
      * </pre>
      *
      * <code>optional int32 state = 8 [default = -1];</code>
@@ -791,7 +791,7 @@ public final class TableMsg {
     boolean hasState();
     /**
      * <pre>
-     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
      * </pre>
      *
      * <code>optional int32 state = 8 [default = -1];</code>
@@ -831,6 +831,23 @@ public final class TableMsg {
      * <code>optional int32 contestScore = 10 [default = -1];</code>
      */
     int getContestScore();
+
+    /**
+     * <pre>
+     * 是否退出 1：退出
+     * </pre>
+     *
+     * <code>optional int32 isQuit = 11 [default = -1];</code>
+     */
+    boolean hasIsQuit();
+    /**
+     * <pre>
+     * 是否退出 1：退出
+     * </pre>
+     *
+     * <code>optional int32 isQuit = 11 [default = -1];</code>
+     */
+    int getIsQuit();
   }
   /**
    * Protobuf type {@code _GamePlayer}
@@ -854,6 +871,7 @@ public final class TableMsg {
       state_ = -1;
       opTime_ = -1L;
       contestScore_ = -1;
+      isQuit_ = -1;
     }
 
     @java.lang.Override
@@ -936,6 +954,11 @@ public final class TableMsg {
             case 80: {
               bitField0_ |= 0x00000100;
               contestScore_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000200;
+              isQuit_ = input.readInt32();
               break;
             }
           }
@@ -1163,7 +1186,7 @@ public final class TableMsg {
     private int state_;
     /**
      * <pre>
-     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
      * </pre>
      *
      * <code>optional int32 state = 8 [default = -1];</code>
@@ -1173,7 +1196,7 @@ public final class TableMsg {
     }
     /**
      * <pre>
-     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
+     * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
      * </pre>
      *
      * <code>optional int32 state = 8 [default = -1];</code>
@@ -1228,6 +1251,29 @@ public final class TableMsg {
       return contestScore_;
     }
 
+    public static final int ISQUIT_FIELD_NUMBER = 11;
+    private int isQuit_;
+    /**
+     * <pre>
+     * 是否退出 1：退出
+     * </pre>
+     *
+     * <code>optional int32 isQuit = 11 [default = -1];</code>
+     */
+    public boolean hasIsQuit() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <pre>
+     * 是否退出 1：退出
+     * </pre>
+     *
+     * <code>optional int32 isQuit = 11 [default = -1];</code>
+     */
+    public int getIsQuit() {
+      return isQuit_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1269,6 +1315,9 @@ public final class TableMsg {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeInt32(10, contestScore_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(11, isQuit_);
       }
       unknownFields.writeTo(output);
     }
@@ -1317,6 +1366,10 @@ public final class TableMsg {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(10, contestScore_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, isQuit_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1382,6 +1435,11 @@ public final class TableMsg {
         result = result && (getContestScore()
             == other.getContestScore());
       }
+      result = result && (hasIsQuit() == other.hasIsQuit());
+      if (hasIsQuit()) {
+        result = result && (getIsQuit()
+            == other.getIsQuit());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1434,6 +1492,10 @@ public final class TableMsg {
       if (hasContestScore()) {
         hash = (37 * hash) + CONTESTSCORE_FIELD_NUMBER;
         hash = (53 * hash) + getContestScore();
+      }
+      if (hasIsQuit()) {
+        hash = (37 * hash) + ISQUIT_FIELD_NUMBER;
+        hash = (53 * hash) + getIsQuit();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1578,6 +1640,8 @@ public final class TableMsg {
         bitField0_ = (bitField0_ & ~0x00000100);
         contestScore_ = -1;
         bitField0_ = (bitField0_ & ~0x00000200);
+        isQuit_ = -1;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -1647,6 +1711,10 @@ public final class TableMsg {
           to_bitField0_ |= 0x00000100;
         }
         result.contestScore_ = contestScore_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.isQuit_ = isQuit_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1741,6 +1809,9 @@ public final class TableMsg {
         }
         if (other.hasContestScore()) {
           setContestScore(other.getContestScore());
+        }
+        if (other.hasIsQuit()) {
+          setIsQuit(other.getIsQuit());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2373,7 +2444,7 @@ public final class TableMsg {
       private int state_ = -1;
       /**
        * <pre>
-       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
        * </pre>
        *
        * <code>optional int32 state = 8 [default = -1];</code>
@@ -2383,7 +2454,7 @@ public final class TableMsg {
       }
       /**
        * <pre>
-       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
        * </pre>
        *
        * <code>optional int32 state = 8 [default = -1];</code>
@@ -2393,7 +2464,7 @@ public final class TableMsg {
       }
       /**
        * <pre>
-       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
        * </pre>
        *
        * <code>optional int32 state = 8 [default = -1];</code>
@@ -2406,7 +2477,7 @@ public final class TableMsg {
       }
       /**
        * <pre>
-       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ，5：退出）
+       * 玩家状态（1：准备，2：等待，3：操作中，4：出完牌 ）
        * </pre>
        *
        * <code>optional int32 state = 8 [default = -1];</code>
@@ -2510,6 +2581,54 @@ public final class TableMsg {
       public Builder clearContestScore() {
         bitField0_ = (bitField0_ & ~0x00000200);
         contestScore_ = -1;
+        onChanged();
+        return this;
+      }
+
+      private int isQuit_ = -1;
+      /**
+       * <pre>
+       * 是否退出 1：退出
+       * </pre>
+       *
+       * <code>optional int32 isQuit = 11 [default = -1];</code>
+       */
+      public boolean hasIsQuit() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <pre>
+       * 是否退出 1：退出
+       * </pre>
+       *
+       * <code>optional int32 isQuit = 11 [default = -1];</code>
+       */
+      public int getIsQuit() {
+        return isQuit_;
+      }
+      /**
+       * <pre>
+       * 是否退出 1：退出
+       * </pre>
+       *
+       * <code>optional int32 isQuit = 11 [default = -1];</code>
+       */
+      public Builder setIsQuit(int value) {
+        bitField0_ |= 0x00000400;
+        isQuit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 是否退出 1：退出
+       * </pre>
+       *
+       * <code>optional int32 isQuit = 11 [default = -1];</code>
+       */
+      public Builder clearIsQuit() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        isQuit_ = -1;
         onChanged();
         return this;
       }
@@ -15611,35 +15730,35 @@ public final class TableMsg {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Table.proto\"$\n\005_Card\022\r\n\005value\030\001 \001(\005\022\014\n" +
-      "\004suit\030\002 \001(\005\"\334\001\n\013_GamePlayer\022\016\n\002id\030\001 \001(\003:" +
+      "\004suit\030\002 \001(\005\"\360\001\n\013_GamePlayer\022\016\n\002id\030\001 \001(\003:" +
       "\002-1\022\030\n\010handCard\030\002 \003(\0132\006._Card\022\023\n\007cardNum" +
       "\030\003 \001(\005:\002-1\022\020\n\004team\030\004 \001(\005:\002-1\022\024\n\010multiple" +
       "\030\005 \001(\005:\002-1\022\021\n\005score\030\006 \001(\005:\002-1\022\022\n\006isAuto\030" +
       "\007 \001(\005:\002-1\022\021\n\005state\030\010 \001(\005:\002-1\022\022\n\006opTime\030\t" +
-      " \001(\003:\002-1\022\030\n\014contestScore\030\n \001(\005:\002-1\"\253\002\n\006_" +
-      "Table\022\034\n\006player\030\001 \003(\0132\014._GamePlayer\022\020\n\010m" +
-      "ultiple\030\002 \003(\005\022\021\n\005state\030\003 \001(\005:\002-1\022\030\n\010last" +
-      "Card\030\004 \003(\0132\006._Card\022\030\n\014lastCardType\030\005 \001(\005",
-      ":\002-1\022\022\n\006lastOp\030\006 \001(\005:\002-1\022\026\n\nroundScore\030\007" +
-      " \001(\005:\002-1\022\030\n\010callCard\030\010 \001(\0132\006._Card\022\024\n\010ca" +
-      "llType\030\t \001(\005:\002-1\022\022\n\006callOp\030\n \001(\005:\002-1\022\022\n\006" +
-      "dealer\030\013 \001(\005:\002-1\022\024\n\010waitTime\030\014 \001(\003:\002-1\022\020" +
-      "\n\004type\030\r \001(\005:\002-1\"+\n\004Call\022\020\n\010callType\030\001 \001" +
-      "(\005\022\021\n\tcardIndex\030\002 \001(\005\"\007\n\005Call_\",\n\004Draw\022\020" +
-      "\n\010cardType\030\001 \001(\005\022\022\n\ncardIndexs\030\002 \003(\005\"\007\n\005" +
-      "Draw_\"\007\n\005Check\"\010\n\006Check_\"\007\n\005Ready\"\010\n\006Rea" +
-      "dy_\"\006\n\004Quit\"\007\n\005Quit_\"\010\n\006Double\"\t\n\007Double" +
-      "_\"\026\n\004Auto\022\016\n\006isAuto\030\001 \001(\005\"\007\n\005Auto_\"\010\n\006Re",
-      "conn\"\t\n\007Reconn_\"5\n\021UpdateGamePlayer_\022 \n\n" +
-      "gamePlayer\030\001 \003(\0132\014._GamePlayer\"&\n\014Update" +
-      "Table_\022\026\n\005table\030\001 \001(\0132\007._Table\"\203\001\n\021_Game" +
-      "PlayerResult\022\020\n\010multiple\030\001 \001(\005\022\022\n\006peanut" +
-      "\030\002 \001(\005:\002-1\022\030\n\014rankingScore\030\003 \001(\005:\002-1\022\030\n\014" +
-      "contestScore\030\004 \001(\005:\002-1\022\024\n\010playerId\030\005 \001(\003" +
-      ":\002-1\"\\\n\014TableResult_\022\021\n\tbaseScore\030\001 \001(\005\022" +
-      "\017\n\007winTeam\030\002 \001(\005\022(\n\014playerResult\030\003 \003(\0132\022" +
-      "._GamePlayerResultB\030\n\ncom.su.msgB\010TableM" +
-      "sgH\001"
+      " \001(\003:\002-1\022\030\n\014contestScore\030\n \001(\005:\002-1\022\022\n\006is" +
+      "Quit\030\013 \001(\005:\002-1\"\253\002\n\006_Table\022\034\n\006player\030\001 \003(" +
+      "\0132\014._GamePlayer\022\020\n\010multiple\030\002 \003(\005\022\021\n\005sta" +
+      "te\030\003 \001(\005:\002-1\022\030\n\010lastCard\030\004 \003(\0132\006._Card\022\030",
+      "\n\014lastCardType\030\005 \001(\005:\002-1\022\022\n\006lastOp\030\006 \001(\005" +
+      ":\002-1\022\026\n\nroundScore\030\007 \001(\005:\002-1\022\030\n\010callCard" +
+      "\030\010 \001(\0132\006._Card\022\024\n\010callType\030\t \001(\005:\002-1\022\022\n\006" +
+      "callOp\030\n \001(\005:\002-1\022\022\n\006dealer\030\013 \001(\005:\002-1\022\024\n\010" +
+      "waitTime\030\014 \001(\003:\002-1\022\020\n\004type\030\r \001(\005:\002-1\"+\n\004" +
+      "Call\022\020\n\010callType\030\001 \001(\005\022\021\n\tcardIndex\030\002 \001(" +
+      "\005\"\007\n\005Call_\",\n\004Draw\022\020\n\010cardType\030\001 \001(\005\022\022\n\n" +
+      "cardIndexs\030\002 \003(\005\"\007\n\005Draw_\"\007\n\005Check\"\010\n\006Ch" +
+      "eck_\"\007\n\005Ready\"\010\n\006Ready_\"\006\n\004Quit\"\007\n\005Quit_" +
+      "\"\010\n\006Double\"\t\n\007Double_\"\026\n\004Auto\022\016\n\006isAuto\030",
+      "\001 \001(\005\"\007\n\005Auto_\"\010\n\006Reconn\"\t\n\007Reconn_\"5\n\021U" +
+      "pdateGamePlayer_\022 \n\ngamePlayer\030\001 \003(\0132\014._" +
+      "GamePlayer\"&\n\014UpdateTable_\022\026\n\005table\030\001 \001(" +
+      "\0132\007._Table\"\203\001\n\021_GamePlayerResult\022\020\n\010mult" +
+      "iple\030\001 \001(\005\022\022\n\006peanut\030\002 \001(\005:\002-1\022\030\n\014rankin" +
+      "gScore\030\003 \001(\005:\002-1\022\030\n\014contestScore\030\004 \001(\005:\002" +
+      "-1\022\024\n\010playerId\030\005 \001(\003:\002-1\"\\\n\014TableResult_" +
+      "\022\021\n\tbaseScore\030\001 \001(\005\022\017\n\007winTeam\030\002 \001(\005\022(\n\014" +
+      "playerResult\030\003 \003(\0132\022._GamePlayerResultB\030" +
+      "\n\ncom.su.msgB\010TableMsgH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15664,7 +15783,7 @@ public final class TableMsg {
     internal_static__GamePlayer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static__GamePlayer_descriptor,
-        new java.lang.String[] { "Id", "HandCard", "CardNum", "Team", "Multiple", "Score", "IsAuto", "State", "OpTime", "ContestScore", });
+        new java.lang.String[] { "Id", "HandCard", "CardNum", "Team", "Multiple", "Score", "IsAuto", "State", "OpTime", "ContestScore", "IsQuit", });
     internal_static__Table_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static__Table_fieldAccessorTable = new
