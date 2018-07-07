@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import com.su.common.constant.BagConst;
 import com.su.common.constant.EffectConst;
-import com.su.common.obj.KV;
 import com.su.config.BagCo;
 import com.su.excel.core.AbstractExcelMapper;
 import com.su.excel.core.RowData;
@@ -29,9 +28,11 @@ public class BagConf extends AbstractExcelMapper<BagCo> {
 		} else if (temp.getUseType() == EffectConst.RESOURCES) {
 			temp.setEffectItem(rowData.getGoods("syxg"));
 		}
-		KV<Integer> kv = rowData.getKVI("yxq");
-		temp.setEffTyep(kv.getKey());
-		temp.setEffValue(kv.getValue());
+		int[] effData = rowData.getIntArr("yxq");
+		if (effData != null) {
+			temp.setEffTyep(effData[0]);
+			temp.setEffValue(effData[1]);
+		}
 		int limit = rowData.getInt("djsx");
 		limit = limit == 0 ? BagConst.DEF_LIMIT : limit;
 		temp.setLimit(limit);

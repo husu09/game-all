@@ -129,6 +129,8 @@ public class GamePlayer implements Delayed {
 		this.index = null;
 		this.table = null;
 		setState(null);
+		this.contestScore = 0;
+		this.isQuit = 0;
 	}
 
 	/**

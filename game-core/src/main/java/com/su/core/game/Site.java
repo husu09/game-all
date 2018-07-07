@@ -8,7 +8,7 @@ public abstract class Site {
 	/**
 	 * 玩家人数
 	 */
-	protected int playerNum;
+	protected volatile int playerNum;
 	/**
 	 * 需要操作的牌桌队列
 	 */
@@ -37,7 +37,7 @@ public abstract class Site {
 				table.getActor().doWaitTable();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
@@ -48,7 +48,7 @@ public abstract class Site {
 				gamePlayer.getTable().getActor().doWaitGamePlayer(gamePlayer);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	

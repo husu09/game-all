@@ -3,8 +3,8 @@ package com.su.server.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.su.common.po.ItemLog;
-import com.su.common.po.PeanutLog;
+import com.su.common.po.log.ItemLog;
+import com.su.common.po.log.PeanutLog;
 import com.su.core.data.DataService;
 
 @Service

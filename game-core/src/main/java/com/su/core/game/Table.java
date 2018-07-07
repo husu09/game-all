@@ -13,6 +13,8 @@ import com.su.common.util.CommonUtil;
 import com.su.common.util.SpringUtil;
 import com.su.common.util.TimeUtil;
 import com.su.core.akka.AkkaContext;
+import com.su.core.game.actor.TableActor;
+import com.su.core.game.actor.TableActorImpl;
 import com.su.core.game.assist.card.CardAssist;
 import com.su.core.game.assist.card.CardAssistManager;
 import com.su.core.game.assist.notice.NoticeAssist;
@@ -81,7 +83,7 @@ public abstract class Table implements Delayed {
 	/**
 	 * actor
 	 */
-	protected Table actor;
+	protected TableActor actor;
 	/**
 	 * 结算时等待时间
 	 */
@@ -103,7 +105,7 @@ public abstract class Table implements Delayed {
 	private _Card.Builder cardBuilder = _Card.newBuilder();
 
 	public Table(Site site) {
-		this.actor = AkkaContext.createActor(Table.class, this.getClass(), this);
+		this.actor = AkkaContext.createActor(TableActor.class, TableActorImpl.class, this);
 		this.site = site;
 		// 初始化牌
 		Card[] cards = new Card[Card.CARDS_NUM * 2];
@@ -409,7 +411,7 @@ public abstract class Table implements Delayed {
 	/**
 	 * 出牌后处理玩家队伍
 	 */
-	public void doPlayerTeamWithDraw(GamePlayer player, Card[] cards) {
+	private void doPlayerTeamWithDraw(GamePlayer player, Card[] cards) {
 		if (this.callType == CallType.LIGHT)
 			return;
 		for (Card card : cards) {
@@ -447,7 +449,7 @@ public abstract class Table implements Delayed {
 	/**
 	 * 获取获胜的队伍
 	 */
-	public Team getWinTeam(GamePlayer player) {
+	private Team getWinTeam(GamePlayer player) {
 		Team winTeam = null;
 
 		if (this.callType == CallType.LIGHT || this.callType == CallType.DARK && this.players[this.ranks[0]] != null) {
@@ -524,12 +526,12 @@ public abstract class Table implements Delayed {
 	/**
 	 * 子类实现的结算方法
 	 */
-	public abstract void doClose(TableResult_.Builder builder, Team winTeam, int redMultiple, int blueMultiple);
+	protected abstract void doClose(TableResult_.Builder builder, Team winTeam, int redMultiple, int blueMultiple);
 
 	/**
 	 * 结算
 	 */
-	public void close(Team winTeam) {
+	private void close(Team winTeam) {
 		// 计算倍数
 		int sumMultiple = 0;
 		for (int multiple : this.multiples) {
@@ -580,7 +582,7 @@ public abstract class Table implements Delayed {
 		}
 	}
 
-	public abstract void doExit(GamePlayer gamePlayer);
+	protected abstract void doExit(GamePlayer gamePlayer);
 
 	/**
 	 * 退出
@@ -595,6 +597,13 @@ public abstract class Table implements Delayed {
 	 * 托管
 	 * */
 	public void auto(GamePlayer gamePlayer, int isAuto) {
+		if (this.state == TableState.CLOSE){
+			logger.error("Table state is not allow {} {}", this.state, gamePlayer.getId());
+			return;
+		}
+		gamePlayer.setIsAuto(isAuto);
+		// 通知
+		noticeAssist.notice(this);
 		
 	}
 
@@ -627,7 +636,7 @@ public abstract class Table implements Delayed {
 	/**
 	 * 结算超时
 	 */
-	public abstract void doWaitClose();
+	protected abstract void doWaitClose();
 
 	/**
 	 * 牌桌等待超时
@@ -779,7 +788,7 @@ public abstract class Table implements Delayed {
 	/**
 	 * 增加公共倍数
 	 */
-	public void addMultiple(Object o, Card[] cards) {
+	private void addMultiple(Object o, Card[] cards) {
 		MultipleType multiple = MultipleType.getMultiple(o, cards);
 		if (multiple != null) {
 			this.multiples[multiple.ordinal()] += multiple.getValue();
@@ -789,29 +798,11 @@ public abstract class Table implements Delayed {
 	/**
 	 * 扣除公共倍数
 	 */
-	public void eddMultiple(Object o, Card[] cards) {
+	private void eddMultiple(Object o, Card[] cards) {
 		MultipleType multiple = MultipleType.getMultiple(o, cards);
 		if (multiple != null && this.multiples[multiple.ordinal()] >= multiple.getValue()) {
 			this.multiples[multiple.ordinal()] -= multiple.getValue();
 		}
-	}
-
-	/**
-	 * 添加排行
-	 */
-	public int addToRanks(Table table, GamePlayer player) {
-		int rank = -1;
-		for (int i = 0; i < this.ranks.length; i++) {
-			if (this.ranks[i] == null) {
-				this.ranks[i] = player.getIndex();
-				rank = i;
-				break;
-			}
-		}
-		if (rank == -1) {
-			logger.error("{} Rank is error {}", player.getId(), rank);
-		}
-		return rank;
 	}
 
 	/**
@@ -905,7 +896,7 @@ public abstract class Table implements Delayed {
 		return site;
 	}
 
-	public Table getActor() {
+	public TableActor getActor() {
 		return actor;
 	}
 

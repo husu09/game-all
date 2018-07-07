@@ -11,7 +11,7 @@ public class SiteConf extends AbstractExcelMapper<SiteCo> {
 
 	@Override
 	public String getName() {
-		return "Y游戏场";
+		return "Y游戏";
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.su.common.po;
+package com.su.common.po.log;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

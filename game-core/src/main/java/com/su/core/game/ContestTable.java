@@ -36,10 +36,8 @@ public class ContestTable  extends Table {
 		}
 		// 清空牌桌
 		this.clean();
-		// 返回牌桌
-		contest.getActor().returnTable(this);
 		// 检测每轮结束
-		contest.getActor().checkTableClose();
+		contest.getActor().checkTableClose(this);
 	}
 
 	@Override

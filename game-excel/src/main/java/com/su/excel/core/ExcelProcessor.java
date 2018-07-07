@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.su.common.util.StringUtil;
+
 /**
  * 预处理excel数据，验证数据完整性后保存
  */
@@ -97,6 +99,8 @@ public class ExcelProcessor {
 							if (cell == null)
 								continue;
 							String value = getCellValueNew(cell);
+							if (StringUtil.isNone(value))
+								continue;
 							if (rowData == null)
 								rowData = new RowData();
 							rowData.put(title.get(i), value);

@@ -5,13 +5,13 @@ import org.springframework.stereotype.Component;
 import com.su.common.constant.BagConst;
 import com.su.common.constant.GamblingConst;
 import com.su.common.constant.RankingConst;
-import com.su.common.obj.KV;
 import com.su.common.util.ParseUtil;
+import com.su.config.Parameter;
 import com.su.excel.core.AbstractExcelMapper;
 import com.su.excel.core.RowData;
 
 @Component
-public class ParameterConf extends AbstractExcelMapper<KV<String>> {
+public class ParameterConf extends AbstractExcelMapper<Parameter> {
 
 	@Override
 	public String getName() {
@@ -19,9 +19,9 @@ public class ParameterConf extends AbstractExcelMapper<KV<String>> {
 	}
 
 	@Override
-	public KV<String> map(RowData rowData) {
-		KV<String> temp = new KV<>();
-		temp.setKey(rowData.getInt("id"));
+	public Parameter map(RowData rowData) {
+		Parameter temp = new Parameter();
+		temp.setId(rowData.getInt("id"));
 		temp.setValue(rowData.getString("cs"));
 		return temp;
 	}

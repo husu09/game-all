@@ -14,6 +14,8 @@ import java.util.Queue;
 import com.su.common.constant.GameConst;
 import com.su.common.util.ArrayUtil;
 import com.su.core.akka.AkkaContext;
+import com.su.core.game.actor.ContestActor;
+import com.su.core.game.actor.ContestActorImpl;
 
 public class Contest {
 	/**
@@ -37,7 +39,7 @@ public class Contest {
 	 */
 	private int tableNum;
 
-	private Contest actor;
+	private ContestActor actor;
 
 	private ContestSite contestSite;
 	/**
@@ -53,7 +55,7 @@ public class Contest {
 	};
 
 	public Contest(ContestSite contestSite) {
-		this.actor = AkkaContext.createActor(Contest.class, Contest.class, this);
+		this.actor = AkkaContext.createActor(ContestActor.class, ContestActorImpl.class, this);
 		this.contestSite = contestSite;
 		this.playerList = new LinkedList<>();
 		this.rankingMap = new HashMap<>();
@@ -96,7 +98,8 @@ public class Contest {
 	/**
 	 * 处理每轮结束
 	 */
-	public void checkTableClose() {
+	public void checkTableClose(Table table) {
+		this.tableQueue.offer(table);
 		if (this.tableQueue.size() < this.tableNum)
 			return;
 		this.baseScore += this.contestSite.getContestCo().getAddedScore();
@@ -134,21 +137,7 @@ public class Contest {
 		}
 	}
 	
-	/**
-	 * 返还table
-	 * */
-	public void returnTable(Table table) {
-		this.tableQueue.offer(table);
-	}
-	
-	/**
-	 * 删除玩家
-	 * */
-	public void removePlayer(GamePlayer gamePlayer) {
-		this.playerList.remove(gamePlayer);
-	}
-	
-	public Contest getActor() {
+	public ContestActor getActor() {
 		return actor;
 	}
 	

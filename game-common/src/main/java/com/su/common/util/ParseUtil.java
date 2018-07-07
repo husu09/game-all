@@ -1,7 +1,6 @@
 package com.su.common.util;
 
 import com.su.common.obj.Goods;
-import com.su.common.obj.KV;
 
 public class ParseUtil {
 
@@ -18,6 +17,8 @@ public class ParseUtil {
 	}
 
 	public static Goods getGoods(String value) {
+		if (StringUtil.isNone(value))
+			return null;
 		String[] splits = value.split("_");
 		Goods goods = new Goods();
 		goods.setType(Integer.parseInt(splits[0]));
@@ -26,28 +27,14 @@ public class ParseUtil {
 		return goods;
 	}
 
-	public static KV<Integer> getKVI(String value) {
+	public static int[] getIntArr(String value) {
+		if (StringUtil.isNone(value))
+			return null;
 		String[] splits = value.split("_");
-		KV<Integer> kv = new KV<>();
-		kv.setKey(Integer.parseInt(splits[0]));
-		kv.setValue(Integer.parseInt(splits[1]));
-		return kv;
-	}
-
-	public static KV<String> getKVS(String value) {
-		String[] splits = value.split("_");
-		KV<String> kv = new KV<>();
-		kv.setKey(Integer.parseInt(splits[0]));
-		kv.setValue(splits[1]);
-		return kv;
-	}
-
-	public static Integer[] getIntArr(String value) {
-		String[] splits = value.split("_");
-		Integer[] arr = null;
+		int[] arr = null;
 		for (int i = 0; i < splits.length; i++) {
 			if (arr == null)
-				arr = new Integer[splits.length];
+				arr = new int[splits.length];
 			arr[i] = Integer.parseInt(splits[i]);
 		}
 		return arr;

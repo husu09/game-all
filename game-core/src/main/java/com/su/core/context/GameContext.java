@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class GameContext {
 	/**
-	 * 是否正在关服
+	 * 是否接受请求
 	 * */
-	private volatile boolean stopping;
+	private volatile boolean accept;
 	
 	/**
 	 * 在线玩家
@@ -24,12 +24,14 @@ public class GameContext {
 		return playerContextMap;
 	}
 
-	public boolean isStopping() {
-		return stopping;
+	public boolean isAccept() {
+		return accept;
 	}
 
-	public void setStopping(boolean stopping) {
-		this.stopping = stopping;
+	public void setAccept(boolean accept) {
+		this.accept = accept;
 	}
+
+	
 		
 }

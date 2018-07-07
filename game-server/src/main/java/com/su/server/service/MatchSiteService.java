@@ -1,7 +1,9 @@
 package com.su.server.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ import com.su.excel.mapper.SiteConf;
 @Service
 public class MatchSiteService extends GameEventAdapter {
 
-	private Map<Integer, MatchSite> matchSiteMap = new HashMap<>();
+	private Map<Integer, MatchSite> matchSiteMap = new ConcurrentHashMap<>();
 
 	@Autowired
 	private SiteConf siteConf;
@@ -38,7 +40,5 @@ public class MatchSiteService extends GameEventAdapter {
 	public Map<Integer, MatchSite> getMatchSiteMap() {
 		return matchSiteMap;
 	}
-
 	
-
 }

@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.su.core.akka.BridgeService;
 import com.su.core.game.Site;
+import com.su.core.game.service.BridgeService;
 
 @Component
 public class ScheduleManager {

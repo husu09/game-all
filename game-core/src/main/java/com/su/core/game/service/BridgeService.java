@@ -1,4 +1,4 @@
-package com.su.core.akka;
+package com.su.core.game.service;
 
 import java.util.Collection;
 import java.util.Map;

@@ -1,5 +1,7 @@
 package com.su.core.akka;
 
+import java.lang.reflect.Constructor;
+
 import akka.actor.ActorSystem;
 import akka.actor.TypedActor;
 import akka.actor.TypedProps;
@@ -8,6 +10,13 @@ import akka.japi.Creator;
 public class AkkaContext {
 
 	private static final ActorSystem system = ActorSystem.create("GAME");
+	
+	/**
+	 * 创建actor
+	 */
+	public static <T> T createActor(Class<T> implementCls) {
+		return TypedActor.get(system).typedActorOf(new TypedProps<T>(implementCls));
+	}
 
 	/**
 	 * 创建actor
@@ -27,7 +36,26 @@ public class AkkaContext {
 				for (int i = 0; i < objs.length; i++) {
 					classzs[i] = objs[i].getClass();
 				}
-				return (T) implementCls.getConstructor(classzs).newInstance(objs);
+				Constructor[] constructors = implementCls.getConstructors();
+				Constructor matchCnst = null;
+				for (Constructor cnst : constructors) {
+					boolean isMatch = true;
+					if (cnst.getParameterTypes().length == classzs.length) {
+						for (int i = 0; i < cnst.getParameterTypes().length; i++){
+							if (!cnst.getParameterTypes()[i].isAssignableFrom(classzs[i])) {
+								isMatch = false;
+								break;
+							}
+						}
+					}
+					if (isMatch){
+						matchCnst = cnst;
+						break;
+					}
+				}
+				if (matchCnst == null)
+					throw new RuntimeException("No match Constructor");
+				return (T) matchCnst.newInstance(objs);
 			}
 		}));
 	}

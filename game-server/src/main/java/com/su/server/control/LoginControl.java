@@ -39,14 +39,14 @@ public class LoginControl {
 			return;
 		}
 
-		long playerId = loginService.getIdCacheByName(req.getAccount());
+		long playerId = loginService.getIdCacheByAccount(req.getAccount());
 		if (playerId == 0) {
 			// 创建用户
 			Player player = new Player();
 			player.setAccount(req.getAccount());
 			player.setName(req.getName());
 			playerId = playerService.createPlayer(player);
-			loginService.addIdCacheByName(req.getAccount(), playerId);
+			loginService.addIdCacheByAccount(req.getAccount(), playerId);
 		}
 		if (playerId == 0) {
 			playerContext.sendError(20002);

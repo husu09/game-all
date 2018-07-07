@@ -18,7 +18,7 @@ import com.su.excel.mapper.ContestRewardConf;
 import com.su.msg.ContestMsg.NoticeContestSite_;
 
 @Service
-public class ContestService extends GameEventAdapter {
+public class ContestSiteService extends GameEventAdapter {
 
 	private Map<Integer, ContestSite> contestSiteMap = new HashMap<>();
 	

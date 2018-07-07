@@ -7,34 +7,31 @@ import com.alibaba.fastjson.JSON;
 import com.su.common.constant.RedisKey;
 import com.su.common.obj.PlayerCoreData;
 import com.su.common.po.Player;
-import com.su.core.context.PlayerContext;
 import com.su.core.data.RedisClient;
-import com.su.core.event.GameEventAdapter;
-import com.su.msg.LoginMsg.Login_;
 
 @Service
-public class LoginService extends GameEventAdapter{
+public class LoginService{
 	@Autowired
 	private RedisClient redisClient;
 
 	/**
 	 * 添加名字缓存
 	 */
-	public void addIdCacheByName(String name, long id) {
+	public void addIdCacheByAccount(String name, long id) {
 		redisClient.hset(RedisKey.PLAYER_NAME_ID, name, String.valueOf(id));
 	}
 
 	/**
 	 * 删除名字缓存
 	 */
-	public void removeIdCacheByName(String name) {
+	public void removeIdCacheByAccount(String name) {
 		redisClient.hdel(RedisKey.PLAYER_NAME_ID, name);
 	}
 
 	/**
 	 * 通过名字获取id
 	 */
-	public long getIdCacheByName(String name) {
+	public long getIdCacheByAccount(String name) {
 		String value = redisClient.hget(RedisKey.PLAYER_NAME_ID, name);
 		if (value == null)
 			return 0;
@@ -65,10 +62,6 @@ public class LoginService extends GameEventAdapter{
 		return JSON.parseObject(value, PlayerCoreData.class);
 	}
 
-	@Override
-	public void login(PlayerContext playerContext, Login_.Builder builder) {
-		
-	}
 	
 	
 }

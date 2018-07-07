@@ -47,16 +47,17 @@ public class ServerStart {
 		// 初始化定时任务管理器
 		ScheduleManager scheduleManager = context.getBean(ScheduleManager.class);
 		scheduleManager.start();
-		
+		// 设置接受请求
 		GameContext gameContext = context.getBean(GameContext.class);
+		gameContext.setAccept(true);
 		
 		System.out.println("输入stop关闭服务器：");
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			String command = sc.nextLine();
 			if (command.equals("stop")) {
-				// 设置服务器关闭状态
-				gameContext.setStopping(true);
+				// 设置不接受请求
+				gameContext.setAccept(false);
 				// 关闭网络服务
 				nettyServer.stop();
 				// 关闭 mq

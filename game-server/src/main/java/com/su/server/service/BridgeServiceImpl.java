@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.su.common.po.Player;
-import com.su.core.akka.BridgeService;
 import com.su.core.game.Site;
 import com.su.core.game.TableResult;
+import com.su.core.game.service.BridgeService;
 import com.su.msg.TableMsg._GamePlayerResult;
 
 @Service
@@ -19,7 +19,7 @@ public class BridgeServiceImpl implements BridgeService {
 	@Autowired
 	private MatchSiteService matchSiteService;
 	@Autowired
-	private ContestService contestService;
+	private ContestSiteService contestService;
 	@Autowired
 	private PlayerGameService playerGameService;
 	@Autowired

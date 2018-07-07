@@ -15,13 +15,13 @@ import com.su.msg.ContestMsg.EnterContestSite;
 import com.su.msg.ContestMsg.EnterContestSite_;
 import com.su.msg.ContestMsg.ExitContestSite;
 import com.su.msg.ContestMsg.ExitContestSite_;
-import com.su.server.service.ContestService;
+import com.su.server.service.ContestSiteService;
 
 @Controller
 public class ContestControl {
 
 	@Autowired
-	private ContestService contestService;
+	private ContestSiteService contestService;
 
 	/**
 	 * 进入比赛场

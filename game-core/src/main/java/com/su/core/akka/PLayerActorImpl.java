@@ -11,6 +11,7 @@ import com.su.core.action.ActionMeta;
 import com.su.core.context.PlayerContext;
 import com.su.core.event.GameEventDispatcher;
 import com.su.core.game.TableResult;
+import com.su.core.game.service.BridgeService;
 import com.su.core.netty.NettyServerHandler;
 import com.su.msg.LoginMsg.Login_;
 import com.su.msg.PlayerMsg.UpdatePlayer_;

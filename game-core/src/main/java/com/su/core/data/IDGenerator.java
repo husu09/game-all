@@ -2,8 +2,8 @@ package com.su.core.data;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.persistence.Id;
@@ -30,7 +30,7 @@ public class IDGenerator {
 	@Value("${entity.packName}")
 	private String packName;
 
-	private Map<String, AtomicLong> idMap = new HashMap<>();
+	private Map<String, AtomicLong> idMap = new ConcurrentHashMap<>();
 
 	public long next(Object o) {
 		long id = getId(o);

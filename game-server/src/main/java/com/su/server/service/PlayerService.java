@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.su.common.po.Player;
 import com.su.common.po.PlayerDetail;
+import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
 import com.su.core.data.DataService;
 import com.su.core.event.GameEventAdapter;
@@ -14,6 +15,8 @@ import com.su.msg.PlayerMsg._Player;
 public class PlayerService extends GameEventAdapter{
 	@Autowired
 	private DataService dataService;
+	@Autowired
+	private GameContext gameContext;
 
 	/**
 	 * 创建用户
@@ -49,12 +52,14 @@ public class PlayerService extends GameEventAdapter{
 		builder.setId(player.getId());
 		builder.setName(player.getName());
 		builder.setPeanut(player.getPeanut());
+		builder.setRankingStep(player.getRankingStep());
+		builder.setRankingScore(player.getRankingScore());
 		return builder.build();
 	}
 
 	@Override
 	public void logout(PlayerContext playerContext) {
-	
+		gameContext.getPlayerContextMap().remove(playerContext.getPlayerId());
 	}
 	
 }
