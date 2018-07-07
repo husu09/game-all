@@ -8,7 +8,7 @@ public interface TableActor {
 	public void deal();
 
 	public void call(GamePlayer player, int callTypeValue, int index);
-
+ 
 	public boolean doubles(GamePlayer player, int multiple);
 
 	public void check(GamePlayer player);
