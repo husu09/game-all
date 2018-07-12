@@ -80,7 +80,7 @@ public class NoticeAssist {
 		if (gamePlayer.getOpTime() != null)
 			builder.setOpTime(gamePlayer.getOpTime());
 		builder.setContestScore(gamePlayer.getContestScore());
-		builder.setIsQuit(gamePlayer.getIsQuit());
+		builder.setIsQuit(gamePlayer.getQuitState());
 		return builder.build();
 	}
 

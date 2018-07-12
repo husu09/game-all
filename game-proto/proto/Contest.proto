@@ -20,7 +20,6 @@ message EnterContestSite_ {
 }
 // 退出比赛场
 message ExitContestSite {
-	optional int32 siteId = 1;
 }
 message ExitContestSite_ {
 }
@@ -35,7 +34,6 @@ message Apply_ {
 
 // 取消报名
 message CancelApply {
-	optional int32 siteId = 1;
 }
 message CancelApply_ {
 }

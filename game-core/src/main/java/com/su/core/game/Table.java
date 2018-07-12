@@ -195,6 +195,7 @@ public abstract class Table implements Delayed {
 			int startIndex = i * GameConst.PLAYER_COUNT;
 			for (int j = 0; j < GameConst.PLAYER_COUNT; j++) {
 				this.players[this.dealer + j % 4].getHandCards()[i] = this.cards[startIndex + j];
+				this.cards[startIndex + j] = null;
 			}
 		}
 		for (int i = 0; i < this.players.length; i++) {
@@ -370,7 +371,7 @@ public abstract class Table implements Delayed {
 		addMultiple(cardType, cards);
 		// 轮分
 		this.roundScore += Card.getScore(cards);
-		if (this.callType != CallType.LIGHT) {
+		if (this.callType != CallType.LIGHT && this.callType != CallType.DARK) {
 			if (this.lastOp == player.getIndex() && this.roundScore != 0) {
 				player.setScore(player.getScore() + this.roundScore);
 				this.roundScore = 0;
@@ -394,18 +395,25 @@ public abstract class Table implements Delayed {
 		} else {
 			// 游戏未结束，由下家出牌
 			doNextPlayerState(player);
+			// 记录出牌
+			draw2CardHeap(cards);
 		}
-
-		// 记录出牌
-		for (int i = 0; i < cards.length; i++) {
-			for (Card card : this.cards) {
-				if (card == null)
-					card = cards[i];
-			}
-		}
-
 		// 通知
 		noticeAssist.notice(this);
+	}
+
+	/**
+	 * 出牌添加到牌堆
+	 */
+	private void draw2CardHeap(Card[] opCards) {
+		for (int i = 0; i < opCards.length; i++) {
+			if (opCards[i] == null)
+				continue;
+			for (int j = 0; j < this.cards.length; j++) {
+				if (this.cards[j] == null)
+					this.cards[j] = opCards[i];
+			}
+		}
 	}
 
 	/**
@@ -518,7 +526,15 @@ public abstract class Table implements Delayed {
 			// 满分
 			if (redScore >= 200 || blueScore >= 200)
 				addMultiple(MultipleType.MAN_FEN, null);
-
+		}
+		if (winTeam != null) {
+			// 结算时未出的牌添加到牌堆
+			for (GamePlayer gamePlayer : this.players) {
+				if (gamePlayer.getState() != PlayerState.FINISH) {
+					draw2CardHeap(gamePlayer.getHandCards());
+					gamePlayer.setState(PlayerState.FINISH);
+				}
+			}
 		}
 		return winTeam;
 	}
@@ -581,10 +597,10 @@ public abstract class Table implements Delayed {
 			deal();
 		}
 	}
-	
+
 	/**
 	 * 解散牌桌
-	 * */
+	 */
 	protected abstract void dissolveTable();
 
 	/**
@@ -594,13 +610,14 @@ public abstract class Table implements Delayed {
 		if (this.state == TableState.CLOSE) {
 			dissolveTable();
 		} else {
-			gamePlayer.getPlayerContext().setGamePlayer(null);
 			gamePlayer.setIsAuto(1);
 			// 主动退出
 			if (isInActi == 1) {
-				gamePlayer.setIsQuit(1);
-			} else {
+				gamePlayer.getPlayerContext().setGamePlayer(null);
+				gamePlayer.setQuitState(2);
 				gamePlayer.getPlayerContext().write(Quit_.getDefaultInstance());
+			} else {
+				gamePlayer.setQuitState(1);
 			}
 			// 通知
 			noticeAssist.notice(this);

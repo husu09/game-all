@@ -33,7 +33,7 @@ public class Contest {
 	/**
 	 * 底分
 	 */
-	private volatile int  baseScore;
+	private volatile int baseScore;
 	/**
 	 * 牌桌数
 	 */
@@ -41,6 +41,9 @@ public class Contest {
 
 	private ContestActor actor;
 
+	/**
+	 * 游戏场
+	 */
 	private ContestSite contestSite;
 	/**
 	 * 排名比较器
@@ -49,7 +52,7 @@ public class Contest {
 
 		@Override
 		public int compare(Entry<GamePlayer, ContestRanking> o1, Entry<GamePlayer, ContestRanking> o2) {
-			return o1.getValue().getContestScore() - o2.getValue().getContestScore();
+			return o2.getValue().getContestScore() - o1.getValue().getContestScore();
 		}
 
 	};
@@ -59,6 +62,7 @@ public class Contest {
 		this.contestSite = contestSite;
 		this.playerList = new LinkedList<>();
 		this.rankingMap = new HashMap<>();
+		this.baseScore = contestSite.getContestCo().getBaseScore();
 		// 初始化牌桌
 		this.tableNum = this.contestSite.getContestCo().getPlayerNum() / GameConst.PLAYER_COUNT;
 		this.tableQueue = new LinkedList<>();
@@ -73,16 +77,19 @@ public class Contest {
 	public void setGamePlayer(List<GamePlayer> playerList) {
 		for (int i = 0; i < playerList.size(); i++)
 			this.playerList.add(playerList.get(i));
-		start();
 	}
 
 	/**
 	 * 开始比赛
 	 */
 	public void start() {
+		// TODO 打乱玩家位置
 		GamePlayer[] tablePlayer = new GamePlayer[GameConst.PLAYER_COUNT];
 		int index = 0;
 		for (GamePlayer player : this.playerList) {
+			// 退出的玩家轮空
+			if (player.getQuitState() != 0)
+				continue;
 			tablePlayer[index++] = player;
 			if (ArrayUtil.getCount(tablePlayer) >= GameConst.PLAYER_COUNT) {
 				Table table = tableQueue.poll();
@@ -91,8 +98,11 @@ public class Contest {
 				ArrayUtil.clear(tablePlayer);
 				index = 0;
 			}
+			// 剩余的玩家轮空
 
 		}
+		// TODO 通知玩家轮空
+		
 	}
 
 	/**
@@ -113,10 +123,16 @@ public class Contest {
 			}
 			contestRanking.setContestScore(gamePlayer.getContestScore());
 			// 淘汰玩家
-			if (gamePlayer.getContestScore() < baseScore || gamePlayer.getIsQuit() == 1) {
+			if (gamePlayer.getContestScore() < baseScore || gamePlayer.getQuitState() == 2) {
 				it.remove();
-				contestRanking.setOut(true);
+				if (gamePlayer.getContestScore() < baseScore) 
+					contestRanking.setState(1);
+				else
+					contestRanking.setState(2);
 				gamePlayer.clean();
+			} else {
+				// 未淘汰玩家重置状态
+				gamePlayer.contestReset();
 			}
 		}
 		// 是否结束
@@ -131,17 +147,34 @@ public class Contest {
 				e.getKey().getPlayerContext().getActor().doContestClose(i);
 				i++;
 			}
+			// 重置玩家状态
+			for (GamePlayer gamePlayer : this.playerList)
+				gamePlayer.clean();
+			// 重置比赛状态
+			resetAndclean();
+			// 返还比赛对象
+			contestSite.getContestQueue().offer(this);
 		} else {
 			// 开始下一轮
 			start();
 		}
+		// TODO 通知
 	}
-	
+
+	/**
+	 * 重置和清除当前对象状态
+	 */
+	public void resetAndclean() {
+		playerList.clear();
+		rankingMap.clear();
+		baseScore = 0;
+		this.baseScore = contestSite.getContestCo().getBaseScore();
+	}
+
 	public ContestActor getActor() {
 		return actor;
 	}
-	
-	
+
 	public ContestSite getContestSite() {
 		return contestSite;
 	}
@@ -149,7 +182,5 @@ public class Contest {
 	public int getBaseScore() {
 		return baseScore;
 	}
-	
-
 
 }

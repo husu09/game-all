@@ -6,9 +6,9 @@ public class ContestRanking {
 	 * */
 	private int contestScore;
 	/**
-	 * 是否淘汰
+	 * 是否淘汰 1：淘汰，2：退出淘汰
 	 * */
-	private boolean isOut;
+	private int state;
 	
 	public int getContestScore() {
 		return contestScore;
@@ -16,10 +16,11 @@ public class ContestRanking {
 	public void setContestScore(int contestScore) {
 		this.contestScore = contestScore;
 	}
-	public boolean isOut() {
-		return isOut;
+	public int getState() {
+		return state;
 	}
-	public void setOut(boolean isOut) {
-		this.isOut = isOut;
+	public void setState(int state) {
+		this.state = state;
 	}
+	
 }

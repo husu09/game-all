@@ -3,12 +3,12 @@ package com.su.core.game;
 import com.su.core.game.enums.Team;
 import com.su.msg.TableMsg.TableResult_;
 
-public class ContestTable  extends Table {
+public class ContestTable extends Table {
 
 	private Contest contest;
-	
-	public ContestTable(Site room, Contest contest) {
-		super(room);
+
+	public ContestTable(Site site, Contest contest) {
+		super(site);
 		this.contest = contest;
 	}
 
@@ -24,11 +24,10 @@ public class ContestTable  extends Table {
 			int addOrEddScore = multiple * contest.getBaseScore();
 			if (otherPlayer.getTeam() == winTeam) {
 				otherPlayer.setContestScore(otherPlayer.getContestScore() + addOrEddScore);
-			}
-			else {
+			} else {
 				// 处理玩家比赛积分
 				if (otherPlayer.getContestScore() < addOrEddScore)
-				otherPlayer.setContestScore(0);
+					otherPlayer.setContestScore(0);
 				else
 					otherPlayer.setContestScore(otherPlayer.getContestScore() - addOrEddScore);
 			}
@@ -43,7 +42,5 @@ public class ContestTable  extends Table {
 	protected void dissolveTable() {
 		
 	}
-
-	
 
 }

@@ -60,9 +60,9 @@ public class GamePlayer implements Delayed {
 	 * */
 	private int contestScore;
 	/**
-	 * 是否退出
+	 * 退出状态 1：退出，2：主动退出
 	 * */
-	private int isQuit;
+	private int quitState;
 	/**
 	 * 叫牌时间
 	 */
@@ -74,14 +74,12 @@ public class GamePlayer implements Delayed {
 	/**
 	 * 托管时出牌时间
 	 */
-	public static final int AUTO_WAIT_TIME = TimeUtil.ONE_SECOND;
+	public static final int AUTO_WAIT_TIME = TimeUtil.ONE_SECOND * 2;
 
 	public GamePlayer(PlayerContext playerContext) {
 		this.playerContext = playerContext;
 		this.id = playerContext.getPlayerId();
 		this.handCards = new Card[Card.HAND_CARDS_NUM];
-		// 设置玩家上下文持有游戏对象
-		playerContext.setGamePlayer(this);
 	}
 
 	@Override
@@ -130,7 +128,7 @@ public class GamePlayer implements Delayed {
 		this.table = null;
 		setState(null);
 		this.contestScore = 0;
-		this.isQuit = 0;
+		this.quitState = 0;
 	}
 
 	/**
@@ -146,6 +144,15 @@ public class GamePlayer implements Delayed {
 		this.score = 0;
 		this.isAuto = 0;
 		this.opTime = null;
+	}
+	
+	/**
+	 * 比赛时重置玩家状态
+	 * */
+	public void contestReset() {
+		reset();
+		this.index = null;
+		this.table = null;
 	}
 
 	/**
@@ -280,13 +287,18 @@ public class GamePlayer implements Delayed {
 	public void setContestScore(int contestScore) {
 		this.contestScore = contestScore;
 	}
-
-	public int getIsQuit() {
-		return isQuit;
+	
+	/**
+	 * 退出状态 1：退出，2：主动退出
+	 * */
+	public int getQuitState() {
+		return quitState;
 	}
-
-	public void setIsQuit(int isQuit) {
-		this.isQuit = isQuit;
+	
+	/**
+	 * 退出状态 1：退出，2：主动退出
+	 * */
+	public void setQuitState(int isQuit) {
+		this.quitState = isQuit;
 	}
-
 }

@@ -18,12 +18,12 @@ public abstract class MatchSite extends Site {
 	/**
 	 * 加入匹配
 	 */
-	public abstract void addPlayerToMatch(PlayerContext playerContext, boolean isFirst);
+	public abstract boolean addPlayerToMatch(PlayerContext playerContext, boolean isFirst);
 
 	/**
 	 * 从匹配队列中删除
 	 */
-	public abstract void removePlayerFromMatch(GamePlayer gamePlayer);
+	public abstract boolean removePlayerFromMatch(PlayerContext playerContext);
 
 	/**
 	 * 获取配置对象

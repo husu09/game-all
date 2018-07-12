@@ -18,7 +18,7 @@ public enum PlayerState {
 	 */
 	FINISH(4);
 	private int value;
-	
+
 	PlayerState(int value) {
 		this.value = value;
 	}

@@ -25,19 +25,17 @@ public class PlayerContext {
 	private volatile GamePlayer gamePlayer;
 	
 	/**
-	 * 当在匹配状态时记录所在的场
+	 * 匹配中的游戏场
 	 * */
-	private volatile Site inSite;
-	
-	/**
-	 * 玩家更新数据
-	 * */
-	private _Player.Builder builder = _Player.newBuilder();
-	
+	private Site site;
 	/**
 	 * 是否更新玩家数据
 	 * */
 	private boolean isNotice;
+	/**
+	 * 玩家更新数据
+	 * */
+	private _Player.Builder builder = _Player.newBuilder();
 	
 
 	public void handleLogin(long playerId) {
@@ -118,12 +116,11 @@ public class PlayerContext {
 		this.isNotice = isNotice;
 	}
 
-	public Site getInSite() {
-		return inSite;
+	public Site getSite() {
+		return site;
 	}
 
-	public void setInSite(Site inSite) {
-		this.inSite = inSite;
+	public void setSite(Site site) {
+		this.site = site;
 	}
-	
 }

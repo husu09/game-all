@@ -42,8 +42,8 @@ public class ContestControl {
 	 */
 	@Action
 	public void exit(PlayerContext playerContext, ExitContestSite req) {
-		contestService.removeFromNoticeMap(req.getSiteId(), playerContext);
-		playerContext.write(ExitContestSite_.getDefaultInstance());
+		/*contestService.removeFromNoticeMap(req.getSiteId(), playerContext);
+		playerContext.write(ExitContestSite_.getDefaultInstance());*/
 	}
 
 	/**
@@ -74,11 +74,11 @@ public class ContestControl {
 	 * */
 	@Action
 	public void cancelApply(PlayerContext playerContext, CancelApply req) {
-		ContestSite contestSite = contestService.getContestSiteMap().get(req.getSiteId());
+		/*ContestSite contestSite = contestService.getContestSiteMap().get(req.getSiteId());
 		if (contestSite == null) {
 			playerContext.sendError(1005);
 			return;
-		}
+		}*/
 		
 	}
 }

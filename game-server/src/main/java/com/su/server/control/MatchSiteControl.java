@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import com.su.core.action.Action;
 import com.su.core.context.PlayerContext;
 import com.su.core.game.MatchSite;
+import com.su.core.game.Site;
 import com.su.core.game.enums.SiteType;
 import com.su.msg.MatchSiteMsg.CancelMatch;
 import com.su.msg.MatchSiteMsg.CancelMatch_;
@@ -27,18 +28,15 @@ public class MatchSiteControl {
 	 */
 	@Action
 	public void match(PlayerContext playerContext, Match req) {
-		if (playerContext.getGamePlayer() != null && playerContext.getGamePlayer().getState() != null) {
-			playerContext.sendError(3002);
-			return;
-		}
 		MatchSite matchSite = matchSiteService.getMatchSiteMap().get(req.getSiteId());
 		if (matchSite == null) {
 			playerContext.sendError(1002);
 			return;
 		}
 		// 加入到匹配队列
-		matchSite.addPlayerToMatch(playerContext, false);
-		playerContext.write(Match_.getDefaultInstance());
+		if (matchSite.addPlayerToMatch(playerContext, false)) {
+			playerContext.write(Match_.newBuilder().setSiteId(matchSite.getSiteCo().getId()));
+		}
 	}
 
 	/**
@@ -46,18 +44,13 @@ public class MatchSiteControl {
 	 */
 	@Action
 	public void mcancelMatch(PlayerContext playerContext, CancelMatch req) {
-		if (playerContext.getGamePlayer() != null && playerContext.getGamePlayer().getState() != null) {
-			playerContext.sendError(3002);
-			return;
+		Site site = playerContext.getSite();
+		if (site != null && site instanceof MatchSite) {
+			// 移除成功通知
+			if (((MatchSite) site).removePlayerFromMatch(playerContext)) {
+				playerContext.write(CancelMatch_.getDefaultInstance());
+			}
 		}
-		// 从匹配队列中移除
-		MatchSite matchSite = matchSiteService.getMatchSiteMap().get(req.getSiteId());
-		if (matchSite == null) {
-			playerContext.sendError(1002);
-			return;
-		}
-		matchSite.removePlayerFromMatch(playerContext.getGamePlayer());
-		playerContext.write(CancelMatch_.getDefaultInstance());
 
 	}
 
@@ -83,6 +76,5 @@ public class MatchSiteControl {
 		}
 		playerContext.write(resp);
 	}
-	
-	
+
 }

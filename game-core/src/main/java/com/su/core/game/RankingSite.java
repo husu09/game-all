@@ -39,17 +39,24 @@ public class RankingSite extends MatchSite {
 	}
 
 	@Override
-	public synchronized void addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {
+	public synchronized boolean addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {
 		// 验证是否可以加入匹配队列
-		if (playerContext.getGamePlayer() == null)
-			new GamePlayer(playerContext);
-		else if (playerSet.contains(playerContext.getGamePlayer()))
-			return;
+		if (playerContext.getGamePlayer() == null) {
+			GamePlayer gamePlayer = new GamePlayer(playerContext);
+			playerContext.setGamePlayer(gamePlayer);
+		} else if (playerSet.contains(playerContext.getGamePlayer()))
+			return false;
 		else if (playerContext.getGamePlayer().getState() != null)
-			return;
+			return false;
 		playerSet.add(playerContext.getGamePlayer());
-		this.playerNum ++;
-		
+		this.playerNum++;
+
+		playerContext.setSite(this);
+		tryStart();
+		return true;
+	}
+
+	private void tryStart() {
 		GamePlayer[] players = new GamePlayer[GameConst.PLAYER_COUNT];
 		for (Iterator<GamePlayer> it = playerSet.iterator(); it.hasNext();) {
 			GamePlayer player = it.next();
@@ -59,13 +66,17 @@ public class RankingSite extends MatchSite {
 					/ 10 != getPlayerByGamePlayer(player).getRankingStep() / 10)
 				break;
 			// 人数已满退出
-			if (!ArrayUtil.add(players, player)) 
+			if (!ArrayUtil.add(players, player))
 				break;
 		}
 		if (ArrayUtil.getCount(players) >= GameConst.PLAYER_COUNT) {
 			for (int i = 0; i < players.length; i++)
 				playerSet.remove(players[i]);
 			return;
+		}
+
+		for (GamePlayer gamePlayer : players) {
+			gamePlayer.getPlayerContext().setSite(null);
 		}
 		// 人数足够时开始游戏
 		Table table = getIdleTableQueue().poll();
@@ -77,9 +88,13 @@ public class RankingSite extends MatchSite {
 	}
 
 	@Override
-	public synchronized void removePlayerFromMatch(GamePlayer gamePlayer) {
-		if (playerSet.remove(gamePlayer))
+	public synchronized boolean removePlayerFromMatch(PlayerContext playerContext) {
+		if (playerSet.remove(playerContext)) {
+			playerContext.setSite(null);
 			this.playerNum--;
+			return true;
+		}
+		return false;
 	}
 
 	/**
