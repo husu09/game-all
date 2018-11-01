@@ -1,6 +1,5 @@
 package com.su.core.game;
 
-import com.su.core.game.enums.TableState;
 import com.su.core.game.enums.Team;
 import com.su.msg.TableMsg.TableResult_;
 
@@ -14,7 +13,7 @@ public class ContestTable  extends Table {
 	}
 
 	@Override
-	public void doClose(TableResult_.Builder builder, Team winTeam, int redMultiple, int blueMultiple) {
+	public void doSettlement(TableResult_.Builder builder, Team winTeam, int redMultiple, int blueMultiple) {
 		builder.setBaseScore(contest.getBaseScore());
 		for (GamePlayer otherPlayer : this.players) {
 			int multiple = 0;
@@ -41,16 +40,10 @@ public class ContestTable  extends Table {
 	}
 
 	@Override
-	public void doExit(GamePlayer gamePlayer) {
-		// 设置退赛状态
-		gamePlayer.setIsQuit(1);
-		if (this.state != TableState.CLOSE)
-			gamePlayer.setIsAuto(1);
-	}
-
-	@Override
-	public void doWaitClose() {
+	protected void dissolveTable() {
 		
 	}
+
+	
 
 }

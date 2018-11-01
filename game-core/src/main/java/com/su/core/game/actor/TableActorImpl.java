@@ -47,8 +47,8 @@ public class TableActorImpl implements TableActor {
 	}
 
 	@Override
-	public void exit(GamePlayer gamePlayer) {
-		table.exit(gamePlayer);
+	public void quit(GamePlayer gamePlayer, int isInAc) {
+		table.quit(gamePlayer, isInAc);
 	}
 
 	@Override

@@ -27,6 +27,9 @@ public class ClassicSite extends MatchSite {
 	
 	@Override
 	public synchronized void addPlayerToMatch(PlayerContext playerContext, boolean isFirst) {
+		// 已经在队列中
+		if (playerContext.getInSite() != null)
+			return;
 		// 当在配置中时记录当前场
 		playerContext.setInSite(this);
 		// 验证是否可以加入匹配队列

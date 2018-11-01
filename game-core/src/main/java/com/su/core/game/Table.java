@@ -24,6 +24,7 @@ import com.su.core.game.enums.MultipleType;
 import com.su.core.game.enums.PlayerState;
 import com.su.core.game.enums.TableState;
 import com.su.core.game.enums.Team;
+import com.su.msg.TableMsg.Quit_;
 import com.su.msg.TableMsg.TableResult_;
 import com.su.msg.TableMsg._Card;
 import com.su.msg.TableMsg._GamePlayer;
@@ -120,8 +121,6 @@ public abstract class Table implements Delayed {
 	 */
 	public void clean() {
 		reset();
-		// 状态
-		setState(null);
 		// 清空玩家
 		for (int i = 0; i < this.players.length; i++)
 			this.players[i] = null;
@@ -133,6 +132,8 @@ public abstract class Table implements Delayed {
 	 * 重置牌桌状态（开始下一局时）
 	 */
 	public void reset() {
+		// 状态
+		setState(null);
 		// 轮分
 		this.roundScore = 0;
 		// 叫牌状态
@@ -189,10 +190,10 @@ public abstract class Table implements Delayed {
 		// 洗牌
 		shuffle();
 		// 发牌
-		int cycleCount = this.cards.length/4;
+		int cycleCount = this.cards.length / 4;
 		for (int i = 0; i < cycleCount; i++) {
 			int startIndex = i * GameConst.PLAYER_COUNT;
-			for (int j = 0 ; j < GameConst.PLAYER_COUNT; j ++) {
+			for (int j = 0; j < GameConst.PLAYER_COUNT; j++) {
 				this.players[this.dealer + j % 4].getHandCards()[i] = this.cards[startIndex + j];
 			}
 		}
@@ -238,7 +239,7 @@ public abstract class Table implements Delayed {
 		this.callType = callType;
 		this.callOp = player.getIndex();
 		// 倍数
-		addMultiple(callType, cards);
+		addMultiple(callType, null);
 		if (callType == CallType.LIGHT) {
 			// 当前玩家
 			player.setTeam(Team.RED);
@@ -355,7 +356,7 @@ public abstract class Table implements Delayed {
 		// 出牌验证
 		CardAssist cardProcessor = cardAssistManager.getCardProcessor().get(cardType);
 		if (!cardProcessor.verify(cards)) {
-			logger.error(" CardType not match Cards {} {} {}", cardTypeValue, Arrays.toString(cards), player.getId());
+			logger.error("CardType not match Cards {} {} {}", cardTypeValue, Arrays.toString(cards), player.getId());
 			return;
 		}
 		if (!cardProcessor.compare(cards, this.lastCardType, this.lastCards)) {
@@ -389,7 +390,7 @@ public abstract class Table implements Delayed {
 			addToRanks(player);
 			Team winTeam = getWinTeam(player);
 			if (winTeam != null)
-				close(winTeam);
+				settlement(winTeam);
 		} else {
 			// 游戏未结束，由下家出牌
 			doNextPlayerState(player);
@@ -525,12 +526,12 @@ public abstract class Table implements Delayed {
 	/**
 	 * 子类实现的结算方法
 	 */
-	protected abstract void doClose(TableResult_.Builder builder, Team winTeam, int redMultiple, int blueMultiple);
+	protected abstract void doSettlement(TableResult_.Builder builder, Team winTeam, int redMultiple, int blueMultiple);
 
 	/**
 	 * 结算
 	 */
-	private void close(Team winTeam) {
+	private void settlement(Team winTeam) {
 		// 计算倍数
 		int sumMultiple = 0;
 		for (int multiple : this.multiples) {
@@ -544,7 +545,7 @@ public abstract class Table implements Delayed {
 		// 玩家结算
 		TableResult_.Builder builder = TableResult_.newBuilder();
 		builder.setWinTeam(winTeam.getValue());
-		doClose(builder, winTeam, redMultiple, blueMultiple);
+		doSettlement(builder, winTeam, redMultiple, blueMultiple);
 		// 下局的庄家
 		for (int i = 0; i < this.ranks.length; i++) {
 			if (this.players[this.ranks[i]].getTeam() == winTeam) {
@@ -580,30 +581,44 @@ public abstract class Table implements Delayed {
 			deal();
 		}
 	}
-
-	protected abstract void doExit(GamePlayer gamePlayer);
+	
+	/**
+	 * 解散牌桌
+	 * */
+	protected abstract void dissolveTable();
 
 	/**
 	 * 退出
 	 */
-	public void exit(GamePlayer gamePlayer) {
-		doExit(gamePlayer);
-		// 通知
-		noticeAssist.notice(this);
+	public void quit(GamePlayer gamePlayer, int isInActi) {
+		if (this.state == TableState.CLOSE) {
+			dissolveTable();
+		} else {
+			gamePlayer.getPlayerContext().setGamePlayer(null);
+			gamePlayer.setIsAuto(1);
+			// 主动退出
+			if (isInActi == 1) {
+				gamePlayer.setIsQuit(1);
+			} else {
+				gamePlayer.getPlayerContext().write(Quit_.getDefaultInstance());
+			}
+			// 通知
+			noticeAssist.notice(this);
+		}
 	}
-	
+
 	/**
 	 * 托管
-	 * */
+	 */
 	public void auto(GamePlayer gamePlayer, int isAuto) {
-		if (this.state == TableState.CLOSE){
+		if (this.state == TableState.CLOSE) {
 			logger.error("Table state is not allow {} {}", this.state, gamePlayer.getId());
 			return;
 		}
 		gamePlayer.setIsAuto(isAuto);
 		// 通知
 		noticeAssist.notice(this);
-		
+
 	}
 
 	/**
@@ -619,23 +634,12 @@ public abstract class Table implements Delayed {
 	 * 玩家操作超时
 	 */
 	public void doWaitGamePlayer(GamePlayer gamePlayer) {
-		if (gamePlayer.getOpTime() <= GamePlayer.AUTO_WAIT_TIME)
-			// 托管
-			gamePlayer.getTable().getActor().check(gamePlayer);
-		else {
-			if (gamePlayer.getState() != PlayerState.OPERATE)
-				return;
-			gamePlayer.setState(PlayerState.WAIT);
-			doNextPlayerState(gamePlayer);
-			// 通知
-			noticeAssist.notice(this);
-		}
+		if (gamePlayer.getState() != PlayerState.OPERATE)
+			return;
+		gamePlayer.getTable().getActor().check(gamePlayer);
+		// 通知
+		noticeAssist.notice(this);
 	}
-
-	/**
-	 * 结算超时
-	 */
-	protected abstract void doWaitClose();
 
 	/**
 	 * 牌桌等待超时
@@ -647,7 +651,7 @@ public abstract class Table implements Delayed {
 				otherGamePlayer.setState(PlayerState.WAIT);
 			doublesToDraw();
 		} else if (this.state == TableState.CLOSE) {
-			doWaitClose();
+			dissolveTable();
 		}
 		// 通知
 		noticeAssist.notice(this);
@@ -769,7 +773,7 @@ public abstract class Table implements Delayed {
 		}
 		// 没有队友时下家接风
 		if (nextPlayer == null)
-			nextPlayer = players[player.getIndex() + 1 % 4];
+			nextPlayer = players[(player.getIndex() + 1) % 4];
 		nextPlayer.setState(PlayerState.OPERATE);
 	}
 
@@ -808,9 +812,13 @@ public abstract class Table implements Delayed {
 	 * 设置状态
 	 */
 	private void setState(TableState state) {
-		if (this.state == TableState.DOUBLES || this.state == TableState.CLOSE)
+		// 处理前面的状态
+		if (this.state == TableState.DOUBLES || this.state == TableState.CLOSE) {
 			this.site.getWaitTableQueue().remove(this);
+			this.waitTime = null;
+		}
 		this.state = state;
+		// 处理之后的状态
 		if (this.state == TableState.DOUBLES)
 			this.waitTime = TimeUtil.getCurrTime() + DOUBLES_WAIT_TIME;
 		else if (this.state == TableState.CLOSE)

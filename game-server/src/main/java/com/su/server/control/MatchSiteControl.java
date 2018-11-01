@@ -38,7 +38,7 @@ public class MatchSiteControl {
 		}
 		// 加入到匹配队列
 		matchSite.addPlayerToMatch(playerContext, false);
-		playerContext.write(Match_.newBuilder().setSiteId(matchSite.getSiteCo().getId()));
+		playerContext.write(Match_.getDefaultInstance());
 	}
 
 	/**

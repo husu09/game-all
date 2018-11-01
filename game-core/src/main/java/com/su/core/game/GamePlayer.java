@@ -152,8 +152,10 @@ public class GamePlayer implements Delayed {
 	 * 设置状态
 	 */
 	public void setState(PlayerState state, boolean isDelay, int subTime) {
-		if (this.state == PlayerState.OPERATE)
+		if (this.state == PlayerState.OPERATE) {
 			this.table.getSite().getWaitGamePlayerQueue().remove(this);
+			this.opTime = null;
+		}
 		this.state = state;
 		if (isDelay && state == PlayerState.OPERATE) {
 			if (this.table.getState() == TableState.CALL)

@@ -10,7 +10,7 @@ public class RankingTable extends MatchTable {
 	}
 	
 	@Override
-	public void doClose(TableResult_.Builder builder, Team winTeam, int redMultiple, int blueMultiple) {
+	public void doSettlement(TableResult_.Builder builder, Team winTeam, int redMultiple, int blueMultiple) {
 		builder.setBaseScore(this.matchSite.getSiteCo().getBaseScore());
 		for (GamePlayer otherPlayer : this.players) {
 			TableResult tableResult = new TableResult();

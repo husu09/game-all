@@ -17,7 +17,7 @@ public interface TableActor {
 
 	public void ready(GamePlayer player);
 
-	public void exit(GamePlayer gamePlayer);
+	public void quit(GamePlayer gamePlayer ,int isInAc);
 
 	public void auto(GamePlayer gamePlayer, int isAuto);
 

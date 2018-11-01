@@ -9,6 +9,10 @@ import com.su.core.context.GameContext;
 import com.su.core.context.PlayerContext;
 import com.su.core.data.DataService;
 import com.su.core.event.GameEventAdapter;
+import com.su.core.game.GamePlayer;
+import com.su.core.game.MatchSite;
+import com.su.core.game.Site;
+import com.su.core.game.Table;
 import com.su.msg.PlayerMsg._Player;
 
 @Service
@@ -59,7 +63,23 @@ public class PlayerService extends GameEventAdapter{
 
 	@Override
 	public void logout(PlayerContext playerContext) {
+		// 从在线列表删除
 		gameContext.getPlayerContextMap().remove(playerContext.getPlayerId());
+		
+		// 取消匹配
+		Site inSite = playerContext.getInSite();
+		if (inSite != null && (inSite instanceof MatchSite)) {
+			MatchSite matchSite = (MatchSite) inSite;
+			matchSite.removePlayerFromMatch(playerContext.getGamePlayer());
+		}
+		// 从牌桌退出
+		GamePlayer gamePlayer = playerContext.getGamePlayer();
+		if (gamePlayer != null) {
+			Table table = gamePlayer.getTable();
+			if (table != null) {
+				table.getActor().quit(gamePlayer, 0);
+			}
+		}
 	}
 	
 }

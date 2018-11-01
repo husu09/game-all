@@ -137,7 +137,7 @@ public class TableControl {
 			playerContext.sendError(3001);
 			return;
 		}
-		gamePlayer.getTable().getActor().exit(gamePlayer);
+		gamePlayer.getTable().getActor().quit(gamePlayer, 1);
 		playerContext.write(Quit_.newBuilder());
 	}
 
